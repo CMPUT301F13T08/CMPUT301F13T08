@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+C:\Users\Michele's Netbook\Documents\GitHub\CMPUT301F13T08\.metadata\.plugins\org.eclipse.jdt.core
+3195093258.index
+3829581920.index
+1157789254.index
