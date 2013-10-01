@@ -8,8 +8,10 @@ Check.
 
 Hello this is Jarrett!
 
-Hello all - Michele
+Alkajsdlfjsa
 
+<<<<<<< HEAD
 new new new -- Alice
 
 Another one -- Alice
+test
