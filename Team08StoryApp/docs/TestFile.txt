@@ -10,8 +10,7 @@ Hello this is Jarrett!
 
 Alkajsdlfjsa
 
-<<<<<<< HEAD
-new new new -- Alice
-
 Another one -- Alice
-test
+
+Exercise!
+
