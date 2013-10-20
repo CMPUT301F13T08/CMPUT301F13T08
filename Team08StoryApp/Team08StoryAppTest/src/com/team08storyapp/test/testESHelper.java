@@ -20,6 +20,7 @@ public class testESHelper extends TestCase {
 	private int storyListSize;
 	
 	private int storyFragmentId;
+	private StoryFragment addStoryFragment;
 	private StoryFragment updateStoryFragment;
 	private StoryFragment firstFragment;
 	private ArrayList<StoryFragment> storyFragments;
@@ -50,6 +51,7 @@ public class testESHelper extends TestCase {
 		storyListSize = 1;
 		
 		storyFragmentId = 1;
+		addStoryFragment = new StoryFragment(1, "text");
 		updateStoryFragment = new StoryFragment(1);
 		updateStoryFragment.setStoryText("story");	
 		firstFragment = new StoryFragment("first fragment");
@@ -83,7 +85,7 @@ public class testESHelper extends TestCase {
 	 * should return true.
 	*/
 	public void testAddStoryFragment(){
-		assertTrue(esHelper.addStoryFragment(addStory));
+		assertTrue(esHelper.addStoryFragment(addStoryFragment));
 	}
 	
 	/* The testAddAnnotationPhoto method tests adding a annotation to the server. If 

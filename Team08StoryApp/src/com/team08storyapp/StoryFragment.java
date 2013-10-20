@@ -12,6 +12,11 @@ public class StoryFragment {
 		this.storyFragmentId = storyFragmentId;
 	}
 	
+	public StoryFragment(int storyFragmentId, String storyText){
+		this.storyFragmentId = storyFragmentId;
+		this.storyText = storyText;
+	}
+	
 	public StoryFragment(String storyText){
 		this.storyText = storyText;
 	}

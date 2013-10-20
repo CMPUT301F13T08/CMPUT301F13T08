@@ -4,37 +4,37 @@ import java.util.ArrayList;
 
 public class ESHelper {
 
-	public Boolean addStory(Story addStory) {
+	public Boolean addStory(Story story) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean addAnnotationPhoto(Photo addAnnotationPhoto) {
+	public boolean addAnnotationPhoto(Photo photo) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean addStoryPhoto(Photo addStoryPhoto) {
+	public boolean addStoryPhoto(Photo photo) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean addChoice(Choice addChoice) {
+	public boolean addChoice(Choice choice) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean updateStory(Story updateStory) {
+	public boolean updateStory(Story story) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean updateStoryFragment(StoryFragment updateStoryFragment) {
+	public boolean updateStoryFragment(StoryFragment storyFragment) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean updateChoice(Choice updateChoice) {
+	public boolean updateChoice(Choice choice) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -79,7 +79,7 @@ public class ESHelper {
 		return null;
 	}
 
-	public boolean addStoryFragment(Story addStory) {
+	public boolean addStoryFragment(StoryFragment storyFragment) {
 		// TODO Auto-generated method stub
 		return false;
 	}
