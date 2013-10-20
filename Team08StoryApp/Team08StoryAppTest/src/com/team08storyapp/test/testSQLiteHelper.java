@@ -54,8 +54,8 @@ public class testSQLiteHelper extends TestCase {
 		storyFragments.add(firstFragment);
 		storyFragmentListSize = 1;
 		
-		addChoice = new Choice(firstFragment.getStoryFragmentId());
-		updateChoice = new Choice(firstFragment.getStoryFragmentId());
+		addChoice = new Choice();
+		updateChoice = new Choice();
 		choiceListSize = 1;
 		
 		addStoryPhoto = new Photo();
