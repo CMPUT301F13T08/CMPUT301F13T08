@@ -13,12 +13,14 @@ public class testStory extends TestCase {
 private SQLiteHelper SHelper;
 	
 	private int storyId;
+	private int downloadStoryId;
 	private Story addStory;
 	private Story updateStory;
 	private int storyListSize;
 	private Story downloadStory;
 	
 	private int storyFragmentId;
+	private StoryFragment addStoryFragment;
 	private StoryFragment updateStoryFragment;
 	private StoryFragment firstFragment;
 	private ArrayList<StoryFragment> storyFragments;
@@ -35,7 +37,7 @@ private SQLiteHelper SHelper;
 	private String searchText;
 	private int searchListSize;
 	
-	private int storyId;
+	
 	
 	// The setUp method is used to setup variables for use in the test cases.
 		protected void setUp(){
@@ -45,7 +47,8 @@ private SQLiteHelper SHelper;
 			addStory = new Story("title", "author");
 			updateStory = new Story(1, "updatedTitle", "updatedAuthor");
 			storyListSize = 1;
-			downloadStory = new Story(1);
+			downloadStory = new Story("title2", "author");
+			downloadStory.setStoryId(2);
 			
 			storyFragmentId = 1;
 			updateStoryFragment = new StoryFragment(1);
@@ -54,6 +57,7 @@ private SQLiteHelper SHelper;
 			storyFragments = new ArrayList<StoryFragment>();
 			storyFragments.add(firstFragment);
 			storyFragmentListSize = 1;
+			addStoryFragment = new StoryFragment(1, "text");
 			
 			addChoice = new Choice();
 			updateChoice = new Choice();
@@ -68,24 +72,47 @@ private SQLiteHelper SHelper;
 		}
 	
 	/* The testDownloadStory method tests downloaded a story from the server. If 
-	 * the story is successfully downloaded the method call to story.downloadStory should
-	 * return true. 
+	 * the story is successfully downloaded, story should not be null, downloadStoryId and the fragment size should match.
 	 */
 	public void testDownloadStory(){
-		assertTrue(Story.downloadStory(1));
+		
+		
+		Story story = Story.downloadStory(downloadStoryId);
+		
+		assertNotNull(story);
+		assertEquals(story.getStoryId(), downloadStoryId);
+		assertEquals(story.getStoryFragments().size(), storyFragmentListSize);
+		
 		
 	}
 	/*The testReadStory method tests reading a story. If the story can be successfully read the
 	 * method call to story.readStory should return true.
 	 */
 	public void testReadStory(){
-		addStory.setFirstStoryFragment(firstFragment);
-		addStory.setStoryFragments(storyFragments);
-		assertTrue(Story.readStory(addStory));
+		downloadStory.setFirstStoryFragment(firstFragment);
+		downloadStory.setStoryFragments(storyFragments);
+		assertTrue(Story.readStory(downloadStory));
+	}
+	
+	public void testBrowseStories(){
 		
+	}
+	
+	
+	public void testPublish(){
 		
+	}
+	public void testSeach(){
 		
-		
+	}
+	
+	
+	/* The testAddStoryFragment method tests adding a story fragment to the server. If 
+	 * the story fragment is added successfully the method call to esHelper.addStoryFragment 
+	 * should return true.
+	 **/
+	public void testAddStoryFragment(){
+		assertTrue(Story.addStoryFragment(addStoryFragment));
 	}
 	
 	

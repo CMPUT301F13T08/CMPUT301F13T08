@@ -53,12 +53,18 @@ public class Story {
 		this.firstStoryFragment = firstStoryFragment;
 	}
 
-	public static boolean downloadStory(int i) {
+	public static Story downloadStory(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static boolean readStory(Story addStory) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public static boolean readStory(Story addStory) {
+	
+	public static boolean addStoryFragment(StoryFragment addStoryFragment) {
 		// TODO Auto-generated method stub
 		return false;
 	}
