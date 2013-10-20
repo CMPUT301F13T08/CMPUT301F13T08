@@ -3,7 +3,8 @@ package com.team08storyapp;
 public class Choice {
 	
 	String text;
-	int curFragmentID;
+	// I think choice should also have an ID of the fragment that it currently belongs to - Alice
+	int curFragmentID; 
 	int FragmentID;
 	int Id;
 	
