@@ -16,18 +16,21 @@
         android:layout_gravity="center" />
 
     <Button 
+        android:id="@+id/read_online_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/read_online"
         />
     
-     <Button 
+     <Button
+        android:id="@+id/read_download_button" 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/read_download"
         />
      
       <Button 
+        android:id="@+id/my_stories_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/my_stories"
