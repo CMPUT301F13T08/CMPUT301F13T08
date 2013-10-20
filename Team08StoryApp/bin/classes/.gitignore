@@ -1,2 +1,12 @@
 /com
 /.gitignore
+/.classpath
+/.project
+/.settings
+/AndroidManifest.xml
+/bin
+/gen
+/proguard-project.txt
+/project.properties
+/res
+/src

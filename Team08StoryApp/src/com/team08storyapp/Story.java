@@ -52,6 +52,16 @@ public class Story {
 	public void setFirstStoryFragment(StoryFragment firstStoryFragment) {
 		this.firstStoryFragment = firstStoryFragment;
 	}
+
+	public static boolean downloadStory(int i) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean readStory(Story addStory) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }
