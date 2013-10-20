@@ -2,5 +2,5 @@
 package com.team08storyapp.test;
 
 public final class BuildConfig {
-	public final static boolean DEBUG = true;
+    public final static boolean DEBUG = true;
 }

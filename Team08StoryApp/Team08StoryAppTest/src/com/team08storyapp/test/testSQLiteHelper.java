@@ -9,7 +9,7 @@ import com.team08storyapp.Choice;
 import com.team08storyapp.Photo;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
-
+// test test
 public class testSQLiteHelper extends TestCase {
 
 	private SQLiteHelper SHelper;
