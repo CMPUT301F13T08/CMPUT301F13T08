@@ -1,3 +1,4 @@
+package src.com.team08storyapp.test;
 import java.util.ArrayList;
 
 import com.team08storyapp.Choice;
@@ -8,10 +9,11 @@ import com.team08storyapp.StoryFragment;
 
 import junit.framework.TestCase;
 
-public class testStory extends TestCase {
+public class testStoryController extends TestCase {
 
-private SQLiteHelper SHelper;
+
 	
+	@SuppressWarnings("unused")
 	private int storyId;
 	private int downloadStoryId;
 	private Story addStory;
@@ -41,7 +43,7 @@ private SQLiteHelper SHelper;
 	
 	// The setUp method is used to setup variables for use in the test cases.
 		protected void setUp(){
-			SHelper = new SQLiteHelper();
+	
 			
 			storyId = 1;
 			addStory = new Story("title", "author");
