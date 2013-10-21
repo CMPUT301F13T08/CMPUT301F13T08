@@ -1,4 +1,4 @@
-package com.team08storyapp;
+package src.com.team08storyapp.test;
 
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 
@@ -12,7 +12,7 @@ public class testPhotoController extends TestCase
 	
 public void testTakePhoto(){
 		
-		picture = new Picture();
+		picture = new Picture(); //?????
 	
 		Photo photo = PhotoController.takePhoto();
 		
