@@ -2,7 +2,7 @@ package com.team08storyapp;
 
 public class Choice {
 	String text;
-	int FragmentID;
+	int storyFragmentID;
 	int Id;
 	
 	public void setText(String string) {
@@ -10,12 +10,12 @@ public class Choice {
 		this.text = string;
 	}
 	
-	public void setId(int CId){
-		this.Id = CId;
+	public void setId(int choiceID){
+		this.Id = choiceID;
 	}
 	
-	public void setFragmentID(int FId){
-		this.FragmentID = FId;
+	public void setFragmentID(int storyFragmentID){
+		this.storyFragmentID = storyFragmentID;
 		
 	}
 
