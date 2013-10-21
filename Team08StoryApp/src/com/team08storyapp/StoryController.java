@@ -25,6 +25,12 @@ public class StoryController {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public static boolean publish(Story addStory) {
+		return false;
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

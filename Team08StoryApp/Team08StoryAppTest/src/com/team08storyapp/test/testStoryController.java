@@ -5,6 +5,7 @@ import com.team08storyapp.Choice;
 import com.team08storyapp.Photo;
 import com.team08storyapp.SQLiteHelper;
 import com.team08storyapp.Story;
+import com.team08storyapp.StoryController;
 import com.team08storyapp.StoryFragment;
 
 import junit.framework.TestCase;
@@ -100,9 +101,12 @@ public class testStoryController extends TestCase {
 		
 	}
 	
-	
+	/*the testPublish method tests publishing a story. If the story can
+	 * be successfully published the method call to storyControll.publish should return true.
+	 * **/
+	 
 	public void testPublish(){
-		
+		assertTrue(StoryController.publish(addStory));
 	}
 	public void testSeach(){
 		
