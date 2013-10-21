@@ -1,5 +1,7 @@
 package com.team08storyapp;
 
+import java.util.ArrayList;
+
 public class StoryController {
 
 	
@@ -30,6 +32,16 @@ public class StoryController {
 		return false;
 		// TODO Auto-generated method stub
 		
+	}
+
+	public static ArrayList<StoryFragment> search(String searchText) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static ArrayList<StoryFragment> browseStories() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
