@@ -74,20 +74,8 @@ public class testStoryController extends TestCase {
 			searchListSize = 1;
 		}
 	
-	/* The testDownloadStory method tests downloaded a story from the server. If 
-	 * the story is successfully downloaded, story should not be null, downloadStoryId and the fragment size should match.
-	 */
-	public void testDownloadStory(){
-		
-		
-		Story story = Story.downloadStory(downloadStoryId);
-		
-		assertNotNull(story);
-		assertEquals(story.getStoryId(), downloadStoryId);
-		assertEquals(story.getStoryFragments().size(), storyFragmentListSize);
-		
-		
-	}
+
+	
 	/*The testReadStory method tests reading a story. If the story can be successfully read the
 	 * method call to story.readStory should return true.
 	 */
@@ -97,30 +85,6 @@ public class testStoryController extends TestCase {
 		assertTrue(Story.readStory(downloadStory));
 	}
 	
-	
-	/*The testBrowseStories method tests browsing a list of stories. If a list of stories
-	 * can be called to be browsed, testBrowseStories should return true.
-	 */
-	public void testBrowseStories(){
-		assertTrue(StoryController.browseStories().size() == storyListSize);
-	}
-	
-	/*the testPublish method tests publishing a story. If the story can
-	 * be successfully published the method call to storyControll.publish should return true.
-	 * **/
-	public void testPublish(){
-		assertTrue(StoryController.publish(addStory));
-	}
-	
-	
-	
-	/*The testSearch method tests a search on all existing stories in a certain database. By
-	 * entering in a string a text, if the text is searched through the database testSearch
-	 * should return true.
-	 */
-	public void testSeach(){
-		assertTrue(StoryController.search(searchText).size() == searchListSize);
-	}
 	
 	
 	/* The testAddStoryFragment method tests adding a story fragment to the server. If 
