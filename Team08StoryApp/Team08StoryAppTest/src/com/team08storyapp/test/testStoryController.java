@@ -97,19 +97,29 @@ public class testStoryController extends TestCase {
 		assertTrue(Story.readStory(downloadStory));
 	}
 	
+	
+	/*The testBrowseStories method tests browsing a list of stories. If a list of stories
+	 * can be called to be browsed, testBrowseStories should return true.
+	 */
 	public void testBrowseStories(){
-		
+		assertTrue(StoryController.browseStories().size() == storyListSize);
 	}
 	
 	/*the testPublish method tests publishing a story. If the story can
 	 * be successfully published the method call to storyControll.publish should return true.
 	 * **/
-	 
 	public void testPublish(){
 		assertTrue(StoryController.publish(addStory));
 	}
+	
+	
+	
+	/*The testSearch method tests a search on all existing stories in a certain database. By
+	 * entering in a string a text, if the text is searched through the database testSearch
+	 * should return true.
+	 */
 	public void testSeach(){
-		
+		assertTrue(StoryController.search(searchText).size() == searchListSize);
 	}
 	
 	
