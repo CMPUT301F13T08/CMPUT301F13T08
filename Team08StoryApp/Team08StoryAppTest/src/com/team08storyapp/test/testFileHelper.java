@@ -94,7 +94,7 @@ public class testFileHelper extends TestCase {
 		
 	}
 	
-	/* Test Case for Use Case 2 & 16
+	/* Test Case for Use Case 2
 	 * 
 	 * The testGetStories method tests retrieval of all the stories stored in local file. The
 	 * local file will contain at least one story for this test. The list returned from the method 
