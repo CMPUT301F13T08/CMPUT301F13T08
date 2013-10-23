@@ -48,18 +48,41 @@ public class testFileHelper extends TestCase {
 		
 	}
 	
+	/*
+	 * Test case for Use Case 9
+	 * 
+	 * Taking the story that is cached by ESHelper.getOnlineStory(StoryId),
+	 * addOfflineStory(story) will store the story in local file. So if a
+	 * story is successfully added, the test function testAddOfflineStory()
+	 *  will return true.
+	 */
 	public void testAddOfflineStory(){
 		story0.setFirstStoryFragment(fragment);
 		story0.setStoryFragments(fragmentList);
 		assertTrue(fHelper.addOfflineStory(story0));
 	}
 	
+	/*
+	 * Test case for Use Case 5, 6, 7, 8
+	 * 
+	 * UpdateOfflineStory() updates an offline story. 
+	 * If the change is successfully saved and applied to the story, 
+	 * the test method testUpdateOfflineStory() should return true.
+	 */
 	public void testUpdateOfflineStory(){
 		fragmentList.add(fragment1);
 		story0.setStoryFragments(fragmentList);
 		assertTrue(fHelper.updateOfflineStory(story0));
 	}
 	
+	/*
+	 * Test case for Use Case 1
+	 * 
+	 * testGetOfflineStory tests getting a story from local file with a given id.
+	 * A story should be returned with that given id. And the basic information of
+	 * that story(title, author, id) should not be null. And we also check the length
+	 * of fragment list to make sure no fragment is lost.
+	 */
 	public void testGetOfflineStory(){
 		Story story = fHelper.getOfflineStory(storyId);
 		
@@ -71,10 +94,23 @@ public class testFileHelper extends TestCase {
 		
 	}
 	
+	/* Test Case for Use Case 2 & 16
+	 * 
+	 * The testGetStories method tests retrieval of all the stories stored in local file. The
+	 * local file will contain at least one story for this test. The list returned from the method 
+	 * call fHelper.getStories should be the same size as the one stored locally.
+	 */
 	public void testGetOfflineStories(){
 		assertEquals(fHelper.getOfflineStories().size(), storyCount);
 	}
 	
+	/* Test Case for Use Case 4
+	 * 
+	 * The testSearchForStory method tests the search functionality of the stories on the 
+	 *local file. Given a string to search the method call fHelper.searchForStory should return
+	 * a list of the size we are expecting for the given search text.
+	 * 
+	 */
 	public void testSearchOfflineStories(){
 		assertEquals(fHelper.searchOfflineStories(searchText).size(), resultCount);
 	}
