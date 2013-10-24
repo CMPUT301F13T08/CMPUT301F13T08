@@ -18,5 +18,6 @@ public class Choice {
 		this.storyFragmentID = storyFragmentID;
 		
 	}
+	
 
 }

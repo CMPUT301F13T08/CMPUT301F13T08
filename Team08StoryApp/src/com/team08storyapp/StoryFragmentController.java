@@ -16,8 +16,9 @@ public class StoryFragmentController {
 		// TODO Auto-generated method stub
 	}
 	
-	public void updateStoryfragment(StoryFragment storyfragment){
+	public boolean updateStoryfragment(StoryFragment storyfragment){
 		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

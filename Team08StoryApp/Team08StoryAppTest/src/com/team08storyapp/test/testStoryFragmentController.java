@@ -15,14 +15,14 @@ import com.team08storyapp.Photo;
 public class testStoryFragmentController extends TestCase {
 
 	private StoryFragmentController aSFragmentController;
-	
-	private Story firstStory;
 	private StoryFragment firstFragment;
 	private StoryFragment updateFragment;
 	private Choice firstChoice;
 	private Annotation firstAnnotation;
 	private Photo firstPhoto;
-	private ArrayList<StoryFragment> storyFragments;
+	private ArrayList<Annotation> aAnnotations;
+	private ArrayList<Choice> aChoices;
+	private ArrayList<Photo> aPhotos;
 	
 	public testStoryFragmentController(){
 		super();
@@ -30,34 +30,46 @@ public class testStoryFragmentController extends TestCase {
 	
 	
 	//SetUp sets up variables that are to be used in the test cases
-	protected void setUp(){
-		firstStory = new Story("title", "author");
-		
+	protected void setUp(){		
 		firstFragment = new StoryFragment(0,"String");
 		updateFragment = new StoryFragment(1, "updateString");
+		//storyFragments = new ArrayList<StoryFragment>();
 		
+		firstChoice = new Choice();
+		firstPhoto = new Photo(null);
+		firstAnnotation = new Annotation(0, 0, null, null);
+		aAnnotations = new ArrayList<Annotation>();
+		aChoices = new ArrayList<Choice>();
 		
 		
 	}
 	
 	//addAnnotation adds an annotation to a StoryFragment Object.
 	public void testAddAnnotation(){
-		
+		firstFragment.setAnnotations(aAnnotations);
+		aAnnotations.add(firstAnnotation);
+		assertTrue(!aAnnotations.equals(null));
 	}
 	
 	//addChoice adds a choice to a StoryFragment Object.
 	public void testAddChoice(){
+		firstFragment.setChoices(aChoices);
+		aChoices.add(firstChoice);
+		assertTrue(!aChoices.equals(null));
 		
 	}
 	
 	//addImage adds an image to a StoryFragment Object.
 	public void testAddImage(){
+		firstFragment.setPhotos(aPhotos);
+		aPhotos.add(firstPhoto);
+		assertTrue(!aPhotos.equals(null));
 		
 	}
 	
 	//updateStoryFragment updates a fragment that has just been modified.
 	public void testUpdateStoryFragment(){
-		
+		assertTrue(aSFragmentController.updateStoryfragment(updateFragment));
 	}
 	
 	

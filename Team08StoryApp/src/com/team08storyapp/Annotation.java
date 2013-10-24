@@ -14,4 +14,6 @@ public class Annotation {
 	public Annotation(int annotationID, int storyFragmentID, Photo photo, String text){
 		
 	}
+	
+
 }

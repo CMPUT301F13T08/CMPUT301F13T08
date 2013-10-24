@@ -7,6 +7,7 @@ public class StoryFragment {
 	private String storyText;
 	private ArrayList<Photo> photos;
 	private ArrayList<Choice> choices;
+	private ArrayList<Annotation> annotations;
 	
 	public StoryFragment(int storyFragmentId){
 		this.storyFragmentId = storyFragmentId;
@@ -51,5 +52,13 @@ public class StoryFragment {
 
 	public void setChoices(ArrayList<Choice> choices) {
 		this.choices = choices;
+	}
+	
+	public ArrayList<Annotation> getAnnotations(){
+		return annotations;
+	}
+	
+	public void setAnnotations(ArrayList<Annotation> annotations){
+		this.annotations = annotations;
 	}
 }
