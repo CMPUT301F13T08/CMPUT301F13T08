@@ -16,15 +16,11 @@ public class testStoryController extends TestCase {
 
 	
 	
-	private Story addStory;
-	private Story downloadStory;
 	
-	private int storyFragmentId;
+	
+	
+
 	private StoryFragment addStoryFragment;
-	private StoryFragment updateStoryFragment;
-	private StoryFragment firstFragment;
-	private ArrayList<StoryFragment> storyFragments;
-	
 	
 	
 	/* The testAddStoryFragment method tests adding a story fragment to an existing story. If 
