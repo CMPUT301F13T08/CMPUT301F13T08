@@ -24,6 +24,10 @@ public class testStoryFragmentController extends TestCase {
 	private Photo firstPhoto;
 	private ArrayList<StoryFragment> storyFragments;
 	
+	public testStoryFragmentController(){
+		super();
+	}
+	
 	
 	//SetUp sets up variables that are to be used in the test cases
 	protected void setUp(){

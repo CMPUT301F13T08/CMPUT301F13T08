@@ -1,4 +1,5 @@
-package src.com.team08storyapp.test;
+package com.team08storyapp.test;
+
 import java.util.ArrayList;
 
 import com.team08storyapp.Choice;
