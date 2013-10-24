@@ -8,11 +8,28 @@ public class Photo {
 	private Bitmap picture;
 	
 	public Photo(Bitmap picture){
-		
+		this.picture = picture;
 	}
 	
 	public Photo(int photoID, Bitmap picture){
-		
+		this.photoID = photoID;
+		this.picture = picture;
+	}
+	
+	public void setPhotoID(int photoID){
+		this.photoID = photoID;
+	}
+	
+	public int getPhotoID(){
+		return photoID; 
+	}
+	
+	public void setPicture(Bitmap picture){
+		this.picture = picture;
+	}
+	
+	public Bitmap getPicture(){
+		return picture;
 	}
 
 }
