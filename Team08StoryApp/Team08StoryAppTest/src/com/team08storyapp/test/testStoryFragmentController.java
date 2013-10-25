@@ -68,10 +68,11 @@ public class testStoryFragmentController extends TestCase {
 		
 	}
 	
-	/* Test Case for Use Case 6
+	/* Test Case for Use Case 6, 13
 	 * 
 	 * The testAddImage method test adding an image to a StoryFragment Object. The array of photos should not be
-	 * null, since a Photo object was put into the array of photos. If successful the test should return true.
+	 * null, since a Photo object was put into the array of photos. This test also relates to Test Case 13 Since
+	 * it allows a user to upload multiple illustrations to one fragment. If successful the test should return true.
 	*/
 	public void testAddImage(){
 		firstFragment.setPhotos(aPhotos);
