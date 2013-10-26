@@ -27,3 +27,5 @@ Testing new addition
 please god work.
 
 trying to test if the photo is uploaded. 
+
+just testing upload on desktop.
