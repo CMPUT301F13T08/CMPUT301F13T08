@@ -28,4 +28,9 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+    public void toOfflineStories(View view){
+    	Intent intent = new Intent(MainActivity.this, OfflineStoriesActivity.class);
+    	startActivity(intent);
+    }
+   
 }

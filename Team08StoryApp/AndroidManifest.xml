@@ -30,6 +30,10 @@
             android:name="com.team08storyapp.OnlineStoriesActivity"
             android:label="@string/title_activity_online_stories" >
         </activity>
+        <activity
+            android:name="com.team08storyapp.OfflineStoriesActivity"
+            android:label="@string/title_activity_offline_stories" >
+        </activity>
     </application>
 
 </manifest>

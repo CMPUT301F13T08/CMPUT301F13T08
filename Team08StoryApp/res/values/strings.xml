@@ -11,5 +11,6 @@
     <string name="title_activity_story_list">StoryListActivity</string>
     <string name="search_hint">Enter the title to search here</string>
     <string name="title_activity_online_stories">OnlineStoriesActivity</string>
+    <string name="title_activity_offline_stories">OfflineStoriesActivity</string>
 
 </resources>
