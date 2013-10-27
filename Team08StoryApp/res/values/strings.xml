@@ -12,5 +12,7 @@
     <string name="search_hint">Enter the title to search here</string>
     <string name="title_activity_online_stories">OnlineStoriesActivity</string>
     <string name="title_activity_offline_stories">OfflineStoriesActivity</string>
-
+    <string name="title_activity_story_view">StoryViewActivity</string>
+    <string name ="read_menu">Read</string>
+	<string name ="download_menu">Download</string>
 </resources>
