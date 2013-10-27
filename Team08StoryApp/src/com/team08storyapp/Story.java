@@ -8,15 +8,27 @@ public class Story {
 	private String title;
 	private String author;
 	private ArrayList<StoryFragment> storyFragments;
-	private StoryFragment firstStoryFragment;
-	
-	public Story(String title, String author){
+	private int firstStoryFragmentId;
+
+	public Story() {
+
+	}
+
+	public Story(String title, String author) {
 		this.title = title;
 		this.author = author;
 	}
-	
-	public Story(int id, String title, String author){
-		this.storyId = id;
+
+	public Story(int storyId, String title, String author) {
+		this.storyId = storyId;
+		this.title = title;
+		this.author = author;
+	}
+
+	public Story(int storyId, String title, String author,
+			ArrayList<StoryFragment> storyFragments, int firstStoryFragmentId) {
+		super();
+		this.storyId = storyId;
 		this.title = title;
 		this.author = author;
 	}
@@ -45,29 +57,18 @@ public class Story {
 		this.storyFragments = storyFragments;
 	}
 
-	public StoryFragment getFirstStoryFragment() {
-		return firstStoryFragment;
+	public int getFirstStoryFragment() {
+		return firstStoryFragmentId;
 	}
 
-	public void setFirstStoryFragment(StoryFragment firstStoryFragment) {
-		this.firstStoryFragment = firstStoryFragment;
+	public void setFirstStoryFragment(int firstStoryFragmentId) {
+		this.firstStoryFragmentId = firstStoryFragmentId;
 	}
 
-	public static Story downloadStory(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public String toString() {
+		return "Story [storyId=" + storyId + ", title=" + title + ", author="
+				+ author + ", storyFragments=" + storyFragments
+				+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
 	}
-
-	public static boolean readStory(Story addStory) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	
-	public static boolean addStoryFragment(StoryFragment addStoryFragment) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	
 }

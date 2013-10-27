@@ -1,56 +1,68 @@
 package com.team08storyapp;
 
 public class Annotation {
-	
+
 	private int annotationID;
 	private String text;
 	private int storyFragmentID;
 	private Photo photo;
-	
-	public Annotation(int storyFragmentID, Photo photo, String text){
+
+	public Annotation() {
+
+	}
+
+	public Annotation(int storyFragmentID, Photo photo, String text) {
 		this.storyFragmentID = storyFragmentID;
 		this.photo = photo;
 		this.text = text;
 	}
-	
-	public Annotation(int annotationID, int storyFragmentID, Photo photo, String text){
+
+	public Annotation(int annotationID, int storyFragmentID, Photo photo,
+			String text) {
+		super();
 		this.annotationID = annotationID;
 		this.storyFragmentID = storyFragmentID;
 		this.photo = photo;
 		this.text = text;
 	}
-	
-	public void setAnnotationID(int annotationID){
+
+	public void setAnnotationID(int annotationID) {
 		this.annotationID = annotationID;
 	}
-	
-	public int getAnnotationID(){
+
+	public int getAnnotationID() {
 		return annotationID;
 	}
-	
-	public void setText(String text){
+
+	public void setText(String text) {
 		this.text = text;
 	}
-	
-	public String getText(){
+
+	public String getText() {
 		return text;
 	}
-	
-	public void setStoryFragmentID(int storyFragmentID){
+
+	public void setStoryFragmentID(int storyFragmentID) {
 		this.storyFragmentID = storyFragmentID;
 	}
-	
-	public int getStoryFragmentID(){
+
+	public int getStoryFragmentID() {
 		return storyFragmentID;
 	}
-	
-	public void setPhoto(Photo photo){
+
+	public void setPhoto(Photo photo) {
 		this.photo = photo;
 	}
-	
-	public Photo getPhoto(){
+
+	public Photo getPhoto() {
 		return photo;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Annotation [storyFragmentID=" + storyFragmentID
+				+ ", annotationID=" + annotationID + ", text=" + text
+				+ ", photo=" + photo + "]";
+	}
 
 }

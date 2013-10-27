@@ -8,18 +8,33 @@ public class StoryFragment {
 	private ArrayList<Photo> photos;
 	private ArrayList<Choice> choices;
 	private ArrayList<Annotation> annotations;
-	
-	public StoryFragment(int storyFragmentId){
+
+	public StoryFragment() {
+
+	}
+
+	public StoryFragment(int storyFragmentId) {
 		this.storyFragmentId = storyFragmentId;
 	}
-	
-	public StoryFragment(int storyFragmentId, String storyText){
+
+	public StoryFragment(int storyFragmentId, String storyText) {
 		this.storyFragmentId = storyFragmentId;
 		this.storyText = storyText;
 	}
-	
-	public StoryFragment(String storyText){
+
+	public StoryFragment(String storyText) {
 		this.storyText = storyText;
+	}
+
+	public StoryFragment(int storyFragmentId, String storyText,
+			ArrayList<Photo> photos, ArrayList<Choice> choices,
+			ArrayList<Annotation> annotations) {
+		super();
+		this.storyFragmentId = storyFragmentId;
+		this.storyText = storyText;
+		this.photos = photos;
+		this.choices = choices;
+		this.annotations = annotations;
 	}
 
 	public int getStoryFragmentId() {
@@ -53,12 +68,19 @@ public class StoryFragment {
 	public void setChoices(ArrayList<Choice> choices) {
 		this.choices = choices;
 	}
-	
-	public ArrayList<Annotation> getAnnotations(){
+
+	public ArrayList<Annotation> getAnnotations() {
 		return annotations;
 	}
-	
-	public void setAnnotations(ArrayList<Annotation> annotations){
+
+	public void setAnnotations(ArrayList<Annotation> annotations) {
 		this.annotations = annotations;
+	}
+
+	@Override
+	public String toString() {
+		return "StoryFragment [storyFragmentId=" + storyFragmentId
+				+ ", storyText=" + storyText + ", photos=" + photos
+				+ ", choices=" + choices + ", annotations=" + annotations + "]";
 	}
 }

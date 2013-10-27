@@ -16,7 +16,7 @@ public class testESHelper extends TestCase {
 	private Story updateStory;
 	private int storyListSize;
 	
-	private StoryFragment firstFragment;
+	private int firstFragment;
 	private ArrayList<StoryFragment> storyFragments;
 	private int storyFragmentListSize;
 
@@ -36,9 +36,9 @@ public class testESHelper extends TestCase {
 		updateStory = new Story(1, "updatedTitle", "updatedAuthor");
 		storyListSize = 1;
 		
-		firstFragment = new StoryFragment("first fragment");
+		firstFragment = 1;
 		storyFragments = new ArrayList<StoryFragment>();
-		storyFragments.add(firstFragment);
+		storyFragments.add(new StoryFragment());
 		storyFragmentListSize = 1;
 		
 		searchText = "title or author";

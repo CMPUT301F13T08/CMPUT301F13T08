@@ -16,7 +16,7 @@ public class testFileHelper extends TestCase {
 	private Story story0;
 	private int storyCount;
 	
-	private StoryFragment fragment;
+	private int fragment;
 	private StoryFragment fragment1;
 	private ArrayList<StoryFragment> fragmentList;
 	
@@ -38,10 +38,10 @@ public class testFileHelper extends TestCase {
 		story0 = new Story("title", "author");
 		storyCount = 1;
 		
-		fragment = new StoryFragment("fragment1");
+		fragment = 1;
 		fragment1 = new StoryFragment("2");
 		fragmentList = new ArrayList<StoryFragment>();
-		fragmentList.add(fragment);
+		fragmentList.add(fragment1);
 		
 		searchText = "title";
 		resultCount = 1;

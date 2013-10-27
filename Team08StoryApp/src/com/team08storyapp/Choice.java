@@ -2,38 +2,47 @@ package com.team08storyapp;
 
 public class Choice {
 	String text;
-	int storyFragmentID;
-	int Id;
-	
-	public Choice(String text, int StoryFragmentID, int Id){
+	int toGoToStoryFragmentID;
+	int choiceId;
+
+	public Choice() {
+
+	}
+
+	public Choice(int toGoToStoryFragmentID, int choiceId, String text) {
+		super();
 		this.text = text;
-		this.storyFragmentID = StoryFragmentID;
-		this.Id = Id;
+		this.toGoToStoryFragmentID = toGoToStoryFragmentID;
+		this.choiceId = choiceId;
 	}
-	
-	public void setText(String string) {
-		this.text = string;
-	}
-	
-	public String getText(){
+
+	public String getText() {
 		return text;
 	}
-	
-	public void setId(int choiceID){
-		this.Id = choiceID;
-	}
-	
-	public int getStoryFragmentID(){
-		return storyFragmentID;
-	}
-	
-	public void setFragmentID(int storyFragmentID){
-		this.storyFragmentID = storyFragmentID;
-	}
-	
-	public int getId(){
-		return Id;
-	}
-	
 
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public int getStoryFragmentID() {
+		return toGoToStoryFragmentID;
+	}
+
+	public void setStoryFragmentID(int toGoToStoryFragmentID) {
+		this.toGoToStoryFragmentID = toGoToStoryFragmentID;
+	}
+
+	public int getChoiceId() {
+		return choiceId;
+	}
+
+	public void setChoiceId(int choiceId) {
+		this.choiceId = choiceId;
+	}
+
+	@Override
+	public String toString() {
+		return "Choice [choiceId=" + choiceId + ", toGoToStoryFragmentID="
+				+ toGoToStoryFragmentID + ", text=" + text + "]";
+	}
 }
