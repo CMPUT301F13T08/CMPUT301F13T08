@@ -1,4 +1,4 @@
-package src.com.team08storyapp.test;
+package com.team08storyapp.test;
 
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 

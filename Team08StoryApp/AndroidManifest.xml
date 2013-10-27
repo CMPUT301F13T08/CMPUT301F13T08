@@ -34,6 +34,10 @@
             android:name="com.team08storyapp.OfflineStoriesActivity"
             android:label="@string/title_activity_offline_stories" >
         </activity>
+        <activity
+            android:name="com.team08storyapp.StoryViewActivity"
+            android:label="@string/title_activity_story_view" >
+        </activity>
     </application>
 
 </manifest>
