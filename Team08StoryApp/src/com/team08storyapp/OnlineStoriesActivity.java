@@ -2,9 +2,10 @@ package com.team08storyapp;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.view.Menu;
 
-public class OnlineStoriesActivity extends Activity {
+public class OnlineStoriesActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
