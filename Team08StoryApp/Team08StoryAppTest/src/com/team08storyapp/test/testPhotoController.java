@@ -1,8 +1,9 @@
-package src.com.team08storyapp.test;
+package com.team08storyapp.test;
 
-import android.provider.ContactsContract.CommonDataKinds.Photo;
+import junit.framework.TestCase;
 
-import com.team08storyapp.Story;
+import com.team08storyapp.Photo;
+import com.team08storyapp.PhotoController;
 
 // test cases for methods of the PhotoController class
 public class testPhotoController extends TestCase
@@ -16,7 +17,7 @@ public void testTakePhoto(){
 	
 		Photo photo = PhotoController.takePhoto();
 		
-		assertNotNull(photo.picture);
+		assertNotNull(photo.getPicture());
 
 	}
 	
@@ -29,7 +30,7 @@ public void testUploadPhoto(){
 	
 	Photo photo = PhotoController.uploadPhoto();
 	
-	assertNotNull(photo.picture);
+	assertNotNull(photo.getPicture());
 	
 }
 	
