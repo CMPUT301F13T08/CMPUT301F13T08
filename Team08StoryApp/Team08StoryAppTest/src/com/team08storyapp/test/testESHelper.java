@@ -1,5 +1,6 @@
 package com.team08storyapp.test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.team08storyapp.ESHelper;
@@ -53,7 +54,15 @@ public class testESHelper extends TestCase {
 	public void testAddOnlineStory(){
 		addStory.setFirstStoryFragment(firstFragment);
 		addStory.setStoryFragments(storyFragments);
-		assertTrue(esHelper.addOnlineStory(addStory));	
+		try {
+			assertTrue(esHelper.addOnlineStory(addStory));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	/* Test Case for Use Case 10
