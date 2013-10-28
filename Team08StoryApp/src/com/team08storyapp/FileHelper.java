@@ -1,6 +1,9 @@
 package com.team08storyapp;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +12,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import android.content.Context;
+
+import com.example.filehelperv0.Story;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -81,12 +86,34 @@ public class FileHelper{
 		return null;
 	}
 
-	public ArrayList<StoryFragment> getOfflineStories() throws FileNotFoundException, IOException{
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Story> getOfflineStories() throws FileNotFoundException, IOException{
+		File file = fileContext.getFilesDir();
+		File[] fileList= file.listFiles();
+		int length = fileList.length;
+		ArrayList<Story> sList = new ArrayList<Story>();
+		
+		for(int i = 0; i < length; i++){
+			InputStream is = new BufferedInputStream(new FileInputStream(fileList[i]));
+			if (is != null){
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr);
+				String temp = "";
+				StringBuilder stringBuilder = new StringBuilder();
+				while ( (temp = br.readLine()) != null ) {
+	                stringBuilder.append(temp);
+	            }
+
+	            is.close();
+	            Type storyType = new TypeToken<Story>(){}.getType();
+	            Story story = gson.fromJson(stringBuilder.toString(), storyType);
+	            System.out.println(story.toString());	
+	            sList.add(story);
+			}			
+		}
+		return sList;
 	}
 
-	public ArrayList<StoryFragment> searchOfflineStories(String searchText) {
+	public ArrayList<Story> searchOfflineStories(String searchText) {
 		// TODO Auto-generated method stub
 		return null;
 	}
