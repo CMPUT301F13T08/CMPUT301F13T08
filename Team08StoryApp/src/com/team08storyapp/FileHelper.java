@@ -26,6 +26,7 @@ public class FileHelper{
 	private Context fileContext;	
 	private Gson gson = new Gson();
 	
+
 	/*
 	 * Initialize the fileContext with passed context.
 	 */
@@ -37,7 +38,7 @@ public class FileHelper{
 	/*
 	 *  function: addOfflineStory
 	 *  input : Story story
-	 *  ouput: boolean value
+	 *  output: boolean value
 	 *  
 	 *  description: 
 	 *  Create a file named after the story's Id (since it's unique), and write the story
@@ -62,9 +63,10 @@ public class FileHelper{
 		return false;
 	}
 	
+	
 	/*
 	 * function: updateOfflineStory
-	 * input: Stroy story
+	 * input: Story story
 	 * output: boolean value
 	 * 
 	 * description:
@@ -87,6 +89,7 @@ public class FileHelper{
 		return false;
 	}
 
+	
 	/*
 	 * function: getOfflineStory
 	 * input: int storyId
@@ -122,6 +125,8 @@ public class FileHelper{
 		}
 		return null;
 	}
+	
+	
 	/*
 	 * function: getOfflineStories
 	 * input: N/A
@@ -161,7 +166,16 @@ public class FileHelper{
 		}
 		return sList;
 	}
-
+	/*
+	 * function: searchOfflineStories
+	 * input: String searchText
+	 * output: ArrayList<Story> storyList;
+	 * 
+	 * description:
+	 * First the function gets all the stories in the current directory. And then compares
+	 * each stories author and title with searchText to determine if this story should be 
+	 * added into the result storyList.
+	 */
 	public ArrayList<Story> searchOfflineStories(String searchText) {
 		searchText = searchText.toLowerCase();
 		
