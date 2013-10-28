@@ -28,7 +28,7 @@ public class FileHelper{
 	private static final int Download = 0;
 	private static final int My = 1;
 	private String prefix;
-	
+
 
 	/*
 	 * Initialize the fileContext with passed context.
