@@ -25,13 +25,32 @@ public class FileHelper{
 	 */
 	private Context fileContext;	
 	private Gson gson = new Gson();
+	private static final int Download = 0;
+	private static final int My = 1;
+	private String prefix;
 	
 
 	/*
 	 * Initialize the fileContext with passed context.
+	 * Since we design to store author's own stories and downloaded stories
+	 * in different directories in internal storage, we need to differentiate them.
+	 * (Actually I haven't come up with a better idea than using a third party
+	 * library called DirectoryPicker when saving files in different directory
+	 * in internal storage. But I think the "prefix" can do the job as well. So
+	 * I may stick to it.)
 	 */
-	public FileHelper(Context context){
+	public FileHelper(Context context, int mode){
 		fileContext = context;
+		switch(mode){
+		case Download:
+			prefix = "Download";
+			break;
+		case My:
+			prefix = "My";
+			break;
+		default:
+			prefix = "My";
+	}
 	}
 	
 	
@@ -77,7 +96,7 @@ public class FileHelper{
 	 */
 	public boolean updateOfflineStory(Story story)throws FileNotFoundException, IOException{
 		try{
-			String fileName = Integer.toString(story.getStoryId());
+			String fileName = prefix + Integer.toString(story.getStoryId());
 			fileContext.deleteFile(fileName); // delete original file
 			addOfflineStory(story);		// add new file
 			return true;
@@ -101,7 +120,7 @@ public class FileHelper{
 	 */
 	public Story getOfflineStory(int storyId) throws FileNotFoundException, IOException {
 		try{
-			String fileName = Integer.toString(storyId);
+			String fileName = prefix + Integer.toString(storyId);
 			InputStream is = fileContext.openFileInput(fileName);
 			
 			if ( is != null){
@@ -141,10 +160,18 @@ public class FileHelper{
 	public ArrayList<Story> getOfflineStories() throws FileNotFoundException, IOException{
 		File file = fileContext.getFilesDir();
 		File[] fileList= file.listFiles();
-		int length = fileList.length;
+		
+		ArrayList<File> prefixFileList = new ArrayList<File>();
+		for(int i = 0; i < fileList.length; i++){
+			System.out.println(fileList[i].getName());
+			if(fileList[i].getName().startsWith(prefix)){
+				prefixFileList.add(fileList[i]);
+			}
+		}
+		
 		ArrayList<Story> sList = new ArrayList<Story>();
 		
-		for(int i = 0; i < length; i++){
+		for(int i = 0; i < prefixFileList.size(); i++){
 			// ReadIn process
 			InputStream is = new BufferedInputStream(new FileInputStream(fileList[i]));
 			if (is != null){
