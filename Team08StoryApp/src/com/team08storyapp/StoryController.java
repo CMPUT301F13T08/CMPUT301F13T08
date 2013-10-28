@@ -2,8 +2,6 @@ package com.team08storyapp;
 
 import java.util.ArrayList;
 
-import android.content.Context;
-
 public class StoryController {
 
 	// Constructor is added since the FileHelper needs 
@@ -22,7 +20,19 @@ public class StoryController {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
+	public static StoryFragment readStoryFragment(ArrayList<StoryFragment> storyFragments, int storyFragmentId){
+		StoryFragment nextFragment = null;
+		for(int i = 0; i < storyFragments.size(); i++){
+			if (storyFragments.get(i).getStoryFragmentId() == storyFragmentId){
+				nextFragment = storyFragments.get(i);
+			}
+		}
+		return nextFragment;
+	}
 
+	
 	public static boolean addStoryFragment(StoryFragment addStoryFragment) {
 		// TODO Auto-generated method stub
 		return false;
