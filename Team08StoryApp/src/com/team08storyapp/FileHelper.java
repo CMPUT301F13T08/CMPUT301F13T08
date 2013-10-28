@@ -12,8 +12,6 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import android.content.Context;
-
-import com.example.filehelperv0.Story;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -114,12 +112,29 @@ public class FileHelper{
 	}
 
 	public ArrayList<Story> searchOfflineStories(String searchText) {
-		// TODO Auto-generated method stub
+		searchText = searchText.toLowerCase();
+		try{
+		ArrayList<Story> allList = getOfflineStories();
+		ArrayList<Story> resultList = new ArrayList<Story>();
+		for(int i = 0; i < allList.size(); i++){
+			String title = allList.get(i).getTitle().toLowerCase();
+			String author = allList.get(i).getAuthor().toLowerCase();
+			if(author.contains(searchText) || title.contains(searchText)){
+				resultList.add(allList.get(i));
+			}
+		}
+		return resultList;
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
+
+}
 	
 	
 	
 	
 
-}
