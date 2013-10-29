@@ -23,7 +23,7 @@ public class FileHelper{
 	 * activities, broadcasting and receiving intents, etc.
 	 * In this case, it provides the directory of internal storage to store our files.
 	 */
-	private Context fileContext;	
+	private Context fileContext;
 	private Gson gson = new Gson();
 	private static final int Download = 0;
 	private static final int My = 1;

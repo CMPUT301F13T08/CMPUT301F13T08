@@ -37,6 +37,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	private EditText et;
 	private ArrayList<Story> resultList;
 	
+	private Story currentStory;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,19 +94,20 @@ public class OnlineStoriesActivity extends ListActivity {
 		position = info.position;
 		switch(item.getItemId()){
 		case DOWNLOAD_ID:
-			// TODO: save selected story to file
+			// TODO: save selected story (currentStory) to file
 			
 			
 			
 		case READ_ID:
 			
-			// TODO: get selected story object
+			// TODO: get selected story object - TODO: read the story - initialize currentStory to story object
 			
-			Story currentStory = null; // should be selected story
-	        
+	        // create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
 	        Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
 	    
+	        // send the story object through the intent
 	        firstStoryFragment.putExtra("story", (Serializable)currentStory);
+	        // send the first story fragment id through the intent
 	        firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
 	   
 	  //      startActivity(firstFragment);

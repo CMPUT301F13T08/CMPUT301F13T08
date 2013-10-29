@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -30,12 +29,13 @@ public class OfflineStoriesActivity extends ListActivity {
 	private EditText et;
 	private ArrayList<Story> resultList;
 	
+	private Story currentStory;
 	
-
-
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		
 		fHelper = new FileHelper(this, 0);
 		header = getLayoutInflater().inflate(R.layout.header_search, null);
@@ -80,6 +80,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		});
 		
 		registerForContextMenu(getListView());
+		
 	}
 	
 	@Override
@@ -91,16 +92,18 @@ public class OfflineStoriesActivity extends ListActivity {
 	
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);       
-        // TODO: read the story
+        // TODO: read the story - initialize currentStory to story object
         
-        Story currentStory = null;
-        
-	       Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
-	    
-	        firstStoryFragment.putExtra("story", (Serializable)currentStory);
-	        firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
-	   
-	  //      startActivity(firstFragment);
+          
+     // create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
+        Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
+    
+        // send the story object through the intent
+        firstStoryFragment.putExtra("story", (Serializable)currentStory);
+        // send the first story fragment id through the intent
+        firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
+   
+  //      startActivity(firstFragment);
     }
 
 	

@@ -37,6 +37,7 @@ public class ESHelper {
 	 * 
 	 * @return
 	 */
+	
 	private Story initializeSampleStory() {
 		Story sampleStory = new Story("The Walk", "Michele Paulichuk");
 		sampleStory.setFirstStoryFragment(1);
@@ -50,7 +51,7 @@ public class ESHelper {
 		storyFragment1
 				.setStoryText("Like any other day, Amara decided to take her dog out for a walk. She left the house and exited the yard.");
 		choices.add(new Choice(2, 1,
-				"Amara turned south heading for her friend’s house."));
+				"Amara turned south heading for her friendï¿½s house."));
 		choices.add(new Choice(7, 2,
 				"Amara turned north heading for the store."));
 		choices.add(new Choice(3, 3,
@@ -61,7 +62,7 @@ public class ESHelper {
 		// Story Fragment 2
 		StoryFragment storyFragment2 = new StoryFragment(1);
 		storyFragment2
-				.setStoryText("As Amara walked toward her friend’s house her dog started acting up. It pulled this way and that way. Then it stopped and started barking at a bush.");
+				.setStoryText("As Amara walked toward her friendï¿½s house her dog started acting up. It pulled this way and that way. Then it stopped and started barking at a bush.");
 		choices.clear();
 		choices.add(new Choice(4, 1, "In the bush, Amara found a small boy."));
 		choices.add(new Choice(5, 2,
@@ -84,7 +85,7 @@ public class ESHelper {
 		// Story Fragment 4
 		StoryFragment storyFragment4 = new StoryFragment(1);
 		storyFragment4
-				.setStoryText("At first Amara was startled by the boy. Then she realized he was crying softly. So she asked the boy what’s wrong. The boy was lost.");
+				.setStoryText("At first Amara was startled by the boy. Then she realized he was crying softly. So she asked the boy whatï¿½s wrong. The boy was lost.");
 		choices.clear();
 		choices.add(new Choice(10, 1,
 				"Amara decides to help the boy find his way home."));
@@ -95,7 +96,7 @@ public class ESHelper {
 		// Story Fragment 5
 		StoryFragment storyFragment5 = new StoryFragment(1);
 		storyFragment5
-				.setStoryText("Amara picked up the bill and looked around. There was no one around and therefore anyone to claim the money. So Amara decided to keep the bill and continue on to her friend’s house.");
+				.setStoryText("Amara picked up the bill and looked around. There was no one around and therefore anyone to claim the money. So Amara decided to keep the bill and continue on to her friendï¿½s house.");
 		choices.clear();
 		choices.add(new Choice(6, 1, "Continue"));
 		storyFragment5.setChoices(choices);
@@ -104,7 +105,7 @@ public class ESHelper {
 		// Story Fragment 6
 		StoryFragment storyFragment6 = new StoryFragment(1);
 		storyFragment6
-				.setStoryText("When Amara got to her friend’s house she explained her excitement at finding one hundred dollars in a bush, all thanks to her dog. Her friend suggests she should reward her dog a treat with part of the money.");
+				.setStoryText("When Amara got to her friendï¿½s house she explained her excitement at finding one hundred dollars in a bush, all thanks to her dog. Her friend suggests she should reward her dog a treat with part of the money.");
 		choices.clear();
 		choices.add(new Choice(7, 1, "Continue"));
 		storyFragment6.setChoices(choices);
@@ -128,7 +129,7 @@ public class ESHelper {
 		// Story Fragment 9
 		StoryFragment storyFragment9 = new StoryFragment(1);
 		storyFragment9
-				.setStoryText("Amara walks past the cave in a hurry. She notices the clouds have formed into rain clouds and decides it’s time to head home. THE END");
+				.setStoryText("Amara walks past the cave in a hurry. She notices the clouds have formed into rain clouds and decides itï¿½s time to head home. THE END");
 		storyFragmentList.add(storyFragment9);
 
 		// Story Fragment 10
@@ -143,13 +144,13 @@ public class ESHelper {
 		// Story Fragment 11
 		StoryFragment storyFragment11 = new StoryFragment(1);
 		storyFragment11
-				.setStoryText("As Amara and the boy stand there, they hear a voice calling the name Timothy. The boy stops his crying and starts yelling Momma. The boy’s mother comes rushing up and is relieved to find her missing son. You decide you have enough excitement for one walk and turn to head home for a nap. THE END");
+				.setStoryText("As Amara and the boy stand there, they hear a voice calling the name Timothy. The boy stops his crying and starts yelling Momma. The boyï¿½s mother comes rushing up and is relieved to find her missing son. You decide you have enough excitement for one walk and turn to head home for a nap. THE END");
 		storyFragmentList.add(storyFragment11);
 
 		// Story Fragment 12
 		StoryFragment storyFragment12 = new StoryFragment(1);
 		storyFragment12
-				.setStoryText("The boy’s mother arrives shortly and is relieved to find her son. As a reward for finding her son, she invites to take you out for ice cream with them. You decide to abandon your walk and take her offer up. THE END");
+				.setStoryText("The boyï¿½s mother arrives shortly and is relieved to find her son. As a reward for finding her son, she invites to take you out for ice cream with them. You decide to abandon your walk and take her offer up. THE END");
 		storyFragmentList.add(storyFragment12);
 
 		sampleStory.setStoryFragments(storyFragmentList);
@@ -226,4 +227,6 @@ public class ESHelper {
 		stories.add(initializeSampleStory());
 		return stories;
 	}
+
+
 }
