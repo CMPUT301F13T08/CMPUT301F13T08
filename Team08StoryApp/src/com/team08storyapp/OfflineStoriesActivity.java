@@ -2,6 +2,7 @@ package com.team08storyapp;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
@@ -91,14 +92,15 @@ public class OfflineStoriesActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);       
         // TODO: read the story
+        
         Story currentStory = null;
         
-        //Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
-    
-  //      firstStoryFragment.putExtra("story", currentStory.toString());
-    //    firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
-   
-  //      startActivity(firstFragment);
+	       Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
+	    
+	        firstStoryFragment.putExtra("story", (Serializable)currentStory);
+	        firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
+	   
+	  //      startActivity(firstFragment);
     }
 
 	

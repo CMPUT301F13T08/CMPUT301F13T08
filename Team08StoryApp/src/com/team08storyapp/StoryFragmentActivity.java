@@ -35,6 +35,11 @@ public class StoryFragmentActivity extends Activity {
 	private View headerText;
 	private TextView storyText;
 	
+	private Story currentStory;
+	private int currentStoryFragmentId = 0;
+	private StoryFragment currentStoryFragment;
+	
+	
     /**
      * instantiate the interactive gallery
      */
@@ -69,13 +74,11 @@ public class StoryFragmentActivity extends Activity {
         // Get the intent - passed either by Online/OfflineStoriesActivity or by StoryFragmentActivity
         Intent storyFragment = getIntent();
         
-        // Get the story object from the intent - need to figure out
-        Story currentStory = null; //= currentFragment.getExtra("story");
-        int currentStoryFragmentId = 0;
+        // Get the story object from the intent
+        currentStory = (Story) storyFragment.getSerializableExtra("story");
         // Get the current story fragment id from the intent - the fragment to display
         storyFragment.getIntExtra("storyFragmentId", currentStoryFragmentId);
         
-        StoryFragment currentStoryFragment;
         
         // The current story fragment object - get from the current story list fragment, by id
         currentStoryFragment = StoryController.readStoryFragment(currentStory.getStoryFragments(), currentStoryFragmentId);

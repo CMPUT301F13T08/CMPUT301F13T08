@@ -1,8 +1,10 @@
 package com.team08storyapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -96,14 +98,14 @@ public class OnlineStoriesActivity extends ListActivity {
 			
 		case READ_ID:
 			
-			// TODO: get selected story object, and create intent to StoryFragmentActivity
+			// TODO: get selected story object
 			
-			//Story currentStory = null;
+			Story currentStory = null; // should be selected story
 	        
-	        //Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
+	        Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
 	    
-	  //      firstStoryFragment.putExtra("story", currentStory.toString());
-	    //    firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
+	        firstStoryFragment.putExtra("story", (Serializable)currentStory);
+	        firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
 	   
 	  //      startActivity(firstFragment);
 			
