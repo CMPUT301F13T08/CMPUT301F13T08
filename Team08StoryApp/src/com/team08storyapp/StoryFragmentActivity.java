@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class StoryViewActivity extends Activity {
+public class StoryFragmentActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_story_view);
+		setContentView(R.layout.activity_story_fragment_view);
 	}
 
 	@Override
