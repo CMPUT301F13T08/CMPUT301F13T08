@@ -2,20 +2,15 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="src" path="Team08StoryAppTest"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpclient-4.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpclient-cache-4.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpcore-4.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpmime-4.3.1.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gson"/>
+	<classpathentry exported="true" kind="lib" path="libs/fluent-hc-4.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gson-2.2.4-javadoc.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gson-2.2.4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
-	<classpathentry kind="lib" path="/ESDemo/lib/fluent-hc-4.2.1.jar"/>
-	<classpathentry kind="lib" path="/ESDemo/lib/gson-2.2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Michele/git/ESDemo/ESDemo/lib/commons-codec-1.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Michele/git/ESDemo/ESDemo/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Michele/git/ESDemo/ESDemo/lib/fluent-hc-4.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Michele/git/ESDemo/ESDemo/lib/gson-2.2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Michele/git/ESDemo/ESDemo/lib/httpclient-4.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Michele/git/ESDemo/ESDemo/lib/httpclient-cache-4.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Michele/git/ESDemo/ESDemo/lib/httpcore-4.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Michele/git/ESDemo/ESDemo/lib/httpmime-4.2.1.jar"/>
 </classpath>
