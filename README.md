@@ -31,3 +31,6 @@ LICENSE
 =============
 Retrieved Oct. 27, 2013 - https://github.com/rayzhangcl/ESDemo
 -This demo was used to help with JSON and ESHelper
+
+Retrieved Oct. 29, 2013  - http://hc.apache.org/downloads.cgi
+-This is for the fluent library which is licenced under apache
