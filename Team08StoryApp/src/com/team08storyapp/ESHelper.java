@@ -162,8 +162,7 @@ public class ESHelper {
 	 * @throws IllegalStateException 
 	 */
 	public boolean addOnlineStory(Story story) throws IllegalStateException, IOException{
-		return false;
-		/*HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"+story.getStoryId());
+		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"+story.getStoryId());
 		StringEntity stringentity = null;
 		try {
 			stringentity = new StringEntity(gson.toJson(story));
@@ -201,7 +200,9 @@ public class ESHelper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		httpPost.releaseConnection();*/
+		httpPost.releaseConnection();
+		
+		return true;
 	}
 
 	public boolean updateOnlineStory(Story story) {
