@@ -36,7 +36,8 @@
         </activity>
         <activity
             android:name="com.team08storyapp.StoryFragmentActivity"
-            android:label="@string/title_activity_story_view" >
+            android:label="@string/title_activity_story_view"
+            android:configChanges="orientation|keyboardHidden" >
         </activity>
     </application>
 
