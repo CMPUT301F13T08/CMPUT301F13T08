@@ -3,9 +3,11 @@ package com.team08storyapp;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -89,6 +91,14 @@ public class OfflineStoriesActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);       
         // TODO: read the story
+        Story currentStory = null;
+        
+        //Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
+    
+  //      firstStoryFragment.putExtra("story", currentStory.toString());
+    //    firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
+   
+  //      startActivity(firstFragment);
     }
 
 	

@@ -67,7 +67,18 @@ public class StoryFragmentActivity extends Activity {
         picGallery.setAdapter(imgAdapt);
         
         
+        Intent storyFragment = getIntent();
+        
+        Story currentStory = null; //= currentFragment.getExtra("story");
+        int currentStoryFragmentId = 0;
+        StoryFragment currentStoryFragment;
+        storyFragment.getIntExtra("storyFragmentId", currentStoryFragmentId);
+        
+        currentStoryFragment = StoryController.readStoryFragment(currentStory.getStoryFragments(), currentStoryFragmentId);
+        
         storyText = (TextView) headerText.findViewById(R.id.headerText);
+        
+        storyText.setText(currentStoryFragment.getStoryText());
         
         /*
         //set long click listener for each gallery thumbnail item
