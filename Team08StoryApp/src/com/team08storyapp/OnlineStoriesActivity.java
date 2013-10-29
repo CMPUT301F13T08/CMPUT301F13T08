@@ -1,12 +1,6 @@
 package com.team08storyapp;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import com.example.filehelperv0.FileHelper;
-import com.example.filehelperv0.R;
-import com.example.filehelperv0.Story;
 
 import android.app.ListActivity;
 import android.os.Bundle;
@@ -39,6 +33,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	private View header;
 	private String searchText;
 	private EditText et;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +42,9 @@ public class OnlineStoriesActivity extends ListActivity {
 		esHelper = new ESHelper();
 		header = getLayoutInflater().inflate(R.layout.header_search, null);
 		
-		try {
-			fillData(esHelper.getOnlineStories(), onCreate);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		fillData(esHelper.getOnlineStories(), onCreate);
+
 		
 		Button searchButton = (Button) header.findViewById(R.id.searchButton);
 		et = (EditText) header.findViewById(R.id.searchText);
@@ -70,18 +59,10 @@ public class OnlineStoriesActivity extends ListActivity {
 					ArrayList<Story> result = esHelper.searchOnlineStories(searchText);
 					fillData(result, onUpdate);
 				}else{
-					try {
 						fillData(esHelper.getOnlineStories(), onUpdate);
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				}
-			}
 			
+			}
 		});
 		
 		registerForContextMenu(getListView());
@@ -126,9 +107,7 @@ public class OnlineStoriesActivity extends ListActivity {
 		if(!update){
 			lv.addHeaderView(header);	
 		}
-		setListAdapter(new ArrayAdapter<String>(this,R.layout.stories_row, lArray));
-
-
+		setListAdapter(new ArrayAdapter<String>(this,R.layout.stories_row, lArray)); 
 	}
 	
 	
