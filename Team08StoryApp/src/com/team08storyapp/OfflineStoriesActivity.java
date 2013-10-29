@@ -25,6 +25,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	private View header;
 	private String searchText;
 	private EditText et;
+	private ArrayList<Story> resultList;
 	
 	
 
@@ -37,7 +38,8 @@ public class OfflineStoriesActivity extends ListActivity {
 		header = getLayoutInflater().inflate(R.layout.header_search, null);
 		
 		try {
-			fillData(fHelper.getOfflineStories(), onCreate);
+			resultList = fHelper.getOfflineStories();
+			fillData(resultList, onCreate);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,11 +58,12 @@ public class OfflineStoriesActivity extends ListActivity {
 				searchText = et.getText().toString();			
 				if(searchText != null && searchText!= ""){
 					System.out.println(searchText);
-					ArrayList<Story> result = fHelper.searchOfflineStories(searchText);
-					fillData(result, onUpdate);
+					resultList = fHelper.searchOfflineStories(searchText);
+					fillData(resultList, onUpdate);
 				}else{
 					try {
-						fillData(fHelper.getOfflineStories(), onUpdate);
+						resultList = fHelper.getOfflineStories();
+						fillData(resultList, onUpdate);
 					} catch (FileNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

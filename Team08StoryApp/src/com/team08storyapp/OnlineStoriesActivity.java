@@ -33,6 +33,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	private View header;
 	private String searchText;
 	private EditText et;
+	private ArrayList<Story> resultList;
 	
 
 	@Override
@@ -41,9 +42,10 @@ public class OnlineStoriesActivity extends ListActivity {
 		
 		esHelper = new ESHelper();
 		header = getLayoutInflater().inflate(R.layout.header_search, null);
+		resultList = esHelper.getOnlineStories();
 		
 
-		fillData(esHelper.getOnlineStories(), onCreate);
+		fillData(resultList, onCreate);
 
 		
 		Button searchButton = (Button) header.findViewById(R.id.searchButton);
@@ -56,10 +58,11 @@ public class OnlineStoriesActivity extends ListActivity {
 				searchText = et.getText().toString();			
 				if(searchText != null && searchText!= ""){
 					System.out.println(searchText);
-					ArrayList<Story> result = esHelper.searchOnlineStories(searchText);
-					fillData(result, onUpdate);
+					resultList = esHelper.searchOnlineStories(searchText);
+					fillData(resultList, onUpdate);
 				}else{
-						fillData(esHelper.getOnlineStories(), onUpdate);
+					resultList = esHelper.getOnlineStories();
+					fillData(resultList, onUpdate);
 				}
 			
 			}
@@ -87,7 +90,8 @@ public class OnlineStoriesActivity extends ListActivity {
 		position = info.position;
 		switch(item.getItemId()){
 		case DOWNLOAD_ID:
-			
+			int index = position - 1;
+			Story selectedStory = resultList.get(index);
 			
 		case READ_ID:
 			
