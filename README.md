@@ -31,3 +31,9 @@ LICENSE
 =============
 Retrieved Oct. 27, 2013 - https://github.com/rayzhangcl/ESDemo
 -This demo was used to help with JSON and ESHelper
+
+Retrieved Oct. 29, 2013  - http://hc.apache.org/downloads.cgi
+-This is for the fluent library which is licenced under apache V2
+
+Retrieved Oct. 29, 2013 - https://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.4-release.zip&can=2&q=
+-This is for JSON which is licenced under apache V2
