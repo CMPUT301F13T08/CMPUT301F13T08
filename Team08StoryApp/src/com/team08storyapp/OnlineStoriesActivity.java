@@ -90,10 +90,22 @@ public class OnlineStoriesActivity extends ListActivity {
 		position = info.position;
 		switch(item.getItemId()){
 		case DOWNLOAD_ID:
-			int index = position - 1;
-			Story selectedStory = resultList.get(index);
+			// TODO: save selected story to file
+			
+			
 			
 		case READ_ID:
+			
+			// TODO: get selected story object, and create intent to StoryFragmentActivity
+			
+			//Story currentStory = null;
+	        
+	        //Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
+	    
+	  //      firstStoryFragment.putExtra("story", currentStory.toString());
+	    //    firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
+	   
+	  //      startActivity(firstFragment);
 			
 			default:
 				return super.onContextItemSelected(item);

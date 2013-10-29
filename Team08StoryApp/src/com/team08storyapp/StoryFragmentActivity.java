@@ -66,19 +66,28 @@ public class StoryFragmentActivity extends Activity {
         //set the gallery adapter
         picGallery.setAdapter(imgAdapt);
         
-        
+        // Get the intent - passed either by Online/OfflineStoriesActivity or by StoryFragmentActivity
         Intent storyFragment = getIntent();
         
+        // Get the story object from the intent - need to figure out
         Story currentStory = null; //= currentFragment.getExtra("story");
         int currentStoryFragmentId = 0;
-        StoryFragment currentStoryFragment;
+        // Get the current story fragment id from the intent - the fragment to display
         storyFragment.getIntExtra("storyFragmentId", currentStoryFragmentId);
         
+        StoryFragment currentStoryFragment;
+        
+        // The current story fragment object - get from the current story list fragment, by id
         currentStoryFragment = StoryController.readStoryFragment(currentStory.getStoryFragments(), currentStoryFragmentId);
         
+        // text view of the story fragment text
         storyText = (TextView) headerText.findViewById(R.id.headerText);
         
+        // set the text view with the story text of the current story fragment
         storyText.setText(currentStoryFragment.getStoryText());
+        // TODO: list of choices and onclick create intent to StoryFragmentActivity
+        
+        
         
         /*
         //set long click listener for each gallery thumbnail item
