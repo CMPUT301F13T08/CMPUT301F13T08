@@ -53,7 +53,6 @@ public class FileHelper{
 	}
 	}
 	
-	
 	/*
 	 *  function: addOfflineStory
 	 *  input : Story story
@@ -67,12 +66,12 @@ public class FileHelper{
 	 */
 	public boolean addOfflineStory(Story story) throws FileNotFoundException, IOException {
 		try{
-			String fileName = Integer.toString(story.getStoryId()); // create the file name
+			String fileName = prefix + Integer.toString(story.getStoryId()); // create the file name
 			String context = gson.toJson(story);	// translate the story context to Json
 			FileOutputStream ops = fileContext.openFileOutput(fileName, Context.MODE_PRIVATE);
 			ops.write(context.getBytes());	
 			ops.close();	
-			//System.out.println("WRITTING DONE");
+			System.out.println("WRITTING DONE");
 			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -121,6 +120,7 @@ public class FileHelper{
 	public Story getOfflineStory(int storyId) throws FileNotFoundException, IOException {
 		try{
 			String fileName = prefix + Integer.toString(storyId);
+			
 			InputStream is = fileContext.openFileInput(fileName);
 			
 			if ( is != null){
@@ -163,7 +163,6 @@ public class FileHelper{
 		
 		ArrayList<File> prefixFileList = new ArrayList<File>();
 		for(int i = 0; i < fileList.length; i++){
-			System.out.println(fileList[i].getName());
 			if(fileList[i].getName().startsWith(prefix)){
 				prefixFileList.add(fileList[i]);
 			}
