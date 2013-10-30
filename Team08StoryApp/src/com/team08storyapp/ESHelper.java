@@ -36,8 +36,7 @@ public class ESHelper {
 	 * @throws IOException
 	 * @throws IllegalStateException
 	 */
-	public boolean addOnlineStory(Story story) throws IllegalStateException,
-			IOException {
+	public boolean addOnlineStory(Story story) {
 		HttpPost httpPost = new HttpPost(
 				"http://cmput301.softwareprocess.es:8080/cmput301f13t08/"
 						+ story.getStoryId());
@@ -66,13 +65,21 @@ public class ESHelper {
 		Log.d(TAG, status);
 
 		HttpEntity entity = response.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				entity.getContent()));
-		String output;
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					entity.getContent()));
+			String output;
 
-		Log.d(TAG, "Output from Server -> ");
-		while ((output = br.readLine()) != null) {
-			Log.d(TAG, output);
+			Log.d(TAG, "Output from Server -> ");
+			while ((output = br.readLine()) != null) {
+				Log.d(TAG, output);
+			}
+		} catch (IllegalStateException e) {
+			Log.d(TAG, e.getLocalizedMessage());
+			return false;
+		} catch (IOException e) {
+			Log.d(TAG, e.getLocalizedMessage());
+			return false;
 		}
 
 		try {
@@ -125,6 +132,7 @@ public class ESHelper {
 
 		} catch (IOException e) {
 
+			Log.d(TAG, e.getLocalizedMessage());
 			return null;
 		}
 		return story;
@@ -135,35 +143,43 @@ public class ESHelper {
 		return stories;
 	}
 
-	public ArrayList<Story> searchOnlineStories(String searchString)
-			throws ClientProtocolException, IOException {
+	public ArrayList<Story> searchOnlineStories(String searchString) {
 		ArrayList<Story> stories = new ArrayList<Story>();
-		HttpPost searchRequest = new HttpPost(
-				"http://cmput301.softwareprocess.es:8080/cmput301f13t08/_search?pretty=1");
-		String query = "{\"query\" : {\"multi_match\" : {\"fields\" : [\"title\", \"author\"],\"query\" : \""
-				+ searchString + "\"}}}";
-		StringEntity stringentity = new StringEntity(query);
+		try {
+			HttpPost searchRequest = new HttpPost(
+					"http://cmput301.softwareprocess.es:8080/cmput301f13t08/_search?pretty=1");
+			String query = "{\"query\" : {\"multi_match\" : {\"fields\" : [\"title\", \"author\"],\"query\" : \""
+					+ searchString + "\"}}}";
+			StringEntity stringentity = new StringEntity(query);
 
-		searchRequest.setHeader("Accept", "application/json");
-		searchRequest.setEntity(stringentity);
+			searchRequest.setHeader("Accept", "application/json");
+			searchRequest.setEntity(stringentity);
 
-		HttpResponse response = httpclient.execute(searchRequest);
-		String status = response.getStatusLine().toString();
-		Log.d(TAG, status);
+			HttpResponse response = httpclient.execute(searchRequest);
+			String status = response.getStatusLine().toString();
+			Log.d(TAG, status);
 
-		String json = getEntityContent(response);
+			String json = getEntityContent(response);
 
-		Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>() {
-		}.getType();
-		ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json,
-				elasticSearchSearchResponseType);
-		Log.d(TAG, esResponse.toString());
-		for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
-			Story story = s.getSource();
-			stories.add(story);
-			Log.d(TAG, story.toString());
+			Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>() {
+			}.getType();
+			ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json,
+					elasticSearchSearchResponseType);
+			Log.d(TAG, esResponse.toString());
+			for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
+				Story story = s.getSource();
+				stories.add(story);
+				Log.d(TAG, story.toString());
+				searchRequest.releaseConnection();
+			}
+		} catch (ClientProtocolException e) {
+			Log.d(TAG, e.getLocalizedMessage());
+			return null;
+		} catch (IOException e) {
+			Log.d(TAG, e.getLocalizedMessage());
+			 return null;
 		}
-		searchRequest.releaseConnection();
+
 		return stories;
 	}
 
