@@ -1,7 +1,10 @@
 package com.team08storyapp;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import org.apache.http.client.ClientProtocolException;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -57,7 +60,15 @@ public class OnlineStoriesActivity extends ListActivity {
 			public void onClick(View v) {
 				searchText = et.getText().toString();			
 				if(searchText != null && searchText!= ""){
-					fillData(esHelper.searchOnlineStories(searchText), onUpdate);
+					try {
+						fillData(esHelper.searchOnlineStories(searchText), onUpdate);
+					} catch (ClientProtocolException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else{
 					fillData(esHelper.getOnlineStories(), onUpdate);
 				}
