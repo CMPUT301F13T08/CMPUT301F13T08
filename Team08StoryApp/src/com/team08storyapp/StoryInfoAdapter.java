@@ -34,7 +34,7 @@ public class StoryInfoAdapter extends ArrayAdapter<StoryInfo> {
         if (v == null) {
             LayoutInflater vi =
                 (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.activity_row, null);
+            v = vi.inflate(R.layout.stories_row, null);
             holder = new ViewHolder();
             holder.item1 = (TextView) v.findViewById(R.id.big);
             holder.item2 = (TextView) v.findViewById(R.id.small);
