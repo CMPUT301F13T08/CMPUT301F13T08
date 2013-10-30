@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class StoryFragmentActivity extends Activity { 
@@ -34,6 +35,7 @@ public class StoryFragmentActivity extends Activity {
 	private View headerGallery;
 	private View headerText;
 	private TextView storyText;
+	private ListView lv;
 	
 	private Story currentStory;
 	private int currentStoryFragmentId = 0;
@@ -56,8 +58,14 @@ public class StoryFragmentActivity extends Activity {
     	
     	//call superclass method and set main content view
         super.onCreate(savedInstanceState);
+        // set up the basis list views for choices.
+        setContentView(R.layout.activity_story_list);
+		lv = (ListView) findViewById(android.R.id.list);
         
+		// used for dialog text 
         View headerText =  getLayoutInflater().inflate(R.layout.header_text, null);
+        
+        // used for list of pictures
         View headerGallery = getLayoutInflater().inflate(R.layout.header_gallery, null);
         
         //get the large image view
@@ -86,8 +94,13 @@ public class StoryFragmentActivity extends Activity {
         // text view of the story fragment text
         storyText = (TextView) headerText.findViewById(R.id.headerText);
         
+        /***
+         * test part:
+         */
+        storyText.setText("Hello world");
+        
         // set the text view with the story text of the current story fragment
-        storyText.setText(currentStoryFragment.getStoryText());
+        //storyText.setText(currentStoryFragment.getStoryText());
         // TODO: list of choices and onclick create intent to StoryFragmentActivity
         
         
