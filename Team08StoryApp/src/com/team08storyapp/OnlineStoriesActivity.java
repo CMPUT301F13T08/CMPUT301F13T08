@@ -60,15 +60,7 @@ public class OnlineStoriesActivity extends ListActivity {
 			public void onClick(View v) {
 				searchText = et.getText().toString();			
 				if(searchText != null && searchText!= ""){
-					try {
-						fillData(esHelper.searchOnlineStories(searchText), onUpdate);
-					} catch (ClientProtocolException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					fillData(esHelper.searchOnlineStories(searchText), onUpdate);
 				}else{
 					fillData(esHelper.getOnlineStories(), onUpdate);
 				}

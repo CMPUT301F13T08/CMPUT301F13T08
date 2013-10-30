@@ -1,9 +1,15 @@
 package com.team08storyapp;
 
+import java.io.Serializable;
+
 import android.graphics.Bitmap;
 
-public class Photo {
+public class Photo implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int photoID;
 	private Bitmap picture;
 
