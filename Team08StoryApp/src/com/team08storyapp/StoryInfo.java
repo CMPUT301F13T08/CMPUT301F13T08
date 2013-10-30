@@ -1,7 +1,6 @@
 package com.team08storyapp;
 
-public class StotyInfo {
-
+public class StoryInfo {
 	private String author;
 	private String title;
 	private String id;
@@ -30,10 +29,10 @@ public class StotyInfo {
 		this.id = id;
 	}
 
-	public StotyInfo(String title, String author, String id){
+	public StoryInfo(String title, String author, String id){
 		this.title = title;
 		this.author = author;
 		this.id = id;
-	}
+	}		
 
 }
