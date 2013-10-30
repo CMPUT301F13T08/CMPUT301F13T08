@@ -1,5 +1,7 @@
 package com.team08storyapp;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -98,6 +100,15 @@ public class StoryFragmentActivity extends Activity {
          * test part:
          */
         storyText.setText("Hello world");
+        
+        // below is a made up choice list just for testing
+        ArrayList<Choice> choiceList = new ArrayList<Choice>();
+        choiceList.add(new Choice(1, 1, "Go to the fragment 1"));
+        choiceList.add(new Choice(2, 5, "Go to the fragment 5"));
+        choiceList.add(new Choice(3, 2, "Go to the fragment 2"));
+        
+        
+        
         
         // set the text view with the story text of the current story fragment
         //storyText.setText(currentStoryFragment.getStoryText());

@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ChoiceInfoAdapter extends ArrayAdapter<ChoiceInfo> {
-	
-	private ArrayList<ChoiceInfo> infos;
+public class ChoiceAdapter extends ArrayAdapter<Choice>{
+
+	private ArrayList<Choice> infos;
 	private Activity activity;
 	
 	public static class ViewHolder{
 		public TextView choiceText;
 	}
 	
-	public ChoiceInfoAdapter(Activity a, int textViewResourceId, ArrayList<ChoiceInfo> infos){
+	public ChoiceAdapter(Activity a, int textViewResourceId, ArrayList<Choice> infos){
 		super(a, textViewResourceId, infos);
 		this.infos = infos;
 		this.activity = a;
@@ -39,7 +39,7 @@ public class ChoiceInfoAdapter extends ArrayAdapter<ChoiceInfo> {
 		}else{
 			holder = (ViewHolder)v.getTag();
 		}
-		final ChoiceInfo choice= infos.get(position);
+		final Choice choice= infos.get(position);
 		
 		if(choice != null){
 			holder.choiceText.setText(choice.getText());
