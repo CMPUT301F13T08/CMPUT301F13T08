@@ -32,6 +32,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_story_list);
 		lv = (ListView) findViewById(android.R.id.list);
 		fHelper = new FileHelper(this, 0);
@@ -84,6 +85,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);    
+        // following 4 lines will display the information on selected item.
         StoryInfo selectedValue = (StoryInfo) lv.getAdapter().getItem(position);		
 		System.out.println(selectedValue.getTitle());
 		System.out.println(selectedValue.getAuthor());
@@ -107,19 +109,23 @@ public class OfflineStoriesActivity extends ListActivity {
 	
 	public void fillData(ArrayList<Story> sList, boolean update){
 		ArrayList<StoryInfo> lList = new ArrayList<StoryInfo>();
+		
 		for(int i = 0; i < sList.size(); i++){
-			String title = sList.get(i).getTitle();
+		/*	String title = sList.get(i).getTitle();
 			String author = sList.get(i).getAuthor();
 			int id = sList.get(i).getStoryId();
 			StoryInfo si = new StoryInfo(title, author, id);
-			lList.add(si);			
+			lList.add(si);
+			*/
+			lList.add(new StoryInfo(sList.get(i).getTitle(), sList.get(i).getAuthor(), 
+					sList.get(i).getStoryId()));
 		}
+		
 		if(!update){
 			lv.addHeaderView(header);	
 		}
-		StoryInfoAdapter adapter = new StoryInfoAdapter(this, android.R.id.list, lList);
-		lv.setAdapter(adapter);	
-
+	
+		lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, lList));	
 	}
 
 

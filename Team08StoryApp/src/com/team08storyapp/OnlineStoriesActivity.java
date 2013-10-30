@@ -20,7 +20,7 @@ import android.widget.ListView;
 public class OnlineStoriesActivity extends ListActivity {
 
 	// make sure to assign the "menu" thing with menu's value, otherwise
-	// contextmenu won't respond.
+	// context menu won't respond.
 	// private FileHelper fHelper; should be ESHelper
 	
 	public int position;
@@ -35,25 +35,21 @@ public class OnlineStoriesActivity extends ListActivity {
 	private View header;
 	private String searchText;
 	private EditText et;
-	private ArrayList<Story> resultList;
-	
+	private ListView lv;
 	private Story currentStory;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		esHelper = new ESHelper();
+		setContentView(R.layout.activity_story_list);
+		lv = (ListView) findViewById(android.R.id.list);
 		header = getLayoutInflater().inflate(R.layout.header_search, null);
-		resultList = esHelper.getOnlineStories();
-		
-
-		fillData(resultList, onCreate);
-
-		
 		Button searchButton = (Button) header.findViewById(R.id.searchButton);
 		et = (EditText) header.findViewById(R.id.searchText);
+		
+		esHelper = new ESHelper();
+		fillData(esHelper.getOnlineStories(), onCreate);
 		
 		searchButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -61,12 +57,9 @@ public class OnlineStoriesActivity extends ListActivity {
 			public void onClick(View v) {
 				searchText = et.getText().toString();			
 				if(searchText != null && searchText!= ""){
-					System.out.println(searchText);
-					resultList = esHelper.searchOnlineStories(searchText);
-					fillData(resultList, onUpdate);
+					fillData(esHelper.searchOnlineStories(searchText), onUpdate);
 				}else{
-					resultList = esHelper.getOnlineStories();
-					fillData(resultList, onUpdate);
+					fillData(esHelper.getOnlineStories(), onUpdate);
 				}
 			
 			}
@@ -92,6 +85,12 @@ public class OnlineStoriesActivity extends ListActivity {
 	public boolean onContextItemSelected(MenuItem item){
 		info = (AdapterContextMenuInfo) item.getMenuInfo();
 		position = info.position;
+        // following 4 lines will display the information on selected item.
+        StoryInfo selectedValue = (StoryInfo) lv.getAdapter().getItem(position);		
+		System.out.println(selectedValue.getTitle());
+		System.out.println(selectedValue.getAuthor());
+		System.out.println(selectedValue.getId());
+        
 		switch(item.getItemId()){
 		case DOWNLOAD_ID:
 			// TODO: save selected story (currentStory) to file
@@ -118,19 +117,16 @@ public class OnlineStoriesActivity extends ListActivity {
 	}
 	
 	public void fillData(ArrayList<Story> sList, boolean update){
-		ArrayList<String> lList = new ArrayList<String>();
+		ArrayList<StoryInfo> lList = new ArrayList<StoryInfo>();
 		for(int i = 0; i < sList.size(); i++){
-			lList.add(sList.get(i).getTitle() + " \nBy: "+ sList.get(i).getAuthor());
+			lList.add(new StoryInfo(sList.get(i).getTitle(), sList.get(i).getAuthor(), 
+					sList.get(i).getStoryId()));		
 		}
-		String[] lArray = new String[lList.size()];
-		lArray = lList.toArray(lArray);
-		ListView lv = getListView();
-		if(!update){
-			lv.addHeaderView(header);	
-		}
-		setListAdapter(new ArrayAdapter<String>(this,R.layout.stories_row, lArray)); 
+			if(!update){
+				lv.addHeaderView(header);	
+			}
+			lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, lList));	
 	}
-	
-	
+
 
 }
