@@ -157,8 +157,8 @@ public class OfflineStoriesActivity extends ListActivity {
 		setContentView(R.layout.activity_story_list);
 		lv = (ListView) findViewById(android.R.id.list);
 		
-/*		fHelper = new FileHelper(this, 0);
-		try {
+		fHelper = new FileHelper(this, 0);
+		/*		try {
 		    fillData(fHelper.getOfflineStories(), onCreate);
 		} catch (FileNotFoundException e2) {
 		    // TODO Auto-generated catch block
@@ -168,19 +168,21 @@ public class OfflineStoriesActivity extends ListActivity {
 		    e2.printStackTrace();
 		}
 */
-		// MADE UP BOOKS FOR TESTING VIEWS
+		/*// sFull is a sample story TESTING
 		try {
-			Story s1 = new Story(1, "From Hell", "Alan Moore");		
-			Story s2 = new Story(2, "Voice of Fiew", "Alan Moore");
-			Story s3 = new Story(3, "V for Vendetta", "Alan Moore");
-			Story s4 = new Story(4, "1984", "George Owell");
-			Story s5 = new Story(5, "The art of computer programming", "Donald Knuth");
-			Story s6 = new Story(6, "Alice in Wonderland", "Lewis Carroll");
-			Story s7 = new Story(7, "Hamlet", "William Shakespeare");
-			Story s8 = new Story(8, "A midsummer night's dream", "William Shakespeare");
-			Story s9 = new Story(9, "The Fall of the House of Usher", "Edgar Allan Poe");
-			Story s10 = new Story(10, "The Masque of the Red Death", "Edgar Allan Poe");
-			Story[] slist = {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10};
+		        Story  sFull= initializeSampleStory();
+			//Story s1 = new Story(1, "From Hell", "Alan Moore");		
+			//Story s2 = new Story(2, "Voice of Fiew", "Alan Moore");
+			//Story s3 = new Story(3, "V for Vendetta", "Alan Moore");
+			//Story s4 = new Story(4, "1984", "George Owell");
+			//Story s5 = new Story(5, "The art of computer programming", "Donald Knuth");
+			//Story s6 = new Story(6, "Alice in Wonderland", "Lewis Carroll");
+			//Story s7 = new Story(7, "Hamlet", "William Shakespeare");
+			//Story s8 = new Story(8, "A midsummer night's dream", "William Shakespeare");
+			//Story s9 = new Story(9, "The Fall of the House of Usher", "Edgar Allan Poe");
+			//Story s10 = new Story(10, "The Masque of the Red Death", "Edgar Allan Poe");
+			//Story[] slist = {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10};
+		        Story[] slist = {sFull};
 			for(Story s: slist){
 				fHelper.addOfflineStory(s);				
 			}
@@ -190,7 +192,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		header = getLayoutInflater().inflate(R.layout.header_search, null);
 		
 		try {			
@@ -243,16 +245,18 @@ public class OfflineStoriesActivity extends ListActivity {
         // following 4 lines will display the information on selected item.
         
 
-        Story selectedValue = (Story) lv.getAdapter().getItem(position);		
-		System.out.println(selectedValue.getTitle());
-		System.out.println(selectedValue.getAuthor());
-		System.out.println(selectedValue.getOfflineStoryId());
+        //Story selectedValue = (Story) lv.getAdapter().getItem(position);
+        currentStory = (Story) lv.getAdapter().getItem(position);
+        	//System.out.println("SELECTED STORYYYYY");
+		//System.out.println(currentStory.getTitle());
+		//System.out.println(currentStory.getAuthor());
+		//System.out.println(currentStory.getOfflineStoryId());
 
         
         // TODO: read the story - initialize currentStory to story object
         
 		// just to test:
-		currentStory = initializeSampleStory();
+		//currentStory = initializeSampleStory();
 		
      // create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
         Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            

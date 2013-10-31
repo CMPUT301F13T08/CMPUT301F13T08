@@ -91,10 +91,10 @@ public class OnlineStoriesActivity extends ListActivity {
 	position = info.position;
 	// following 4 lines will display the information on selected item.
 
-	Story selectedValue = (Story) lv.getAdapter().getItem(position);
-	System.out.println(selectedValue.getTitle());
-	System.out.println(selectedValue.getAuthor());
-	System.out.println(selectedValue.getOnlineStoryId());
+	currentStory = (Story) lv.getAdapter().getItem(position);
+	//System.out.println(currentStory.getTitle());
+	//System.out.println(currentStory.getAuthor());
+	//System.out.println(currentStory.getOnlineStoryId());
 
 
 	switch (item.getItemId()) {
