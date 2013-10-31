@@ -186,8 +186,8 @@ public class MyStoriesActivity extends ListActivity {
 
     public void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
+	    lv.addHeaderView(footerCreate);
 	    lv.addHeaderView(header);
-	    lv.addFooterView(footerCreate);
 	}
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
