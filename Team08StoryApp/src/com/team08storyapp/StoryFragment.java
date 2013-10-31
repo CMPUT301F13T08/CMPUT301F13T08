@@ -74,6 +74,7 @@ public class StoryFragment implements Serializable{
 		this.choices = choices;
 	}
 
+	
 	public ArrayList<Annotation> getAnnotations() {
 		return annotations;
 	}

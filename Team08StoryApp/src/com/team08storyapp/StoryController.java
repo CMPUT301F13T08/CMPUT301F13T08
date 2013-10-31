@@ -27,6 +27,7 @@ public class StoryController {
 		for(int i = 0; i < storyFragments.size(); i++){
 			if (storyFragments.get(i).getStoryFragmentId() == storyFragmentId){
 				nextFragment = storyFragments.get(i);
+				break;
 			}
 		}
 		return nextFragment;
