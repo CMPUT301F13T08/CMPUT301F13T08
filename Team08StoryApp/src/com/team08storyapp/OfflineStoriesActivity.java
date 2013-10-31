@@ -242,10 +242,12 @@ public class OfflineStoriesActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);    
         // following 4 lines will display the information on selected item.
         
-        //currentStory = (Story) lv.getAdapter().getItem(position);		
-		//System.out.println(currentStory.getTitle());
-		//System.out.println(currentStory.getAuthor());
-		//System.out.println(currentStory.getOfflineStoryId());
+
+        Story selectedValue = (Story) lv.getAdapter().getItem(position);		
+		System.out.println(selectedValue.getTitle());
+		System.out.println(selectedValue.getAuthor());
+		System.out.println(selectedValue.getOfflineStoryId());
+
         
         // TODO: read the story - initialize currentStory to story object
         

@@ -146,23 +146,28 @@ public class MyStoriesActivity extends ListActivity {
 	Story currentStory = (Story) lv.getAdapter().getItem(position);
 	System.out.println(currentStory.getTitle());
 	System.out.println(currentStory.getAuthor());
-	//System.out.println(currentStory.getStoryId());
+
 
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
 	    // TODO: call esHelper to publish
-	    
-	   // try {
-		esHelper.addOnlineStory(currentStory); 
-	    //} catch (Exception e){
-		//Toast.makeText(getApplicationContext(),
-		//	"Publish Error. Internect Connection Error",
-		//	Toast.LENGTH_LONG).show();
-	    //}
-	    
+	    try{
+		if(currentStory.getOnlineStoryId() > 0){
+		    esHelper.updateOnlineStory(currentStory);
+		    Toast.makeText(getApplicationContext(),
+				"Your Story is Successfully Published",
+				Toast.LENGTH_LONG).show();
+		}else{
+		    currentStory.setOnlineStoryId(esHelper.addOnlineStory(currentStory));
+		    Toast.makeText(getApplicationContext(),
+				"Your Story is Successfully Published",
+				Toast.LENGTH_LONG).show();
+		}
+	    } catch (Exception e){
 		Toast.makeText(getApplicationContext(),
 			"Your Story is Successfully Published",
 			Toast.LENGTH_LONG).show();
+	    }
 
 	case READ_ID:
 
