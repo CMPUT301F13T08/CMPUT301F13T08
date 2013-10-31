@@ -100,7 +100,20 @@ public class ESHelper {
     }
 
     public boolean updateOnlineStory(Story story) {
-	// TODO Auto-generated method stub
+	HttpPost updateRequest = new HttpPost(
+		"http://cmput301.softwareprocess.es:8080/testing/lab02/1/_update");
+	String query = "{\"script\" : \"ctx._source." + str + "}";
+	StringEntity stringentity = new StringEntity(query);
+
+	updateRequest.setHeader("Accept", "application/json");
+	updateRequest.setEntity(stringentity);
+
+	HttpResponse response = httpclient.execute(updateRequest);
+	String status = response.getStatusLine().toString();
+	System.out.println(status);
+
+	String json = getEntityContent(response);
+	updateRequest.releaseConnection();
 	return false;
     }
 

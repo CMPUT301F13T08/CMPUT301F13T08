@@ -52,15 +52,15 @@ public class OnlineStoriesActivity extends ListActivity {
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
 	et = (EditText) header.findViewById(R.id.searchText);
 
-	/*esHelper = new ESHelper();
-	fillData(esHelper.getOnlineStories(), onCreate);*/
+	esHelper = new ESHelper();
+	fillData(esHelper.getOnlineStories(), onCreate);
 
 	searchButton.setOnClickListener(new View.OnClickListener() {
 
 	    @Override
 	    public void onClick(View v) {
 		searchText = et.getText().toString();
-		if (searchText != null && searchText != "") {
+		if (searchText != null && !searchText.isEmpty()) {
 		    fillData(esHelper.searchOnlineStories(searchText), onUpdate);
 		} else {
 		    fillData(esHelper.getOnlineStories(), onUpdate);
