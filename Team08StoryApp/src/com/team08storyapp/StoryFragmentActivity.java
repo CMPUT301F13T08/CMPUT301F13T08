@@ -82,17 +82,18 @@ public class StoryFragmentActivity extends Activity {
         picGallery.setAdapter(imgAdapt);
         
         // Get the intent - passed either by Online/OfflineStoriesActivity or by StoryFragmentActivity
-        //Intent storyFragment = getIntent();
+        Intent storyFragment = getIntent();
         
         // Get the story object from the intent
-        //currentStory = (Story) storyFragment.getSerializableExtra("story");
+        currentStory = (Story) storyFragment.getSerializableExtra("story");
+        
         // Get the current story fragment id from the intent - the fragment to display
         //storyFragment.getIntExtra("storyFragmentId", currentStoryFragmentId);
-        
+        currentStoryFragmentId = storyFragment.getIntExtra("storyFragmentId", 0);
         
         // The current story fragment object - get from the current story list fragment, by id
-        //currentStoryFragment = StoryController.readStoryFragment(currentStory.getStoryFragments(), currentStoryFragmentId);
-        
+        currentStoryFragment = StoryController.readStoryFragment(currentStory.getStoryFragments(), currentStoryFragmentId);
+ 
         // text view of the story fragment text
         storyText = (TextView) headerText.findViewById(R.id.headerText);
         //storyText = (TextView) findViewById(R.id.dialogue);
@@ -101,6 +102,7 @@ public class StoryFragmentActivity extends Activity {
          */
         String test = "Hello world";
         storyText.setText(test);
+        //storyText.setText(currentStoryFragment.getStoryText());
         
         // below is a made up choice list just for testing
         ArrayList<Choice> choiceList = new ArrayList<Choice>();
@@ -333,3 +335,6 @@ public class StoryFragmentActivity extends Activity {
     }
  
 }
+
+
+
