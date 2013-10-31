@@ -116,21 +116,50 @@ public class StoryFragmentActivity extends Activity {
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 
+	System.out.println("CURRENT STORY FRAGMENT IDDDDDDDDDD");
+	System.out.println(currentStoryFragmentId);
+	
 	// The current story fragment object - get from the current story list
 	// fragment, by id
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
+	/*if (currentStoryFragment != null){
+	    System.out.println("THERE IS A FRAGMENTTTTT");
+	}
+	else{
+	    System.out.println("THERE IS NO FRAGMENTTTT");
+	}*/
 	textSection.setText(currentStoryFragment.getStoryText()); // fragment
-	// choices now NULL - not sure why yet!
-	ArrayList<Choice> storyFragmentChoices = currentStoryFragment.getChoices();
+	
+	ArrayList<Choice> storyFragmentChoices = currentStoryFragment.getChoices(); // if no choices: NULL POINTER EXCEPTION
 	/*
 	 * ArrayList<Choice> choiceList = new ArrayList<Choice>();
 	 * choiceList.add(new Choice(1, 1, "Go to the fragment 1"));
 	 * choiceList.add(new Choice(2, 5, "Go to the fragment 5"));
 	 * choiceList.add(new Choice(3, 2, "Go to the fragment 2"));
 	 */
+	
 	fillChoice(storyFragmentChoices);
+	
 	// fillChoice(choiceList);
+	
+	lv.setOnItemClickListener(new OnItemClickListener() {
+	    // handle clicks
+	    public void onItemClick(AdapterView<?> parent, View v,
+		    int position, long id) {
+		
+		Intent nextStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);
+		nextStoryFragment.putExtra("story", currentStory);
+	        		       	  
+	        Choice nextChoice = (Choice) lv.getAdapter().getItem(position);
+	        int nextStoryFragmentId = nextChoice.getStoryFragmentID();
+	        
+	        nextStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+	   
+	        startActivity(nextStoryFragment);
+		
+	    }
+	});
 
     }
 

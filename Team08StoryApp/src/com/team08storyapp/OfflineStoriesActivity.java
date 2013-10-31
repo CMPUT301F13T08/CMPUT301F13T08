@@ -254,12 +254,7 @@ public class OfflineStoriesActivity extends ListActivity {
         // send the first story fragment id through the intent
         int nextStoryFragmentId = currentStory.getFirstStoryFragment();
         
-       /* StoryFragment fragment = StoryController.readStoryFragment(currentStory.getStoryFragments(), currentStory.getFirstStoryFragment());
-        ArrayList<Choice> choices = fragment.getChoices();
-        if (choices == null){
-            System.out.println("NO CHOICESSS");
-        }*/
-        
+
         firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
    
         startActivity(firstStoryFragment);
