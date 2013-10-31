@@ -61,7 +61,7 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
-	    String fileName = prefix + Integer.toString(story.getStoryId()); 
+	    String fileName = prefix + Integer.toString(story.getOfflineStoryId()); 
 	    // translate the story context to Json
 	    String context = gson.toJson(story); 
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,
@@ -90,7 +90,7 @@ public class FileHelper {
     public boolean updateOfflineStory(Story story)
 	    throws FileNotFoundException, IOException {
 	try {
-	    String fileName = prefix + Integer.toString(story.getStoryId());
+	    String fileName = prefix + Integer.toString(story.getOfflineStoryId());
 	    fileContext.deleteFile(fileName); // delete original file
 	    addOfflineStory(story); // add new file
 	    return true;

@@ -44,7 +44,7 @@ public class ESHelper {
     public boolean addOnlineStory(Story story) {
 	HttpPost httpPost = new HttpPost(
 		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
-			+ story.getStoryId());
+			+ story.getOnlineStoryId());
 	StringEntity stringentity = null;
 	try {
 	    stringentity = new StringEntity(gson.toJson(story));
