@@ -6,14 +6,20 @@
 
     <TextView
         android:id="@+id/headerText"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:layout_weight="0"
         android:clickable="true"
-        android:scrollbars="vertical"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:minHeight="200dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="10dp"
         android:scrollHorizontally="false"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/previous"
