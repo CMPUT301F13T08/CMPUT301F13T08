@@ -10,27 +10,32 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_main);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+	// Inflate the menu; this adds items to the action bar if it is present.
+	getMenuInflater().inflate(R.menu.main, menu);
+	return true;
+    }
+
+    public void toOnlineStories(View view) {
+	Intent intent = new Intent(MainActivity.this,
+		OnlineStoriesActivity.class);
+	startActivity(intent);
+    }
+
+    public void toOfflineStories(View view) {
+	Intent intent = new Intent(MainActivity.this,
+		OfflineStoriesActivity.class);
+	startActivity(intent);
     }
     
-    
-    public void toOnlineStories(View view){
-    	Intent intent = new Intent(MainActivity.this, OnlineStoriesActivity.class);
-    	startActivity(intent);
+    public void toMyStories(View view){
+	Intent intent = new Intent(MainActivity.this, MyStoriesActivity.class);
+	startActivity(intent);
     }
-    
-    public void toOfflineStories(View view){
-    	Intent intent = new Intent(MainActivity.this, OfflineStoriesActivity.class);
-    	startActivity(intent);
-    }
-   
+
 }

@@ -3,10 +3,15 @@
     package="com.team08storyapp"
     android:versionCode="1"
     android:versionName="1.0" >
-    
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />
@@ -39,8 +44,12 @@
         </activity>
         <activity
             android:name="com.team08storyapp.StoryFragmentActivity"
-            android:label="@string/title_activity_story_view"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_story_view" >
+        </activity>
+        <activity
+            android:name="com.team08storyapp.MyStoriesActivity"
+            android:label="@string/title_activity_my_stories" >
         </activity>
     </application>
 
