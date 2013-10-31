@@ -24,9 +24,10 @@ public class StoryController {
 	
 	public static StoryFragment readStoryFragment(ArrayList<StoryFragment> storyFragments, int storyFragmentId){
 		StoryFragment nextFragment = null;
-		for(int i = 0; i < storyFragments.size(); i++){
-			if (storyFragments.get(i).getStoryFragmentId() == storyFragmentId){
-				nextFragment = storyFragments.get(i);
+		for(StoryFragment storyFragment : storyFragments){
+		    //int thisStoryFragmentId = storyFragment.getStoryFragmentId();
+			if (storyFragment.getStoryFragmentId() == storyFragmentId){
+				nextFragment = storyFragment;
 				break;
 			}
 		}
