@@ -105,7 +105,11 @@ public class StoryFragmentActivity extends Activity {
         //storyText.setText(currentStoryFragment.getStoryText());
         
         // below is a made up choice list just for testing
+        
+        
+        // TODO: Should slam the currentStoryFragment.getChoices() on the adapter
         ArrayList<Choice> choiceList = new ArrayList<Choice>();
+        
         choiceList.add(new Choice(1, 1, "Go to the fragment 1"));
         choiceList.add(new Choice(2, 5, "Go to the fragment 5"));
         choiceList.add(new Choice(3, 2, "Go to the fragment 2"));
