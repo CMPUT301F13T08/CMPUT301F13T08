@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class StoryInfoAdapter extends ArrayAdapter<StoryInfo> {
+public class StoryInfoAdapter extends ArrayAdapter<Story> {
 	
-	private ArrayList<StoryInfo> infos;
+	private ArrayList<Story> infos;
 	private Activity activity;
 	
-	public StoryInfoAdapter(Activity a, int textViewResourceId, ArrayList<StoryInfo> infos){
+	public StoryInfoAdapter(Activity a, int textViewResourceId, ArrayList<Story> infos){
 		super(a, textViewResourceId, infos);
 		this.infos = infos;
 		this.activity = a;
@@ -43,7 +43,7 @@ public class StoryInfoAdapter extends ArrayAdapter<StoryInfo> {
         else
             holder=(ViewHolder)v.getTag();
  
-        final StoryInfo story = infos.get(position);
+        final Story story = infos.get(position);
         
         if (story != null) {
             holder.item1.setText(story.getTitle());

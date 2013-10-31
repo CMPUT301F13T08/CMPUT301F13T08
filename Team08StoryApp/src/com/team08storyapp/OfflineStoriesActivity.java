@@ -2,7 +2,6 @@ package com.team08storyapp;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
@@ -77,7 +76,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		// Story Fragment 4
 		StoryFragment storyFragment4 = new StoryFragment(1);
 		storyFragment4
-				.setStoryText("At first Amara was startled by the boy. Then she realized he was crying softly. So she asked the boy what�s wrong. The boy was lost.");
+				.setStoryText("At first Amara was startled by the boy. Then she realized he was crying softly. So she asked the boy what���s wrong. The boy was lost.");
 		choices.clear();
 		choices.add(new Choice(10, 1,
 				"Amara decides to help the boy find his way home."));
@@ -88,7 +87,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		// Story Fragment 5
 		StoryFragment storyFragment5 = new StoryFragment(1);
 		storyFragment5
-				.setStoryText("Amara picked up the bill and looked around. There was no one around and therefore anyone to claim the money. So Amara decided to keep the bill and continue on to her friend�s house.");
+				.setStoryText("Amara picked up the bill and looked around. There was no one around and therefore anyone to claim the money. So Amara decided to keep the bill and continue on to her friend���s house.");
 		choices.clear();
 		choices.add(new Choice(6, 1, "Continue"));
 		storyFragment5.setChoices(choices);
@@ -97,7 +96,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		// Story Fragment 6
 		StoryFragment storyFragment6 = new StoryFragment(1);
 		storyFragment6
-				.setStoryText("When Amara got to her friend�s house she explained her excitement at finding one hundred dollars in a bush, all thanks to her dog. Her friend suggests she should reward her dog a treat with part of the money.");
+				.setStoryText("When Amara got to her friend���s house she explained her excitement at finding one hundred dollars in a bush, all thanks to her dog. Her friend suggests she should reward her dog a treat with part of the money.");
 		choices.clear();
 		choices.add(new Choice(7, 1, "Continue"));
 		storyFragment6.setChoices(choices);
@@ -121,7 +120,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		// Story Fragment 9
 		StoryFragment storyFragment9 = new StoryFragment(1);
 		storyFragment9
-				.setStoryText("Amara walks past the cave in a hurry. She notices the clouds have formed into rain clouds and decides it�s time to head home. THE END");
+				.setStoryText("Amara walks past the cave in a hurry. She notices the clouds have formed into rain clouds and decides it���s time to head home. THE END");
 		storyFragmentList.add(storyFragment9);
 
 		// Story Fragment 10
@@ -136,7 +135,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		// Story Fragment 11
 		StoryFragment storyFragment11 = new StoryFragment(1);
 		storyFragment11
-				.setStoryText("As Amara and the boy stand there, they hear a voice calling the name Timothy. The boy stops his crying and starts yelling Momma. The boy�s mother comes rushing up and is relieved to find her missing son. You decide you have enough excitement for one walk and turn to head home for a nap. THE END");
+				.setStoryText("As Amara and the boy stand there, they hear a voice calling the name Timothy. The boy stops his crying and starts yelling Momma. The boy���s mother comes rushing up and is relieved to find her missing son. You decide you have enough excitement for one walk and turn to head home for a nap. THE END");
 		storyFragmentList.add(storyFragment11);
 
 		// Story Fragment 12
@@ -232,10 +231,10 @@ public class OfflineStoriesActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);    
         // following 4 lines will display the information on selected item.
         
-        StoryInfo selectedValue = (StoryInfo) lv.getAdapter().getItem(position);		
+        Story selectedValue = (Story) lv.getAdapter().getItem(position);		
 		System.out.println(selectedValue.getTitle());
 		System.out.println(selectedValue.getAuthor());
-		System.out.println(selectedValue.getId());
+		System.out.println(selectedValue.getStoryId());
         
         // TODO: read the story - initialize currentStory to story object
         
@@ -265,24 +264,11 @@ public class OfflineStoriesActivity extends ListActivity {
 
 	
 	
-	public void fillData(ArrayList<Story> sList, boolean update){
-		ArrayList<StoryInfo> lList = new ArrayList<StoryInfo>();
-		
-		for(int i = 0; i < sList.size(); i++){
-			String title = sList.get(i).getTitle();
-			String author = sList.get(i).getAuthor();
-			int id = sList.get(i).getStoryId();
-			StoryInfo si = new StoryInfo(title, author, id);
-			lList.add(si);
-			
-			//lList.add(new StoryInfo(sList.get(i).getTitle(), sList.get(i).getAuthor(), 
-			//		sList.get(i).getStoryId()));
-		}
-		
+	public void fillData(ArrayList<Story> sList, boolean update){		
 		if(!update){
 			lv.addHeaderView(header);	
 		}	
-		lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, lList));	
+		lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));	
 	}
 
 
