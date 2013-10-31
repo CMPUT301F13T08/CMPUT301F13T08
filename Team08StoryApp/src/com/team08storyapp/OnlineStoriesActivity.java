@@ -91,7 +91,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	Story selectedValue = (Story) lv.getAdapter().getItem(position);
 	System.out.println(selectedValue.getTitle());
 	System.out.println(selectedValue.getAuthor());
-	System.out.println(selectedValue.getStoryId());
+	System.out.println(selectedValue.getOnlineStoryId());
 
 	switch (item.getItemId()) {
 	case DOWNLOAD_ID:

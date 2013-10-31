@@ -237,7 +237,7 @@ public class OfflineStoriesActivity extends ListActivity {
         Story selectedValue = (Story) lv.getAdapter().getItem(position);		
 		System.out.println(selectedValue.getTitle());
 		System.out.println(selectedValue.getAuthor());
-		System.out.println(selectedValue.getStoryId());
+		System.out.println(selectedValue.getOfflineStoryId());
         
         // TODO: read the story - initialize currentStory to story object
         

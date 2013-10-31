@@ -27,7 +27,7 @@ public class testESHelper extends TestCase {
      */
     private Story initializeSampleStory() {
 	Story sampleStory = new Story("The Walk", "Michele Paulichuk");
-	sampleStory.setStoryId(1);
+	sampleStory.setOnlineStoryId(1);
 
 	ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
 	ArrayList<Choice> choices = new ArrayList<Choice>();
@@ -153,9 +153,10 @@ public class testESHelper extends TestCase {
      * true.
      */
     public void testAddOnlineStory() {
+	int expectedid = 1;
 	Story addStory = initializeSampleStory();
 
-	assertTrue(esHelper.addOnlineStory(addStory));
+	assertTrue(esHelper.addOnlineStory(addStory) == expectedid);
     }
 
     /*
@@ -186,7 +187,7 @@ public class testESHelper extends TestCase {
 	Story story = esHelper.getOnlineStory(storyId);
 
 	assertTrue(!story.equals(null));
-	assertTrue(story.getStoryId() == storyId);
+	assertTrue(story.getOnlineStoryId() == storyId);
 	assertTrue(!story.getAuthor().equals(null)
 		&& !story.getTitle().equals(null)
 		&& story.getStoryFragments().size() == storyFragmentListSize);

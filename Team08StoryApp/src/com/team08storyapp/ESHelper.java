@@ -24,7 +24,7 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  * @author Michele's Netbook
- *
+ * 
  */
 public class ESHelper {
     // Http Connector
@@ -41,61 +41,66 @@ public class ESHelper {
      * @throws IOException
      * @throws IllegalStateException
      */
-    public boolean addOnlineStory(Story story) {
-	HttpPost httpPost = new HttpPost(
-		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
-			+ story.getStoryId());
-	StringEntity stringentity = null;
-	try {
-	    stringentity = new StringEntity(gson.toJson(story));
-	} catch (UnsupportedEncodingException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	    return false;
-	}
-	httpPost.setHeader("Accept", "application/json");
-
-	httpPost.setEntity(stringentity);
-	HttpResponse response = null;
-	try {
-	    response = httpclient.execute(httpPost);
-	} catch (ClientProtocolException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	    return false;
-	} catch (IOException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	    return false;
-	}
-
-	String status = response.getStatusLine().toString();
-	Log.d(TAG, status);
-
-	HttpEntity entity = response.getEntity();
-	try {
-	    BufferedReader br = new BufferedReader(new InputStreamReader(
-		    entity.getContent()));
-	    String output;
-
-	    Log.d(TAG, "Output from Server -> ");
-	    while ((output = br.readLine()) != null) {
-		Log.d(TAG, output);
+    public int addOnlineStory(Story story) {
+	if (story.getOnlineStoryId() == 0) {
+	    ArrayList<Story> stories = getOnlineStories();
+	    int nextId = stories.size() + 1;
+	    HttpPost httpPost = new HttpPost(
+		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
+			    + nextId);
+	    story.setOnlineStoryId(nextId);
+	    StringEntity stringentity = null;
+	    try {
+		stringentity = new StringEntity(gson.toJson(story));
+	    } catch (UnsupportedEncodingException e) {
+		Log.d(TAG, e.getLocalizedMessage());
+		return 0;
 	    }
-	} catch (IllegalStateException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	    return false;
-	} catch (IOException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	    return false;
+	    httpPost.setHeader("Accept", "application/json");
+
+	    httpPost.setEntity(stringentity);
+	    HttpResponse response = null;
+	    try {
+		response = httpclient.execute(httpPost);
+	    } catch (ClientProtocolException e) {
+		Log.d(TAG, e.getLocalizedMessage());
+		return 0;
+	    } catch (IOException e) {
+		Log.d(TAG, e.getLocalizedMessage());
+		return 0;
+	    }
+
+	    String status = response.getStatusLine().toString();
+	    Log.d(TAG, status);
+
+	    HttpEntity entity = response.getEntity();
+	    try {
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+			entity.getContent()));
+		String output;
+
+		Log.d(TAG, "Output from Server -> ");
+		while ((output = br.readLine()) != null) {
+		    Log.d(TAG, output);
+		}
+	    } catch (IllegalStateException e) {
+		Log.d(TAG, e.getLocalizedMessage());
+		return 0;
+	    } catch (IOException e) {
+		Log.d(TAG, e.getLocalizedMessage());
+		return 0;
+	    }
+
+	    try {
+		EntityUtils.consume(entity);
+	    } catch (IOException e) {
+		Log.d(TAG, e.getLocalizedMessage());
+		return 0;
+	    }
+	    httpPost.releaseConnection();
 	}
 
-	try {
-	    EntityUtils.consume(entity);
-	} catch (IOException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	    return false;
-	}
-	httpPost.releaseConnection();
-
-	return true;
+	return story.getOnlineStoryId();
     }
 
     public boolean updateOnlineStory(Story story) {
