@@ -151,15 +151,18 @@ public class MyStoriesActivity extends ListActivity {
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
 	    // TODO: call esHelper to publish
-	    if (esHelper.addOnlineStory(currentStory)) {
-		Toast.makeText(getApplicationContext(),
-			"Your Story is Successfully Published",
-			Toast.LENGTH_LONG).show();
-	    } else {
+	    
+	    try {
+		esHelper.addOnlineStory(currentStory); 
+	    } catch (Exception e){
 		Toast.makeText(getApplicationContext(),
 			"Publish Error. Internect Connection Error",
 			Toast.LENGTH_LONG).show();
 	    }
+	    
+		Toast.makeText(getApplicationContext(),
+			"Your Story is Successfully Published",
+			Toast.LENGTH_LONG).show();
 
 	case READ_ID:
 
