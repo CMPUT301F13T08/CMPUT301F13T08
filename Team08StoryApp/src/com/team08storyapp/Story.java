@@ -9,7 +9,8 @@ public class Story implements Serializable {
 	 * 
 	 */
     private static final long serialVersionUID = 1L;
-    private int storyId;
+    private int onlineStoryId;
+    private int offlineStoryId;
     private String title;
     private String author;
     private ArrayList<StoryFragment> storyFragments;
@@ -25,28 +26,28 @@ public class Story implements Serializable {
 	storyFragments = new ArrayList<StoryFragment>();
     }
 
-    public Story(int storyId, String title, String author) {
-	this.storyId = storyId;
+    public Story(int offlineStoryId, String title, String author) {
+	this.offlineStoryId = offlineStoryId;
 	this.title = title;
 	this.author = author;
 	storyFragments = new ArrayList<StoryFragment>();
     }
 
-    public Story(int storyId, String title, String author,
+    public Story(int onlineStoryId, String title, String author,
 	    ArrayList<StoryFragment> storyFragments, int firstStoryFragmentId) {
 	super();
-	this.storyId = storyId;
+	this.onlineStoryId = onlineStoryId;
 	this.title = title;
 	this.author = author;
 	storyFragments = new ArrayList<StoryFragment>();
     }
 
-    public int getStoryId() {
-	return storyId;
+    public int getOnlineStoryId() {
+	return onlineStoryId;
     }
 
-    public void setStoryId(int storyId) {
-	this.storyId = storyId;
+    public void setOnlineStoryId(int onlineStoryId) {
+	this.onlineStoryId = onlineStoryId;
     }
 
     public String getTitle() {
@@ -75,8 +76,16 @@ public class Story implements Serializable {
 
     @Override
     public String toString() {
-	return "Story [storyId=" + storyId + ", title=" + title + ", author="
+	return "Story [storyId=" + onlineStoryId + ", title=" + title + ", author="
 		+ author + ", storyFragments=" + storyFragments
 		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
+    }
+
+    public int getOfflineStoryId() {
+	return offlineStoryId;
+    }
+
+    public void setOfflineStoryId(int offlineStoryId) {
+	this.offlineStoryId = offlineStoryId;
     }
 }
