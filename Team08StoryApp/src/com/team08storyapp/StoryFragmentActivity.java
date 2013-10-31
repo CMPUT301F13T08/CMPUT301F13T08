@@ -1,7 +1,6 @@
 package com.team08storyapp;
 
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +47,7 @@ public class StoryFragmentActivity extends Activity {
 
 	super.onCreate(savedInstanceState);
 	// set up background layout
+
 	setContentView(R.layout.activity_story_list);
 	lv = (ListView) findViewById(android.R.id.list);
 
@@ -102,12 +102,16 @@ public class StoryFragmentActivity extends Activity {
 
 	// Get the intent - passed either by Online/OfflineStoriesActivity or
 	// by StoryFragmentActivity
+
 	Intent storyFragment = getIntent();
 
 	// Get the story object from the
-	//intent 
-	currentStory = (Story) storyFragment
-		.getSerializableExtra("story"); // Get the current story
+	// intent
+
+	currentStory = (Story) storyFragment.getSerializableExtra("story"); // Get
+									    // the
+									    // current
+									    // story
 	// fragment id from the intent - the fragment to display
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
@@ -120,6 +124,13 @@ public class StoryFragmentActivity extends Activity {
 	// choices now NULL - not sure why yet!
 	ArrayList<Choice> storyFragmentChoices = currentStoryFragment
 		.getChoices();
+
+	/*
+	 * ArrayList<Choice> choiceList = new ArrayList<Choice>();
+	 * choiceList.add(new Choice(1, 1, "Go to the fragment 1"));
+	 * choiceList.add(new Choice(2, 5, "Go to the fragment 5"));
+	 * choiceList.add(new Choice(3, 2, "Go to the fragment 2"));
+	 */
 	fillChoice(storyFragmentChoices);
 	// fillChoice(choiceList);
 
