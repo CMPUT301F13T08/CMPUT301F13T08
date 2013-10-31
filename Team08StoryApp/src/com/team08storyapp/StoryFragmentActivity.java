@@ -66,15 +66,19 @@ public class StoryFragmentActivity extends Activity {
     	        // Get the story object from the intent
     	        currentStory = (Story) storyFragment.getSerializableExtra("story");
     	        // Get the current story fragment id from the intent - the fragment to display
-    	        storyFragment.getIntExtra("storyFragmentId", currentStoryFragmentId);
+    	        currentStoryFragmentId = storyFragment.getIntExtra("storyFragmentId", 0);
     	        
     	        
     	        // The current story fragment object - get from the current story list fragment, by id
     	        currentStoryFragment = StoryController.readStoryFragment(currentStory.getStoryFragments(), currentStoryFragmentId);
     	        
     	       
-    			textSection.setText("Please place your test text here.");
+    			textSection.setText(currentStoryFragment.getStoryText());
+    			// fragment choices now NULL - not sure why yet!
+    			//ArrayList<Choice> storyFragmentChoices = currentStoryFragment.getChoices();
+    			//fillChoice(currentStoryFragment.getChoices());
     			fillChoice(choiceList);
+    			
     				
     		
     		}

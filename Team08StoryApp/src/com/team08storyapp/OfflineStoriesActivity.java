@@ -43,7 +43,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		storyFragment1
 				.setStoryText("Like any other day, Amara decided to take her dog out for a walk. She left the house and exited the yard.");
 		choices.add(new Choice(2, 1,
-				"Amara turned south heading for her friend�s house."));
+				"Amara turned south heading for her friend's house."));
 		choices.add(new Choice(7, 2,
 				"Amara turned north heading for the store."));
 		choices.add(new Choice(3, 3,
@@ -54,7 +54,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		// Story Fragment 2
 		StoryFragment storyFragment2 = new StoryFragment(1);
 		storyFragment2
-				.setStoryText("As Amara walked toward her friend�s house her dog started acting up. It pulled this way and that way. Then it stopped and started barking at a bush.");
+				.setStoryText("As Amara walked toward her friend's house her dog started acting up. It pulled this way and that way. Then it stopped and started barking at a bush.");
 		choices.clear();
 		choices.add(new Choice(4, 1, "In the bush, Amara found a small boy."));
 		choices.add(new Choice(5, 2,
@@ -142,7 +142,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		// Story Fragment 12
 		StoryFragment storyFragment12 = new StoryFragment(1);
 		storyFragment12
-				.setStoryText("The boy�s mother arrives shortly and is relieved to find her son. As a reward for finding her son, she invites to take you out for ice cream with them. You decide to abandon your walk and take her offer up. THE END");
+				.setStoryText("The boy's mother arrives shortly and is relieved to find her son. As a reward for finding her son, she invites to take you out for ice cream with them. You decide to abandon your walk and take her offer up. THE END");
 		storyFragmentList.add(storyFragment12);
 
 		sampleStory.setStoryFragments(storyFragmentList);
