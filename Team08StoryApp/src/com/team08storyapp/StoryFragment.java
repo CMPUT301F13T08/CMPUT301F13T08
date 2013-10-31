@@ -1,8 +1,13 @@
 package com.team08storyapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StoryFragment {
+public class StoryFragment implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int storyFragmentId;
 	private String storyText;
 	private ArrayList<Photo> photos;

@@ -9,14 +9,15 @@
     android:orientation="vertical"
     tools:context=".StoryFragmentActivity" >
     
-    <ImageView
-        android:id="@+id/test_image"
-        android:src="@drawable/ic_launcher"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        />
 
+    <ImageView
+	android:id="@+id/test_image"
+	android:src="@drawable/ic_launcher"
+	android:layout_width="fill_parent"
+	android:layout_height="0dp"
+	android:layout_weight="0.3"
+	/>
+    
    <TextView
        android:id="@+id/dialogue"
        android:layout_width="fill_parent"

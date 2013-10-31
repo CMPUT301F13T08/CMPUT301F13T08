@@ -30,6 +30,7 @@ public class StoryFragmentActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
     	super.onCreate(savedInstanceState);
     	//  set up background layout
     	setContentView(R.layout.activity_story_list);
@@ -89,3 +90,6 @@ public class StoryFragmentActivity extends Activity {
     }
  
 }
+
+
+

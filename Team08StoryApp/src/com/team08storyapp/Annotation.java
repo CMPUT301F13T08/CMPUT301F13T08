@@ -1,7 +1,13 @@
 package com.team08storyapp;
 
-public class Annotation {
+import java.io.Serializable;
 
+public class Annotation implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int annotationID;
 	private String text;
 	private int storyFragmentID;

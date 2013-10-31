@@ -19,7 +19,7 @@ public class testESHelper extends TestCase {
 	private ESHelper esHelper;
 
 	private static final String TAG = "ESHelper";
-	
+
 	public testESHelper(String name) {
 		super(name);
 	}
@@ -158,13 +158,8 @@ public class testESHelper extends TestCase {
 	 */
 	public void testAddOnlineStory() {
 		Story addStory = initializeSampleStory();
-		try {
-			assertTrue(esHelper.addOnlineStory(addStory));
-		} catch (IllegalStateException e) {
-			Log.d(TAG, e.getLocalizedMessage());
-		} catch (IOException e) {
-			Log.d(TAG, e.getLocalizedMessage());
-		}
+		
+		assertTrue(esHelper.addOnlineStory(addStory));
 	}
 
 	/*
@@ -226,12 +221,6 @@ public class testESHelper extends TestCase {
 		String searchText = "walk";
 		int searchListSize = 1;
 
-		try {
-			assertTrue(esHelper.searchOnlineStories(searchText).size() == searchListSize);
-		} catch (ClientProtocolException e) {
-			Log.d(TAG, e.getLocalizedMessage());
-		} catch (IOException e) {
-			Log.d(TAG, e.getLocalizedMessage());;
-		}
+		assertTrue(esHelper.searchOnlineStories(searchText).size() == searchListSize);
 	}
 }

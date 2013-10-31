@@ -1,9 +1,14 @@
 package com.team08storyapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Story {
+public class Story implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int storyId;
 	private String title;
 	private String author;

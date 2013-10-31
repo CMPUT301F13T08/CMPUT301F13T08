@@ -1,6 +1,12 @@
 package com.team08storyapp;
 
-public class Choice {
+import java.io.Serializable;
+
+public class Choice implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String text;
 	int toGoToStoryFragmentID;
 	int choiceId;
