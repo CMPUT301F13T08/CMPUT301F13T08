@@ -1,5 +1,6 @@
 package com.team08storyapp;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class OnlineStoriesActivity extends ListActivity {
     private static final boolean onUpdate = true;
     private static final boolean onCreate = false;
 
+    private FileHelper fHelper;
     private ESHelper esHelper;
     private View header;
     private String searchText;
@@ -50,8 +52,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
 	et = (EditText) header.findViewById(R.id.searchText);
 
-	esHelper = new ESHelper();
-	fillData(esHelper.getOnlineStories(), onCreate);
+	/*esHelper = new ESHelper();
+	fillData(esHelper.getOnlineStories(), onCreate);*/
 
 	searchButton.setOnClickListener(new View.OnClickListener() {
 
@@ -88,15 +90,29 @@ public class OnlineStoriesActivity extends ListActivity {
 	info = (AdapterContextMenuInfo) item.getMenuInfo();
 	position = info.position;
 	// following 4 lines will display the information on selected item.
-	Story selectedValue = (Story) lv.getAdapter().getItem(position);
-	System.out.println(selectedValue.getTitle());
-	System.out.println(selectedValue.getAuthor());
-	System.out.println(selectedValue.getOnlineStoryId());
+
+	currentStory = (Story) lv.getAdapter().getItem(position);
+	//System.out.println(currentStory.getTitle());
+	//System.out.println(currentStory.getAuthor());
+	//System.out.println(currentStory.getOnlineStoryId());
+
 
 	switch (item.getItemId()) {
 	case DOWNLOAD_ID:
 	    // TODO: save selected story (currentStory) to file
 
+	    fHelper = new FileHelper(this, 0);
+	    try {
+		fHelper.addOfflineStory(currentStory);
+	    } catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    
+	    
 	case READ_ID:
 
 	    // TODO: get selected story object - TODO: read the story -
@@ -104,16 +120,20 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    // create intent to pass the selected story object and the first
 	    // story fragment id to the StoryFragmentActivity
-	    Intent firstStoryFragment = new Intent(getApplicationContext(),
-		    StoryFragmentActivity.class);
+	    // create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
+	        Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
+	    
+	        // send the story object through the intent
+	        firstStoryFragment.putExtra("story", currentStory);
+	        
+	       
+	        // send the first story fragment id through the intent
+	        int nextStoryFragmentId = currentStory.getFirstStoryFragment();
+	        
 
-	    // send the story object through the intent
-	    firstStoryFragment.putExtra("story", (Serializable) currentStory);
-	    // send the first story fragment id through the intent
-	    firstStoryFragment.putExtra("storyFragmentId",
-		    currentStory.getFirstStoryFragment());
-
-	    // startActivity(firstFragment);
+	        firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+	   
+	        startActivity(firstStoryFragment);
 
 	default:
 	    return super.onContextItemSelected(item);

@@ -41,6 +41,7 @@ public class ESHelper {
      * @throws IOException
      * @throws IllegalStateException
      */
+
     public int addOnlineStory(Story story) {
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	StrictMode.setThreadPolicy(policy); 
@@ -71,6 +72,7 @@ public class ESHelper {
 		Log.d(TAG, e.getLocalizedMessage());
 		return 0;
 	    }
+
 
 	    String status = response.getStatusLine().toString();
 	    Log.d(TAG, status);

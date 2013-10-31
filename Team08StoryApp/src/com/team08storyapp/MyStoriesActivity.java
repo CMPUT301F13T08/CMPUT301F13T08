@@ -146,7 +146,7 @@ public class MyStoriesActivity extends ListActivity {
 	Story currentStory = (Story) lv.getAdapter().getItem(position);
 	System.out.println(currentStory.getTitle());
 	System.out.println(currentStory.getAuthor());
-	System.out.println(currentStory.getOfflineStoryId());
+
 
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
