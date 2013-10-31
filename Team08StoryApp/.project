@@ -30,11 +30,4 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>res/drawable-mdpi/BreakingBadOctocat.png</name>
-			<type>1</type>
-			<location>/Users/sf/Desktop/Screen Shot 2013-10-29 at 1.14.32 PM.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
