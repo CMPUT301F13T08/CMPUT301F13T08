@@ -241,9 +241,7 @@ public class OfflineStoriesActivity extends ListActivity {
         
 		// just to test:
 		currentStory = initializeSampleStory();
-		if (currentStory == null){
-			System.out.println("NO STORYYYY here");
-		}
+		
      // create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
         Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
     
@@ -251,6 +249,13 @@ public class OfflineStoriesActivity extends ListActivity {
         firstStoryFragment.putExtra("story", currentStory);
         // send the first story fragment id through the intent
         int nextStoryFragmentId = currentStory.getFirstStoryFragment();
+        
+       /* StoryFragment fragment = StoryController.readStoryFragment(currentStory.getStoryFragments(), currentStory.getFirstStoryFragment());
+        ArrayList<Choice> choices = fragment.getChoices();
+        if (choices == null){
+            System.out.println("NO CHOICESSS");
+        }*/
+        
         firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
    
         startActivity(firstStoryFragment);

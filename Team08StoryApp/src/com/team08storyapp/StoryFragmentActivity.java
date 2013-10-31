@@ -75,9 +75,9 @@ public class StoryFragmentActivity extends Activity {
     	       
     			textSection.setText(currentStoryFragment.getStoryText());
     			// fragment choices now NULL - not sure why yet!
-    			//ArrayList<Choice> storyFragmentChoices = currentStoryFragment.getChoices();
-    			//fillChoice(currentStoryFragment.getChoices());
-    			fillChoice(choiceList);
+    			ArrayList<Choice> storyFragmentChoices = currentStoryFragment.getChoices();
+    			fillChoice(storyFragmentChoices);
+    			//fillChoice(choiceList);
     			
     				
     		
