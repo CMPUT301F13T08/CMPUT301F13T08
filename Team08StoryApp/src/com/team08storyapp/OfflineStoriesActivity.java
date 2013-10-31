@@ -29,6 +29,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	private EditText et;	
 	private Story currentStory;
 	
+	// just to test:
 	private Story initializeSampleStory() {
 		Story sampleStory = new Story("The Walk", "Michele Paulichuk");
 		sampleStory.setFirstStoryFragment(1);
@@ -240,13 +241,17 @@ public class OfflineStoriesActivity extends ListActivity {
         
 		// just to test:
 		currentStory = initializeSampleStory();
+		if (currentStory == null){
+			System.out.println("NO STORYYYY here");
+		}
      // create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
         Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
     
         // send the story object through the intent
         firstStoryFragment.putExtra("story", currentStory);
         // send the first story fragment id through the intent
-        firstStoryFragment.putExtra("storyFragmentId", currentStory.getFirstStoryFragment());
+        int nextStoryFragmentId = currentStory.getFirstStoryFragment();
+        firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
    
         startActivity(firstStoryFragment);
    
@@ -277,5 +282,3 @@ public class OfflineStoriesActivity extends ListActivity {
 
 
 	}
-
-

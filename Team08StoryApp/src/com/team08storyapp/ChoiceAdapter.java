@@ -42,7 +42,7 @@ public class ChoiceAdapter extends ArrayAdapter<Choice>{
 		final Choice choice= infos.get(position);
 		
 		if(choice != null){
-			holder.choiceText.setText(choice.getText());
+			holder.choiceText.setText("  --"+choice.getText());
 		}
 		return v;
 		
