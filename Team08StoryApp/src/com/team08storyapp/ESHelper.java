@@ -15,8 +15,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -42,6 +42,8 @@ public class ESHelper {
      * @throws IllegalStateException
      */
     public int addOnlineStory(Story story) {
+	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	StrictMode.setThreadPolicy(policy); 
 	if (story.getOnlineStoryId() == 0) {
 	    ArrayList<Story> stories = getOnlineStories();
 	    int nextId = stories.size() + 1;
@@ -90,14 +92,6 @@ public class ESHelper {
 		Log.d(TAG, e.getLocalizedMessage());
 		return 0;
 	    }
-
-	    try {
-		EntityUtils.consume(entity);
-	    } catch (IOException e) {
-		Log.d(TAG, e.getLocalizedMessage());
-		return 0;
-	    }
-	    httpPost.releaseConnection();
 	}
 
 	return story.getOnlineStoryId();
@@ -109,6 +103,8 @@ public class ESHelper {
     }
 
     public Story getOnlineStory(int storyId) {
+	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	StrictMode.setThreadPolicy(policy); 
 	Story story;
 	try {
 	    HttpGet getRequest = new HttpGet(
@@ -133,7 +129,6 @@ public class ESHelper {
 	    // We get the Story from it!
 	    story = esResponse.getSource();
 	    Log.d(TAG, story.toString());
-	    getRequest.releaseConnection();
 
 	} catch (ClientProtocolException e) {
 
@@ -150,6 +145,8 @@ public class ESHelper {
     }
 
     public ArrayList<Story> getOnlineStories() {
+	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	StrictMode.setThreadPolicy(policy); 
 	ArrayList<Story> stories = new ArrayList<Story>();
 	try {
 	    HttpPost postRequest = new HttpPost(
@@ -178,8 +175,6 @@ public class ESHelper {
 		stories.add(story);
 	    }
 
-	    postRequest.releaseConnection();
-
 	} catch (ClientProtocolException e) {
 	    Log.d(TAG, e.getLocalizedMessage());
 	    return null;
@@ -192,6 +187,8 @@ public class ESHelper {
     }
 
     public ArrayList<Story> searchOnlineStories(String searchString) {
+	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	StrictMode.setThreadPolicy(policy); 
 	ArrayList<Story> stories = new ArrayList<Story>();
 	try {
 	    HttpPost searchRequest = new HttpPost(
@@ -218,7 +215,6 @@ public class ESHelper {
 		Story story = s.getSource();
 		stories.add(story);
 		Log.d(TAG, story.toString());
-		searchRequest.releaseConnection();
 	    }
 	} catch (ClientProtocolException e) {
 	    Log.d(TAG, e.getLocalizedMessage());
