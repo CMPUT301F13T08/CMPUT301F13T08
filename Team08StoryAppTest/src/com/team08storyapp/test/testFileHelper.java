@@ -94,7 +94,7 @@ public class testFileHelper extends TestCase {
 		assertNotNull(story.getAuthor());
 		assertNotNull(story.getTitle());
 		assertEquals(story.getStoryFragments().size(), fragmentList.size());
-		assertEquals(story.getStoryId(), storyId);
+		assertEquals(story.getOfflineStoryId(), storyId);
 		
 	}
 	
