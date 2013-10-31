@@ -152,13 +152,13 @@ public class MyStoriesActivity extends ListActivity {
 	case PUBLISH_ID:
 	    // TODO: call esHelper to publish
 	    
-	    try {
+	   // try {
 		esHelper.addOnlineStory(currentStory); 
-	    } catch (Exception e){
-		Toast.makeText(getApplicationContext(),
-			"Publish Error. Internect Connection Error",
-			Toast.LENGTH_LONG).show();
-	    }
+	    //} catch (Exception e){
+		//Toast.makeText(getApplicationContext(),
+		//	"Publish Error. Internect Connection Error",
+		//	Toast.LENGTH_LONG).show();
+	    //}
 	    
 		Toast.makeText(getApplicationContext(),
 			"Your Story is Successfully Published",
