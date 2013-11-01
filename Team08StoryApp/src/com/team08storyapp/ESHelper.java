@@ -236,8 +236,7 @@ public class ESHelper {
 	try {
 	    HttpPost searchRequest = new HttpPost(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/_search?pretty=1");
-	    String query = "{\"query\" : {\"multi_match\" : {\"fields\" : [\"title\", \"author\"],\"query\" : \""
-		    + searchString + "\"}}}";
+		String query = "{\"query\": {\"query_string\" :{ \"fields\":[\"title\",\"author\"], \"query\":\""+ searchString + "\"}}}";
 	    StringEntity stringentity = new StringEntity(query);
 
 	    searchRequest.setHeader("Accept", "application/json");
