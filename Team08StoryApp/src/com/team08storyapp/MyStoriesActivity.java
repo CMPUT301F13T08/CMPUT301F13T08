@@ -68,7 +68,7 @@ public class MyStoriesActivity extends ListActivity {
 		    "Edgar Allan Poe");
 	    Story s10 = new Story(20, "Annabel Lee", "Edgar Allan Poe");
 	    Story[] slist = { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 };
-	    for (Story s : slist) {		
+	    for (Story s : slist) {
 		fHelper.addOfflineStory(s);
 	    }
 	} catch (FileNotFoundException e1) {
@@ -81,7 +81,7 @@ public class MyStoriesActivity extends ListActivity {
 
 	try {
 	    ArrayList<Story> temp = fHelper.getOfflineStories();
-	    for(Story s: temp){
+	    for (Story s : temp) {
 		System.out.println(s.getTitle());
 	    }
 	    fillData(temp, onCreate);
@@ -147,23 +147,26 @@ public class MyStoriesActivity extends ListActivity {
 	System.out.println(currentStory.getTitle());
 	System.out.println(currentStory.getAuthor());
 
-
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
 	    // TODO: call esHelper to publish
-	    try{
-		if(currentStory.getOnlineStoryId() > 0){
-		    esHelper.addOrUpdateOnlineStory(currentStory);
+	    try {
+		Story encodedStory = fHelper.encodeStory(currentStory);
+		if (currentStory.getOnlineStoryId() > 0) {
+		    esHelper.addOrUpdateOnlineStory(encodedStory);
+
 		    Toast.makeText(getApplicationContext(),
-				"Your Story is Successfully Published",
-				Toast.LENGTH_LONG).show();
-		}else{
-		    currentStory.setOnlineStoryId(esHelper.addOrUpdateOnlineStory(currentStory));
+			    "Your Story is Successfully Published",
+			    Toast.LENGTH_LONG).show();
+		} else {
+		    currentStory.setOnlineStoryId(esHelper
+			    .addOrUpdateOnlineStory(encodedStory));
+
 		    Toast.makeText(getApplicationContext(),
-				"Your Story is Successfully Published",
-				Toast.LENGTH_LONG).show();
+			    "Your Story is Successfully Published",
+			    Toast.LENGTH_LONG).show();
 		}
-	    } catch (Exception e){
+	    } catch (Exception e) {
 		Toast.makeText(getApplicationContext(),
 			"Your Story is Successfully Published",
 			Toast.LENGTH_LONG).show();

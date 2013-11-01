@@ -230,42 +230,74 @@ public class FileHelper {
     }
 
     public Story encodeStory(Story s) {
-	//OnlineStory onlineStory = new OnlineStory(s.getOfflineStoryId());
-	
+	// OnlineStory onlineStory = new OnlineStory(s.getOfflineStoryId());
+
 	// get all fragments
 	ArrayList<StoryFragment> sfList = s.getStoryFragments();
+	
+	// for each fragment, get it's photolist and annotation list
 
-	// for each fragment, get its photoList and encode each of them with
-	// base64.
 	for (int i = 0; i < sfList.size(); i++) {
-
-	    ArrayList<Annotation> aList = sfList.get(i).getAnnotations();
-	    ArrayList<String> encodedAList = new ArrayList<String>();
-	    for (int j = 0; j < aList.size(); j++) {
-		encodedAList.add(Base64.encodeToString(aList.get(i).getPhoto(),
-			Base64.DEFAULT));
+	    ArrayList<Photo> photos = sfList.get(i).getPhotos();
+	    ArrayList<Annotation> annotations = sfList.get(i).getAnnotations();
+	    
+	    // set picture in each Photo object to empty after encoding.
+	    for (int m = 0; m < photos.size(); m++) {
+		byte[] photo = photos.get(m).getPicture();
+		photos.get(m).setEncodedPicture(
+			Base64.encodeToString(photo, Base64.DEFAULT));
+		photo = new byte[photo.length];
+		photos.get(m).setPicture(photo);
 	    }
-
-	    ArrayList<Photo> pList = sfList.get(i).getPhotos();
-	    ArrayList<String> encodedPList = new ArrayList<String>();
-	    for (int m = 0; m < pList.size(); m++) {
-		encodedPList.add(Base64.encodeToString(pList.get(i)
-			.getPicture(), Base64.DEFAULT));
+	    
+	    /* 
+	     * Encode the photo pf annotation object first and clear the photo.
+	     * since we don't want Json to handle huge byteArrays.
+	     */
+	    
+	    for (int n = 0; n < annotations.size(); n++) {
+		byte[] annotation = annotations.get(n).getPhoto();
+		annotations.get(n).setEncodedAnnotation(
+			Base64.encodeToString(annotation, Base64.DEFAULT));
+		annotation = new byte[annotation.length];
+		annotations.get(n).setPhoto(annotation);
 	    }
-
-	    sfList.get(i).setEncodedAnnotations(encodedAList);
-	    sfList.get(i).setEncodedPhotos(encodedPList);
+	    
+	    sfList.get(i).setAnnotations(annotations);
+	    sfList.get(i).setPhotos(photos);
 	}
 	return s;
 
     }
-    
-    public Story decodeStory(Story story){
+
+    public Story decodeStory(Story story) {
 	// get a story
-	// get a list of fragments;
-	// for each fragment's photoList and annotationList
-	// and decode each of them
-	// put them in a new offline story
+	ArrayList<StoryFragment> sfList = story.getStoryFragments();
+	
+	for (int i = 0; i < sfList.size(); i++) {
+	    ArrayList<Photo> photos = sfList.get(i).getPhotos();
+	    ArrayList<Annotation> annotations = sfList.get(i).getAnnotations();
+	    
+	    
+	    for (int m = 0; m < photos.size(); m++) {
+		photos.get(m).setPicture(
+			Base64.decode(photos.get(m).getEncodedPicture(), Base64.DEFAULT));
+		// clear the encoded string to avoid conflicts with encodeStory
+		// and save spaces.
+		photos.get(m).setEncodedPicture(null);
+		}
+	    
+	    for (int n = 0; n < annotations.size(); n++) {
+		
+		annotations.get(n).setPhoto(
+			Base64.decode(annotations.get(n).getEncodedAnnotation(), Base64.DEFAULT));
+
+		annotations.get(n).setEncodedAnnotation(null);
+	    }
+	    
+	    sfList.get(i).setAnnotations(annotations);
+	    sfList.get(i).setPhotos(photos);
+	}
 	return story;
     }
 }
