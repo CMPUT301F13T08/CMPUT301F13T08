@@ -11,17 +11,17 @@ public class Photo implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private int photoID;
-	private Bitmap picture;
+	private byte[] picture;
 
 	public Photo() {
 
 	}
 
-	public Photo(Bitmap picture) {
+	public Photo(byte[] picture) {
 		this.picture = picture;
 	}
 
-	public Photo(int photoID, Bitmap picture) {
+	public Photo(int photoID, byte[] picture) {
 		super();
 		this.photoID = photoID;
 		this.picture = picture;
@@ -35,11 +35,11 @@ public class Photo implements Serializable{
 		return photoID;
 	}
 
-	public void setPicture(Bitmap picture) {
+	public void setPicture(byte[] picture) {
 		this.picture = picture;
 	}
 
-	public Bitmap getPicture() {
+	public byte[] getPicture() {
 		return picture;
 	}
 

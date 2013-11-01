@@ -13,6 +13,8 @@ public class StoryFragment implements Serializable {
     private ArrayList<Photo> photos;
     private ArrayList<Choice> choices;
     private ArrayList<Annotation> annotations;
+    private ArrayList<String> encodedPhotos;
+    private ArrayList<String> encodedAnnotations;
 
     public StoryFragment() {
 
@@ -96,6 +98,22 @@ public class StoryFragment implements Serializable {
     public void setAnnotations(ArrayList<Annotation> annotations) {
 	this.annotations = annotations;
     }
+    
+    public ArrayList<String> getEncodedPhotos() {
+        return encodedPhotos;
+    }
+
+    public ArrayList<String> getEncodedAnnotations() {
+        return encodedAnnotations;
+    }
+
+    public void setEncodedPhotos(ArrayList<String> encodedPhotos) {
+        this.encodedPhotos = encodedPhotos;
+    }
+
+    public void setEncodedAnnotations(ArrayList<String> encodedAnnotations) {
+        this.encodedAnnotations = encodedAnnotations;
+    }
 
     @Override
     public String toString() {
@@ -103,4 +121,6 @@ public class StoryFragment implements Serializable {
 		+ ", storyText=" + storyText + ", photos=" + photos
 		+ ", choices=" + choices + ", annotations=" + annotations + "]";
     }
+
+
 }
