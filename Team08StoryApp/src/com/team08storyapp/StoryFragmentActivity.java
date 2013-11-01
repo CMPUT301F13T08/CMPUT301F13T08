@@ -33,7 +33,6 @@ public class StoryFragmentActivity extends Activity {
     private Story currentStory;
     private int currentStoryFragmentId;
     private StoryFragment currentStoryFragment;
-    private final int PICKER = 1;
     private int currentPic = 0;
     private PicAdapter imgAdapt;
     private Gallery picGallery;
@@ -100,48 +99,30 @@ public class StoryFragmentActivity extends Activity {
 
 	picGallery.setAdapter(imgAdapt);
 
-	// Get the intent - passed either by Online/OfflineStoriesActivity or
-	// by StoryFragmentActivity
+	// Get the intent - passed either by Online/OfflineStoriesActivity or by StoryFragmentActivity
 
 	Intent storyFragment = getIntent();
 
-	// Get the story object from the
-	// intent
-
-	currentStory = (Story) storyFragment.getSerializableExtra("story"); // Get
-									    // the
-									    // current
-									    // story
-	// fragment id from the intent - the fragment to display
+	// Get the story object from the intent
+	currentStory = (Story) storyFragment.getSerializableExtra("story"); 
+	// Get the story fragment id from the intent - the fragment to display
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 
-	System.out.println("CURRENT STORY FRAGMENT IDDDDDDDDDD");
-	System.out.println(currentStoryFragmentId);
 	
-	// The current story fragment object - get from the current story list
-	// fragment, by id
+	// The current story fragment object - from the story fragment list, by id
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
-	/*if (currentStoryFragment != null){
-	    System.out.println("THERE IS A FRAGMENTTTTT");
-	}
-	else{
-	    System.out.println("THERE IS NO FRAGMENTTTT");
-	}*/
-	textSection.setText(currentStoryFragment.getStoryText()); // fragment
 	
-	ArrayList<Choice> storyFragmentChoices = currentStoryFragment.getChoices(); // if no choices: NULL POINTER EXCEPTION
-	/*
-	 * ArrayList<Choice> choiceList = new ArrayList<Choice>();
-	 * choiceList.add(new Choice(1, 1, "Go to the fragment 1"));
-	 * choiceList.add(new Choice(2, 5, "Go to the fragment 5"));
-	 * choiceList.add(new Choice(3, 2, "Go to the fragment 2"));
-	 */
+	// Display the current fragment text
+	textSection.setText(currentStoryFragment.getStoryText()); 
 	
+	// The list of choices from the current fragment
+	ArrayList<Choice> storyFragmentChoices = currentStoryFragment.getChoices();
+	
+	// Populate choices listview with the go to choices from the current fragment
 	fillChoice(storyFragmentChoices);
 	
-	// fillChoice(choiceList);
 	
 	lv.setOnItemClickListener(new OnItemClickListener() {
 	    // handle clicks

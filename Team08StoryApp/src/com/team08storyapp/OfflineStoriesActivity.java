@@ -28,128 +28,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	private EditText et;	
 	private Story currentStory;
 	
-	// just to test:
-	 private Story initializeSampleStory() {
-		Story sampleStory = new Story("The Walk", "Michele Paulichuk");
-		sampleStory.setOfflineStoryId(1);
-		//System.out.println("STORYYYYYY IDDDDDD");
-		//System.out.println(sampleStory.getOnlineStoryId());
-		ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
-		//ArrayList<Choice> choices = new ArrayList<Choice>();
-
-		// Story Fragment 1
-		sampleStory.setFirstStoryFragment(1);
-		StoryFragment storyFragment1 = new StoryFragment(1);
-		storyFragment1
-			.setStoryText("Like any other day, Amara decided to take her dog out for a walk. She left the house and exited the yard.");
-		ArrayList<Choice> choices1 = new ArrayList<Choice>();
-		choices1.add(new Choice(2, 1,
-			"Amara turned south heading for her friend�s house."));
-		choices1.add(new Choice(7, 2,
-			"Amara turned north heading for the store."));
-		choices1.add(new Choice(3, 3,
-			"Amara turned east heading for the river valley."));
-		storyFragment1.setChoices(choices1);
-		storyFragmentList.add(storyFragment1);
-
-		// Story Fragment 2
-		StoryFragment storyFragment2 = new StoryFragment(2);
-		storyFragment2
-			.setStoryText("As Amara walked toward her friend�s house her dog started acting up. It pulled this way and that way. Then it stopped and started barking at a bush.");
-		ArrayList<Choice> choices2 = new ArrayList<Choice>();
-		choices2.add(new Choice(4, 1, "In the bush, Amara found a small boy."));
-		choices2.add(new Choice(5, 2,
-			"In the bush, Amara found a hundred dollar bill."));
-		storyFragment2.setChoices(choices2);
-		storyFragmentList.add(storyFragment2);
-
-		// Story Fragment 3
-		StoryFragment storyFragment3 = new StoryFragment(3);
-		storyFragment3
-			.setStoryText("Amara gets to the river valley and decides to take a path she has yet to explore. As Amara walks along she comes across a cave in the side of the valley.");
-		ArrayList<Choice> choices3 = new ArrayList<Choice>();
-		choices3.add(new Choice(8, 1,
-			"Amara decides to take a peek in the cave."));
-		choices3.add(new Choice(9, 2,
-			"Amara thinks the cave is creepy and continues walking."));
-		storyFragment3.setChoices(choices3);
-		storyFragmentList.add(storyFragment3);
-
-		// Story Fragment 4
-		StoryFragment storyFragment4 = new StoryFragment(4);
-		storyFragment4
-			.setStoryText("At first Amara was startled by the boy. Then she realized he was crying softly. So she asked the boy what�s wrong. The boy was lost.");
-		ArrayList<Choice> choices4 = new ArrayList<Choice>();
-		choices4.add(new Choice(10, 1,
-			"Amara decides to help the boy find his way home."));
-		choices4.add(new Choice(11, 2, "Amara is uncertain what to do."));
-		storyFragment4.setChoices(choices4);
-		storyFragmentList.add(storyFragment4);
-
-		// Story Fragment 5
-		StoryFragment storyFragment5 = new StoryFragment(5);
-		storyFragment5
-			.setStoryText("Amara picked up the bill and looked around. There was no one around and therefore anyone to claim the money. So Amara decided to keep the bill and continue on to her friend�s house.");
-		ArrayList<Choice> choices5 = new ArrayList<Choice>();
-		choices5.add(new Choice(6, 1, "Continue"));
-		storyFragment5.setChoices(choices5);
-		storyFragmentList.add(storyFragment5);
-
-		// Story Fragment 6
-		StoryFragment storyFragment6 = new StoryFragment(6);
-		storyFragment6
-			.setStoryText("When Amara got to her friend�s house she explained her excitement at finding one hundred dollars in a bush, all thanks to her dog. Her friend suggests she should reward her dog a treat with part of the money.");
-		ArrayList<Choice> choices6 = new ArrayList<Choice>();
-		choices6.add(new Choice(7, 1, "Continue"));
-		storyFragment6.setChoices(choices6);
-		storyFragmentList.add(storyFragment6);
-
-		// Story Fragment 7
-		StoryFragment storyFragment7 = new StoryFragment(7);
-		storyFragment7
-			.setStoryText("Amara heads to the store and buys her dog a big juicy bone. After which, they head home for a nap. THE END");
-		storyFragmentList.add(storyFragment7);
-
-		// Story Fragment 8
-		StoryFragment storyFragment8 = new StoryFragment(8);
-		storyFragment8
-			.setStoryText("Amara steps towards the cave, as a little boy crawls out of it.");
-		ArrayList<Choice> choices8 = new ArrayList<Choice>();
-		choices8.add(new Choice(4, 1, "Continue"));
-		storyFragment8.setChoices(choices8);
-		storyFragmentList.add(storyFragment8);
-
-		// Story Fragment 9
-		StoryFragment storyFragment9 = new StoryFragment(9);
-		storyFragment9
-			.setStoryText("Amara walks past the cave in a hurry. She notices the clouds have formed into rain clouds and decides it�s time to head home. THE END");
-		storyFragmentList.add(storyFragment9);
-
-		// Story Fragment 10
-		StoryFragment storyFragment10 = new StoryFragment(10);
-		storyFragment10
-			.setStoryText("The boy says he knows his phone number and his mom is home but has no way to call her. Amara pulls out her cell and dials the number. She explains she found the boy and where she is.");
-		ArrayList<Choice> choices9 = new ArrayList<Choice>();
-		choices9.add(new Choice(12, 1, "Continue"));
-		storyFragment10.setChoices(choices9);
-		storyFragmentList.add(storyFragment10);
-
-		// Story Fragment 11
-		StoryFragment storyFragment11 = new StoryFragment(11);
-		storyFragment11
-			.setStoryText("As Amara and the boy stand there, they hear a voice calling the name Timothy. The boy stops his crying and starts yelling Momma. The boy�s mother comes rushing up and is relieved to find her missing son. You decide you have enough excitement for one walk and turn to head home for a nap. THE END");
-		storyFragmentList.add(storyFragment11);
-
-		// Story Fragment 12
-		StoryFragment storyFragment12 = new StoryFragment(12);
-		storyFragment12
-			.setStoryText("The boy�s mother arrives shortly and is relieved to find her son. As a reward for finding her son, she invites to take you out for ice cream with them. You decide to abandon your walk and take her offer up. THE END");
-		storyFragmentList.add(storyFragment12);
-
-		sampleStory.setStoryFragments(storyFragmentList);
-		return sampleStory;
-	    }
-		
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
@@ -158,41 +37,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		lv = (ListView) findViewById(android.R.id.list);
 		
 		fHelper = new FileHelper(this, 0);
-		/*		try {
-		    fillData(fHelper.getOfflineStories(), onCreate);
-		} catch (FileNotFoundException e2) {
-		    // TODO Auto-generated catch block
-		    e2.printStackTrace();
-		} catch (IOException e2) {
-		    // TODO Auto-generated catch block
-		    e2.printStackTrace();
-		}
-*/
-		/*// sFull is a sample story TESTING
-		try {
-		        Story  sFull= initializeSampleStory();
-			//Story s1 = new Story(1, "From Hell", "Alan Moore");		
-			//Story s2 = new Story(2, "Voice of Fiew", "Alan Moore");
-			//Story s3 = new Story(3, "V for Vendetta", "Alan Moore");
-			//Story s4 = new Story(4, "1984", "George Owell");
-			//Story s5 = new Story(5, "The art of computer programming", "Donald Knuth");
-			//Story s6 = new Story(6, "Alice in Wonderland", "Lewis Carroll");
-			//Story s7 = new Story(7, "Hamlet", "William Shakespeare");
-			//Story s8 = new Story(8, "A midsummer night's dream", "William Shakespeare");
-			//Story s9 = new Story(9, "The Fall of the House of Usher", "Edgar Allan Poe");
-			//Story s10 = new Story(10, "The Masque of the Red Death", "Edgar Allan Poe");
-			//Story[] slist = {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10};
-		        Story[] slist = {sFull};
-			for(Story s: slist){
-				fHelper.addOfflineStory(s);				
-			}
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+		
 		header = getLayoutInflater().inflate(R.layout.header_search, null);
 		
 		try {			
@@ -244,39 +89,26 @@ public class OfflineStoriesActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);    
         // following 4 lines will display the information on selected item.
         
-
-        //Story selectedValue = (Story) lv.getAdapter().getItem(position);
+        // Get the selected story object
         currentStory = (Story) lv.getAdapter().getItem(position);
-        	//System.out.println("SELECTED STORYYYYY");
-		//System.out.println(currentStory.getTitle());
-		//System.out.println(currentStory.getAuthor());
-		//System.out.println(currentStory.getOfflineStoryId());
-
-        
-        // TODO: read the story - initialize currentStory to story object
-        
-		// just to test:
-		//currentStory = initializeSampleStory();
-		
-     // create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
+        	
+        //create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
         Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
     
         // send the story object through the intent
         firstStoryFragment.putExtra("story", currentStory);
-        
-       
-        // send the first story fragment id through the intent
+         
         int nextStoryFragmentId = currentStory.getFirstStoryFragment();
         
-
+        // send the first story fragment id through the intent
         firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
    
+        // start the StoryFragmentActivity to display the first fragment of the selected story
         startActivity(firstStoryFragment);
    
    
     }
 
-	
 	
 	public void fillData(ArrayList<Story> sList, boolean update){		
 		if(!update){
