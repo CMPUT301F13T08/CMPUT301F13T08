@@ -12,6 +12,15 @@ public class Annotation implements Serializable{
 	private String text;
 	private int storyFragmentID;
 	private byte[] photo;
+	private String encodedAnnotation;
+
+	public String getEncodedAnnotation() {
+	    return encodedAnnotation;
+	}
+
+	public void setEncodedAnnotation(String encodedAnnotation) {
+	    this.encodedAnnotation = encodedAnnotation;
+	}
 
 	public Annotation() {
 

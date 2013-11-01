@@ -12,6 +12,15 @@ public class Photo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int photoID;
 	private byte[] picture;
+	private String encodedPicture;
+
+	public String getEncodedPicture() {
+	    return encodedPicture;
+	}
+
+	public void setEncodedPicture(String encodedPicture) {
+	    this.encodedPicture = encodedPicture;
+	}
 
 	public Photo() {
 
