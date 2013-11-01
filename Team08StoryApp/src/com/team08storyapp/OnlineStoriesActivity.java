@@ -60,7 +60,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    @Override
 	    public void onClick(View v) {
 		searchText = et.getText().toString();
-		if (searchText != null && searchText != "") {
+		if (searchText != null && !searchText.isEmpty()) {
 		    fillData(esHelper.searchOnlineStories(searchText), onUpdate);
 		} else {
 		    fillData(esHelper.getOnlineStories(), onUpdate);
