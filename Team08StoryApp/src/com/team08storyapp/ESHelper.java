@@ -23,7 +23,22 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * @author Michele's Netbook
+ * ESHelper is a helper class that helps the application communicate with a webservice. The 
+ * webservice is may allow posting, listing, deleting and searching stories. 
+ * <p>
+ * For the purpose of this application, this class allows the following communications with 
+ * the webservice:
+ * <ul>
+ * <li>Adding a local story to the webservice.
+ * <li>Getting a specific story stored on the webservice using a provided ID.
+ * <li>Getting all stories stored from the webservice.
+ * <li>Updating a specific story stored on the webservice using a provided ID.
+ * <li>Searching the webservice for all stories that contain a provided text string within either it's author and/or title.
+ * </ul>
+ * 
+ * @author Michele Paulichuk
+ * @version 1.0 November 8, 2013 
+ * @since 1.0
  * 
  */
 public class ESHelper {
