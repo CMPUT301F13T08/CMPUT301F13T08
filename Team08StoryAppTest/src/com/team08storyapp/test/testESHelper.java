@@ -13,8 +13,6 @@ public class testESHelper extends TestCase {
 
     private ESHelper esHelper;
 
-    private static final String TAG = "ESHelper";
-
     public testESHelper(String name) {
 	super(name);
     }
@@ -28,7 +26,6 @@ public class testESHelper extends TestCase {
 	sampleStory.setOnlineStoryId(1);
 
 	ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
-	ArrayList<Choice> choices = new ArrayList<Choice>();
 
 	// Story Fragment 1
 	sampleStory.setFirstStoryFragment(1);
@@ -243,17 +240,25 @@ public class testESHelper extends TestCase {
     /*
      * Test Case for Use Case 1
      * 
-     * The testGetStory method tests retrieving a story from the server with a
-     * given story id. A story object should be returned. The object should not
-     * be null, should contain the same story id as given, and should contain
-     * the author, title and story fragments.
+     * The testGetOnlineStory method tests retrieving a story to the webservice
+     * via ESHelper's getOnlineStory method.
+     * 
+     * The test retrieves a specific story from the webservice via a
+     * specifically selected online story id. The test is predetermined for that
+     * story and thus knows how many fragments that story should currently have.
+     * So the test test that indeed that specific story is retrieved
+     * successfully by checking the id, that the author and title are not null,
+     * and it contains the correct number of fragments.
      */
     public void testGetOnlineStory() {
+	// set the predetermined story and it's known number of story fragments
 	int storyId = 1;
 	int storyFragmentListSize = 12;
 
+	// retrieve story from the webservice from the specified id
 	Story story = esHelper.getOnlineStory(storyId);
 
+	// test that the retrieved story is indeed retrieved and correct
 	assertTrue(!story.equals(null));
 	assertTrue(story.getOnlineStoryId() == storyId);
 	assertTrue(!story.getAuthor().equals(null)
@@ -264,28 +269,46 @@ public class testESHelper extends TestCase {
     /*
      * Test Case for Use Case 2 & 16
      * 
-     * The testGetStories method tests retrieval of all the stories stored on
-     * the server. The server will contain at least one story for this test. The
-     * list returned from the method call esHelper.getStories should be the same
-     * size as the one on the server.
+     * The testGetOnlineStories method tests retrieving all stories on the
+     * webservice via ESHelper's getOnlineStories method.
+     * 
+     * The test retrieves all stories from the webservice. Before the test we
+     * should know how many stories are stored on the webservice. Once the
+     * method to retrieve the stories is called, the returned list's size is
+     * compared to the predetermined size. If the sizes are equally than it is
+     * successfully retrieving all stories online.
      */
     public void testGetOnlineStories() {
+	// set to the known count of the stories on the webservice currently
 	int storyListSize = 1;
+
+	// retrieve the stories and compare the list size to the known size
 	assertTrue(esHelper.getOnlineStories().size() == storyListSize);
     }
 
     /*
      * Test Case for Use Case 4
      * 
-     * The testSearchForStory method tests the search functionality of the
-     * stories on the server. Given a string to search the method call
-     * esHelper.searchForStory should return a list of the size we are expecting
-     * for the given search text.
+     * The testSearchOnlineStories method tests retrieving all stories on the
+     * webservice via ESHelper's searchOnlineStories method.
+     * 
+     * The test retrieves a specific list of stories from the webservice based
+     * on a predetermined search. The search is predetermined and thus it is
+     * known how many of the stories currently online should contain the search
+     * text. When the search is performed a check is done to test that the
+     * number of stories returned is the same as expected.
      */
     public void testSearchOnlineStories() {
+	// set the searchText to the predetermined text to search the webservice
+	// stories author and titles for
 	String searchText = "walk";
+
+	// set the searchListSize to the known size of the list the search
+	// should return
 	int searchListSize = 1;
 
+	// retrieve the story's from the search and compare the size of the list
+	// to the known size
 	assertTrue(esHelper.searchOnlineStories(searchText).size() == searchListSize);
     }
 }
