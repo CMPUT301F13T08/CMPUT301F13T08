@@ -11,19 +11,19 @@ public class Annotation implements Serializable{
 	private int annotationID;
 	private String text;
 	private int storyFragmentID;
-	private Photo photo;
+	private byte[] photo;
 
 	public Annotation() {
 
 	}
 
-	public Annotation(int storyFragmentID, Photo photo, String text) {
+	public Annotation(int storyFragmentID, byte[] photo, String text) {
 		this.storyFragmentID = storyFragmentID;
 		this.photo = photo;
 		this.text = text;
 	}
 
-	public Annotation(int annotationID, int storyFragmentID, Photo photo,
+	public Annotation(int annotationID, int storyFragmentID, byte[] photo,
 			String text) {
 		super();
 		this.annotationID = annotationID;
@@ -56,11 +56,11 @@ public class Annotation implements Serializable{
 		return storyFragmentID;
 	}
 
-	public void setPhoto(Photo photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
-	public Photo getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 

@@ -11,7 +11,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
 import android.content.Context;
+import android.util.Base64;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -61,9 +64,10 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
-	    String fileName = prefix + Integer.toString(story.getOfflineStoryId()); 
+	    String fileName = prefix
+		    + Integer.toString(story.getOfflineStoryId());
 	    // translate the story context to Json
-	    String context = gson.toJson(story); 
+	    String context = gson.toJson(story);
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,
 		    Context.MODE_PRIVATE);
 	    ops.write(context.getBytes());
@@ -90,7 +94,8 @@ public class FileHelper {
     public boolean updateOfflineStory(Story story)
 	    throws FileNotFoundException, IOException {
 	try {
-	    String fileName = prefix + Integer.toString(story.getOfflineStoryId());
+	    String fileName = prefix
+		    + Integer.toString(story.getOfflineStoryId());
 	    fileContext.deleteFile(fileName); // delete original file
 	    addOfflineStory(story); // add new file
 	    return true;
@@ -158,7 +163,7 @@ public class FileHelper {
 	for (int i = 0; i < fileList.length; i++) {
 	    System.out.println(fileList[i].getName());
 	    if (fileList[i].getName().startsWith(prefix)) {
-		System.out.println("add "+fileList[i].getName());
+		System.out.println("add " + fileList[i].getName());
 		prefixFileList.add(fileList[i]);
 	    }
 	}
@@ -224,4 +229,43 @@ public class FileHelper {
 	return null;
     }
 
+    public Story encodeStory(Story s) {
+	//OnlineStory onlineStory = new OnlineStory(s.getOfflineStoryId());
+	
+	// get all fragments
+	ArrayList<StoryFragment> sfList = s.getStoryFragments();
+
+	// for each fragment, get its photoList and encode each of them with
+	// base64.
+	for (int i = 0; i < sfList.size(); i++) {
+
+	    ArrayList<Annotation> aList = sfList.get(i).getAnnotations();
+	    ArrayList<String> encodedAList = new ArrayList<String>();
+	    for (int j = 0; j < aList.size(); j++) {
+		encodedAList.add(Base64.encodeToString(aList.get(i).getPhoto(),
+			Base64.DEFAULT));
+	    }
+
+	    ArrayList<Photo> pList = sfList.get(i).getPhotos();
+	    ArrayList<String> encodedPList = new ArrayList<String>();
+	    for (int m = 0; m < pList.size(); m++) {
+		encodedPList.add(Base64.encodeToString(pList.get(i)
+			.getPicture(), Base64.DEFAULT));
+	    }
+
+	    sfList.get(i).setEncodedAnnotations(encodedAList);
+	    sfList.get(i).setEncodedPhotos(encodedPList);
+	}
+	return s;
+
+    }
+    
+    public Story decodeStory(Story story){
+	// get a story
+	// get a list of fragments;
+	// for each fragment's photoList and annotationList
+	// and decode each of them
+	// put them in a new offline story
+	return story;
+    }
 }
