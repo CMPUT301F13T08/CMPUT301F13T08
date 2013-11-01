@@ -152,13 +152,14 @@ public class MyStoriesActivity extends ListActivity {
 	case PUBLISH_ID:
 	    // TODO: call esHelper to publish
 	    try{
-		if(currentStory.getOnlineStoryId() > 0){
-		    esHelper.updateOnlineStory(currentStory);
+		Story encodedStory = fHelper.encodeStory(currentStory);
+		if(currentStory.getOnlineStoryId() > 0){		    
+		    esHelper.updateOnlineStory(encodedStory);
 		    Toast.makeText(getApplicationContext(),
 				"Your Story is Successfully Published",
 				Toast.LENGTH_LONG).show();
 		}else{
-		    currentStory.setOnlineStoryId(esHelper.addOnlineStory(currentStory));
+		    currentStory.setOnlineStoryId(esHelper.addOnlineStory(encodedStory));
 		    Toast.makeText(getApplicationContext(),
 				"Your Story is Successfully Published",
 				Toast.LENGTH_LONG).show();

@@ -101,7 +101,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	    fHelper = new FileHelper(this, 0);
 	    try {
 		// Save the story to file, via FileHelper if the download option selected
-		fHelper.addOfflineStory(currentStory);
+		Story decodedStory = fHelper.decodeStory(currentStory);
+		fHelper.addOfflineStory(decodedStory);
 	    } catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
