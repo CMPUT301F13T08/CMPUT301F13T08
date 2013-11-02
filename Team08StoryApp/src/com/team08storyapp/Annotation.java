@@ -11,7 +11,7 @@ public class Annotation implements Serializable{
 	private int annotationID;
 	private String text;
 	private int storyFragmentID;
-	private byte[] photo;
+	private String photo;
 	private String encodedAnnotation;
 
 	public String getEncodedAnnotation() {
@@ -26,13 +26,13 @@ public class Annotation implements Serializable{
 
 	}
 
-	public Annotation(int storyFragmentID, byte[] photo, String text) {
+	public Annotation(int storyFragmentID, String photo, String text) {
 		this.storyFragmentID = storyFragmentID;
 		this.photo = photo;
 		this.text = text;
 	}
 
-	public Annotation(int annotationID, int storyFragmentID, byte[] photo,
+	public Annotation(int annotationID, int storyFragmentID, String photo,
 			String text) {
 		super();
 		this.annotationID = annotationID;
@@ -65,11 +65,11 @@ public class Annotation implements Serializable{
 		return storyFragmentID;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 

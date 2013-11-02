@@ -11,7 +11,7 @@ public class Photo implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private int photoID;
-	private byte[] picture;
+	private String pictureName;
 	private String encodedPicture;
 
 	public String getEncodedPicture() {
@@ -26,14 +26,12 @@ public class Photo implements Serializable{
 
 	}
 
-	public Photo(byte[] picture) {
-		this.picture = picture;
+	public String getPictureName() {
+	    return pictureName;
 	}
 
-	public Photo(int photoID, byte[] picture) {
-		super();
-		this.photoID = photoID;
-		this.picture = picture;
+	public void setPictureName(String pictureName) {
+	    this.pictureName = pictureName;
 	}
 
 	public void setPhotoID(int photoID) {
@@ -44,16 +42,8 @@ public class Photo implements Serializable{
 		return photoID;
 	}
 
-	public void setPicture(byte[] picture) {
-		this.picture = picture;
-	}
-
-	public byte[] getPicture() {
-		return picture;
-	}
-
 	@Override
 	public String toString() {
-		return "Photo [photoID=" + photoID + ", picture=" + picture + "]";
+		return "Photo [photoID=" + photoID + ", picture=" + pictureName + "]";
 	}
 }

@@ -1,24 +1,35 @@
 package com.team08storyapp;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 //variable for selection intent
 //variable to store the currently selected image
 //adapter for gallery view
@@ -30,10 +41,10 @@ import android.widget.TextView;
  */
 public class StoryFragmentActivity extends Activity {
 
-    private Story currentStory;
     private int currentStoryFragmentId;
-    private StoryFragment currentStoryFragment;
+    private int currentStoryId;
     private int currentPic = 0;
+
     private PicAdapter imgAdapt;
     private Gallery picGallery;
     private ListView lv;
@@ -41,10 +52,17 @@ public class StoryFragmentActivity extends Activity {
     private View headerGallery;
     private ImageView picView;
 
+    private Story currentStory;
+    private StoryFragment currentStoryFragment;
+    private FileHelper fHelper;
+
+    private final int PICKER = 1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
 	super.onCreate(savedInstanceState);
+	fHelper = new FileHelper(this, 0);
 	// set up background layout
 
 	setContentView(R.layout.activity_story_list);
@@ -64,13 +82,6 @@ public class StoryFragmentActivity extends Activity {
 	    }
 	});
 	textSection.setMovementMethod(new ScrollingMovementMethod());
-	textSection
-		.setText("One hundred and ninety-one floors up, you look over the edge of the roof and the street "
-			+ "below is mottled with a shag carpet of people, standing, looking up. The breaking glass is a window "
-			+ "right below us. A window blows out the side of the building, and then comes a file cabinet big as a "
-			+ "black refrigerator, right below us a six-drawer filing cabinet drops right out of the cliff "
-			+ "face of the building, and drops turning slowly, and drops getting smaller, and drops disappearing "
-			+ "into the packed crowd. ");
 
 	// set up gallery header
 	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
@@ -80,11 +91,6 @@ public class StoryFragmentActivity extends Activity {
 
 	// get the gallery view
 	picGallery = (Gallery) headerGallery.findViewById(R.id.gallery);
-
-	// create a new adapter
-	imgAdapt = new PicAdapter(this);
-	// set the gallery adapter
-	picGallery.setAdapter(imgAdapt);
 
 	// set the click listener for each item in the thumbnail gallery
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
@@ -97,48 +103,78 @@ public class StoryFragmentActivity extends Activity {
 	    }
 	});
 
-	picGallery.setAdapter(imgAdapt);
+	picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
+	    // handle long clicks
+	    public boolean onItemLongClick(AdapterView<?> parent, View v,
+		    int position, long id) {
+		// update the currently selected position so that we assign the
+		// imported bitmap to correct item
+		currentPic = position;
+		// take the user to their chosen image selection app (gallery or
+		// file manager)
+		Intent pickIntent = new Intent();
+		pickIntent.setType("image/*");
+		pickIntent.setAction(Intent.ACTION_GET_CONTENT);
+		// we will handle the returned data in onActivityResult
+		startActivityForResult(
+			Intent.createChooser(pickIntent, "Select Picture"), 1);
+		return true;
+	    }
+	});
 
-	// Get the intent - passed either by Online/OfflineStoriesActivity or by StoryFragmentActivity
+	// Get the intent - passed either by Online/OfflineStoriesActivity or by
+	// StoryFragmentActivity
 
 	Intent storyFragment = getIntent();
 
 	// Get the story object from the intent
-	currentStory = (Story) storyFragment.getSerializableExtra("story"); 
+	currentStory = (Story) storyFragment.getSerializableExtra("story");
 	// Get the story fragment id from the intent - the fragment to display
+	System.out.println(currentStory.toString());
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
+	currentStoryId = currentStory.getOfflineStoryId();
 
-	
-	// The current story fragment object - from the story fragment list, by id
+	// The current story fragment object - from the story fragment list, by
+	// id
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
-	
+
 	// Display the current fragment text
-	textSection.setText(currentStoryFragment.getStoryText()); 
-	
+	textSection.setText(currentStoryFragment.getStoryText());
+
 	// The list of choices from the current fragment
-	ArrayList<Choice> storyFragmentChoices = currentStoryFragment.getChoices();
-	
-	// Populate choices listview with the go to choices from the current fragment
+	ArrayList<Choice> storyFragmentChoices = currentStoryFragment
+		.getChoices();
+
+	// Populate choices listview with the go to choices from the current
+	// fragment
+	ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
+	// create a new adapter
+	imgAdapt = new PicAdapter(this, illustrationList);
+	// set the gallery adapter
+	picGallery.setAdapter(imgAdapt);
+	System.out.print("ADAPTER DONE");
+
 	fillChoice(storyFragmentChoices);
-	
-	
+
 	lv.setOnItemClickListener(new OnItemClickListener() {
 	    // handle clicks
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
-		
-		Intent nextStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);
+
+		Intent nextStoryFragment = new Intent(getApplicationContext(),
+			StoryFragmentActivity.class);
 		nextStoryFragment.putExtra("story", currentStory);
-	        		       	  
-	        Choice nextChoice = (Choice) lv.getAdapter().getItem(position);
-	        int nextStoryFragmentId = nextChoice.getStoryFragmentID();
-	        
-	        nextStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-	   
-	        startActivity(nextStoryFragment);
-		
+
+		Choice nextChoice = (Choice) lv.getAdapter().getItem(position);
+		int nextStoryFragmentId = nextChoice.getStoryFragmentID();
+
+		nextStoryFragment.putExtra("storyFragmentId",
+			nextStoryFragmentId);
+
+		startActivity(nextStoryFragment);
+
 	    }
 	});
 
@@ -167,7 +203,7 @@ public class StoryFragmentActivity extends Activity {
 	Bitmap placeholder;
 
 	// constructor
-	public PicAdapter(Context c) {
+	public PicAdapter(Context c, ArrayList<Photo> photoList) {
 
 	    // instantiate context
 	    galleryContext = c;
@@ -178,9 +214,47 @@ public class StoryFragmentActivity extends Activity {
 	    placeholder = BitmapFactory.decodeResource(getResources(),
 		    R.drawable.ic_launcher);
 
+	    System.out.println(photoList.size());
+
+	    // decode the placeholder image
+	    placeholder = BitmapFactory.decodeResource(getResources(),
+		    R.drawable.ic_launcher);
+
 	    // set placeholder as all thumbnail images in the gallery initially
 	    for (int i = 0; i < imageBitmaps.length; i++)
 		imageBitmaps[i] = placeholder;
+
+	    if (photoList.size() > 0) {
+		File file = getFilesDir();
+		File[] fileList = file.listFiles();
+		ArrayList<File> prefixFileList = new ArrayList<File>();
+		for (int i = 0; i < fileList.length; i++) {
+		    System.out.println(fileList[i].getName());
+		    if (fileList[i].getName().startsWith(
+			    "ImageFragment"
+				    + Integer.toString(currentStoryFragmentId))) {
+			System.out.println("add " + fileList[i].getName());
+			prefixFileList.add(fileList[i]);
+		    }
+		}
+		for (int i = 0; i < Math.min(imageBitmaps.length,
+			photoList.size()); i++) {
+		    String path = prefixFileList.get(i).getAbsolutePath();
+		    // String filePath = path.substring(0,
+		    // path.lastIndexOf(File.separator));
+		    placeholder = BitmapFactory.decodeFile(path);
+		    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		    placeholder
+			    .compress(Bitmap.CompressFormat.PNG, 100, stream);
+		    byte[] bytePicture = stream.toByteArray();
+
+		    System.out.println("ByteArray Done");
+
+		    imageBitmaps[i] = BitmapFactory.decodeByteArray(
+			    bytePicture, 0, bytePicture.length);
+
+		}
+	    }
 
 	    // get the styling attributes - use default Andorid system resources
 	    TypedArray styleAttrs = galleryContext
@@ -190,6 +264,7 @@ public class StoryFragmentActivity extends Activity {
 		    R.styleable.PicGallery_android_galleryItemBackground, 0);
 	    // recycle attributes
 	    styleAttrs.recycle();
+
 	}
 
 	// BaseAdapter methods
@@ -241,6 +316,138 @@ public class StoryFragmentActivity extends Activity {
 	    // return bitmap at posn index
 	    return imageBitmaps[posn];
 	}
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+	if (resultCode == RESULT_OK) {
+	    // check if we are returning from picture selection
+	    if (requestCode == PICKER) {
+
+		// the returned picture URI
+		Uri pickedUri = data.getData();
+
+		// declare the bitmap
+		Bitmap pic = null;
+		// declare the path string
+		String imgPath = "";
+
+		// retrieve the string using media data
+		String[] medData = { MediaStore.Images.Media.DATA };
+		// query the data
+		Cursor picCursor = managedQuery(pickedUri, medData, null, null,
+			null);
+		if (picCursor != null) {
+		    // get the path string
+		    int index = picCursor
+			    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		    picCursor.moveToFirst();
+		    imgPath = picCursor.getString(index);
+		} else
+		    imgPath = pickedUri.getPath();
+
+		// if and else handle both choosing from gallery and from file
+		// manager
+
+		// if we have a new URI attempt to decode the image bitmap
+		if (pickedUri != null) {
+
+		    // set the width and height we want to use as maximum
+		    // display
+		    int targetWidth = 600;
+		    int targetHeight = 400;
+
+		    // sample the incoming image to save on memory resources
+
+		    // create bitmap options to calculate and use sample size
+		    BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+
+		    // first decode image dimensions only - not the image bitmap
+		    // itself
+		    bmpOptions.inJustDecodeBounds = true;
+		    BitmapFactory.decodeFile(imgPath, bmpOptions);
+
+		    // work out what the sample size should be
+
+		    // image width and height before sampling
+		    int currHeight = bmpOptions.outHeight;
+		    int currWidth = bmpOptions.outWidth;
+
+		    // variable to store new sample size
+		    int sampleSize = 1;
+
+		    // calculate the sample size if the existing size is larger
+		    // than target size
+		    if (currHeight > targetHeight || currWidth > targetWidth) {
+			// use either width or height
+			if (currWidth > currHeight)
+			    sampleSize = Math.round((float) currHeight
+				    / (float) targetHeight);
+			else
+			    sampleSize = Math.round((float) currWidth
+				    / (float) targetWidth);
+		    }
+		    // use the new sample size
+		    bmpOptions.inSampleSize = sampleSize;
+
+		    // now decode the bitmap using sample options
+		    bmpOptions.inJustDecodeBounds = false;
+
+		    // get the file as a bitmap
+		    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
+
+		    String fileName = "ImageFragment"
+			    + Integer.toString(currentStoryFragment
+				    .getStoryFragmentId())
+			    + "Photo"
+			    + Integer.toString(currentStoryFragment.getPhotos()
+				    .size() + 1) + ".png";
+
+		    try {
+			FileOutputStream fos = openFileOutput(fileName,
+				Context.MODE_PRIVATE);
+			pic.compress(CompressFormat.PNG, 90, fos);
+		    } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+
+		    Photo add = new Photo();
+		    add.setPhotoID(currentStoryFragment.getPhotos().size() + 1);
+		    add.setPictureName(fileName);
+		    ArrayList<Photo> temp = currentStoryFragment.getPhotos();
+		    temp.add(add);
+		    currentStoryFragment.setPhotos(temp);
+		    currentStory.getStoryFragments().set(
+			    currentStory.getStoryFragments().indexOf(currentStoryFragment), currentStoryFragment);
+		    try {
+			fHelper.updateOfflineStory(currentStory);
+			currentStory = fHelper.getOfflineStory(currentStoryId);
+		    } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+
+		    // pass bitmap to ImageAdapter to add to array
+		    imgAdapt.addPic(pic);
+
+		    // redraw the gallery thumbnails to reflect the new addition
+		    picGallery.setAdapter(imgAdapt);
+
+		    // display the newly selected image at larger size
+		    picView.setImageBitmap(pic);
+		    // scale options
+		    picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		}
+	    }
+
+	    // superclass method
+	    super.onActivityResult(requestCode, resultCode, data);
+	}
+
     }
 
 }
