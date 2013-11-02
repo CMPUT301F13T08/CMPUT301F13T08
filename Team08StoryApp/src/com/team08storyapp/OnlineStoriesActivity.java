@@ -128,7 +128,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	    // story fragment id to the StoryFragmentActivity
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    OnlineStoryFragmentActivity.class);
-
+	    
+	    fHelper = new FileHelper(this, 0);
 	    // send the story object through the intent
 	    try {
 		System.out.println("Decode Story starts");

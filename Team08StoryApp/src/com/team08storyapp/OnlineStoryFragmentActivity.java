@@ -239,7 +239,7 @@ public class OnlineStoryFragmentActivity extends Activity {
 		for (int i = 0; i < fileList.length; i++) {
 		    System.out.println("FIND IMAGE: " + fileList[i].getName());
 		    if (fileList[i].getName().startsWith(
-			    "OnlineImage"+Integer.toString(currentStoryId)+"Fragment"
+			    "Image"+Integer.toString(currentStoryId)+"Fragment"
 				    + Integer.toString(currentStoryFragmentId))) {
 			System.out.println("USE IMAGE: " + fileList[i].getName());
 			prefixFileList.add(fileList[i]);
