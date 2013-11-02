@@ -67,6 +67,37 @@ public class MyStoriesActivity extends ListActivity {
 	    Story s9 = new Story(19, "The Fall of the House of Usher",
 		    "Edgar Allan Poe");
 	    Story s10 = new Story(20, "Annabel Lee", "Edgar Allan Poe");
+	    StoryFragment sf1 = new StoryFragment(1, "	Rorschard finds out the death of Edward Blake, the famous Comedian.\n" +
+	    		"	He inspected the room and want to find out the murderer. But, he needs to inform some of his" +
+	    		"old friends.");
+	    Choice c1 = new Choice(2, 1, "Go to Adrian Veidt, the Ozymandians.");
+	    Choice c2 = new Choice(3, 2, "Go to NiteOwl, his besty back in 60s.");
+	    Choice c3 = new Choice(4, 3, "Go to Dr.Manhattan, who is supposed to know everything and able to foresee everything,");
+	    ArrayList<Choice> cList1 = new ArrayList<Choice>();
+	    cList1.add(c1);
+	    cList1.add(c2);
+	    cList1.add(c3);
+	    sf1.setChoices(cList1);
+	    StoryFragment sf2 = new StoryFragment(2, "	Adrian is shocked by Comedian's death, 'The comedian dead? But why?'\n" +
+	    		"	'You are supposed to be the smartest man in the world. You tell me.'\n" +
+	    		"Adrian gives some other assumptions, the soviets, or a political killing. Rorcharch is not satisfied with " +
+	    		"either of them. So he decides to leave.");
+	    c1 = new Choice(3, 1, "Go to NiteOwl, his besty back in 60s");
+	    ArrayList<Choice> cList2 = new ArrayList<Choice>();
+	    cList2.add(c1);
+	    sf2.setChoices(cList2);
+	    
+	    StoryFragment sf3 = new StoryFragment(3, "	NiteOwl is not home. Please come back later.");
+	    ArrayList<StoryFragment> sflist = new ArrayList<StoryFragment>();
+	    sflist.add(sf1);
+	    sflist.add(sf2);
+	    sflist.add(sf3);
+	    s2.setFirstStoryFragment(1);
+	    s2.setStoryFragments(sflist);
+	    
+	    
+	    
+	    
 	    Story[] slist = { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 };
 	    for (Story s : slist) {
 		fHelper.addOfflineStory(s);
@@ -201,6 +232,60 @@ public class MyStoriesActivity extends ListActivity {
 	    lv.addHeaderView(header);
 	}
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
+    }
+    
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+	super.onListItemClick(l, v, position, id);
+	// following 4 lines will display the information on selected item.
+
+	// Get the selected story object
+	currentStory = (Story) lv.getAdapter().getItem(position);
+
+	// create intent to pass the selected story object and the first story
+	// fragment id to the StoryFragmentActivity
+	Intent firstStoryFragment = new Intent(getApplicationContext(),
+		StoryFragmentActivity.class);
+
+	// send the story object through the intent
+	firstStoryFragment.putExtra("story", currentStory);
+
+	int nextStoryFragmentId = currentStory.getFirstStoryFragment();
+
+	// send the first story fragment id through the intent
+	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+
+	// start the StoryFragmentActivity to display the first fragment of the
+	// selected story
+	startActivity(firstStoryFragment);
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        try {
+	    fillData(fHelper.getOfflineStories(), onUpdate);
+	} catch (FileNotFoundException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+    }
+    
+    protected void onResume() {
+	super.onResume();
+	try {
+	    fillData(fHelper.getOfflineStories(), onUpdate);
+	} catch (FileNotFoundException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	
+	
     }
 
 }

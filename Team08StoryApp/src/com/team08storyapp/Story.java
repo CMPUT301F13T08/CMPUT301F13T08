@@ -33,10 +33,10 @@ public class Story implements Serializable {
 	storyFragments = new ArrayList<StoryFragment>();
     }
 
-    public Story(int onlineStoryId, String title, String author,
+    public Story(int offlineStoryId, String title, String author,
 	    ArrayList<StoryFragment> storyFragments, int firstStoryFragmentId) {
 	super();
-	this.onlineStoryId = onlineStoryId;
+	this.offlineStoryId = offlineStoryId;
 	this.title = title;
 	this.author = author;
 	storyFragments = new ArrayList<StoryFragment>();
@@ -76,7 +76,7 @@ public class Story implements Serializable {
 
     @Override
     public String toString() {
-	return "Story [storyId=" + onlineStoryId + ", title=" + title + ", author="
+	return "Story [storyId=" + offlineStoryId + ", title=" + title + ", author="
 		+ author + ", storyFragments=" + storyFragments
 		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
     }

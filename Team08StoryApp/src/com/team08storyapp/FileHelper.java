@@ -34,6 +34,8 @@ public class FileHelper {
     private Gson gson = new Gson();
     private static final int Download = 0;
     private static final int My = 1;
+    private static final int Read = 0;
+    private static final int Save = 1;
     private String prefix;
 
     /*
@@ -76,7 +78,7 @@ public class FileHelper {
 		    Context.MODE_PRIVATE);
 	    ops.write(context.getBytes());
 	    ops.close();
-	    System.out.println(fileName);
+	    System.out.println("addOfflineStory: Adding "+fileName);
 	    return true;
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -167,9 +169,9 @@ public class FileHelper {
 
 	ArrayList<File> prefixFileList = new ArrayList<File>();
 	for (int i = 0; i < fileList.length; i++) {
-	    System.out.println(fileList[i].getName());
+	    System.out.println("GetAllFiles: "+fileList[i].getName());
 	    if (fileList[i].getName().startsWith(prefix)) {
-		System.out.println("add " + fileList[i].getName());
+		System.out.println("AddSelectedFile: " + fileList[i].getName());
 		prefixFileList.add(fileList[i]);
 	    }
 	}
@@ -236,11 +238,10 @@ public class FileHelper {
     }
 
     public Story encodeStory(Story s) throws IOException {
-	// OnlineStory onlineStory = new OnlineStory(s.getOfflineStoryId());
 
 	// get all fragments
 	ArrayList<StoryFragment> sfList = s.getStoryFragments();
-
+	// get all online 
 	// for each fragment, get it's photolist and annotation list
 
 	for (int i = 0; i < sfList.size(); i++) {
@@ -289,8 +290,21 @@ public class FileHelper {
 
     }
 
-    public Story decodeStory(Story story) {
+    public Story decodeStory(Story story, int mode) throws Exception, IOException {
 	// get a story
+	int storyId;
+	if(mode == Read){
+	    storyId = story.getOnlineStoryId();
+	}else{
+	    if(story.getOfflineStoryId()<1){
+		storyId = getOfflineStories().size()+1;
+		story.setOfflineStoryId(storyId);
+	    }else{
+		storyId = story.getOfflineStoryId();
+	    }
+	}
+	
+	
 	ArrayList<StoryFragment> sfList = story.getStoryFragments();
 
 	for (int i = 0; i < sfList.size(); i++) {
@@ -305,14 +319,25 @@ public class FileHelper {
 		// and save spaces.
 		photos.get(m).setEncodedPicture(null);
 
-		String fileName;
+		String fileName = "";
+		
 		if (photos.get(m).getPictureName().isEmpty()) {
-		    fileName = "ImageFragment" + Integer.toString(i + 1)
-			    + "Photo" + Integer.toString(m + 1) + ".png";
-		} else {
+		    if(mode == Save){
+		    fileName = "OfflineImage"+Integer.toString(storyId)+"Fragment"
+			    + Integer.toString(sfList.get(i).getStoryFragmentId())
+			    + "Photo"
+			    + Integer.toString(m + 1) + ".png";}
+		    else if (mode == Read){
+			fileName = "OnlineImage"+Integer.toString(storyId)+"Fragment"
+				    + Integer.toString(sfList.get(i).getStoryFragmentId())
+				    + "Photo"
+				    + Integer.toString(m + 1) + ".png";
+		    }
+		    
+		}else {
 		    fileName = photos.get(m).getPictureName();
 		}
-
+		System.out.println("Decode Image File Name: " + fileName);
 		try {
 		    FileOutputStream fos = fileContext.openFileOutput(fileName,
 			    Context.MODE_PRIVATE);

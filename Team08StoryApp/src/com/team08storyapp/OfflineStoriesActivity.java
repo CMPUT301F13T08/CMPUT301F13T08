@@ -41,6 +41,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
 
 	Story s1 = new Story(1, "Fight Club", "Chuck Palahniuk");
+	s1.setOfflineStoryId(1);
 	StoryFragment sf1 = new StoryFragment(
 		1,
 		"You left the airport without your suitcase. And returned home to"

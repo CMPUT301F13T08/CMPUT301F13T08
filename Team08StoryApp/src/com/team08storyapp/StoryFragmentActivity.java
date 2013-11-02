@@ -42,6 +42,7 @@ import android.widget.Toast;
 public class StoryFragmentActivity extends Activity {
 
     private int currentStoryFragmentId;
+    private int currentStoryFragmentIndex;
     private int currentStoryId;
     private int currentPic = 0;
 
@@ -134,6 +135,13 @@ public class StoryFragmentActivity extends Activity {
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 	currentStoryId = currentStory.getOfflineStoryId();
+	
+	for( int i = 0; i < currentStory.getStoryFragments().size();i++){
+	    if(currentStory.getStoryFragments().get(i).getStoryFragmentId() == currentStoryFragmentId){
+		currentStoryFragmentIndex = i;
+	    }
+	}
+	System.out.println("storyFragment index: "  + currentStoryFragmentIndex);
 
 	// The current story fragment object - from the story fragment list, by
 	// id
@@ -154,7 +162,7 @@ public class StoryFragmentActivity extends Activity {
 	imgAdapt = new PicAdapter(this, illustrationList);
 	// set the gallery adapter
 	picGallery.setAdapter(imgAdapt);
-	System.out.print("ADAPTER DONE");
+	System.out.print("******ADAPTER DONE*******");
 
 	fillChoice(storyFragmentChoices);
 
@@ -229,11 +237,11 @@ public class StoryFragmentActivity extends Activity {
 		File[] fileList = file.listFiles();
 		ArrayList<File> prefixFileList = new ArrayList<File>();
 		for (int i = 0; i < fileList.length; i++) {
-		    System.out.println(fileList[i].getName());
+		    System.out.println("FIND IMAGE: " + fileList[i].getName());
 		    if (fileList[i].getName().startsWith(
-			    "ImageFragment"
+			    "OfflineImage"+Integer.toString(currentStoryId)+"Fragment"
 				    + Integer.toString(currentStoryFragmentId))) {
-			System.out.println("add " + fileList[i].getName());
+			System.out.println("USE IMAGE: " + fileList[i].getName());
 			prefixFileList.add(fileList[i]);
 		    }
 		}
@@ -248,7 +256,7 @@ public class StoryFragmentActivity extends Activity {
 			    .compress(Bitmap.CompressFormat.PNG, 100, stream);
 		    byte[] bytePicture = stream.toByteArray();
 
-		    System.out.println("ByteArray Done");
+		    System.out.println("*****ByteArray Done******");
 
 		    imageBitmaps[i] = BitmapFactory.decodeByteArray(
 			    bytePicture, 0, bytePicture.length);
@@ -354,8 +362,8 @@ public class StoryFragmentActivity extends Activity {
 
 		    // set the width and height we want to use as maximum
 		    // display
-		    int targetWidth = 600;
-		    int targetHeight = 400;
+		    int targetWidth = 300;
+		    int targetHeight = 250;
 
 		    // sample the incoming image to save on memory resources
 
@@ -396,12 +404,13 @@ public class StoryFragmentActivity extends Activity {
 		    // get the file as a bitmap
 		    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
 
-		    String fileName = "ImageFragment"
+		    String fileName = "OfflineImage"+Integer.toString(currentStoryId)+"Fragment"
 			    + Integer.toString(currentStoryFragment
 				    .getStoryFragmentId())
 			    + "Photo"
 			    + Integer.toString(currentStoryFragment.getPhotos()
 				    .size() + 1) + ".png";
+		    System.out.println("New image: "+fileName);
 
 		    try {
 			FileOutputStream fos = openFileOutput(fileName,
@@ -411,18 +420,24 @@ public class StoryFragmentActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		    }
-
+		    System.out.println(currentStoryFragment.toString());
+		    System.out.println(currentStory.getStoryFragments().toString());
+		    System.out.println("TEST ID "+currentStoryFragmentIndex);
 		    Photo add = new Photo();
 		    add.setPhotoID(currentStoryFragment.getPhotos().size() + 1);
 		    add.setPictureName(fileName);
 		    ArrayList<Photo> temp = currentStoryFragment.getPhotos();
 		    temp.add(add);
+		    System.out.println("PHOTO MAKE DONE");
 		    currentStoryFragment.setPhotos(temp);
 		    currentStory.getStoryFragments().set(
-			    currentStory.getStoryFragments().indexOf(currentStoryFragment), currentStoryFragment);
+			    currentStoryFragmentIndex, currentStoryFragment);
+		    System.out.println("SWAP FRAGMENT DONE");
 		    try {
 			fHelper.updateOfflineStory(currentStory);
+			System.out.println("Test currentStoryId:" + currentStoryId);
 			currentStory = fHelper.getOfflineStory(currentStoryId);
+			System.out.println("================================================CLEAR==================================");
 		    } catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

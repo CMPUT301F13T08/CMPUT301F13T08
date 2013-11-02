@@ -52,6 +52,10 @@
             android:name="com.team08storyapp.MyStoriesActivity"
             android:label="@string/title_activity_my_stories" >
         </activity>
+        <activity
+            android:name="com.team08storyapp.OnlineStoryFragmentActivity"
+            android:label="@string/title_activity_online_story_fragment" >
+        </activity>
     </application>
 
 </manifest>

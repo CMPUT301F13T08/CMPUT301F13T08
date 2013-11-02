@@ -22,5 +22,6 @@
     <string name="camera_des">Image Vary</string>
     <string name="get_photo">get photo</string>
     <string name="title_activity_my_stories">MyStoriesActivity</string>
+    <string name="title_activity_online_story_fragment">OnlineStoryFragmentActivity</string>
 
 </resources>

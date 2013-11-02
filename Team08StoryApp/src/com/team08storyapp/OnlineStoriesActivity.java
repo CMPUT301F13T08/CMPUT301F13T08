@@ -99,10 +99,19 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    fHelper = new FileHelper(this, 0);
 	    try {
+		currentStory = fHelper.decodeStory(currentStory, 1);
+	    } catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	    } catch (Exception e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	    }
+	    try {
 		// Save the story to file, via FileHelper if the download option
 		// selected
-		Story decodedStory = fHelper.decodeStory(currentStory);
-		fHelper.addOfflineStory(decodedStory);
+		System.out.println(currentStory.toString());
+		fHelper.addOfflineStory(currentStory);
 	    } catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -118,9 +127,20 @@ public class OnlineStoriesActivity extends ListActivity {
 	    // create intent to pass the selected story object and the first
 	    // story fragment id to the StoryFragmentActivity
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
-		    StoryFragmentActivity.class);
+		    OnlineStoryFragmentActivity.class);
 
 	    // send the story object through the intent
+	    try {
+		System.out.println("Decode Story starts");
+		currentStory = fHelper.decodeStory(currentStory, 0);
+		System.out.println(currentStory.toString());
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
 	    firstStoryFragment.putExtra("story", currentStory);
 
 	    int nextStoryFragmentId = currentStory.getFirstStoryFragment();
@@ -151,9 +171,4 @@ public class OnlineStoriesActivity extends ListActivity {
 	fillData(esHelper.getOnlineStories(), onUpdate);
     }
 
-    protected void onResume() {
-	super.onResume();
-	fillData(esHelper.getOnlineStories(), onUpdate);
-
-    }
 }
