@@ -1,7 +1,12 @@
 package com.team08storyapp;
 
+import java.io.InputStream;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.Toast;
@@ -10,12 +15,19 @@ import android.widget.Toast;
 public class PhotoController extends Activity {
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	private static final int SELECT_PHOTO = 200;
 	Uri imageFileUri;
 	
 	public void takePhoto(){
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	}
+	
+	public void uploadPhoto() {
+		Intent photoPickIntent = new Intent(Intent.ACTION_PICK);
+		photoPickIntent.setType("image/*");
+		startActivityForResult(photoPickIntent, SELECT_PHOTO);
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -30,6 +42,24 @@ public class PhotoController extends Activity {
 	            // Image capture failed, advise user
 	        }
 	    }
+	    if (requestCode == SELECT_PHOTO){
+	            Uri selectedImage = data.getData();
+	            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+	            Cursor cursor = getContentResolver().query(
+	                               selectedImage, filePathColumn, null, null, null);
+	            cursor.moveToFirst();
+
+	            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+	            String filePath = cursor.getString(columnIndex);
+	            cursor.close();
+
+
+	            @SuppressWarnings("unused")
+				Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
+	            }
+	        
+	    
 	}
 	
 	/*public void takePhoto(){
@@ -82,9 +112,5 @@ public class PhotoController extends Activity {
 	    return BitmapFactory.decodeFile(path, options);
 	}*/
 
-
-	public void uploadPhoto() {
-		
-	}
-
 }
+
