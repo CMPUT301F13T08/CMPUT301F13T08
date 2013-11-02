@@ -38,11 +38,11 @@ public class OnlineStoriesActivity extends ListActivity {
     private EditText et;
     private ListView lv;
     private Story currentStory;
-  
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	
+
 	setContentView(R.layout.activity_story_list);
 	lv = (ListView) findViewById(android.R.id.list);
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
@@ -50,7 +50,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	et = (EditText) header.findViewById(R.id.searchText);
 
 	esHelper = new ESHelper();
-	
+
 	// Populate listview with the stories curently online
 	// Cache the stories currently online
 	fillData(esHelper.getOnlineStories(), onCreate);
@@ -68,7 +68,6 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    }
 	});
-	
 
 	registerForContextMenu(getListView());
     }
@@ -97,10 +96,11 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	switch (item.getItemId()) {
 	case DOWNLOAD_ID:
-	  
+
 	    fHelper = new FileHelper(this, 0);
 	    try {
-		// Save the story to file, via FileHelper if the download option selected
+		// Save the story to file, via FileHelper if the download option
+		// selected
 		Story decodedStory = fHelper.decodeStory(currentStory);
 		fHelper.addOfflineStory(decodedStory);
 	    } catch (FileNotFoundException e) {
@@ -110,25 +110,27 @@ public class OnlineStoriesActivity extends ListActivity {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
-	    
-	    
+
 	case READ_ID:
 
 	    // create intent to pass the selected story object and the first
 	    // story fragment id to the StoryFragmentActivity
-	    // create intent to pass the selected story object and the first story fragment id to the StoryFragmentActivity
-	        Intent firstStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);		            
-	    
-	        // send the story object through the intent
-	        firstStoryFragment.putExtra("story", currentStory);
-	       
-	        int nextStoryFragmentId = currentStory.getFirstStoryFragment();
-	        
-	        // send the first story fragment id through the intent
-	        firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-	   
-	        // start the StoryFragmentActivity to display the first fragment of the selected story
-	        startActivity(firstStoryFragment);
+	    // create intent to pass the selected story object and the first
+	    // story fragment id to the StoryFragmentActivity
+	    Intent firstStoryFragment = new Intent(getApplicationContext(),
+		    StoryFragmentActivity.class);
+
+	    // send the story object through the intent
+	    firstStoryFragment.putExtra("story", currentStory);
+
+	    int nextStoryFragmentId = currentStory.getFirstStoryFragment();
+
+	    // send the first story fragment id through the intent
+	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+
+	    // start the StoryFragmentActivity to display the first fragment of
+	    // the selected story
+	    startActivity(firstStoryFragment);
 
 	default:
 	    return super.onContextItemSelected(item);
@@ -142,4 +144,16 @@ public class OnlineStoriesActivity extends ListActivity {
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+	    Intent intent) {
+	super.onActivityResult(requestCode, resultCode, intent);
+	fillData(esHelper.getOnlineStories(), onUpdate);
+    }
+
+    protected void onResume() {
+	super.onResume();
+	fillData(esHelper.getOnlineStories(), onUpdate);
+
+    }
 }
