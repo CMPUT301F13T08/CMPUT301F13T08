@@ -55,53 +55,53 @@ public class MyStoriesActivity extends ListActivity {
 	esHelper = new ESHelper();
 
 	try {
-	    Story s1 = new Story(11, "To the End", "Alan Cumming");
-	    Story s2 = new Story(12, "Watchmen", "Alan Moore");
-	    Story s3 = new Story(13, "SlaughterHouse-Five", "");
-	    Story s4 = new Story(14, "Animal Farm", "George Owell");
-	    Story s5 = new Story(15, "The art of computer programming",
-		    "Donald Knuth");
-	    Story s6 = new Story(16, "Software and hardware", "D. Patterson");
-	    Story s7 = new Story(17, "Macbeth", "William Shakespeare");
-	    Story s8 = new Story(18, "King Lear", "William Shakespeare");
-	    Story s9 = new Story(19, "The Fall of the House of Usher",
-		    "Edgar Allan Poe");
-	    Story s10 = new Story(20, "Annabel Lee", "Edgar Allan Poe");
-	    StoryFragment sf1 = new StoryFragment(1, "	Rorschard finds out the death of Edward Blake, the famous Comedian.\n" +
-	    		"	He inspected the room and want to find out the murderer. But, he needs to inform some of his" +
-	    		"old friends.");
-	    Choice c1 = new Choice(2, 1, "Go to Adrian Veidt, the Ozymandians.");
-	    Choice c2 = new Choice(3, 2, "Go to NiteOwl, his besty back in 60s.");
-	    Choice c3 = new Choice(4, 3, "Go to Dr.Manhattan, who is supposed to know everything and able to foresee everything,");
-	    ArrayList<Choice> cList1 = new ArrayList<Choice>();
-	    cList1.add(c1);
-	    cList1.add(c2);
-	    cList1.add(c3);
-	    sf1.setChoices(cList1);
-	    StoryFragment sf2 = new StoryFragment(2, "	Adrian is shocked by Comedian's death, 'The comedian dead? But why?'\n" +
-	    		"	'You are supposed to be the smartest man in the world. You tell me.'\n" +
-	    		"Adrian gives some other assumptions, the soviets, or a political killing. Rorcharch is not satisfied with " +
-	    		"either of them. So he decides to leave.");
-	    c1 = new Choice(3, 1, "Go to NiteOwl, his besty back in 60s");
-	    ArrayList<Choice> cList2 = new ArrayList<Choice>();
-	    cList2.add(c1);
-	    sf2.setChoices(cList2);
+	    Story s1 = new Story(11, "Los Santos", "Alice Wu");
+	    ArrayList<StoryFragment> sfList = new ArrayList<StoryFragment>();
+	    StoryFragment sf1 = new StoryFragment(1, "	This is the city, where sins grow, profits expand, people gets colder," +
+	    		" and Michael" +
+	    		"De Santa, the retired criminal wanted to start his new life. \n    But this comes to an end, when he finds" +
+	    		"out his son, Jimmy, is set up in a credit card fraud by a local dealership. \n    The rage occupies him, leading him" +
+	    		"to teach that manager a 'lesson'" );
+	    ArrayList<Choice> cList = new ArrayList<Choice>();
+	    Choice c1 = new Choice(2, 1, "Use the car Jimmy bought from the dealership to crash into the dealership.");
+	    Choice c2 = new Choice(3, 2, "Wait for someone from dealdership to 'steal' Jimmy's car and scares that someone to crahs into the dealership.");
+	    cList.add(c2);
+	    cList.add(c1);
+	    sf1.setChoices(cList);
+	    sfList.add(sf1);
 	    
-	    StoryFragment sf3 = new StoryFragment(3, "	NiteOwl is not home. Please come back later.");
-	    ArrayList<StoryFragment> sflist = new ArrayList<StoryFragment>();
-	    sflist.add(sf1);
-	    sflist.add(sf2);
-	    sflist.add(sf3);
-	    s2.setFirstStoryFragment(1);
-	    s2.setStoryFragments(sflist);
+	    StoryFragment sf2 = new StoryFragment(2, " Jimmy's Range Rover is drove right through the glass wall, crashing a brand new display Aston Martin DB9 " +
+	    		"into the manager's office.\n" +
+	    		"    The manager is shocked and furious, trying to started a friendly conversation. However the conversation is started by Michael's full fist and ended by " +
+	    		"a hit of a bat.\n    The manager lies on the ground, bleeading and moaning.\n" +
+	    		"    'I hope you'll enjoy your coma.', Michael hits the manager one last time. However he didn't notice there's a young fellow behind him." +
+	    		"    'Hey man, you know, I'm responsible for that 'deal'. You may get me fired for this!', the young, confuse-looking black man said.\n" +
+	    		"    'Why don't you come to work for me?', leaves the young man with his card, Michael walks away." );
+	    cList = new ArrayList<Choice>();
+	    c1 = new Choice(4, 1, "The young man calls Michael right away..");
+	    cList.add(c1);
+	    sf2.setChoices(cList);
+	    sfList.add(sf2);
+	    
+	    StoryFragment sf3 = new StoryFragment(3, "   'Hey young man, keep driving, we are going to do something crazy.',pointing the gun right at the driver's righ temple, " +
+	    		"Michael says and smirks.\n" +
+	    		"    'Easy, easy, may I know what's going on bro?'.\n"+
+	    		"    'Absolutely, drive to the dealership, and then crash it! You got a problem with that?'\n" +
+	    		"    'Not at all, you've got the gun,'");
+	    cList = new ArrayList<Choice>();
+	    c1 = new Choice(2, 1, "The driver follows Michael's instruction and drice right to the dealership.");
+	    cList.add(c1);
+	    sf3.setChoices(cList);
+	    sfList.add(sf3);
+	    
+	    StoryFragment sf4 = new StoryFragment(4, "    'Hey, this is Michael, leave a message I'll call you back, if I want.'" );
+	    sfList.add(sf4);
+	    s1.setFirstStoryFragment(1);
+	    s1.setStoryFragments(sfList);
 	    
 	    
-	    
-	    
-	    Story[] slist = { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10 };
-	    for (Story s : slist) {
-		fHelper.addOfflineStory(s);
-	    }
+	    fHelper.addOfflineStory(s1);
+
 	} catch (FileNotFoundException e1) {
 	    // TODO Auto-generated catch block
 	    e1.printStackTrace();
@@ -233,7 +233,7 @@ public class MyStoriesActivity extends ListActivity {
 	}
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
-    
+
     protected void onListItemClick(ListView l, View v, int position, long id) {
 	super.onListItemClick(l, v, position, id);
 	// following 4 lines will display the information on selected item.
@@ -259,10 +259,12 @@ public class MyStoriesActivity extends ListActivity {
 	startActivity(firstStoryFragment);
 
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        try {
+    protected void onActivityResult(int requestCode, int resultCode,
+	    Intent intent) {
+	super.onActivityResult(requestCode, resultCode, intent);
+	try {
 	    fillData(fHelper.getOfflineStories(), onUpdate);
 	} catch (FileNotFoundException e) {
 	    // TODO Auto-generated catch block
@@ -272,7 +274,7 @@ public class MyStoriesActivity extends ListActivity {
 	    e.printStackTrace();
 	}
     }
-    
+
     protected void onResume() {
 	super.onResume();
 	try {
@@ -284,8 +286,7 @@ public class MyStoriesActivity extends ListActivity {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
-	
-	
+
     }
 
 }
