@@ -156,12 +156,6 @@ public class MyStoriesActivity extends ListActivity {
 	registerForContextMenu(getListView());
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.online_stories, menu);
-	return true;
-    }
 
     public void onCreateContextMenu(ContextMenu menu, View v,
 	    ContextMenuInfo menuInfo) {

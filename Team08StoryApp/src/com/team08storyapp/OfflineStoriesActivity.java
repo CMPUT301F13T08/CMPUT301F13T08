@@ -93,13 +93,6 @@ public class OfflineStoriesActivity extends ListActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.offline_stories, menu);
-	return true;
-    }
-
     protected void onListItemClick(ListView l, View v, int position, long id) {
 	super.onListItemClick(l, v, position, id);
 	// following 4 lines will display the information on selected item.

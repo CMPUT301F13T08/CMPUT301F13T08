@@ -159,7 +159,7 @@ public class MyStoryFragmentActivity extends Activity {
 	// fragment
 	ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
 	// create a new adapter
-	imgAdapt = new PicAdapter(this, illustrationList);
+	imgAdapt = new PicAdapter(this, illustrationList, currentStoryId, currentStoryFragmentId);
 	// set the gallery adapter
 	picGallery.setAdapter(imgAdapt);
 	System.out.print("******ADAPTER DONE*******");
@@ -196,136 +196,7 @@ public class MyStoryFragmentActivity extends Activity {
 	lv.setAdapter(adapter);
 
     }
-
-    public class PicAdapter extends BaseAdapter {
-
-	// use the default gallery background image
-	int defaultItemBackground;
-
-	// gallery context
-	private Context galleryContext;
-
-	// array to store bitmaps to display
-	private Bitmap[] imageBitmaps;
-	// placeholder bitmap for empty spaces in gallery
-	Bitmap placeholder;
-
-	// constructor
-	public PicAdapter(Context c, ArrayList<Photo> photoList) {
-
-	    // instantiate context
-	    galleryContext = c;
-
-	    // create bitmap array
-	    imageBitmaps = new Bitmap[10];
-	    // decode the placeholder image
-	    placeholder = BitmapFactory.decodeResource(getResources(),
-		    R.drawable.ic_launcher);
-
-	    System.out.println(photoList.size());
-
-	    // decode the placeholder image
-	    placeholder = BitmapFactory.decodeResource(getResources(),
-		    R.drawable.ic_launcher);
-
-	    // set placeholder as all thumbnail images in the gallery initially
-	    for (int i = 0; i < imageBitmaps.length; i++)
-		imageBitmaps[i] = placeholder;
-
-	    if (photoList.size() > 0) {
-		File file = getFilesDir();
-		File[] fileList = file.listFiles();
-		ArrayList<File> prefixFileList = new ArrayList<File>();
-		for (int i = 0; i < fileList.length; i++) {
-		    System.out.println("FIND IMAGE: " + fileList[i].getName());
-		    if (fileList[i].getName().startsWith(
-			    "Image"+Integer.toString(currentStoryId)+"Fragment"
-				    + Integer.toString(currentStoryFragmentId))) {
-			System.out.println("USE IMAGE: " + fileList[i].getName());
-			prefixFileList.add(fileList[i]);
-		    }
-		}
-		for (int i = 0; i < Math.min(imageBitmaps.length,
-			photoList.size()); i++) {
-		    String path = prefixFileList.get(i).getAbsolutePath();
-		    // String filePath = path.substring(0,
-		    // path.lastIndexOf(File.separator));
-		    placeholder = BitmapFactory.decodeFile(path);
-		    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		    placeholder
-			    .compress(Bitmap.CompressFormat.PNG, 100, stream);
-		    byte[] bytePicture = stream.toByteArray();
-
-		    System.out.println("*****ByteArray Done******");
-
-		    imageBitmaps[i] = BitmapFactory.decodeByteArray(
-			    bytePicture, 0, bytePicture.length);
-
-		}
-	    }
-
-	    // get the styling attributes - use default Andorid system resources
-	    TypedArray styleAttrs = galleryContext
-		    .obtainStyledAttributes(R.styleable.PicGallery);
-	    // get the background resource
-	    defaultItemBackground = styleAttrs.getResourceId(
-		    R.styleable.PicGallery_android_galleryItemBackground, 0);
-	    // recycle attributes
-	    styleAttrs.recycle();
-
-	}
-
-	// BaseAdapter methods
-
-	// return number of data items i.e. bitmap images
-	public int getCount() {
-	    return imageBitmaps.length;
-	}
-
-	// return item at specified position
-	public Object getItem(int position) {
-	    return position;
-	}
-
-	// return item ID at specified position
-	public long getItemId(int position) {
-	    return position;
-	}
-
-	// get view specifies layout and display options for each thumbnail in
-	// the gallery
-	public View getView(int position, View convertView, ViewGroup parent) {
-
-	    // create the view
-	    ImageView imageView = new ImageView(galleryContext);
-	    // specify the bitmap at this position in the array
-	    imageView.setImageBitmap(imageBitmaps[position]);
-	    // set layout options
-	    imageView.setLayoutParams(new Gallery.LayoutParams(300, 200));
-	    // scale type within view area
-	    imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-	    // set default gallery item background
-	    imageView.setBackgroundResource(defaultItemBackground);
-	    // return the view
-	    return imageView;
-	}
-
-	// custom methods for this app
-
-	// helper method to add a bitmap to the gallery when the user chooses
-	// one
-	public void addPic(Bitmap newPic) {
-	    // set at currently selected index
-	    imageBitmaps[currentPic] = newPic;
-	}
-
-	// return bitmap at specified position for larger display
-	public Bitmap getPic(int posn) {
-	    // return bitmap at posn index
-	    return imageBitmaps[posn];
-	}
-    }
-
+ 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 	if (resultCode == RESULT_OK) {
@@ -447,7 +318,7 @@ public class MyStoryFragmentActivity extends Activity {
 		    }
 
 		    // pass bitmap to ImageAdapter to add to array
-		    imgAdapt.addPic(pic);
+		    imgAdapt.addPic(currentPic, pic);
 
 		    // redraw the gallery thumbnails to reflect the new addition
 		    picGallery.setAdapter(imgAdapt);
