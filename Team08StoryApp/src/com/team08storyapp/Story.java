@@ -76,7 +76,7 @@ public class Story implements Serializable {
 
     @Override
     public String toString() {
-	return "Story [storyId=" + offlineStoryId + ", title=" + title + ", author="
+	return "Story [offlineStoryId=" + offlineStoryId+ "olineStoryId= " + onlineStoryId + "title=" + title + ", author="
 		+ author + ", storyFragments=" + storyFragments
 		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
     }

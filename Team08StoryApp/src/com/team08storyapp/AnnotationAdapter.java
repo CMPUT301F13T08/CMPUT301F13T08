@@ -49,13 +49,12 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	final Annotation anno = annoList.get(position);
 
 	if (anno != null) {
-	    if (!anno.getPhoto().isEmpty()) {
-
+	    if (anno.getPhoto() != null && !anno.getPhoto().isEmpty()) {
 		File file = activity.getFilesDir();
 		File[] fileList = file.listFiles();
 		File annoFile;
 		for (int i = 0; i < fileList.length; i++) {
-		    if (fileList[i].getName() == anno.getPhoto()) {
+		    if (fileList[i].getName().equals(anno.getPhoto())) {
 			annoFile = fileList[i];
 			String path = annoFile.getAbsolutePath();
 			Bitmap placeholder = BitmapFactory.decodeFile(path);
@@ -63,9 +62,6 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 			placeholder.compress(Bitmap.CompressFormat.PNG, 80,
 				stream);
 			byte[] bytePicture = stream.toByteArray();
-
-			System.out.println("*****ByteArray Done******");
-
 			holder.annoImage.setImageBitmap((BitmapFactory
 				.decodeByteArray(bytePicture, 0,
 					bytePicture.length)));
@@ -77,16 +73,11 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 			activity.getResources(), R.drawable.ic_launcher));
 	    }
 
-	    if (!anno.getText().isEmpty()) {
+	    if (anno.getText() != null && !anno.getText().isEmpty()) {
 		holder.annoText.setText(anno.getText());
 	    } else {
-		holder.annoText.setText("");
+		holder.annoText.setText("No Text Annotations.");
 	    }
-	} else {
-	    holder.annoText
-		    .setText("No annotations for current story fragment.");
-	    holder.annoImage.setImageBitmap(BitmapFactory.decodeResource(
-		    activity.getResources(), R.drawable.ic_launcher));
 	}
 
 	return v;

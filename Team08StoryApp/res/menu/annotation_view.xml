@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/add_anno_camera" android:title="From Gallery"></item>
-    <item android:id="@+id/add_anno_gallery" android:title="From Camera"></item>
+    <item android:id="@+id/add_anno_camera" android:title="From Camera"></item>
+    <item android:id="@+id/add_anno_gallery" android:title="From Gallery"></item>
    
 </menu>
