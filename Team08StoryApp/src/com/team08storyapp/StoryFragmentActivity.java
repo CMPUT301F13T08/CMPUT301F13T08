@@ -107,6 +107,7 @@ public class StoryFragmentActivity extends Activity {
 	Intent storyFragment = getIntent();
 
 	// Get the story object from the intent
+	// See source [7]
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
 	// Get the story fragment id from the intent - the fragment to display
 	System.out.println(currentStory.toString());
