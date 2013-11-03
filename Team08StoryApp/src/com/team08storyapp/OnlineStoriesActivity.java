@@ -16,6 +16,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class OnlineStoriesActivity extends ListActivity {
 
@@ -112,6 +113,9 @@ public class OnlineStoriesActivity extends ListActivity {
 		// selected
 		System.out.println(currentStory.toString());
 		fHelper.addOfflineStory(currentStory);
+		Toast.makeText(getApplicationContext(),
+			"Selected Story is Downloaded.", Toast.LENGTH_LONG)
+			.show();
 	    } catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -128,7 +132,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    // story fragment id to the StoryFragmentActivity
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    OnlineStoryFragmentActivity.class);
-	    
+
 	    fHelper = new FileHelper(this, 0);
 	    // send the story object through the intent
 	    try {

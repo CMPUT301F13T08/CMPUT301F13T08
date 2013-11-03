@@ -104,6 +104,7 @@ public class StoryFragmentActivity extends Activity {
 	    }
 	});
 
+	/*
 	picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
 	    // handle long clicks
 	    public boolean onItemLongClick(AdapterView<?> parent, View v,
@@ -122,6 +123,7 @@ public class StoryFragmentActivity extends Activity {
 		return true;
 	    }
 	});
+	*/
 
 	// Get the intent - passed either by Online/OfflineStoriesActivity or by
 	// StoryFragmentActivity
@@ -326,6 +328,7 @@ public class StoryFragmentActivity extends Activity {
 	}
     }
 
+    /*
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 	if (resultCode == RESULT_OK) {
@@ -463,6 +466,6 @@ public class StoryFragmentActivity extends Activity {
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
 
-    }
+    }*/
 
 }

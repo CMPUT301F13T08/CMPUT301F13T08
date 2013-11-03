@@ -244,7 +244,7 @@ public class MyStoriesActivity extends ListActivity {
 	// create intent to pass the selected story object and the first story
 	// fragment id to the StoryFragmentActivity
 	Intent firstStoryFragment = new Intent(getApplicationContext(),
-		StoryFragmentActivity.class);
+		MyStoryFragmentActivity.class);
 
 	// send the story object through the intent
 	firstStoryFragment.putExtra("story", currentStory);

@@ -15,7 +15,7 @@
     <string name="title_activity_story_view">StoryFragmentActivity</string>
     <string name="read_menu">Read</string>
     <string name="download_menu">Download</string>
-    <string name="publish_menu">Publishd</string>
+    <string name="publish_menu">Publish</string>
     <string name="picture">Picture</string>
     <string name="select_intro">Long-press a thumbnail to add an illustration</string>
     <string name="show_intro">Press a thumbnail to display at larger size</string>
@@ -23,5 +23,6 @@
     <string name="get_photo">get photo</string>
     <string name="title_activity_my_stories">MyStoriesActivity</string>
     <string name="title_activity_online_story_fragment">OnlineStoryFragmentActivity</string>
+    <string name="title_activity_my_story_fragment">MyStoryFragmentActivity</string>
 
 </resources>

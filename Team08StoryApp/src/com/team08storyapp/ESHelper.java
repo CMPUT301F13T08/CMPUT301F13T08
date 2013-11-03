@@ -275,14 +275,14 @@ public class ESHelper {
     String getEntityContent(HttpResponse response) throws IOException {
 	BufferedReader br = new BufferedReader(new InputStreamReader(
 		(response.getEntity().getContent())));
-	String output;
+	StringBuilder stringBuilder = new StringBuilder();
 	Log.d(TAG, "Output from Server -> ");
-	String json = "";
+	String output = "";
 	while ((output = br.readLine()) != null) {
 	    Log.d(TAG, output);
-	    json += output;
+	    stringBuilder.append(output);
 	}
-	Log.d(TAG, "JSON:" + json);
-	return json;
+	Log.d(TAG, "JSON:" + stringBuilder.toString());
+	return stringBuilder.toString();
     }
 }
