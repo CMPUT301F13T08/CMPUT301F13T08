@@ -118,6 +118,7 @@ public class OnlineStoriesActivity extends ListActivity {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
+	    return true;
 
 	case READ_ID:
 
@@ -152,6 +153,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    // the selected story
 	    startActivity(firstStoryFragment);
 
+	    return true;
 	default:
 	    return super.onContextItemSelected(item);
 	}
