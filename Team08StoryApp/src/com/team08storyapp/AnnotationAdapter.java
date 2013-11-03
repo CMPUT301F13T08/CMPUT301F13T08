@@ -50,7 +50,7 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 
 	if (anno != null) {
 	    if (!anno.getPhoto().isEmpty()) {
-		
+
 		File file = activity.getFilesDir();
 		File[] fileList = file.listFiles();
 		File annoFile;
@@ -72,16 +72,21 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 			break;
 		    }
 		}
-	    }else{
-		holder.annoImage.setImageBitmap(BitmapFactory.decodeResource(activity.getResources(),
-		    R.drawable.ic_launcher));
+	    } else {
+		holder.annoImage.setImageBitmap(BitmapFactory.decodeResource(
+			activity.getResources(), R.drawable.ic_launcher));
 	    }
-	    
+
 	    if (!anno.getText().isEmpty()) {
 		holder.annoText.setText(anno.getText());
 	    } else {
 		holder.annoText.setText("");
 	    }
+	} else {
+	    holder.annoText
+		    .setText("No annotations for current story fragment.");
+	    holder.annoImage.setImageBitmap(BitmapFactory.decodeResource(
+		    activity.getResources(), R.drawable.ic_launcher));
 	}
 
 	return v;

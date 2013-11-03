@@ -19,7 +19,7 @@ public class AnnotationViewActivity extends Activity {
 	setContentView(R.layout.activity_story_list);
 	// REQUIRE INTENT TO HAVE AN ARRAYLIST OF ANNOTATIONS
 	Intent passedIntent = getIntent();
-	aList = (ArrayList<Annotation>) passedIntent.getSerializableExtra("annotationList");
+	aList = (ArrayList<Annotation>) passedIntent.getSerializableExtra("Annotations");
 	lv = (ListView) findViewById(android.R.id.list);
 	lv.setAdapter(new AnnotationAdapter(this, android.R.id.list, aList));	
     }
