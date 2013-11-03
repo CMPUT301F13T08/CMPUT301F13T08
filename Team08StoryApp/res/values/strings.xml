@@ -24,5 +24,6 @@
     <string name="title_activity_my_stories">MyStoriesActivity</string>
     <string name="title_activity_online_story_fragment">OnlineStoryFragmentActivity</string>
     <string name="title_activity_my_story_fragment">MyStoryFragmentActivity</string>
+    <string name="title_activity_annotation_view">AnnotationViewActivity</string>
 
 </resources>

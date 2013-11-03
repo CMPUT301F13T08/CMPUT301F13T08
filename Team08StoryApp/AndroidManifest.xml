@@ -19,9 +19,9 @@
 
     <application
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.team08storyapp.MainActivity"
@@ -60,6 +60,10 @@
         <activity
             android:name="com.team08storyapp.MyStoryFragmentActivity"
             android:label="@string/title_activity_my_story_fragment" >
+        </activity>
+        <activity
+            android:name="com.team08storyapp.AnnotationViewActivity"
+            android:label="@string/title_activity_annotation_view" >
         </activity>
     </application>
 

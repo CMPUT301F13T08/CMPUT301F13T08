@@ -354,7 +354,9 @@ public class FileHelper {
 
 		String fileName;
 		if (annotations.get(n).getPhoto().isEmpty()) {
-		    fileName = "ImageFragment" + Integer.toString(i + 1)
+		    fileName = "Image"
+				+ Integer.toString(storyId)
+				+ "Fragment" + Integer.toString(i + 1)
 			    + "Annotation" + Integer.toString(n + 1) + ".png";
 		} else {
 		    fileName = annotations.get(n).getPhoto();
