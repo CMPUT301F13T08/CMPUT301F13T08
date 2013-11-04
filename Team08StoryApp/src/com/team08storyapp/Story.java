@@ -148,41 +148,73 @@ public class Story implements Serializable {
     
     public Story(int offlineStoryId, String title, String author,
 	    ArrayList<StoryFragment> storyFragments, int firstStoryFragmentId) {
-	super();
-	this.offlineStoryId = offlineStoryId;
-	this.title = title;
-	this.author = author;
-	storyFragments = new ArrayList<StoryFragment>();
+    	super();
+    	this.offlineStoryId = offlineStoryId;
+    	this.title = title;
+    	this.author = author;
+    	storyFragments = new ArrayList<StoryFragment>();
     }
+    /**
+     * @return onlineStoryId
+     */
 
     public int getOnlineStoryId() {
-	return onlineStoryId;
+    	return onlineStoryId;
     }
 
+    /**
+     * @param onlineStoryId
+     * 			the onlineStoryId to set.
+     */
     public void setOnlineStoryId(int onlineStoryId) {
-	this.onlineStoryId = onlineStoryId;
+    	this.onlineStoryId = onlineStoryId;
     }
 
+    /**
+     * @return title
+     */
+    
     public String getTitle() {
-	return title;
+    	return title;
     }
+
+    /**
+     * @return author
+     */
 
     public String getAuthor() {
-	return author;
+    	return author;
     }
 
+    /**
+     * @return ArrayList of storyFragments
+     */
+    
     public ArrayList<StoryFragment> getStoryFragments() {
-	return storyFragments;
+    	return storyFragments;
     }
 
+    /**
+     * @param ArrayList of storyFragments
+     * 			sets the arraylist of storyFragments.
+     */
     public void setStoryFragments(ArrayList<StoryFragment> storyFragments) {
-	this.storyFragments = storyFragments;
+    	this.storyFragments = storyFragments;
     }
+    
+    /**
+     * @return firstStoryFragmentId
+     */
 
     public int getFirstStoryFragment() {
-	return firstStoryFragmentId;
+    	return firstStoryFragmentId;
     }
 
+    /**
+     * @param firstStoryFragmentId
+     * 				Sets the first storyFragment Id
+     */
+    
     public void setFirstStoryFragment(int firstStoryFragmentId) {
 	this.firstStoryFragmentId = firstStoryFragmentId;
     }
@@ -193,11 +225,19 @@ public class Story implements Serializable {
 		+ author + ", storyFragments=" + storyFragments
 		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
     }
+    
+    /**
+     * @return offlineStoryId
+     */
 
     public int getOfflineStoryId() {
 	return offlineStoryId;
     }
 
+    /**
+     * @param offlineStoryId
+     * 			sets offlineStoryId
+     */
     public void setOfflineStoryId(int offlineStoryId) {
 	this.offlineStoryId = offlineStoryId;
     }
