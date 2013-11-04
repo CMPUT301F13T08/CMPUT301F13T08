@@ -250,6 +250,10 @@ public class FileHelper {
 
 	try {
 
+	    if (!searchText.matches(".*\\w.*") || searchText.contains("\n")) {
+		return getOfflineStories();
+	    }
+
 	    ArrayList<Story> allList = getOfflineStories();
 	    ArrayList<Story> resultList = new ArrayList<Story>();
 
@@ -385,10 +389,9 @@ public class FileHelper {
 
 		String fileName;
 		if (annotations.get(n).getPhoto().isEmpty()) {
-		    fileName = "Image"
-				+ Integer.toString(storyId)
-				+ "Fragment" + Integer.toString(i + 1)
-			    + "Annotation" + Integer.toString(n + 1) + ".png";
+		    fileName = "Image" + Integer.toString(storyId) + "Fragment"
+			    + Integer.toString(i + 1) + "Annotation"
+			    + Integer.toString(n + 1) + ".png";
 		} else {
 		    fileName = annotations.get(n).getPhoto();
 

@@ -282,10 +282,16 @@ public class ESHelper {
     }
 
     public ArrayList<Story> searchOnlineStories(String searchString) {
+	searchString = searchString.toLowerCase();
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
 	StrictMode.setThreadPolicy(policy);
 	ArrayList<Story> stories = new ArrayList<Story>();
+	
+	if (!searchString.matches(".*\\w.*") || searchString.contains("\n")) {
+	    return getOnlineStories();
+	}
+
 	try {
 	    HttpPost searchRequest = new HttpPost(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/_search?pretty=1");
