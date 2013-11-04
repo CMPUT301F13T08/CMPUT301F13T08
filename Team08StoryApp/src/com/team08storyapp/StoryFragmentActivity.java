@@ -256,6 +256,11 @@ public class StoryFragmentActivity extends Activity {
 	    // a popup menu asks to choose a picture from gallery or camera
 	    showPopup();
 	    return true;
+	    
+	case R.id.action_settings:
+	    Intent mainIntent = new Intent(getApplicationContext(),
+		    MainActivity.class);
+	    startActivity(mainIntent);
 	default:
 	    return super.onOptionsItemSelected(item);
 	}

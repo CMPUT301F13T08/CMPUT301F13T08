@@ -11,5 +11,10 @@
           android:title="Add Annotations"
           android:showAsAction="ifRoom"
            />
+     
+     <item android:id="@+id/action_settings"
+          android:title="@string/action_settings"
+          android:showAsAction="never" />
+     
     
 </menu>
