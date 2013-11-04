@@ -321,142 +321,50 @@ public class StoryFragmentActivity extends Activity {
 
 	    // the returned picture URI
 	    Uri pickedUri = data.getData();
+	    PhotoController pc = new PhotoController();
+	    
+	    // save the image and get the new file name for that image
+	    String fileName = pc.saveToLocal(pickedUri, currentStoryId,
+		    currentStoryFragment);
 
-	    // declare the bitmap
-	    Bitmap pic = null;
+	    // compose the new annotation with the new image
+	    Annotation add = new Annotation();
+	    add.setAnnotationID(currentStoryFragment.getAnnotations().size() + 1);
+	    add.setPhoto(fileName);
+	    ArrayList<Annotation> temp = currentStoryFragment.getAnnotations();
+	    temp.add(add);
+	    currentStoryFragment.setAnnotations(temp);
 
-	    // declare the path string
-	    String imgPath = "";
+	    // update the current story with the new story fragment
+	    currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+		    currentStoryFragment);
 
-	    // retrieve the string using media data
-	    String[] medData = { MediaStore.Images.Media.DATA };
-
-	    // query the data
-	    Cursor picCursor = managedQuery(pickedUri, medData, null, null,
-		    null);
-	    if (picCursor != null) {
-
-		// get the path string
-		int index = picCursor
-			.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-		picCursor.moveToFirst();
-		imgPath = picCursor.getString(index);
-	    } else
-		imgPath = pickedUri.getPath();
-
-	    // if we have a new URI attempt to decode the image bitmap
-	    if (pickedUri != null) {
-
-		/*
-		 * set the width and height we want to use as maximum display
-		 */
-		int targetWidth = 200;
-		int targetHeight = 150;
-
-		// create bitmap options to calculate and use sample size
-		BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-
-		/*
-		 * first decode image dimensions only - not the image bitmap
-		 * itself
-		 */
-		bmpOptions.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-		/*
-		 * work out what the sample size should be image width and
-		 * height before sampling
-		 */
-		int currHeight = bmpOptions.outHeight;
-		int currWidth = bmpOptions.outWidth;
-
-		// variable to store new sample size
-		int sampleSize = 1;
-
-		/*
-		 * calculate the sample size if the existing size is larger than
-		 * target size
-		 */
-		if (currHeight > targetHeight || currWidth > targetWidth) {
-		    // use either width or height
-		    if (currWidth > currHeight)
-			sampleSize = Math.round((float) currHeight
-				/ (float) targetHeight);
-		    else
-			sampleSize = Math.round((float) currWidth
-				/ (float) targetWidth);
-		}
-
-		// use the new sample size
-		bmpOptions.inSampleSize = sampleSize;
-
-		// now decode the bitmap using sample options
-		bmpOptions.inJustDecodeBounds = false;
-
-		// get the file as a bitmap
-		pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-		// set the new file name
-		String fileName = "Image"
-			+ Integer.toString(currentStoryId)
-			+ "Fragment"
-			+ Integer.toString(currentStoryFragment
-				.getStoryFragmentId())
-			+ "Annotation"
-			+ Integer.toString(currentStoryFragment
-				.getAnnotations().size() + 1) + ".png";
-
-		// save the new image file
+	    /*
+	     * if the user is reading a downloaded story, then we update the
+	     * local file of the story and update the story in web server. else
+	     * if the user is reading an online story, we directly update the
+	     * online story.
+	     */
+	    if (mode == MODE_OFFLINE) {
 		try {
-		    FileOutputStream fos = openFileOutput(fileName,
-			    Context.MODE_PRIVATE);
-		    pic.compress(CompressFormat.PNG, 90, fos);
+		    fHelper.updateOfflineStory(currentStory);
+		    currentStory = fHelper.getOfflineStory(currentStoryId);
+		    esHelper.addOrUpdateOnlineStory(currentStory);
 		} catch (FileNotFoundException e) {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
 		}
-
-		// compose the new annotation with the new image
-		Annotation add = new Annotation();
-		add.setAnnotationID(currentStoryFragment.getAnnotations()
-			.size() + 1);
-		add.setPhoto(fileName);
-		ArrayList<Annotation> temp = currentStoryFragment
-			.getAnnotations();
-		temp.add(add);
-		currentStoryFragment.setAnnotations(temp);
-
-		// update the current story with the new story fragment
-		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-			currentStoryFragment);
-
-		/*
-		 * if the user is reading a downloaded story, then we update the
-		 * local file of the story and update the story in web server.
-		 * else if the user is reading an online story, we directly update
-		 *  the online story.
-		 */
-		if (mode == MODE_OFFLINE) {
-		    try {
-			fHelper.updateOfflineStory(currentStory);
-			currentStory = fHelper.getOfflineStory(currentStoryId);
-			esHelper.addOrUpdateOnlineStory(currentStory);
-		    } catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		    } catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		    }
-		} else if (mode == MODE_ONLINE) {
-		    esHelper.addOrUpdateOnlineStory(currentStory);
-		}
-		
-		// pop up a message to inform user that annotation is added
-		Toast.makeText(getApplicationContext(),
-			"New annotation is uploaded successfully",
-			Toast.LENGTH_LONG).show();
+	    } else if (mode == MODE_ONLINE) {
+		esHelper.addOrUpdateOnlineStory(currentStory);
 	    }
+
+	    // pop up a message to inform user that annotation is added
+	    Toast.makeText(getApplicationContext(),
+		    "New annotation is uploaded successfully",
+		    Toast.LENGTH_LONG).show();
 	}
 
 	// superclass method
