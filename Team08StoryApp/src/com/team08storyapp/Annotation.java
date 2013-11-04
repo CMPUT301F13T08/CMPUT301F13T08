@@ -34,7 +34,19 @@ package com.team08storyapp;
 import java.io.Serializable;
 
 /**
- * Annotation is a model class representing a User's Annotations. An Annotation has 
+ * Annotation is a model class representing a User's Annotations on a Particular
+ * Story Fragment. An Annotation has the following properties:
+ * <ul>
+ * <li>Annotation Id to uniquely identify the Annotation.
+ * <li>Story Fragment Id the Id identified with the Story Fragment the Annotation belongs to.
+ * <li>Photo the photo the reader set in the Annotation.
+ * <li>Text the text the reader set in the Annotation.
+ * </ul>
+ * These properties are able to be accessed through the constructor or through
+ * public getters/setters.
+ * 
+ * @see StoryFragment
+ * @see Photo
  * 
  * @author Michele Paulichuk
  * @author Alice Wu
@@ -43,67 +55,135 @@ import java.io.Serializable;
  * @author Jiawei Shen
  * @version 1.0 November 8, 2013
  * @since 1.0
- *
+ * 
  */
-public class Annotation implements Serializable{
+public class Annotation implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private int annotationID;
+    private String text;
+    private int storyFragmentID;
+    private String photo;
+    private String encodedAnnotation;
 
-	private static final long serialVersionUID = 1L;
-	private int annotationID;
-	private String text;
-	private int storyFragmentID;
-	private String photo;
-	private String encodedAnnotation;
+    /**
+     * The default constructor for creating an Annotation object. It will have
+     * none of it's properties set, requiring the class instantiating the object
+     * to set it's properties.
+     */
+    public Annotation() {
+    }
 
-	public String getEncodedAnnotation() {
-	    return encodedAnnotation;
-	}
+    /**
+     * A constructor for creating an Annotation object, when the following
+     * properties are known:
+     * <ul>
+     * <li>Annotation Id
+     * <li>Story Fragment Id
+     * <li>Photo
+     * <li>Text
+     * </ul>
+     * 
+     * @param annotationID
+     *            The Id used to uniquely identify an Annotation.
+     * @param storyFragmentID
+     *            The Id used to identify which story fragment the Annotation
+     *            belongs to.
+     * @param photo
+     *            The image or illustration component of the Annotation.
+     * @param text
+     *            The textual component of the Annotation.
+     */
+    public Annotation(int annotationID, int storyFragmentID, String photo,
+	    String text) {
+	super();
+	this.annotationID = annotationID;
+	this.storyFragmentID = storyFragmentID;
+	this.photo = photo;
+	this.text = text;
+    }
 
-	public void setEncodedAnnotation(String encodedAnnotation) {
-	    this.encodedAnnotation = encodedAnnotation;
-	}
+    /**
+     * @return The text of an Annotation
+     */
+    public String getText() {
+	return text;
+    }
 
-	public Annotation() {
+    /**
+     * @param text
+     *            the text to set
+     */
+    public void setText(String text) {
+	this.text = text;
+    }
 
-	}
+    /**
+     * @return The storyFragmentID of the Story Fragment an the Annotation
+     *         belongs to.
+     */
+    public int getStoryFragmentID() {
+	return storyFragmentID;
+    }
 
-	public Annotation(int annotationID, int storyFragmentID, String photo,
-			String text) {
-		super();
-		this.annotationID = annotationID;
-		this.storyFragmentID = storyFragmentID;
-		this.photo = photo;
-		this.text = text;
-	}
+    /**
+     * @param storyFragmentID
+     *            The storyFragmentID to set for the Annotation.
+     */
+    public void setStoryFragmentID(int storyFragmentID) {
+	this.storyFragmentID = storyFragmentID;
+    }
 
-	public void setAnnotationID(int annotationID) {
-		this.annotationID = annotationID;
-	}
+    /**
+     * @return The photo set in the Annotation but represented in as an encoded
+     *         string.
+     */
+    public String getPhoto() {
+	return photo;
+    }
 
-	public int getAnnotationID() {
-		return annotationID;
-	}
+    /**
+     * @param photo
+     *            The photo to set for the Annotation.
+     */
+    public void setPhoto(String photo) {
+	this.photo = photo;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    /**
+     * Retrieving the encoded Annotation is used for storing the Annotation
+     * either on the webservice or local file system as photos need to be stored
+     * as encoded byte arrays.
+     * 
+     * @return The encoded Annotation.
+     */
+    public String getEncodedAnnotation() {
+	return encodedAnnotation;
+    }
 
-	public String getText() {
-		return text;
-	}
+    /**
+     * The Annotation will be encoded from without the class and then set in the
+     * Annotation object to for future use for the Annotation to be stored
+     * outside the application.
+     * 
+     * @param encodedAnnotation
+     *            The encodedAnnotation to set representing the Annotation.
+     */
+    public void setEncodedAnnotation(String encodedAnnotation) {
+	this.encodedAnnotation = encodedAnnotation;
+    }
 
-	public void setStoryFragmentID(int storyFragmentID) {
-		this.storyFragmentID = storyFragmentID;
-	}
+    /**
+     * @return The annotationID used to uniquely identify the Annotation.
+     */
+    public int getAnnotationID() {
+	return annotationID;
+    }
 
-	public int getStoryFragmentID() {
-		return storyFragmentID;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
+    /**
+     * @param annotationID
+     *            The annotationID to set for the Annotation.
+     */
+    public void setAnnotationID(int annotationID) {
+	this.annotationID = annotationID;
+    }
 }
