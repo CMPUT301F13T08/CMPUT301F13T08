@@ -1,4 +1,4 @@
-/*
+/**
 AUTHORS
 ========
 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
@@ -60,18 +60,8 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-//variable for selection intent
-//variable to store the currently selected image
-//adapter for gallery view
-//gallery object
-//image view for larger display
 
-/**
- * instantiate the interactive gallery
- */
 public class StoryFragmentActivity extends Activity {
-
-    // private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private static final int MODE_ONLINE = 0;
@@ -79,7 +69,9 @@ public class StoryFragmentActivity extends Activity {
     private int currentStoryFragmentId;
     private int currentStoryFragmentIndex;
     private int currentStoryId;
+    private int mode;
 
+    // declare variables for UI setup
     private PicAdapter imgAdapt;
     private Gallery picGallery;
     private ListView lv;
@@ -92,27 +84,29 @@ public class StoryFragmentActivity extends Activity {
     private FileHelper fHelper;
     private ESHelper esHelper;
     private Uri imageFileUri;
-    private int mode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
 	super.onCreate(savedInstanceState);
-	esHelper = new ESHelper();
-	fHelper = new FileHelper(this, 0);
-	// set up background layout
 
+	// Initialize esHelper
+	esHelper = new ESHelper();
+
+	// Initialize fHelper to Download mode
+	fHelper = new FileHelper(this, 0);
+
+	// set up background layout
 	setContentView(R.layout.activity_story_list);
 	lv = (ListView) findViewById(android.R.id.list);
 
 	// set up text header
 	headerText = getLayoutInflater().inflate(R.layout.header_text, null);
 	headerText.setBackgroundColor(0x0099cc);
-
 	TextView textSection = (TextView) headerText
 		.findViewById(R.id.headerText);
-
 	textSection.setOnTouchListener(new View.OnTouchListener() {
+
 	    @Override
 	    public boolean onTouch(View arg0, MotionEvent arg1) {
 		return false;
@@ -123,6 +117,7 @@ public class StoryFragmentActivity extends Activity {
 	// set up gallery header
 	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
 		null);
+
 	// set up the picView
 	picView = (ImageView) headerGallery.findViewById(R.id.picture);
 
@@ -131,6 +126,7 @@ public class StoryFragmentActivity extends Activity {
 
 	// set the click listener for each item in the thumbnail gallery
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
+
 	    // handle clicks
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
@@ -140,30 +136,42 @@ public class StoryFragmentActivity extends Activity {
 	    }
 	});
 
-	// Get the intent - passed either by Online/OfflineStoriesActivity or by
-	// StoryFragmentActivity
-
+	/*
+	 * Get the intent - passed either by Online/OfflineStoriesActivity or by
+	 * StoryFragmentActivity
+	 */
 	Intent storyFragment = getIntent();
 
+	/*
+	 * detect the mode: if mode is 0: user is reading an online story. if
+	 * mode is 1, user is reading a downloaded story. This mode variable is
+	 * crucial because it determines the way that app stores the annotation.
+	 */
 	mode = storyFragment.getIntExtra("mode", 0);
-	// Get the story object from the intent
-	// See source [7]
+
+	/*
+	 * Get the story object from the intent See source [7]
+	 */
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
+
 	// Get the story fragment id from the intent - the fragment to display
-	System.out.println(currentStory.toString());
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 	currentStoryId = currentStory.getOfflineStoryId();
 
+	/*
+	 * get the currentStoryFragmentIndex in case an update is made on this
+	 * fragment.
+	 */
 	for (int i = 0; i < currentStory.getStoryFragments().size(); i++) {
 	    if (currentStory.getStoryFragments().get(i).getStoryFragmentId() == currentStoryFragmentId) {
 		currentStoryFragmentIndex = i;
 	    }
 	}
-	System.out.println("storyFragment index: " + currentStoryFragmentIndex);
 
-	// The current story fragment object - from the story fragment list, by
-	// id
+	/* The current story fragment object - from the story fragment list, by
+	 *  id
+	 */
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
 
@@ -174,39 +182,48 @@ public class StoryFragmentActivity extends Activity {
 	ArrayList<Choice> storyFragmentChoices = currentStoryFragment
 		.getChoices();
 
-	// Populate choices listview with the go to choices from the current
-	// fragment
+	/*
+	 * Populate choices listview with the go to choices from the current
+	 * fragment
+	 */
 	ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
-	// create a new adapter
+
+	// create a new adapter based on current story fragment's information
 	imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
 		currentStoryFragmentId);
+
 	// set the gallery adapter
 	picGallery.setAdapter(imgAdapt);
-	System.out.print("******ADAPTER DONE*******");
 
+	// populate the listview with choices
 	fillChoice(storyFragmentChoices);
 
+	// set listview item's setOnItemClickListener
 	lv.setOnItemClickListener(new OnItemClickListener() {
+	    
 	    // handle clicks
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
 
+		// prepare to start to read the next story fragment
 		Intent nextStoryFragment = new Intent(getApplicationContext(),
 			StoryFragmentActivity.class);
+
+		// pass the currentStory to intent
 		nextStoryFragment.putExtra("story", currentStory);
 
+		// retrieve the selected choice object
 		Choice nextChoice = (Choice) lv.getAdapter().getItem(position);
 
+		// get the id of next story fragment
 		int nextStoryFragmentId = nextChoice.getStoryFragmentID();
 
+		// put the id in the intent
 		nextStoryFragment.putExtra("storyFragmentId",
 			nextStoryFragmentId);
-
 		startActivity(nextStoryFragment);
-
 	    }
 	});
-
     }
 
     @Override
@@ -410,12 +427,11 @@ public class StoryFragmentActivity extends Activity {
 		} else if (mode == MODE_ONLINE) {
 		    esHelper.addOrUpdateOnlineStory(currentStory);
 		}
-		 Toast.makeText(getApplicationContext(),
-			    "New annotation is uploaded successfully",
-			    Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(),
+			"New annotation is uploaded successfully",
+			Toast.LENGTH_LONG).show();
 	    }
-	   
-	    
+
 	}
 
 	// superclass method
