@@ -1,3 +1,34 @@
+/*
+AUTHORS
+========
+Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
+
+LICENSE
+=======
+Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
+GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+This program is free software: you can redistribute it and/or modify it under the terms of 
+the GNU General Public License as published by the Free Software Foundation, either 
+version 3 of the License, or (at your option) any later version. This program is distributed 
+in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public 
+License for more details. You should have received a copy of the GNU General Public License 
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+              
+3rd Party Libraries
+=============
+Retrieved Oct. 27, 2013 - https://github.com/rayzhangcl/ESDemo
+-This demo was used to help with JSON and ESHelper
+
+Retrieved Oct. 29, 2013  - http://hc.apache.org/downloads.cgi
+-This is for the fluent library which is licenced under apache V2
+
+Retrieved Oct. 29, 2013 
+- https://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.4-release.zip&can=2&q=
+-This is for JSON which is licenced under apache V2
+ */
+
 package com.team08storyapp;
 
 import java.io.BufferedReader;
@@ -38,7 +69,13 @@ import com.google.gson.reflect.TypeToken;
  * string within either it's author and/or title.
  * </ul>
  * 
+ * @author Abram Hindle and Chenlei Zhang (@link
+ *         https://github.com/rayzhangcl/ESDemo)
  * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
  * @version 1.0 November 8, 2013
  * @since 1.0
  * 
@@ -55,8 +92,16 @@ public class ESHelper {
     private static final String TAG = "ESHelper";
 
     /**
-     * @param story
-     * @return
+     * Adds or updates a story on the webservice. The method checks the Story
+     * object passed in to see if it contains a onlineStoryId. If it does not it
+     * finds the next possible Id to assigned to it and then adds the Story to
+     * the webservice with that Id. If the Story object contains an
+     * onlineStoryId then it calls the webservice with that Id and the story
+     * object, updating the Story that was located at that Id.
+     * 
+     * @param story The Story that is being added or updated to the webservice.
+     * @return The onlineStoryId of the Story that was added or updated.
+     * @see Story
      */
     public int addOrUpdateOnlineStory(Story story) {
 	// set policy to allow for internet activity to happen within the
@@ -142,6 +187,16 @@ public class ESHelper {
 	return story.getOnlineStoryId();
     }
 
+    /**
+     * Returns a Story object for a specific onlineStoryId contained on the webservice. This
+     * Story object can be used to display a "Chose Your Own Adventure story".
+     * <p>
+     * The method uses ElisticSearch (@link http://www.elasticsearch.org/guide/) to retrieve the story from the webservice.
+     * 
+     * @param storyId The onlineStoryId of the Story to retrieve from the webservice.
+     * @return The Story object for a specified onlineStoryId.
+     * @see Story
+     */
     public Story getOnlineStory(int storyId) {
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
@@ -169,7 +224,6 @@ public class ESHelper {
 		    elasticSearchResponseType);
 	    // We get the Story from it!
 	    story = esResponse.getSource();
-	    Log.d(TAG, story.toString());
 
 	} catch (ClientProtocolException e) {
 
@@ -213,7 +267,6 @@ public class ESHelper {
 	    Log.d(TAG, esResponse.toString());
 	    for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
 		Story story = s.getSource();
-		Log.d(TAG, story.toString());
 		stories.add(story);
 	    }
 
@@ -236,7 +289,8 @@ public class ESHelper {
 	try {
 	    HttpPost searchRequest = new HttpPost(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/_search?pretty=1");
-		String query = "{\"query\": {\"query_string\" :{ \"fields\":[\"title\",\"author\"], \"query\":\""+ searchString + "\"}}}";
+	    String query = "{\"query\": {\"query_string\" :{ \"fields\":[\"title\",\"author\"], \"query\":\""
+		    + searchString + "\"}}}";
 	    StringEntity stringentity = new StringEntity(query);
 
 	    searchRequest.setHeader("Accept", "application/json");
@@ -256,7 +310,6 @@ public class ESHelper {
 	    for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
 		Story story = s.getSource();
 		stories.add(story);
-		Log.d(TAG, story.toString());
 	    }
 	} catch (ClientProtocolException e) {
 	    Log.d(TAG, e.getLocalizedMessage());
