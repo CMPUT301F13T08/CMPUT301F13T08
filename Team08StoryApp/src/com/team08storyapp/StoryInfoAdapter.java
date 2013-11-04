@@ -41,11 +41,28 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * This StoryInfoAdapter class is a subclass of ArrayAdapter<T>. It is a customized 
+ * array adapter which populates a story's author and title into two views.
+ * 
+ * @author Sue Smith
+ * @author Alice Wu
+ *
+ */
 public class StoryInfoAdapter extends ArrayAdapter<Story> {
 	
 	private ArrayList<Story> infos;
 	private Activity activity;
 	
+	/**
+	 * Constructor of StoryInfoAdapter. It takes in the current activity to 
+	 * get system service, and the view that will be converted to the desired
+	 * view, and a list of stories as well.
+	 * 
+	 * @param a
+	 * @param textViewResourceId
+	 * @param infos
+	 */
 	public StoryInfoAdapter(Activity a, int textViewResourceId, ArrayList<Story> infos){
 		super(a, textViewResourceId, infos);
 		this.infos = infos;
@@ -53,11 +70,22 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
 		
 	}
 	
+    /**
+     *  This innerclass ViewHolder holds two TextViews.
+     *  
+     * @author Sue Smith
+     * @author Alice Wu
+     *
+     */
     public static class ViewHolder{
         public TextView item1;
         public TextView item2;
     }
     
+    /**
+     *  Method will inflate the layout first and populate the data.
+     *  
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         ViewHolder holder;

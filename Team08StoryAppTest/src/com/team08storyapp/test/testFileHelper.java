@@ -19,7 +19,7 @@ public class testFileHelper extends TestCase {
     private FileHelper fHelper;
 
     private int storyId;
-    private Story story0;
+    private Story s1;
     private int storyCount;
 
     private int fragment;
@@ -34,12 +34,12 @@ public class testFileHelper extends TestCase {
     // set up testing data for testing methods.
     public void setUp() throws FileNotFoundException, IOException {
 
-	fHelper = new FileHelper(context, 1);
+	fHelper = new FileHelper(context, 0);
 
-	storyId = 1;
+	storyId = 12;
 	storyCount = 1;
 
-	Story s1 = new Story(11, "Los Santos", "Alice Wu");
+	s1 = new Story(12, "Morroco likoko", "Alice Wu");
 	ArrayList<StoryFragment> sfList = new ArrayList<StoryFragment>();
 	StoryFragment sf1 = new StoryFragment(
 		1,
@@ -111,9 +111,9 @@ public class testFileHelper extends TestCase {
      * return true.
      */
     public void testAddOfflineStory() throws FileNotFoundException, IOException {
-	story0.setFirstStoryFragment(fragment);
-	story0.setStoryFragments(fragmentList);
-	assertTrue(fHelper.addOfflineStory(story0));
+	s1.setFirstStoryFragment(fragment);
+	s1.setStoryFragments(fragmentList);
+	assertTrue(fHelper.addOfflineStory(s1));
     }
 
     /*
@@ -126,8 +126,8 @@ public class testFileHelper extends TestCase {
     public void testUpdateOfflineStory() throws FileNotFoundException,
 	    IOException {
 	fragmentList.add(fragment1);
-	story0.setStoryFragments(fragmentList);
-	assertTrue(fHelper.updateOfflineStory(story0));
+	s1.setStoryFragments(fragmentList);
+	assertTrue(fHelper.updateOfflineStory(s1));
     }
 
     /*
