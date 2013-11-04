@@ -31,27 +31,48 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
-import java.io.InputStream;
+/**
+ * PhotoController is a controller class which allows users to choose from gallery
+ * or take a photo through intent in order to add a photo to an annotation or 
+ * a story fragment or an annotation.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 Novebmer 8, 2013
+ * @since 1.0
+ * 
+ */
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.widget.Toast;
 
 public class PhotoController extends Activity {
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	Uri imageFileUri;
 	
+	/**
+	 * Method takePhoto invokes an intent action which is sent to the camera
+	 * application to capture an image and save it.
+	 * 
+	 */
+	
 	public void takePhoto(){
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
+	
+	/**
+	 * Method chooseFromGallery starts an intent which allows one to choose
+	 * images from the gallery.
+	 * 
+	 */
 	
 	public void chooseFromGallery() {
 	    Intent pickIntent = new Intent();
