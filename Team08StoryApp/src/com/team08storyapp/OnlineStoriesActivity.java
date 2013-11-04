@@ -205,4 +205,10 @@ public class OnlineStoriesActivity extends ListActivity {
 	fillData(esHelper.getOnlineStories(), onUpdate);
     }
 
+    protected void onResume() {
+ 	super.onResume();
+ 	fillData(esHelper.getOnlineStories(), onUpdate);
+    }
+ 
+
 }
