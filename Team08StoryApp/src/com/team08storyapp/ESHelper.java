@@ -99,13 +99,13 @@ public class ESHelper {
      * onlineStoryId then it calls the webservice with that Id and the story
      * object, updating the Story that was located at that Id.
      * 
-     * @param story The Story that is being added or updated to the webservice.
+     * @param story
+     *            The Story that is being added or updated to the webservice.
      * @return The onlineStoryId of the Story that was added or updated.
      * @see Story
      */
     public int addOrUpdateOnlineStory(Story story) {
-	// set policy to allow for internet activity to happen within the
-	// android application
+
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
 	StrictMode.setThreadPolicy(policy);
@@ -188,50 +188,65 @@ public class ESHelper {
     }
 
     /**
-     * Returns a Story object for a specific onlineStoryId contained on the webservice. This
-     * Story object can be used to display a "Chose Your Own Adventure story".
+     * Returns a Story object for a specific onlineStoryId contained on the
+     * webservice. This Story object can be used to display a
+     * "Chose Your Own Adventure story".
      * <p>
-     * The method uses ElisticSearch (@link http://www.elasticsearch.org/guide/) to retrieve the story from the webservice.
+     * The method uses ElisticSearch (@link http://www.elasticsearch.org/guide/)
+     * to retrieve the story from the webservice.
      * 
-     * @param storyId The onlineStoryId of the Story to retrieve from the webservice.
+     * @param storyId
+     *            The onlineStoryId of the Story to retrieve from the
+     *            webservice.
      * @return The Story object for a specified onlineStoryId.
      * @see Story
      */
     public Story getOnlineStory(int storyId) {
+	// set policy to allow for internet activity to happen within the
+	// android application
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
 	StrictMode.setThreadPolicy(policy);
+
 	Story story;
 	try {
+	    // Create a HttpGet object with the onlineStoryId of the Story to
+	    // retrieve from the webservice
 	    HttpGet getRequest = new HttpGet(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
 			    + storyId + "?pretty=1");
 
+	    // Set the HttpGet so that it knows it is retrieving a JSON
+	    // formatted object
 	    getRequest.addHeader("Accept", "application/json");
 
+	    // Execute the httpclient to get the object from the webservice
 	    HttpResponse response = httpclient.execute(getRequest);
 
+	    // Retrieve and print to the log cat the status result of the post
 	    String status = response.getStatusLine().toString();
 	    Log.d(TAG, status);
 
+	    // Retrieve the Story object in the form of a string to be converted
+	    // from JSON
 	    String json = getEntityContent(response);
 
 	    // We have to tell GSON what type we expect
 	    Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Story>>() {
 	    }.getType();
+
 	    // Now we expect to get a Story response
 	    ElasticSearchResponse<Story> esResponse = gson.fromJson(json,
 		    elasticSearchResponseType);
+
 	    // We get the Story from it!
 	    story = esResponse.getSource();
 
 	} catch (ClientProtocolException e) {
-
 	    Log.d(TAG, e.getLocalizedMessage());
 	    return null;
 
 	} catch (IOException e) {
-
 	    Log.d(TAG, e.getLocalizedMessage());
 	    return null;
 	}
@@ -239,31 +254,50 @@ public class ESHelper {
 	return story;
     }
 
+    /**
+     * Returns a list of all Story objects contained on the webservice. These
+     * stories can be used to display a list of all possible stories to view
+     * online.
+     * 
+     * @return The List of Stories from the webservice.
+     * @see Story
+     */
     public ArrayList<Story> getOnlineStories() {
+	// set policy to allow for internet activity to happen within the
+	// android application
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
 	StrictMode.setThreadPolicy(policy);
+
 	ArrayList<Story> stories = new ArrayList<Story>();
 	try {
+	    // Create a HttpPost object to retrieve the Stories from the
+	    // webservice
 	    HttpPost postRequest = new HttpPost(
-		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/_search?pretty=1"); // 0yzbiRXsTHi9LQGTHWS-MA
+		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/_search?pretty=1");
 
+	    // Set the httppost so that it knows it is retrieving a JSON
+	    // formatted object
 	    postRequest.addHeader("Accept", "application/json");
 
+	    // Execute the httpclient to get the object from the webservice
 	    HttpResponse response = httpclient.execute(postRequest);
 
+	    // Retrieve and print to the log cat the status result of the post
 	    String status = response.getStatusLine().toString();
 	    Log.d(TAG, status);
 
+	    // Retrieve the Story object in the form of a string to be converted
+	    // from JSON
 	    String json = getEntityContent(response);
 
 	    // We have to tell GSON what type we expect
 	    Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>() {
 	    }.getType();
-	    // Now we expect to get a Recipe response
+	    // Now we expect to get a story response
 	    ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json,
 		    elasticSearchSearchResponseType);
-	    // We get the recipe from it!
+	    // We get the story from it!
 	    Log.d(TAG, esResponse.toString());
 	    for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
 		Story story = s.getSource();
@@ -281,32 +315,63 @@ public class ESHelper {
 	return stories;
     }
 
+    /**
+     * Returns a list of stories from the webservice that contain the searched
+     * text in either their Author or Title fields.
+     * <p>
+     * The method uses ElisticSearch (@link http://www.elasticsearch.org/guide/)
+     * to retrieve the story from the webservice.
+     * 
+     * @param searchString
+     *            A text string containing the key set of words to use in
+     *            searching the webservices Stories.
+     * @return A list of stories that contain the text used in the search in
+     *         either their Author or Title fields.
+     */
     public ArrayList<Story> searchOnlineStories(String searchString) {
+	// set policy to allow for internet activity to happen within the
+	// android application
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
 	StrictMode.setThreadPolicy(policy);
+
 	ArrayList<Story> stories = new ArrayList<Story>();
 	try {
+	    // Create a HttpPost object to retrieve the Stories from the
+	    // webservice
 	    HttpPost searchRequest = new HttpPost(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/_search?pretty=1");
+
+	    // Create the ElasticSearch query string to search the webservice
+	    // for the search text
 	    String query = "{\"query\": {\"query_string\" :{ \"fields\":[\"title\",\"author\"], \"query\":\""
 		    + searchString + "\"}}}";
 	    StringEntity stringentity = new StringEntity(query);
 
+	    // Set the httppost so that it knows it is retrieving a JSON
+	    // formatted object
 	    searchRequest.setHeader("Accept", "application/json");
 	    searchRequest.setEntity(stringentity);
 
+	    // Execute the httpclient to get the object from the webservice
 	    HttpResponse response = httpclient.execute(searchRequest);
+
+	    // Retrieve and print to the log cat the status result of the post
 	    String status = response.getStatusLine().toString();
 	    Log.d(TAG, status);
 
+	    // Retrieve the Story object in the form of a string to be converted
+	    // from JSON
 	    String json = getEntityContent(response);
 
+	    // We have to tell GSON what type we expect
 	    Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>() {
 	    }.getType();
+	    // Now we expect to get a story response
 	    ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json,
 		    elasticSearchSearchResponseType);
 	    Log.d(TAG, esResponse.toString());
+	    // We get the story from it!
 	    for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
 		Story story = s.getSource();
 		stories.add(story);
@@ -323,19 +388,30 @@ public class ESHelper {
     }
 
     /**
-     * get the http response and return json string
+     * Returns a string containing the content from the Http request for all
+     * webservice calls.
+     * 
+     * @param response
+     *            The response provided from calling the webservice.
+     * @return A string of the content from the webservice request.
+     * @throws IOException
      */
     String getEntityContent(HttpResponse response) throws IOException {
+	// Create a buffer reader to read the contents of response.
 	BufferedReader br = new BufferedReader(new InputStreamReader(
 		(response.getEntity().getContent())));
 	StringBuilder stringBuilder = new StringBuilder();
 	Log.d(TAG, "Output from Server -> ");
 	String output = "";
+	
+	// Retrieve the contents of the response and append it in a string.
 	while ((output = br.readLine()) != null) {
 	    Log.d(TAG, output);
 	    stringBuilder.append(output);
 	}
 	Log.d(TAG, "JSON:" + stringBuilder.toString());
+	
+	// Return the string of the response.
 	return stringBuilder.toString();
     }
 }
