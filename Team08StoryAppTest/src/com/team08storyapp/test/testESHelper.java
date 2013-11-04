@@ -183,61 +183,6 @@ public class testESHelper extends TestCase {
     }
 
     /*
-     * Test Case for Use Case 10
-     * 
-     * The testUpdateOnlineStory method tests updating a story to the webservice
-     * via ESHelper's addOrUpdateOnlineStory method.
-     * 
-     * The test retrieves a specific story from the webservice. Then modifies
-     * one of it's story fragments story text, saving the original text for
-     * later comparison. It then tries to update the story on the webservice. If
-     * the id returned matches the current one for the story than it appears to
-     * have updated successfully. However, more tests are needed for this result
-     * to be accepted. So the test calls the webservice to retrieve the story
-     * again and some comparisons are done to see if the story on the webservice
-     * does contain the updated text.
-     */
-    public void testUpdateOnlineStory() {
-	// retrieve a story from the webservice to update
-	Story updateStory = esHelper.getOnlineStory(1);
-
-	// update a portion of the story
-	ArrayList<StoryFragment> storyFragments = updateStory
-		.getStoryFragments();
-	StoryFragment orginalStoryFragment = storyFragments.get(0);
-	storyFragments.get(0).setStoryText("Changed the text of the story");
-	updateStory.setStoryFragments(storyFragments);
-
-	// test that the update processed successfully by checking that the id
-	// returned is the id the story had previously
-	assertTrue(esHelper.addOrUpdateOnlineStory(updateStory) == updateStory
-		.getOnlineStoryId());
-
-	// Retrieve the story from online for further testing
-	Story onlineStory = esHelper.getOnlineStory(updateStory
-		.getOnlineStoryId());
-
-	// test that the story for the id given was received, if it was not
-	// Received this may indicate that the story was not added
-	assertTrue(onlineStory != null);
-
-	// test the properties of the story against the initial story to ensure
-	// the story updated still contains the same author, title, and first
-	// fragment
-	assertEquals(updateStory.getAuthor(), onlineStory.getAuthor());
-	assertEquals(updateStory.getTitle(), onlineStory.getTitle());
-	assertEquals(updateStory.getFirstStoryFragment(),
-		onlineStory.getFirstStoryFragment());
-
-	// test that the story fragment we changed is different from the
-	// original story fragment.
-	ArrayList<StoryFragment> onlineStoryFragments = onlineStory
-		.getStoryFragments();
-	assertNotSame(orginalStoryFragment.getStoryText(), onlineStoryFragments
-		.get(0).getStoryText());
-    }
-
-    /*
      * Test Case for Use Case 1
      * 
      * The testGetOnlineStory method tests retrieving a story to the webservice
@@ -310,5 +255,60 @@ public class testESHelper extends TestCase {
 	// retrieve the story's from the search and compare the size of the list
 	// to the known size
 	assertTrue(esHelper.searchOnlineStories(searchText).size() == searchListSize);
+    }
+
+    /*
+     * Test Case for Use Case 10
+     * 
+     * The testUpdateOnlineStory method tests updating a story to the webservice
+     * via ESHelper's addOrUpdateOnlineStory method.
+     * 
+     * The test retrieves a specific story from the webservice. Then modifies
+     * one of it's story fragments story text, saving the original text for
+     * later comparison. It then tries to update the story on the webservice. If
+     * the id returned matches the current one for the story than it appears to
+     * have updated successfully. However, more tests are needed for this result
+     * to be accepted. So the test calls the webservice to retrieve the story
+     * again and some comparisons are done to see if the story on the webservice
+     * does contain the updated text.
+     */
+    public void testUpdateOnlineStory() {
+	// retrieve a story from the webservice to update
+	Story updateStory = esHelper.getOnlineStory(1);
+
+	// update a portion of the story
+	ArrayList<StoryFragment> storyFragments = updateStory
+		.getStoryFragments();
+	StoryFragment orginalStoryFragment = storyFragments.get(0);
+	storyFragments.get(0).setStoryText("Changed the text of the story");
+	updateStory.setStoryFragments(storyFragments);
+
+	// test that the update processed successfully by checking that the id
+	// returned is the id the story had previously
+	assertTrue(esHelper.addOrUpdateOnlineStory(updateStory) == updateStory
+		.getOnlineStoryId());
+
+	// Retrieve the story from online for further testing
+	Story onlineStory = esHelper.getOnlineStory(updateStory
+		.getOnlineStoryId());
+
+	// test that the story for the id given was received, if it was not
+	// Received this may indicate that the story was not added
+	assertTrue(onlineStory != null);
+
+	// test the properties of the story against the initial story to ensure
+	// the story updated still contains the same author, title, and first
+	// fragment
+	assertEquals(updateStory.getAuthor(), onlineStory.getAuthor());
+	assertEquals(updateStory.getTitle(), onlineStory.getTitle());
+	assertEquals(updateStory.getFirstStoryFragment(),
+		onlineStory.getFirstStoryFragment());
+
+	// test that the story fragment we changed is different from the
+	// original story fragment.
+	ArrayList<StoryFragment> onlineStoryFragments = onlineStory
+		.getStoryFragments();
+	assertNotSame(orginalStoryFragment.getStoryText(), onlineStoryFragments
+		.get(0).getStoryText());
     }
 }
