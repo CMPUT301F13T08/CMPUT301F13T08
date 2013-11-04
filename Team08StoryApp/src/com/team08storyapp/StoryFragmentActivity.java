@@ -1,4 +1,4 @@
-/**
+/*
 AUTHORS
 ========
 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
@@ -85,6 +85,12 @@ public class StoryFragmentActivity extends Activity {
     private ESHelper esHelper;
     private Uri imageFileUri;
 
+    /**
+     * onCreate methods creates all the layouts and prepares all the data needed
+     * for processing the reading.
+     * 
+     * @param: Bundle savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -227,6 +233,12 @@ public class StoryFragmentActivity extends Activity {
 	});
     }
 
+    /**
+     * onCreateOptionsMenu method gets the layout of the action bar.
+     * 
+     * @param: Menu menu
+     * @return: boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -235,6 +247,13 @@ public class StoryFragmentActivity extends Activity {
 	return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * onOptionItemSelected method handles different situations of selected menu
+     * item.
+     * 
+     * @param: MenuItem item
+     * @return: boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -261,6 +280,12 @@ public class StoryFragmentActivity extends Activity {
 	}
     }
 
+    /**
+     * fillChoice method takes in a Choice arrayList and populate the choice
+     * text with the help of a customized adapter in the list view.
+     * 
+     * @param cList
+     */
     public void fillChoice(ArrayList<Choice> cList) {
 
 	// add headers to background list view
@@ -271,9 +296,12 @@ public class StoryFragmentActivity extends Activity {
 
 	// populate the listview with choices
 	lv.setAdapter(adapter);
-
     }
 
+    /**
+     * showPopup method sets up the popup menu and its menu item's click listener.
+     * 
+     */
     public void showPopup() {
 
 	// root view of popup menu
@@ -316,13 +344,17 @@ public class StoryFragmentActivity extends Activity {
 
     }
 
+    /**
+     * onActivityResult handles the results from adding annotations from gallery/ 
+     * camera: save the photo, update the story.
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (resultCode == RESULT_OK) {
 
 	    // the returned picture URI
 	    Uri pickedUri = data.getData();
 	    PhotoController pc = new PhotoController();
-	    
+
 	    // save the image and get the new file name for that image
 	    String fileName = pc.saveToLocal(pickedUri, currentStoryId,
 		    currentStoryFragment);

@@ -64,47 +64,39 @@ public class OfflineStoriesActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
+	// set the background view for layout
 	setContentView(R.layout.activity_story_list);
+	
+	// set up the listview
 	lv = (ListView) findViewById(android.R.id.list);
 
+	// instantiate a fHelper
 	fHelper = new FileHelper(this, 0);
 
+	// set up the header 
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
-
-	Story s1 = new Story(1, "Fight Club", "Chuck Palahniuk");
-	s1.setOfflineStoryId(1);
-	StoryFragment sf1 = new StoryFragment(
-		1,
-		"You left the airport without your suitcase. And returned home to"
-			+ "an arson crime. The on-site manager asked you if you have places to stay.");
-	Choice c1 = new Choice(2, 1,
-		"You replied no in shock, then walked away to phone booth.");
-
-	StoryFragment sf2 = new StoryFragment(2, "You are so careless when crossing the road. You are hit by a car" +
-			"And DEAD.");
-	sf1.getChoices().add(c1);
-	s1.setFirstStoryFragment(1);
-	s1.getStoryFragments().add(sf1);
-	s1.getStoryFragments().add(sf2);
-	try {
-	    fHelper.addOfflineStory(s1);
-	    fillData(fHelper.getOfflineStories(), onCreate);
-	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
+	
+	// set up the search button
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
+	
+	// set up the search field which is an editText
 	et = (EditText) header.findViewById(R.id.searchText);
 
+	// enable the clickListener on search button
 	searchButton.setOnClickListener(new View.OnClickListener() {
+	    
 	    @Override
 	    public void onClick(View v) {
 		searchText = et.getText().toString();
-		if (searchText != null && searchText != "") {
-		    System.out.println(searchText);
+
+		/*
+		 * if the search text is not null and empty, we carry out the
+		 * search.
+		 * else we return all the stories.
+		 * Note: currently, due to whitespace and newline character problem
+		 * in elasticsearch query, we 
+		 */
+		if (searchText != null && !searchText.equals("")) {
 		    fillData(fHelper.searchOfflineStories(searchText), onUpdate);
 		} else {
 		    try {
