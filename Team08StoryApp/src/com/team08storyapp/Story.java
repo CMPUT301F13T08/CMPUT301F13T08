@@ -216,12 +216,12 @@ public class Story implements Serializable {
      */
     
     public void setFirstStoryFragment(int firstStoryFragmentId) {
-	this.firstStoryFragmentId = firstStoryFragmentId;
+    	this.firstStoryFragmentId = firstStoryFragmentId;
     }
 
     @Override
     public String toString() {
-	return "Story [offlineStoryId=" + offlineStoryId+ "olineStoryId= " + onlineStoryId + "title=" + title + ", author="
+    	return "Story [offlineStoryId=" + offlineStoryId+ "olineStoryId= " + onlineStoryId + "title=" + title + ", author="
 		+ author + ", storyFragments=" + storyFragments
 		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
     }
@@ -231,7 +231,7 @@ public class Story implements Serializable {
      */
 
     public int getOfflineStoryId() {
-	return offlineStoryId;
+    	return offlineStoryId;
     }
 
     /**
@@ -239,6 +239,6 @@ public class Story implements Serializable {
      * 			sets offlineStoryId
      */
     public void setOfflineStoryId(int offlineStoryId) {
-	this.offlineStoryId = offlineStoryId;
+    	this.offlineStoryId = offlineStoryId;
     }
 }
