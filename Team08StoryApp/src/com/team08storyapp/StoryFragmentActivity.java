@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -70,11 +70,10 @@ import android.widget.Toast;
  * instantiate the interactive gallery
  */
 public class StoryFragmentActivity extends Activity {
-    private static final int SELECT_PHOTO = 100;
-    private final static int VIEW_ANNOTATION = Menu.FIRST;
-    private final static int ADD_ANNOTATION = Menu.FIRST + 1;
-    private final static int MAIN_MENU = Menu.FIRST + 2;
 
+    // private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private int currentStoryFragmentId;
     private int currentStoryFragmentIndex;
     private int currentStoryId;
@@ -90,8 +89,7 @@ public class StoryFragmentActivity extends Activity {
     private StoryFragment currentStoryFragment;
     private FileHelper fHelper;
     private ESHelper esHelper;
-
-    private final int PICKER = 1;
+    private Uri imageFileUri;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -249,171 +247,169 @@ public class StoryFragmentActivity extends Activity {
 	MenuInflater inflater = popupMenu.getMenuInflater();
 	// popupMenu.inflate(R.menu.annotation_view);
 	inflater.inflate(R.menu.annotation_view, popupMenu.getMenu());
-	
-	popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){	   
-	    public boolean onMenuItemClick(MenuItem item) {
-		System.out.println("MenuItemSetUp");
-		switch (item.getItemId()) {
-		case R.id.add_anno_camera:
-		    // archive(item);
-		    return true;
-		case R.id.add_anno_gallery:
-		    // take the user to their chosen image selection app (gallery or
-		    // file manager)
-		    System.out.println("GallerySelected!");
-		    Intent pickIntent = new Intent();
-		    pickIntent.setType("image/*");
-		    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
-		    startActivityForResult(
-				Intent.createChooser(pickIntent, "Select Picture"), 1);
-		    return true;
-		default:
-		    return false;
-		}
-	    }
-	});
+	popupMenu
+		.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+		    public boolean onMenuItemClick(MenuItem item) {
+
+			switch (item.getItemId()) {
+			case R.id.add_anno_camera:
+			    Intent intent = new Intent(
+				    MediaStore.ACTION_IMAGE_CAPTURE);
+			    intent.putExtra(MediaStore.EXTRA_OUTPUT,
+				    imageFileUri);
+			    startActivityForResult(intent,
+				    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+			    return true;
+			case R.id.add_anno_gallery:
+			    // take the user to their chosen image selection app
+			    Intent pickIntent = new Intent();
+			    pickIntent.setType("image/*");
+			    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
+			    startActivityForResult(
+					Intent.createChooser(pickIntent, "Select Picture"), 1);
+			    return true;
+			default:
+			    return false;
+			}
+		    }
+		});
 	popupMenu.show();
-	
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 	if (resultCode == RESULT_OK) {
 	    // check if we are returning from picture selection
-	    if (requestCode == PICKER) {
-		
-		// the returned picture URI
-		Uri pickedUri = data.getData();
 
-		// declare the bitmap
-		Bitmap pic = null;
-		// declare the path string
-		String imgPath = "";
+	    // the returned picture URI
+	    Uri pickedUri = data.getData();
 
-		// retrieve the string using media data
-		String[] medData = { MediaStore.Images.Media.DATA };
-		// query the data
-		Cursor picCursor = managedQuery(pickedUri, medData, null, null,
-			null);
-		if (picCursor != null) {
-		    // get the path string
-		    int index = picCursor
-			    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-		    picCursor.moveToFirst();
-		    imgPath = picCursor.getString(index);
-		} else
-		    imgPath = pickedUri.getPath();
+	    // declare the bitmap
+	    Bitmap pic = null;
+	    // declare the path string
+	    String imgPath = "";
 
-		// if and else handle both choosing from gallery and from file
-		// manager
+	    // retrieve the string using media data
+	    String[] medData = { MediaStore.Images.Media.DATA };
+	    // query the data
+	    Cursor picCursor = managedQuery(pickedUri, medData, null, null,
+		    null);
+	    if (picCursor != null) {
+		// get the path string
+		int index = picCursor
+			.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		picCursor.moveToFirst();
+		imgPath = picCursor.getString(index);
+	    } else
+		imgPath = pickedUri.getPath();
 
-		// if we have a new URI attempt to decode the image bitmap
-		if (pickedUri != null) {
+	    // if and else handle both choosing from gallery and from file
+	    // manager
 
-		    // set the width and height we want to use as maximum
-		    // display
-		    int targetWidth = 200;
-		    int targetHeight = 150;
+	    // if we have a new URI attempt to decode the image bitmap
+	    if (pickedUri != null) {
 
-		    // sample the incoming image to save on memory resources
+		// set the width and height we want to use as maximum
+		// display
+		int targetWidth = 200;
+		int targetHeight = 150;
 
-		    // create bitmap options to calculate and use sample size
-		    BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+		// sample the incoming image to save on memory resources
 
-		    // first decode image dimensions only - not the image bitmap
-		    // itself
-		    bmpOptions.inJustDecodeBounds = true;
-		    BitmapFactory.decodeFile(imgPath, bmpOptions);
+		// create bitmap options to calculate and use sample size
+		BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
 
-		    // work out what the sample size should be
+		// first decode image dimensions only - not the image bitmap
+		// itself
+		bmpOptions.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(imgPath, bmpOptions);
 
-		    // image width and height before sampling
-		    int currHeight = bmpOptions.outHeight;
-		    int currWidth = bmpOptions.outWidth;
+		// work out what the sample size should be
 
-		    // variable to store new sample size
-		    int sampleSize = 1;
+		// image width and height before sampling
+		int currHeight = bmpOptions.outHeight;
+		int currWidth = bmpOptions.outWidth;
 
-		    // calculate the sample size if the existing size is larger
-		    // than target size
-		    if (currHeight > targetHeight || currWidth > targetWidth) {
-			// use either width or height
-			if (currWidth > currHeight)
-			    sampleSize = Math.round((float) currHeight
-				    / (float) targetHeight);
-			else
-			    sampleSize = Math.round((float) currWidth
-				    / (float) targetWidth);
-		    }
-		    // use the new sample size
-		    bmpOptions.inSampleSize = sampleSize;
+		// variable to store new sample size
+		int sampleSize = 1;
 
-		    // now decode the bitmap using sample options
-		    bmpOptions.inJustDecodeBounds = false;
-
-		    // get the file as a bitmap
-		    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-		    String fileName = "Image"
-			    + Integer.toString(currentStoryId)
-			    + "Fragment"
-			    + Integer.toString(currentStoryFragment
-				    .getStoryFragmentId())
-			    + "Annotation"
-			    + Integer.toString(currentStoryFragment
-				    .getAnnotations().size() + 1) + ".png";
-		    System.out.println("New image: " + fileName);
-
-		    try {
-			FileOutputStream fos = openFileOutput(fileName,
-				Context.MODE_PRIVATE);
-			pic.compress(CompressFormat.PNG, 90, fos);
-		    } catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		    }
-		    System.out.println(currentStoryFragment.toString());
-		    System.out.println(currentStory.getStoryFragments()
-			    .toString());
-		    System.out.println("TEST ID " + currentStoryFragmentIndex);
-		    Annotation add = new Annotation();
-		    add.setAnnotationID(currentStoryFragment.getAnnotations()
-			    .size() + 1);
-		    add.setPhoto(fileName);
-		    ArrayList<Annotation> temp = currentStoryFragment
-			    .getAnnotations();
-		    temp.add(add);
-		    System.out.println("Annotation MAKE DONE");
-		    currentStoryFragment.setAnnotations(temp);
-		    currentStory.getStoryFragments().set(
-			    currentStoryFragmentIndex, currentStoryFragment);
-		    System.out.println("SWAP FRAGMENT DONE");
-		    try {
-			fHelper.updateOfflineStory(currentStory);
-			System.out.println("Test currentStoryId:"
-				+ currentStoryId);
-			currentStory = fHelper.getOfflineStory(currentStoryId);
-			esHelper.addOrUpdateOnlineStory(currentStory);
-			Toast.makeText(getApplicationContext(),
-				"New annotation is uploaded successfully",
-				Toast.LENGTH_LONG).show();
-			System.out
-				.println("================================================CLEAR==================================");
-		    } catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		    } catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		    }
-
+		// calculate the sample size if the existing size is larger
+		// than target size
+		if (currHeight > targetHeight || currWidth > targetWidth) {
+		    // use either width or height
+		    if (currWidth > currHeight)
+			sampleSize = Math.round((float) currHeight
+				/ (float) targetHeight);
+		    else
+			sampleSize = Math.round((float) currWidth
+				/ (float) targetWidth);
 		}
-	    }
+		// use the new sample size
+		bmpOptions.inSampleSize = sampleSize;
 
-	    // superclass method
-	    super.onActivityResult(requestCode, resultCode, data);
+		// now decode the bitmap using sample options
+		bmpOptions.inJustDecodeBounds = false;
+
+		// get the file as a bitmap
+		pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
+
+		String fileName = "Image"
+			+ Integer.toString(currentStoryId)
+			+ "Fragment"
+			+ Integer.toString(currentStoryFragment
+				.getStoryFragmentId())
+			+ "Annotation"
+			+ Integer.toString(currentStoryFragment
+				.getAnnotations().size() + 1) + ".png";
+		System.out.println("New image: " + fileName);
+
+		try {
+		    FileOutputStream fos = openFileOutput(fileName,
+			    Context.MODE_PRIVATE);
+		    pic.compress(CompressFormat.PNG, 90, fos);
+		} catch (FileNotFoundException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+		System.out.println(currentStoryFragment.toString());
+		System.out.println(currentStory.getStoryFragments().toString());
+		System.out.println("TEST ID " + currentStoryFragmentIndex);
+		Annotation add = new Annotation();
+		add.setAnnotationID(currentStoryFragment.getAnnotations()
+			.size() + 1);
+		add.setPhoto(fileName);
+		ArrayList<Annotation> temp = currentStoryFragment
+			.getAnnotations();
+		temp.add(add);
+		System.out.println("Annotation MAKE DONE");
+		currentStoryFragment.setAnnotations(temp);
+		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+			currentStoryFragment);
+		System.out.println("SWAP FRAGMENT DONE");
+		try {
+		    fHelper.updateOfflineStory(currentStory);
+		    System.out.println("Test currentStoryId:" + currentStoryId);
+		    currentStory = fHelper.getOfflineStory(currentStoryId);
+		    esHelper.addOrUpdateOnlineStory(currentStory);
+		    Toast.makeText(getApplicationContext(),
+			    "New annotation is uploaded successfully",
+			    Toast.LENGTH_LONG).show();
+		    System.out
+			    .println("================================================CLEAR==================================");
+		} catch (FileNotFoundException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+
+	    }
 	}
 
+	// superclass method
+	super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

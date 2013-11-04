@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -49,18 +49,23 @@ public class PhotoController extends Activity {
 	private static final int SELECT_PHOTO = 200;
 	Uri imageFileUri;
 	
+	
 	public void takePhoto(){
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 	
-	public void uploadPhoto() {
-		Intent photoPickIntent = new Intent(Intent.ACTION_PICK);
-		photoPickIntent.setType("image/*");
-		startActivityForResult(photoPickIntent, SELECT_PHOTO);
+	public void chooseFromGallery() {
+	    Intent pickIntent = new Intent();
+	    pickIntent.setType("image/*");
+	    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
+	    startActivityForResult(
+			Intent.createChooser(pickIntent, "Select Picture"), 1);
 	}
 	
+	
+	/*
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
 	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 	        if (resultCode == RESULT_OK) {
