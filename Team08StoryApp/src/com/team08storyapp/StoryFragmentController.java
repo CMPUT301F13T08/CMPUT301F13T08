@@ -31,9 +31,6 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
-
-
-
 public class StoryFragmentController {
 	
 	public void addAnnotation(Annotation annotation, StoryFragment storyfragment){
