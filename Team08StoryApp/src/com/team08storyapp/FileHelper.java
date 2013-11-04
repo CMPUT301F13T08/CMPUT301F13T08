@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -347,6 +347,7 @@ public class FileHelper {
 	    for (int m = 0; m < photos.size(); m++) {
 		byte[] photoByte = Base64.decode(photos.get(m)
 			.getEncodedPicture(), Base64.DEFAULT);
+		
 		Bitmap photoBM = BitmapFactory.decodeByteArray(photoByte, 0,
 			photoByte.length);
 		// clear the encoded string to avoid conflicts with encodeStory
@@ -367,6 +368,7 @@ public class FileHelper {
 		} else {
 		    fileName = photos.get(m).getPictureName();
 		}
+		
 		System.out.println("Decode Image File Name: " + fileName);
 		try {
 		    FileOutputStream fos = fileContext.openFileOutput(fileName,

@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -80,8 +80,11 @@ public class PicAdapter extends BaseAdapter {
 	    // set placeholder as all thumbnail images in the gallery initially
 	    for (int i = 0; i < imageBitmaps.length; i++)
 		imageBitmaps[i] = placeholder;
-
+	    System.out.println("place holder done");
+	    
+	    //System.out.println("photosize > 0");
 	    if (photoList.size() > 0) {
+		System.out.println("photosize > 0");
 		File file = galleryContext.getFilesDir();
 		File[] fileList = file.listFiles();
 		ArrayList<File> prefixFileList = new ArrayList<File>();
@@ -95,7 +98,7 @@ public class PicAdapter extends BaseAdapter {
 		    }
 		}
 		for (int i = 0; i < Math.min(imageBitmaps.length,
-			photoList.size()); i++) {
+			prefixFileList.size()); i++) {
 		    String path = prefixFileList.get(i).getAbsolutePath();
 		    // String filePath = path.substring(0,
 		    // path.lastIndexOf(File.separator));

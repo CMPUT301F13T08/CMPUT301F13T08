@@ -64,39 +64,21 @@ public class OfflineStoriesActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
-	// set the background view for layout
 	setContentView(R.layout.activity_story_list);
-	
-	// set up the listview
 	lv = (ListView) findViewById(android.R.id.list);
 
-	// instantiate a fHelper
 	fHelper = new FileHelper(this, 0);
 
-	// set up the header 
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
-	
-	// set up the search button
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
-	
-	// set up the search field which is an editText
 	et = (EditText) header.findViewById(R.id.searchText);
 
-	// enable the clickListener on search button
 	searchButton.setOnClickListener(new View.OnClickListener() {
-	    
 	    @Override
 	    public void onClick(View v) {
 		searchText = et.getText().toString();
-
-		/*
-		 * if the search text is not null and empty, we carry out the
-		 * search.
-		 * else we return all the stories.
-		 * Note: currently, due to whitespace and newline character problem
-		 * in elasticsearch query, we 
-		 */
-		if (searchText != null && !searchText.equals("")) {
+		if (searchText != null && searchText != "") {
+		    System.out.println(searchText);
 		    fillData(fHelper.searchOfflineStories(searchText), onUpdate);
 		} else {
 		    try {

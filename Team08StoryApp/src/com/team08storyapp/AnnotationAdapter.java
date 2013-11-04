@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -45,24 +45,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-/**
- * AnnotationAdapter is a class that is responsible for populating
- * an annotation array list into a list view.
- * 
- * @author Alice Wu
- *
- */
+
 public class AnnotationAdapter extends ArrayAdapter<Annotation> {
     private ArrayList<Annotation> annoList;
     private Activity activity;
 
-    /**
-     * constructor of an annotationAdapter.
-     * 
-     * @param Activity a
-     * @param textViewResourceId
-     * @param annoList
-     */
     public AnnotationAdapter(Activity a, int textViewResourceId,
 	    ArrayList<Annotation> annoList) {
 	super(a, textViewResourceId, annoList);
@@ -70,27 +57,11 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	this.activity = a;
     }
 
-    /**
-     * The view that we are going to put information of annotations
-     * in.
-     * In this class, there are two fields: an ImageView for image annotation
-     * and a TextView for text annotation.
-     * @author Alice Wu
-     *
-     */
     public static class ViewHolder {
 	public ImageView annoImage;
 	public TextView annoText;
     }
-    
-    /**
-     * Overrides getView method in ArrayAdapter.
-     * 
-     * @param: position
-     * @param: convertView
-     * @param: parent;
-     * @return: View
-     */
+
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
 	ViewHolder holder;
@@ -109,8 +80,6 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	final Annotation anno = annoList.get(position);
 
 	if (anno != null) {
-	    
-	    // set the annotation photo if it has
 	    if (anno.getPhoto() != null && !anno.getPhoto().isEmpty()) {
 		File file = activity.getFilesDir();
 		File[] fileList = file.listFiles();
@@ -135,7 +104,6 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 			activity.getResources(), R.drawable.ic_launcher));
 	    }
 
-	    // set the text annotation if the annotation has
 	    if (anno.getText() != null && !anno.getText().isEmpty()) {
 		holder.annoText.setText(anno.getText());
 	    } else {
