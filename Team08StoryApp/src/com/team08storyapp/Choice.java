@@ -33,53 +33,101 @@ package com.team08storyapp;
 
 import java.io.Serializable;
 
-public class Choice implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	String text;
-	int toGoToStoryFragmentID;
-	int choiceId;
+/**
+ * Choice is a model for the possible choices a Story Fragment may contain. A
+ * Choice for a Story Fragment leads the Story to another Story Fragment of the
+ * Reader's choice.
+ * <p>
+ * A Choice has the following properties:
+ * <ul>
+ * <li>Choice Id to uniquely identify the choice.
+ * <li>Text displayed for the choice.
+ * <li>Story Fragment Id of the Story Fragment to go to from the choice.
+ * </ul>
+ * These properties are able to be accessed through the constructor or through
+ * public getters/setters.
+ * 
+ * @see StoryFragment
+ * @see Story
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
+public class Choice implements Serializable {
+    private static final long serialVersionUID = 1L;
+    String text;
+    int toGoToStoryFragmentID;
+    int choiceId;
 
-	public Choice() {
+    /**
+     * A constructor for creating a Choice object, when the following
+     * properties are known:
+     * <ul>
+     * <li>Story Fragment Id
+     * <li>Choice Id
+     * <li>Text
+     * </ul>
+     * 
+     * @param toGoToStoryFragmentID Story Fragment the Choice leads to.
+     * @param choiceId Unique identifier of the Choice.
+     * @param text The text to display to the Choice.
+     */
+    public Choice(int toGoToStoryFragmentID, int choiceId, String text) {
+	super();
+	this.text = text;
+	this.toGoToStoryFragmentID = toGoToStoryFragmentID;
+	this.choiceId = choiceId;
+    }
 
-	}
+    /**
+     * @return the text
+     */
+    public String getText() {
+	return text;
+    }
 
-	public Choice(int toGoToStoryFragmentID, int choiceId, String text) {
-		super();
-		this.text = text;
-		this.toGoToStoryFragmentID = toGoToStoryFragmentID;
-		this.choiceId = choiceId;
-	}
+    /**
+     * @param text
+     *            The text to set for the Choice
+     */
+    public void setText(String text) {
+	this.text = text;
+    }
 
-	public String getText() {
-		return text;
-	}
+    /**
+     * @return the getStoryFragmentID
+     */
+    public int getStoryFragmentID() {
+	return toGoToStoryFragmentID;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    /**
+     * @param setStoryFragmentID
+     *            The setStoryFragmentID to set for the Choice
+     */
+    public void setStoryFragmentID(int toGoToStoryFragmentID) {
+	this.toGoToStoryFragmentID = toGoToStoryFragmentID;
+    }
 
-	public int getStoryFragmentID() {
-		return toGoToStoryFragmentID;
-	}
+    /**
+     * @return the choiceId
+     */
+    public int getChoiceId() {
+	return choiceId;
+    }
 
-	public void setStoryFragmentID(int toGoToStoryFragmentID) {
-		this.toGoToStoryFragmentID = toGoToStoryFragmentID;
-	}
+    /**
+     * @param choiceId
+     *            The choiceId to set for the Choice
+     */
+    public void setChoiceId(int choiceId) {
+	this.choiceId = choiceId;
+    }
 
-	public int getChoiceId() {
-		return choiceId;
-	}
-
-	public void setChoiceId(int choiceId) {
-		this.choiceId = choiceId;
-	}
-
-	@Override
-	public String toString() {
-		return "Choice [choiceId=" + choiceId + ", toGoToStoryFragmentID="
-				+ toGoToStoryFragmentID + ", text=" + text + "]";
-	}
 }
