@@ -257,7 +257,7 @@ public class StoryFragmentActivity extends Activity {
 	    showPopup();
 	    return true;
 	    
-	case R.id.action_settings:
+	case R.id.action_mainmenu:
 	    Intent mainIntent = new Intent(getApplicationContext(),
 		    MainActivity.class);
 	    startActivity(mainIntent);
