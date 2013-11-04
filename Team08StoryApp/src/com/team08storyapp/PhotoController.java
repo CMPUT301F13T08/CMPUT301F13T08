@@ -31,18 +31,10 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
-/**
+/*
  * PhotoController is a controller class which allows users to choose from gallery
  * or take a photo through intent in order to add a photo to an annotation or 
  * a story fragment or an annotation.
- * 
- * @author Michele Paulichuk
- * @author Alice Wu
- * @author Ana Marcu
- * @author Jarrett Toll
- * @author Jiawei Shen
- * @version 1.0 Novebmer 8, 2013
- * @since 1.0
  * 
  */
 
