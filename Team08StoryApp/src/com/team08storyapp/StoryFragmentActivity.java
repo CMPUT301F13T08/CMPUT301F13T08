@@ -74,6 +74,8 @@ public class StoryFragmentActivity extends Activity {
     // private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    private static final int MODE_ONLINE = 0;
+    private static final int MODE_OFFLINE = 1;
     private int currentStoryFragmentId;
     private int currentStoryFragmentIndex;
     private int currentStoryId;
@@ -90,6 +92,7 @@ public class StoryFragmentActivity extends Activity {
     private FileHelper fHelper;
     private ESHelper esHelper;
     private Uri imageFileUri;
+    private int mode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,6 +145,7 @@ public class StoryFragmentActivity extends Activity {
 
 	Intent storyFragment = getIntent();
 
+	mode = storyFragment.getIntExtra("mode", 0);
 	// Get the story object from the intent
 	// See source [7]
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
@@ -265,8 +269,8 @@ public class StoryFragmentActivity extends Activity {
 			    Intent pickIntent = new Intent();
 			    pickIntent.setType("image/*");
 			    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
-			    startActivityForResult(
-					Intent.createChooser(pickIntent, "Select Picture"), 1);
+			    startActivityForResult(Intent.createChooser(
+				    pickIntent, "Select Picture"), 1);
 			    return true;
 			default:
 			    return false;
@@ -387,25 +391,31 @@ public class StoryFragmentActivity extends Activity {
 		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 			currentStoryFragment);
 		System.out.println("SWAP FRAGMENT DONE");
-		try {
-		    fHelper.updateOfflineStory(currentStory);
-		    System.out.println("Test currentStoryId:" + currentStoryId);
-		    currentStory = fHelper.getOfflineStory(currentStoryId);
+		if (mode == MODE_OFFLINE) {
+		    try {
+			fHelper.updateOfflineStory(currentStory);
+			System.out.println("Test currentStoryId:"
+				+ currentStoryId);
+			currentStory = fHelper.getOfflineStory(currentStoryId);
+			esHelper.addOrUpdateOnlineStory(currentStory);
+			System.out
+				.println("================================================CLEAR==================================");
+		    } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+		} else if (mode == MODE_ONLINE) {
 		    esHelper.addOrUpdateOnlineStory(currentStory);
-		    Toast.makeText(getApplicationContext(),
+		}
+		 Toast.makeText(getApplicationContext(),
 			    "New annotation is uploaded successfully",
 			    Toast.LENGTH_LONG).show();
-		    System.out
-			    .println("================================================CLEAR==================================");
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
-
 	    }
+	   
+	    
 	}
 
 	// superclass method

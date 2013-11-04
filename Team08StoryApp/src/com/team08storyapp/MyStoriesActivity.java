@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -105,11 +105,6 @@ public class MyStoriesActivity extends ListActivity {
 	    cList.add(c2);
 	    cList.add(c1);
 	    sf1.setChoices(cList);
-	    Annotation anno = new Annotation(2, 1, "",
-		    "GTA5 Rules! Can't wait for Trevor's appearance!");
-	    ArrayList<Annotation> alist = new ArrayList<Annotation>();
-	    alist.add(anno);
-	    sf1.setAnnotations(alist);
 	    sfList.add(sf1);
 	    s1.setOnlineStoryId(7);
 

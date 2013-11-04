@@ -143,6 +143,7 @@ public class OfflineStoriesActivity extends ListActivity {
 
 	// send the first story fragment id through the intent
 	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+	firstStoryFragment.putExtra("mode", 1);
 
 	// start the StoryFragmentActivity to display the first fragment of the
 	// selected story

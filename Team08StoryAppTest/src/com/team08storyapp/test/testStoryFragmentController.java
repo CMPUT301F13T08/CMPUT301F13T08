@@ -35,7 +35,7 @@ public class testStoryFragmentController extends TestCase {
 		//storyFragments = new ArrayList<StoryFragment>();
 		
 		firstChoice = new Choice(2, 1, "stuff");
-		firstPhoto = new Photo(null);
+		firstPhoto = new Photo();
 		firstAnnotation = new Annotation(0, 0, null, null);
 		aAnnotations = new ArrayList<Annotation>();
 		aChoices = new ArrayList<Choice>();

@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -158,7 +158,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    // create intent to pass the selected story object and the first
 	    // story fragment id to the StoryFragmentActivity
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
-		    OnlineStoryFragmentActivity.class);
+		    StoryFragmentActivity.class);
 
 	    fHelper = new FileHelper(this, 0);
 	    // send the story object through the intent
@@ -179,6 +179,7 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    // send the first story fragment id through the intent
 	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+	    firstStoryFragment.putExtra("mode", 0);
 
 	    // start the StoryFragmentActivity to display the first fragment of
 	    // the selected story
