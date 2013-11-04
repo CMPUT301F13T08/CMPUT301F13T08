@@ -33,11 +33,20 @@ package com.team08storyapp;
 
 import java.io.Serializable;
 
+/**
+ * Annotation is a model class representing a User's Annotations. An Annotation has 
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ *
+ */
 public class Annotation implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int annotationID;
 	private String text;
@@ -55,12 +64,6 @@ public class Annotation implements Serializable{
 
 	public Annotation() {
 
-	}
-
-	public Annotation(int storyFragmentID, String photo, String text) {
-		this.storyFragmentID = storyFragmentID;
-		this.photo = photo;
-		this.text = text;
 	}
 
 	public Annotation(int annotationID, int storyFragmentID, String photo,
@@ -103,12 +106,4 @@ public class Annotation implements Serializable{
 	public String getPhoto() {
 		return photo;
 	}
-
-	@Override
-	public String toString() {
-		return "Annotation [storyFragmentID=" + storyFragmentID
-				+ ", annotationID=" + annotationID + ", text=" + text
-				+ ", photo=" + photo + "]";
-	}
-
 }
