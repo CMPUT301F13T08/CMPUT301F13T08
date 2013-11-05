@@ -19,14 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 3rd Party Libraries
 =============
 Retrieved Oct. 27, 2013 - https://github.com/rayzhangcl/ESDemo
--This demo was used to help with JSON and ESHelper
+-This demo was used to help with JSON and ESHelper which is under the CC0 licenses
 
 Retrieved Oct. 29, 2013  - http://hc.apache.org/downloads.cgi
--This is for the fluent library which is licenced under apache V2
+-This is for the fluent library which is licensed under apache V2
 
 Retrieved Oct. 29, 2013 
 - https://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.4-release.zip&can=2&q=
--This is for JSON which is licenced under apache V2
+-This is for JSON which is licensed under apache V2
  */
 
 package com.team08storyapp;
@@ -66,8 +66,11 @@ public class Choice implements Serializable {
     int choiceId;
 
     /**
-     * A constructor for creating a Choice object, when the following properties
-     * are known:
+     * A constructor for creating a Choice object. This is the only constructor
+     * used and is used to help setup the Choices to display for a Story
+     * Fragment for when a Story is being read by a user or saving Choices when
+     * an Author is writing a Story. The following properties must be known at
+     * time of creating a Choice object:
      * <ul>
      * <li>Story Fragment Id
      * <li>Choice Id

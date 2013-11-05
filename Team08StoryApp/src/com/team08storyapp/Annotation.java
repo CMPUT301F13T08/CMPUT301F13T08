@@ -19,14 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 3rd Party Libraries
 =============
 Retrieved Oct. 27, 2013 - https://github.com/rayzhangcl/ESDemo
--This demo was used to help with JSON and ESHelper
+-This demo was used to help with JSON and ESHelper which is under the CC0 licenses
 
 Retrieved Oct. 29, 2013  - http://hc.apache.org/downloads.cgi
--This is for the fluent library which is licenced under apache V2
+-This is for the fluent library which is licensed under apache V2
 
 Retrieved Oct. 29, 2013 
 - https://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.4-release.zip&can=2&q=
--This is for JSON which is licenced under apache V2
+-This is for JSON which is licensed under apache V2
  */
 
 package com.team08storyapp;
@@ -34,7 +34,7 @@ package com.team08storyapp;
 import java.io.Serializable;
 
 /**
- * Annotation is a model class representing a User's Annotations on a Particular
+ * Annotation is a model class representing a reader's Annotations on a Particular
  * Story Fragment. An Annotation has the following properties:
  * <ul>
  * <li>Annotation Id to uniquely identify the Annotation.
@@ -82,35 +82,6 @@ public class Annotation implements Serializable {
     }
 
     /**
-     * A constructor for creating an Annotation object, when the following
-     * properties are known:
-     * <ul>
-     * <li>Annotation Id
-     * <li>Story Fragment Id
-     * <li>Photo
-     * <li>Text
-     * </ul>
-     * 
-     * @param annotationID
-     *            The Id used to uniquely identify an Annotation.
-     * @param storyFragmentID
-     *            The Id used to identify which story fragment the Annotation
-     *            belongs to.
-     * @param photo
-     *            The image or illustration component of the Annotation.
-     * @param text
-     *            The textual component of the Annotation.
-     */
-    public Annotation(int annotationID, int storyFragmentID, String photo,
-	    String text) {
-	super();
-	this.annotationID = annotationID;
-	this.storyFragmentID = storyFragmentID;
-	this.photo = photo;
-	this.text = text;
-    }
-
-    /**
      * @return The text of an Annotation
      */
     public String getText() {
@@ -119,7 +90,7 @@ public class Annotation implements Serializable {
 
     /**
      * @param text
-     *            the text to set
+     *            The text to set the in the Annotation.
      */
     public void setText(String text) {
 	this.text = text;

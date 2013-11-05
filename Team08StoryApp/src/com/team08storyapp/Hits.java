@@ -19,14 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 3rd Party Libraries
 =============
 Retrieved Oct. 27, 2013 - https://github.com/rayzhangcl/ESDemo
--This demo was used to help with JSON and ESHelper
+-This demo was used to help with JSON and ESHelper which is under the CC0 licenses
 
 Retrieved Oct. 29, 2013  - http://hc.apache.org/downloads.cgi
--This is for the fluent library which is licenced under apache V2
+-This is for the fluent library which is licensed under apache V2
 
 Retrieved Oct. 29, 2013 
 - https://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.4-release.zip&can=2&q=
--This is for JSON which is licenced under apache V2
+-This is for JSON which is licensed under apache V2
  */
 
 package com.team08storyapp;
@@ -34,24 +34,48 @@ package com.team08storyapp;
 import java.util.Collection;
 
 /**
+ * Hits is a model class used in conjunction with the ElasticSearch. It helps
+ * store the number of hits a call to the webservice using ElasticSearch
+ * returns.
+ * <p>
+ * This class is a strongly typed class and is used on model classes
+ * representing the JSON objects to return from an ElasticSearch.
+ * 
+ * @param <T>
+ *            The java object that will be returned via JSON from the
+ *            ElasticSearch.
+ * 
+ * @see ESHelper
+ * 
+ * @author Abram Hindle and Chenlei Zhang (@link
+ *         https://github.com/rayzhangcl/ESDemo)
  * @author Michele Paulichuk
  * @author Alice Wu
  * @author Ana Marcu
  * @author Jarrett Toll
  * @author Jiawei Shen
  * @version 1.0 November 8, 2013
- * @since 1.0
- *
- * @param <T>
+ * @since 1.0 *
  */
 public class Hits<T> {
     int total;
     double max_score;
     Collection<ElasticSearchResponse<T>> hits;
+
+    /**
+     * @return The number of hits a search has retrieved.
+     */
     public Collection<ElasticSearchResponse<T>> getHits() {
-        return hits;
+	return hits;
     }
+
+    /**
+     * This method overrides the toString() method. Allowing it to display the
+     * properties of this model class when the toString method is called.
+     * 
+     * @see java.lang.Object#toString()
+     */
     public String toString() {
-        return (super.toString()+","+total+","+max_score+","+hits);
+	return (super.toString() + "," + total + "," + max_score + "," + hits);
     }
 }

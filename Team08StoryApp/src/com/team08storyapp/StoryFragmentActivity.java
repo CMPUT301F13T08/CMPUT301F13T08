@@ -1,11 +1,11 @@
-/**
+/*
 AUTHORS
 ========
 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -19,14 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 3rd Party Libraries
 =============
 Retrieved Oct. 27, 2013 - https://github.com/rayzhangcl/ESDemo
--This demo was used to help with JSON and ESHelper
+-This demo was used to help with JSON and ESHelper which is under the CC0 licenses
 
 Retrieved Oct. 29, 2013  - http://hc.apache.org/downloads.cgi
--This is for the fluent library which is licenced under apache V2
+-This is for the fluent library which is licensed under apache V2
 
 Retrieved Oct. 29, 2013 
 - https://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.4-release.zip&can=2&q=
--This is for JSON which is licenced under apache V2
+-This is for JSON which is licensed under apache V2
  */
 
 package com.team08storyapp;

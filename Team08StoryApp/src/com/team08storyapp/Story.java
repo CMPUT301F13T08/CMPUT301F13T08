@@ -19,14 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 3rd Party Libraries
 =============
 Retrieved Oct. 27, 2013 - https://github.com/rayzhangcl/ESDemo
--This demo was used to help with JSON and ESHelper
+-This demo was used to help with JSON and ESHelper which is under the CC0 licenses
 
 Retrieved Oct. 29, 2013  - http://hc.apache.org/downloads.cgi
--This is for the fluent library which is licenced under apache V2
+-This is for the fluent library which is licensed under apache V2
 
 Retrieved Oct. 29, 2013 
 - https://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.4-release.zip&can=2&q=
--This is for JSON which is licenced under apache V2
+-This is for JSON which is licensed under apache V2
  */
 
 package com.team08storyapp;
@@ -35,8 +35,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Story is a model class representing a Story. A story has the following
- * properties:
+ * Story is a model class representing a Chose Your Own Adventure Story. A story
+ * has the following properties:
  * <ul>
  * <li>Online Story Id to uniquely identify the Story from other Stories stored
  * online.
@@ -75,7 +75,7 @@ public class Story implements Serializable {
 
     /**
      * A constructor for creating a Story object used when initializing a sample
-     * story for testing. The following properties must be know:
+     * story for testing. The following must be know:
      * <ul>
      * <li>Title
      * <li>Author
@@ -94,8 +94,9 @@ public class Story implements Serializable {
     }
 
     /**
-     * A constructor for creating a Story object used when an Author is writing
-     * a Story. The following properties must be know:
+     * A constructor for creating a Story object used for setting up a Story for
+     * displaying to a reader or when an Author saves a Story they are writing.
+     * The following properties must be know:
      * <ul>
      * <li>OfflineStoryId
      * <li>Title
