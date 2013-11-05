@@ -106,8 +106,6 @@ public class OnlineStoriesActivity extends ListActivity {
 	registerForContextMenu(getListView());
     }
 
-
-
     public void onCreateContextMenu(ContextMenu menu, View v,
 	    ContextMenuInfo menuInfo) {
 	super.onCreateContextMenu(menu, v, menuInfo);
@@ -206,5 +204,11 @@ public class OnlineStoriesActivity extends ListActivity {
 	super.onActivityResult(requestCode, resultCode, intent);
 	fillData(esHelper.getOnlineStories(), onUpdate);
     }
+
+    /*
+     *  remainder to Alice: remember to set the onResume, otherwise there won't
+     *  any update.
+     */
+  
 
 }

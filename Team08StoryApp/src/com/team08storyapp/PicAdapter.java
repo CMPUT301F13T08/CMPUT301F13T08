@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -86,11 +86,11 @@ public class PicAdapter extends BaseAdapter {
 		File[] fileList = file.listFiles();
 		ArrayList<File> prefixFileList = new ArrayList<File>();
 		for (int i = 0; i < fileList.length; i++) {
-		    System.out.println("FIND IMAGE: " + fileList[i].getName());
+		    //System.out.println("FIND IMAGE: " + fileList[i].getName());
 		    if (fileList[i].getName().startsWith(
 			    "Image"+Integer.toString(currentStoryId)+"Fragment"
 				    + Integer.toString(currentStoryFragmentId))) {
-			System.out.println("USE IMAGE: " + fileList[i].getName());
+			//System.out.println("USE IMAGE: " + fileList[i].getName());
 			prefixFileList.add(fileList[i]);
 		    }
 		}
@@ -105,7 +105,7 @@ public class PicAdapter extends BaseAdapter {
 			    .compress(Bitmap.CompressFormat.PNG, 100, stream);
 		    byte[] bytePicture = stream.toByteArray();
 
-		    System.out.println("*****ByteArray Done******");
+		    //System.out.println("*****ByteArray Done******");
 
 		    imageBitmaps[i] = BitmapFactory.decodeByteArray(
 			    bytePicture, 0, bytePicture.length);
