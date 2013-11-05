@@ -2,9 +2,6 @@ package com.team08storyapp.test;
 
 import java.util.ArrayList;
 
-import com.team08storyapp.Annotation;
-import com.team08storyapp.Choice;
-import com.team08storyapp.Photo;
 import com.team08storyapp.StoryController;
 import com.team08storyapp.StoryFragment;
 
