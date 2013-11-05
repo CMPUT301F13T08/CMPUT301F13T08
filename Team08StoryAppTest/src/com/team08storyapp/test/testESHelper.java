@@ -22,8 +22,7 @@ public class testESHelper extends TestCase {
      * as test data for the below tests.
      */
     private Story initializeSampleStory() {
-	Story sampleStory = new Story("The Walk", "Michele Paulichuk");
-	sampleStory.setOnlineStoryId(1);
+	Story sampleStory = new Story("Sample Story for Testing", "Michele Paulichuk");
 
 	ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
 
@@ -162,6 +161,8 @@ public class testESHelper extends TestCase {
 	// create the story for adding to the webservice
 	Story addStory = initializeSampleStory();
 
+	addStory.setOnlineStoryId(expectedid);
+	
 	// add the story and test that the id expected is the id assigned
 	assertTrue(esHelper.addOrUpdateOnlineStory(addStory) == expectedid);
 
@@ -225,7 +226,7 @@ public class testESHelper extends TestCase {
      */
     public void testGetOnlineStories() {
 	// set to the known count of the stories on the webservice currently
-	int storyListSize = 1;
+	int storyListSize = 6;
 
 	// retrieve the stories and compare the list size to the known size
 	assertTrue(esHelper.getOnlineStories().size() == storyListSize);
@@ -274,7 +275,7 @@ public class testESHelper extends TestCase {
      */
     public void testUpdateOnlineStory() {
 	// retrieve a story from the webservice to update
-	Story updateStory = esHelper.getOnlineStory(1);
+	Story updateStory = esHelper.getOnlineStory(6);
 
 	// update a portion of the story
 	ArrayList<StoryFragment> storyFragments = updateStory
