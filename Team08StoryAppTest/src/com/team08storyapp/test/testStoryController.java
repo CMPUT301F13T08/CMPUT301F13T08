@@ -16,7 +16,7 @@ public class testStoryController extends TestCase {
 	private StoryFragment firstStoryFragment;
 	private StoryFragment retrievedStoryFragment;
 	StoryFragment secondStoryFragment;
-	ArrayList<StoryFragment> storyFragmentList = null;
+	ArrayList<StoryFragment> storyFragmentList;
 		
 		
 		protected void setUp(){		
