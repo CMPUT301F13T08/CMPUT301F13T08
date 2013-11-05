@@ -104,7 +104,7 @@ public class FileHelper {
 	    IOException {
 	try {
 	    System.out.println("old offline id:"  + story.getOfflineStoryId());
-	    if(getOfflineStory(story.getOfflineStoryId()) != null){
+	    if(getOfflineStory(story.getOfflineStoryId()) != null && getOfflineStory(story.getOfflineStoryId()) != story){
 		int total = getOfflineStories().size();
 		story.setOfflineStoryId(Math.max(total-1, getOfflineStories().get(total-1).getOfflineStoryId())+1);
 		System.out.println("new offline id:" + story.getOfflineStoryId());
@@ -327,6 +327,7 @@ public class FileHelper {
 		byte[] bytes = bos.toByteArray();
 		annotations.get(n).setEncodedAnnotation(
 			Base64.encodeToString(bytes, Base64.DEFAULT));
+		
 	    }
 	    sfList.get(i).setAnnotations(annotations);
 	    sfList.get(i).setPhotos(photos);

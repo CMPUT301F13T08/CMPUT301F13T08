@@ -256,7 +256,7 @@ public class StoryFragmentActivity extends Activity {
 	    // a popup menu asks to choose a picture from gallery or camera
 	    showPopup();
 	    return true;
-	    
+
 	case R.id.action_mainmenu:
 	    Intent mainIntent = new Intent(getApplicationContext(),
 		    MainActivity.class);
@@ -444,7 +444,19 @@ public class StoryFragmentActivity extends Activity {
 		    try {
 			fHelper.updateOfflineStory(currentStory);
 			currentStory = fHelper.getOfflineStory(currentStoryId);
-			esHelper.addOrUpdateOnlineStory(currentStory);
+			Story encodedStory = fHelper.encodeStory(currentStory);
+			if (esHelper.addOrUpdateOnlineStory(encodedStory) == encodedStory
+				.getOnlineStoryId()) {
+			    // pop up a message to inform user that annotation
+			    // is added
+			    Toast.makeText(getApplicationContext(),
+				    "New annotation is uploaded successfully",
+				    Toast.LENGTH_LONG).show();
+			} else {
+			    Toast.makeText(getApplicationContext(),
+				    "Network problem, please try again.",
+				    Toast.LENGTH_LONG).show();
+			}
 		    } catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -453,7 +465,25 @@ public class StoryFragmentActivity extends Activity {
 			e.printStackTrace();
 		    }
 		} else if (mode == MODE_ONLINE) {
-		    esHelper.addOrUpdateOnlineStory(currentStory);
+		    try {
+			Story encodedStory = fHelper.encodeStory(currentStory);
+			if (esHelper.addOrUpdateOnlineStory(encodedStory) == encodedStory
+				.getOnlineStoryId()) {
+			    // pop up a message to inform user that annotation
+			    // is added
+			    Toast.makeText(getApplicationContext(),
+				    "New annotation is uploaded successfully",
+				    Toast.LENGTH_LONG).show();
+			} else {
+			    Toast.makeText(getApplicationContext(),
+				    "Network problem, please try again.",
+				    Toast.LENGTH_LONG).show();
+			}
+		    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+
 		}
 
 		// pop up a message to inform user that annotation is added
