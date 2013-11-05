@@ -117,6 +117,16 @@ public class StoryFragment implements Serializable {
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
     }
+    /**
+     * A constructor for creating a StoryFragment object, when the following
+     * properties are know:
+     * <ul>
+     * <li>StoryText
+     * </ul>
+     * 
+     * @param storyText
+     * 		The textual component of the story.
+     */
 
     public StoryFragment(String storyText) {
 	this.storyText = storyText;
@@ -124,6 +134,25 @@ public class StoryFragment implements Serializable {
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
     }
+    
+    /**
+     * A constructor for creating a StoryFragment object,, when the following
+     * properties are known:
+     * <ul>
+     * <li>StoryFragment Id
+     * <li>StoryText
+     * <li>ArrayList of Photo
+     * <li>Arraylist of Choice
+     * <li>Arraylist of annotation
+     * </ul>
+     * 
+     * @param storyFragmentId
+     * 		
+     * @param storyText
+     * @param photos
+     * @param choices
+     * @param annotations
+     */
 
     public StoryFragment(int storyFragmentId, String storyText,
 	    ArrayList<Photo> photos, ArrayList<Choice> choices,
