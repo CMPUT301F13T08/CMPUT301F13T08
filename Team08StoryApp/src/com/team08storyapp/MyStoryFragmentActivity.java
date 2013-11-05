@@ -78,18 +78,15 @@ public class MyStoryFragmentActivity extends Activity {
     private int currentStoryFragmentIndex;
     private int currentStoryId;
     private int currentPic = 0;
-
     private PicAdapter imgAdapt;
     private Gallery picGallery;
     private ListView lv;
     private View headerText;
     private View headerGallery;
     private ImageView picView;
-
     private Story currentStory;
     private StoryFragment currentStoryFragment;
     private FileHelper fHelper;
-
     private Uri imageFileUri;
 
     @Override
@@ -97,17 +94,15 @@ public class MyStoryFragmentActivity extends Activity {
 
 	super.onCreate(savedInstanceState);
 	fHelper = new FileHelper(this, 1);
+	
 	// set up background layout
-
 	setContentView(R.layout.activity_story_list);
 	lv = (ListView) findViewById(android.R.id.list);
 
 	// set up text header
 	headerText = getLayoutInflater().inflate(R.layout.header_text, null);
-
 	TextView textSection = (TextView) headerText
 		.findViewById(R.id.headerText);
-
 	textSection.setOnTouchListener(new View.OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -195,25 +190,20 @@ public class MyStoryFragmentActivity extends Activity {
 		currentStoryFragmentId);
 	// set the gallery adapter
 	picGallery.setAdapter(imgAdapt);
-	System.out.print("******ADAPTER DONE*******");
-
+	
 	fillChoice(storyFragmentChoices);
-
 	lv.setOnItemClickListener(new OnItemClickListener() {
+	   
 	    // handle clicks
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
-
 		Intent nextStoryFragment = new Intent(getApplicationContext(),
 			MyStoryFragmentActivity.class);
 		nextStoryFragment.putExtra("story", currentStory);
-
 		Choice nextChoice = (Choice) lv.getAdapter().getItem(position);
 		int nextStoryFragmentId = nextChoice.getStoryFragmentID();
-
 		nextStoryFragment.putExtra("storyFragmentId",
 			nextStoryFragmentId);
-
 		startActivity(nextStoryFragment);
 
 	    }
@@ -290,10 +280,7 @@ public class MyStoryFragmentActivity extends Activity {
 		imgPath = picCursor.getString(index);
 	    } else
 		imgPath = pickedUri.getPath();
-
-	    // if and else handle both choosing from gallery and from file
-	    // manager
-
+	    
 	    // if we have a new URI attempt to decode the image bitmap
 	    if (pickedUri != null) {
 
@@ -302,17 +289,12 @@ public class MyStoryFragmentActivity extends Activity {
 		int targetWidth = 200;
 		int targetHeight = 150;
 
-		// sample the incoming image to save on memory resources
-
 		// create bitmap options to calculate and use sample size
 		BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
 
-		// first decode image dimensions only - not the image bitmap
-		// itself
+		// first decode image dimensions only 
 		bmpOptions.inJustDecodeBounds = true;
 		BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-		// work out what the sample size should be
 
 		// image width and height before sampling
 		int currHeight = bmpOptions.outHeight;
@@ -321,8 +303,9 @@ public class MyStoryFragmentActivity extends Activity {
 		// variable to store new sample size
 		int sampleSize = 1;
 
-		// calculate the sample size if the existing size is larger
-		// than target size
+		/* calculate the sample size if the existing size is larger
+		 * than target size
+		 */
 		if (currHeight > targetHeight || currWidth > targetWidth) {
 		    // use either width or height
 		    if (currWidth > currHeight)
@@ -332,6 +315,7 @@ public class MyStoryFragmentActivity extends Activity {
 			sampleSize = Math.round((float) currWidth
 				/ (float) targetWidth);
 		}
+		
 		// use the new sample size
 		bmpOptions.inSampleSize = sampleSize;
 
@@ -360,35 +344,26 @@ public class MyStoryFragmentActivity extends Activity {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
 		}
-		System.out.println(currentStoryFragment.toString());
-		System.out.println(currentStory.getStoryFragments().toString());
-		System.out.println("TEST ID " + currentStoryFragmentIndex);
+
 		Photo add = new Photo();
 		add.setPhotoID(currentStoryFragment.getPhotos().size() + 1);
 		add.setPictureName(fileName);
 		ArrayList<Photo> temp = currentStoryFragment.getPhotos();
-		temp.add(add);
-		System.out.println("PHOTO MAKE DONE");
+		temp.add(add);		
 		currentStoryFragment.setPhotos(temp);
 		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 			currentStoryFragment);
-		System.out.println("SWAP FRAGMENT DONE");
+		
 		try {
 		    fHelper.updateOfflineStory(currentStory);
-		    System.out.println("Test currentStoryId:" + currentStoryId);
-		    currentStory = fHelper.getOfflineStory(currentStoryId);
-		    System.out
-			    .println("================================================CLEAR==================================");
+		    currentStory = fHelper.getOfflineStory(currentStoryId);		    
 		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
 		} catch (IOException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
 		}
 
-		// pass bitmap to ImageAdapter to add to array
-		
+		// pass bitmap to ImageAdapter to add to array		
 		imgAdapt.addPic(currentPic, pic);
 
 		// redraw the gallery thumbnails to reflect the new addition
@@ -396,6 +371,7 @@ public class MyStoryFragmentActivity extends Activity {
 
 		// display the newly selected image at larger size
 		picView.setImageBitmap(pic);
+		
 		// scale options
 		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 	    } else {
