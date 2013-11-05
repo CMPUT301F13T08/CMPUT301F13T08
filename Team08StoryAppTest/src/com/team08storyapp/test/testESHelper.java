@@ -231,8 +231,10 @@ public class testESHelper extends TestCase {
 	// set to the known count of the stories on the webservice currently
 	int storyListSize = 6;
 
+	int onlineSize = esHelper.getOnlineStories().size();
+	
 	// retrieve the stories and compare the list size to the known size
-	assertTrue(esHelper.getOnlineStories().size() == storyListSize);
+	assertTrue(onlineSize == storyListSize);
     }
 
     /*
