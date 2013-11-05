@@ -175,7 +175,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    }
 	    firstStoryFragment.putExtra("story", currentStory);
 
-	    int nextStoryFragmentId = currentStory.getFirstStoryFragment();
+	    int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
 
 	    // send the first story fragment id through the intent
 	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);

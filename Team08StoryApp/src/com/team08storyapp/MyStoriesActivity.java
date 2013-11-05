@@ -142,7 +142,7 @@ public class MyStoriesActivity extends ListActivity {
 		StoryFragment sf4 = new StoryFragment(4,
 			"    'Hey, this is Michael, leave a message I'll call you back, if I want.'");
 		sfList.add(sf4);
-		s1.setFirstStoryFragment(1);
+		s1.setFirstStoryFragmentId(1);
 		s1.setStoryFragments(sfList);
 
 		fHelper.addOfflineStory(s1);
@@ -256,7 +256,7 @@ public class MyStoriesActivity extends ListActivity {
 	    firstStoryFragment.putExtra("story", (Serializable) currentStory);
 	    // send the first story fragment id through the intent
 	    firstStoryFragment.putExtra("storyFragmentId",
-		    currentStory.getFirstStoryFragment());
+		    currentStory.getFirstStoryFragmentId());
 
 	    // startActivity(firstFragment);
 
@@ -288,7 +288,7 @@ public class MyStoriesActivity extends ListActivity {
 	// send the story object through the intent
 	firstStoryFragment.putExtra("story", currentStory);
 
-	int nextStoryFragmentId = currentStory.getFirstStoryFragment();
+	int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
 
 	// send the first story fragment id through the intent
 	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
