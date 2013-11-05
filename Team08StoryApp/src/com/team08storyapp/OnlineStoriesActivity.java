@@ -209,6 +209,15 @@ public class OnlineStoriesActivity extends ListActivity {
      *  remainder to Alice: remember to set the onResume, otherwise there won't
      *  any update.
      */
+    @Override
+    protected void onResume(){
+	super.onResume();
+	ArrayList<Story> result = esHelper.getOnlineStories();
+	while (result == null){
+	    result = esHelper.getOnlineStories();
+	}
+	fillData(result, onUpdate);
+    }
   
 
 }
