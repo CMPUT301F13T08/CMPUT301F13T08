@@ -38,7 +38,8 @@ import java.io.Serializable;
  * Story Fragment. An Annotation has the following properties:
  * <ul>
  * <li>Annotation Id to uniquely identify the Annotation.
- * <li>Story Fragment Id the Id identified with the Story Fragment the Annotation belongs to.
+ * <li>Story Fragment Id the Id identified with the Story Fragment the
+ * Annotation belongs to.
  * <li>Photo the photo the reader set in the Annotation.
  * <li>Text the text the reader set in the Annotation.
  * </ul>
@@ -102,18 +103,18 @@ public class Annotation implements Serializable {
      */
     public Annotation(int annotationID, int storyFragmentID, String photo,
 	    String text) {
-    	super();
-		this.annotationID = annotationID;
-		this.storyFragmentID = storyFragmentID;
-		this.photo = photo;
-		this.text = text;
+	super();
+	this.annotationID = annotationID;
+	this.storyFragmentID = storyFragmentID;
+	this.photo = photo;
+	this.text = text;
     }
 
     /**
      * @return The text of an Annotation
      */
     public String getText() {
-    	return text;
+	return text;
     }
 
     /**
@@ -121,15 +122,15 @@ public class Annotation implements Serializable {
      *            the text to set
      */
     public void setText(String text) {
-    	this.text = text;
+	this.text = text;
     }
 
     /**
-     * @return The storyFragmentID of the Story Fragment an the Annotation
-     *         belongs to.
+     * @return The storyFragmentID of the Story Fragment the Annotation belongs
+     *         to.
      */
     public int getStoryFragmentID() {
-    	return storyFragmentID;
+	return storyFragmentID;
     }
 
     /**
@@ -137,7 +138,7 @@ public class Annotation implements Serializable {
      *            The storyFragmentID to set for the Annotation.
      */
     public void setStoryFragmentID(int storyFragmentID) {
-    	this.storyFragmentID = storyFragmentID;
+	this.storyFragmentID = storyFragmentID;
     }
 
     /**
@@ -145,7 +146,7 @@ public class Annotation implements Serializable {
      *         string.
      */
     public String getPhoto() {
-    	return photo;
+	return photo;
     }
 
     /**
@@ -153,7 +154,7 @@ public class Annotation implements Serializable {
      *            The photo to set for the Annotation.
      */
     public void setPhoto(String photo) {
-    	this.photo = photo;
+	this.photo = photo;
     }
 
     /**
@@ -164,7 +165,7 @@ public class Annotation implements Serializable {
      * @return The encoded Annotation.
      */
     public String getEncodedAnnotation() {
-    	return encodedAnnotation;
+	return encodedAnnotation;
     }
 
     /**
@@ -176,14 +177,14 @@ public class Annotation implements Serializable {
      *            The encodedAnnotation to set representing the Annotation.
      */
     public void setEncodedAnnotation(String encodedAnnotation) {
-    	this.encodedAnnotation = encodedAnnotation;
+	this.encodedAnnotation = encodedAnnotation;
     }
 
     /**
      * @return The annotationID used to uniquely identify the Annotation.
      */
     public int getAnnotationID() {
-    	return annotationID;
+	return annotationID;
     }
 
     /**
@@ -191,6 +192,6 @@ public class Annotation implements Serializable {
      *            The annotationID to set for the Annotation.
      */
     public void setAnnotationID(int annotationID) {
-    	this.annotationID = annotationID;
+	this.annotationID = annotationID;
     }
 }

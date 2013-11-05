@@ -35,15 +35,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Story is a model class representing a User's Story. A story has the following
+ * Story is a model class representing a Story. A story has the following
  * properties:
  * <ul>
- * <li>OnlineStoryId to uniquely identify the Stories online.
- * <li>OfflineStoryId to uniquely identify the Stories offline.
- * <li>Title, to represent the title of a story.
- * <li>Author, to identify who wrote the story.
- * <li>StoryFragments, which is an array that contains all the storyfragments related to a story.
- * <li>FirstStoryFragmentId is an integer which points towards the ID of the first fragment related to the story.
+ * <li>Online Story Id to uniquely identify the Story from other Stories stored
+ * online.
+ * <li>OfflineStoryId to uniquely identify the Story from other Stories stored
+ * offline.
+ * <li>Title of the Story.
+ * <li>Author of the Story.
+ * <li>A list of the Story Fragments, which are the pages that make up the
+ * Story.
+ * <li>First Story Fragment Id of the first page of the Story.
  * </ul>
  * These properties are able to be accessed through the constructor or through
  * public getters/setters.
@@ -71,37 +74,28 @@ public class Story implements Serializable {
     private int firstStoryFragmentId;
 
     /**
-     * The default constructor for creating a Story object. It will have no properties
-     * set except it creates a new ArrayList of storyFragment objects
-     */
-    
-    public Story() {
-    	storyFragments = new ArrayList<StoryFragment>();
-    }
-    
-    /**
-     * A constructor for creating a Story object, when the following
-     * properties are know:
+     * A constructor for creating a Story object used when initializing a sample
+     * story for testing. The following properties must be know:
      * <ul>
      * <li>Title
      * <li>Author
      * </ul>
      * 
      * @param title
-     * 				The text which the story is called.
+     *            The title of the Story.
      * @param author
-     * 				The text with the name of the author
+     *            The author of the Story.
      */
 
     public Story(String title, String author) {
-    	this.title = title;
-    	this.author = author;
-		storyFragments = new ArrayList<StoryFragment>();
+	this.title = title;
+	this.author = author;
+	storyFragments = new ArrayList<StoryFragment>();
     }
 
     /**
-     * A constructor for creating a Story object, when the following
-     * properties are know:
+     * A constructor for creating a Story object used when an Author is writing
+     * a Story. The following properties must be know:
      * <ul>
      * <li>OfflineStoryId
      * <li>Title
@@ -109,136 +103,110 @@ public class Story implements Serializable {
      * </ul>
      * 
      * @param offlineStoryId
-     * 				The integer uniquely identifies this story offline.
+     *            The Id used to uniquely identify the Story offline.
      * @param title
-     * 				The text which the story is called.
+     *            The title of the Story.
      * @param author
-     * 				The text with the name of the author
+     *            The author of the Story.
      */
-    
+
     public Story(int offlineStoryId, String title, String author) {
-    	this.offlineStoryId = offlineStoryId;
-    	this.title = title;
-    	this.author = author;
-    	storyFragments = new ArrayList<StoryFragment>();
+	this.offlineStoryId = offlineStoryId;
+	this.title = title;
+	this.author = author;
+	storyFragments = new ArrayList<StoryFragment>();
     }
 
     /**
-     * A constructor for creating a Story object, when the following
-     * properties are know:
-     * <ul>
-     * <li>OfflineStoryId
-     * <li>Title
-     * <li>Author
-     * <li>StoryFragments
-     * <li>FirstStoryFragmentId
-     * </ul>
-     * 
-     * @param offlineStoryId
-     * 				The integer uniquely identifies this story offline.
-     * @param title
-     * 				The text which the story is called.
-     * @param author
-     * 				The text with the name of the author.
-     * @param storyFragments
-     * 				A preset arraylist of story fragments.
-     * @param firstStoryFragmentId
-     * 				An integer which points to the first fragment of the story.
+     * @return The onlineStoryId used to uniquely identify of the Story from
+     *         online.
      */
-    
-    public Story(int offlineStoryId, String title, String author,
-	    ArrayList<StoryFragment> storyFragments, int firstStoryFragmentId) {
-    	super();
-    	this.offlineStoryId = offlineStoryId;
-    	this.title = title;
-    	this.author = author;
-    	storyFragments = new ArrayList<StoryFragment>();
-    }
-    /**
-     * @return onlineStoryId
-     */
-
     public int getOnlineStoryId() {
-    	return onlineStoryId;
+	return onlineStoryId;
     }
 
     /**
      * @param onlineStoryId
-     * 			the onlineStoryId to set.
+     *            The onlineStoryId to set the Story to.
      */
     public void setOnlineStoryId(int onlineStoryId) {
-    	this.onlineStoryId = onlineStoryId;
+	this.onlineStoryId = onlineStoryId;
     }
 
     /**
-     * @return title
+     * @return The offlineStoryId used to uniquely identify of the Story when
+     *         stored offline.
      */
-    
-    public String getTitle() {
-    	return title;
-    }
-
-    /**
-     * @return author
-     */
-
-    public String getAuthor() {
-    	return author;
-    }
-
-    /**
-     * @return ArrayList of storyFragments
-     */
-    
-    public ArrayList<StoryFragment> getStoryFragments() {
-    	return storyFragments;
-    }
-
-    /**
-     * @param ArrayList of storyFragments
-     * 			sets the arraylist of storyFragments.
-     */
-    public void setStoryFragments(ArrayList<StoryFragment> storyFragments) {
-    	this.storyFragments = storyFragments;
-    }
-    
-    /**
-     * @return firstStoryFragmentId
-     */
-
-    public int getFirstStoryFragment() {
-    	return firstStoryFragmentId;
-    }
-
-    /**
-     * @param firstStoryFragmentId
-     * 				Sets the first storyFragment Id
-     */
-    
-    public void setFirstStoryFragment(int firstStoryFragmentId) {
-    	this.firstStoryFragmentId = firstStoryFragmentId;
-    }
-
-    @Override
-    public String toString() {
-    	return "Story [offlineStoryId=" + offlineStoryId+ "olineStoryId= " + onlineStoryId + "title=" + title + ", author="
-		+ author + ", storyFragments=" + storyFragments
-		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
-    }
-    
-    /**
-     * @return offlineStoryId
-     */
-
     public int getOfflineStoryId() {
-    	return offlineStoryId;
+	return offlineStoryId;
     }
 
     /**
      * @param offlineStoryId
-     * 			sets offlineStoryId
+     *            The offlineStoryId to set the stored Story to.
      */
     public void setOfflineStoryId(int offlineStoryId) {
-    	this.offlineStoryId = offlineStoryId;
+	this.offlineStoryId = offlineStoryId;
+    }
+
+    /**
+     * @return The title of the Story.
+     */
+    public String getTitle() {
+	return title;
+    }
+
+    /**
+     * @param title
+     *            The title to set the Story with.
+     */
+    public void setTitle(String title) {
+	this.title = title;
+    }
+
+    /**
+     * @return The author of the Story.
+     */
+    public String getAuthor() {
+	return author;
+    }
+
+    /**
+     * @param author
+     *            The author to set for the Story.
+     */
+    public void setAuthor(String author) {
+	this.author = author;
+    }
+
+    /**
+     * @return The storyFragments, which are the pages of the Story.
+     */
+    public ArrayList<StoryFragment> getStoryFragments() {
+	return storyFragments;
+    }
+
+    /**
+     * @param storyFragments
+     *            The storyFragments to set for the pages of the Story.
+     */
+    public void setStoryFragments(ArrayList<StoryFragment> storyFragments) {
+	this.storyFragments = storyFragments;
+    }
+
+    /**
+     * @return The firstStoryFragmentId, that is to uniquely identify the first
+     *         page of the Story to being the Story with.
+     */
+    public int getFirstStoryFragmentId() {
+	return firstStoryFragmentId;
+    }
+
+    /**
+     * @param firstStoryFragmentId
+     *            The firstStoryFragmentId to set for the Story`s first page.
+     */
+    public void setFirstStoryFragmentId(int firstStoryFragmentId) {
+	this.firstStoryFragmentId = firstStoryFragmentId;
     }
 }

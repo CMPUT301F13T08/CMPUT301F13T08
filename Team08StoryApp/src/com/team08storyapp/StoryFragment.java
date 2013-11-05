@@ -36,14 +36,40 @@ import java.util.ArrayList;
 
 public class StoryFragment implements Serializable {
     /**
-	 * 
-	 */
+     * StoryFragment is a model class representing a Story Fragment in a story.
+     * A StoryFragment has the following properties:
+     * <ul>
+     * <li>Story Fragment Id is an integer which uniquely identify a story fragment.
+     * <li>Story text is a string which contains the words for the storyline.
+     * <li>Photos is an ArrayList of photo objects.
+     * <li>Choices is an ArrayList of choice objects.
+     * <li>Annotation is an ArrayList of annotation object. 
+     * </ul>
+     * These properties are able to be accessed through the constructor or through
+     * public getters/setters.
+     * 
+     * @author Michele Paulichuk
+     * @author Alice Wu
+     * @author Ana Marcu
+     * @author Jarrett Toll
+     * @author Jiawei Shen
+     * @version 1.0 November 8, 2013
+     * @since 1.0
+     * 
+     */
+    
     private static final long serialVersionUID = 1L;
     private int storyFragmentId;
     private String storyText;
     private ArrayList<Photo> photos;
     private ArrayList<Choice> choices;
     private ArrayList<Annotation> annotations;
+    
+    /**
+     * The default constructor for creating a StoryFragment object. It will have
+     * none of it's properties set, except it will have ArrayLists ready for choices
+     * photos and annotations. 
+     */
 
     public StoryFragment() {
 
@@ -51,6 +77,17 @@ public class StoryFragment implements Serializable {
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
     }
+    
+    /**
+     * A constructor for creating a StoryFragment object, when the following
+     * properties are know:
+     * <ul>
+     * <li>StoryFragmentId
+     * </ul>
+     * 
+     * @param storyFragmentId
+     * 		The Id is used to uniquely identify a storyFragment
+     */
 
     public StoryFragment(int storyFragmentId) {
 	this.storyFragmentId = storyFragmentId;
@@ -58,6 +95,20 @@ public class StoryFragment implements Serializable {
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
     }
+    
+    /**
+     * A constructor for creating a StoryFragment object, when the following
+     * properties are know:
+     * <ul>
+     * <li>StoryFragmentId
+     * <li>StoryText
+     * </ul>
+     * 
+     * @param storyFragmentId
+     * 		The Id is used to uniquely identify a storyFragment object.
+     * @param storyText
+     * 		The textual component of the story
+     */
 
     public StoryFragment(int storyFragmentId, String storyText) {
 	this.storyFragmentId = storyFragmentId;
@@ -66,6 +117,16 @@ public class StoryFragment implements Serializable {
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
     }
+    /**
+     * A constructor for creating a StoryFragment object, when the following
+     * properties are know:
+     * <ul>
+     * <li>StoryText
+     * </ul>
+     * 
+     * @param storyText
+     * 		The textual component of the story.
+     */
 
     public StoryFragment(String storyText) {
 	this.storyText = storyText;
@@ -73,6 +134,25 @@ public class StoryFragment implements Serializable {
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
     }
+    
+    /**
+     * A constructor for creating a StoryFragment object,, when the following
+     * properties are known:
+     * <ul>
+     * <li>StoryFragment Id
+     * <li>StoryText
+     * <li>ArrayList of Photo
+     * <li>Arraylist of Choice
+     * <li>Arraylist of annotation
+     * </ul>
+     * 
+     * @param storyFragmentId
+     * 		
+     * @param storyText
+     * @param photos
+     * @param choices
+     * @param annotations
+     */
 
     public StoryFragment(int storyFragmentId, String storyText,
 	    ArrayList<Photo> photos, ArrayList<Choice> choices,

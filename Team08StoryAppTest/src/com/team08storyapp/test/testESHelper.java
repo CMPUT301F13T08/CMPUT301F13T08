@@ -28,7 +28,7 @@ public class testESHelper extends TestCase {
 	ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
 
 	// Story Fragment 1
-	sampleStory.setFirstStoryFragment(1);
+	sampleStory.setFirstStoryFragmentId(1);
 	StoryFragment storyFragment1 = new StoryFragment(1);
 	storyFragment1
 		.setStoryText("Like any other day, Amara decided to take her dog out for a walk. She left the house and exited the yard.");
@@ -176,8 +176,8 @@ public class testESHelper extends TestCase {
 	// the story added is indeed the same story
 	assertEquals(addStory.getAuthor(), onlineStory.getAuthor());
 	assertEquals(addStory.getTitle(), onlineStory.getTitle());
-	assertEquals(addStory.getFirstStoryFragment(),
-		onlineStory.getFirstStoryFragment());
+	assertEquals(addStory.getFirstStoryFragmentId(),
+		onlineStory.getFirstStoryFragmentId());
 	assertEquals(addStory.getStoryFragments(),
 		onlineStory.getStoryFragments());
     }
@@ -301,8 +301,8 @@ public class testESHelper extends TestCase {
 	// fragment
 	assertEquals(updateStory.getAuthor(), onlineStory.getAuthor());
 	assertEquals(updateStory.getTitle(), onlineStory.getTitle());
-	assertEquals(updateStory.getFirstStoryFragment(),
-		onlineStory.getFirstStoryFragment());
+	assertEquals(updateStory.getFirstStoryFragmentId(),
+		onlineStory.getFirstStoryFragmentId());
 
 	// test that the story fragment we changed is different from the
 	// original story fragment.

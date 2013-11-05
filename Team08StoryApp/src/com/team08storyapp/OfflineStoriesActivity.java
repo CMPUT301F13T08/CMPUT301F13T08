@@ -125,7 +125,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	// send the story object through the intent
 	firstStoryFragment.putExtra("story", currentStory);
 
-	int nextStoryFragmentId = currentStory.getFirstStoryFragment();
+	int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
 
 	// send the first story fragment id through the intent
 	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
