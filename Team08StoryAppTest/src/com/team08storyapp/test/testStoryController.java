@@ -9,13 +9,14 @@ import junit.framework.TestCase;
 
 public class testStoryController extends TestCase {
 
-    private int nextStoryFragmentId;
-    private StoryFragment addStoryFragment;
-    private StoryFragment firstStoryFragment;
-    private StoryFragment retrievedStoryFragment;
-    StoryFragment secondStoryFragment;
-    ArrayList<StoryFragment> storyFragmentList = null;
-
+    	private int nextStoryFragmentId;
+	private StoryFragment firstStoryFragment;
+	private StoryFragment retrievedStoryFragment;
+	StoryFragment secondStoryFragment;
+	ArrayList<StoryFragment> storyFragmentList;
+		
+	
+	
     protected void setUp() {
 	//Instantiate the Array List of Story Fragments
 	storyFragmentList = new ArrayList<StoryFragment>();
@@ -31,15 +32,14 @@ public class testStoryController extends TestCase {
 
     }
 
-    /*
-     * The testAddStoryFragment method tests adding a story fragment to an
-     * existing story. If the story fragment is added successfully the method
-     * call to esHelper.addStoryFragment should return true. This is related to
-     * user story # 5.
-     */
-    public void testAddStoryFragment() {
-	assertTrue(StoryController.addStoryFragment(addStoryFragment));
-    }
+	
+	/* The testAddStoryFragment method tests adding a story fragment to an existing story. If 
+	 * the story fragment is added successfully the method call to esHelper.addStoryFragment 
+	 * should return true. This is related to user story # 5.
+	 **/
+	public void testAddStoryFragment(){
+		assertTrue(StoryController.addStoryFragment(firstStoryFragment));
+	}
 
     // call the method readStoryFragment() of story controller, to retrieve a
     // fragment from a list, by id
