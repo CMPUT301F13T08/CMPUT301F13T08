@@ -34,9 +34,9 @@ package com.team08storyapp;
 import java.util.Collection;
 
 /**
- * Hits is a model class used in conjunction with the ElasticSearch. It helps
- * store the number of hits a call to the webservice using ElasticSearch
- * returns.
+ * Hits is a model class used in conjunction with the ElasticSearch in the
+ * ESHelper class. It helps store the number of hits a call to the webservice
+ * using ElasticSearch returns.
  * <p>
  * This class is a strongly typed class and is used on model classes
  * representing the JSON objects to return from an ElasticSearch.

@@ -31,6 +31,31 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
+/**
+ * ElasticSearchResponse is a model class used in the ESHelper class for
+ * retrieving a known object form the webservice. It helps store the
+ * ElasticSearch response from that call to the webservice.
+ * <p>
+ * This class is a strongly typed class and is used on model classes
+ * representing the JSON objects to return from an ElasticSearch.
+ * 
+ * @param <T>
+ *            The java object that will be returned via JSON from the
+ *            ElasticSearch.
+ * 
+ * @see ESHelper
+ * 
+ * @author Abram Hindle and Chenlei Zhang (@link
+ *         https://github.com/rayzhangcl/ESDemo)
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class ElasticSearchResponse<T> {
     String _index;
     String _type;
@@ -40,6 +65,9 @@ public class ElasticSearchResponse<T> {
     T _source;
     double max_score;
 
+    /**
+     * @return The strongly typed object received from the ElasticSearch call.
+     */
     public T getSource() {
 	return _source;
     }

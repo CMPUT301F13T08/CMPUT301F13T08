@@ -34,6 +34,33 @@ package com.team08storyapp;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * ElasticSearchSearchResponse is a model class used in the ESHelper class when
+ * retrieving search results from searching the webservice for particular data.
+ * It helps store the ElasticSearch response and number of hits returned from
+ * the call to the webservice.
+ * <p>
+ * This class is a strongly typed class and is used on model classes
+ * representing the JSON objects to return from an ElasticSearch.
+ * 
+ * @param <T>
+ *            The java object that will be returned via JSON from the
+ *            ElasticSearch.
+ * 
+ * @see ESHelper
+ * @see Hits
+ * 
+ * @author Abram Hindle and Chenlei Zhang (@link
+ *         https://github.com/rayzhangcl/ESDemo)
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class ElasticSearchSearchResponse<T> {
     int took;
     boolean timed_out;
@@ -41,10 +68,17 @@ public class ElasticSearchSearchResponse<T> {
     Hits<T> hits;
     boolean exists;
 
+    /**
+     * @return The number of hits a search has retrieved.
+     */
     public Collection<ElasticSearchResponse<T>> getHits() {
 	return hits.getHits();
     }
 
+    /**
+     * @return The collection of strongly typed object received from the
+     *         ElasticSearch search.
+     */
     public Collection<T> getSources() {
 	Collection<T> out = new ArrayList<T>();
 	for (ElasticSearchResponse<T> essrt : getHits()) {
@@ -53,6 +87,12 @@ public class ElasticSearchSearchResponse<T> {
 	return out;
     }
 
+    /**
+     * This method overrides the toString() method. Allowing it to display the
+     * properties of this model class when the toString method is called. 
+     * 
+     * @see java.lang.Object#toString()
+     */
     public String toString() {
 	return (super.toString() + ":" + took + "," + _shards + "," + exists
 		+ "," + hits);

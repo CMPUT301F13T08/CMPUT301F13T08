@@ -42,6 +42,7 @@ import java.io.Serializable;
  * Annotation belongs to.
  * <li>Photo the photo the reader set in the Annotation.
  * <li>Text the text the reader set in the Annotation.
+ * <li>Encoded Annotation is the Annotation encoded for storing it in a file or on a webservice.
  * </ul>
  * These properties are able to be accessed through the constructor or through
  * public getters/setters.
@@ -59,13 +60,7 @@ import java.io.Serializable;
  * 
  */
 public class Annotation implements Serializable {
-    @Override
-    public String toString() {
-	return "Annotation [annotationID=" + annotationID + ", text=" + text
-		+ ", storyFragmentID=" + storyFragmentID + ", photo=" + photo
-		+ ", encodedAnnotation=" + encodedAnnotation + "]";
-    }
-
+    
     private static final long serialVersionUID = 1L;
     private int annotationID;
     private String text;
