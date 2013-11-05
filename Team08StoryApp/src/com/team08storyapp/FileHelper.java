@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -68,6 +68,7 @@ public class FileHelper {
     private static final int Read = 0;
     private static final int Save = 1;
     private String prefix;
+    private ESHelper esHelper;
 
     /*
      * Initialize the fileContext with passed context. Since we design to store
@@ -79,6 +80,7 @@ public class FileHelper {
      * to it.)
      */
     public FileHelper(Context context, int mode) {
+	esHelper = new ESHelper();
 	fileContext = context;
 	switch (mode) {
 	case Download:
@@ -101,6 +103,13 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
+	    System.out.println("old offline id:"  + story.getOfflineStoryId());
+	    if(getOfflineStory(story.getOfflineStoryId()) != null){
+		int total = getOfflineStories().size();
+		story.setOfflineStoryId(Math.max(total-1, getOfflineStories().get(total-1).getOfflineStoryId())+1);
+		System.out.println("new offline id:" + story.getOfflineStoryId());
+		esHelper.addOrUpdateOnlineStory(story);
+	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
 	    // translate the story context to Json

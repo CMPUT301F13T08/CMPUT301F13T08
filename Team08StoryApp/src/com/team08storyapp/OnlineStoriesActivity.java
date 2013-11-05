@@ -138,10 +138,15 @@ public class OnlineStoriesActivity extends ListActivity {
 		// Save the story to file, via FileHelper if the download option
 		// selected
 		System.out.println(currentStory.toString());
-		fHelper.addOfflineStory(currentStory);
-		Toast.makeText(getApplicationContext(),
-			"Selected Story is Downloaded.", Toast.LENGTH_LONG)
-			.show();
+		if (fHelper.addOfflineStory(currentStory)) {
+		    Toast.makeText(getApplicationContext(),
+			    "Selected Story is Downloaded.You have "+Integer.toString(fHelper.getOfflineStories().size())+" stories.", Toast.LENGTH_LONG)
+			    .show();
+		}else{
+		    Toast.makeText(getApplicationContext(),
+			    "Network problem. Please check your network and try again.", Toast.LENGTH_LONG)
+			    .show();
+		}
 	    } catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -206,18 +211,17 @@ public class OnlineStoriesActivity extends ListActivity {
     }
 
     /*
-     *  remainder to Alice: remember to set the onResume, otherwise there won't
-     *  any update.
+     * remainder to Alice: remember to set the onResume, otherwise there won't
+     * any update.
      */
     @Override
-    protected void onResume(){
+    protected void onResume() {
 	super.onResume();
 	ArrayList<Story> result = esHelper.getOnlineStories();
-	while (result == null){
+	while (result == null) {
 	    result = esHelper.getOnlineStories();
 	}
 	fillData(result, onUpdate);
     }
-  
 
 }
