@@ -34,30 +34,17 @@ package com.team08storyapp;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class StoryFragment implements Serializable {
-    /**
-     * StoryFragment is a model class representing a Story Fragment in a story.
-     * A StoryFragment has the following properties:
-     * <ul>
-     * <li>Story Fragment Id is an integer which uniquely identify a story
-     * fragment.
-     * <li>Story text is a string which contains the words for the storyline.
-     * <li>Photos is an ArrayList of photo objects.
-     * <li>Choices is an ArrayList of choice objects.
-     * <li>Annotation is an ArrayList of annotation object.
-     * </ul>
-     * These properties are able to be accessed through the constructor or
-     * through public getters/setters.
-     * 
-     * @author Michele Paulichuk
-     * @author Alice Wu
-     * @author Ana Marcu
-     * @author Jarrett Toll
-     * @author Jiawei Shen
-     * @version 1.0 November 8, 2013
-     * @since 1.0
-     * 
-     */
 
     private static final long serialVersionUID = 1L;
     private int storyFragmentId;
@@ -66,50 +53,12 @@ public class StoryFragment implements Serializable {
     private ArrayList<Choice> choices;
     private ArrayList<Annotation> annotations;
 
-    /**
-     * The default constructor for creating a StoryFragment object. It will have
-     * none of it's properties set, except it will have ArrayLists ready for
-     * choices photos and annotations.
-     */
-
-    public StoryFragment() {
-
-	choices = new ArrayList<Choice>();
-	photos = new ArrayList<Photo>();
-	annotations = new ArrayList<Annotation>();
-    }
-
-    /**
-     * A constructor for creating a StoryFragment object, when the following
-     * properties are know:
-     * <ul>
-     * <li>StoryFragmentId
-     * </ul>
-     * 
-     * @param storyFragmentId
-     *            The Id is used to uniquely identify a storyFragment
-     */
-
     public StoryFragment(int storyFragmentId) {
 	this.storyFragmentId = storyFragmentId;
 	choices = new ArrayList<Choice>();
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
     }
-
-    /**
-     * A constructor for creating a StoryFragment object, when the following
-     * properties are know:
-     * <ul>
-     * <li>StoryFragmentId
-     * <li>StoryText
-     * </ul>
-     * 
-     * @param storyFragmentId
-     *            The Id is used to uniquely identify a storyFragment object.
-     * @param storyText
-     *            The textual component of the story
-     */
 
     public StoryFragment(int storyFragmentId, String storyText) {
 	this.storyFragmentId = storyFragmentId;
@@ -120,149 +69,73 @@ public class StoryFragment implements Serializable {
     }
 
     /**
-     * A constructor for creating a StoryFragment object, when the following
-     * properties are know:
-     * <ul>
-     * <li>StoryText
-     * </ul>
-     * 
-     * @param storyText
-     *            The textual component of the story.
-     */
-
-    public StoryFragment(String storyText) {
-	this.storyText = storyText;
-	choices = new ArrayList<Choice>();
-	photos = new ArrayList<Photo>();
-	annotations = new ArrayList<Annotation>();
-    }
-
-    /**
-     * A constructor for creating a StoryFragment object,, when the following
-     * properties are known:
-     * <ul>
-     * <li>StoryFragment Id
-     * <li>StoryText
-     * <li>ArrayList of Photo
-     * <li>Arraylist of Choice
-     * <li>Arraylist of annotation
-     * </ul>
-     * 
-     * @param storyFragmentId
-     *            The Id used to uniquely identify an Annotation.
-     * @param storyText
-     *            The textual part of the story.
-     * @param photos
-     *            An ArrayList which contains photo objects
-     * @param choices
-     *            An ArrayList which contains choice objects
-     * @param annotations
-     *            An ArrrayList which contains annotation objects
-     */
-
-    public StoryFragment(int storyFragmentId, String storyText,
-	    ArrayList<Photo> photos, ArrayList<Choice> choices,
-	    ArrayList<Annotation> annotations) {
-	super();
-	this.storyFragmentId = storyFragmentId;
-	this.storyText = storyText;
-	this.photos = photos;
-	this.choices = choices;
-	this.annotations = annotations;
-	choices = new ArrayList<Choice>();
-	photos = new ArrayList<Photo>();
-	annotations = new ArrayList<Annotation>();
-    }
-
-    /**
-     * @return the Story Fragment Id
+     * @return the storyFragmentId
      */
     public int getStoryFragmentId() {
-	return storyFragmentId;
+        return storyFragmentId;
     }
 
     /**
-     * @param storyFragmentId
-     *            Sets the Story Fragment Id
+     * @param storyFragmentId the storyFragmentId to set
      */
     public void setStoryFragmentId(int storyFragmentId) {
-	this.storyFragmentId = storyFragmentId;
+        this.storyFragmentId = storyFragmentId;
     }
 
     /**
-     * @return The text for the story.
+     * @return the storyText
      */
-
     public String getStoryText() {
-	return storyText;
+        return storyText;
     }
 
     /**
-     * @param storyText
-     *            Sets the story text.
+     * @param storyText the storyText to set
      */
     public void setStoryText(String storyText) {
-	this.storyText = storyText;
+        this.storyText = storyText;
     }
 
     /**
-     * @return an ArrayList of photo objects.
+     * @return the photos
      */
     public ArrayList<Photo> getPhotos() {
-	return photos;
+        return photos;
     }
 
     /**
-     * @param photos
-     *            Sets the ArrayList of photo.
+     * @param photos the photos to set
      */
     public void setPhotos(ArrayList<Photo> photos) {
-	this.photos = photos;
+        this.photos = photos;
     }
 
     /**
-     * @return an ArrayList of Choice objects.
+     * @return the choices
      */
-
     public ArrayList<Choice> getChoices() {
-	return choices;
+        return choices;
     }
-    
-    /**
-     * @param choices
-     * 		Sets an ArrayList of Choice objects.
-     */
 
+    /**
+     * @param choices the choices to set
+     */
     public void setChoices(ArrayList<Choice> choices) {
-	this.choices = choices;
+        this.choices = choices;
     }
-    
-    /**
-     * @return an ArrayList of Annotation objects
-     */
 
+    /**
+     * @return the annotations
+     */
     public ArrayList<Annotation> getAnnotations() {
-	return annotations;
+        return annotations;
     }
-    
-    /**
-     * @param annotations
-     * 		Sets an ArrayList of Annotation objects.
-     */
 
+    /**
+     * @param annotations the annotations to set
+     */
     public void setAnnotations(ArrayList<Annotation> annotations) {
-	this.annotations = annotations;
-    }
-    
-    /**
-     * @return a string with StoryFragmentId, StoryText, Photos, Choices, and Annotations.
-     */
-
-    @Override
-    public String toString() {
-	return "StoryFragment [storyFragmentId=" + storyFragmentId
-		+ ", storyText=" + storyText + ", photos=" + photos
-		+ ", choices=" + choices + ", annotations=" + annotations + "]";
+        this.annotations = annotations;
     }
 
 }

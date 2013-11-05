@@ -35,46 +35,39 @@ import java.util.ArrayList;
 
 public class StoryController {
 
-	// Constructor is added since the FileHelper needs 
-	// a context from previous activity.
-	//private FileHelper fHelper;
-	//private Context activityContext
-	//public StoryController(Context ctx){
-	//	activityContext = ctx;
-	//}
-	
-	/*
-	 * Also I'm thinking that the constructor of StoryController
-	 * should take at least a storyId as a parameter?
-	 */
-	public static boolean readStory(Story addStory) {
-		// TODO Auto-generated method stub
-		return false;
+    // Constructor is added since the FileHelper needs
+    // a context from previous activity.
+    // private FileHelper fHelper;
+    // private Context activityContext
+    // public StoryController(Context ctx){
+    // activityContext = ctx;
+    // }
+
+    /*
+     * Also I'm thinking that the constructor of StoryController should take at
+     * least a storyId as a parameter?
+     */
+    public static boolean readStory(Story addStory) {
+	// TODO Auto-generated method stub
+	return false;
+    }
+
+    public static StoryFragment readStoryFragment(
+	    ArrayList<StoryFragment> storyFragments, int storyFragmentId) {
+	StoryFragment nextFragment = null;
+	for (StoryFragment storyFragment : storyFragments) {
+	    // int thisStoryFragmentId = storyFragment.getStoryFragmentId();
+	    if (storyFragment.getStoryFragmentId() == storyFragmentId) {
+		nextFragment = storyFragment;
+		break;
+	    }
 	}
-	
-	
-	public static StoryFragment readStoryFragment(ArrayList<StoryFragment> storyFragments, int storyFragmentId){
-		StoryFragment nextFragment = null;
-		for(StoryFragment storyFragment : storyFragments){
-		    //int thisStoryFragmentId = storyFragment.getStoryFragmentId();
-			if (storyFragment.getStoryFragmentId() == storyFragmentId){
-				nextFragment = storyFragment;
-				break;
-			}
-		}
-		return nextFragment;
-	}
+	return nextFragment;
+    }
 
+    public static boolean addStoryFragment(StoryFragment addStoryFragment) {
+	// TODO Auto-generated method stub
+	return false;
+    }
 
-	public static boolean addStoryFragment(StoryFragment addStoryFragment) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	
 }
-
-
-
-

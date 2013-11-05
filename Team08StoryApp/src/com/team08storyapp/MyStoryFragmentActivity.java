@@ -132,7 +132,7 @@ public class MyStoryFragmentActivity extends Activity {
 	});
 
 	picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
-	    
+
 	    // handle long clicks
 	    public boolean onItemLongClick(AdapterView<?> parent, View v,
 		    int position, long id) {

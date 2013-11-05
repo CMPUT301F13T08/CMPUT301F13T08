@@ -39,7 +39,8 @@ public class ElasticSearchResponse<T> {
     boolean exists;
     T _source;
     double max_score;
+
     public T getSource() {
-        return _source;
+	return _source;
     }
 }

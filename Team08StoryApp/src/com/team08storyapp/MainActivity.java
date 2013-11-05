@@ -63,8 +63,8 @@ public class MainActivity extends Activity {
 		OfflineStoriesActivity.class);
 	startActivity(intent);
     }
-    
-    public void toMyStories(View view){
+
+    public void toMyStories(View view) {
 	Intent intent = new Intent(MainActivity.this, MyStoriesActivity.class);
 	startActivity(intent);
     }

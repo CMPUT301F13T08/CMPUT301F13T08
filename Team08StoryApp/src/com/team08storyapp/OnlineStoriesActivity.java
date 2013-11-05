@@ -139,13 +139,17 @@ public class OnlineStoriesActivity extends ListActivity {
 		// selected
 		System.out.println(currentStory.toString());
 		if (fHelper.addOfflineStory(currentStory)) {
-		    Toast.makeText(getApplicationContext(),
-			    "Selected Story is Downloaded.You have "+Integer.toString(fHelper.getOfflineStories().size())+" stories.", Toast.LENGTH_LONG)
-			    .show();
-		}else{
-		    Toast.makeText(getApplicationContext(),
-			    "Network problem. Please check your network and try again.", Toast.LENGTH_LONG)
-			    .show();
+		    Toast.makeText(
+			    getApplicationContext(),
+			    "Selected Story is Downloaded.You have "
+				    + Integer.toString(fHelper
+					    .getOfflineStories().size())
+				    + " stories.", Toast.LENGTH_LONG).show();
+		} else {
+		    Toast.makeText(
+			    getApplicationContext(),
+			    "Network problem. Please check your network and try again.",
+			    Toast.LENGTH_LONG).show();
 		}
 	    } catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block

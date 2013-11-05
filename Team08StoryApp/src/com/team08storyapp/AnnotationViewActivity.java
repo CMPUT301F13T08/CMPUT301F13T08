@@ -43,16 +43,16 @@ public class AnnotationViewActivity extends Activity {
     private ListView lv;
     private ArrayList<Annotation> aList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_story_list);
 	// REQUIRE INTENT TO HAVE AN ARRAYLIST OF ANNOTATIONS
 	Intent passedIntent = getIntent();
-	aList = (ArrayList<Annotation>) passedIntent.getSerializableExtra("Annotations");
+	aList = (ArrayList<Annotation>) passedIntent
+		.getSerializableExtra("Annotations");
 	lv = (ListView) findViewById(android.R.id.list);
-	lv.setAdapter(new AnnotationAdapter(this, android.R.id.list, aList));	
+	lv.setAdapter(new AnnotationAdapter(this, android.R.id.list, aList));
     }
 
     @Override

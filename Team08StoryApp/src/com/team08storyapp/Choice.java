@@ -66,17 +66,20 @@ public class Choice implements Serializable {
     int choiceId;
 
     /**
-     * A constructor for creating a Choice object, when the following
-     * properties are known:
+     * A constructor for creating a Choice object, when the following properties
+     * are known:
      * <ul>
      * <li>Story Fragment Id
      * <li>Choice Id
      * <li>Text
      * </ul>
      * 
-     * @param toGoToStoryFragmentID Story Fragment the Choice leads to.
-     * @param choiceId Unique identifier of the Choice.
-     * @param text The text to display to the Choice.
+     * @param toGoToStoryFragmentID
+     *            Story Fragment the Choice leads to.
+     * @param choiceId
+     *            Unique identifier of the Choice.
+     * @param text
+     *            The text to display to the Choice.
      */
     public Choice(int toGoToStoryFragmentID, int choiceId, String text) {
 	super();

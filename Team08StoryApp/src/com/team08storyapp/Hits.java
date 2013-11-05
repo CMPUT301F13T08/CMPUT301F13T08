@@ -33,6 +33,17 @@ package com.team08storyapp;
 
 import java.util.Collection;
 
+/**
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ *
+ * @param <T>
+ */
 public class Hits<T> {
     int total;
     double max_score;
