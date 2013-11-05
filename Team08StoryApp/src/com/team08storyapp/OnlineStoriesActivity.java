@@ -86,8 +86,12 @@ public class OnlineStoriesActivity extends ListActivity {
 	// Populate listview with the stories curently online
 	// Cache the stories currently online
 	System.out.println("Prepare to fill data");
-	System.out.println(esHelper.getOnlineStories());
-	fillData(esHelper.getOnlineStories(), onCreate);
+	ArrayList<Story> result = esHelper.getOnlineStories();
+	while (result == null) {
+	    result = esHelper.getOnlineStories();
+	    System.out.println(result);
+	}
+	fillData(result, onCreate);
 
 	searchButton.setOnClickListener(new View.OnClickListener() {
 
@@ -102,7 +106,6 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    }
 	});
-
 	registerForContextMenu(getListView());
     }
 
