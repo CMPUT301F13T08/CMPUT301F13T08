@@ -103,11 +103,15 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
-	    System.out.println("old offline id:"  + story.getOfflineStoryId());
-	    if(getOfflineStory(story.getOfflineStoryId()) != null && getOfflineStory(story.getOfflineStoryId()) != story){
+	    System.out.println("old offline id:" + story.getOfflineStoryId());
+	    if (getOfflineStory(story.getOfflineStoryId()) != null
+		    && getOfflineStory(story.getOfflineStoryId())
+			    .getOnlineStoryId() != story.getOnlineStoryId()) {
 		int total = getOfflineStories().size();
-		story.setOfflineStoryId(Math.max(total-1, getOfflineStories().get(total-1).getOfflineStoryId())+1);
-		System.out.println("new offline id:" + story.getOfflineStoryId());
+		story.setOfflineStoryId(Math.max(total - 1, getOfflineStories()
+			.get(total - 1).getOfflineStoryId()) + 1);
+		System.out.println("new offline id:"
+			+ story.getOfflineStoryId());
 		esHelper.addOrUpdateOnlineStory(story);
 	    }
 	    String fileName = prefix
@@ -143,9 +147,6 @@ public class FileHelper {
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
 	    fileContext.deleteFile(fileName); // delete original file
-	    System.out.println("DELETE FILE");
-	    System.out.println("FIND? "
-		    + getOfflineStory(story.getOfflineStoryId()));
 	    addOfflineStory(story); // add new file
 	    return true;
 	} catch (FileNotFoundException e) {
@@ -295,18 +296,22 @@ public class FileHelper {
 
 	    // set picture in each Photo object to empty after encoding.
 	    for (int m = 0; m < photos.size(); m++) {
-		InputStream is = fileContext.openFileInput(photos.get(m)
-			.getPictureName());
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		byte[] b = new byte[1024];
-		int bytesRead = 0;
-		while ((bytesRead = is.read(b)) != -1) {
-		    bos.write(b, 0, bytesRead);
-		}
-		byte[] bytes = bos.toByteArray();
+		try {
+		    InputStream is = fileContext.openFileInput(photos.get(m)
+			    .getPictureName());
+		    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		    byte[] b = new byte[1024];
+		    int bytesRead = 0;
+		    while ((bytesRead = is.read(b)) != -1) {
+			bos.write(b, 0, bytesRead);
+		    }
+		    byte[] bytes = bos.toByteArray();
 
-		photos.get(m).setEncodedPicture(
-			Base64.encodeToString(bytes, Base64.DEFAULT));
+		    photos.get(m).setEncodedPicture(
+			    Base64.encodeToString(bytes, Base64.DEFAULT));
+		} catch (Exception e) {
+		    continue;
+		}
 	    }
 
 	    /*
@@ -316,18 +321,22 @@ public class FileHelper {
 
 	    for (int n = 0; n < annotations.size(); n++) {
 
-		InputStream is = fileContext.openFileInput(annotations.get(n)
-			.getPhoto());
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		byte[] b = new byte[1024];
-		int bytesRead = 0;
-		while ((bytesRead = is.read(b)) != -1) {
-		    bos.write(b, 0, bytesRead);
+		try {
+		    InputStream is = fileContext.openFileInput(annotations.get(
+			    n).getPhoto());
+		    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		    byte[] b = new byte[1024];
+		    int bytesRead = 0;
+		    while ((bytesRead = is.read(b)) != -1) {
+			bos.write(b, 0, bytesRead);
+		    }
+		    byte[] bytes = bos.toByteArray();
+		    annotations.get(n).setEncodedAnnotation(
+			    Base64.encodeToString(bytes, Base64.DEFAULT));
+		} catch (Exception e) {
+		    continue;
 		}
-		byte[] bytes = bos.toByteArray();
-		annotations.get(n).setEncodedAnnotation(
-			Base64.encodeToString(bytes, Base64.DEFAULT));
-		
+
 	    }
 	    sfList.get(i).setAnnotations(annotations);
 	    sfList.get(i).setPhotos(photos);
@@ -355,64 +364,75 @@ public class FileHelper {
 	    ArrayList<Annotation> annotations = sfList.get(i).getAnnotations();
 
 	    for (int m = 0; m < photos.size(); m++) {
-		byte[] photoByte = Base64.decode(photos.get(m)
-			.getEncodedPicture(), Base64.DEFAULT);
-		Bitmap photoBM = BitmapFactory.decodeByteArray(photoByte, 0,
-			photoByte.length);
-		// clear the encoded string to avoid conflicts with encodeStory
-		// and save spaces.
-		photos.get(m).setEncodedPicture(null);
-
-		String fileName = "";
-
-		if (photos.get(m).getPictureName().isEmpty()) {
-		    if (mode == Save) {
-			fileName = "Image"
-				+ Integer.toString(storyId)
-				+ "Fragment"
-				+ Integer.toString(sfList.get(i)
-					.getStoryFragmentId()) + "Photo"
-				+ Integer.toString(m + 1) + ".png";
-		    }
-		} else {
-		    fileName = photos.get(m).getPictureName();
-		}
-		System.out.println("Decode Image File Name: " + fileName);
 		try {
-		    FileOutputStream fos = fileContext.openFileOutput(fileName,
-			    Context.MODE_PRIVATE);
-		    photoBM.compress(CompressFormat.PNG, 90, fos);
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
+		    byte[] photoByte = Base64.decode(photos.get(m)
+			    .getEncodedPicture(), Base64.DEFAULT);
+		    Bitmap photoBM = BitmapFactory.decodeByteArray(photoByte,
+			    0, photoByte.length);
+		    // clear the encoded string to avoid conflicts with
+		    // encodeStory
+		    // and save spaces.
+		    photos.get(m).setEncodedPicture(null);
+
+		    String fileName = "";
+
+		    if (photos.get(m).getPictureName().isEmpty()) {
+			if (mode == Save) {
+			    fileName = "Image"
+				    + Integer.toString(storyId)
+				    + "Fragment"
+				    + Integer.toString(sfList.get(i)
+					    .getStoryFragmentId()) + "Photo"
+				    + Integer.toString(m + 1) + ".png";
+			}
+		    } else {
+			fileName = photos.get(m).getPictureName();
+		    }
+		    System.out.println("Decode Image File Name: " + fileName);
+		    try {
+			FileOutputStream fos = fileContext.openFileOutput(
+				fileName, Context.MODE_PRIVATE);
+			photoBM.compress(CompressFormat.PNG, 90, fos);
+		    } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+		} catch (Exception e) {
 		    e.printStackTrace();
+		    continue;
 		}
 	    }
 
 	    for (int n = 0; n < annotations.size(); n++) {
-
-		byte[] annotationByte = Base64.decode(annotations.get(n)
-			.getEncodedAnnotation(), Base64.DEFAULT);
-		Bitmap annotationBM = BitmapFactory.decodeByteArray(
-			annotationByte, 0, annotationByte.length);
-
-		annotations.get(n).setEncodedAnnotation(null);
-
-		String fileName;
-		if (annotations.get(n).getPhoto().isEmpty()) {
-		    fileName = "Image" + Integer.toString(storyId) + "Fragment"
-			    + Integer.toString(i + 1) + "Annotation"
-			    + Integer.toString(n + 1) + ".png";
-		} else {
-		    fileName = annotations.get(n).getPhoto();
-
-		}
 		try {
-		    FileOutputStream fos = fileContext.openFileOutput(fileName,
-			    Context.MODE_PRIVATE);
-		    annotationBM.compress(CompressFormat.PNG, 90, fos);
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
+		    byte[] annotationByte = Base64.decode(annotations.get(n)
+			    .getEncodedAnnotation(), Base64.DEFAULT);
+		    Bitmap annotationBM = BitmapFactory.decodeByteArray(
+			    annotationByte, 0, annotationByte.length);
+
+		    annotations.get(n).setEncodedAnnotation(null);
+
+		    String fileName;
+		    if (annotations.get(n).getPhoto().isEmpty()) {
+			fileName = "Image" + Integer.toString(storyId)
+				+ "Fragment" + Integer.toString(i + 1)
+				+ "Annotation" + Integer.toString(n + 1)
+				+ ".png";
+		    } else {
+			fileName = annotations.get(n).getPhoto();
+
+		    }
+		    try {
+			FileOutputStream fos = fileContext.openFileOutput(
+				fileName, Context.MODE_PRIVATE);
+			annotationBM.compress(CompressFormat.PNG, 90, fos);
+		    } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+		} catch (Exception e) {
 		    e.printStackTrace();
+		    continue;
 		}
 	    }
 	    sfList.get(i).setAnnotations(annotations);

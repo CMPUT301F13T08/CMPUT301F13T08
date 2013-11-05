@@ -410,6 +410,7 @@ public class StoryFragmentActivity extends Activity {
 			+ Integer.toString(currentStoryFragment
 				.getAnnotations().size() + 1) + ".png";
 
+		System.out.println("THIS IS THE NEW FILE NAME: "+ fileName);
 		// save the new image file
 		try {
 		    FileOutputStream fos = openFileOutput(fileName,
@@ -445,10 +446,15 @@ public class StoryFragmentActivity extends Activity {
 			fHelper.updateOfflineStory(currentStory);
 			currentStory = fHelper.getOfflineStory(currentStoryId);
 			Story encodedStory = fHelper.encodeStory(currentStory);
-			if (esHelper.addOrUpdateOnlineStory(encodedStory) == encodedStory
+			System.out.println("Encode is done");
+			System.out.println("TEST ENCODE:" + encodedStory.toString());
+			int id = esHelper.addOrUpdateOnlineStory(encodedStory);
+			if (id== encodedStory
 				.getOnlineStoryId()) {
 			    // pop up a message to inform user that annotation
 			    // is added
+			    System.out.println("TEST OF ONLINE ID PASSED: "+ Integer.toString(id)+" | "+Integer.toString(encodedStory
+					.getOnlineStoryId()));
 			    Toast.makeText(getApplicationContext(),
 				    "New annotation is uploaded successfully",
 				    Toast.LENGTH_LONG).show();
