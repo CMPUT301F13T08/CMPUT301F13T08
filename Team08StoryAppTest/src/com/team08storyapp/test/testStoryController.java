@@ -20,7 +20,7 @@ public class testStoryController extends TestCase {
     ArrayList<StoryFragment> storyFragmentList = null;
 
     protected void setUp() {
-	//istantiate the ArrayList of Story Fragments
+	//Instantiate the Array List of Story Fragments
 	storyFragmentList = new ArrayList<StoryFragment>();
 	
 	// set the next fragment id to 2 - see testReadStoryFragment
