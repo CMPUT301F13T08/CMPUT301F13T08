@@ -212,14 +212,12 @@ public class MyStoriesActivity extends ListActivity {
     public boolean onContextItemSelected(MenuItem item) {
 	info = (AdapterContextMenuInfo) item.getMenuInfo();
 	position = info.position;
-	// following 4 lines will display the information on selected item.
 	Story currentStory = (Story) lv.getAdapter().getItem(position);
 	System.out.println(currentStory.getTitle());
 	System.out.println(currentStory.getAuthor());
 
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
-	    // TODO: call esHelper to publish
 	    try {
 		Story encodedStory = fHelper.encodeStory(currentStory);
 		if (currentStory.getOnlineStoryId() > 0) {
@@ -241,24 +239,18 @@ public class MyStoriesActivity extends ListActivity {
 			"Your Story is Successfully Published",
 			Toast.LENGTH_LONG).show();
 	    }
-
 	case READ_ID:
 
-	    // TODO: get selected story object- TODO: read the story -
-	    // initialize currentStory to story object
-
-	    // create intent to pass the selected story object and the first
-	    // story fragment id to the StoryFragmentActivity
+	    /*
+	     * create intent to pass the selected story object and the first
+	     * story fragment id to the StoryFragmentActivity
+	     */
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
-
-	    // send the story object through the intent
 	    firstStoryFragment.putExtra("story", (Serializable) currentStory);
-	    // send the first story fragment id through the intent
 	    firstStoryFragment.putExtra("storyFragmentId",
 		    currentStory.getFirstStoryFragmentId());
-
-	    // startActivity(firstFragment);
+	    startActivity(firstStoryFragment);
 
 	default:
 	    return super.onContextItemSelected(item);
@@ -275,26 +267,17 @@ public class MyStoriesActivity extends ListActivity {
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
 	super.onListItemClick(l, v, position, id);
-	// following 4 lines will display the information on selected item.
 
-	// Get the selected story object
+	/*
+	 * Get the selected story object, pass related information to start
+	 * activity of reading the story
+	 */
 	currentStory = (Story) lv.getAdapter().getItem(position);
-
-	// create intent to pass the selected story object and the first story
-	// fragment id to the StoryFragmentActivity
 	Intent firstStoryFragment = new Intent(getApplicationContext(),
 		MyStoryFragmentActivity.class);
-
-	// send the story object through the intent
 	firstStoryFragment.putExtra("story", currentStory);
-
 	int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
-
-	// send the first story fragment id through the intent
 	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-
-	// start the StoryFragmentActivity to display the first fragment of the
-	// selected story
 	startActivity(firstStoryFragment);
 
     }
@@ -309,7 +292,6 @@ public class MyStoriesActivity extends ListActivity {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
     }
@@ -319,13 +301,10 @@ public class MyStoriesActivity extends ListActivity {
 	try {
 	    fillData(fHelper.getOfflineStories(), onUpdate);
 	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
-
     }
 
 }
