@@ -33,30 +33,52 @@ package com.team08storyapp;
 
 import java.util.ArrayList;
 
+/**
+ * StoryController is a controller class that manipulates data of story objects.
+ * This class allows for us to read story, read the story fragments related to
+ * that story and allows us to add story fragments on to a story.
+ * <p>
+ * For the purpose of this application, this class does the following:
+ * <ul>
+ * <li>Reading the story.
+ * <li>Getting a specific Story Fragment by using Story Fragment Id.
+ * <li>Adding a Story Fragment to a story.
+ * </ul>
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @Version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
+
 public class StoryController {
 
-    // Constructor is added since the FileHelper needs
-    // a context from previous activity.
-    // private FileHelper fHelper;
-    // private Context activityContext
-    // public StoryController(Context ctx){
-    // activityContext = ctx;
-    // }
-
-    /*
-     * Also I'm thinking that the constructor of StoryController should take at
-     * least a storyId as a parameter?
-     */
     public static boolean readStory(Story addStory) {
 	// TODO Auto-generated method stub
 	return false;
     }
 
+    /**
+     * ReadStoryFragment method passing in an Arraylist of Story Fragment object
+     * and a Story Fragment Id. It goes through the ArrayList finding the next
+     * story fragment comparing the Story Fragment Id. The method then returns
+     * the next story fragment in line.
+     * 
+     * @param storyFragments
+     *            Array List of Story Fragment objects that relates to the
+     *            current story.
+     * @param storyFragmentId
+     *            An integer which uniquely identifies a Story Fragment.
+     * @return The Story Fragment that is supposed to be next in the story.
+     */
     public static StoryFragment readStoryFragment(
 	    ArrayList<StoryFragment> storyFragments, int storyFragmentId) {
 	StoryFragment nextFragment = null;
 	for (StoryFragment storyFragment : storyFragments) {
-	    // int thisStoryFragmentId = storyFragment.getStoryFragmentId();
 	    if (storyFragment.getStoryFragmentId() == storyFragmentId) {
 		nextFragment = storyFragment;
 		break;
@@ -65,6 +87,11 @@ public class StoryController {
 	return nextFragment;
     }
 
+    /**
+     * 
+     * @param addStoryFragment
+     * @return
+     */
     public static boolean addStoryFragment(StoryFragment addStoryFragment) {
 	// TODO Auto-generated method stub
 	return false;
