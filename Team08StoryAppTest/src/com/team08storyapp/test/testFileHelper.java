@@ -96,7 +96,7 @@ public class testFileHelper extends TestCase {
 	StoryFragment sf4 = new StoryFragment(4,
 		"    'Hey, this is Michael, leave a message I'll call you back, if I want.'");
 	sfList.add(sf4);
-	s1.setFirstStoryFragment(1);
+	s1.setFirstStoryFragmentId(1);
 	s1.setStoryFragments(sfList);
 
 	fHelper.addOfflineStory(s1);
@@ -111,7 +111,7 @@ public class testFileHelper extends TestCase {
      * return true.
      */
     public void testAddOfflineStory() throws FileNotFoundException, IOException {
-	s1.setFirstStoryFragment(fragment);
+	s1.setFirstStoryFragmentId(fragment);
 	s1.setStoryFragments(fragmentList);
 	assertTrue(fHelper.addOfflineStory(s1));
     }
