@@ -13,7 +13,6 @@ import junit.framework.TestCase;
 public class testStoryController extends TestCase {
 
     	private int nextStoryFragmentId;
-	private StoryFragment addStoryFragment;
 	private StoryFragment firstStoryFragment;
 	private StoryFragment retrievedStoryFragment;
 	StoryFragment secondStoryFragment;
@@ -26,6 +25,7 @@ public class testStoryController extends TestCase {
 	    	nextStoryFragmentId = 2;
 	    	firstStoryFragment = new StoryFragment(1, "fragment text");
 	    	secondStoryFragment = new StoryFragment(2, "another fragment text");
+	    	
 	    	
 	    	// storyFragment list has two fragments with ids 1 and 2
 	    	storyFragmentList.add(firstStoryFragment);
@@ -40,7 +40,7 @@ public class testStoryController extends TestCase {
 	 * should return true. This is related to user story # 5.
 	 **/
 	public void testAddStoryFragment(){
-		assertTrue(StoryController.addStoryFragment(addStoryFragment));
+		assertTrue(StoryController.addStoryFragment(firstStoryFragment));
 	}
 	
 
