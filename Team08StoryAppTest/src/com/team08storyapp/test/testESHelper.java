@@ -155,6 +155,7 @@ public class testESHelper extends TestCase {
      * a story to the webservice.
      */
     public void testAddOnlineStory() {
+	esHelper = new ESHelper();
 	// get the id that is expected to be set to the newly added story
 	int expectedid = esHelper.getOnlineStories().size() + 1;
 
@@ -179,8 +180,8 @@ public class testESHelper extends TestCase {
 	assertEquals(addStory.getTitle(), onlineStory.getTitle());
 	assertEquals(addStory.getFirstStoryFragmentId(),
 		onlineStory.getFirstStoryFragmentId());
-	assertEquals(addStory.getStoryFragments(),
-		onlineStory.getStoryFragments());
+	assertEquals(addStory.getStoryFragments().size(),
+		onlineStory.getStoryFragments().size());
     }
 
     /*
@@ -197,6 +198,7 @@ public class testESHelper extends TestCase {
      * and it contains the correct number of fragments.
      */
     public void testGetOnlineStory() {
+	esHelper = new ESHelper();
 	// set the predetermined story and it's known number of story fragments
 	int storyId = 1;
 	int storyFragmentListSize = 12;
@@ -225,6 +227,7 @@ public class testESHelper extends TestCase {
      * successfully retrieving all stories online.
      */
     public void testGetOnlineStories() {
+	esHelper = new ESHelper();
 	// set to the known count of the stories on the webservice currently
 	int storyListSize = 6;
 
@@ -245,6 +248,7 @@ public class testESHelper extends TestCase {
      * number of stories returned is the same as expected.
      */
     public void testSearchOnlineStories() {
+	esHelper = new ESHelper();
 	// set the searchText to the predetermined text to search the webservice
 	// stories author and titles for
 	String searchText = "walk";
@@ -274,6 +278,7 @@ public class testESHelper extends TestCase {
      * does contain the updated text.
      */
     public void testUpdateOnlineStory() {
+	esHelper = new ESHelper();
 	// retrieve a story from the webservice to update
 	Story updateStory = esHelper.getOnlineStory(6);
 
