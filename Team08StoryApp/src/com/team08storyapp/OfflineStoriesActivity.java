@@ -68,7 +68,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	lv = (ListView) findViewById(android.R.id.list);
 
 	fHelper = new FileHelper(this, 0);
-
+	
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
 
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
@@ -95,6 +95,17 @@ public class OfflineStoriesActivity extends ListActivity {
 	    }
 
 	});
+
+	try {
+	    fillData(fHelper.getOfflineStories(), onCreate);
+	} catch (FileNotFoundException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	
 	registerForContextMenu(getListView());
 
     }
