@@ -27,7 +27,7 @@ public class testAnnotationController extends TestCase {
     private int testCurrentStoryFragmentIndex;
     private FileHelper testFHelper;
     private ESHelper testESHelper;
-    
+
     public testAnnotationController() {
 	super();
     }
@@ -35,7 +35,7 @@ public class testAnnotationController extends TestCase {
     @Before
     public void setUp() throws FileNotFoundException, IOException {
 	testCurrentStoryFragmentIndex = 1;
-	
+
 	anController = new AnnotationController(testActivity, testContext,
 		testStory, testStoryFragment, testCurrentStoryFragmentIndex,
 		testFHelper, testESHelper);

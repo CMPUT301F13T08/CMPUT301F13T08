@@ -26,7 +26,7 @@ public class testPhotoController extends TestCase {
     private StoryFragment testCurrentStoryFragment;
     private int testCurrentStoryFragmentIndex;
     private FileHelper testFHelper;
-    
+
     public testPhotoController() {
 	super();
     }
