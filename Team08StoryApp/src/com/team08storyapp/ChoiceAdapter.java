@@ -91,6 +91,7 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
 	View v = convertView;
 	ViewHolder holder = new ViewHolder();
 
+	/* if the given view is null, populate it with desired layout.*/
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
 		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -103,6 +103,7 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
 	View v = convertView;
 	ViewHolder holder;
 
+	/* if the view is not empty populate with the given layout*/
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
 		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -113,13 +114,14 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
 	    v.setTag(holder);
 	} else
 	    holder = (ViewHolder) v.getTag();
-
+	
 	if (infos == null) {
 	    return v;
 	}
 
 	final Story story = infos.get(position);
 
+	/* set Title and Author to the right places. */
 	if (story != null) {
 	    holder.item1.setText(story.getTitle());
 	    holder.item2.setText(story.getAuthor());
