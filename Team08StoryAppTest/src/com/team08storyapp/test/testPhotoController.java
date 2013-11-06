@@ -48,10 +48,6 @@ public class testPhotoController extends AndroidTestCase {
 	
     }
     
-    // TODO: write test case
-    private void testAddIllustration(){
-	
-    }
     
     
     
