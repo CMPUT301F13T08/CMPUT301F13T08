@@ -106,6 +106,11 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
     /**
      * The customized getView will populate images and texts into the passed
      * ListView.
+     * 
+     * @param position
+     *            the index of the selected photo in the adapter
+     * @convertView the view that is going to be converted to user's desire
+     * @parent a ViewGroup object
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
