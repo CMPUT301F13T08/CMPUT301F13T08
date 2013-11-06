@@ -46,8 +46,13 @@ import android.widget.TextView;
  * views.
  * 
  * @author Sue Smith
+ * @author Michele Paulichuk
  * @author Alice Wu
- * 
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
  */
 public class StoryInfoAdapter extends ArrayAdapter<Story> {
 
@@ -63,11 +68,11 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
      * @param textViewResourceId
      * @param infos
      */
-    public StoryInfoAdapter(Activity a, int textViewResourceId,
+    public StoryInfoAdapter(Activity activity, int textViewResourceId,
 	    ArrayList<Story> infos) {
-	super(a, textViewResourceId, infos);
+	super(activity, textViewResourceId, infos);
 	this.infos = infos;
-	this.activity = a;
+	this.activity = activity;
 
     }
 
@@ -75,7 +80,13 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
      * This innerclass ViewHolder holds two TextViews.
      * 
      * @author Sue Smith
+     * @author Michele Paulichuk
      * @author Alice Wu
+     * @author Ana Marcu
+     * @author Jarrett Toll
+     * @author Jiawei Shen
+     * @version 1.0 November 8, 2013
+     * @since 1.0
      * 
      */
     public static class ViewHolder {
@@ -84,7 +95,8 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
     }
 
     /**
-     * Method will inflate the layout first and populate the data.
+     * Method will inflate the layout first and populate the data to corresponding fields.
+     * (Title to item1, Author to item2)
      * 
      */
     public View getView(int position, View convertView, ViewGroup parent) {

@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -41,6 +41,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * ChoiceAdapter is a customized ArrayAdapter, which will populate only selected
+ * information of a list of Choice objects into a listView by overriding the
+ * getView method.
+ * 
+ * @author Sue Smith
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class ChoiceAdapter extends ArrayAdapter<Choice> {
 
     private ArrayList<Choice> infos;
@@ -50,14 +65,28 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
 	public TextView choiceText;
     }
 
-    public ChoiceAdapter(Activity a, int textViewResourceId,
+    /**
+     * Constructor of a ChoiceAdapter requires an activity object, an int value
+     * of resourceView, and an ArrayList of Choice objects as well.
+     * 
+     * 
+     * @param activity
+     * @param textViewResourceId
+     * @param infos
+     */
+    public ChoiceAdapter(Activity activity, int textViewResourceId,
 	    ArrayList<Choice> infos) {
-	super(a, textViewResourceId, infos);
+	super(activity, textViewResourceId, infos);
 	this.infos = infos;
-	this.activity = a;
+	this.activity = activity;
 
     }
 
+    /**
+     * Public method getView overrides the getView method from ArrayAdapter for
+     * custom purpose. It will populate only the text in a Choice object into
+     * the TextView in the passed convertedView.
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
 	ViewHolder holder = new ViewHolder();

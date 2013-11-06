@@ -5,11 +5,15 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="Illustration from Camera"/>
-    
     <item
         android:id="@+id/choose_picture"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="Illustration from Gallery"/>
+    <item
+        android:id="@+id/main_menu"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Return to Main Menu"/>
 
 </menu>
