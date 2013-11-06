@@ -45,6 +45,19 @@ import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 
+/**
+ * PicAdapter is a customized Adapter based on BaseAdapter
+ * 
+ * @author Sue Smith
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class PicAdapter extends BaseAdapter {
 
     // use the default gallery background image
@@ -58,20 +71,35 @@ public class PicAdapter extends BaseAdapter {
     // placeholder bitmap for empty spaces in gallery
     Bitmap placeholder;
 
-    // constructor
-    public PicAdapter(Context c, ArrayList<Photo> photoList,
+    /**
+     * This constructor of PicAdapter will populate all images from photoList
+     * into a gallery with customized getView function.
+     * 
+     * @author Sue Smith
+     * @author Michele Paulichuk
+     * @author Alice Wu
+     * @author Ana Marcu
+     * @author Jarrett Toll
+     * @author Jiawei Shen
+     * @version 1.0 November 8, 2013
+     * @since 1.0
+     * 
+     * @param context
+     * @param photoList
+     * @param currentStoryId
+     * @param currentStoryFragmentId
+     */
+    public PicAdapter(Context context, ArrayList<Photo> photoList,
 	    int currentStoryId, int currentStoryFragmentId) {
 
 	// instantiate context
-	galleryContext = c;
+	galleryContext = context;
 
 	// create bitmap array
 	imageBitmaps = new Bitmap[10];
 	// decode the placeholder image
 	placeholder = BitmapFactory.decodeResource(
 		galleryContext.getResources(), R.drawable.ic_launcher);
-
-	System.out.println(photoList.size());
 
 	// decode the placeholder image
 	placeholder = BitmapFactory.decodeResource(
@@ -80,35 +108,25 @@ public class PicAdapter extends BaseAdapter {
 	// set placeholder as all thumbnail images in the gallery initially
 	for (int i = 0; i < imageBitmaps.length; i++)
 	    imageBitmaps[i] = placeholder;
-
 	if (photoList.size() > 0) {
 	    File file = galleryContext.getFilesDir();
 	    File[] fileList = file.listFiles();
 	    ArrayList<File> prefixFileList = new ArrayList<File>();
 	    for (int i = 0; i < fileList.length; i++) {
-		// System.out.println("FIND IMAGE: " + fileList[i].getName());
 		if (fileList[i].getName().startsWith(
 			"Image" + Integer.toString(currentStoryId) + "Fragment"
 				+ Integer.toString(currentStoryFragmentId))) {
-		    // System.out.println("USE IMAGE: " +
-		    // fileList[i].getName());
 		    prefixFileList.add(fileList[i]);
 		}
 	    }
 	    for (int i = 0; i < Math.min(imageBitmaps.length, photoList.size()); i++) {
 		String path = prefixFileList.get(i).getAbsolutePath();
-		// String filePath = path.substring(0,
-		// path.lastIndexOf(File.separator));
 		placeholder = BitmapFactory.decodeFile(path);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		placeholder.compress(Bitmap.CompressFormat.PNG, 100, stream);
 		byte[] bytePicture = stream.toByteArray();
-
-		// System.out.println("*****ByteArray Done******");
-
 		imageBitmaps[i] = BitmapFactory.decodeByteArray(bytePicture, 0,
 			bytePicture.length);
-
 	    }
 	}
 
@@ -122,8 +140,6 @@ public class PicAdapter extends BaseAdapter {
 	styleAttrs.recycle();
 
     }
-
-    // BaseAdapter methods
 
     // return number of data items i.e. bitmap images
     public int getCount() {
@@ -158,18 +174,27 @@ public class PicAdapter extends BaseAdapter {
 	return imageView;
     }
 
-    // custom methods for this app
-
-    // helper method to add a bitmap to the gallery when the user chooses
-    // one
+    /**
+     * addPic method is a helper method to add a bitmap to the gallery when the
+     * user chooses one
+     * 
+     * @param currentPic
+     * @param newPic
+     */
     public void addPic(int currentPic, Bitmap newPic) {
 	// set at currently selected index
 	imageBitmaps[currentPic] = newPic;
     }
 
-    // return bitmap at specified position for larger display
-    public Bitmap getPic(int posn) {
-	// return bitmap at posn index
-	return imageBitmaps[posn];
+    /**
+     * getPic returns bitmap at specified position for larger display
+     * 
+     * @param position
+     * @return
+     */
+
+    public Bitmap getPic(int position) {
+	// return bitmap at position index
+	return imageBitmaps[position];
     }
 }

@@ -137,6 +137,7 @@ public class testFileHelper extends AndroidTestCase {
 	assertEquals(fHelper.searchOfflineStories("co").size(), 1);
 	assertEquals(fHelper.searchOfflineStories("    ").size(), 1);
 	assertEquals(fHelper.searchOfflineStories("\n").size(), 1);
+	assertEquals(fHelper.searchOfflineStories("DAT").size(), 0);
     }
 
     @Test
