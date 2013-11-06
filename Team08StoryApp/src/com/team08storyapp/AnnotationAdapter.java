@@ -71,8 +71,11 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
      * LAYOUT_INFLATER_SERVICE.
      * 
      * @param activity
+     *            an activity object that provides LAYOUT_INFLATER_SERVICE
      * @param textViewResourceId
+     *            the int value of the id of the view
      * @param annoList
+     *            a list of annotations
      */
     public AnnotationAdapter(Activity activity, int textViewResourceId,
 	    ArrayList<Annotation> annoList) {
@@ -81,6 +84,20 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	this.activity = activity;
     }
 
+    /**
+     * ViewHolder is a like a struct in C++. Only hold two view objects for the
+     * population purpose of AnnotationAdapter
+     * 
+     * @author Sue Smith
+     * @author Michele Paulichuk
+     * @author Alice Wu
+     * @author Ana Marcu
+     * @author Jarrett Toll
+     * @author Jiawei Shen
+     * @version 1.0 November 8, 2013
+     * @since 1.0
+     * 
+     */
     public static class ViewHolder {
 	public ImageView annoImage;
 	public TextView annoText;
@@ -94,6 +111,10 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	View v = convertView;
 	ViewHolder holder;
 
+	/*
+	 * if the passed view is a valid view then inflate it with desired
+	 * layout
+	 */
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
 		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -107,6 +128,11 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 
 	final Annotation anno = annoList.get(position);
 
+	/*
+	 * if the annotation is not a null object and really has a photo then
+	 * just read the photo as a byteArray and set it to the layout's Image
+	 * view. Else set the default lauch icon to the image view.
+	 */
 	if (anno != null) {
 	    if (anno.getPhoto() != null && !anno.getPhoto().isEmpty()) {
 		File file = activity.getFilesDir();
@@ -132,6 +158,11 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 		holder.annoImage.setImageBitmap(BitmapFactory.decodeResource(
 			activity.getResources(), R.drawable.ic_launcher));
 	    }
+
+	    /*
+	     * if the annotation has its own text then set the text to the
+	     * textView else set the message to "No Text Annotation".
+	     */
 
 	    if (anno.getText() != null && !anno.getText().isEmpty()) {
 		holder.annoText.setText(anno.getText());

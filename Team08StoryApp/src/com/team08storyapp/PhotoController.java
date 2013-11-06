@@ -197,7 +197,6 @@ public class PhotoController {
 			Context.MODE_PRIVATE);
 		pic.compress(CompressFormat.PNG, 90, fos);
 	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	} else {

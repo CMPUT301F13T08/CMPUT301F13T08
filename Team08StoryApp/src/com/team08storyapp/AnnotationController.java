@@ -271,16 +271,14 @@ public class AnnotationController {
 	 */
 	try {
 
-	    // encode the story
+	    /* encode the story */
 	    Story encodedStory = fHelper.encodeStory(currentStory);
 
-	    // make sure the annotation is uploaded and rewrites the right file.
+	    /* make sure the annotation is uploaded and rewrites the right file.*/
 	    if (esHelper.addOrUpdateOnlineStory(encodedStory) == encodedStory
 		    .getOnlineStoryId()) {
 
-		/*
-		 * pop up a message to inform user that annotation is added
-		 */
+		/* pop up a message to inform user that annotation is added */
 		Toast.makeText(context,
 			"New annotation is uploaded successfully",
 			Toast.LENGTH_LONG).show();
