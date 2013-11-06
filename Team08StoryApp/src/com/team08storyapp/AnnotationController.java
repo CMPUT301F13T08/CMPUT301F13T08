@@ -107,7 +107,7 @@ public class AnnotationController {
 	this.fHelper = fHelper;
 	this.esHelper = esHelper;
     }
-    
+
     /**
      * savePhoto is the function where resizing, saving the illustration, and
      * updating the current fragment are performed in order.

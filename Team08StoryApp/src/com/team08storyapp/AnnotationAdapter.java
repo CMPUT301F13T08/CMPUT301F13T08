@@ -81,14 +81,14 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	this.activity = activity;
     }
 
-    
     public static class ViewHolder {
 	public ImageView annoImage;
 	public TextView annoText;
     }
 
     /**
-     *  The customized getView will populate images and texts into the passed ListView.
+     * The customized getView will populate images and texts into the passed
+     * ListView.
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;

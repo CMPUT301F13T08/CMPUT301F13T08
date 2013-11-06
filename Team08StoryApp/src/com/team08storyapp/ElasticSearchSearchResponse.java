@@ -89,7 +89,7 @@ public class ElasticSearchSearchResponse<T> {
 
     /**
      * This method overrides the toString() method. Allowing it to display the
-     * properties of this model class when the toString method is called. 
+     * properties of this model class when the toString method is called.
      * 
      * @see java.lang.Object#toString()
      */

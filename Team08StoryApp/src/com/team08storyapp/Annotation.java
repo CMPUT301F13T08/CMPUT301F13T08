@@ -34,15 +34,16 @@ package com.team08storyapp;
 import java.io.Serializable;
 
 /**
- * Annotation is a model class representing a reader's Annotations on a Particular
- * Story Fragment. An Annotation has the following properties:
+ * Annotation is a model class representing a reader's Annotations on a
+ * Particular Story Fragment. An Annotation has the following properties:
  * <ul>
  * <li>Annotation Id to uniquely identify the Annotation.
  * <li>Story Fragment Id the Id identified with the Story Fragment the
  * Annotation belongs to.
  * <li>Photo the photo the reader set in the Annotation.
  * <li>Text the text the reader set in the Annotation.
- * <li>Encoded Annotation is the Annotation encoded for storing it in a file or on a webservice.
+ * <li>Encoded Annotation is the Annotation encoded for storing it in a file or
+ * on a webservice.
  * </ul>
  * These properties are able to be accessed through the constructor or through
  * public getters/setters.
@@ -60,7 +61,7 @@ import java.io.Serializable;
  * 
  */
 public class Annotation implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     private int annotationID;
     private String text;

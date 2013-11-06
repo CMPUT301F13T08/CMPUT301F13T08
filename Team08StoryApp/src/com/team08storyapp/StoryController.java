@@ -57,8 +57,6 @@ import java.util.ArrayList;
 
 public class StoryController {
 
-
-
     /**
      * ReadStoryFragment method passing in an Arraylist of Story Fragment object
      * and a Story Fragment Id. It goes through the ArrayList finding the next
@@ -83,7 +81,6 @@ public class StoryController {
 	}
 	return nextFragment;
     }
-
 
     /**
      * 
