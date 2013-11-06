@@ -70,18 +70,33 @@ public class MainActivity extends Activity {
 	return true;
     }
 
+
+    /** 
+     * toOnlineStories creates an intent to move to OnlineStoriesActivity when "Read Online Stories" is
+     * clicked.
+     * @param view
+     */
     public void toOnlineStories(View view) {
 	Intent intent = new Intent(MainActivity.this,
 		OnlineStoriesActivity.class);
 	startActivity(intent);
     }
 
+    /**
+     * toOfflineStories creates an intent to move to OfflineStoriesActivity when "Read Downloaded Stories" is
+     * clicked.
+     * @param view
+     */
     public void toOfflineStories(View view) {
 	Intent intent = new Intent(MainActivity.this,
 		OfflineStoriesActivity.class);
 	startActivity(intent);
     }
 
+    /**
+     * toMyStories creates an intent to move to MyStoriesActivity when "My Stories" is clicked.
+     * @param view
+     */
     public void toMyStories(View view) {
 	Intent intent = new Intent(MainActivity.this, MyStoriesActivity.class);
 	startActivity(intent);
