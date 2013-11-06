@@ -49,6 +49,21 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * OnlineStoriesActivity is a view class that displays a list of stories that
+ * are available online. Users are able to either download or read an online
+ * story by long-clicking a story in list and selecting one of the above options
+ * through a context menu.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
+
 public class OnlineStoriesActivity extends ListActivity {
 
     public int position;
