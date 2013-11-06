@@ -71,8 +71,11 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
      * 
      * 
      * @param activity
+     *            an activity object that provides LAYOUT_INFLATER_SERVICE
      * @param textViewResourceId
+     *            the int value of the id of the view
      * @param infos
+     *            a list of choice objects
      */
     public ChoiceAdapter(Activity activity, int textViewResourceId,
 	    ArrayList<Choice> infos) {
@@ -86,12 +89,17 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
      * Public method getView overrides the getView method from ArrayAdapter for
      * custom purpose. It will populate only the text in a Choice object into
      * the TextView in the passed convertedView.
+     * 
+     * @param position
+     *            the index of the selected photo in the adapter
+     * @convertView the view that is going to be converted to user's desire
+     * @parent a ViewGroup object
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
 	ViewHolder holder = new ViewHolder();
 
-	/* if the given view is null, populate it with desired layout.*/
+	/* if the given view is null, populate it with desired layout. */
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
 		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

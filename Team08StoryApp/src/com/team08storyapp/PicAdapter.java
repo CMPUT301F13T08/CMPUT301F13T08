@@ -68,7 +68,7 @@ public class PicAdapter extends BaseAdapter {
 
     /* array to store bitmaps to display */
     private Bitmap[] imageBitmaps;
-    
+
     /* placeholder bitmap for empty spaces in gallery */
     Bitmap placeholder;
 
@@ -78,9 +78,13 @@ public class PicAdapter extends BaseAdapter {
      * 
      * 
      * @param context
+     *            a context object
      * @param photoList
+     *            a list of photo objects
      * @param currentStoryId
+     *            the id of current story object
      * @param currentStoryFragmentId
+     *            the id of the current story fragment object
      */
     public PicAdapter(Context context, ArrayList<Photo> photoList,
 	    int currentStoryId, int currentStoryFragmentId) {
@@ -90,7 +94,7 @@ public class PicAdapter extends BaseAdapter {
 
 	/* create bitmap array */
 	imageBitmaps = new Bitmap[5];
-	
+
 	/* decode the placeholder image */
 	placeholder = BitmapFactory.decodeResource(
 		galleryContext.getResources(), R.drawable.ic_launcher);
@@ -127,11 +131,11 @@ public class PicAdapter extends BaseAdapter {
 	/* get the styling attributes - use default Andorid system resources */
 	TypedArray styleAttrs = galleryContext
 		.obtainStyledAttributes(R.styleable.PicGallery);
-	
+
 	/* get the background resource */
 	defaultItemBackground = styleAttrs.getResourceId(
 		R.styleable.PicGallery_android_galleryItemBackground, 0);
-	
+
 	/* recycle attributes */
 	styleAttrs.recycle();
 
@@ -152,27 +156,32 @@ public class PicAdapter extends BaseAdapter {
 	return position;
     }
 
-    /*
+    /**
      * get view specifies layout and display options for each thumbnail in the
      * gallery
+     * 
+     * @param position
+     *            the index of the selected photo in the adapter
+     * @convertView the view that is going to be converted to user's desire
+     * @parent a ViewGroup object
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 
-	/* create the view */	
+	/* create the view */
 	ImageView imageView = new ImageView(galleryContext);
-	
+
 	/* specify the bitmap at this position in the array */
 	imageView.setImageBitmap(imageBitmaps[position]);
-	
+
 	/* set layout options */
 	imageView.setLayoutParams(new Gallery.LayoutParams(300, 200));
-	
+
 	/* scale type within view area */
 	imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-	
+
 	/* set default gallery item background */
 	imageView.setBackgroundResource(defaultItemBackground);
-	
+
 	/* return the view */
 	return imageView;
     }
@@ -182,10 +191,13 @@ public class PicAdapter extends BaseAdapter {
      * user chooses one
      * 
      * @param currentPic
+     *            the index in the imageBitmaps
      * @param newPic
+     *            new bitmap object that will be added to the currentPic
+     *            position in the imageBitmaps
      */
     public void addPic(int currentPic, Bitmap newPic) {
-	
+
 	/* set at currently selected index */
 	imageBitmaps[currentPic] = newPic;
     }
@@ -194,11 +206,12 @@ public class PicAdapter extends BaseAdapter {
      * getPic returns bitmap at specified position for larger display
      * 
      * @param position
+     *            the index of the desired picture in the imageBitmaps
      * @return
      */
 
     public Bitmap getPic(int position) {
-	
+
 	/* return bitmap at position index */
 	return imageBitmaps[position];
     }
