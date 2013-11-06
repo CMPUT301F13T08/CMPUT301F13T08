@@ -1,7 +1,16 @@
 package com.team08storyapp.test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -178,11 +187,11 @@ public class testESHelper extends TestCase {
 	 * should return
 	 */
 	searchListSize = 1;
-	
+
 	// ***Setup for testUpdateOnlineStory***
 	storyIdUpdateStory = 6;
     }
-   
+
     /*
      * Test Case for Use Case 2 & 16
      * 
@@ -200,7 +209,7 @@ public class testESHelper extends TestCase {
 	// retrieve the stories and compare the list size to the known size
 	assertTrue(esHelper.getOnlineStories().size() == storyListSizeGetStories);
     }
-    
+
     /*
      * Test Case for Use Case 3
      * 
@@ -343,10 +352,31 @@ public class testESHelper extends TestCase {
 	assertNotSame(orginalStoryFragment.getStoryText(), onlineStoryFragments
 		.get(0).getStoryText());
     }
-    
+
     @After
     // Remove test data from the application
-    protected void tearDown() {
-	
+    protected void tearDown() throws IOException {
+	// Http Connector
+	HttpClient httpclient = new DefaultHttpClient();
+	HttpDelete httpDelete = new HttpDelete(
+		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/6");
+	httpDelete.addHeader("Accept", "application/json");
+
+	HttpResponse response = httpclient.execute(httpDelete);
+
+	String status = response.getStatusLine().toString();
+	System.out.println(status);
+
+	HttpEntity entity = response.getEntity();
+	BufferedReader br = new BufferedReader(new InputStreamReader(
+		entity.getContent()));
+	String output;
+	System.err.println("Output from Server -> ");
+	while ((output = br.readLine()) != null) {
+	    System.err.println(output);
+	}
+	EntityUtils.consume(entity);
+
+	httpDelete.releaseConnection();
     }
 }
