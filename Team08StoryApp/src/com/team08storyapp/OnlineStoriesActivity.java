@@ -146,10 +146,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	    try {
 		currentStory = fHelper.decodeStory(currentStory, 1);
 	    } catch (IOException e1) {
-		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	    } catch (Exception e1) {
-		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	    }
 	    try {
@@ -172,10 +170,8 @@ public class OnlineStoriesActivity extends ListActivity {
 			    Toast.LENGTH_LONG).show();
 		}
 	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    } catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	    return true;
@@ -198,10 +194,8 @@ public class OnlineStoriesActivity extends ListActivity {
 		currentStory = fHelper.decodeStory(currentStory, 0);
 		System.out.println(currentStory.toString());
 	    } catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    } catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	    firstStoryFragment.putExtra("story", currentStory);
@@ -223,7 +217,12 @@ public class OnlineStoriesActivity extends ListActivity {
 	    return super.onContextItemSelected(item);
 	}
     }
-
+    /**
+     * fillData populates the list with a collection of online stories. These stories
+     * can be read or downloaded. 
+     * @param sList
+     * @param update
+     */
     public void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
 	    lv.addHeaderView(header);
