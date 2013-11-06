@@ -61,6 +61,27 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * StoryFragmentActivity is a view class that displays a specific fragment of
+ * either and online or downloaded story. Each fragment consists of:
+ * <ul>
+ * <li>Illustrations
+ * <li>Dialogue
+ * <li>Choices
+ * </ul>
+ * <p>
+ * Users are also able to add photo annotations to story fragments by using the
+ * action bar or the settings menu.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
+
 public class StoryFragmentActivity extends Activity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;

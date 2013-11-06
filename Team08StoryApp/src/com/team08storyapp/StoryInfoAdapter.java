@@ -95,8 +95,8 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
     }
 
     /**
-     * Method will inflate the layout first and populate the data to corresponding fields.
-     * (Title to item1, Author to item2)
+     * Method will inflate the layout first and populate the data to
+     * corresponding fields. (Title to item1, Author to item2)
      * 
      */
     public View getView(int position, View convertView, ViewGroup parent) {
