@@ -75,14 +75,6 @@ public class PicAdapter extends BaseAdapter {
      * This constructor of PicAdapter will populate all images from photoList
      * into a gallery with customized getView function.
      * 
-     * @author Sue Smith
-     * @author Michele Paulichuk
-     * @author Alice Wu
-     * @author Ana Marcu
-     * @author Jarrett Toll
-     * @author Jiawei Shen
-     * @version 1.0 November 8, 2013
-     * @since 1.0
      * 
      * @param context
      * @param photoList

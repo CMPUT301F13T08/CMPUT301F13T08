@@ -43,16 +43,42 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * FileHelper is a helper class that mainly manages retrieving, saving stories
+ * or images files in local, sometimes assists ESHelper by encoding or decoding
+ * a story when uploading or downloading a story
+ * 
+ * <p>
+ * In order to manage files, FileHelper provides the following methods:
+ * <ul>
+ * <li>Add an offline story with a given story.
+ * <li>Get an offline story with a given story Id.
+ * <li>Retrieve a list of all available offline stories.
+ * <li>Update an offline story with a given story Id.
+ * <li>search for offline stories with given search string. (Note: it doesn't
+ * perform search on "\n" and whitespace )
+ * </ul>
+ * 
+ * @author Sue Smith
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
+
+@SuppressLint("DefaultLocale")
 public class FileHelper {
 
     /*
@@ -65,19 +91,24 @@ public class FileHelper {
     private Gson gson = new Gson();
     private static final int Download = 0;
     private static final int My = 1;
-    private static final int Read = 0;
     private static final int Save = 1;
     private String prefix;
     private ESHelper esHelper;
 
-    /*
-     * Initialize the fileContext with passed context. Since we design to store
-     * author's own stories and downloaded stories in different directories in
-     * internal storage, we need to differentiate them. (Actually I haven't come
-     * up with a better idea than using a third party library called
-     * DirectoryPicker when saving files in different directory in internal
-     * storage. But I think the "prefix" can do the job as well. So I may stick
-     * to it.)
+    /**
+     * The Constructor initializes the fileContext with passed context. Since we
+     * design to store author's own stories and downloaded stories in different
+     * directories in internal storage, we need to differentiate them. (Actually
+     * I haven't come up with a better idea than using a third party library
+     * called DirectoryPicker when saving files in different directory in
+     * internal storage. But I think the "prefix" can do the job as well. So I
+     * may stick to it.)
+     * 
+     * @param context
+     *            an Context object
+     * @param mode
+     *            integer,to access dowaloaded stories: mode == 0; to access
+     *            authored stories mode == 1
      */
     public FileHelper(Context context, int mode) {
 	esHelper = new ESHelper();
@@ -92,13 +123,17 @@ public class FileHelper {
 	}
     }
 
-    /*
-     * function: addOfflineStory input : Story story output: boolean value
+    /**
+     * Create a file named after the story's Id (since it's unique), and write
+     * the story content into the file. If a story is successfully written into
+     * the file, true will be returned. Otherwise, function will return false.
      * 
-     * description: Create a file named after the story's Id (since it's
-     * unique), and write the story content into the file. If a story is
-     * successfully written into the file, true will be returned. Otherwise,
-     * function will return false.
+     * @param story
+     *            the story that needs to be added to local file system
+     * @return true: story is successfully added | false: writing file error
+     *         during adding process
+     * @throws FileNotFoundException
+     * @throws IOException
      */
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
@@ -110,19 +145,17 @@ public class FileHelper {
 		int total = getOfflineStories().size();
 		story.setOfflineStoryId(Math.max(total - 1, getOfflineStories()
 			.get(total - 1).getOfflineStoryId()) + 1);
-		System.out.println("new offline id:"
-			+ story.getOfflineStoryId());
 		esHelper.addOrUpdateOnlineStory(story);
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
+	    
 	    // translate the story context to Json
 	    String context = gson.toJson(story);
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,
 		    Context.MODE_PRIVATE);
 	    ops.write(context.getBytes());
 	    ops.close();
-	    System.out.println("addOfflineStory: Adding " + fileName);
 	    return true;
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -132,14 +165,19 @@ public class FileHelper {
 	return false;
     }
 
-    /*
-     * function: updateOfflineStory input: Story story output: boolean value
+    /**
+     * Update process is done by deleting the original file and write a new
+     * file. So this function deletes the original file named by the story id
+     * and creates a new file and writes the updated content into the new file,
+     * then saves it. When update is successful, true will be returned,
+     * otherwise false will be returned.
      * 
-     * description: Update process is done by deleting the original file and
-     * write a new file. So this function deletes the original file named by the
-     * story id and creates a new file and writes the updated content into the
-     * new file, then saves it. When update is successful, true will be
-     * returned, otherwise false will be returned.
+     * @param story
+     *            the story object that needs to be updated
+     * @return true: story is successfully updated | false: writing file error
+     *         during update process
+     * @throws FileNotFoundException
+     * @throws IOException
      */
     public boolean updateOfflineStory(Story story)
 	    throws FileNotFoundException, IOException {
@@ -157,18 +195,21 @@ public class FileHelper {
 	return false;
     }
 
-    /*
-     * function: getOfflineStory input: int storyId output: Story story
+    /**
+     * Retrieve the file by the passed story id, and get the file.
      * 
-     * description: Retrieve the file by the passed story id, and get the file.
-     * Finally return it. If any error occurs, a null object will be returned.
+     * @param storyId
+     *            the offline id of the desired story
+     * @return on success desired story object will be returned otherwise null
+     *         will be returned
+     * @throws FileNotFoundException
+     * @throws IOException
      */
     public Story getOfflineStory(int storyId) throws FileNotFoundException,
 	    IOException {
 	try {
 	    String fileName = prefix + Integer.toString(storyId);
 	    InputStream is = fileContext.openFileInput(fileName);
-
 	    if (is != null) {
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
@@ -193,34 +234,31 @@ public class FileHelper {
 	return null;
     }
 
-    /*
-     * function: getOfflineStories input: N/A output: ArrayList<Story>
-     * storyList;
+    /**
+     * First the function creates a file which contains the directory of all
+     * files. Then file.listFiles() function returns a list of files represented
+     * by the directory in the file. And the function will get a list of stories
+     * in Json and put them into ArrayList<Story> sList.
      * 
-     * description: First the function creates a file which contains the
-     * directory of all files. Then file.listFiles() function returns a list of
-     * files represented by the directory in the file. And the function will get
-     * a list of stories in Json and put them into ArrayList<Story> sList. On
-     * success, the sList will be returned with a list of stories. Otherwise
-     * sList will be null.
+     * @return On success, the sList will be returned with a list of stories.
+     *         Otherwise sList will be null.
+     * @throws FileNotFoundException
+     * @throws IOException
      */
+    @SuppressLint("DefaultLocale")
     public ArrayList<Story> getOfflineStories() throws FileNotFoundException,
 	    IOException {
 	File file = fileContext.getFilesDir();
 	File[] fileList = file.listFiles();
-
 	ArrayList<File> prefixFileList = new ArrayList<File>();
 	for (int i = 0; i < fileList.length; i++) {
-	    System.out.println("GetAllFiles: " + fileList[i].getName());
 	    if (fileList[i].getName().startsWith(prefix)) {
-		System.out.println("AddSelectedFile: " + fileList[i].getName());
 		prefixFileList.add(fileList[i]);
 	    }
 	}
-
 	ArrayList<Story> sList = new ArrayList<Story>();
-
 	for (int i = 0; i < prefixFileList.size(); i++) {
+	    
 	    // ReadIn process
 	    InputStream is = new BufferedInputStream(new FileInputStream(
 		    prefixFileList.get(i)));
@@ -233,12 +271,13 @@ public class FileHelper {
 		    stringBuilder.append(temp);
 		}
 		is.close();
+		
 		// Translation process
 		Type storyType = new TypeToken<Story>() {
 		}.getType();
 		Story story = gson
 			.fromJson(stringBuilder.toString(), storyType);
-		// System.out.println(story.toString());
+		
 		// Add process
 		sList.add(story);
 	    }
@@ -246,27 +285,24 @@ public class FileHelper {
 	return sList;
     }
 
-    /*
-     * function: searchOfflineStories input: String searchText output:
-     * ArrayList<Story> storyList;
+    /**
+     * First the function gets all the stories in the current directory. And
+     * then compares each stories author and title with searchText to determine
+     * if this story should be added into the result storyList.
      * 
-     * description: First the function gets all the stories in the current
-     * directory. And then compares each stories author and title with
-     * searchText to determine if this story should be added into the result
-     * storyList.
+     * @param searchText
+     * @return return an ArrayList<Story> storyList that contains the search
+     *         text in author and/or title field;
      */
+
     public ArrayList<Story> searchOfflineStories(String searchText) {
 	searchText = searchText.toLowerCase();
-
 	try {
-
 	    if (!searchText.matches(".*\\w.*") || searchText.contains("\n")) {
 		return getOfflineStories();
 	    }
-
 	    ArrayList<Story> allList = getOfflineStories();
 	    ArrayList<Story> resultList = new ArrayList<Story>();
-
 	    for (int i = 0; i < allList.size(); i++) {
 		String title = allList.get(i).getTitle().toLowerCase();
 		String author = allList.get(i).getAuthor().toLowerCase();
@@ -283,13 +319,22 @@ public class FileHelper {
 	return null;
     }
 
+    /**
+     * Function takes in a story object and encodes all the image files related
+     * to the story into a Base64 string for further use. (Convert to Json
+     * Object and upload to webserver)
+     * 
+     * @param s
+     *            a story that needs to be encoded for uploading to webserver
+     * @return s an encoded story object
+     * @throws IOException
+     */
     public Story encodeStory(Story s) throws IOException {
 
 	// get all fragments
 	ArrayList<StoryFragment> sfList = s.getStoryFragments();
-	// get all online
+	
 	// for each fragment, get it's photolist and annotation list
-
 	for (int i = 0; i < sfList.size(); i++) {
 	    ArrayList<Photo> photos = sfList.get(i).getPhotos();
 	    ArrayList<Annotation> annotations = sfList.get(i).getAnnotations();
@@ -314,12 +359,8 @@ public class FileHelper {
 		}
 	    }
 
-	    
-	    //  Encode the photo  annotation object first and clear the photo.
-	    
-
+	    // Encode the photo annotation object first and clear the photo.
 	    for (int n = 0; n < annotations.size(); n++) {
-
 		try {
 		    InputStream is = fileContext.openFileInput(annotations.get(
 			    n).getPhoto());
@@ -335,7 +376,6 @@ public class FileHelper {
 		} catch (Exception e) {
 		    continue;
 		}
-
 	    }
 	    sfList.get(i).setAnnotations(annotations);
 	    sfList.get(i).setPhotos(photos);
@@ -344,37 +384,46 @@ public class FileHelper {
 
     }
 
+    /**
+     * This function decodes a story's images files from encoded strings to
+     * byteArray and save them to local before passing the story to
+     * addOfflineStory(Story story) for adding to local
+     * 
+     * @param story
+     *            a story downdloaed from webserver that needs to be decoded
+     * @param mode
+     *            the mode:
+     * @return
+     * @throws Exception
+     * @throws IOException
+     */
     public Story decodeStory(Story story, int mode) throws Exception,
 	    IOException {
+	
 	// get a story
 	int storyId;
-
 	if (story.getOfflineStoryId() < 1) {
 	    storyId = getOfflineStories().size() + 1;
 	    story.setOfflineStoryId(storyId);
 	} else {
 	    storyId = story.getOfflineStoryId();
 	}
-
 	ArrayList<StoryFragment> sfList = story.getStoryFragments();
-
 	for (int i = 0; i < sfList.size(); i++) {
 	    ArrayList<Photo> photos = sfList.get(i).getPhotos();
 	    ArrayList<Annotation> annotations = sfList.get(i).getAnnotations();
-
 	    for (int m = 0; m < photos.size(); m++) {
 		try {
 		    byte[] photoByte = Base64.decode(photos.get(m)
 			    .getEncodedPicture(), Base64.DEFAULT);
 		    Bitmap photoBM = BitmapFactory.decodeByteArray(photoByte,
 			    0, photoByte.length);
+
 		    // clear the encoded string to avoid conflicts with
 		    // encodeStory
 		    // and save spaces.
 		    photos.get(m).setEncodedPicture(null);
-
 		    String fileName = "";
-
 		    if (photos.get(m).getPictureName().isEmpty()) {
 			if (mode == Save) {
 			    fileName = "Image"
@@ -387,7 +436,6 @@ public class FileHelper {
 		    } else {
 			fileName = photos.get(m).getPictureName();
 		    }
-		    System.out.println("Decode Image File Name: " + fileName);
 		    try {
 			FileOutputStream fos = fileContext.openFileOutput(
 				fileName, Context.MODE_PRIVATE);
@@ -401,16 +449,13 @@ public class FileHelper {
 		    continue;
 		}
 	    }
-
 	    for (int n = 0; n < annotations.size(); n++) {
 		try {
 		    byte[] annotationByte = Base64.decode(annotations.get(n)
 			    .getEncodedAnnotation(), Base64.DEFAULT);
 		    Bitmap annotationBM = BitmapFactory.decodeByteArray(
 			    annotationByte, 0, annotationByte.length);
-
 		    annotations.get(n).setEncodedAnnotation(null);
-
 		    String fileName;
 		    if (annotations.get(n).getPhoto().isEmpty()) {
 			fileName = "Image" + Integer.toString(storyId)
@@ -419,7 +464,6 @@ public class FileHelper {
 				+ ".png";
 		    } else {
 			fileName = annotations.get(n).getPhoto();
-
 		    }
 		    try {
 			FileOutputStream fos = fileContext.openFileOutput(

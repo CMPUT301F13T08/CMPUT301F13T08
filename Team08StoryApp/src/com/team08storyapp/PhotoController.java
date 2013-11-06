@@ -131,7 +131,7 @@ public class PhotoController {
     }
 
     public int currentPosition() {
-	return currentStoryFragment.getPhotos().size()-1;
+	return currentStoryFragment.getPhotos().size() - 1;
 
     }
 
@@ -147,8 +147,8 @@ public class PhotoController {
 
 	try {
 	    fHelper.updateOfflineStory(currentStory);
-	    Toast.makeText(activity, "Illustration is added successfully", Toast.LENGTH_LONG)
-	    .show();
+	    Toast.makeText(activity, "Illustration is added successfully",
+		    Toast.LENGTH_LONG).show();
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {

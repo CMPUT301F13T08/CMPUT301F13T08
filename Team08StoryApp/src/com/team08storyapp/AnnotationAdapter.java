@@ -46,22 +46,50 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * AnnotationAdapter is a customized ArrayAdapter that is designed for
+ * populating the images and text (if applicable) into right views in a
+ * ListView. This class requires at least a list of annotation as the
+ * information provider and an activity to get LAYOUT_INFLATER_SERVICE.
+ * 
+ * @author Sue Smith
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class AnnotationAdapter extends ArrayAdapter<Annotation> {
     private ArrayList<Annotation> annoList;
     private Activity activity;
 
-    public AnnotationAdapter(Activity a, int textViewResourceId,
+    /**
+     * The constructor of an AnnotationAdapter requires at least a list of
+     * annotation as the information provider and an activity to get
+     * LAYOUT_INFLATER_SERVICE.
+     * 
+     * @param activity
+     * @param textViewResourceId
+     * @param annoList
+     */
+    public AnnotationAdapter(Activity activity, int textViewResourceId,
 	    ArrayList<Annotation> annoList) {
-	super(a, textViewResourceId, annoList);
+	super(activity, textViewResourceId, annoList);
 	this.annoList = annoList;
-	this.activity = a;
+	this.activity = activity;
     }
 
+    
     public static class ViewHolder {
 	public ImageView annoImage;
 	public TextView annoText;
     }
 
+    /**
+     *  The customized getView will populate images and texts into the passed ListView.
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
 	ViewHolder holder;
