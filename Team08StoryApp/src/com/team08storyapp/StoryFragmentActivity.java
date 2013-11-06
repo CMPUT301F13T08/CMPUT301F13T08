@@ -280,6 +280,9 @@ public class StoryFragmentActivity extends Activity {
 	}
     }
 
+    /**
+     * @param cList
+     */
     private void fillChoice(ArrayList<Choice> cList) {
 
 	/* add headers to background list view */
@@ -293,6 +296,9 @@ public class StoryFragmentActivity extends Activity {
 
     }
 
+    /**
+     * 
+     */
     private void showPopup() {
 
 	/* root view of popup menu */

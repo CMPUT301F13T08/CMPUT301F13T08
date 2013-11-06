@@ -222,12 +222,14 @@ public class PhotoController {
 
     }
 
-    /*
-     * Add Illustration is a function that updates a story with newly added
+    /**
+     * AddIllustration is a method that updates a story with newly added
      * illustrations.
+     * 
+     * @param fileName
      */
     private void addIllustration(String fileName) {
-	
+
 	// create a new photo object based on id and fileName
 	Photo add = new Photo();
 	add.setPhotoID(currentStoryFragment.getPhotos().size() + 1);
@@ -237,7 +239,7 @@ public class PhotoController {
 	ArrayList<Photo> temp = currentStoryFragment.getPhotos();
 	temp.add(add);
 	currentStoryFragment.setPhotos(temp);
-	
+
 	// update the story
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		currentStoryFragment);

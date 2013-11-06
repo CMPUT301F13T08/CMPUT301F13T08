@@ -85,32 +85,16 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
     }
 
     /**
-     * ViewHolder is a like a struct in C++. Only hold two view objects for the
-     * population purpose of AnnotationAdapter
-     * 
-     * @author Sue Smith
-     * @author Michele Paulichuk
-     * @author Alice Wu
-     * @author Ana Marcu
-     * @author Jarrett Toll
-     * @author Jiawei Shen
-     * @version 1.0 November 8, 2013
-     * @since 1.0
-     * 
-     */
-    public static class ViewHolder {
-	public ImageView annoImage;
-	public TextView annoText;
-    }
-
-    /**
      * The customized getView will populate images and texts into the passed
      * ListView.
      * 
      * @param position
      *            the index of the selected photo in the adapter
-     * @convertView the view that is going to be converted to user's desire
-     * @parent a ViewGroup object
+     * @param convertView
+     *            the view that is going to be converted to user's desire
+     * @param parent
+     *            a ViewGroup object
+     * @return
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
@@ -177,6 +161,25 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	}
 
 	return v;
+    }
+
+    /**
+     * ViewHolder is a like a struct in C++. Only hold two view objects for the
+     * population purpose of AnnotationAdapter
+     * 
+     * @author Sue Smith
+     * @author Michele Paulichuk
+     * @author Alice Wu
+     * @author Ana Marcu
+     * @author Jarrett Toll
+     * @author Jiawei Shen
+     * @version 1.0 November 8, 2013
+     * @since 1.0
+     * 
+     */
+    public static class ViewHolder {
+	public ImageView annoImage;
+	public TextView annoText;
     }
 
 }

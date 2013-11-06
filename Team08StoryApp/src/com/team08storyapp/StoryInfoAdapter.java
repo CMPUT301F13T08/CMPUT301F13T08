@@ -80,31 +80,16 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
     }
 
     /**
-     * This innerclass ViewHolder holds two TextViews.
-     * 
-     * @author Sue Smith
-     * @author Michele Paulichuk
-     * @author Alice Wu
-     * @author Ana Marcu
-     * @author Jarrett Toll
-     * @author Jiawei Shen
-     * @version 1.0 November 8, 2013
-     * @since 1.0
-     * 
-     */
-    public static class ViewHolder {
-	public TextView item1;
-	public TextView item2;
-    }
-
-    /**
      * Method will inflate the layout first and populate the data to
      * corresponding fields. (Title to item1, Author to item2)
      * 
      * @param position
      *            the index of the selected photo in the adapter
-     * @convertView the view that is going to be converted to user's desire
-     * @parent a ViewGroup object
+     * @param convertView
+     *            the view that is going to be converted to user's desire
+     * @param parent
+     *            a ViewGroup object
+     * @return
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
@@ -134,5 +119,23 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
 	    holder.item2.setText(story.getAuthor());
 	}
 	return v;
+    }
+
+    /**
+     * This innerclass ViewHolder holds two TextViews.
+     * 
+     * @author Sue Smith
+     * @author Michele Paulichuk
+     * @author Alice Wu
+     * @author Ana Marcu
+     * @author Jarrett Toll
+     * @author Jiawei Shen
+     * @version 1.0 November 8, 2013
+     * @since 1.0
+     * 
+     */
+    public static class ViewHolder {
+	public TextView item1;
+	public TextView item2;
     }
 }

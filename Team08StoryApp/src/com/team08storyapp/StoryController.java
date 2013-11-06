@@ -83,9 +83,8 @@ public class StoryController {
     }
 
     /**
-     * 
      * @param addStoryFragment
-     * @return False
+     * @return
      */
     public static boolean addStoryFragment(StoryFragment addStoryFragment) {
 	// TODO Auto-generated method stub

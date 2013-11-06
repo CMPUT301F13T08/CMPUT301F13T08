@@ -217,9 +217,11 @@ public class OnlineStoriesActivity extends ListActivity {
 	    return super.onContextItemSelected(item);
 	}
     }
+
     /**
-     * fillData populates the list with a collection of online stories. These stories
-     * can be read or downloaded. 
+     * fillData populates the list with a collection of online stories. These
+     * stories can be read or downloaded.
+     * 
      * @param sList
      * @param update
      */

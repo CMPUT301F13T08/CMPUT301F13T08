@@ -52,8 +52,8 @@ import android.widget.Toast;
 
 /**
  * MyStoriesActivity is a view class that displays a list of stories created by
- * the user. Users can view each story in the list simply by clicking on it. Users
- * are also given the option to create a new story from scratch.
+ * the user. Users can view each story in the list simply by clicking on it.
+ * Users are also given the option to create a new story from scratch.
  * 
  * @author Michele Paulichuk
  * @author Alice Wu
@@ -64,11 +64,9 @@ import android.widget.Toast;
  * @since 1.0
  */
 
-
 public class MyStoriesActivity extends ListActivity {
-    
-    
-    /*position is used to discover which list item is being selected */
+
+    /* position is used to discover which list item is being selected */
     public int position;
     public AdapterContextMenuInfo info;
 
@@ -103,8 +101,8 @@ public class MyStoriesActivity extends ListActivity {
 	esHelper = new ESHelper();
 
 	/*
-	 * The following code will not be present for part 4, but is necessary to auto-generate a story in
-	 * My Stories for part 3 demo.
+	 * The following code will not be present for part 4, but is necessary
+	 * to auto-generate a story in My Stories for part 3 demo.
 	 */
 	try {
 	    if (fHelper.getOfflineStory(11) == null) {
@@ -168,7 +166,6 @@ public class MyStoriesActivity extends ListActivity {
 
 		fHelper.addOfflineStory(s1);
 	    }
-	    
 
 	} catch (FileNotFoundException e1) {
 	    e1.printStackTrace();
@@ -188,7 +185,6 @@ public class MyStoriesActivity extends ListActivity {
 	    e.printStackTrace();
 	}
 
-	
 	searchButton.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
@@ -210,7 +206,8 @@ public class MyStoriesActivity extends ListActivity {
 	    }
 	});
 
-	/* This commented code will be used in Part 4.
+	/*
+	 * This commented code will be used in Part 4.
 	 * createButton.setOnClickListener(new View.OnClickListener() {
 	 * 
 	 * @Override public void onClick(View v) { //TODO: start a create a new
@@ -236,8 +233,10 @@ public class MyStoriesActivity extends ListActivity {
 
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
-	    /*This case handles publishing a story online by passing a story object
-	     * to esHelper to be pushed online. */
+	    /*
+	     * This case handles publishing a story online by passing a story
+	     * object to esHelper to be pushed online.
+	     */
 	    try {
 		Story encodedStory = fHelper.encodeStory(currentStory);
 		if (currentStory.getOnlineStoryId() > 0) {
@@ -263,8 +262,8 @@ public class MyStoriesActivity extends ListActivity {
 	case READ_ID:
 
 	    /*
-	     * This case creates an intent to pass the selected story object and the first
-	     * story fragment id to the StoryFragmentActivity
+	     * This case creates an intent to pass the selected story object and
+	     * the first story fragment id to the StoryFragmentActivity
 	     */
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
@@ -277,9 +276,10 @@ public class MyStoriesActivity extends ListActivity {
 	    return super.onContextItemSelected(item);
 	}
     }
-    
+
     /**
      * This method populates the list view with a list of My Stories.
+     * 
      * @param sList
      * @param update
      */

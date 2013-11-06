@@ -92,8 +92,10 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
      * 
      * @param position
      *            the index of the selected photo in the adapter
-     * @convertView the view that is going to be converted to user's desire
-     * @parent a ViewGroup object
+     * @param convertView
+     *            the view that is going to be converted to user's desire
+     * @param parent
+     *            a ViewGroup object
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;

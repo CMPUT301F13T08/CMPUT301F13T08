@@ -70,10 +70,10 @@ public class MainActivity extends Activity {
 	return true;
     }
 
-
-    /** 
-     * toOnlineStories creates an intent to move to OnlineStoriesActivity when "Read Online Stories" is
-     * clicked.
+    /**
+     * toOnlineStories creates an intent to move to OnlineStoriesActivity when
+     * "Read Online Stories" is clicked.
+     * 
      * @param view
      */
     public void toOnlineStories(View view) {
@@ -83,8 +83,9 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * toOfflineStories creates an intent to move to OfflineStoriesActivity when "Read Downloaded Stories" is
-     * clicked.
+     * toOfflineStories creates an intent to move to OfflineStoriesActivity when
+     * "Read Downloaded Stories" is clicked.
+     * 
      * @param view
      */
     public void toOfflineStories(View view) {
@@ -94,7 +95,9 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * toMyStories creates an intent to move to MyStoriesActivity when "My Stories" is clicked.
+     * toMyStories creates an intent to move to MyStoriesActivity when
+     * "My Stories" is clicked.
+     * 
      * @param view
      */
     public void toMyStories(View view) {
