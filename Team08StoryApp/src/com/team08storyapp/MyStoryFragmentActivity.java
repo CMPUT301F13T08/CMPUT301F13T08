@@ -232,7 +232,7 @@ public class MyStoryFragmentActivity extends Activity {
 
 	// when user selects "View annotations" button in action bar
 	case R.id.take_picture:
-	    if (pc.currentPosition() > 4) {
+	    if (pc.currentPosition() >= 4) {
 		Toast.makeText(getApplicationContext(),
 			"Sorry. Illustration gallery is full now.",
 			Toast.LENGTH_LONG).show();
@@ -245,7 +245,7 @@ public class MyStoryFragmentActivity extends Activity {
 
 	    // when user selects "add annotations" icon in action bar
 	case R.id.choose_picture:
-	    if (pc.currentPosition() > 4) {
+	    if (pc.currentPosition() >= 4) {
 		Toast.makeText(getApplicationContext(),
 			"Sorry. Illustration gallery is full now.",
 			Toast.LENGTH_LONG).show();
