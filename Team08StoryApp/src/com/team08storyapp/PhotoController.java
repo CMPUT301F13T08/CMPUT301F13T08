@@ -210,21 +210,39 @@ public class PhotoController {
 	return pic;
     }
 
+    /**
+     * currentPosition function will return the index of the last photo in the
+     * gallery
+     * 
+     * @return an integer value that represents the index of the last photo in
+     *         the gallery
+     */
     public int currentPosition() {
 	return currentStoryFragment.getPhotos().size() - 1;
 
     }
 
+    /*
+     * Add Illustration is a function that updates a story with newly added
+     * illustrations.
+     */
     private void addIllustration(String fileName) {
+	
+	// create a new photo object based on id and fileName
 	Photo add = new Photo();
 	add.setPhotoID(currentStoryFragment.getPhotos().size() + 1);
 	add.setPictureName(fileName);
+
+	// add new Photo to photoList
 	ArrayList<Photo> temp = currentStoryFragment.getPhotos();
 	temp.add(add);
 	currentStoryFragment.setPhotos(temp);
+	
+	// update the story
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		currentStoryFragment);
 
+	// update the story in local file system
 	try {
 	    fHelper.updateOfflineStory(currentStory);
 	    Toast.makeText(activity, "Illustration is added successfully",
