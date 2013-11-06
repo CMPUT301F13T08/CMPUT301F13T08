@@ -63,11 +63,31 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-//variable for selection intent
-//variable to store the currently selected image
-//adapter for gallery view
-//gallery object
-//image view for larger display
+
+/**
+* MyStoryFragmentActivity is a view class that displays a specific story fragment
+* for stories created by the user. Currently, users are able to add illustrations
+* to these fragments.
+* <p>
+* In future developments, users will be able to add/edit/delete dialogue and chocies from
+* this activity.
+* 
+* @author Michele Paulichuk
+* @author Alice Wu
+* @author Ana Marcu
+* @author Jarrett Toll
+* @author Jiawei Shen
+* @version 1.0 November 8, 2013
+* @since 1.0
+*/
+
+/**
+* variable for selection intent
+* variable to store the currently selected image
+* adapter for gallery view
+* gallery object
+* image view for larger display
+*/ 
 
 /**
  * instantiate the interactive gallery
