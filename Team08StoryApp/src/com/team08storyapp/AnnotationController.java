@@ -45,6 +45,25 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
+/**
+ * AnnotationController is a controller class that is responsible for resizing
+ * (if needed), saving annotations and update the current story and current
+ * story fragment.
+ * <p>
+ * In current stage, AnnotationController only provides a public method:
+ * <ul>
+ * <li>savePhoto(Uri pickedUri)
+ * </ul>
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class AnnotationController {
 
     private Activity activity;
@@ -56,10 +75,31 @@ public class AnnotationController {
     private ESHelper esHelper;
     private static final int MODE_OFFLINE = 1;
 
-    public AnnotationController(Activity a, Context context,
+    /**
+     * Constructor of the AnnotationController takes in all the variables it
+     * needs and set them to corresponding variables to its own fields.
+     * 
+     * @param activity
+     *            an activity object
+     * @param context
+     *            a context object for writing files
+     * @param currentStory
+     *            currentStory, which will be updated after an image is added
+     * @param currentStoryFragment
+     *            the story fragment that needs to be updated
+     * @param currentStoryFragmentIndex
+     *            This is an index reference of the currentStoryFragment when
+     *            updating. Since ArrayList.indexOf didn't work so well.
+     * @param fHelper
+     *            The FileHelper object that helps with saving images.
+     * @param esHelper
+     *            The ESHelper object that helps with uploading and saving
+     *            images online.
+     */
+    public AnnotationController(Activity activity, Context context,
 	    Story currentStory, StoryFragment currentStoryFragment,
 	    int currentStoryFragmentIndex, FileHelper fHelper, ESHelper esHelper) {
-	this.activity = a;
+	this.activity = activity;
 	this.context = context;
 	this.currentStory = currentStory;
 	this.currentStoryFragment = currentStoryFragment;
