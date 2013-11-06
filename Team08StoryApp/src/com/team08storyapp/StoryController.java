@@ -57,11 +57,6 @@ import java.util.ArrayList;
 
 public class StoryController {
 
-   /* public static boolean readStory(Story addStory) {
-	// TODO Auto-generated method stub
-	return false;
-    }*/
-
     /**
      * ReadStoryFragment method passing in an Arraylist of Story Fragment object
      * and a Story Fragment Id. It goes through the ArrayList finding the next
@@ -90,11 +85,11 @@ public class StoryController {
     /**
      * 
      * @param addStoryFragment
-     * @return
+     * @return False
      */
-   /* public static boolean addStoryFragment(StoryFragment addStoryFragment) {
+    public static boolean addStoryFragment(StoryFragment addStoryFragment) {
 	// TODO Auto-generated method stub
 	return false;
-    }*/
+    }
 
 }

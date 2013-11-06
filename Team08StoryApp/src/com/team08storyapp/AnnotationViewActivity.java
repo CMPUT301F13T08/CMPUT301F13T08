@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -39,11 +39,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ListView;
 
-
-
 /**
  * AnnotationViewActivity is a view class that displays a list of annotations
- * for a specific story fragment. Users are able to select an annotation from 
+ * for a specific story fragment. Users are able to select an annotation from
  * list to view the annotation in its entirety.
  * 
  * @author Michele Paulichuk
@@ -53,7 +51,7 @@ import android.widget.ListView;
  * @author Jiawei Shen
  * @version 1.0 November 8, 2013
  * @since 1.0
- *
+ * 
  */
 public class AnnotationViewActivity extends Activity {
     private ListView lv;
@@ -63,7 +61,7 @@ public class AnnotationViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_story_list);
-	// REQUIRE INTENT TO HAVE AN ARRAYLIST OF ANNOTATIONS
+	/* Require intent to have an arraylist of annotations */
 	Intent passedIntent = getIntent();
 	aList = (ArrayList<Annotation>) passedIntent
 		.getSerializableExtra("Annotations");
@@ -73,7 +71,7 @@ public class AnnotationViewActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
+	/* Inflate the menu; this adds items to the action bar if it is present. */
 	getMenuInflater().inflate(R.menu.annotation_view, menu);
 	return true;
     }

@@ -149,8 +149,8 @@ public class FileHelper {
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
-	    
-	    // translate the story context to Json
+
+	    /* translate the story context to Json */
 	    String context = gson.toJson(story);
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,
 		    Context.MODE_PRIVATE);
@@ -184,8 +184,10 @@ public class FileHelper {
 	try {
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
-	    fileContext.deleteFile(fileName); // delete original file
-	    addOfflineStory(story); // add new file
+	    /* delete original file */
+	    fileContext.deleteFile(fileName);
+	    /* add new file */
+	    addOfflineStory(story);
 	    return true;
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -258,8 +260,8 @@ public class FileHelper {
 	}
 	ArrayList<Story> sList = new ArrayList<Story>();
 	for (int i = 0; i < prefixFileList.size(); i++) {
-	    
-	    // ReadIn process
+
+	    /* ReadIn process */
 	    InputStream is = new BufferedInputStream(new FileInputStream(
 		    prefixFileList.get(i)));
 	    if (is != null) {
@@ -271,14 +273,14 @@ public class FileHelper {
 		    stringBuilder.append(temp);
 		}
 		is.close();
-		
-		// Translation process
+
+		/* Translation process */
 		Type storyType = new TypeToken<Story>() {
 		}.getType();
 		Story story = gson
 			.fromJson(stringBuilder.toString(), storyType);
-		
-		// Add process
+
+		/* Add process */
 		sList.add(story);
 	    }
 	}
@@ -331,15 +333,15 @@ public class FileHelper {
      */
     public Story encodeStory(Story s) throws IOException {
 
-	// get all fragments
+	/* get all fragments */
 	ArrayList<StoryFragment> sfList = s.getStoryFragments();
-	
-	// for each fragment, get it's photolist and annotation list
+
+	/* for each fragment, get it's photolist and annotation list */
 	for (int i = 0; i < sfList.size(); i++) {
 	    ArrayList<Photo> photos = sfList.get(i).getPhotos();
 	    ArrayList<Annotation> annotations = sfList.get(i).getAnnotations();
 
-	    // set picture in each Photo object to empty after encoding.
+	    /* set picture in each Photo object to empty after encoding. */
 	    for (int m = 0; m < photos.size(); m++) {
 		try {
 		    InputStream is = fileContext.openFileInput(photos.get(m)
@@ -359,7 +361,7 @@ public class FileHelper {
 		}
 	    }
 
-	    // Encode the photo annotation object first and clear the photo.
+	    /* Encode the photo annotation object first and clear the photo. */
 	    for (int n = 0; n < annotations.size(); n++) {
 		try {
 		    InputStream is = fileContext.openFileInput(annotations.get(
@@ -399,8 +401,8 @@ public class FileHelper {
      */
     public Story decodeStory(Story story, int mode) throws Exception,
 	    IOException {
-	
-	// get a story
+
+	/* get a story */
 	int storyId;
 	if (story.getOfflineStoryId() < 1) {
 	    storyId = getOfflineStories().size() + 1;
@@ -419,9 +421,10 @@ public class FileHelper {
 		    Bitmap photoBM = BitmapFactory.decodeByteArray(photoByte,
 			    0, photoByte.length);
 
-		    // clear the encoded string to avoid conflicts with
-		    // encodeStory
-		    // and save spaces.
+		    /*
+		     * clear the encoded string to avoid conflicts with
+		     * encodeStory and save spaces.
+		     */
 		    photos.get(m).setEncodedPicture(null);
 		    String fileName = "";
 		    if (photos.get(m).getPictureName().isEmpty()) {

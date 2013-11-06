@@ -43,7 +43,8 @@ import android.graphics.Bitmap;
  * <li>Photo Id to uniquely identify the Photo.
  * <li>Picture Name is the name the user gave to the Photo.
  * <li>Photo the photo the reader set in the Annotation.
- * <li>Encoded Picture is the Photo encoded for storing it in a file or on a webservice.
+ * <li>Encoded Picture is the Photo encoded for storing it in a file or on a
+ * webservice.
  * </ul>
  * These properties are able to be accessed through the constructor or through
  * public getters/setters.

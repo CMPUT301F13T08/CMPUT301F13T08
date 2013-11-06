@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -38,22 +38,23 @@ import android.view.Menu;
 import android.view.View;
 
 /**
- * MainActivity is a view class that displays the main menu for our application. It is the first thing the user
- * sees when they run the application, and gives the options to view:
+ * MainActivity is a view class that displays the main menu for our application.
+ * It is the first thing the user sees when they run the application, and gives
+ * the options to view:
  * <ul>
  * <li>Online Stories
  * <li>Downloaded Stories
  * <li>My Stories
  * </ul>
  * 
-* @author Michele Paulichuk
-* @author Alice Wu
-* @author Ana Marcu
-* @author Jarrett Toll
-* @author Jiawei Shen
-* @version 1.0 November 8, 2013
-* @since 1.0
-*/
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class MainActivity extends Activity {
 
     @Override
@@ -64,7 +65,7 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
+	/* Inflate the menu; this adds items to the action bar if it is present. */
 	getMenuInflater().inflate(R.menu.main, menu);
 	return true;
     }

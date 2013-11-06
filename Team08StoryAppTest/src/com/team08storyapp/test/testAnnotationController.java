@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.test.AndroidTestCase;
 
 import com.team08storyapp.AnnotationController;
@@ -27,9 +29,9 @@ public class testAnnotationController extends AndroidTestCase {
     private FileHelper testFHelper;
     private ESHelper testESHelper;
 
-    public testAnnotationController() {
+  /*  public testAnnotationController() {
 	super();
-    }
+    }*/
 
     @Before
     public void setUp() throws FileNotFoundException, IOException {
@@ -40,10 +42,20 @@ public class testAnnotationController extends AndroidTestCase {
 		testFHelper, testESHelper);
 
     }
+    
+    // TODO: write test case
+    public void testSavePhoto() {
+	
+    }
+    
+    // TODO: write test case
+    private void testAddAnnotation(){
+	
+    }
 
-    @Test
+    /*@Test
     public void test() {
 	fail("Not yet implemented");
-    }
+    }*/
 
 }

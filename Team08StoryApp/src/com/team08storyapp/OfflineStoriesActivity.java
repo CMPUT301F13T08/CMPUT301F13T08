@@ -46,6 +46,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+/**
+ * OfflineStoriesActivity is a view class that displays a list of stories that
+ * have been downloaded. Users are able to read a story in the list simply by
+ * clicking on it (no internet connection required).
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
+
 public class OfflineStoriesActivity extends ListActivity {
 
     public int position;
@@ -112,27 +126,34 @@ public class OfflineStoriesActivity extends ListActivity {
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
 	super.onListItemClick(l, v, position, id);
-	// following 4 lines will display the information on selected item.
 
-	// Get the selected story object
+	/*
+	 * following 4 lines will display the information on selected item.
+	 * 
+	 * /Get the selected story object
+	 */
 	currentStory = (Story) lv.getAdapter().getItem(position);
 
-	// create intent to pass the selected story object and the first story
-	// fragment id to the StoryFragmentActivity
+	/*
+	 * create intent to pass the selected story object and the first story
+	 * fragment id to the StoryFragmentActivity
+	 */
 	Intent firstStoryFragment = new Intent(getApplicationContext(),
 		StoryFragmentActivity.class);
 
-	// send the story object through the intent
+	/* send the story object through the intent */
 	firstStoryFragment.putExtra("story", currentStory);
 
 	int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
 
-	// send the first story fragment id through the intent
+	/* send the first story fragment id through the intent */
 	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
 	firstStoryFragment.putExtra("mode", 1);
 
-	// start the StoryFragmentActivity to display the first fragment of the
-	// selected story
+	/*
+	 * start the StoryFragmentActivity to display the first fragment of the
+	 * selected story
+	 */
 	startActivity(firstStoryFragment);
 
     }

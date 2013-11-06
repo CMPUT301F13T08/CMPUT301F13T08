@@ -61,6 +61,27 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * StoryFragmentActivity is a view class that displays a specific fragment of
+ * either and online or downloaded story. Each fragment consists of:
+ * <ul>
+ * <li>Illustrations
+ * <li>Dialogue
+ * <li>Choices
+ * </ul>
+ * <p>
+ * Users are also able to add photo annotations to story fragments by using the
+ * action bar or the settings menu.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
+
 public class StoryFragmentActivity extends Activity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -71,7 +92,7 @@ public class StoryFragmentActivity extends Activity {
     private int currentStoryId;
     private int mode;
 
-    // declare variables for UI setup
+    /* declare variables for UI setup */
     private PicAdapter imgAdapt;
     private Gallery picGallery;
     private ListView lv;
@@ -90,17 +111,17 @@ public class StoryFragmentActivity extends Activity {
 
 	super.onCreate(savedInstanceState);
 
-	// Initialize esHelper
+	/* Initialize esHelper */
 	esHelper = new ESHelper();
 
-	// Initialize fHelper to Download mode
+	/* Initialize fHelper to Download mode */
 	fHelper = new FileHelper(this, 0);
 
-	// set up background layout
+	/* set up background layout */
 	setContentView(R.layout.activity_story_list);
 	lv = (ListView) findViewById(android.R.id.list);
 
-	// set up text header
+	/* set up text header */
 	headerText = getLayoutInflater().inflate(R.layout.header_text, null);
 	headerText.setBackgroundColor(0x0099cc);
 	TextView textSection = (TextView) headerText
@@ -114,24 +135,26 @@ public class StoryFragmentActivity extends Activity {
 	});
 	textSection.setMovementMethod(new ScrollingMovementMethod());
 
-	// set up gallery header
+	/* set up gallery header */
 	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
 		null);
 
-	// set up the picView
+	/* set up the picView */
 	picView = (ImageView) headerGallery.findViewById(R.id.picture);
 
-	// get the gallery view
+	/* get the gallery view */
 	picGallery = (Gallery) headerGallery.findViewById(R.id.gallery);
 
-	// set the click listener for each item in the thumbnail gallery
+	/* set the click listener for each item in the thumbnail gallery */
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
 
-	    // handle clicks
+	    /* handle clicks */
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
-		// set the larger image view to display the chosen bitmap
-		// calling method of adapter class
+		/*
+		 * set the larger image view to display the chosen bitmap
+		 * calling method of adapter class
+		 */
 		picView.setImageBitmap(imgAdapt.getPic(position));
 	    }
 	});
@@ -154,7 +177,7 @@ public class StoryFragmentActivity extends Activity {
 	 */
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
 
-	// Get the story fragment id from the intent - the fragment to display
+	/* Get the story fragment id from the intent - the fragment to display */
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 	currentStoryId = currentStory.getOfflineStoryId();
@@ -176,10 +199,10 @@ public class StoryFragmentActivity extends Activity {
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
 
-	// Display the current fragment text
+	/* Display the current fragment text */
 	textSection.setText(currentStoryFragment.getStoryText());
 
-	// The list of choices from the current fragment
+	/* The list of choices from the current fragment */
 	ArrayList<Choice> storyFragmentChoices = currentStoryFragment
 		.getChoices();
 
@@ -189,37 +212,37 @@ public class StoryFragmentActivity extends Activity {
 	 */
 	ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
 
-	// create a new adapter based on current story fragment's information
+	/* create a new adapter based on current story fragment's information */
 	imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
 		currentStoryFragmentId);
 
-	// set the gallery adapter
+	/* set the gallery adapter */
 	picGallery.setAdapter(imgAdapt);
 
-	// populate the listview with choices
+	/* populate the listview with choices */
 	fillChoice(storyFragmentChoices);
 
-	// set listview item's setOnItemClickListener
+	/* set listview item's setOnItemClickListener */
 	lv.setOnItemClickListener(new OnItemClickListener() {
 
-	    // handle clicks
+	    /* handle clicks */
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
 
-		// prepare to start to read the next story fragment
+		/* prepare to start to read the next story fragment */
 		Intent nextStoryFragment = new Intent(getApplicationContext(),
 			StoryFragmentActivity.class);
 
-		// pass the currentStory to intent
+		/* pass the currentStory to intent */
 		nextStoryFragment.putExtra("story", currentStory);
 
-		// retrieve the selected choice object
+		/* retrieve the selected choice object */
 		Choice nextChoice = (Choice) lv.getAdapter().getItem(position);
 
-		// get the id of next story fragment
+		/* get the id of next story fragment */
 		int nextStoryFragmentId = nextChoice.getStoryFragmentID();
 
-		// put the id in the intent
+		/* put the id in the intent */
 		nextStoryFragment.putExtra("storyFragmentId",
 			nextStoryFragmentId);
 		startActivity(nextStoryFragment);
@@ -230,7 +253,7 @@ public class StoryFragmentActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-	// Inflate the menu; this adds items to the action bar if it is present.
+	/* Inflate the menu; this adds items to the action bar if it is present. */
 	getMenuInflater().inflate(R.menu.annotation_action_bar, menu);
 	return super.onCreateOptionsMenu(menu);
     }
@@ -238,10 +261,10 @@ public class StoryFragmentActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-	// Handle item selection
+	/* Handle item selection */
 	switch (item.getItemId()) {
 
-	// when user selects "View annotations" button in action bar
+	/* when user selects "View annotations" button in action bar */
 	case R.id.view_annotations:
 	    Intent annoIntent = new Intent(getApplicationContext(),
 		    AnnotationViewActivity.class);
@@ -250,10 +273,10 @@ public class StoryFragmentActivity extends Activity {
 	    startActivity(annoIntent);
 	    return true;
 
-	    // when user selects "add annotations" icon in action bar
+	    /* when user selects "add annotations" icon in action bar */
 	case R.id.action_add_annotations:
 
-	    // a popup menu asks to choose a picture from gallery or camera
+	    /* a popup menu asks to choose a picture from gallery or camera */
 	    showPopup();
 	    return true;
 
@@ -268,28 +291,28 @@ public class StoryFragmentActivity extends Activity {
 
     public void fillChoice(ArrayList<Choice> cList) {
 
-	// add headers to background list view
+	/* add headers to background list view */
 	lv.addHeaderView(headerGallery);
 	lv.addHeaderView(headerText);
 	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
 		cList);
 
-	// populate the listview with choices
+	/* populate the listview with choices */
 	lv.setAdapter(adapter);
 
     }
 
     public void showPopup() {
 
-	// root view of popup menu
+	/* root view of popup menu */
 	View popUpItemView = findViewById(R.id.action_add_annotations);
 
-	// instantiate the popup menu
+	/* instantiate the popup menu */
 	PopupMenu popupMenu = new PopupMenu(this, popUpItemView);
 	MenuInflater inflater = popupMenu.getMenuInflater();
 	inflater.inflate(R.menu.annotation_view, popupMenu.getMenu());
 
-	// setup popmenu's click listener
+	/* setup popmenu's click listener */
 	popupMenu
 		.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 		    public boolean onMenuItemClick(MenuItem item) {
@@ -303,7 +326,7 @@ public class StoryFragmentActivity extends Activity {
 				    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 			    return true;
 			case R.id.add_anno_gallery:
-			    // take the user to their chosen image selection app
+			    /* take the user to their chosen image selection app */
 			    Intent pickIntent = new Intent();
 			    pickIntent.setType("image/*");
 			    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
@@ -316,14 +339,14 @@ public class StoryFragmentActivity extends Activity {
 		    }
 		});
 
-	// show the popup menu
+	/* show the popup menu */
 	popupMenu.show();
 
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (resultCode == RESULT_OK) {
-	    // the returned picture URI
+	    /* the returned picture URI */
 	    Uri pickedUri = data.getData();
 	    AnnotationController ac = new AnnotationController(this,
 		    getApplicationContext(), currentStory,
@@ -340,7 +363,7 @@ public class StoryFragmentActivity extends Activity {
 	} else {
 	    System.out.println("Not sure what's happening!");
 
-	    // superclass method
+	    /* superclass method */
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
     }

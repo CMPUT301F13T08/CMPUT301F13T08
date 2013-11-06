@@ -49,11 +49,22 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class OnlineStoriesActivity extends ListActivity {
+/**
+ * OnlineStoriesActivity is a view class that displays a list of stories that
+ * are available online. Users are able to either download or read an online
+ * story by long-clicking a story in list and selecting one of the above options
+ * through a context menu.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 
-    // make sure to assign the "menu" thing with menu's value, otherwise
-    // context menu won't respond. -- Solved I presume
-    // private FileHelper fHelper; should be ESHelper
+public class OnlineStoriesActivity extends ListActivity {
 
     public int position;
     public AdapterContextMenuInfo info;
@@ -83,8 +94,10 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	esHelper = new ESHelper();
 
-	// Populate listview with the stories curently online
-	// Cache the stories currently online
+	/*
+	 * Populate listview with the stories curently online Cache the stories
+	 * currently online
+	 */
 	System.out.println("Prepare to fill data");
 	ArrayList<Story> result = esHelper.getOnlineStories();
 	while (result == null) {
@@ -119,9 +132,11 @@ public class OnlineStoriesActivity extends ListActivity {
     public boolean onContextItemSelected(MenuItem item) {
 	info = (AdapterContextMenuInfo) item.getMenuInfo();
 	position = info.position;
-	// following 4 lines will display the information on selected item.
-
-	// Get the story object of the selected story item
+	/*
+	 * following 4 lines will display the information on selected item.
+	 * 
+	 * Get the story object of the selected story item
+	 */
 	currentStory = (Story) lv.getAdapter().getItem(position);
 
 	switch (item.getItemId()) {
@@ -138,8 +153,10 @@ public class OnlineStoriesActivity extends ListActivity {
 		e1.printStackTrace();
 	    }
 	    try {
-		// Save the story to file, via FileHelper if the download option
-		// selected
+		/*
+		 * Save the story to file, via FileHelper if the download option
+		 * selected
+		 */
 		System.out.println(currentStory.toString());
 		if (fHelper.addOfflineStory(currentStory)) {
 		    Toast.makeText(
@@ -165,15 +182,17 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	case READ_ID:
 
-	    // create intent to pass the selected story object and the first
-	    // story fragment id to the StoryFragmentActivity
-	    // create intent to pass the selected story object and the first
-	    // story fragment id to the StoryFragmentActivity
+	    /*
+	     * create intent to pass the selected story object and the first
+	     * story fragment id to the StoryFragmentActivity create intent to
+	     * pass the selected story object and the first story fragment id to
+	     * the StoryFragmentActivity
+	     */
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
 
 	    fHelper = new FileHelper(this, 0);
-	    // send the story object through the intent
+	    /* send the story object through the intent */
 	    try {
 		System.out.println("Decode Story starts");
 		currentStory = fHelper.decodeStory(currentStory, 0);
@@ -189,12 +208,14 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
 
-	    // send the first story fragment id through the intent
+	    /* send the first story fragment id through the intent */
 	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
 	    firstStoryFragment.putExtra("mode", 0);
 
-	    // start the StoryFragmentActivity to display the first fragment of
-	    // the selected story
+	    /*
+	     * start the StoryFragmentActivity to display the first fragment of
+	     * the selected story
+	     */
 	    startActivity(firstStoryFragment);
 
 	    return true;
@@ -217,10 +238,6 @@ public class OnlineStoriesActivity extends ListActivity {
 	fillData(esHelper.getOnlineStories(), onUpdate);
     }
 
-    /*
-     * remainder to Alice: remember to set the onResume, otherwise there won't
-     * any update.
-     */
     @Override
     protected void onResume() {
 	super.onResume();
