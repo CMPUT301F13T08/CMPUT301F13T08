@@ -107,6 +107,22 @@ public class AnnotationController {
 	this.fHelper = fHelper;
 	this.esHelper = esHelper;
     }
+    
+    /**
+     * savePhoto is the function where resizing, saving the illustration, and
+     * updating the current fragment are performed in order.
+     * <ul>
+     * <li>resizing the illustration to 200 * 150 if it's larger than this
+     * dimension.
+     * <li>saving the image based on the information of its fragmentId storyId
+     * and current photo Id.
+     * <li>updating the story in local file system.
+     * </ul>
+     * 
+     * @param pickedUri
+     *            Uri reference to the image
+     * @return Bitmap object that is decoded from the Uri
+     */
 
     public Bitmap savePhoto(Uri pickedUri, int mode) {
 	String fileName = "Image"
