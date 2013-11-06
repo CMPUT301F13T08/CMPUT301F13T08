@@ -46,8 +46,8 @@ import android.widget.Toast;
 
 /**
  * PhotoController is a controller class that is responsible for resizing (if
- * needed), saving images and update the current story and current
- * story fragment.
+ * needed), saving illustrations and update the current story and current story
+ * fragment.
  * <p>
  * In current stage, PhotoController only provides a public method:
  * <ul>
@@ -73,18 +73,27 @@ public class PhotoController {
     private FileHelper fHelper;
 
     /**
-     * 
-     * @param a an activity object
-     * @param context a context object for writing files
-     * @param currentStory currentStory, which will be updated after all ima
+     *  Constructor of the PhotoController takes in all the variables it needs and 
+     *  set them to corresponding variables to its own fields.
+     *  
+     * @param activity
+     *            an activity object
+     * @param context
+     *            a context object for writing files
+     * @param currentStory
+     *            currentStory, which will be updated after an image is added
      * @param currentStoryFragment
+     *            the story fragment that needs to be updated
      * @param currentStoryFragmentIndex
+     *            This is an index reference of the currentStoryFragment when
+     *            updating. Since ArrayList.indexOf didn't work so well.
      * @param fHelper
+     *            The FileHelper object that helps with saving images.
      */
-    public PhotoController(Activity a, Context context, Story currentStory,
+    public PhotoController(Activity activity, Context context, Story currentStory,
 	    StoryFragment currentStoryFragment, int currentStoryFragmentIndex,
 	    FileHelper fHelper) {
-	this.activity = a;
+	this.activity = activity;
 	this.context = context;
 	this.currentStory = currentStory;
 	this.currentStoryFragment = currentStoryFragment;
@@ -92,8 +101,21 @@ public class PhotoController {
 	this.fHelper = fHelper;
     }
 
+    /**
+     * savePhoto is the function where resizing, saving the illustration, and updating
+     * the current fragment are performed in order.
+     * <ul>
+     * <li>resizing the illustration to 200 * 150 if it's larger than this dimension.
+     * <li>saving the image based on the information of its fragmentId storyId
+     * and current photo Id.
+     * <li>updating the story in local file system.
+     * </ul>
+     * 
+     * @param pickedUri
+     *            Uri reference to the image
+     * @return Bitmap object that is decoded from the Uri
+     */
     public Bitmap savePhoto(Uri pickedUri) {
-
 	String fileName = "Image"
 		+ Integer.toString(currentStory.getOfflineStoryId())
 		+ "Fragment"
