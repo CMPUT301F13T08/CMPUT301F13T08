@@ -291,8 +291,12 @@ public class MyStoriesActivity extends ListActivity {
 	    return super.onContextItemSelected(item);
 	}
     }
-
     
+    /**
+     * This method populates the list view with a list of My Stories.
+     * @param sList
+     * @param update
+     */
     public void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
 	    lv.addHeaderView(footerCreate);
