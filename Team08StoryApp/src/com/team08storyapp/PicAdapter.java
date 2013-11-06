@@ -68,6 +68,7 @@ public class PicAdapter extends BaseAdapter {
 
     /* array to store bitmaps to display */
     private Bitmap[] imageBitmaps;
+    
     /* placeholder bitmap for empty spaces in gallery */
     Bitmap placeholder;
 
@@ -89,6 +90,7 @@ public class PicAdapter extends BaseAdapter {
 
 	/* create bitmap array */
 	imageBitmaps = new Bitmap[5];
+	
 	/* decode the placeholder image */
 	placeholder = BitmapFactory.decodeResource(
 		galleryContext.getResources(), R.drawable.ic_launcher);
@@ -125,9 +127,11 @@ public class PicAdapter extends BaseAdapter {
 	/* get the styling attributes - use default Andorid system resources */
 	TypedArray styleAttrs = galleryContext
 		.obtainStyledAttributes(R.styleable.PicGallery);
+	
 	/* get the background resource */
 	defaultItemBackground = styleAttrs.getResourceId(
 		R.styleable.PicGallery_android_galleryItemBackground, 0);
+	
 	/* recycle attributes */
 	styleAttrs.recycle();
 
@@ -154,16 +158,21 @@ public class PicAdapter extends BaseAdapter {
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 
-	/* create the view */
+	/* create the view */	
 	ImageView imageView = new ImageView(galleryContext);
+	
 	/* specify the bitmap at this position in the array */
 	imageView.setImageBitmap(imageBitmaps[position]);
+	
 	/* set layout options */
 	imageView.setLayoutParams(new Gallery.LayoutParams(300, 200));
+	
 	/* scale type within view area */
 	imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+	
 	/* set default gallery item background */
 	imageView.setBackgroundResource(defaultItemBackground);
+	
 	/* return the view */
 	return imageView;
     }
@@ -176,6 +185,7 @@ public class PicAdapter extends BaseAdapter {
      * @param newPic
      */
     public void addPic(int currentPic, Bitmap newPic) {
+	
 	/* set at currently selected index */
 	imageBitmaps[currentPic] = newPic;
     }
@@ -188,6 +198,7 @@ public class PicAdapter extends BaseAdapter {
      */
 
     public Bitmap getPic(int position) {
+	
 	/* return bitmap at position index */
 	return imageBitmaps[position];
     }
