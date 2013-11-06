@@ -255,133 +255,43 @@ public class MyStoryFragmentActivity extends Activity {
 
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onResume() {
+	try {
+	    currentStory = fHelper.getOfflineStory(currentStoryId);
+	    currentStoryFragment = currentStory.getStoryFragments().get(
+		    currentStoryFragmentIndex);
 
-	if (resultCode == RESULT_OK) {
-
-	    // the returned picture URI
-	    Uri pickedUri = data.getData();
-
-	    // declare the bitmap
-	    Bitmap pic = null;
-	    // declare the path string
-	    String imgPath = "";
-
-	    // retrieve the string using media data
-	    String[] medData = { MediaStore.Images.Media.DATA };
-	    // query the data
-	    Cursor picCursor = managedQuery(pickedUri, medData, null, null,
-		    null);
-	    if (picCursor != null) {
-		// get the path string
-		int index = picCursor
-			.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-		picCursor.moveToFirst();
-		imgPath = picCursor.getString(index);
-	    } else
-		imgPath = pickedUri.getPath();
-
-	    // if we have a new URI attempt to decode the image bitmap
-	    if (pickedUri != null) {
-
-		// set the width and height we want to use as maximum
-		// display
-		int targetWidth = 200;
-		int targetHeight = 150;
-
-		// create bitmap options to calculate and use sample size
-		BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-
-		// first decode image dimensions only
-		bmpOptions.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-		// image width and height before sampling
-		int currHeight = bmpOptions.outHeight;
-		int currWidth = bmpOptions.outWidth;
-
-		// variable to store new sample size
-		int sampleSize = 1;
-
-		/*
-		 * calculate the sample size if the existing size is larger than
-		 * target size
-		 */
-		if (currHeight > targetHeight || currWidth > targetWidth) {
-		    // use either width or height
-		    if (currWidth > currHeight)
-			sampleSize = Math.round((float) currHeight
-				/ (float) targetHeight);
-		    else
-			sampleSize = Math.round((float) currWidth
-				/ (float) targetWidth);
-		}
-
-		// use the new sample size
-		bmpOptions.inSampleSize = sampleSize;
-
-		// now decode the bitmap using sample options
-		bmpOptions.inJustDecodeBounds = false;
-
-		// get the file as a bitmap
-		pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-		String fileName = "Image"
-			+ Integer.toString(currentStoryId)
-			+ "Fragment"
-			+ Integer.toString(currentStoryFragment
-				.getStoryFragmentId())
-			+ "Photo"
-			+ Integer.toString(currentStoryFragment.getPhotos()
-				.size() + 1) + ".png";
-		System.out.println("New image: " + fileName);
-		currentPic = currentStoryFragment.getPhotos().size();
-
-		try {
-		    FileOutputStream fos = openFileOutput(fileName,
-			    Context.MODE_PRIVATE);
-		    pic.compress(CompressFormat.PNG, 90, fos);
-		} catch (FileNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
-
-		Photo add = new Photo();
-		add.setPhotoID(currentStoryFragment.getPhotos().size() + 1);
-		add.setPictureName(fileName);
-		ArrayList<Photo> temp = currentStoryFragment.getPhotos();
-		temp.add(add);
-		currentStoryFragment.setPhotos(temp);
-		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-			currentStoryFragment);
-
-		try {
-		    fHelper.updateOfflineStory(currentStory);
-		    currentStory = fHelper.getOfflineStory(currentStoryId);
-		} catch (FileNotFoundException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-
-		// pass bitmap to ImageAdapter to add to array
-		imgAdapt.addPic(currentPic, pic);
-
-		// redraw the gallery thumbnails to reflect the new addition
-		picGallery.setAdapter(imgAdapt);
-
-		// display the newly selected image at larger size
-		picView.setImageBitmap(pic);
-
-		// scale options
-		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-	    } else {
-
-		// superclass method
-		super.onActivityResult(requestCode, resultCode, data);
-	    }
+	} catch (Exception e) {
+	    e.printStackTrace();
 	}
+	super.onResume();
 
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+	if (resultCode == RESULT_OK) {
+	    Uri pickedUri = data.getData();
+	    PhotoController pc = new PhotoController(this,
+		    getApplicationContext(), currentStory,
+		    currentStoryFragment, currentStoryFragmentIndex, fHelper);
+	    Bitmap pic = pc.savePhoto(pickedUri);
+	    if (pic != null) {
+		currentPic = pc.currentPosition();
+		imgAdapt.addPic(currentPic, pic);
+		picGallery.setAdapter(imgAdapt);
+		picView.setImageBitmap(pic);
+		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+	    }
+	    try {
+		currentStory = fHelper.getOfflineStory(currentStoryId);
+		currentStoryFragment = currentStory.getStoryFragments().get(
+			currentStoryFragmentIndex);
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+	} else {
+	    super.onActivityResult(requestCode, resultCode, data);
+	}
+    }
 }
