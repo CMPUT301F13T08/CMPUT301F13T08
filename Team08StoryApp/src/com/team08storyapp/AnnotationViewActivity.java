@@ -39,11 +39,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ListView;
 
-
-
 /**
  * AnnotationViewActivity is a view class that displays a list of annotations
- * for a specific story fragment. Users are able to select an annotation from 
+ * for a specific story fragment. Users are able to select an annotation from
  * list to view the annotation in its entirety.
  * 
  * @author Michele Paulichuk
@@ -53,7 +51,7 @@ import android.widget.ListView;
  * @author Jiawei Shen
  * @version 1.0 November 8, 2013
  * @since 1.0
- *
+ * 
  */
 public class AnnotationViewActivity extends Activity {
     private ListView lv;

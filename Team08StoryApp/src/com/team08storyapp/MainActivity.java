@@ -38,22 +38,23 @@ import android.view.Menu;
 import android.view.View;
 
 /**
- * MainActivity is a view class that displays the main menu for our application. It is the first thing the user
- * sees when they run the application, and gives the options to view:
+ * MainActivity is a view class that displays the main menu for our application.
+ * It is the first thing the user sees when they run the application, and gives
+ * the options to view:
  * <ul>
  * <li>Online Stories
  * <li>Downloaded Stories
  * <li>My Stories
  * </ul>
  * 
-* @author Michele Paulichuk
-* @author Alice Wu
-* @author Ana Marcu
-* @author Jarrett Toll
-* @author Jiawei Shen
-* @version 1.0 November 8, 2013
-* @since 1.0
-*/
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class MainActivity extends Activity {
 
     @Override

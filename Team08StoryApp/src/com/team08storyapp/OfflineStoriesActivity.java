@@ -46,6 +46,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+/**
+ * OfflineStoriesActivity is a view class that displays a list of stories that
+ * have been downloaded. Users are able to read a story in the list simply by 
+ * clicking on it (no internet connection required).
+ * 
+* @author Michele Paulichuk
+* @author Alice Wu
+* @author Ana Marcu
+* @author Jarrett Toll
+* @author Jiawei Shen
+* @version 1.0 November 8, 2013
+* @since 1.0
+*/
+
 public class OfflineStoriesActivity extends ListActivity {
 
     public int position;

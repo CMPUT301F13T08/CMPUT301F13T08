@@ -38,14 +38,14 @@ import java.io.FileNotFoundException;
  * the user. Users can view each story in the list simply by clicking on it. Users
  * are also given the option to create a new story from scratch.
  * 
-* @author Michele Paulichuk
-* @author Alice Wu
-* @author Ana Marcu
-* @author Jarrett Toll
-* @author Jiawei Shen
-* @version 1.0 November 8, 2013
-* @since 1.0
-*/
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -66,18 +66,18 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /**
-*MyStoriesActivity is a view class that displays a list of stories created by
-*the user. By clicking on a story on a list, users are able to read/edit their stories.
-*Users are also given the option to create a new story from scratch. 
-* 
-* @author Michele Paulichuk
-* @author Alice Wu
-* @author Ana Marcu
-* @author Jarrett Toll
-* @author Jiawei Shen
-* @version 1.0 November 8, 2013
-* @since 1.0
-*/
+ * MyStoriesActivity is a view class that displays a list of stories created by
+ * the user. By clicking on a story on a list, users are able to read/edit their
+ * stories. Users are also given the option to create a new story from scratch.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 
 public class MyStoriesActivity extends ListActivity {
 
@@ -176,53 +176,41 @@ public class MyStoriesActivity extends ListActivity {
 
 		fHelper.addOfflineStory(s1);
 	    }
-/*
-	    if (fHelper.getOfflineStory(12) == null) {
-		Story s1 = new Story(12, "Fight Club", "C. Palahniuk");
-		ArrayList<StoryFragment> sfList = new ArrayList<StoryFragment>();
-		StoryFragment sf1 = new StoryFragment(
-			1,
-			"	At the end of the century," +
-			" the apocalypse is the talk of the town. However all you've been talking about is the " +
-			"horrible insomnia you have for months. Waking up in different airports, in different time zones" +
-			" feels definitely bad. But could it be worse? The answer is yes. After losing your suitecase at the airport, you return home" +
-			" to an arson attack " +
-			"of your precious apartment. All the condiments you collect, furnitures you take good care of, fall from the 15th floor " +
-			"right to the ground. The polite doorman comes to you, asking if you have a place to stay.");
-		ArrayList<Choice> cList = new ArrayList<Choice>();
-		Choice c1 = new Choice(2, 1,
-			"No, I don't.");
-		Choice c2 = new Choice(
-			3,
-			2,
-			"Answer yes and try to call some one in the phone booth.");
-		cList.add(c2);
-		cList.add(c1);
-		sf1.setChoices(cList);
-		sfList.add(sf1);
-
-		StoryFragment sf2 = new StoryFragment(
-			2,
-			"    The doorman is just being polite. He can't offer you a place to stay.");
-		sfList.add(sf2);
-
-		StoryFragment sf3 = new StoryFragment(
-			3,
-			"   You called Tyler. And you decide to meet at a bar.");
-		cList = new ArrayList<Choice>();
-		c1 = new Choice(4, 1,
-			"Call a cab to get to that bar.");
-		cList.add(c1);
-		sf3.setChoices(cList);
-		sfList.add(sf3);
-
-		StoryFragment sf4 = new StoryFragment(4,
-			"    Tyler is on his way. Please wait for a minute.");
-		sfList.add(sf4);
-		s1.setFirstStoryFragmentId(1);
-		s1.setStoryFragments(sfList);
-		fHelper.addOfflineStory(s1);
-	    }*/
+	    /*
+	     * if (fHelper.getOfflineStory(12) == null) { Story s1 = new
+	     * Story(12, "Fight Club", "C. Palahniuk"); ArrayList<StoryFragment>
+	     * sfList = new ArrayList<StoryFragment>(); StoryFragment sf1 = new
+	     * StoryFragment( 1, "	At the end of the century," +
+	     * " the apocalypse is the talk of the town. However all you've been talking about is the "
+	     * +
+	     * "horrible insomnia you have for months. Waking up in different airports, in different time zones"
+	     * +
+	     * " feels definitely bad. But could it be worse? The answer is yes. After losing your suitecase at the airport, you return home"
+	     * + " to an arson attack " +
+	     * "of your precious apartment. All the condiments you collect, furnitures you take good care of, fall from the 15th floor "
+	     * +
+	     * "right to the ground. The polite doorman comes to you, asking if you have a place to stay."
+	     * ); ArrayList<Choice> cList = new ArrayList<Choice>(); Choice c1 =
+	     * new Choice(2, 1, "No, I don't."); Choice c2 = new Choice( 3, 2,
+	     * "Answer yes and try to call some one in the phone booth.");
+	     * cList.add(c2); cList.add(c1); sf1.setChoices(cList);
+	     * sfList.add(sf1);
+	     * 
+	     * StoryFragment sf2 = new StoryFragment( 2,
+	     * "    The doorman is just being polite. He can't offer you a place to stay."
+	     * ); sfList.add(sf2);
+	     * 
+	     * StoryFragment sf3 = new StoryFragment( 3,
+	     * "   You called Tyler. And you decide to meet at a bar."); cList =
+	     * new ArrayList<Choice>(); c1 = new Choice(4, 1,
+	     * "Call a cab to get to that bar."); cList.add(c1);
+	     * sf3.setChoices(cList); sfList.add(sf3);
+	     * 
+	     * StoryFragment sf4 = new StoryFragment(4,
+	     * "    Tyler is on his way. Please wait for a minute.");
+	     * sfList.add(sf4); s1.setFirstStoryFragmentId(1);
+	     * s1.setStoryFragments(sfList); fHelper.addOfflineStory(s1); }
+	     */
 
 	} catch (FileNotFoundException e1) {
 	    // TODO Auto-generated catch block
@@ -312,8 +300,7 @@ public class MyStoriesActivity extends ListActivity {
 			    Toast.LENGTH_LONG).show();
 		}
 	    } catch (Exception e) {
-		Toast.makeText(getApplicationContext(),
-			"Publish Error",
+		Toast.makeText(getApplicationContext(), "Publish Error",
 			Toast.LENGTH_LONG).show();
 		return true;
 	    }
