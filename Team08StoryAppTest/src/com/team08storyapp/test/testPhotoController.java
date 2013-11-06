@@ -3,20 +3,19 @@ package com.team08storyapp.test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import android.app.Activity;
 import android.content.Context;
+import android.test.AndroidTestCase;
 
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.PhotoController;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
-public class testPhotoController extends TestCase {
+public class testPhotoController extends AndroidTestCase {
 
     private PhotoController phController;
 

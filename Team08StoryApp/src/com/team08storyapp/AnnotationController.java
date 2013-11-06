@@ -109,7 +109,6 @@ public class AnnotationController {
     }
 
     public Bitmap savePhoto(Uri pickedUri, int mode) {
-
 	String fileName = "Image"
 		+ Integer.toString(currentStory.getOfflineStoryId())
 		+ "Fragment"
@@ -121,6 +120,7 @@ public class AnnotationController {
 
 	// declare the bitmap
 	Bitmap pic = null;
+	
 	// declare the path string
 	String imgPath = "";
 
@@ -143,7 +143,6 @@ public class AnnotationController {
 
 	// if we have a new URI attempt to decode the image bitmap
 	if (pickedUri != null) {
-
 	    int targetWidth = 200;
 	    int targetHeight = 150;
 
@@ -183,9 +182,6 @@ public class AnnotationController {
 
 	    // get the file as a bitmap
 	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-	    System.out.println("New image: " + fileName);
-
 	    try {
 		FileOutputStream fos = context.openFileOutput(fileName,
 			Context.MODE_PRIVATE);
