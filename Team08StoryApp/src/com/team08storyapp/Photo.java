@@ -33,8 +33,6 @@ package com.team08storyapp;
 
 import java.io.Serializable;
 
-import android.graphics.Bitmap;
-
 /**
  * Photo is a model class representing an image or illustration that can be used
  * in an Annotation on a Story Fragment in a Story or as an illustration on a

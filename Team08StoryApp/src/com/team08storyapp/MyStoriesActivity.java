@@ -32,21 +32,6 @@ Retrieved Oct. 29, 2013
 package com.team08storyapp;
 
 import java.io.FileNotFoundException;
-
-/**
- * MyStoriesActivity is a view class that displays a list of stories created by
- * the user. Users can view each story in the list simply by clicking on it. Users
- * are also given the option to create a new story from scratch.
- * 
- * @author Michele Paulichuk
- * @author Alice Wu
- * @author Ana Marcu
- * @author Jarrett Toll
- * @author Jiawei Shen
- * @version 1.0 November 8, 2013
- * @since 1.0
- */
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -64,6 +49,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+/**
+ * MyStoriesActivity is a view class that displays a list of stories created by
+ * the user. Users can view each story in the list simply by clicking on it. Users
+ * are also given the option to create a new story from scratch.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 
 /**
  * MyStoriesActivity is a view class that displays a list of stories created by
