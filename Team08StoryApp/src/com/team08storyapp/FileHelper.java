@@ -314,10 +314,9 @@ public class FileHelper {
 		}
 	    }
 
-	    /*
-	     * Encode the photo pf annotation object first and clear the photo.
-	     * since we don't want Json to handle huge byteArrays.
-	     */
+	    
+	    //  Encode the photo  annotation object first and clear the photo.
+	    
 
 	    for (int n = 0; n < annotations.size(); n++) {
 
