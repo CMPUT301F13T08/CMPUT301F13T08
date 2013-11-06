@@ -235,7 +235,7 @@ public class AnnotationController {
 		Toast.makeText(context, "Network problem, please try again.",
 			Toast.LENGTH_LONG).show();
 	    }
-
+	    
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
