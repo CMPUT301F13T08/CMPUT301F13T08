@@ -108,7 +108,29 @@ public class AnnotationController {
 	this.esHelper = esHelper;
     }
 
+    /**
+     * savePhoto is the function where resizing, saving the illustration, and
+     * updating the current fragment are performed in order.
+     * <ul>
+     * <li>resizing the annotation to 200 * 150 if it's larger than this
+     * dimension.
+     * <li>saving the image based on the information of its fragmentId storyId
+     * and current photo Id.
+     * <li>updating the story in local file system.
+     * </ul>
+     * 
+     * @param pickedUri
+     *            Uri reference to the image
+     * @param mode
+     *            an integer value to indicate whether the annotation should be
+     *            also saved to downloaded story besides upload it to the online
+     *            story
+     * @return Bitmap object that is decoded from the Uri
+     * 
+     */
     public Bitmap savePhoto(Uri pickedUri, int mode) {
+
+	// create the fileName for the image
 	String fileName = "Image"
 		+ Integer.toString(currentStory.getOfflineStoryId())
 		+ "Fragment"
@@ -120,7 +142,7 @@ public class AnnotationController {
 
 	// declare the bitmap
 	Bitmap pic = null;
-	
+
 	// declare the path string
 	String imgPath = "";
 
@@ -143,6 +165,8 @@ public class AnnotationController {
 
 	// if we have a new URI attempt to decode the image bitmap
 	if (pickedUri != null) {
+
+	    // set the target image size
 	    int targetWidth = 200;
 	    int targetHeight = 150;
 
@@ -187,18 +211,33 @@ public class AnnotationController {
 			Context.MODE_PRIVATE);
 		pic.compress(CompressFormat.PNG, 90, fos);
 	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	} else {
+
+	    /*
+	     * if anything wrong happen during the saving process, a toast
+	     * message will popup.
+	     */
+
 	    Toast.makeText(activity, "Save File Error", Toast.LENGTH_LONG)
 		    .show();
 	}
+
+	/*
+	 * add the annotation to online story and/or downloaded story depends on
+	 * the mode
+	 */
 	addAnnotation(fileName, mode);
 	return pic;
     }
 
     private void addAnnotation(String fileName, int mode) {
+
+	/*
+	 * make up a new annotation object and put related information(fileName,
+	 * id) into the object and update the current story
+	 */
 	Annotation add = new Annotation();
 	add.setAnnotationID(currentStoryFragment.getAnnotations().size() + 1);
 	add.setPhoto(fileName);
@@ -210,23 +249,37 @@ public class AnnotationController {
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		currentStoryFragment);
 
+	/*
+	 * if the user adds the annotation in the downloaded story, the local
+	 * story file will need to be updated.
+	 */
 	if (mode == MODE_OFFLINE) {
 	    try {
 		fHelper.updateOfflineStory(currentStory);
 	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    } catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	}
+
+	/*
+	 * Else simply save the new story to the web server. On success a toast
+	 * message will popup to inform the user that the annotation is added
+	 * successfully
+	 */
 	try {
+
+	    // encode the story
 	    Story encodedStory = fHelper.encodeStory(currentStory);
+
+	    // make sure the annotation is uploaded and rewrites the right file.
 	    if (esHelper.addOrUpdateOnlineStory(encodedStory) == encodedStory
 		    .getOnlineStoryId()) {
-		// pop up a message to inform user that annotation
-		// is added
+
+		/*
+		 * pop up a message to inform user that annotation is added
+		 */
 		Toast.makeText(context,
 			"New annotation is uploaded successfully",
 			Toast.LENGTH_LONG).show();
@@ -236,7 +289,6 @@ public class AnnotationController {
 	    }
 
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
     }

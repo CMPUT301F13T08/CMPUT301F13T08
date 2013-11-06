@@ -73,9 +73,9 @@ public class PhotoController {
     private FileHelper fHelper;
 
     /**
-     *  Constructor of the PhotoController takes in all the variables it needs and 
-     *  set them to corresponding variables to its own fields.
-     *  
+     * Constructor of the PhotoController takes in all the variables it needs
+     * and set them to corresponding variables to its own fields.
+     * 
      * @param activity
      *            an activity object
      * @param context
@@ -90,9 +90,9 @@ public class PhotoController {
      * @param fHelper
      *            The FileHelper object that helps with saving images.
      */
-    public PhotoController(Activity activity, Context context, Story currentStory,
-	    StoryFragment currentStoryFragment, int currentStoryFragmentIndex,
-	    FileHelper fHelper) {
+    public PhotoController(Activity activity, Context context,
+	    Story currentStory, StoryFragment currentStoryFragment,
+	    int currentStoryFragmentIndex, FileHelper fHelper) {
 	this.activity = activity;
 	this.context = context;
 	this.currentStory = currentStory;
@@ -102,10 +102,11 @@ public class PhotoController {
     }
 
     /**
-     * savePhoto is the function where resizing, saving the illustration, and updating
-     * the current fragment are performed in order.
+     * savePhoto is the function where resizing, saving the illustration, and
+     * updating the current fragment are performed in order.
      * <ul>
-     * <li>resizing the illustration to 200 * 150 if it's larger than this dimension.
+     * <li>resizing the illustration to 200 * 150 if it's larger than this
+     * dimension.
      * <li>saving the image based on the information of its fragmentId storyId
      * and current photo Id.
      * <li>updating the story in local file system.
@@ -209,21 +210,39 @@ public class PhotoController {
 	return pic;
     }
 
+    /**
+     * currentPosition function will return the index of the last photo in the
+     * gallery
+     * 
+     * @return an integer value that represents the index of the last photo in
+     *         the gallery
+     */
     public int currentPosition() {
 	return currentStoryFragment.getPhotos().size() - 1;
 
     }
 
+    /*
+     * Add Illustration is a function that updates a story with newly added
+     * illustrations.
+     */
     private void addIllustration(String fileName) {
+	
+	// create a new photo object based on id and fileName
 	Photo add = new Photo();
 	add.setPhotoID(currentStoryFragment.getPhotos().size() + 1);
 	add.setPictureName(fileName);
+
+	// add new Photo to photoList
 	ArrayList<Photo> temp = currentStoryFragment.getPhotos();
 	temp.add(add);
 	currentStoryFragment.setPhotos(temp);
+	
+	// update the story
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		currentStoryFragment);
 
+	// update the story in local file system
 	try {
 	    fHelper.updateOfflineStory(currentStory);
 	    Toast.makeText(activity, "Illustration is added successfully",
