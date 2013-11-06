@@ -271,7 +271,7 @@ public class MyStoryFragmentActivity extends Activity {
     }
 
     /** fillChoice populates our choice list with a list of choices for a specific fragment*/
-    public void fillChoice(ArrayList<Choice> cList) {
+    private void fillChoice(ArrayList<Choice> cList) {
 	lv.addHeaderView(headerGallery);
 	lv.addHeaderView(headerText);
 	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,

@@ -155,7 +155,7 @@ public class OfflineStoriesActivity extends ListActivity {
      * @param sList
      * @param update
      */
-    public void fillData(ArrayList<Story> sList, boolean update) {
+    private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
 	    lv.addHeaderView(header);
 	}
