@@ -80,7 +80,9 @@ import android.widget.Toast;
  */
 
 public class MyStoriesActivity extends ListActivity {
-
+    
+    
+    /*position is used to discover which list item is being selected */
     public int position;
     public AdapterContextMenuInfo info;
 
@@ -114,6 +116,10 @@ public class MyStoriesActivity extends ListActivity {
 	fHelper = new FileHelper(this, 1);
 	esHelper = new ESHelper();
 
+	/*
+	 * The following code will not be present for part 4, but is necessary to auto-generate a story in
+	 * My Stories for part 3 demo.
+	 */
 	try {
 	    if (fHelper.getOfflineStory(11) == null) {
 		Story s1 = new Story(11, "Los Santos", "Alice Wu");
@@ -176,47 +182,11 @@ public class MyStoriesActivity extends ListActivity {
 
 		fHelper.addOfflineStory(s1);
 	    }
-	    /*
-	     * if (fHelper.getOfflineStory(12) == null) { Story s1 = new
-	     * Story(12, "Fight Club", "C. Palahniuk"); ArrayList<StoryFragment>
-	     * sfList = new ArrayList<StoryFragment>(); StoryFragment sf1 = new
-	     * StoryFragment( 1, "	At the end of the century," +
-	     * " the apocalypse is the talk of the town. However all you've been talking about is the "
-	     * +
-	     * "horrible insomnia you have for months. Waking up in different airports, in different time zones"
-	     * +
-	     * " feels definitely bad. But could it be worse? The answer is yes. After losing your suitecase at the airport, you return home"
-	     * + " to an arson attack " +
-	     * "of your precious apartment. All the condiments you collect, furnitures you take good care of, fall from the 15th floor "
-	     * +
-	     * "right to the ground. The polite doorman comes to you, asking if you have a place to stay."
-	     * ); ArrayList<Choice> cList = new ArrayList<Choice>(); Choice c1 =
-	     * new Choice(2, 1, "No, I don't."); Choice c2 = new Choice( 3, 2,
-	     * "Answer yes and try to call some one in the phone booth.");
-	     * cList.add(c2); cList.add(c1); sf1.setChoices(cList);
-	     * sfList.add(sf1);
-	     * 
-	     * StoryFragment sf2 = new StoryFragment( 2,
-	     * "    The doorman is just being polite. He can't offer you a place to stay."
-	     * ); sfList.add(sf2);
-	     * 
-	     * StoryFragment sf3 = new StoryFragment( 3,
-	     * "   You called Tyler. And you decide to meet at a bar."); cList =
-	     * new ArrayList<Choice>(); c1 = new Choice(4, 1,
-	     * "Call a cab to get to that bar."); cList.add(c1);
-	     * sf3.setChoices(cList); sfList.add(sf3);
-	     * 
-	     * StoryFragment sf4 = new StoryFragment(4,
-	     * "    Tyler is on his way. Please wait for a minute.");
-	     * sfList.add(sf4); s1.setFirstStoryFragmentId(1);
-	     * s1.setStoryFragments(sfList); fHelper.addOfflineStory(s1); }
-	     */
+	    
 
 	} catch (FileNotFoundException e1) {
-	    // TODO Auto-generated catch block
 	    e1.printStackTrace();
 	} catch (IOException e1) {
-	    // TODO Auto-generated catch block
 	    e1.printStackTrace();
 	}
 
@@ -227,15 +197,13 @@ public class MyStoriesActivity extends ListActivity {
 	    }
 	    fillData(temp, onCreate);
 	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 
+	
 	searchButton.setOnClickListener(new View.OnClickListener() {
-
 	    @Override
 	    public void onClick(View v) {
 		searchText = et.getText().toString();
@@ -256,7 +224,7 @@ public class MyStoriesActivity extends ListActivity {
 	    }
 	});
 
-	/*
+	/* This commented code will be used in Part 4.
 	 * createButton.setOnClickListener(new View.OnClickListener() {
 	 * 
 	 * @Override public void onClick(View v) { //TODO: start a create a new
@@ -282,6 +250,8 @@ public class MyStoriesActivity extends ListActivity {
 
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
+	    /*This case handles publishing a story online by passing a story object
+	     * to esHelper to be pushed online. */
 	    try {
 		Story encodedStory = fHelper.encodeStory(currentStory);
 		if (currentStory.getOnlineStoryId() > 0) {
@@ -307,7 +277,7 @@ public class MyStoriesActivity extends ListActivity {
 	case READ_ID:
 
 	    /*
-	     * create intent to pass the selected story object and the first
+	     * This case creates an intent to pass the selected story object and the first
 	     * story fragment id to the StoryFragmentActivity
 	     */
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
@@ -322,6 +292,7 @@ public class MyStoriesActivity extends ListActivity {
 	}
     }
 
+    
     public void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
 	    lv.addHeaderView(footerCreate);
@@ -354,7 +325,6 @@ public class MyStoriesActivity extends ListActivity {
 	try {
 	    fillData(fHelper.getOfflineStories(), onUpdate);
 	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
 	    e.printStackTrace();
