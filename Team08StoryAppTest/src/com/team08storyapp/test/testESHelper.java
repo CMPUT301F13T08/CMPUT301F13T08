@@ -2,6 +2,10 @@ package com.team08storyapp.test;
 
 import java.util.ArrayList;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 import com.team08storyapp.Choice;
@@ -12,17 +16,22 @@ import com.team08storyapp.StoryFragment;
 public class testESHelper extends TestCase {
 
     private ESHelper esHelper;
-
-    public testESHelper(String name) {
-	super(name);
-    }
+    int expectedIdAddStory;
+    Story addStory;
+    int storyIdGetStory;
+    int storyFragmentListSizeGetStory;
+    int storyListSizeGetStories;
+    String searchText;
+    int searchListSize;
+    int storyIdUpdateStory;
 
     /*
      * The initializeSampleStory method is used to create a sample story to use
      * as test data for the below tests.
      */
     private Story initializeSampleStory() {
-	Story sampleStory = new Story("Sample Story for Testing", "Michele Paulichuk");
+	Story sampleStory = new Story("Sample Story for Testing",
+		"Michele Paulichuk");
 
 	ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
 
@@ -139,6 +148,59 @@ public class testESHelper extends TestCase {
 	return sampleStory;
     }
 
+    // Set up testing data for testing methods.
+    @Before
+    public void setUp() {
+	esHelper = new ESHelper();
+
+	// ***Setup for testGetOnlineStories()
+	// set to the known count of the stories on the webservice currently
+	storyListSizeGetStories = 6;
+
+	// ***Setup for testAddOnlineStory***
+	// create the story for adding to the webservice
+	addStory = initializeSampleStory();
+
+	// ***Setup for testGetOnlineStory***
+	// set the predetermined story and it's known number of story fragments
+	storyIdGetStory = 1;
+	storyFragmentListSizeGetStory = 12;
+
+	// ***Setup for testSearchOnlineStory***
+	/*
+	 * set the searchText to the predetermined text to search the webservice
+	 * stories author and titles for
+	 */
+	searchText = "walk";
+
+	/*
+	 * set the searchListSize to the known size of the list the search
+	 * should return
+	 */
+	searchListSize = 1;
+	
+	// ***Setup for testUpdateOnlineStory***
+	storyIdUpdateStory = 6;
+    }
+   
+    /*
+     * Test Case for Use Case 2 & 16
+     * 
+     * The testGetOnlineStories method tests retrieving all stories on the
+     * webservice via ESHelper's getOnlineStories method.
+     * 
+     * The test retrieves all stories from the webservice. Before the test we
+     * should know how many stories are stored on the webservice. Once the
+     * method to retrieve the stories is called, the returned list's size is
+     * compared to the predetermined size. If the sizes are equally than it is
+     * successfully retrieving all stories online.
+     */
+    @Test
+    public void testGetOnlineStories() {
+	// retrieve the stories and compare the list size to the known size
+	assertTrue(esHelper.getOnlineStories().size() == storyListSizeGetStories);
+    }
+    
     /*
      * Test Case for Use Case 3
      * 
@@ -154,21 +216,16 @@ public class testESHelper extends TestCase {
      * can be said that the add portion of addOrUpdateOnline story passes adding
      * a story to the webservice.
      */
+    @Test
     public void testAddOnlineStory() {
-	esHelper = new ESHelper();
 	// get the id that is expected to be set to the newly added story
-	int expectedid = esHelper.getOnlineStories().size() + 1;
+	expectedIdAddStory = esHelper.getOnlineStories().size() + 1;
 
-	// create the story for adding to the webservice
-	Story addStory = initializeSampleStory();
-
-	addStory.setOnlineStoryId(expectedid);
-	
 	// add the story and test that the id expected is the id assigned
-	assertTrue(esHelper.addOrUpdateOnlineStory(addStory) == expectedid);
+	assertTrue(esHelper.addOrUpdateOnlineStory(addStory) == expectedIdAddStory);
 
 	// Retrieve the story from online for further testing
-	Story onlineStory = esHelper.getOnlineStory(expectedid);
+	Story onlineStory = esHelper.getOnlineStory(expectedIdAddStory);
 
 	// test that the story for the id given was received, if it was not
 	// Received this may indicate that the story was not added
@@ -180,8 +237,8 @@ public class testESHelper extends TestCase {
 	assertEquals(addStory.getTitle(), onlineStory.getTitle());
 	assertEquals(addStory.getFirstStoryFragmentId(),
 		onlineStory.getFirstStoryFragmentId());
-	assertEquals(addStory.getStoryFragments().size(),
-		onlineStory.getStoryFragments().size());
+	assertEquals(addStory.getStoryFragments().size(), onlineStory
+		.getStoryFragments().size());
     }
 
     /*
@@ -197,44 +254,17 @@ public class testESHelper extends TestCase {
      * successfully by checking the id, that the author and title are not null,
      * and it contains the correct number of fragments.
      */
+    @Test
     public void testGetOnlineStory() {
-	esHelper = new ESHelper();
-	// set the predetermined story and it's known number of story fragments
-	int storyId = 1;
-	int storyFragmentListSize = 12;
-
 	// retrieve story from the webservice from the specified id
-	Story story = esHelper.getOnlineStory(storyId);
+	Story story = esHelper.getOnlineStory(storyIdGetStory);
 
 	// test that the retrieved story is indeed retrieved and correct
 	assertTrue(!story.equals(null));
-	assertTrue(story.getOnlineStoryId() == storyId);
+	assertTrue(story.getOnlineStoryId() == storyIdGetStory);
 	assertTrue(!story.getAuthor().equals(null)
 		&& !story.getTitle().equals(null)
-		&& story.getStoryFragments().size() == storyFragmentListSize);
-    }
-
-    /*
-     * Test Case for Use Case 2 & 16
-     * 
-     * The testGetOnlineStories method tests retrieving all stories on the
-     * webservice via ESHelper's getOnlineStories method.
-     * 
-     * The test retrieves all stories from the webservice. Before the test we
-     * should know how many stories are stored on the webservice. Once the
-     * method to retrieve the stories is called, the returned list's size is
-     * compared to the predetermined size. If the sizes are equally than it is
-     * successfully retrieving all stories online.
-     */
-    public void testGetOnlineStories() {
-	esHelper = new ESHelper();
-	// set to the known count of the stories on the webservice currently
-	int storyListSize = 6;
-
-	int onlineSize = esHelper.getOnlineStories().size();
-	
-	// retrieve the stories and compare the list size to the known size
-	assertTrue(onlineSize == storyListSize);
+		&& story.getStoryFragments().size() == storyFragmentListSizeGetStory);
     }
 
     /*
@@ -249,18 +279,12 @@ public class testESHelper extends TestCase {
      * text. When the search is performed a check is done to test that the
      * number of stories returned is the same as expected.
      */
+    @Test
     public void testSearchOnlineStories() {
-	esHelper = new ESHelper();
-	// set the searchText to the predetermined text to search the webservice
-	// stories author and titles for
-	String searchText = "walk";
-
-	// set the searchListSize to the known size of the list the search
-	// should return
-	int searchListSize = 1;
-
-	// retrieve the story's from the search and compare the size of the list
-	// to the known size
+	/*
+	 * retrieve the story's from the search and compare the size of the list
+	 * to the known size
+	 */
 	assertTrue(esHelper.searchOnlineStories(searchText).size() == searchListSize);
     }
 
@@ -279,10 +303,10 @@ public class testESHelper extends TestCase {
      * again and some comparisons are done to see if the story on the webservice
      * does contain the updated text.
      */
+    @Test
     public void testUpdateOnlineStory() {
-	esHelper = new ESHelper();
 	// retrieve a story from the webservice to update
-	Story updateStory = esHelper.getOnlineStory(6);
+	Story updateStory = esHelper.getOnlineStory(storyIdUpdateStory);
 
 	// update a portion of the story
 	ArrayList<StoryFragment> storyFragments = updateStory
@@ -318,5 +342,11 @@ public class testESHelper extends TestCase {
 		.getStoryFragments();
 	assertNotSame(orginalStoryFragment.getStoryText(), onlineStoryFragments
 		.get(0).getStoryText());
+    }
+    
+    @After
+    // Remove test data from the application
+    protected void tearDown() {
+	
     }
 }
