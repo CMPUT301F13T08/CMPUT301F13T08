@@ -88,7 +88,7 @@ public class PicAdapter extends BaseAdapter {
 	galleryContext = context;
 
 	// create bitmap array
-	imageBitmaps = new Bitmap[10];
+	imageBitmaps = new Bitmap[5];
 	// decode the placeholder image
 	placeholder = BitmapFactory.decodeResource(
 		galleryContext.getResources(), R.drawable.ic_launcher);

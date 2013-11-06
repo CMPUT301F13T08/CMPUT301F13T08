@@ -88,6 +88,7 @@ public class MyStoryFragmentActivity extends Activity {
     private StoryFragment currentStoryFragment;
     private FileHelper fHelper;
     private Uri imageFileUri;
+    private PhotoController pc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -179,6 +180,10 @@ public class MyStoryFragmentActivity extends Activity {
 	ArrayList<Choice> storyFragmentChoices = currentStoryFragment
 		.getChoices();
 
+	pc = new PhotoController(this,
+		    getApplicationContext(), currentStory,
+		    currentStoryFragment, currentStoryFragmentIndex, fHelper);
+	
 	/*
 	 * Populate choices listview with the go to choices from the current
 	 * fragment
@@ -227,6 +232,12 @@ public class MyStoryFragmentActivity extends Activity {
 
 	// when user selects "View annotations" button in action bar
 	case R.id.take_picture:
+	    if (pc.currentPosition() > 4) {
+		Toast.makeText(getApplicationContext(),
+			"Sorry. Illustration gallery is full now.",
+			Toast.LENGTH_LONG).show();
+		return true;
+	    }
 	    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 	    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 	    startActivityForResult(intent, 2);
@@ -234,6 +245,13 @@ public class MyStoryFragmentActivity extends Activity {
 
 	    // when user selects "add annotations" icon in action bar
 	case R.id.choose_picture:
+	    if (pc.currentPosition() > 4) {
+		Toast.makeText(getApplicationContext(),
+			"Sorry. Illustration gallery is full now.",
+			Toast.LENGTH_LONG).show();
+		return true;
+	    }
+	    
 	    // take the user to their chosen image selection app
 	    Intent pickIntent = new Intent();
 	    pickIntent.setType("image/*");
@@ -241,6 +259,11 @@ public class MyStoryFragmentActivity extends Activity {
 	    startActivityForResult(
 		    Intent.createChooser(pickIntent, "Select Picture"), 1);
 	    return true;
+
+	case R.id.main_menu:
+	    Intent mainIntent = new Intent(getApplicationContext(),
+		    MainActivity.class);
+	    startActivity(mainIntent);
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
@@ -272,12 +295,12 @@ public class MyStoryFragmentActivity extends Activity {
 
 	if (resultCode == RESULT_OK) {
 	    Uri pickedUri = data.getData();
-	    PhotoController pc = new PhotoController(this,
-		    getApplicationContext(), currentStory,
-		    currentStoryFragment, currentStoryFragmentIndex, fHelper);
 	    Bitmap pic = pc.savePhoto(pickedUri);
 	    if (pic != null) {
 		currentPic = pc.currentPosition();
+		if (currentPic > 4) {
+		    currentPic = (currentPic % 5);
+		}
 		imgAdapt.addPic(currentPic, pic);
 		picGallery.setAdapter(imgAdapt);
 		picView.setImageBitmap(pic);
