@@ -73,9 +73,9 @@ public class PhotoController {
     private FileHelper fHelper;
 
     /**
-     *  Constructor of the PhotoController takes in all the variables it needs and 
-     *  set them to corresponding variables to its own fields.
-     *  
+     * Constructor of the PhotoController takes in all the variables it needs
+     * and set them to corresponding variables to its own fields.
+     * 
      * @param activity
      *            an activity object
      * @param context
@@ -90,9 +90,9 @@ public class PhotoController {
      * @param fHelper
      *            The FileHelper object that helps with saving images.
      */
-    public PhotoController(Activity activity, Context context, Story currentStory,
-	    StoryFragment currentStoryFragment, int currentStoryFragmentIndex,
-	    FileHelper fHelper) {
+    public PhotoController(Activity activity, Context context,
+	    Story currentStory, StoryFragment currentStoryFragment,
+	    int currentStoryFragmentIndex, FileHelper fHelper) {
 	this.activity = activity;
 	this.context = context;
 	this.currentStory = currentStory;
@@ -102,10 +102,11 @@ public class PhotoController {
     }
 
     /**
-     * savePhoto is the function where resizing, saving the illustration, and updating
-     * the current fragment are performed in order.
+     * savePhoto is the function where resizing, saving the illustration, and
+     * updating the current fragment are performed in order.
      * <ul>
-     * <li>resizing the illustration to 200 * 150 if it's larger than this dimension.
+     * <li>resizing the illustration to 200 * 150 if it's larger than this
+     * dimension.
      * <li>saving the image based on the information of its fragmentId storyId
      * and current photo Id.
      * <li>updating the story in local file system.
@@ -124,20 +125,20 @@ public class PhotoController {
 		+ Integer.toString(currentStoryFragment.getPhotos().size() + 1)
 		+ ".png";
 
-	// declare the bitmap
+	/* declare the bitmap */
 	Bitmap pic = null;
-	// declare the path string
+	/* declare the path string */
 	String imgPath = "";
 
-	// retrieve the string using media data
+	/* retrieve the string using media data */
 	String[] medData = { MediaStore.Images.Media.DATA };
 
-	// query the data
+	/* query the data */
 	Cursor picCursor = activity.getContentResolver().query(pickedUri,
 		medData, null, null, null);
 	if (picCursor != null) {
 
-	    // get the path string
+	    /* get the path string */
 	    int index = picCursor
 		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 	    picCursor.moveToFirst();
@@ -146,24 +147,24 @@ public class PhotoController {
 	    imgPath = pickedUri.getPath();
 	picCursor.close();
 
-	// if we have a new URI attempt to decode the image bitmap
+	/* if we have a new URI attempt to decode the image bitmap */
 	if (pickedUri != null) {
 
 	    int targetWidth = 200;
 	    int targetHeight = 150;
 
-	    // create bitmap options to calculate and use sample size
+	    /* create bitmap options to calculate and use sample size */
 	    BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
 
-	    // first decode image dimensions only
+	    /* first decode image dimensions only */
 	    bmpOptions.inJustDecodeBounds = true;
 	    BitmapFactory.decodeFile(imgPath, bmpOptions);
 
-	    // image width and height before sampling
+	    /* image width and height before sampling */
 	    int currHeight = bmpOptions.outHeight;
 	    int currWidth = bmpOptions.outWidth;
 
-	    // variable to store new sample size
+	    /* variable to store new sample size */
 	    int sampleSize = 1;
 
 	    /*
@@ -171,7 +172,7 @@ public class PhotoController {
 	     * target size
 	     */
 	    if (currHeight > targetHeight || currWidth > targetWidth) {
-		// use either width or height
+		/* use either width or height */
 		if (currWidth > currHeight)
 		    sampleSize = Math.round((float) currHeight
 			    / (float) targetHeight);
@@ -180,13 +181,13 @@ public class PhotoController {
 			    / (float) targetWidth);
 	    }
 
-	    // use the new sample size
+	    /* use the new sample size */
 	    bmpOptions.inSampleSize = sampleSize;
 
-	    // now decode the bitmap using sample options
+	    /* now decode the bitmap using sample options */
 	    bmpOptions.inJustDecodeBounds = false;
 
-	    // get the file as a bitmap
+	    /* get the file as a bitmap */
 	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
 
 	    System.out.println("New image: " + fileName);

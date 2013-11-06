@@ -81,14 +81,16 @@ import com.google.gson.reflect.TypeToken;
  * 
  */
 public class ESHelper {
-    // Http Connector
+    /* Http Connector */
     private HttpClient httpclient = new DefaultHttpClient();
 
-    // JSON Utilities
+    /* JSON Utilities */
     private Gson gson = new Gson();
 
-    // tag for printing out to the log cat which class the log information is
-    // coming from
+    /*
+     * tag for printing out to the log cat which class the log information is
+     * coming from
+     */
     private static final String TAG = "ESHelper";
 
     /**
@@ -111,29 +113,37 @@ public class ESHelper {
 	StrictMode.setThreadPolicy(policy);
 
 	HttpPost httpPost;
-	// check if there is an online story Id to determine if adding or
-	// updating the story
+	/*
+	 * check if there is an online story Id to determine if adding or
+	 * updating the story
+	 */
 	if (story.getOnlineStoryId() == 0) {
-	    // find out how many stories are stored online in order to generate
-	    // an appropriate online story Id
+	    /*
+	     * find out how many stories are stored online in order to generate
+	     * an appropriate online story Id
+	     */
 	    ArrayList<Story> stories = getOnlineStories();
 	    int nextId = stories.size() + 1;
 
-	    // create the httppost item with the webservice information and the
-	    // new id to put the story under
+	    /*
+	     * create the httppost item with the webservice information and the
+	     * new id to put the story under
+	     */
 	    httpPost = new HttpPost(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
 			    + nextId);
 	    story.setOnlineStoryId(nextId);
 	} else {
-	    // create the httppost item with the webservice information and the
-	    // story's online id so that it upates that item
+	    /*
+	     * create the httppost item with the webservice information and the
+	     * story's online id so that it upates that item
+	     */
 	    httpPost = new HttpPost(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
 			    + story.getOnlineStoryId());
 	}
 
-	// convert the story object to JSON format
+	/* convert the story object to JSON format */
 	StringEntity stringentity = null;
 	try {
 	    stringentity = new StringEntity(gson.toJson(story));
@@ -142,13 +152,15 @@ public class ESHelper {
 	    return 0;
 	}
 
-	// set the httppost so that it knows it is accepting a JSON formatted
-	// object to add
+	/*
+	 * set the httppost so that it knows it is accepting a JSON formatted
+	 * object to add
+	 */
 	httpPost.setHeader("Accept", "application/json");
-	// set the object to add into the httppost
+	/* set the object to add into the httppost */
 	httpPost.setEntity(stringentity);
 
-	// execute the httpclient to post the object to the webservice
+	/* execute the httpclient to post the object to the webservice */
 	HttpResponse response = null;
 	try {
 	    response = httpclient.execute(httpPost);
@@ -160,7 +172,7 @@ public class ESHelper {
 	    return 0;
 	}
 
-	// Retrieve and print to the log cat the status result of the post
+	/* Retrieve and print to the log cat the status result of the post */
 	String status = response.getStatusLine().toString();
 	Log.d(TAG, status);
 
@@ -182,8 +194,10 @@ public class ESHelper {
 	    return 0;
 	}
 
-	// return back to the calling class the online story id for the story
-	// object added or updated
+	/*
+	 * return back to the calling class the online story id for the story
+	 * object added or updated
+	 */
 	return story.getOnlineStoryId();
     }
 
@@ -202,44 +216,52 @@ public class ESHelper {
      * @see Story
      */
     public Story getOnlineStory(int storyId) {
-	// set policy to allow for internet activity to happen within the
-	// android application
+	/*
+	 * set policy to allow for internet activity to happen within the
+	 * android application
+	 */
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
 	StrictMode.setThreadPolicy(policy);
 
 	Story story;
 	try {
-	    // Create a HttpGet object with the onlineStoryId of the Story to
-	    // retrieve from the webservice
+	    /*
+	     * Create a HttpGet object with the onlineStoryId of the Story to
+	     * retrieve from the webservice
+	     */
 	    HttpGet getRequest = new HttpGet(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
 			    + storyId + "?pretty=1");
 
-	    // Set the HttpGet so that it knows it is retrieving a JSON
-	    // formatted object
+	    /*
+	     * Set the HttpGet so that it knows it is retrieving a JSON
+	     * formatted object
+	     */
 	    getRequest.addHeader("Accept", "application/json");
 
-	    // Execute the httpclient to get the object from the webservice
+	    /* Execute the httpclient to get the object from the webservice */
 	    HttpResponse response = httpclient.execute(getRequest);
 
-	    // Retrieve and print to the log cat the status result of the post
+	    /* Retrieve and print to the log cat the status result of the post */
 	    String status = response.getStatusLine().toString();
 	    Log.d(TAG, status);
 
-	    // Retrieve the Story object in the form of a string to be converted
-	    // from JSON
+	    /*
+	     * Retrieve the Story object in the form of a string to be converted
+	     * from JSON
+	     */
 	    String json = getEntityContent(response);
 
-	    // We have to tell GSON what type we expect
+	    /* We have to tell GSON what type we expect */
 	    Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Story>>() {
 	    }.getType();
 
-	    // Now we expect to get a Story response
+	    /* Now we expect to get a Story response */
 	    ElasticSearchResponse<Story> esResponse = gson.fromJson(json,
 		    elasticSearchResponseType);
 
-	    // We get the Story from it!
+	    /* We get the Story from it! */
 	    story = esResponse.getSource();
 
 	} catch (ClientProtocolException e) {
@@ -263,41 +285,49 @@ public class ESHelper {
      * @see Story
      */
     public ArrayList<Story> getOnlineStories() {
-	// set policy to allow for internet activity to happen within the
-	// android application
+	/*
+	 * set policy to allow for internet activity to happen within the
+	 * android application
+	 */
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
 	StrictMode.setThreadPolicy(policy);
 
 	ArrayList<Story> stories = new ArrayList<Story>();
 	try {
-	    // Create a HttpPost object to retrieve the Stories from the
-	    // webservice
+	    /*
+	     * Create a HttpPost object to retrieve the Stories from the
+	     * webservice
+	     */
 	    HttpPost postRequest = new HttpPost(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/_search?pretty=1");
 
-	    // Set the httppost so that it knows it is retrieving a JSON
-	    // formatted object
+	    /*
+	     * Set the httppost so that it knows it is retrieving a JSON
+	     * formatted object
+	     */
 	    postRequest.addHeader("Accept", "application/json");
 
-	    // Execute the httpclient to get the object from the webservice
+	    /* Execute the httpclient to get the object from the webservice */
 	    HttpResponse response = httpclient.execute(postRequest);
 
-	    // Retrieve and print to the log cat the status result of the post
+	    /* Retrieve and print to the log cat the status result of the post */
 	    String status = response.getStatusLine().toString();
 	    Log.d(TAG, status);
 
-	    // Retrieve the Story object in the form of a string to be converted
-	    // from JSON
+	    /*
+	     * Retrieve the Story object in the form of a string to be converted
+	     * from JSON
+	     */
 	    String json = getEntityContent(response);
 
-	    // We have to tell GSON what type we expect
+	    /* We have to tell GSON what type we expect */
 	    Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>() {
 	    }.getType();
-	    // Now we expect to get a story response
+	    /* Now we expect to get a story response */
 	    ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json,
 		    elasticSearchSearchResponseType);
-	    // We get the story from it!
+	    /* We get the story from it! */
 	    Log.d(TAG, esResponse.toString());
 	    for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
 		Story story = s.getSource();
@@ -336,47 +366,55 @@ public class ESHelper {
 	StrictMode.setThreadPolicy(policy);
 
 	ArrayList<Story> stories = new ArrayList<Story>();
-	
+
 	if (!searchString.matches(".*\\w.*") || searchString.contains("\n")) {
 	    return getOnlineStories();
 	}
 
 	try {
-	    // Create a HttpPost object to retrieve the Stories from the
-	    // webservice
+	    /*
+	     * Create a HttpPost object to retrieve the Stories from the
+	     * webservice
+	     */
 	    HttpPost searchRequest = new HttpPost(
 		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/_search?pretty=1");
 
-	    // Create the ElasticSearch query string to search the webservice
-	    // for the search text
+	    /*
+	     * Create the ElasticSearch query string to search the webservice
+	     * for the search text
+	     */
 	    String query = "{\"query\": {\"query_string\" :{ \"fields\":[\"title\",\"author\"], \"query\":\""
 		    + searchString + "\"}}}";
 	    StringEntity stringentity = new StringEntity(query);
 
-	    // Set the httppost so that it knows it is retrieving a JSON
-	    // formatted object
+	    /*
+	     * Set the httppost so that it knows it is retrieving a JSON
+	     * formatted object
+	     */
 	    searchRequest.setHeader("Accept", "application/json");
 	    searchRequest.setEntity(stringentity);
 
-	    // Execute the httpclient to get the object from the webservice
+	    /* Execute the httpclient to get the object from the webservice */
 	    HttpResponse response = httpclient.execute(searchRequest);
 
-	    // Retrieve and print to the log cat the status result of the post
+	    /* Retrieve and print to the log cat the status result of the post */
 	    String status = response.getStatusLine().toString();
 	    Log.d(TAG, status);
 
-	    // Retrieve the Story object in the form of a string to be converted
-	    // from JSON
+	    /*
+	     * Retrieve the Story object in the form of a string to be converted
+	     * from JSON
+	     */
 	    String json = getEntityContent(response);
 
-	    // We have to tell GSON what type we expect
+	    /* We have to tell GSON what type we expect */
 	    Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>() {
 	    }.getType();
-	    // Now we expect to get a story response
+	    /* Now we expect to get a story response */
 	    ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json,
 		    elasticSearchSearchResponseType);
 	    Log.d(TAG, esResponse.toString());
-	    // We get the story from it!
+	    /* We get the story from it! */
 	    for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
 		Story story = s.getSource();
 		stories.add(story);
@@ -402,21 +440,21 @@ public class ESHelper {
      * @throws IOException
      */
     String getEntityContent(HttpResponse response) throws IOException {
-	// Create a buffer reader to read the contents of response.
+	/* Create a buffer reader to read the contents of response. */
 	BufferedReader br = new BufferedReader(new InputStreamReader(
 		(response.getEntity().getContent())));
 	StringBuilder stringBuilder = new StringBuilder();
 	Log.d(TAG, "Output from Server -> ");
 	String output = "";
-	
-	// Retrieve the contents of the response and append it in a string.
+
+	/* Retrieve the contents of the response and append it in a string. */
 	while ((output = br.readLine()) != null) {
 	    Log.d(TAG, output);
 	    stringBuilder.append(output);
 	}
 	Log.d(TAG, "JSON:" + stringBuilder.toString());
-	
-	// Return the string of the response.
+
+	/* Return the string of the response. */
 	return stringBuilder.toString();
     }
 }

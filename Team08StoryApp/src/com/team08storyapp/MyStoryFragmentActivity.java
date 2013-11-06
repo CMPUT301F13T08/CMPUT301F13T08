@@ -65,29 +65,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
-* MyStoryFragmentActivity is a view class that displays a specific story fragment
-* for stories created by the user. Currently, users are able to add illustrations
-* to these fragments.
-* <p>
-* In future developments, users will be able to add/edit/delete dialogue and chocies from
-* this activity.
-* 
-* @author Michele Paulichuk
-* @author Alice Wu
-* @author Ana Marcu
-* @author Jarrett Toll
-* @author Jiawei Shen
-* @version 1.0 November 8, 2013
-* @since 1.0
-*/
+ * MyStoryFragmentActivity is a view class that displays a specific story fragment
+ * for stories created by the user. Currently, users are able to add illustrations
+ * to these fragments.
+ * <p>
+ * In future developments, users will be able to add/edit/delete dialogue and chocies from
+ * this activity.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 
 /**
-* variable for selection intent
-* variable to store the currently selected image
-* adapter for gallery view
-* gallery object
-* image view for larger display
-*/ 
+ * variable for selection intent
+ * variable to store the currently selected image
+ * adapter for gallery view
+ * gallery object
+ * image view for larger display
+ */
 
 /**
  * instantiate the interactive gallery
@@ -116,11 +116,11 @@ public class MyStoryFragmentActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	fHelper = new FileHelper(this, 1);
 
-	// set up background layout
+	/* set up background layout */
 	setContentView(R.layout.activity_story_list);
 	lv = (ListView) findViewById(android.R.id.list);
 
-	// set up text header
+	/* set up text header */
 	headerText = getLayoutInflater().inflate(R.layout.header_text, null);
 	TextView textSection = (TextView) headerText
 		.findViewById(R.id.headerText);
@@ -132,36 +132,38 @@ public class MyStoryFragmentActivity extends Activity {
 	});
 	textSection.setMovementMethod(new ScrollingMovementMethod());
 
-	// set up gallery header
+	/* set up gallery header */
 	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
 		null);
-	// set up the picView
+	/* set up the picView */
 	picView = (ImageView) headerGallery.findViewById(R.id.picture);
 
-	// get the gallery view
+	/* get the gallery view */
 	picGallery = (Gallery) headerGallery.findViewById(R.id.gallery);
 
-	// set the click listener for each item in the thumbnail gallery
+	/* set the click listener for each item in the thumbnail gallery */
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
-	    // handle clicks
+	    /* handle clicks */
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
-		// set the larger image view to display the chosen bitmap
-		// calling method of adapter class
+		/*
+		 * set the larger image view to display the chosen bitmap
+		 * calling method of adapter class
+		 */
 		picView.setImageBitmap(imgAdapt.getPic(position));
 	    }
 	});
 
 	picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-	    // handle long clicks
+	    /* handle long clicks */
 	    public boolean onItemLongClick(AdapterView<?> parent, View v,
 		    int position, long id) {
 		currentPic = position;
 		Intent pickIntent = new Intent();
 		pickIntent.setType("image/*");
 		pickIntent.setAction(Intent.ACTION_GET_CONTENT);
-		// we will handle the returned data in onActivityResult
+		/* we will handle the returned data in onActivityResult */
 		startActivityForResult(
 			Intent.createChooser(pickIntent, "Select Picture"), 1);
 		return true;
@@ -174,10 +176,10 @@ public class MyStoryFragmentActivity extends Activity {
 	 */
 	Intent storyFragment = getIntent();
 
-	// Get the story object from the intent
+	/* Get the story object from the intent */
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
 
-	// Get the story fragment id from the intent - the fragment to display
+	/* Get the story fragment id from the intent - the fragment to display */
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 	currentStoryId = currentStory.getOfflineStoryId();
@@ -188,38 +190,39 @@ public class MyStoryFragmentActivity extends Activity {
 	    }
 	}
 
-	// The current story fragment object - from the story fragment list, by
-	// id
+	/*
+	 * The current story fragment object - from the story fragment list, by
+	 * id
+	 */
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
 
-	// Display the current fragment text
+	/* Display the current fragment text */
 	textSection.setText(currentStoryFragment.getStoryText());
 
-	// The list of choices from the current fragment
+	/* The list of choices from the current fragment */
 	ArrayList<Choice> storyFragmentChoices = currentStoryFragment
 		.getChoices();
 
-	pc = new PhotoController(this,
-		    getApplicationContext(), currentStory,
-		    currentStoryFragment, currentStoryFragmentIndex, fHelper);
-	
+	pc = new PhotoController(this, getApplicationContext(), currentStory,
+		currentStoryFragment, currentStoryFragmentIndex, fHelper);
+
 	/*
 	 * Populate choices listview with the go to choices from the current
 	 * fragment
 	 */
 	ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
 
-	// create a new adapter
+	/* create a new adapter */
 	imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
 		currentStoryFragmentId);
 
-	// set the gallery adapter
+	/* set the gallery adapter */
 	picGallery.setAdapter(imgAdapt);
 	fillChoice(storyFragmentChoices);
 	lv.setOnItemClickListener(new OnItemClickListener() {
 
-	    // handle clicks
+	    /* handle clicks */
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
 		Intent nextStoryFragment = new Intent(getApplicationContext(),
@@ -239,7 +242,7 @@ public class MyStoryFragmentActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-	// Inflate the menu; this adds items to the action bar if it is present.
+	/* Inflate the menu; this adds items to the action bar if it is present. */
 	getMenuInflater().inflate(R.menu.my_stories, menu);
 	return super.onCreateOptionsMenu(menu);
     }
@@ -247,10 +250,10 @@ public class MyStoryFragmentActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-	// Handle item selection
+	/* Handle item selection */
 	switch (item.getItemId()) {
 
-	// when user selects "View annotations" button in action bar
+	/* when user selects "View annotations" button in action bar */
 	case R.id.take_picture:
 	    if (pc.currentPosition() >= 4) {
 		Toast.makeText(getApplicationContext(),
@@ -263,7 +266,7 @@ public class MyStoryFragmentActivity extends Activity {
 	    startActivityForResult(intent, 2);
 	    return true;
 
-	    // when user selects "add annotations" icon in action bar
+	    /* when user selects "add annotations" icon in action bar */
 	case R.id.choose_picture:
 	    if (pc.currentPosition() >= 4) {
 		Toast.makeText(getApplicationContext(),
@@ -271,8 +274,8 @@ public class MyStoryFragmentActivity extends Activity {
 			Toast.LENGTH_LONG).show();
 		return true;
 	    }
-	    
-	    // take the user to their chosen image selection app
+
+	    /* take the user to their chosen image selection app */
 	    Intent pickIntent = new Intent();
 	    pickIntent.setType("image/*");
 	    pickIntent.setAction(Intent.ACTION_GET_CONTENT);

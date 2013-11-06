@@ -60,15 +60,15 @@ import android.widget.ImageView;
  */
 public class PicAdapter extends BaseAdapter {
 
-    // use the default gallery background image
+    /* use the default gallery background image */
     int defaultItemBackground;
 
-    // gallery context
+    /* gallery context */
     private Context galleryContext;
 
-    // array to store bitmaps to display
+    /* array to store bitmaps to display */
     private Bitmap[] imageBitmaps;
-    // placeholder bitmap for empty spaces in gallery
+    /* placeholder bitmap for empty spaces in gallery */
     Bitmap placeholder;
 
     /**
@@ -84,20 +84,20 @@ public class PicAdapter extends BaseAdapter {
     public PicAdapter(Context context, ArrayList<Photo> photoList,
 	    int currentStoryId, int currentStoryFragmentId) {
 
-	// instantiate context
+	/* instantiate context */
 	galleryContext = context;
 
-	// create bitmap array
+	/* create bitmap array */
 	imageBitmaps = new Bitmap[5];
-	// decode the placeholder image
+	/* decode the placeholder image */
 	placeholder = BitmapFactory.decodeResource(
 		galleryContext.getResources(), R.drawable.ic_launcher);
 
-	// decode the placeholder image
+	/* decode the placeholder image */
 	placeholder = BitmapFactory.decodeResource(
 		galleryContext.getResources(), R.drawable.ic_launcher);
 
-	// set placeholder as all thumbnail images in the gallery initially
+	/* set placeholder as all thumbnail images in the gallery initially */
 	for (int i = 0; i < imageBitmaps.length; i++)
 	    imageBitmaps[i] = placeholder;
 	if (photoList.size() > 0) {
@@ -122,47 +122,49 @@ public class PicAdapter extends BaseAdapter {
 	    }
 	}
 
-	// get the styling attributes - use default Andorid system resources
+	/* get the styling attributes - use default Andorid system resources */
 	TypedArray styleAttrs = galleryContext
 		.obtainStyledAttributes(R.styleable.PicGallery);
-	// get the background resource
+	/* get the background resource */
 	defaultItemBackground = styleAttrs.getResourceId(
 		R.styleable.PicGallery_android_galleryItemBackground, 0);
-	// recycle attributes
+	/* recycle attributes */
 	styleAttrs.recycle();
 
     }
 
-    // return number of data items i.e. bitmap images
+    /* return number of data items i.e. bitmap images */
     public int getCount() {
 	return imageBitmaps.length;
     }
 
-    // return item at specified position
+    /* return item at specified position */
     public Object getItem(int position) {
 	return position;
     }
 
-    // return item ID at specified position
+    /* return item ID at specified position */
     public long getItemId(int position) {
 	return position;
     }
 
-    // get view specifies layout and display options for each thumbnail in
-    // the gallery
+    /*
+     * get view specifies layout and display options for each thumbnail in the
+     * gallery
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
-	// create the view
+	/* create the view */
 	ImageView imageView = new ImageView(galleryContext);
-	// specify the bitmap at this position in the array
+	/* specify the bitmap at this position in the array */
 	imageView.setImageBitmap(imageBitmaps[position]);
-	// set layout options
+	/* set layout options */
 	imageView.setLayoutParams(new Gallery.LayoutParams(300, 200));
-	// scale type within view area
+	/* scale type within view area */
 	imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-	// set default gallery item background
+	/* set default gallery item background */
 	imageView.setBackgroundResource(defaultItemBackground);
-	// return the view
+	/* return the view */
 	return imageView;
     }
 
@@ -174,7 +176,7 @@ public class PicAdapter extends BaseAdapter {
      * @param newPic
      */
     public void addPic(int currentPic, Bitmap newPic) {
-	// set at currently selected index
+	/* set at currently selected index */
 	imageBitmaps[currentPic] = newPic;
     }
 
@@ -186,7 +188,7 @@ public class PicAdapter extends BaseAdapter {
      */
 
     public Bitmap getPic(int position) {
-	// return bitmap at position index
+	/* return bitmap at position index */
 	return imageBitmaps[position];
     }
 }

@@ -118,21 +118,21 @@ public class AnnotationController {
 			.toString(currentStoryFragment.getAnnotations().size() + 1)
 		+ ".png";
 
-	// declare the bitmap
+	/* declare the bitmap */
 	Bitmap pic = null;
-	
-	// declare the path string
+
+	/* declare the path string */
 	String imgPath = "";
 
-	// retrieve the string using media data
+	/* retrieve the string using media data */
 	String[] medData = { MediaStore.Images.Media.DATA };
 
-	// query the data
+	/* query the data */
 	Cursor picCursor = activity.getContentResolver().query(pickedUri,
 		medData, null, null, null);
 	if (picCursor != null) {
 
-	    // get the path string
+	    /* get the path string */
 	    int index = picCursor
 		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 	    picCursor.moveToFirst();
@@ -141,23 +141,23 @@ public class AnnotationController {
 	    imgPath = pickedUri.getPath();
 	picCursor.close();
 
-	// if we have a new URI attempt to decode the image bitmap
+	/* if we have a new URI attempt to decode the image bitmap */
 	if (pickedUri != null) {
 	    int targetWidth = 200;
 	    int targetHeight = 150;
 
-	    // create bitmap options to calculate and use sample size
+	    /* create bitmap options to calculate and use sample size */
 	    BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
 
-	    // first decode image dimensions only
+	    /* first decode image dimensions only */
 	    bmpOptions.inJustDecodeBounds = true;
 	    BitmapFactory.decodeFile(imgPath, bmpOptions);
 
-	    // image width and height before sampling
+	    /* image width and height before sampling */
 	    int currHeight = bmpOptions.outHeight;
 	    int currWidth = bmpOptions.outWidth;
 
-	    // variable to store new sample size
+	    /* variable to store new sample size */
 	    int sampleSize = 1;
 
 	    /*
@@ -174,13 +174,13 @@ public class AnnotationController {
 			    / (float) targetWidth);
 	    }
 
-	    // use the new sample size
+	    /* use the new sample size */
 	    bmpOptions.inSampleSize = sampleSize;
 
-	    // now decode the bitmap using sample options
+	    /* now decode the bitmap using sample options */
 	    bmpOptions.inJustDecodeBounds = false;
 
-	    // get the file as a bitmap
+	    /* get the file as a bitmap */
 	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
 	    try {
 		FileOutputStream fos = context.openFileOutput(fileName,
@@ -206,7 +206,7 @@ public class AnnotationController {
 	temp.add(add);
 	currentStoryFragment.setAnnotations(temp);
 
-	// update the current story with the new story fragment
+	/* update the current story with the new story fragment */
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		currentStoryFragment);
 
@@ -225,8 +225,9 @@ public class AnnotationController {
 	    Story encodedStory = fHelper.encodeStory(currentStory);
 	    if (esHelper.addOrUpdateOnlineStory(encodedStory) == encodedStory
 		    .getOnlineStoryId()) {
-		// pop up a message to inform user that annotation
-		// is added
+		/*
+		 * pop up a message to inform user that annotation is added
+		 */
 		Toast.makeText(context,
 			"New annotation is uploaded successfully",
 			Toast.LENGTH_LONG).show();
