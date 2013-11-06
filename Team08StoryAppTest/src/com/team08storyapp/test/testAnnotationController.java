@@ -3,13 +3,12 @@ package com.team08storyapp.test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import android.app.Activity;
 import android.content.Context;
+import android.test.AndroidTestCase;
 
 import com.team08storyapp.AnnotationController;
 import com.team08storyapp.ESHelper;
@@ -17,7 +16,7 @@ import com.team08storyapp.FileHelper;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
-public class testAnnotationController extends TestCase {
+public class testAnnotationController extends AndroidTestCase {
 
     private AnnotationController anController;
     private Activity testActivity;
