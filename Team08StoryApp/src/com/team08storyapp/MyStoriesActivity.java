@@ -273,6 +273,7 @@ public class MyStoriesActivity extends ListActivity {
 		    Toast.makeText(getApplicationContext(),
 			    "Your Story is Successfully Published",
 			    Toast.LENGTH_LONG).show();
+		    return true;
 		} else {
 		    currentStory.setOnlineStoryId(esHelper
 			    .addOrUpdateOnlineStory(encodedStory));
@@ -283,8 +284,9 @@ public class MyStoriesActivity extends ListActivity {
 		}
 	    } catch (Exception e) {
 		Toast.makeText(getApplicationContext(),
-			"Your Story is Successfully Published",
+			"Publish Error",
 			Toast.LENGTH_LONG).show();
+		return true;
 	    }
 	case READ_ID:
 
@@ -298,7 +300,7 @@ public class MyStoriesActivity extends ListActivity {
 	    firstStoryFragment.putExtra("storyFragmentId",
 		    currentStory.getFirstStoryFragmentId());
 	    startActivity(firstStoryFragment);
-
+	    return true;
 	default:
 	    return super.onContextItemSelected(item);
 	}
