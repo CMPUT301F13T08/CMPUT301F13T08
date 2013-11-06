@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.test.AndroidTestCase;
 
 import com.team08storyapp.FileHelper;
@@ -26,9 +27,9 @@ public class testPhotoController extends AndroidTestCase {
     private int testCurrentStoryFragmentIndex;
     private FileHelper testFHelper;
 
-    public testPhotoController() {
+   /* public testPhotoController() {
 	super();
-    }
+    }*/
 
     @Before
     public void setUp() throws FileNotFoundException, IOException {
@@ -36,10 +37,27 @@ public class testPhotoController extends AndroidTestCase {
 		testCurrentStory, testCurrentStoryFragment,
 		testCurrentStoryFragmentIndex, testFHelper);
     }
+    
+    // TODO: write test case
+    public void testSavePhoto(){
+	
+    }
 
-    @Test
+    // TODO: write test case
+    public void testCurrentPosition() {
+	
+    }
+    
+    // TODO: write test case
+    private void testAddIllustration(){
+	
+    }
+    
+    
+    
+   /* @Test
     public void test() {
 	fail("Not yet implemented");
     }
-
+*/
 }
