@@ -47,12 +47,7 @@ public class testAnnotationController extends AndroidTestCase {
     public void testSavePhoto() {
 	
     }
-    
-    // TODO: write test case
-    private void testAddAnnotation(){
-	
-    }
-
+   
     /*@Test
     public void test() {
 	fail("Not yet implemented");
