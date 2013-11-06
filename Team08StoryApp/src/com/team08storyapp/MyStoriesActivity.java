@@ -64,19 +64,6 @@ import android.widget.Toast;
  * @since 1.0
  */
 
-/**
- * MyStoriesActivity is a view class that displays a list of stories created by
- * the user. By clicking on a story on a list, users are able to read/edit their
- * stories. Users are also given the option to create a new story from scratch.
- * 
- * @author Michele Paulichuk
- * @author Alice Wu
- * @author Ana Marcu
- * @author Jarrett Toll
- * @author Jiawei Shen
- * @version 1.0 November 8, 2013
- * @since 1.0
- */
 
 public class MyStoriesActivity extends ListActivity {
     
@@ -290,9 +277,13 @@ public class MyStoriesActivity extends ListActivity {
 	    return super.onContextItemSelected(item);
 	}
     }
-
     
-    public void fillData(ArrayList<Story> sList, boolean update) {
+    /**
+     * This method populates the list view with a list of My Stories.
+     * @param sList
+     * @param update
+     */
+    private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
 	    lv.addHeaderView(footerCreate);
 	    lv.addHeaderView(header);

@@ -64,9 +64,12 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
      * system service, and the view that will be converted to the desired view,
      * and a list of stories as well.
      * 
-     * @param a
+     * @param activity
+     *            an activity object that provides LAYOUT_INFLATER_SERVICE
      * @param textViewResourceId
+     *            the int value of id of the view
      * @param infos
+     *            a list of stories
      */
     public StoryInfoAdapter(Activity activity, int textViewResourceId,
 	    ArrayList<Story> infos) {
@@ -98,12 +101,16 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
      * Method will inflate the layout first and populate the data to
      * corresponding fields. (Title to item1, Author to item2)
      * 
+     * @param position
+     *            the index of the selected photo in the adapter
+     * @convertView the view that is going to be converted to user's desire
+     * @parent a ViewGroup object
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
 	ViewHolder holder;
 
-	/* if the view is not empty populate with the given layout*/
+	/* if the view is not empty populate with the given layout */
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
 		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -114,7 +121,7 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
 	    v.setTag(holder);
 	} else
 	    holder = (ViewHolder) v.getTag();
-	
+
 	if (infos == null) {
 	    return v;
 	}

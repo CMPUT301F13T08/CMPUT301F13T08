@@ -69,17 +69,7 @@ import android.widget.Toast;
  * @since 1.0
  */
 
-/**
- * variable for selection intent
- * variable to store the currently selected image
- * adapter for gallery view
- * gallery object
- * image view for larger display
- */
 
-/**
- * instantiate the interactive gallery
- */
 public class MyStoryFragmentActivity extends Activity {
 
     private int currentStoryFragmentId;
@@ -280,7 +270,8 @@ public class MyStoryFragmentActivity extends Activity {
 	}
     }
 
-    public void fillChoice(ArrayList<Choice> cList) {
+    /** fillChoice populates our choice list with a list of choices for a specific fragment*/
+    private void fillChoice(ArrayList<Choice> cList) {
 	lv.addHeaderView(headerGallery);
 	lv.addHeaderView(headerText);
 	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
