@@ -98,11 +98,9 @@ public class OnlineStoriesActivity extends ListActivity {
 	 * Populate listview with the stories curently online Cache the stories
 	 * currently online
 	 */
-	System.out.println("Prepare to fill data");
 	ArrayList<Story> result = esHelper.getOnlineStories();
 	while (result == null) {
 	    result = esHelper.getOnlineStories();
-	    System.out.println(result);
 	}
 	fillData(result, onCreate);
 
@@ -132,9 +130,7 @@ public class OnlineStoriesActivity extends ListActivity {
     public boolean onContextItemSelected(MenuItem item) {
 	info = (AdapterContextMenuInfo) item.getMenuInfo();
 	position = info.position;
-	/*
-	 * following 4 lines will display the information on selected item.
-	 * 
+	/* 
 	 * Get the story object of the selected story item
 	 */
 	currentStory = (Story) lv.getAdapter().getItem(position);

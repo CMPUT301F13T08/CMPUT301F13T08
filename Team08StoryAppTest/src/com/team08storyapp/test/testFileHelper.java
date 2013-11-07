@@ -20,14 +20,17 @@ public class testFileHelper extends AndroidTestCase {
 
     private FileHelper fHelper;
 
-    private int storyId;
     private Story s1;
     private int storyCount;
 
-    private int fragment;
+    private Story s2;
+    
     private StoryFragment fragment1;
     private ArrayList<StoryFragment> sfList;
+    private ArrayList<StoryFragment> sfList1;
     private Context context;
+
+    private String content;
 
     @Before
     // set up testing data for testing methods.
@@ -36,19 +39,17 @@ public class testFileHelper extends AndroidTestCase {
 	context = getContext();
 	fHelper = new FileHelper(context, 0);
 
-	storyId = 12;
-	storyCount = 1;
+	storyCount = 2;
 
 	s1 = new Story(12, "Morroco likoko", "Alice Wu");
 	s1.setOfflineStoryId(12);
 	sfList = new ArrayList<StoryFragment>();
-	StoryFragment sf1 = new StoryFragment(
-		1,
-		"	This is the city, where sins grow, profits expand, people gets colder,"
-			+ " and Michael"
-			+ "De Santa, the retired criminal wanted to start his new life. \n    But this comes to an end, when he finds"
-			+ "out his son, Jimmy, is set up in a credit card fraud by a local dealership. \n    The rage occupies him, leading him"
-			+ "to teach that manager a 'lesson'");
+	content = "	This is the city, where sins grow, profits expand, people gets colder,"
+		+ " and Michael"
+		+ "De Santa, the retired criminal wanted to start his new life. \n    But this comes to an end, when he finds"
+		+ "out his son, Jimmy, is set up in a credit card fraud by a local dealership. \n    The rage occupies him, leading him"
+		+ "to teach that manager a 'lesson'";
+	StoryFragment sf1 = new StoryFragment(1, content);
 
 	Photo p1 = new Photo();
 	p1.setPhotoID(1);
@@ -61,6 +62,11 @@ public class testFileHelper extends AndroidTestCase {
 	s1.setFirstStoryFragmentId(1);
 	s1.setStoryFragments(sfList);
 	fHelper.addOfflineStory(s1);
+	
+	s2 = new Story(13, "FA LA LA LA ", "FA FA LA LA");
+	sfList1 = new ArrayList<StoryFragment>();
+	s2.setStoryFragments(sfList1);
+	fHelper.addOfflineStory(s2);
     }
 
     /*
@@ -82,6 +88,9 @@ public class testFileHelper extends AndroidTestCase {
      * UpdateOfflineStory() updates an offline story. If the change is
      * successfully saved and applied to the story, the test method
      * testUpdateOfflineStory() should return true.
+     * 
+     * NOTE TO JOSH:
+     * Sorry we didn't see any difference between use case 6 and use case 11.
      */
     @Test
     public void testUpdateOfflineStory() throws FileNotFoundException,
@@ -103,11 +112,21 @@ public class testFileHelper extends AndroidTestCase {
     public void testGetOfflineStory() throws FileNotFoundException, IOException {
 	Story story = fHelper.getOfflineStory(12);
 
+	/* make sure we get the right story */
 	assertNotNull(story);
 	assertNotNull(story.getAuthor());
 	assertNotNull(story.getTitle());
 	assertEquals(story.getStoryFragments().size(), sfList.size());
 	assertEquals(story.getOfflineStoryId(), 12);
+
+	/* test we are reading the same text as we wrote into the content string */
+	assertEquals(story.getStoryFragments().get(0).getStoryText(), content);
+	
+	/* test we are reading the same photo*/
+	assertEquals(story.getStoryFragments().get(0).getPhotos().get(0).getPictureName(), "Image12Fragment1Photo1.png");
+	
+	/* make sure the story we read has no choices */
+	assertTrue(story.getStoryFragments().get(0).getChoices() == null);
     }
 
     /*
@@ -135,11 +154,12 @@ public class testFileHelper extends AndroidTestCase {
     @Test
     public void testSearchOfflineStories() {
 	assertEquals(fHelper.searchOfflineStories("co").size(), 1);
-	assertEquals(fHelper.searchOfflineStories("    ").size(), 1);
-	assertEquals(fHelper.searchOfflineStories("\n").size(), 1);
+	assertEquals(fHelper.searchOfflineStories("    ").size(), 2);
+	assertEquals(fHelper.searchOfflineStories("\n").size(), 2);
 	assertEquals(fHelper.searchOfflineStories("DAT").size(), 0);
     }
 
+    
     @Test
     public void testEncodeStory() throws FileNotFoundException, IOException {
 	Story encodedStory = fHelper.encodeStory(s1);
@@ -159,6 +179,7 @@ public class testFileHelper extends AndroidTestCase {
     @After
     protected void tearDown() {
 	context.deleteFile("Download12");
+	context.deleteFile("Download13");
     }
 
 }

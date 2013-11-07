@@ -445,7 +445,7 @@ public class FileHelper {
 		     * clear the encoded string to avoid conflicts with
 		     * encodeStory and save spaces.
 		     */
-		    photos.get(m).setEncodedPicture(null);
+		    photos.get(m).setEncodedPicture("");
 		    String fileName = "";
 		    if (photos.get(m).getPictureName().isEmpty()) {
 			if (mode == Save) {
@@ -477,7 +477,7 @@ public class FileHelper {
 			    .getEncodedAnnotation(), Base64.DEFAULT);
 		    Bitmap annotationBM = BitmapFactory.decodeByteArray(
 			    annotationByte, 0, annotationByte.length);
-		    annotations.get(n).setEncodedAnnotation(null);
+		    annotations.get(n).setEncodedAnnotation("");
 		    String fileName;
 		    if (annotations.get(n).getPhoto().isEmpty()) {
 			fileName = "Image" + Integer.toString(storyId)
