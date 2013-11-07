@@ -38,6 +38,11 @@ public class testAnnotationController extends AndroidTestCase {
     public void setUp() throws FileNotFoundException, IOException {
 	testCurrentStoryFragmentIndex = 1;
 
+	testActivity = new Activity();
+	testStory = new Story("newstory", "me");
+	testFHelper = new FileHelper(testContext, testCurrentStoryFragmentIndex);
+	testESHelper = new ESHelper();
+	
 	anController = new AnnotationController(testActivity, testContext,
 		testStory, testStoryFragment, testCurrentStoryFragmentIndex,
 		testFHelper, testESHelper);
@@ -46,11 +51,11 @@ public class testAnnotationController extends AndroidTestCase {
 
     }
     
-   /* // TODO: write test case
+    // TODO: write test case
     public void testSavePhoto() {
 	testBitmap = anController.savePhoto(testUri, 1);
 	assertNull(testBitmap);
-    }*/
+    }
    
 
 

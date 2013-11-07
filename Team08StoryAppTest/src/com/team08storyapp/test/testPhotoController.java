@@ -12,6 +12,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.test.ActivityTestCase;
 
+import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.MyStoriesActivity;
 import com.team08storyapp.Photo;
@@ -44,6 +45,7 @@ public class testPhotoController extends ActivityTestCase {
 	
 	testFHelper = new FileHelper(testContext, 0);
 	testCurrentStory = new Story(14, "Spaceman Spiff", "Calvin");
+	
 	testCurrentStoryFragment = new StoryFragment(1, "Test text.");
 	testStoryFragmentList = new ArrayList<StoryFragment>();
 	testStoryFragmentList.add(testCurrentStoryFragment);
