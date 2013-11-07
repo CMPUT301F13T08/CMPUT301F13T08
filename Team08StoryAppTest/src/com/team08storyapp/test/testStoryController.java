@@ -17,15 +17,15 @@ public class testStoryController extends TestCase {
     ArrayList<StoryFragment> storyFragmentList;
 
     protected void setUp() {
-	// Instantiate the Array List of Story Fragments
+	/* Instantiate the Array List of Story Fragments */
 	storyFragmentList = new ArrayList<StoryFragment>();
 
-	// set the next fragment id to 2 - see testReadStoryFragment
+	/* Set the next fragment id to 2 - see testReadStoryFragment */
 	nextStoryFragmentId = 2;
 	firstStoryFragment = new StoryFragment(1, "fragment text");
 	secondStoryFragment = new StoryFragment(2, "another fragment text");
 
-	// storyFragment list has two fragments with ids 1 and 2
+	/* StoryFragment list has two fragments with ids 1 and 2 */
 	storyFragmentList.add(firstStoryFragment);
 	storyFragmentList.add(secondStoryFragment);
 
@@ -42,10 +42,11 @@ public class testStoryController extends TestCase {
 	assertFalse(StoryController.addStoryFragment(firstStoryFragment));
     }
 
-    // call the method readStoryFragment() of story controller, to retrieve a
-    // fragment from a list, by id
-    // the returned fragment should be the same as the fragment in the
-    // storyFragmentList with id 2
+    /*
+     * Call the method readStoryFragment() of story controller, to retrieve a
+     * fragment from a list, by id the returned fragment should be the same as
+     * the fragment in the storyFragmentList with id 2.
+     */
     public void testReadStoryFragment() {
 	retrievedStoryFragment = StoryController.readStoryFragment(
 		storyFragmentList, nextStoryFragmentId);

@@ -94,15 +94,15 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
      *            the view that is going to be converted to user's desire
      * @param parent
      *            a ViewGroup object
-     * @return
+     * @return the converted view for the Annotation
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
 	ViewHolder holder;
 
 	/*
-	 * if the passed view is a valid view then inflate it with desired
-	 * layout
+	 * If the passed view is a valid view then inflate it with desired
+	 * layout.
 	 */
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
@@ -118,9 +118,9 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	final Annotation anno = annoList.get(position);
 
 	/*
-	 * if the annotation is not a null object and really has a photo then
+	 * If the annotation is not a null object and really has a photo then
 	 * just read the photo as a byteArray and set it to the layout's Image
-	 * view. Else set the default lauch icon to the image view.
+	 * view. Else set the default launch icon to the image view.
 	 */
 	if (anno != null) {
 	    if (anno.getPhoto() != null && !anno.getPhoto().isEmpty()) {
@@ -149,7 +149,7 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	    }
 
 	    /*
-	     * if the annotation has its own text then set the text to the
+	     * If the annotation has its own text then set the text to the
 	     * textView else set the message to "No Text Annotation".
 	     */
 

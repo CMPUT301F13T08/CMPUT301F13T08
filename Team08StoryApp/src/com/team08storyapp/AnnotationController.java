@@ -109,7 +109,7 @@ public class AnnotationController {
     }
 
     /**
-     * savePhoto is the function where resizing, saving the illustration, and
+     * SavePhoto is the function where resizing, saving the illustration, and
      * updating the current fragment are performed in order.
      * <ul>
      * <li>resizing the annotation to 200 * 150 if it's larger than this
@@ -122,7 +122,7 @@ public class AnnotationController {
      * @param pickedUri
      *            Uri reference to the image
      * @param mode
-     *            an integer value to indicate whether the annotation should be
+     *            An integer value to indicate whether the annotation should be
      *            also saved to downloaded story besides upload it to the online
      *            story
      * @return Bitmap object that is decoded from the Uri
@@ -238,14 +238,16 @@ public class AnnotationController {
 	return pic;
     }
 
-    /**
-     * @param fileName
-     * @param mode
+    /*
+     * Adds the user's Annotation to the Story and saves it either to Offline or
+     * Online depending on where they were reading the Story from. If it is
+     * Online the Annotation should now be viewable by others.
+     * 
      */
     private void addAnnotation(String fileName, int mode) {
 
 	/*
-	 * make up a new annotation object and put related information(fileName,
+	 * Make up a new annotation object and put related information(fileName,
 	 * id) into the object and update the current story
 	 */
 	Annotation add = new Annotation();
@@ -255,12 +257,12 @@ public class AnnotationController {
 	temp.add(add);
 	currentStoryFragment.setAnnotations(temp);
 
-	/* update the current story with the new story fragment */
+	/* Update the current story with the new story fragment */
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		currentStoryFragment);
 
 	/*
-	 * if the user adds the annotation in the downloaded story, the local
+	 * If the user adds the annotation in the downloaded story, the local
 	 * story file will need to be updated.
 	 */
 	if (mode == MODE_OFFLINE) {
