@@ -101,7 +101,6 @@ public class StoryController {
     public static Story addStoryFragment(StoryFragment addStoryFragment,
 	    Story story) {
 	// TODO This will be completed in Project Part 4
-	story.getStoryFragments().add(addStoryFragment);
 	return story;
     }
 
@@ -118,8 +117,6 @@ public class StoryController {
     public static StoryFragment addChoice(String choiceText,
 	    StoryFragment storyFragment) {
 	// TODO This will be completed in Project Part 4
-	Choice choice = new Choice(0, storyFragment.getChoices().size()+1, choiceText);
-	storyFragment.getChoices().add(choice);
 	return storyFragment;
     }
 
@@ -142,7 +139,6 @@ public class StoryController {
 	    StoryFragment storyFragment1, StoryFragment storyFragment2,
 	    Choice choice) {
 	// TODO This will be completed in Project Part 4
-	storyFragment1.getChoices().add(choice);
 	return storyFragment1;
     }
 }
