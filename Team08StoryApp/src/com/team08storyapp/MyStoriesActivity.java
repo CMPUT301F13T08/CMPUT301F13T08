@@ -219,7 +219,7 @@ public class MyStoriesActivity extends ListActivity {
 	    ContextMenuInfo menuInfo) {
 	super.onCreateContextMenu(menu, v, menuInfo);
 	menu.add(0, PUBLISH_ID, 0, R.string.publish_menu);
-	menu.add(0, READ_ID, 0, R.string.read_menu);
+	/*menu.add(0, READ_ID, 0, R.string.read_menu);*/
     }
 
     public boolean onContextItemSelected(MenuItem item) {
@@ -257,12 +257,13 @@ public class MyStoriesActivity extends ListActivity {
 			Toast.LENGTH_LONG).show();
 		return true;
 	    }
+	    /*
 	case READ_ID:
 
 	    /*
 	     * This case creates an intent to pass the selected story object and
 	     * the first story fragment id to the StoryFragmentActivity
-	     */
+	     
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
 	    firstStoryFragment.putExtra("story", (Serializable) currentStory);
@@ -270,6 +271,7 @@ public class MyStoriesActivity extends ListActivity {
 		    currentStory.getFirstStoryFragmentId());
 	    startActivity(firstStoryFragment);
 	    return true;
+	    */
 	default:
 	    return super.onContextItemSelected(item);
 	}
