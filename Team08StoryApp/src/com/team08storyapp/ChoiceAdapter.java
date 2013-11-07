@@ -69,7 +69,6 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
      * Constructor of a ChoiceAdapter requires an activity object, an int value
      * of resourceView, and an ArrayList of Choice objects as well.
      * 
-     * 
      * @param activity
      *            an activity object that provides LAYOUT_INFLATER_SERVICE
      * @param textViewResourceId
