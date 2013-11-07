@@ -62,6 +62,15 @@ public class testAnnotationController extends ActivityTestCase {
     }
 
     /*
+     * Test Case for Use Cases 6, 11
+     * 
+     * The testSavePhoto method tests saving the illustrations and updating the
+     * current fragment.
+     * 
+     * The test uses an annotation controller to save a photo. Then it tests if
+     * the returned object is null. If it is not null than an Assertion Error is
+     * thrown.
+     * 
      * parameters: mock testUri and mode as 0 testSavePhoto should return a null
      * Bitmap object
      */

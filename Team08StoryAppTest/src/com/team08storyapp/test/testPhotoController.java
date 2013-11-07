@@ -62,6 +62,15 @@ public class testPhotoController extends ActivityTestCase {
     }
 
     /*
+     * Test Case for Use Cases 6, 11
+     * 
+     * The testSavePhoto method tests saving the illustrations and updating the
+     * current fragment.
+     * 
+     * The test uses a photo controller to save a photo. Then it tests if the
+     * returned object is null. If it is not null than an Assertion Error is
+     * thrown.
+     * 
      * Input parameters: a mock testUri The savePhoto() should return a null
      * Bitmap object
      */
