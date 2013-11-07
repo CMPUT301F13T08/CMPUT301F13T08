@@ -120,13 +120,9 @@ public class OfflineStoriesActivity extends ListActivity {
 	super.onListItemClick(l, v, position, id);
 
 	/*
-	 * following 4 lines will display the information on selected item.
 	 * 
-	 * /Get the selected story object
-	 */
-	currentStory = (Story) lv.getAdapter().getItem(position);
-
-	/*
+	 * Get the selected story object
+	 * currentStory = (Story) lv.getAdapter().getItem(position);
 	 * create intent to pass the selected story object and the first story
 	 * fragment id to the StoryFragmentActivity
 	 */
@@ -156,7 +152,9 @@ public class OfflineStoriesActivity extends ListActivity {
      * connection.
      * 
      * @param sList
+     * 		An Arraylist of stories used to populate the listview.
      * @param update
+     * 		indicates whether or not a header exists.
      */
     private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {

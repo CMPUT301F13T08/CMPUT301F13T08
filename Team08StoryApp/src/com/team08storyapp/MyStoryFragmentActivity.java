@@ -274,6 +274,7 @@ public class MyStoryFragmentActivity extends Activity {
      * specific fragment
      * 
      * @param cList
+     * 		an ArrayList of choices to used to populate the list.
      */
     private void fillChoice(ArrayList<Choice> cList) {
 	lv.addHeaderView(headerGallery);

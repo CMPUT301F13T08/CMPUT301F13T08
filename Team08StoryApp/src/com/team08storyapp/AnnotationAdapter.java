@@ -166,16 +166,6 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
     /**
      * ViewHolder is a like a struct in C++. Only hold two view objects for the
      * population purpose of AnnotationAdapter
-     * 
-     * @author Sue Smith
-     * @author Michele Paulichuk
-     * @author Alice Wu
-     * @author Ana Marcu
-     * @author Jarrett Toll
-     * @author Jiawei Shen
-     * @version 1.0 November 8, 2013
-     * @since 1.0
-     * 
      */
     public static class ViewHolder {
 	public ImageView annoImage;
