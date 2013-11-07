@@ -232,6 +232,7 @@ public class PhotoController {
      * illustrations.
      * 
      * @param fileName
+     * 		the name of the file for the illustration being added.
      */
     private void addIllustration(String fileName) {
 
@@ -264,7 +265,8 @@ public class PhotoController {
 
     /**
      * Retrieves the StoryFragment from the current fragment.
-     * @return on success desired current story fragment object.
+     * @return 
+     * 		on success desired current story fragment object.
      */
     public StoryFragment getCurrentStoryFragment() {
 	return currentStoryFragment;

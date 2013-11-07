@@ -48,7 +48,7 @@ public class testESHelper extends AndroidTestCase {
 
 	ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
 
-	// Story Fragment 1
+	/* Story Fragment 1 */
 	sampleStory.setFirstStoryFragmentId(1);
 	StoryFragment storyFragment1 = new StoryFragment(1);
 	storyFragment1
@@ -63,7 +63,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment1.setChoices(choices1);
 	storyFragmentList.add(storyFragment1);
 
-	// Story Fragment 2
+	/* Story Fragment 2 */
 	StoryFragment storyFragment2 = new StoryFragment(2);
 	storyFragment2
 		.setStoryText("As Amara walked toward her friend's house her dog started acting up. It pulled this way and that way. Then it stopped and started barking at a bush.");
@@ -74,7 +74,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment2.setChoices(choices2);
 	storyFragmentList.add(storyFragment2);
 
-	// Story Fragment 3
+	/* Story Fragment 3 */
 	StoryFragment storyFragment3 = new StoryFragment(3);
 	storyFragment3
 		.setStoryText("Amara gets to the river valley and decides to take a path she has yet to explore. As Amara walks along she comes across a cave in the side of the valley.");
@@ -86,7 +86,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment3.setChoices(choices3);
 	storyFragmentList.add(storyFragment3);
 
-	// Story Fragment 4
+	/* Story Fragment 4 */
 	StoryFragment storyFragment4 = new StoryFragment(4);
 	storyFragment4
 		.setStoryText("At first Amara was startled by the boy. Then she realized he was crying softly. So she asked the boy what's wrong. The boy was lost.");
@@ -97,7 +97,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment4.setChoices(choices4);
 	storyFragmentList.add(storyFragment4);
 
-	// Story Fragment 5
+	/* Story Fragment 5 */
 	StoryFragment storyFragment5 = new StoryFragment(5);
 	storyFragment5
 		.setStoryText("Amara picked up the bill and looked around. There was no one around and therefore anyone to claim the money. So Amara decided to keep the bill and continue on to her friend's house.");
@@ -106,7 +106,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment5.setChoices(choices5);
 	storyFragmentList.add(storyFragment5);
 
-	// Story Fragment 6
+	/* Story Fragment 6 */
 	StoryFragment storyFragment6 = new StoryFragment(6);
 	storyFragment6
 		.setStoryText("When Amara got to her friend's house she explained her excitement at finding one hundred dollars in a bush, all thanks to her dog. Her friend suggests she should reward her dog a treat with part of the money.");
@@ -115,13 +115,13 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment6.setChoices(choices6);
 	storyFragmentList.add(storyFragment6);
 
-	// Story Fragment 7
+	/* Story Fragment 7 */
 	StoryFragment storyFragment7 = new StoryFragment(7);
 	storyFragment7
 		.setStoryText("Amara heads to the store and buys her dog a big juicy bone. After which, they head home for a nap. THE END");
 	storyFragmentList.add(storyFragment7);
 
-	// Story Fragment 8
+	/* Story Fragment 8 */
 	StoryFragment storyFragment8 = new StoryFragment(8);
 	storyFragment8
 		.setStoryText("Amara steps towards the cave, as a little boy crawls out of it.");
@@ -130,13 +130,13 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment8.setChoices(choices8);
 	storyFragmentList.add(storyFragment8);
 
-	// Story Fragment 9
+	/* Story Fragment 9 */
 	StoryFragment storyFragment9 = new StoryFragment(9);
 	storyFragment9
 		.setStoryText("Amara walks past the cave in a hurry. She notices the clouds have formed into rain clouds and decides it's time to head home. THE END");
 	storyFragmentList.add(storyFragment9);
 
-	// Story Fragment 10
+	/* Story Fragment 10 */
 	StoryFragment storyFragment10 = new StoryFragment(10);
 	storyFragment10
 		.setStoryText("The boy says he knows his phone number and his mom is home but has no way to call her. Amara pulls out her cell and dials the number. She explains she found the boy and where she is.");
@@ -145,13 +145,13 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment10.setChoices(choices9);
 	storyFragmentList.add(storyFragment10);
 
-	// Story Fragment 11
+	/* Story Fragment 11 */
 	StoryFragment storyFragment11 = new StoryFragment(11);
 	storyFragment11
 		.setStoryText("As Amara and the boy stand there, they hear a voice calling the name Timothy. The boy stops his crying and starts yelling Momma. The boy's mother comes rushing up and is relieved to find her missing son. You decide you have enough excitement for one walk and turn to head home for a nap. THE END");
 	storyFragmentList.add(storyFragment11);
 
-	// Story Fragment 12
+	/* Story Fragment 12 */
 	StoryFragment storyFragment12 = new StoryFragment(12);
 	storyFragment12
 		.setStoryText("The boy's mother arrives shortly and is relieved to find her son. As a reward for finding her son, she invites to take you out for ice cream with them. You decide to abandon your walk and take her offer up. THE END");
@@ -167,7 +167,7 @@ public class testESHelper extends AndroidTestCase {
 
 	ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
 
-	// Story Fragment 1
+	/* Story Fragment 1 */
 	sampleStory.setFirstStoryFragmentId(1);
 	StoryFragment storyFragment1 = new StoryFragment(1);
 	storyFragment1
@@ -182,7 +182,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment1.setChoices(choices1);
 	storyFragmentList.add(storyFragment1);
 
-	// Story Fragment 2
+	/* Story Fragment 2 */
 	StoryFragment storyFragment2 = new StoryFragment(2);
 	storyFragment2
 		.setStoryText("As Amara walked toward her friend's house her dog started acting up. It pulled this way and that way. Then it stopped and started barking at a bush.");
@@ -193,7 +193,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment2.setChoices(choices2);
 	storyFragmentList.add(storyFragment2);
 
-	// Story Fragment 3
+	/* Story Fragment 3 */
 	StoryFragment storyFragment3 = new StoryFragment(3);
 	storyFragment3
 		.setStoryText("Amara gets to the river valley and decides to take a path she has yet to explore. As Amara walks along she comes across a cave in the side of the valley.");
@@ -205,7 +205,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment3.setChoices(choices3);
 	storyFragmentList.add(storyFragment3);
 
-	// Story Fragment 4
+	/* Story Fragment 4 */
 	StoryFragment storyFragment4 = new StoryFragment(4);
 	storyFragment4
 		.setStoryText("At first Amara was startled by the boy. Then she realized he was crying softly. So she asked the boy what's wrong. The boy was lost.");
@@ -216,7 +216,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment4.setChoices(choices4);
 	storyFragmentList.add(storyFragment4);
 
-	// Story Fragment 5
+	/* Story Fragment 5 */
 	StoryFragment storyFragment5 = new StoryFragment(5);
 	storyFragment5
 		.setStoryText("Amara picked up the bill and looked around. There was no one around and therefore anyone to claim the money. So Amara decided to keep the bill and continue on to her friend's house.");
@@ -225,7 +225,7 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment5.setChoices(choices5);
 	storyFragmentList.add(storyFragment5);
 
-	// Story Fragment 6
+	/* Story Fragment 6 */
 	StoryFragment storyFragment6 = new StoryFragment(6);
 	storyFragment6
 		.setStoryText("When Amara got to her friend's house she explained her excitement at finding one hundred dollars in a bush, all thanks to her dog. Her friend suggests she should reward her dog a treat with part of the money.");
@@ -234,13 +234,13 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment6.setChoices(choices6);
 	storyFragmentList.add(storyFragment6);
 
-	// Story Fragment 7
+	/* Story Fragment 7 */
 	StoryFragment storyFragment7 = new StoryFragment(7);
 	storyFragment7
 		.setStoryText("Amara heads to the store and buys her dog a big juicy bone. After which, they head home for a nap. THE END");
 	storyFragmentList.add(storyFragment7);
 
-	// Story Fragment 8
+	/* Story Fragment 8 */
 	StoryFragment storyFragment8 = new StoryFragment(8);
 	storyFragment8
 		.setStoryText("Amara steps towards the cave, as a little boy crawls out of it.");
@@ -249,13 +249,13 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment8.setChoices(choices8);
 	storyFragmentList.add(storyFragment8);
 
-	// Story Fragment 9
+	/* Story Fragment 9 */
 	StoryFragment storyFragment9 = new StoryFragment(9);
 	storyFragment9
 		.setStoryText("Amara walks past the cave in a hurry. She notices the clouds have formed into rain clouds and decides it's time to head home. THE END");
 	storyFragmentList.add(storyFragment9);
 
-	// Story Fragment 10
+	/* Story Fragment 10 */
 	StoryFragment storyFragment10 = new StoryFragment(10);
 	storyFragment10
 		.setStoryText("The boy says he knows his phone number and his mom is home but has no way to call her. Amara pulls out her cell and dials the number. She explains she found the boy and where she is.");
@@ -264,13 +264,13 @@ public class testESHelper extends AndroidTestCase {
 	storyFragment10.setChoices(choices9);
 	storyFragmentList.add(storyFragment10);
 
-	// Story Fragment 11
+	/* Story Fragment 11 */
 	StoryFragment storyFragment11 = new StoryFragment(11);
 	storyFragment11
 		.setStoryText("As Amara and the boy stand there, they hear a voice calling the name Timothy. The boy stops his crying and starts yelling Momma. The boy's mother comes rushing up and is relieved to find her missing son. You decide you have enough excitement for one walk and turn to head home for a nap. THE END");
 	storyFragmentList.add(storyFragment11);
 
-	// Story Fragment 12
+	/* Story Fragment 12 */
 	StoryFragment storyFragment12 = new StoryFragment(12);
 	storyFragment12
 		.setStoryText("The boy's mother arrives shortly and is relieved to find her son. As a reward for finding her son, she invites to take you out for ice cream with them. You decide to abandon your walk and take her offer up. THE END");
@@ -280,28 +280,33 @@ public class testESHelper extends AndroidTestCase {
 	return sampleStory;
     }
 
-    // Set up testing data for testing methods.
+    /* Set up testing data for testing methods. */
     @Before
     public void setUp() {
 	esHelper = new ESHelper();
 
-	// ***Setup for testGetOnlineStories()
-	// set to the known count of the stories on the webservice currently
+	/*
+	 * ***Setup for testGetOnlineStories()*** set to the known count of the
+	 * stories on the webservice currently
+	 */
 	storyListSizeGetStories = 5;
 
-	// ***Setup for testAddOnlineStory***
-	// create the story for adding to the webservice
+	/*
+	 * ***Setup for testAddOnlineStory*** create the story for adding to the
+	 * webservice
+	 */
 	addStory = initializeSampleTestStory();
 
-	// ***Setup for testGetOnlineStory***
-	// set the predetermined story and it's known number of story fragments
-	storyIdGetStory = 1;
+	/*
+	 * ***Setup for testGetOnlineStory*** set the predetermined story and
+	 * it's known number of story fragments
+	 */storyIdGetStory = 1;
 	storyFragmentListSizeGetStory = 12;
 
-	// ***Setup for testSearchOnlineStory***
 	/*
-	 * set the searchText to the predetermined text to search the webservice
-	 * stories author and titles for
+	 * ***Setup for testSearchOnlineStory*** set the searchText to the
+	 * predetermined text to search the webservice stories author and titles
+	 * for
 	 */
 	searchText = "walk";
 
@@ -311,7 +316,7 @@ public class testESHelper extends AndroidTestCase {
 	 */
 	searchListSize = 1;
 
-	// ***Setup for testUpdateOnlineStory***
+	/* ***Setup for testUpdateOnlineStory*** */
 	storyIdUpdateStory = 1;
     }
 
@@ -351,24 +356,28 @@ public class testESHelper extends AndroidTestCase {
      */
     @Test
     public void testAddOnlineStory() {
-	// get the id that is expected to be set to the newly added story
+	/* get the id that is expected to be set to the newly added story */
 	expectedIdAddStory = esHelper.getOnlineStories().size() + 1;
 
-	// add the story
+	/* add the story */
 	actualIdAddStory = esHelper.addOrUpdateOnlineStory(addStory);
 
-	// that the id expected is the id assigned
+	/* that the id expected is the id assigned */
 	assertTrue(actualIdAddStory == expectedIdAddStory);
 
-	// Retrieve the story from online for further testing
+	/* Retrieve the story from online for further testing */
 	Story onlineStory = esHelper.getOnlineStory(actualIdAddStory);
 
-	// test that the story for the id given was received, if it was not
-	// Received this may indicate that the story was not added
+	/*
+	 * test that the story for the id given was received, if it was not
+	 * Received this may indicate that the story was not added
+	 */
 	assertTrue(onlineStory != null);
 
-	// test the properties of the story against the initial story to ensure
-	// the story added is indeed the same story
+	/*
+	 * test the properties of the story against the initial story to ensure
+	 * the story added is indeed the same story
+	 */
 	assertEquals(addStory.getAuthor(), onlineStory.getAuthor());
 	assertEquals(addStory.getTitle(), onlineStory.getTitle());
 	assertEquals(addStory.getFirstStoryFragmentId(),
@@ -392,10 +401,10 @@ public class testESHelper extends AndroidTestCase {
      */
     @Test
     public void testGetOnlineStory() {
-	// retrieve story from the webservice from the specified id
+	/* retrieve story from the webservice from the specified id */
 	Story story = esHelper.getOnlineStory(storyIdGetStory);
 
-	// test that the retrieved story is indeed retrieved and correct
+	/* test that the retrieved story is indeed retrieved and correct */
 	assertTrue(!story.equals(null));
 	assertTrue(story.getOnlineStoryId() == storyIdGetStory);
 	assertTrue(!story.getAuthor().equals(null)
@@ -441,39 +450,47 @@ public class testESHelper extends AndroidTestCase {
      */
     @Test
     public void testUpdateOnlineStory() {
-	// retrieve a story from the webservice to update
+	/* retrieve a story from the webservice to update */
 	Story updateStory = esHelper.getOnlineStory(storyIdUpdateStory);
 
-	// update a portion of the story
+	/* update a portion of the story */
 	ArrayList<StoryFragment> storyFragments = updateStory
 		.getStoryFragments();
 	storyFragmentToUpdate = storyFragments.get(1);
 	storyFragments.get(1).setStoryText("Changed the text of the story");
 	updateStory.setStoryFragments(storyFragments);
 
-	// test that the update processed successfully by checking that the id
-	// returned is the id the story had previously
+	/*
+	 * test that the update processed successfully by checking that the id
+	 * returned is the id the story had previously
+	 */
 	assertTrue(esHelper.addOrUpdateOnlineStory(updateStory) == updateStory
 		.getOnlineStoryId());
 
-	// Retrieve the story from online for further testing
+	/* Retrieve the story from online for further testing */
 	Story onlineStory = esHelper.getOnlineStory(updateStory
 		.getOnlineStoryId());
 
-	// test that the story for the id given was received, if it was not
-	// Received this may indicate that the story was not added
+	/*
+	 * test that the story for the id given was received, if it was not
+	 * Received this may indicate that the story was not added
+	 */
 	assertTrue(onlineStory != null);
 
-	// test the properties of the story against the initial story to ensure
-	// the story updated still contains the same author, title, and first
-	// fragment
+	/*
+	 * test the properties of the story against the initial story to ensure
+	 * the story updated still contains the same author, title, and first
+	 * fragment
+	 */
 	assertEquals(updateStory.getAuthor(), onlineStory.getAuthor());
 	assertEquals(updateStory.getTitle(), onlineStory.getTitle());
 	assertEquals(updateStory.getFirstStoryFragmentId(),
 		onlineStory.getFirstStoryFragmentId());
 
-	// test that the story fragment we changed is different from the
-	// original story fragment.
+	/*
+	 * test that the story fragment we changed is different from the
+	 * original story fragment.
+	 */
 	ArrayList<StoryFragment> onlineStoryFragments = onlineStory
 		.getStoryFragments();
 	assertNotSame(storyFragmentToUpdate.getStoryText(),
@@ -481,10 +498,10 @@ public class testESHelper extends AndroidTestCase {
     }
 
     @After
-    // Remove test data from the application
+    /* Remove test data from the application */
     protected void tearDown() throws IOException {
 
-	// Delete the story added to online
+	/* Delete the story added to online */
 	HttpClient httpclient = new DefaultHttpClient();
 	HttpDelete httpDelete = new HttpDelete(
 		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
@@ -505,7 +522,7 @@ public class testESHelper extends AndroidTestCase {
 	    System.err.println(output);
 	}
 
-	// Change back the updated story
+	/* Change back the updated story */
 	Story story = getStoryToRedoUpdateTest();
 	esHelper.addOrUpdateOnlineStory(story);
 

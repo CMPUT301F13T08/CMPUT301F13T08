@@ -79,7 +79,7 @@ public class testPhotoController extends ActivityTestCase {
     }
 
     /*
-     * testCurrentStoryFragment has no Photos, soc urrentPosition() should
+     * testCurrentStoryFragment has no Photos, so currentPosition() should
      * return -1
      */
     public void testCurrentPosition() {

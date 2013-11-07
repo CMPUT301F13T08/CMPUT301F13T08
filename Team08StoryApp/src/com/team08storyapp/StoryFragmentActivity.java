@@ -174,7 +174,7 @@ public class StoryFragmentActivity extends Activity {
 	currentStoryId = currentStory.getOfflineStoryId();
 
 	/*
-	 * get the currentStoryFragmentIndex in case an update is made on this
+	 * Gets the currentStoryFragmentIndex in case an update is made on this
 	 * fragment.
 	 */
 	for (int i = 0; i < currentStory.getStoryFragments().size(); i++) {
@@ -184,8 +184,8 @@ public class StoryFragmentActivity extends Activity {
 	}
 
 	/*
-	 * The current story fragment object - from the story fragment list, by
-	 * id
+	 * Gets the current story fragment object from the story fragment list,
+	 * by id.
 	 */
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
