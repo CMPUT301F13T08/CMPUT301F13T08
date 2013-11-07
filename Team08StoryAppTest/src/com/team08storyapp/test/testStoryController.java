@@ -73,6 +73,7 @@ public class testStoryController extends TestCase {
      * will be handled in Project Part 4
      */
     public void testaddChoice() {
+	
 	/* set the text for the Choice and add it to the Story Fragment*/
 	String choiceText = "This is a choice";
 	StoryFragment storyFragment = StoryController.addChoice(choiceText,
@@ -101,6 +102,8 @@ public class testStoryController extends TestCase {
 	/* create a choice to connect the Story Fragments*/
 	Choice choiceToJoin = new Choice();
 	choiceToJoin.setText("connecting to storyFragment2");
+	choiceToJoin.setChoiceId(joinStoryFragment1.getChoices().size()+1);
+	choiceToJoin.setStoryFragmentID(nextStoryFragmentId);
 	
 	/* connect the Story Fragments*/
 	StoryFragment storyFragment = StoryController.connectStoryFragments(
