@@ -414,7 +414,7 @@ public class FileHelper {
      *            a story downdloaed from webserver that needs to be decoded
      * @param mode
      *            the mode:
-     * @return
+     * @return the decoded Story
      * @throws Exception
      * @throws IOException
      */
