@@ -71,7 +71,7 @@ public class testFileHelper extends AndroidTestCase {
 		+ "him, leading him" + "to teach that manager a 'lesson'";
 	StoryFragment sf1 = new StoryFragment(1, content);
 
-	// make a photo with launch icon, assign it to story fragment 1
+	/* make a photo with launch icon, assign it to story fragment 1 */
 	Photo p1 = new Photo();
 	p1.setPhotoID(1);
 	String fileName = "Image12Fragment1Photo1.png";
@@ -190,7 +190,7 @@ public class testFileHelper extends AndroidTestCase {
     @Test
     public void testSearchOfflineStories() {
 
-	// test the result of search should only have 1 item
+	/* test the result of search should only have 1 item */
 	assertEquals(fHelper.searchOfflineStories("Morroco likoko").size(), 1);
 	/*
 	 * and the only item should be exactly the story has "Morroco likoko" as
@@ -201,8 +201,10 @@ public class testFileHelper extends AndroidTestCase {
 	assertEquals(fHelper.searchOfflineStories("co").get(0).getAuthor(),
 		"Alice Wu");
 
-	// test " we don't carry out search on whitespace or newline character"
-	// is true
+	/*
+	 * test " we don't carry out search on whitespace or newline character"
+	 * is true
+	 */
 	assertEquals(fHelper.searchOfflineStories("    ").size(), storyCount);
 	assertEquals(fHelper.searchOfflineStories("\n").size(), storyCount);
 
@@ -222,10 +224,10 @@ public class testFileHelper extends AndroidTestCase {
     @Test
     public void testEncodeStory() throws FileNotFoundException, IOException {
 
-	// encode a story
+	/* encode a story */
 	Story encodedStory = fHelper.encodeStory(s1);
 
-	// create the byte[] of lauch icon image
+	/* create the byte[] of lauch icon image */
 	InputStream is = context.openFileInput(s1.getStoryFragments().get(0)
 		.getPhotos().get(0).getPictureName());
 	ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -236,16 +238,16 @@ public class testFileHelper extends AndroidTestCase {
 	}
 	byte[] bytes = bos.toByteArray();
 
-	// test the encodeStory() function does some "encoding"
+	/* test the encodeStory() function does some "encoding" */
 	assertNotNull(encodedStory.getStoryFragments().get(0).getPhotos()
 		.get(0).getEncodedPicture());
 
-	// test the correctness of encoding
+	/* test the correctness of encoding */
 	assertEquals(Base64.encodeToString(bytes, Base64.DEFAULT), encodedStory
 		.getStoryFragments().get(0).getPhotos().get(0)
 		.getEncodedPicture());
 
-	// test the file is not changed during the process
+	/* test the file is not changed during the process */
 	assertEquals(encodedStory.getStoryFragments().get(0).getPhotos().get(0)
 		.getPictureName(), "Image12Fragment1Photo1.png");
     }
@@ -272,7 +274,7 @@ public class testFileHelper extends AndroidTestCase {
 
     }
 
-    // Delete data
+    /* Delete data */
     @After
     protected void tearDown() {
 	context.deleteFile("Download12");
