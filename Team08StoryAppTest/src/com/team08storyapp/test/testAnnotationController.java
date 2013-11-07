@@ -2,6 +2,7 @@ package com.team08storyapp.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,10 +29,10 @@ public class testAnnotationController extends AndroidTestCase {
     private int testCurrentStoryFragmentIndex;
     private FileHelper testFHelper;
     private ESHelper testESHelper;
+    private Bitmap testBitmap;
+    private Uri testUri;
 
-  /*  public testAnnotationController() {
-	super();
-    }*/
+
 
     @Before
     public void setUp() throws FileNotFoundException, IOException {
@@ -41,16 +42,16 @@ public class testAnnotationController extends AndroidTestCase {
 		testStory, testStoryFragment, testCurrentStoryFragmentIndex,
 		testFHelper, testESHelper);
 
+	testUri = Uri.parse("teststring");
+
     }
     
-    // TODO: write test case
+   /* // TODO: write test case
     public void testSavePhoto() {
-	
-    }
-   
-    /*@Test
-    public void test() {
-	fail("Not yet implemented");
+	testBitmap = anController.savePhoto(testUri, 1);
+	assertNull(testBitmap);
     }*/
+   
+
 
 }

@@ -151,8 +151,13 @@ public class AnnotationController {
 	String[] medData = { MediaStore.Images.Media.DATA };
 
 	/* query the data */
-	Cursor picCursor = activity.getContentResolver().query(pickedUri,
-		medData, null, null, null);
+	Cursor picCursor;
+	try {
+	    picCursor = activity.getContentResolver().query(pickedUri,
+		    medData, null, null, null);
+	} catch (Exception e) {
+	    return null;
+	}
 	if (picCursor != null) {
 
 	    /* get the path string */
@@ -211,8 +216,8 @@ public class AnnotationController {
 		FileOutputStream fos = context.openFileOutput(fileName,
 			Context.MODE_PRIVATE);
 		pic.compress(CompressFormat.PNG, 90, fos);
-	    } catch (FileNotFoundException e) {
-		e.printStackTrace();
+	    } catch (FileNotFoundException e1) {
+		e1.printStackTrace();
 	    }
 	} else {
 
