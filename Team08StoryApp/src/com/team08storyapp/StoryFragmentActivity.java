@@ -280,7 +280,10 @@ public class StoryFragmentActivity extends Activity {
 	}
     }
 
-    public void fillChoice(ArrayList<Choice> cList) {
+    /**
+     * @param cList
+     */
+    private void fillChoice(ArrayList<Choice> cList) {
 
 	/* add headers to background list view */
 	lv.addHeaderView(headerGallery);
@@ -293,7 +296,10 @@ public class StoryFragmentActivity extends Activity {
 
     }
 
-    public void showPopup() {
+    /**
+     * 
+     */
+    private void showPopup() {
 
 	/* root view of popup menu */
 	View popUpItemView = findViewById(R.id.action_add_annotations);

@@ -143,7 +143,7 @@ public class AnnotationController {
 
 	/* declare the bitmap */
 	Bitmap pic = null;
-	
+
 	// declare the path string
 	String imgPath = "";
 
@@ -233,6 +233,10 @@ public class AnnotationController {
 	return pic;
     }
 
+    /**
+     * @param fileName
+     * @param mode
+     */
     private void addAnnotation(String fileName, int mode) {
 
 	/*
@@ -274,7 +278,7 @@ public class AnnotationController {
 	    /* encode the story */
 	    Story encodedStory = fHelper.encodeStory(currentStory);
 
-	    /* make sure the annotation is uploaded and rewrites the right file.*/
+	    /* make sure the annotation is uploaded and rewrites the right file. */
 	    if (esHelper.addOrUpdateOnlineStory(encodedStory) == encodedStory
 		    .getOnlineStoryId()) {
 
@@ -286,7 +290,7 @@ public class AnnotationController {
 		Toast.makeText(context, "Network problem, please try again.",
 			Toast.LENGTH_LONG).show();
 	    }
-	    
+
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

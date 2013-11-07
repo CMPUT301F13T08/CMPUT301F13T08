@@ -77,11 +77,10 @@ public class OfflineStoriesActivity extends ListActivity {
 
 	setContentView(R.layout.activity_story_list);
 	lv = (ListView) findViewById(android.R.id.list);
-
 	fHelper = new FileHelper(this, 0);
-
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
 
+	/* assigns searchbutton to a button in our layout */
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
 	et = (EditText) header.findViewById(R.id.searchText);
 
@@ -96,10 +95,8 @@ public class OfflineStoriesActivity extends ListActivity {
 		    try {
 			fillData(fHelper.getOfflineStories(), onUpdate);
 		    } catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		    } catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		    }
 		}
@@ -110,10 +107,8 @@ public class OfflineStoriesActivity extends ListActivity {
 	try {
 	    fillData(fHelper.getOfflineStories(), onCreate);
 	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 
@@ -155,7 +150,15 @@ public class OfflineStoriesActivity extends ListActivity {
 
     }
 
-    public void fillData(ArrayList<Story> sList, boolean update) {
+    /**
+     * fillData poplates our list with a collection of stories that have been
+     * downloaded. Stories found in this list can be viewed without an Internet
+     * connection.
+     * 
+     * @param sList
+     * @param update
+     */
+    private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
 	    lv.addHeaderView(header);
 	}
@@ -169,10 +172,8 @@ public class OfflineStoriesActivity extends ListActivity {
 	try {
 	    fillData(fHelper.getOfflineStories(), onUpdate);
 	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
     }
@@ -182,10 +183,8 @@ public class OfflineStoriesActivity extends ListActivity {
 	try {
 	    fillData(fHelper.getOfflineStories(), onUpdate);
 	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 

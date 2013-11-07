@@ -53,12 +53,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * MyStoryFragmentActivity is a view class that displays a specific story fragment
- * for stories created by the user. Currently, users are able to add illustrations
- * to these fragments.
+ * MyStoryFragmentActivity is a view class that displays a specific story
+ * fragment for stories created by the user. Currently, users are able to add
+ * illustrations to these fragments.
  * <p>
- * In future developments, users will be able to add/edit/delete dialogue and chocies from
- * this activity.
+ * In future developments, users will be able to add/edit/delete dialogue and
+ * chocies from this activity.
  * 
  * @author Michele Paulichuk
  * @author Alice Wu
@@ -69,17 +69,6 @@ import android.widget.Toast;
  * @since 1.0
  */
 
-/**
- * variable for selection intent
- * variable to store the currently selected image
- * adapter for gallery view
- * gallery object
- * image view for larger display
- */
-
-/**
- * instantiate the interactive gallery
- */
 public class MyStoryFragmentActivity extends Activity {
 
     private int currentStoryFragmentId;
@@ -280,7 +269,13 @@ public class MyStoryFragmentActivity extends Activity {
 	}
     }
 
-    public void fillChoice(ArrayList<Choice> cList) {
+    /**
+     * fillChoice populates our choice list with a list of choices for a
+     * specific fragment
+     * 
+     * @param cList
+     */
+    private void fillChoice(ArrayList<Choice> cList) {
 	lv.addHeaderView(headerGallery);
 	lv.addHeaderView(headerText);
 	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,

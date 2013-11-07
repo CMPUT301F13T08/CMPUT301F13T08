@@ -162,8 +162,11 @@ public class PicAdapter extends BaseAdapter {
      * 
      * @param position
      *            the index of the selected photo in the adapter
-     * @convertView the view that is going to be converted to user's desire
-     * @parent a ViewGroup object
+     * @param convertView
+     *            the view that is going to be converted to user's desire
+     * @param parent
+     *            a ViewGroup object
+     * @return
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -207,7 +210,7 @@ public class PicAdapter extends BaseAdapter {
      * 
      * @param position
      *            the index of the desired picture in the imageBitmaps
-     * @return
+     * @return the bitmap at the given position
      */
 
     public Bitmap getPic(int position) {
