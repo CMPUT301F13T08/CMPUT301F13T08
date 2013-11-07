@@ -238,9 +238,11 @@ public class AnnotationController {
 	return pic;
     }
 
-    /**
-     * @param fileName
-     * @param mode
+    /*
+     * Adds the user's Annotation to the Story and saves it either to Offline or
+     * Online depending on where they were reading the Story from. If it is
+     * Online the Annotation should now be viewable by others.
+     * 
      */
     private void addAnnotation(String fileName, int mode) {
 

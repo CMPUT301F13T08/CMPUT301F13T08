@@ -94,7 +94,7 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
      *            the view that is going to be converted to user's desire
      * @param parent
      *            a ViewGroup object
-     * @return
+     * @return the converted view for the Annotation
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
