@@ -232,6 +232,9 @@ public class StoryFragmentActivity extends Activity {
 
 		/* get the id of next story fragment */
 		int nextStoryFragmentId = nextChoice.getStoryFragmentID();
+		
+		/* pass the mode */
+		nextStoryFragment.putExtra("mode", mode);
 
 		/* put the id in the intent */
 		nextStoryFragment.putExtra("storyFragmentId",
