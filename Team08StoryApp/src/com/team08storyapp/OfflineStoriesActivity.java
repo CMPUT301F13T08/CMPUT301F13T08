@@ -120,11 +120,10 @@ public class OfflineStoriesActivity extends ListActivity {
 	super.onListItemClick(l, v, position, id);
 
 	/*
-	 * 
-	 * Get the selected story object
-	 * currentStory = (Story) lv.getAdapter().getItem(position);
-	 * create intent to pass the selected story object and the first story
-	 * fragment id to the StoryFragmentActivity
+	 * Get the selected story object currentStory = (Story)
+	 * lv.getAdapter().getItem(position); create intent to pass the selected
+	 * story object and the first story fragment id to the
+	 * StoryFragmentActivity
 	 */
 	Intent firstStoryFragment = new Intent(getApplicationContext(),
 		StoryFragmentActivity.class);
@@ -152,9 +151,9 @@ public class OfflineStoriesActivity extends ListActivity {
      * connection.
      * 
      * @param sList
-     * 		An Arraylist of stories used to populate the listview.
+     *            An Arraylist of stories used to populate the listview.
      * @param update
-     * 		indicates whether or not a header exists.
+     *            indicates whether or not a header exists.
      */
     private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
@@ -168,6 +167,10 @@ public class OfflineStoriesActivity extends ListActivity {
 	    Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
 	try {
+	    /*
+	     * Populate the listview with the online stories at the start of the
+	     * activity
+	     */
 	    fillData(fHelper.getOfflineStories(), onUpdate);
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -179,6 +182,7 @@ public class OfflineStoriesActivity extends ListActivity {
     protected void onResume() {
 	super.onResume();
 	try {
+	    /* Re-populate the listview with the online stories */
 	    fillData(fHelper.getOfflineStories(), onUpdate);
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();

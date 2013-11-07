@@ -130,7 +130,7 @@ public class OnlineStoriesActivity extends ListActivity {
     public boolean onContextItemSelected(MenuItem item) {
 	info = (AdapterContextMenuInfo) item.getMenuInfo();
 	position = info.position;
-	/* 
+	/*
 	 * Get the story object of the selected story item
 	 */
 	currentStory = (Story) lv.getAdapter().getItem(position);
@@ -219,9 +219,9 @@ public class OnlineStoriesActivity extends ListActivity {
      * stories can be read or downloaded.
      * 
      * @param sList
-     * 		An ArrayList of stories used to populate the listview.
+     *            An ArrayList of stories used to populate the listview.
      * @param update
-     * 		Indicates whether or not a header already exists.
+     *            Indicates whether or not a header already exists.
      */
     private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
@@ -234,6 +234,10 @@ public class OnlineStoriesActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode,
 	    Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
+	/*
+	 * Populate the listview with the downloaded/offline stories at the
+	 * start of the activity
+	 */
 	fillData(esHelper.getOnlineStories(), onUpdate);
     }
 
@@ -244,6 +248,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	while (result == null) {
 	    result = esHelper.getOnlineStories();
 	}
+	/* Re-populate the listview with the downloaded/offline stories */
 	fillData(result, onUpdate);
     }
 
