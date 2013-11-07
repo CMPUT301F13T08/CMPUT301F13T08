@@ -262,10 +262,19 @@ public class PhotoController {
 
     }
 
+    /**
+     * Retrieves the StoryFragment from the current fragment.
+     * @return on success desired current story fragment object.
+     */
     public StoryFragment getCurrentStoryFragment() {
 	return currentStoryFragment;
     }
 
+    /**
+     * Sets the current story fragment to currentStoryFragment.
+     * @param currentStoryFragment
+     * 		the current story fragment.
+     */
     public void setCurrentStoryFragment(StoryFragment currentStoryFragment) {
 	this.currentStoryFragment = currentStoryFragment;
     }

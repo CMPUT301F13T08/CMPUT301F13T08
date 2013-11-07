@@ -38,39 +38,51 @@ public class testPhotoController extends ActivityTestCase {
 
     @Before
     public void setUp() throws FileNotFoundException, IOException {
-	
+
+	/*
+	 * Initialize testUri with a mock string Initialize the activity and
+	 * context, file helper, and test story objects
+	 */
 	testUri = Uri.parse("test");
 	testActivity = super.getActivity();
 	testContext = super.getInstrumentation().getContext();
-	
+
 	testFHelper = new FileHelper(testContext, 0);
 	testCurrentStory = new Story(14, "Spaceman Spiff", "Calvin");
-	
+
 	testCurrentStoryFragment = new StoryFragment(1, "Test text.");
 	testStoryFragmentList = new ArrayList<StoryFragment>();
 	testStoryFragmentList.add(testCurrentStoryFragment);
-	
+
 	testCurrentStory.setStoryFragments(testStoryFragmentList);
+
+	/* The PhotoController initialization */
 	phController = new PhotoController(testActivity, testContext,
 		testCurrentStory, testCurrentStoryFragment, 0, testFHelper);
     }
 
-    // TODO: write test case
+    /*
+     * Input parameters: a mock testUri The savePhoto() should return a null
+     * Bitmap object
+     */
     public void testSavePhoto() {
 	assertNull(phController.savePhoto(testUri));
     }
 
-    // TODO: write test case
+    /*
+     * testCurrentStoryFragment has no Photos, soc urrentPosition() should
+     * return -1
+     */
     public void testCurrentPosition() {
 	phController.setCurrentStoryFragment(testCurrentStoryFragment);
 	assertEquals(phController.currentPosition(), -1);
     }
-
+    
+    
+    /* Delete the file used to test savePhoto() after the testcase has run */
     @After
     public void tearDown() {
 	testContext.deleteFile("Download14");
     }
-    /*
-     * @Test public void test() { fail("Not yet implemented"); }
-     */
+   
 }
