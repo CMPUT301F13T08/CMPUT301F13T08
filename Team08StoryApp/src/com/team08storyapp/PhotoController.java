@@ -97,7 +97,7 @@ public class PhotoController {
 	this.activity = activity;
 	this.context = context;
 	this.currentStory = currentStory;
-	this.currentStoryFragment = currentStoryFragment;
+	this.setCurrentStoryFragment(currentStoryFragment);
 	this.currentStoryFragmentIndex = currentStoryFragmentIndex;
 	this.fHelper = fHelper;
     }
@@ -121,9 +121,9 @@ public class PhotoController {
 	String fileName = "Image"
 		+ Integer.toString(currentStory.getOfflineStoryId())
 		+ "Fragment"
-		+ Integer.toString(currentStoryFragment.getStoryFragmentId())
+		+ Integer.toString(getCurrentStoryFragment().getStoryFragmentId())
 		+ "Photo"
-		+ Integer.toString(currentStoryFragment.getPhotos().size() + 1)
+		+ Integer.toString(getCurrentStoryFragment().getPhotos().size() + 1)
 		+ ".png";
 
 	/* declare the bitmap */
@@ -218,7 +218,7 @@ public class PhotoController {
      *         the gallery
      */
     public int currentPosition() {
-	return currentStoryFragment.getPhotos().size() - 1;
+	return getCurrentStoryFragment().getPhotos().size() - 1;
 
     }
 
@@ -232,17 +232,17 @@ public class PhotoController {
 
 	// create a new photo object based on id and fileName
 	Photo add = new Photo();
-	add.setPhotoID(currentStoryFragment.getPhotos().size() + 1);
+	add.setPhotoID(getCurrentStoryFragment().getPhotos().size() + 1);
 	add.setPictureName(fileName);
 
 	// add new Photo to photoList
-	ArrayList<Photo> temp = currentStoryFragment.getPhotos();
+	ArrayList<Photo> temp = getCurrentStoryFragment().getPhotos();
 	temp.add(add);
-	currentStoryFragment.setPhotos(temp);
+	getCurrentStoryFragment().setPhotos(temp);
 
 	// update the story
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-		currentStoryFragment);
+		getCurrentStoryFragment());
 
 	// update the story in local file system
 	try {
@@ -255,6 +255,14 @@ public class PhotoController {
 	    e.printStackTrace();
 	}
 
+    }
+
+    public StoryFragment getCurrentStoryFragment() {
+	return currentStoryFragment;
+    }
+
+    public void setCurrentStoryFragment(StoryFragment currentStoryFragment) {
+	this.currentStoryFragment = currentStoryFragment;
     }
 
 }

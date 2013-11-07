@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,14 +44,14 @@ public class testPhotoController extends AndroidTestCase {
 	phController = new PhotoController(testActivity, testContext,
 		testCurrentStory, testCurrentStoryFragment,
 		testCurrentStoryFragmentIndex, testFHelper);
-	testCurrentStory = new Story("Spaceman Spiff", "Calvin");
+	//testCurrentStory = new Story("Spaceman Spiff", "Calvin");
 	testCurrentStoryFragment = new StoryFragment(1, "Test text.");
-	testPhoto1 = new Photo();
-	testPhoto2 = new Photo();
-	testPhotoList.add(testPhoto1);
-	testPhotoList.add(testPhoto2);
-	testStoryFragmentList.add(testCurrentStoryFragment);
-	testCurrentStory.setStoryFragments(testStoryFragmentList);
+	//testPhoto1 = new Photo();
+	//testPhoto2 = new Photo();
+	//testPhotoList.add(testPhoto1);
+	//testPhotoList.add(testPhoto2);
+	//testStoryFragmentList.add(testCurrentStoryFragment);
+	//testCurrentStory.setStoryFragments(testStoryFragmentList);
     }
     
     // TODO: write test case
@@ -59,12 +60,11 @@ public class testPhotoController extends AndroidTestCase {
 
     // TODO: write test case
     public void testCurrentPosition() {
-
+	phController.setCurrentStoryFragment(testCurrentStoryFragment);
+	assertEquals(phController.currentPosition(), -1);
     }
     
-    
-    
-    
+
    /* @Test
     public void test() {
 	fail("Not yet implemented");
