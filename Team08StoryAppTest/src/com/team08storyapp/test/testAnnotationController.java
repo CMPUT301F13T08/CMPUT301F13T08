@@ -62,8 +62,8 @@ public class testAnnotationController extends ActivityTestCase {
     }
 
     /*
-     * parameters: mock testUri and mode as 0 
-     * testSavePhoto should return a null Bitmap object
+     * parameters: mock testUri and mode as 0 testSavePhoto should return a null
+     * Bitmap object
      */
     public void testSavePhoto() {
 	testBitmap = anController.savePhoto(testUri, 0);

@@ -16,7 +16,6 @@ public class testStoryController extends TestCase {
     StoryFragment secondStoryFragment;
     ArrayList<StoryFragment> storyFragmentList;
 
-
     protected void setUp() {
 	// Instantiate the Array List of Story Fragments
 	storyFragmentList = new ArrayList<StoryFragment>();
@@ -31,8 +30,6 @@ public class testStoryController extends TestCase {
 	storyFragmentList.add(secondStoryFragment);
 
     }
-    
-
 
     /*
      * The testAddStoryFragment method tests adding a story fragment to an
@@ -50,7 +47,6 @@ public class testStoryController extends TestCase {
     // the returned fragment should be the same as the fragment in the
     // storyFragmentList with id 2
     public void testReadStoryFragment() {
-
 	retrievedStoryFragment = StoryController.readStoryFragment(
 		storyFragmentList, nextStoryFragmentId);
 

@@ -77,12 +77,11 @@ public class testPhotoController extends ActivityTestCase {
 	phController.setCurrentStoryFragment(testCurrentStoryFragment);
 	assertEquals(phController.currentPosition(), -1);
     }
-    
-    
+
     /* Delete the file used to test savePhoto() after the testcase has run */
     @After
     public void tearDown() {
 	testContext.deleteFile("Download14");
     }
-   
+
 }

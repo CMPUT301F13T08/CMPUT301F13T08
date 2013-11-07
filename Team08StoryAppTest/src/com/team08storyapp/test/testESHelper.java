@@ -162,8 +162,7 @@ public class testESHelper extends AndroidTestCase {
     }
 
     private Story getStoryToRedoUpdateTest() {
-	Story sampleStory = new Story("The Walk",
-		"Michele Paulichuk");
+	Story sampleStory = new Story("The Walk", "Michele Paulichuk");
 	sampleStory.setOnlineStoryId(storyIdUpdateStory);
 
 	ArrayList<StoryFragment> storyFragmentList = new ArrayList<StoryFragment>();
@@ -280,7 +279,7 @@ public class testESHelper extends AndroidTestCase {
 	sampleStory.setStoryFragments(storyFragmentList);
 	return sampleStory;
     }
-    
+
     // Set up testing data for testing methods.
     @Before
     public void setUp() {
@@ -441,7 +440,7 @@ public class testESHelper extends AndroidTestCase {
      * does contain the updated text.
      */
     @Test
-    public void testUpdateOnlineStory() {		
+    public void testUpdateOnlineStory() {
 	// retrieve a story from the webservice to update
 	Story updateStory = esHelper.getOnlineStory(storyIdUpdateStory);
 
@@ -477,15 +476,15 @@ public class testESHelper extends AndroidTestCase {
 	// original story fragment.
 	ArrayList<StoryFragment> onlineStoryFragments = onlineStory
 		.getStoryFragments();
-	assertNotSame(storyFragmentToUpdate.getStoryText(), onlineStoryFragments
-		.get(0).getStoryText());
+	assertNotSame(storyFragmentToUpdate.getStoryText(),
+		onlineStoryFragments.get(0).getStoryText());
     }
 
     @After
     // Remove test data from the application
     protected void tearDown() throws IOException {
-	
-	//Delete the story added to online
+
+	// Delete the story added to online
 	HttpClient httpclient = new DefaultHttpClient();
 	HttpDelete httpDelete = new HttpDelete(
 		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
@@ -505,10 +504,10 @@ public class testESHelper extends AndroidTestCase {
 	while ((output = br.readLine()) != null) {
 	    System.err.println(output);
 	}
-		
-	//Change back the updated story
+
+	// Change back the updated story
 	Story story = getStoryToRedoUpdateTest();
 	esHelper.addOrUpdateOnlineStory(story);
-	
+
     }
 }

@@ -54,7 +54,6 @@ public class testFileHelper extends AndroidTestCase {
      * function with these code.
      */
     public void setUp() throws FileNotFoundException, IOException {
-
 	context = getContext();
 	fHelper = new FileHelper(context, 0);
 
