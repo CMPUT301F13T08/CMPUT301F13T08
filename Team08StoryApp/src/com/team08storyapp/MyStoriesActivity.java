@@ -195,10 +195,8 @@ public class MyStoriesActivity extends ListActivity {
 		    try {
 			fillData(fHelper.getOfflineStories(), onUpdate);
 		    } catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		    } catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		    }
 		}
@@ -281,7 +279,9 @@ public class MyStoriesActivity extends ListActivity {
      * This method populates the list view with a list of My Stories.
      * 
      * @param sList
+     * 		An ArrayList of stories used to populate the list.
      * @param update
+     * 		A flag that indicates if a footer/header already exists.
      */
     private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
