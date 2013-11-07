@@ -13,6 +13,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.test.AndroidTestCase;
 
+import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.Photo;
 import com.team08storyapp.PhotoController;
@@ -41,6 +42,12 @@ public class testPhotoController extends AndroidTestCase {
 
     @Before
     public void setUp() throws FileNotFoundException, IOException {
+	testCurrentStoryFragmentIndex = 1;
+	
+	testActivity = new Activity();
+	testCurrentStory = new Story("newstory", "me");
+	testFHelper = new FileHelper(testContext, testCurrentStoryFragmentIndex);
+	
 	phController = new PhotoController(testActivity, testContext,
 		testCurrentStory, testCurrentStoryFragment,
 		testCurrentStoryFragmentIndex, testFHelper);
