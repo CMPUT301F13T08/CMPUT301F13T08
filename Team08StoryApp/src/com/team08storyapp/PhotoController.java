@@ -227,12 +227,10 @@ public class PhotoController {
 
     }
 
-    /**
+    /*
      * AddIllustration is a method that updates a story with newly added
      * illustrations.
      * 
-     * @param fileName
-     * 		the name of the file for the illustration being added.
      */
     private void addIllustration(String fileName) {
 

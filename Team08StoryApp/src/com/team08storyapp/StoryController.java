@@ -43,7 +43,13 @@ import java.util.ArrayList;
  * <li>Reading the story.
  * <li>Getting a specific Story Fragment by using Story Fragment Id.
  * <li>Adding a Story Fragment to a story.
+ * <li>Adding a Choice to a Story Fragment.
+ * <li>Connecting two Story Fragments together.
  * </ul>
+ * 
+ * @see Story
+ * @see StoryFragment
+ * @see Choice
  * 
  * @author Michele Paulichuk
  * @author Alice Wu
@@ -83,12 +89,51 @@ public class StoryController {
     }
 
     /**
+     * Allows for an Authors creation of a StoryFragment to be added to the
+     * Story they are working on.
+     * 
      * @param addStoryFragment
-     * @return
+     *            The Story Fragment that was created to add to the Story.
+     * @param story
+     *            The Story the Author is creating by adding Story Fragments to.
+     * @return Whether the Story Fragment was added successful
      */
-    public static boolean addStoryFragment(StoryFragment addStoryFragment) {
-	// TODO Auto-generated method stub
+    public static boolean addStoryFragment(StoryFragment addStoryFragment,
+	    Story story) {
+	// TODO This will be completed in Project Part 4
 	return false;
     }
 
+    /**
+     * Allows for an Author's creation of a Choice to be added to the Story
+     * Fragment they are working on.
+     * 
+     * @param choice
+     *            The Choice the Author has created for the Story Fragment.
+     * @param storyFragment
+     *            The Story Fragment that the Choice is being added to.
+     * @param story
+     *            The Story the Author is creating by adding Story Fragments to.
+     * @return
+     */
+    public static boolean addChoice(Choice choice, StoryFragment storyFragment,
+	    Story story) {
+
+	return false;
+    }
+
+    /**
+     * Takes two Story Fragments for a Story and connects them via the Choice.
+     * 
+     * @param storyFragment1 The first Story Fragment to connect with the second Story Fragment.
+     * @param storyFragment2 The second Story Fragment to connect with the first Story Fragment.
+     * @param story The Story Fragment that the Story Fragments are being connected in.
+     * @param choice The choice the Story Fragments are being connected with.
+     * @return
+     */
+    public static boolean connectStoryFragments(StoryFragment storyFragment1,
+	    StoryFragment storyFragment2, Story story, Choice choice) {
+	// TODO This will be completed in Project Part 4
+	return false;
+    }
 }

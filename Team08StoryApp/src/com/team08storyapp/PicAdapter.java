@@ -166,7 +166,7 @@ public class PicAdapter extends BaseAdapter {
      *            the view that is going to be converted to user's desire
      * @param parent
      *            a ViewGroup object
-     * @return
+     * @return the converted view for the Photo
      */
     public View getView(int position, View convertView, ViewGroup parent) {
 
