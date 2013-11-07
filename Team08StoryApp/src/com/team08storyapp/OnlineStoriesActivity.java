@@ -95,7 +95,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	esHelper = new ESHelper();
 
 	/*
-	 * Populate listview with the stories curently online Cache the stories
+	 * Populate listview with the stories currently online Cache the stories
 	 * currently online
 	 */
 	ArrayList<Story> result = esHelper.getOnlineStories();
@@ -219,7 +219,9 @@ public class OnlineStoriesActivity extends ListActivity {
      * stories can be read or downloaded.
      * 
      * @param sList
+     * 		An ArrayList of stories used to populate the listview.
      * @param update
+     * 		Indicates whether or not a header already exists.
      */
     private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
