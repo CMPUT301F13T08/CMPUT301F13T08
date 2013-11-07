@@ -1,7 +1,11 @@
 package com.team08storyapp.test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -9,10 +13,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.test.AndroidTestCase;
+import android.util.Base64;
 
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.Photo;
+import com.team08storyapp.R;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
@@ -24,7 +34,7 @@ public class testFileHelper extends AndroidTestCase {
     private int storyCount;
 
     private Story s2;
-    
+
     private StoryFragment fragment1;
     private ArrayList<StoryFragment> sfList;
     private ArrayList<StoryFragment> sfList1;
@@ -33,27 +43,45 @@ public class testFileHelper extends AndroidTestCase {
     private String content;
 
     @Before
-    // set up testing data for testing methods.
+    /*
+     * set up testing data for testing methods.
+     * 
+     * ADDRESSING FEEDBACK: I was trying to make adding stories into a function
+     * annotated as a @BeforeClass as you suggested. However there is an issue
+     * with context, which is "Cannot make a static reference to the non-static
+     * method getContext() from the type AndroidTestCase". But I really need the
+     * context to make the FileHelper. So that's why I still keep the setUp
+     * function with these code.
+     */
     public void setUp() throws FileNotFoundException, IOException {
 
 	context = getContext();
 	fHelper = new FileHelper(context, 0);
 
-	storyCount = 2;
+	storyCount = fHelper.getOfflineStories().size() + 2;
 
-	s1 = new Story(12, "Morroco likoko", "Alice Wu");
+	s1 = new Story(14, "Morroco likoko", "Alice Wu");
 	s1.setOfflineStoryId(12);
 	sfList = new ArrayList<StoryFragment>();
 	content = "	This is the city, where sins grow, profits expand, people gets colder,"
 		+ " and Michael"
-		+ "De Santa, the retired criminal wanted to start his new life. \n    But this comes to an end, when he finds"
-		+ "out his son, Jimmy, is set up in a credit card fraud by a local dealership. \n    The rage occupies him, leading him"
-		+ "to teach that manager a 'lesson'";
+		+ "De Santa, the retired criminal wanted to start his new life. "
+		+ "\n    But this comes to an end, when he finds"
+		+ "out his son, Jimmy, is set up in a credit card "
+		+ "fraud by a local dealership. \n    The rage occupies "
+		+ "him, leading him" + "to teach that manager a 'lesson'";
 	StoryFragment sf1 = new StoryFragment(1, content);
 
+	// make a photo with launch icon, assign it to story fragment 1
 	Photo p1 = new Photo();
 	p1.setPhotoID(1);
-	p1.setPictureName("Image12Fragment1Photo1.png");
+	String fileName = "Image12Fragment1Photo1.png";
+	p1.setPictureName(fileName);
+	Bitmap photo = BitmapFactory.decodeResource(context.getResources(),
+		R.drawable.ic_launcher);
+	FileOutputStream fos = context.openFileOutput(fileName,
+		Context.MODE_PRIVATE);
+	photo.compress(CompressFormat.PNG, 90, fos);
 	ArrayList<Photo> pList = new ArrayList<Photo>();
 	pList.add(p1);
 	sf1.setPhotos(pList);
@@ -62,7 +90,7 @@ public class testFileHelper extends AndroidTestCase {
 	s1.setFirstStoryFragmentId(1);
 	s1.setStoryFragments(sfList);
 	fHelper.addOfflineStory(s1);
-	
+
 	s2 = new Story(13, "FA LA LA LA ", "FA FA LA LA");
 	sfList1 = new ArrayList<StoryFragment>();
 	s2.setStoryFragments(sfList1);
@@ -89,8 +117,9 @@ public class testFileHelper extends AndroidTestCase {
      * successfully saved and applied to the story, the test method
      * testUpdateOfflineStory() should return true.
      * 
-     * NOTE TO JOSH:
-     * Sorry we didn't see any difference between use case 6 and use case 11.
+     * ADDRESSING FEEDBACK: NOTE TO JOSH: Sorry we didn't see any difference
+     * between use case 6 and use case 11 right now. Hope we can find out in
+     * part 4 in order to improve our test cases.
      */
     @Test
     public void testUpdateOfflineStory() throws FileNotFoundException,
@@ -121,12 +150,13 @@ public class testFileHelper extends AndroidTestCase {
 
 	/* test we are reading the same text as we wrote into the content string */
 	assertEquals(story.getStoryFragments().get(0).getStoryText(), content);
-	
-	/* test we are reading the same photo*/
-	assertEquals(story.getStoryFragments().get(0).getPhotos().get(0).getPictureName(), "Image12Fragment1Photo1.png");
-	
+
+	/* test we are reading the same photo */
+	assertEquals(story.getStoryFragments().get(0).getPhotos().get(0)
+		.getPictureName(), "Image12Fragment1Photo1.png");
+
 	/* make sure the story we read has no choices */
-	assertTrue(story.getStoryFragments().get(0).getChoices() == null);
+	assertTrue(story.getStoryFragments().get(0).getChoices().isEmpty());
     }
 
     /*
@@ -150,32 +180,100 @@ public class testFileHelper extends AndroidTestCase {
      * stories on thelocal file. Given a string to search the method call
      * fHelper.searchForStory should return a list of the size we are expecting
      * for the given search text.
+     * 
+     * ADDRESSING FEEDBACK: Since we still feel like there's need for search
+     * offline stories, we keep the function. And to be a more comprehensive
+     * test, I did add another story, and make sure the returned story is what
+     * we want by testing the author, title, as suggested in the feedback:
+     * "create a relevant story and irrelevant story and check that the relevant
+     * story is returned and the irrelevant one is not"
      */
     @Test
     public void testSearchOfflineStories() {
-	assertEquals(fHelper.searchOfflineStories("co").size(), 1);
-	assertEquals(fHelper.searchOfflineStories("    ").size(), 2);
-	assertEquals(fHelper.searchOfflineStories("\n").size(), 2);
-	assertEquals(fHelper.searchOfflineStories("DAT").size(), 0);
+
+	// test the result of search should only have 1 item
+	assertEquals(fHelper.searchOfflineStories("Morroco likoko").size(), 1);
+	/*
+	 * and the only item should be exactly the story has "Morroco likoko" as
+	 * title and Alice Wu as the author.
+	 */
+	assertEquals(fHelper.searchOfflineStories("co").get(0).getTitle(),
+		"Morroco likoko");
+	assertEquals(fHelper.searchOfflineStories("co").get(0).getAuthor(),
+		"Alice Wu");
+
+	// test " we don't carry out search on whitespace or newline character"
+	// is true
+	assertEquals(fHelper.searchOfflineStories("    ").size(), storyCount);
+	assertEquals(fHelper.searchOfflineStories("\n").size(), storyCount);
+
+	// No author or title has string "DAT". The result should be 0.
+	assertEquals(fHelper
+		.searchOfflineStories("WHO DAT WHO DAT WHO DAT DAT").size(), 0);
     }
 
-    
+    /*
+     * Test case for Use Case #3, #12, #10, #14
+     * 
+     * Since encodeStory() function is used before uploading/updating an online
+     * story, this test is a part for UC#3, 12, 10, 14. testEncodeStory() tests
+     * the encoding functionality of encodeStory, especially its ability and
+     * correctness to encode an image.
+     */
     @Test
     public void testEncodeStory() throws FileNotFoundException, IOException {
+
+	// encode a story
 	Story encodedStory = fHelper.encodeStory(s1);
-	assertNull(encodedStory.getStoryFragments().get(0).getPhotos().get(0)
+
+	// create the byte[] of lauch icon image
+	InputStream is = context.openFileInput(s1.getStoryFragments().get(0)
+		.getPhotos().get(0).getPictureName());
+	ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	byte[] b = new byte[1024];
+	int bytesRead = 0;
+	while ((bytesRead = is.read(b)) != -1) {
+	    bos.write(b, 0, bytesRead);
+	}
+	byte[] bytes = bos.toByteArray();
+
+	// test the encodeStory() function does some "encoding"
+	assertNotNull(encodedStory.getStoryFragments().get(0).getPhotos()
+		.get(0).getEncodedPicture());
+
+	// test the correctness of encoding
+	assertEquals(Base64.encodeToString(bytes, Base64.DEFAULT), encodedStory
+		.getStoryFragments().get(0).getPhotos().get(0)
 		.getEncodedPicture());
+
+	// test the file is not changed during the process
 	assertEquals(encodedStory.getStoryFragments().get(0).getPhotos().get(0)
 		.getPictureName(), "Image12Fragment1Photo1.png");
     }
 
+    /*
+     * Test case for Use Case #9, #12, #16
+     * 
+     * Since decodeStory() function is used before saving the downloaded story
+     * into local file system, this test is a part for UC#3, 12, 10, 14.
+     * testDecodeStory() tests the decoding functionality of decodeStory().
+     */
     @Test
     public void testDecodeStory() throws Exception {
 	Story encodedStory = fHelper.encodeStory(s1);
-	assertNull(fHelper.decodeStory(encodedStory, 1).getStoryFragments()
-		.get(0).getPhotos().get(0).getEncodedPicture());
+
+	// assert the correctness of fileName
+	assertEquals(fHelper.decodeStory(encodedStory, 1).getStoryFragments()
+		.get(0).getPhotos().get(0).getPictureName(),
+		"Image12Fragment1Photo1.png");
+	FileInputStream fos = context
+		.openFileInput("Image12Fragment1Photo1.png");
+	Bitmap photo = BitmapFactory.decodeStream(fos);
+	assertNotNull(photo);
+
     }
 
+    // Delete data
     @After
     protected void tearDown() {
 	context.deleteFile("Download12");

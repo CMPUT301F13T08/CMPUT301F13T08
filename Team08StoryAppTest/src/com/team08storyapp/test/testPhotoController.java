@@ -40,21 +40,26 @@ public class testPhotoController extends AndroidTestCase {
 
     @Before
     public void setUp() throws FileNotFoundException, IOException {
+	testUri = Uri.parse("test");
+
+	testCurrentStory = new Story(14,"Spaceman Spiff", "Calvin");
+	testCurrentStoryFragment = new StoryFragment(1, "Test text.");
+	//testPhoto1 = new Photo();
+	//testPhoto2 = new Photo();
+	//testPhotoList.add(testPhoto1);
+	//testPhotoList.add(testPhoto2);
+	testStoryFragmentList = new ArrayList<StoryFragment>();
+	testStoryFragmentList.add(testCurrentStoryFragment);
+	testCurrentStory.setStoryFragments(testStoryFragmentList);
 	phController = new PhotoController(testActivity, testContext,
 		testCurrentStory, testCurrentStoryFragment,
 		testCurrentStoryFragmentIndex, testFHelper);
-	testCurrentStory = new Story("Spaceman Spiff", "Calvin");
-	testCurrentStoryFragment = new StoryFragment(1, "Test text.");
-	testPhoto1 = new Photo();
-	testPhoto2 = new Photo();
-	testPhotoList.add(testPhoto1);
-	testPhotoList.add(testPhoto2);
-	testStoryFragmentList.add(testCurrentStoryFragment);
-	testCurrentStory.setStoryFragments(testStoryFragmentList);
     }
     
     // TODO: write test case
     public void testSavePhoto(){
+
+	assertNull(phController.savePhoto(testUri));
     }
 
     // TODO: write test case
