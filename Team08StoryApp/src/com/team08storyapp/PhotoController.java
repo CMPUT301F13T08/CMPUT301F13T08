@@ -128,6 +128,7 @@ public class PhotoController {
 
 	/* declare the bitmap */
 	Bitmap pic = null;
+	
 	/* declare the path string */
 	String imgPath = "";
 
@@ -190,9 +191,6 @@ public class PhotoController {
 
 	    /* get the file as a bitmap */
 	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-	    System.out.println("New image: " + fileName);
-
 	    try {
 		FileOutputStream fos = context.openFileOutput(fileName,
 			Context.MODE_PRIVATE);
