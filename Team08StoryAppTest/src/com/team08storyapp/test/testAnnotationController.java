@@ -2,20 +2,16 @@ package com.team08storyapp.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
+import java.util.ArrayList;
 
-import junit.framework.TestCase;
-
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.test.ActivityTestCase;
-import android.test.AndroidTestCase;
-import android.test.ApplicationTestCase;
 
 import com.team08storyapp.AnnotationController;
 import com.team08storyapp.ESHelper;
@@ -38,6 +34,7 @@ public class testAnnotationController extends ActivityTestCase {
     private ESHelper testESHelper;
     private Bitmap testBitmap;
     private Uri testUri;
+    private ArrayList<StoryFragment> testStoryFragmentList;
 
 
 
@@ -50,12 +47,16 @@ public class testAnnotationController extends ActivityTestCase {
 	testContext = super.getInstrumentation().getContext();
 	
 
-	testStory = new Story("newstory", "me");
-	testFHelper = new FileHelper(testContext, testCurrentStoryFragmentIndex);
+	testStory = new Story(15,"newstory", "me");
+	testFHelper = new FileHelper(testContext, 0);
 	testESHelper = new ESHelper();
 	
+	testStoryFragment = new StoryFragment(1, "Test text.");
+	testStoryFragmentList = new ArrayList<StoryFragment>();
+	testStoryFragmentList.add(testStoryFragment);
+	
 	anController = new AnnotationController(testActivity, testContext,
-		testStory, testStoryFragment, testCurrentStoryFragmentIndex,
+		testStory, testStoryFragment, 0,
 		testFHelper, testESHelper);
 
 	
@@ -66,6 +67,11 @@ public class testAnnotationController extends ActivityTestCase {
     public void testSavePhoto() {
 	testBitmap = anController.savePhoto(testUri, 0);
 	assertNull(testBitmap);
+    }
+    
+    @After
+    public void tearDown(){
+	testContext.deleteFile("Download15");
     }
    
 

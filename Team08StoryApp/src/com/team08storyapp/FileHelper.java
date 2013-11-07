@@ -148,7 +148,6 @@ public class FileHelper {
 		int total = getOfflineStories().size();
 		story.setOfflineStoryId(Math.max(total - 1, getOfflineStories()
 			.get(total - 1).getOfflineStoryId()) + 1);
-		esHelper.addOrUpdateOnlineStory(story);
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
