@@ -153,8 +153,8 @@ public class AnnotationController {
 	/* query the data */
 	Cursor picCursor;
 	try {
-	    picCursor = activity.getContentResolver().query(pickedUri,
-		    medData, null, null, null);
+	    picCursor = activity.getContentResolver().query(pickedUri, medData,
+		    null, null, null);
 	} catch (Exception e) {
 	    return null;
 	}
