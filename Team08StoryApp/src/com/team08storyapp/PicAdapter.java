@@ -128,7 +128,7 @@ public class PicAdapter extends BaseAdapter {
 	    }
 	}
 
-	/* get the styling attributes - use default Andorid system resources */
+	/* get the styling attributes - use default Android system resources */
 	TypedArray styleAttrs = galleryContext
 		.obtainStyledAttributes(R.styleable.PicGallery);
 

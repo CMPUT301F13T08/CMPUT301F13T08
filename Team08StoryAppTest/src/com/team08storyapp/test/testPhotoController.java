@@ -12,7 +12,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.test.ActivityTestCase;
 
-import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.MyStoriesActivity;
 import com.team08storyapp.Photo;

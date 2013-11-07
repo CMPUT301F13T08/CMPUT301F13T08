@@ -58,7 +58,7 @@ import android.widget.Toast;
  * illustrations to these fragments.
  * <p>
  * In future developments, users will be able to add/edit/delete dialogue and
- * chocies from this activity.
+ * choices from this activity.
  * 
  * @author Michele Paulichuk
  * @author Alice Wu
