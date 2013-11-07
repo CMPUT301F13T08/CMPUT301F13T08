@@ -66,6 +66,14 @@ public class Choice implements Serializable {
     int choiceId;
 
     /**
+     * The default constructor for creating an Choice object. It will have none
+     * of it's properties set, requiring the class instantiating the object to
+     * set it's properties.
+     */
+    public Choice() {
+    }
+
+    /**
      * A constructor for creating a Choice object. This is the only constructor
      * used and is used to help setup the Choices to display for a Story
      * Fragment for when a Story is being read by a user or saving Choices when
