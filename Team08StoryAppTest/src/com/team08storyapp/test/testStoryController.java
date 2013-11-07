@@ -32,14 +32,36 @@ public class testStoryController extends TestCase {
     }
 
     /*
+     * Test for Use Case 5
+     * 
      * The testAddStoryFragment method tests adding a story fragment to an
-     * existing story. If the story fragment is added successfully the method
-     * call to esHelper.addStoryFragment should return true. This is related to
-     * user story # 5.
+     * existing story. It will take a Story and add the given Story Fragment to
+     * it. Then it will retrieve the Story from the Author's MyStories local
+     * storage and compare the Story Fragment to the one added. If they are the
+     * same the Story Fragment was added successfully.
+     * 
+     * The test in this method will fail as this method this is tested will be
+     * handled in Project Part 4
      */
-
     public void testAddStoryFragment() {
-	assertFalse(StoryController.addStoryFragment(firstStoryFragment));
+
+    }
+
+    /*
+     * Test for Use Case
+     * 
+     * The testaddChoice method tests adding a choice to a story fragment of an
+     * existing story.
+     * 
+     * The test in this method will fail as this method this is tested will be
+     * handled in Project Part 4
+     */
+    public void testaddChoice() {
+
+    }
+
+    public void testconnectStoryFragments() {
+
     }
 
     /*
