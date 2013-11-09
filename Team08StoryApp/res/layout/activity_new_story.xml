@@ -57,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/enterAuthor"
-        android:text="Save" />
+        android:text="Save" 
+        android:onClick="toEditFragmentActivity"/>
 
 </RelativeLayout>

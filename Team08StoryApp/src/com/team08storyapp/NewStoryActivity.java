@@ -2,7 +2,9 @@ package com.team08storyapp;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 
 public class NewStoryActivity extends Activity {
 
@@ -19,4 +21,10 @@ public class NewStoryActivity extends Activity {
 		return true;
 	}
 
+	
+	 public void toEditFragmentActivity(View view) {
+			Intent intent = new Intent(NewStoryActivity.this,
+				EditFragmentActivity.class);
+			startActivity(intent);
+		    }
 }
