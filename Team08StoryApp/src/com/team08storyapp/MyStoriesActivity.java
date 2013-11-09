@@ -323,6 +323,12 @@ public class MyStoriesActivity extends ListActivity {
 	}
     }
 
+    public void toNewStoryActivity(View view) {
+    	Intent intent = new Intent(MyStoriesActivity.this, NewStoryActivity.class);
+    	startActivity(intent);
+        }
+    
+    
     protected void onResume() {
 	super.onResume();
 	try {
