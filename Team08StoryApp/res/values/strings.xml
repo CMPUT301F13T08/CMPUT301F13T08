@@ -25,5 +25,9 @@
     <string name="title_activity_online_story_fragment">OnlineStoryFragmentActivity</string>
     <string name="title_activity_my_story_fragment">MyStoryFragmentActivity</string>
     <string name="title_activity_annotation_view">AnnotationViewActivity</string>
+    <string name="title_activity_new_story">NewStoryActivity</string>
+    <string name="title_activity_edit_fragment">EditFragmentActivity</string>
+    <string name="title_activity_edit_choice">EditChoiceActivity</string>
+    <string name="title_activity_select_fragment">SelectFragmentActivity</string>
 
 </resources>

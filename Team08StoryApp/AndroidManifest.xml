@@ -67,6 +67,22 @@
             android:name="com.team08storyapp.AnnotationViewActivity"
             android:label="@string/title_activity_annotation_view" >
         </activity>
+        <activity
+            android:name="com.team08storyapp.NewStoryActivity"
+            android:label="@string/title_activity_new_story" >
+        </activity>
+        <activity
+            android:name="com.team08storyapp.EditFragmentActivity"
+            android:label="@string/title_activity_edit_fragment" >
+        </activity>
+        <activity
+            android:name="com.team08storyapp.EditChoiceActivity"
+            android:label="@string/title_activity_edit_choice" >
+        </activity>
+        <activity
+            android:name="com.team08storyapp.SelectFragmentActivity"
+            android:label="@string/title_activity_select_fragment" >
+        </activity>
     </application>
 
 </manifest>
