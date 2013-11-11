@@ -2,6 +2,7 @@ package com.team08storyapp;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -33,6 +34,9 @@ public class EditFragmentActivity extends Activity {
 	            return true;
 	            
 	        case R.id.addChoice:
+	            Intent intent = new Intent(EditFragmentActivity.this,
+	    		EditChoiceActivity.class);
+	    	startActivity(intent);
 	        	return true;
 	        	
 	        case R.id.save:
