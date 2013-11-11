@@ -2,7 +2,9 @@ package com.team08storyapp;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 
 public class EditChoiceActivity extends Activity {
 
@@ -19,4 +21,19 @@ public class EditChoiceActivity extends Activity {
 		return true;
 	}
 
+	
+	public void returnEditFragmentActivity(View view) {
+		Intent intent = new Intent(EditChoiceActivity.this,
+			EditFragmentActivity.class);
+		
+		/* Extras will have to be added here to make sure the correct story fragment is opened.
+		 */
+		startActivity(intent);
+	}
+	
+	public void toSelectFragmentActivity(View view) {
+	    Intent intent = new Intent(EditChoiceActivity.this, SelectFragmentActivity.class);
+	    startActivity(intent);
+	}
+	
 }
