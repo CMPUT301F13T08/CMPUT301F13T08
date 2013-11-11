@@ -100,45 +100,29 @@ public class StoryController {
      */
     public static Story addStoryFragment(StoryFragment addStoryFragment,
 	    Story story) {
-	// TODO This will be completed in Project Part 4
+	story.getStoryFragments().add(addStoryFragment);
 	return story;
     }
 
     /**
      * Allows for an Author's creation of a Choice to be added to the Story
-     * Fragment they are working on.
+     * Fragment they are working on. By adding a Choice the Author is connecting
+     * two Story Fragments together.
      * 
      * @param choice
      *            The Choice the Author has created for the Story Fragment.
      * @param storyFragment
      *            The Story Fragment that the Choice is being added to.
+     * @param storyFragment2
+     *            The Story Fragment that the Choice leads to.
      * @return The Story Fragment with the newly added Choice.
      */
     public static StoryFragment addChoice(String choiceText,
-	    StoryFragment storyFragment) {
-	// TODO This will be completed in Project Part 4
-	return storyFragment;
-    }
-
-    /**
-     * Takes two Story Fragments for a Story and connects them via the Choice.
-     * 
-     * @param storyFragment1
-     *            The first Story Fragment to connect with the second Story
-     *            Fragment.
-     * @param storyFragment2
-     *            The second Story Fragment to connect with the first Story
-     *            Fragment.
-     * @param choice
-     *            The choice the Story Fragments are being connected with.
-     * @return The first Story Fragment containing the Choice used to join the
-     *         Story Fragments. Where the Choice contains the Id of the second
-     *         Story Fragment.
-     */
-    public static StoryFragment connectStoryFragments(
-	    StoryFragment storyFragment1, StoryFragment storyFragment2,
-	    Choice choice) {
-	// TODO This will be completed in Project Part 4
+	    StoryFragment storyFragment1, int storyFragment2Id) {
+	int choiceId = storyFragment1.getChoices().size() + 1;
+	Choice choice = new Choice(storyFragment2Id, choiceId, choiceText);
+	storyFragment1.getChoices().add(choice);
 	return storyFragment1;
     }
+
 }

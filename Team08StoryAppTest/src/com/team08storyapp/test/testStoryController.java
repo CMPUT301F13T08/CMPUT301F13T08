@@ -55,74 +55,34 @@ public class testStoryController extends TestCase {
      * will be handled in Project Part 4
      */
     public void testAddStoryFragment() {
-	/* Check that the Story Fragment exists in the Story*/
+	/* Check that the Story Fragment exists in the Story */
 	Story s = StoryController.addStoryFragment(testAddStoryFragment, story);
 	assertTrue(s.getStoryFragments().contains(testAddStoryFragment));
     }
 
     /*
-     * Test for Use Case 8
+     * Test for Use Case 7 & 8
      * 
      * The testaddChoice method tests adding a choice to a story fragment of an
-     * existing story. This will take the current Story Fragment and the Choice
-     * the Author has created and add it to the Story Fragment. Once it has been
-     * added we will get the Story Fragment and check for the Choice comparing
-     * it to the original object.
+     * existing story. This will take the current Story Fragment, the Id of the
+     * Story Fragment the Choice leads to and the Choice the Author has created
+     * and add it to the Story Fragment. Once it has been added we will get the
+     * Story Fragment and check for the Choice comparing it to the original
+     * object.
      * 
-     * NOTE: The test in this method will fail as this method this is tested
-     * will be handled in Project Part 4
      */
     public void testaddChoice() {
-	
-	/* set the text for the Choice and add it to the Story Fragment*/
+	/* set the text for the Choice and add it to the Story Fragment */
+	int storyFragment2Id = joinStoryFragment2.getStoryFragmentId();
 	String choiceText = "This is a choice";
 	StoryFragment storyFragment = StoryController.addChoice(choiceText,
-		testAddStoryFragment);
-	
-	/* Check that the last choice added is the Choice we added*/
+		joinStoryFragment1, storyFragment2Id);
+
+	/* Check that the last choice added is the Choice we added */
 	ArrayList<Choice> choices = storyFragment.getChoices();
 	Choice choice = choices.get(choices.size() - 1);
 	assertTrue(choice.getText() == choiceText);
-    }
-
-    /*
-     * Test for Use Case 7
-     * 
-     * The testconnectStoryFragments method tests adding a choice to a story
-     * fragment of an existing story. This will take the one Story Fragment , a
-     * second Story Fragment, and the joining Choice the Author has created and
-     * add it to the Story Fragment. Once the fragments are joined, the Story
-     * will be retrieved and checked that the two Story Fragments are linked via
-     * the correct Choice.
-     * 
-     * NOTE: The test in this method will fail as this method this is tested
-     * will be handled in Project Part 4
-     */
-    public void testconnectStoryFragments() {
-	/* create a choice to connect the Story Fragments*/
-	Choice choiceToJoin = new Choice();
-	choiceToJoin.setText("connecting to storyFragment2");
-	choiceToJoin.setChoiceId(joinStoryFragment1.getChoices().size()+1);
-	choiceToJoin.setStoryFragmentID(nextStoryFragmentId);
-	
-	/* connect the Story Fragments*/
-	StoryFragment storyFragment = StoryController.connectStoryFragments(
-		joinStoryFragment1, joinStoryFragment2, choiceToJoin);
-
-	/* check that the Story Fragment returned is the first Story Fragment*/
-	assertTrue(storyFragment.getStoryFragmentId() == joinStoryFragment1.getStoryFragmentId());
-	
-	/* retrieve the list of choices from the returned fragment*/
-	ArrayList<Choice> choices = storyFragment.getChoices();
-	/* joining choice would have been added as the last choice in the list*/
-	Choice choice = choices.get(choices.size() - 1);
-	
-	/* check that the choice is correct*/
-	assertTrue(choice.getText() == choiceToJoin.getText());
-
-	/* check that the choice contains the second Story Fragment*/
-	assertTrue(choice.getStoryFragmentID() == joinStoryFragment2
-		.getStoryFragmentId());
+	assertTrue(choice.getStoryFragmentID() == storyFragment2Id);
     }
 
     /*
