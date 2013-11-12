@@ -95,8 +95,6 @@ public class MyStoriesActivity extends ListActivity {
 	et = (EditText) header.findViewById(R.id.searchText);
 	footerCreate = getLayoutInflater().inflate(
 		R.layout.footer_create_button, null);
-	Button createButton = (Button) footerCreate
-		.findViewById(R.id.createButton);
 
 	fHelper = new FileHelper(this, 1);
 	esHelper = new ESHelper();

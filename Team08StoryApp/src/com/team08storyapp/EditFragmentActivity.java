@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class EditFragmentActivity extends Activity {
+   
 
     private int currentStoryFragmentId;
     private int currentStoryFragmentIndex;

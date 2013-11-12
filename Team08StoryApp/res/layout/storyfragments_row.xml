@@ -12,9 +12,17 @@
 
     <TextView
         android:id="@+id/fragmentText"
-        android:layout_width="fill_parent"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:textSize="30sp" >
     </TextView>
+
+    <Button
+        android:id="@+id/selectButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:text="select" />
 
 </LinearLayout>

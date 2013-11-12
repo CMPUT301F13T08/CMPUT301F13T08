@@ -2,16 +2,14 @@ package com.team08storyapp;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 public class EditChoiceActivity extends Activity {
@@ -20,6 +18,7 @@ public class EditChoiceActivity extends Activity {
     private int choiceId;
     private Choice currentChoice;
     private FileHelper fHelper;
+    private ArrayList<StoryFragment> availableStoryFragmentList;
 
     private EditText tv;
     private static final int LINKED_FRAGMENT = 1;
@@ -42,6 +41,11 @@ public class EditChoiceActivity extends Activity {
 	choiceId = choiceIntent.getIntExtra("choiceId", 1);
 	currentChoice = new Choice();
 	currentChoice.setChoiceId(choiceId);
+	availableStoryFragmentList = currentStory.getStoryFragments();
+	if (currentStory.getStoryFragments().size() == availableStoryFragmentList
+		.size()) {
+	    availableStoryFragmentList.remove(currentStoryFragmentIndex);
+	}
 	return true;
     }
 
@@ -69,17 +73,6 @@ public class EditChoiceActivity extends Activity {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-
-	/*
-	 * Intent intent = new Intent(EditChoiceActivity.this,
-	 * EditFragmentActivity.class);
-	 * 
-	 * /* Extras will have to be added here to make sure the correct story
-	 * fragment is opened.
-	 */
-	/*
-	 * startActivity(intent);
-	 */	
 	finish();
 
     }
@@ -87,6 +80,8 @@ public class EditChoiceActivity extends Activity {
     public void toSelectFragmentActivity(View view) {
 	Intent intent = new Intent(EditChoiceActivity.this,
 		SelectFragmentActivity.class);
+	intent.putExtra("storyFragments", availableStoryFragmentList);
+	intent.putExtra("story", currentStory);
 	startActivityForResult(intent, LINKED_FRAGMENT);
     }
 
