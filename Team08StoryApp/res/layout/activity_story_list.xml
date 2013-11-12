@@ -1,32 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    
-    <ListView 
-        android:id="@android:id/list" 
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="400dp"
-        
-        
-    />
+        android:layout_height="400dp" />
 
-   <!--  <TextView
-        android:id="@+id/emptyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No Text" /> -->
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="toNewStoryActivity"
-        android:text="Create New Story" 
-        android:layout_gravity="bottom|center"
-        android:layout_marginTop="15dip"
-        />
-    
 </LinearLayout>

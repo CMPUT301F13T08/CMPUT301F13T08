@@ -1,9 +1,12 @@
 package com.team08storyapp;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -38,16 +41,13 @@ public class EditFragmentActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_story_list);
+	setContentView(R.layout.activity_edit_fragment);
 	
 	/* set up the choice listView */
 	lv = (ListView) findViewById(android.R.id.list);
 
 	/* set up the EditText Dialogue */
-	headerText = getLayoutInflater()
-		.inflate(R.layout.header_dialogue, null);
-	EditText textSection = (EditText) headerText
-		.findViewById(R.id.headerDialogue);
+	EditText textSection = (EditText) findViewById(R.id.headerDialogue);
 	textSection.setOnTouchListener(new View.OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -55,7 +55,6 @@ public class EditFragmentActivity extends Activity {
 	    }
 	});
 	
-
 	/* set up gallery header */
 	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
 		null);
@@ -108,6 +107,9 @@ public class EditFragmentActivity extends Activity {
 		.getChoices();
 	ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
 
+	pc = new PhotoController(this, getApplicationContext(), currentStory,
+		currentStoryFragment, currentStoryFragmentIndex, fHelper);
+	
 	/* create a new adapter */
 	imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
 		currentStoryFragmentId);
@@ -141,6 +143,15 @@ public class EditFragmentActivity extends Activity {
 	    return true;
 
 	case R.id.save:
+	    try {
+		fHelper.updateOfflineStory(currentStory);
+	    } catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
 	    return true;
 
 	default:
@@ -150,7 +161,6 @@ public class EditFragmentActivity extends Activity {
 
     private void fillChoice(ArrayList<Choice> cList) {
 	lv.addHeaderView(headerGallery);
-	lv.addHeaderView(headerText);
 	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
 		cList);
 	lv.setAdapter(adapter);
@@ -168,6 +178,33 @@ public class EditFragmentActivity extends Activity {
 	}
 	super.onResume();
 
+    }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+	if (resultCode == RESULT_OK) {
+	    Uri pickedUri = data.getData();
+	    Bitmap pic = pc.savePhoto(pickedUri);
+	    if (pic != null) {
+		currentPic = pc.currentPosition();
+		if (currentPic > 4) {
+		    currentPic = (currentPic % 5);
+		}
+		imgAdapt.addPic(currentPic, pic);
+		picGallery.setAdapter(imgAdapt);
+		picView.setImageBitmap(pic);
+		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+	    }
+	    try {
+		currentStory = fHelper.getOfflineStory(currentStoryId);
+		currentStoryFragment = currentStory.getStoryFragments().get(
+			currentStoryFragmentIndex);
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+	} else {
+	    super.onActivityResult(requestCode, resultCode, data);
+	}
     }
 
 }

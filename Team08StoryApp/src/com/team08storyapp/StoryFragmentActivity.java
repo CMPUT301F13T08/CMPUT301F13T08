@@ -109,14 +109,12 @@ public class StoryFragmentActivity extends Activity {
 	fHelper = new FileHelper(this, 0);
 
 	/* set up background layout */
-	setContentView(R.layout.activity_story_list);
+	setContentView(R.layout.activity_story_fragment_view);
 	lv = (ListView) findViewById(android.R.id.list);
 
 	/* set up text header */
-	headerText = getLayoutInflater().inflate(R.layout.header_text, null);
-	headerText.setBackgroundColor(0x0099cc);
-	TextView textSection = (TextView) headerText
-		.findViewById(R.id.headerText);
+	TextView textSection = (TextView) findViewById(R.id.headerText);
+	System.out.println("FOUND");
 	textSection.setOnTouchListener(new View.OnTouchListener() {
 
 	    @Override
@@ -290,7 +288,6 @@ public class StoryFragmentActivity extends Activity {
 
 	/* add headers to background list view */
 	lv.addHeaderView(headerGallery);
-	lv.addHeaderView(headerText);
 	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
 		cList);
 

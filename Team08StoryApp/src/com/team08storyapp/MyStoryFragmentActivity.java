@@ -94,11 +94,10 @@ public class MyStoryFragmentActivity extends Activity {
 	fHelper = new FileHelper(this, 1);
 
 	/* set up background layout */
-	setContentView(R.layout.activity_story_list);
+	setContentView(R.layout.activity_my_story_fragment);
 	lv = (ListView) findViewById(android.R.id.list);
 
 	/* set up text header */
-	headerText = getLayoutInflater().inflate(R.layout.header_text, null);
 	TextView textSection = (TextView) headerText
 		.findViewById(R.id.headerText);
 	textSection.setOnTouchListener(new View.OnTouchListener() {

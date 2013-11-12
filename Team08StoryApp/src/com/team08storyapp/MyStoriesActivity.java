@@ -88,7 +88,7 @@ public class MyStoriesActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_story_list);
+	setContentView(R.layout.activity_my_stories);
 	lv = (ListView) findViewById(android.R.id.list);
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
@@ -305,23 +305,6 @@ public class MyStoriesActivity extends ListActivity {
 	    lv.addHeaderView(header);
 	}
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
-    }
-
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-	super.onListItemClick(l, v, position, id);
-
-	/*
-	 * Get the selected story object, pass related information to start
-	 * activity of reading the story
-	 */
-	currentStory = (Story) lv.getAdapter().getItem(position);
-	Intent firstStoryFragment = new Intent(getApplicationContext(),
-		MyStoryFragmentActivity.class);
-	firstStoryFragment.putExtra("story", currentStory);
-	int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
-	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-	startActivity(firstStoryFragment);
-
     }
 
     @Override

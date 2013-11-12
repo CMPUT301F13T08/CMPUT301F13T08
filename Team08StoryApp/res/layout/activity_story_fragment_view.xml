@@ -2,40 +2,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context=".StoryFragmentActivity" >
-    
 
-    <ImageView
-	android:id="@+id/test_image"
-	android:src="@drawable/ic_launcher"
-	android:layout_width="fill_parent"
-	android:layout_height="0dp"
-	android:layout_weight="0.3"
-	/>
-    
-   <TextView
-       android:id="@+id/dialogue"
-       android:layout_width="fill_parent"
-       android:layout_height="0dp"
-       android:scrollbars="vertical"
-       android:layout_weight="0.4"
-       android:text="tesssssssssssssssssssssssssssssssting" />
-   
-   <ListView
-       android:id="@+id/choices"
-       android:layout_width="fill_parent"
-       android:layout_height="0dp"
-       android:layout_weight="0.4"
-       android:scrollbars="vertical"
-      
-       ></ListView>
-   
+    <TextView
+        android:id="@+id/headerText"
+        style="@style/AppTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="193dp"
+        android:layout_weight="0"
+        android:clickable="true"
+        android:maxLines="10"
+        android:minHeight="200dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="10dp"
+        android:scrollHorizontally="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:textSize="18sp" />
 
-    
-    
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp" />
+
 </LinearLayout>
