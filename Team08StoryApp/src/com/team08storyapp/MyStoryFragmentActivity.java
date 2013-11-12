@@ -131,21 +131,21 @@ public class MyStoryFragmentActivity extends Activity {
 	    }
 	});
 
+	/*
 	picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-	    /* handle long clicks */
 	    public boolean onItemLongClick(AdapterView<?> parent, View v,
 		    int position, long id) {
 		currentPic = position;
 		Intent pickIntent = new Intent();
 		pickIntent.setType("image/*");
 		pickIntent.setAction(Intent.ACTION_GET_CONTENT);
-		/* we will handle the returned data in onActivityResult */
 		startActivityForResult(
 			Intent.createChooser(pickIntent, "Select Picture"), 1);
 		return true;
 	    }
 	});
+	*/
+	
 
 	/*
 	 * Get the intent - passed either by Online/OfflineStoriesActivity or by
