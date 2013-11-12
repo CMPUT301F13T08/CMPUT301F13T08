@@ -54,6 +54,7 @@ public class EditFragmentActivity extends Activity {
 		return false;
 	    }
 	});
+	
 
 	/* set up gallery header */
 	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
@@ -93,13 +94,15 @@ public class EditFragmentActivity extends Activity {
 		currentStoryFragmentIndex = i;
 	    }
 	}
-
 	/*
 	 * The current story fragment object - from the story fragment list, by
 	 * id
 	 */
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
+
+	/* Display the current fragment text */
+	textSection.setText(currentStoryFragment.getStoryText());
 
 	ArrayList<Choice> storyFragmentChoices = currentStoryFragment
 		.getChoices();
