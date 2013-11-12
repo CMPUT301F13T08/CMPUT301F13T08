@@ -142,9 +142,9 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
-	    if (getOfflineStory(story.getOfflineStoryId()) != null
+	    if ((getOfflineStory(story.getOfflineStoryId()) != null
 		    && getOfflineStory(story.getOfflineStoryId())
-			    .getOnlineStoryId() != story.getOnlineStoryId()) {
+			    .getOnlineStoryId() != story.getOnlineStoryId()) || story.getOfflineStoryId() == 0) {
 		int total = getOfflineStories().size();
 		story.setOfflineStoryId(Math.max(total - 1, getOfflineStories()
 			.get(total - 1).getOfflineStoryId()) + 1);
