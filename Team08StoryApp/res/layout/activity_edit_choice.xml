@@ -8,9 +8,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EditChoiceActivity" >
 
+    
+    
     <TextView
+        android:id="@+id/choiceText"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Choice Text:"
+       />
+    
+    <EditText
+        android:id="@+id/editChoiceText"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/choiceText"
+        android:hint="Enter the text for your choice."
+        />
+
+    <Button
+        android:id="@+id/buttonFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_below="@+id/editChoiceText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="116dp"
+        android:text="Link choice to fragment"
+        android:onClick="toSelectFragmentActivity" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/editChoiceText"
+        android:text="Save"
+        android:onClick="returnEditFragmentActivity"
+         />
+  
 
 </RelativeLayout>
