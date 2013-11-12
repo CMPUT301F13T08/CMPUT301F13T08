@@ -72,6 +72,7 @@ public class MyStoriesActivity extends ListActivity {
 
     private static final int PUBLISH_ID = Menu.FIRST;
     private static final int READ_ID = Menu.FIRST + 1;
+    private static final int EDIT_ID = Menu.FIRST +2;
     private static final boolean onUpdate = true;
     private static final boolean onCreate = false;
 
@@ -219,7 +220,8 @@ public class MyStoriesActivity extends ListActivity {
 	    ContextMenuInfo menuInfo) {
 	super.onCreateContextMenu(menu, v, menuInfo);
 	menu.add(0, PUBLISH_ID, 0, R.string.publish_menu);
-	/*menu.add(0, READ_ID, 0, R.string.read_menu);*/
+	menu.add(0, READ_ID, 0, R.string.read_menu);
+	menu.add(0,EDIT_ID, 0, R.string.edit_menu);
     }
 
     public boolean onContextItemSelected(MenuItem item) {

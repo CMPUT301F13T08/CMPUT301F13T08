@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Team08StoryApp</string>
+     <string name="edit_menu">Edit</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="story_welcome">Team 08 Story Book App!</string>
