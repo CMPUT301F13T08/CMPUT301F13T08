@@ -9,8 +9,28 @@
     tools:context=".SelectFragmentActivity" >
 
     <TextView
+        android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="Select a fragment to link to:" 
+        />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:layout_alignLeft="@+id/text1"
+        android:layout_below="@id/text1" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/buttonCreateFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Create Fragment"
+        android:onClick="newEditFragmentActivity" />
 
 </RelativeLayout>
