@@ -259,12 +259,24 @@ public class MyStoriesActivity extends ListActivity {
 			Toast.LENGTH_LONG).show();
 		return true;
 	    }
-	    /*
+	case EDIT_ID:
+	    
+	    Intent intent = new Intent(MyStoriesActivity.this,
+			EditFragmentActivity.class);
+		intent.putExtra("story", currentStory);
+		int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
+		intent.putExtra("storyFragmentId", nextStoryFragmentId);
+		startActivity(intent);
+	    
+	   
+	    return true;
+	    
 	case READ_ID:
 
 	    /*
 	     * This case creates an intent to pass the selected story object and
 	     * the first story fragment id to the StoryFragmentActivity
+	     */
 	     
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
@@ -273,7 +285,7 @@ public class MyStoriesActivity extends ListActivity {
 		    currentStory.getFirstStoryFragmentId());
 	    startActivity(firstStoryFragment);
 	    return true;
-	    */
+	    
 	default:
 	    return super.onContextItemSelected(item);
 	}
