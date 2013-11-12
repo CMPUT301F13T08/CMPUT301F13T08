@@ -5,13 +5,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class EditFragmentActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_edit_fragment);
+		setContentView(R.layout.activity_story_list);
+		lv = (ListView) findViewById(android.R.id.list);
 	}
 
 	@Override
