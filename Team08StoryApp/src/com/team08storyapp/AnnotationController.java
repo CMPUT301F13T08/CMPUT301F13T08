@@ -74,6 +74,7 @@ public class AnnotationController {
     private FileHelper fHelper;
     private ESHelper esHelper;
     private static final int MODE_OFFLINE = 1;
+    private static final int MODE_MY = 2;
 
     /**
      * Constructor of the AnnotationController takes in all the variables it
@@ -242,7 +243,6 @@ public class AnnotationController {
      * Adds the user's Annotation to the Story and saves it either to Offline or
      * Online depending on where they were reading the Story from. If it is
      * Online the Annotation should now be viewable by others.
-     * 
      */
     private void addAnnotation(String fileName, int mode) {
 
@@ -273,6 +273,18 @@ public class AnnotationController {
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    }
+	} else if (mode == MODE_MY) {
+	    try {
+		fHelper.updateOfflineStory(currentStory);
+	    } catch (FileNotFoundException e) {
+		e.printStackTrace();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	    Toast.makeText(context, "New annotation is saved successfully",
+		    Toast.LENGTH_LONG).show();
+	    return;
+
 	}
 
 	/*

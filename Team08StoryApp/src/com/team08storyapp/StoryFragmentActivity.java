@@ -76,8 +76,6 @@ import android.widget.TextView;
 public class StoryFragmentActivity extends Activity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-    private static final int MODE_ONLINE = 0;
-    private static final int MODE_OFFLINE = 1;
     private int currentStoryFragmentId;
     private int currentStoryFragmentIndex;
     private int currentStoryId;

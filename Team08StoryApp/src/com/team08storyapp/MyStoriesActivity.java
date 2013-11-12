@@ -283,6 +283,7 @@ public class MyStoriesActivity extends ListActivity {
 	    firstStoryFragment.putExtra("story", (Serializable) currentStory);
 	    firstStoryFragment.putExtra("storyFragmentId",
 		    currentStory.getFirstStoryFragmentId());
+	    firstStoryFragment.putExtra("mode", 2);
 	    startActivity(firstStoryFragment);
 	    return true;
 	    

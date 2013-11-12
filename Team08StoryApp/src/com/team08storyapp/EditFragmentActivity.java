@@ -19,22 +19,28 @@ import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class EditFragmentActivity extends Activity {
 
     private int currentStoryFragmentId;
     private int currentStoryFragmentIndex;
     private int currentStoryId;
-    private int currentPic = 0;
+    private int mode;
+    private int currentPic;
+
+    /* declare variables for UI setup */
     private PicAdapter imgAdapt;
     private Gallery picGallery;
     private ListView lv;
-    private View headerText;
     private View headerGallery;
     private ImageView picView;
+    private EditText textSection;
+
     private Story currentStory;
     private StoryFragment currentStoryFragment;
     private FileHelper fHelper;
+    private ESHelper esHelper;
     private Uri imageFileUri;
     private PhotoController pc;
 
@@ -42,23 +48,24 @@ public class EditFragmentActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_edit_fragment);
-	
+	fHelper = new FileHelper(this, 1);
+
 	/* set up the choice listView */
 	lv = (ListView) findViewById(android.R.id.list);
 
 	/* set up the EditText Dialogue */
-	EditText textSection = (EditText) findViewById(R.id.headerDialogue);
+	textSection = (EditText) findViewById(R.id.headerDialogue);
 	textSection.setOnTouchListener(new View.OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View arg0, MotionEvent arg1) {
 		return false;
 	    }
 	});
-	
+
 	/* set up gallery header */
 	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
 		null);
-	
+
 	/* set up the picView */
 	picView = (ImageView) headerGallery.findViewById(R.id.picture);
 
@@ -109,7 +116,7 @@ public class EditFragmentActivity extends Activity {
 
 	pc = new PhotoController(this, getApplicationContext(), currentStory,
 		currentStoryFragment, currentStoryFragmentIndex, fHelper);
-	
+
 	/* create a new adapter */
 	imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
 		currentStoryFragmentId);
@@ -139,17 +146,31 @@ public class EditFragmentActivity extends Activity {
 	case R.id.addChoice:
 	    Intent intent = new Intent(EditFragmentActivity.this,
 		    EditChoiceActivity.class);
+	    /* pass the currentStory to intent */
+	    intent.putExtra("story", currentStory);
+
+	    /* retrieve the selected choice object */
+	    int newChoiceId = currentStoryFragment.getChoices().size()+1;
+
+	    /* put the id in the intent */
+	    intent.putExtra("choiceId", newChoiceId);
+	    intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
 	    startActivity(intent);
 	    return true;
 
 	case R.id.save:
 	    try {
+		String dialogue = textSection.getText().toString();
+		currentStoryFragment.setStoryText(dialogue);
+		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+			currentStoryFragment);
+		System.out.println(currentStory.getOfflineStoryId());
 		fHelper.updateOfflineStory(currentStory);
+		Toast.makeText(getApplicationContext(), "Save Successfully",
+			Toast.LENGTH_LONG).show();
 	    } catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    } catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	    return true;
@@ -179,7 +200,7 @@ public class EditFragmentActivity extends Activity {
 	super.onResume();
 
     }
-    
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 	if (resultCode == RESULT_OK) {
