@@ -69,7 +69,7 @@ public class SelectFragmentActivity extends Activity {
 		int storyFragmentId = sf.getStoryFragmentId();
 		
 		Intent intent = new Intent(SelectFragmentActivity.this,
-			EditFragmentActivity.class);
+			EditChoiceActivity.class);
 		intent.putExtra("storyFragmentId", storyFragmentId);
 		intent.putExtra("story", currentStory);
 		intent.putExtra("mode", 1);
