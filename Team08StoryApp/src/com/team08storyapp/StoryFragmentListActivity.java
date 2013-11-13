@@ -54,10 +54,11 @@ public class StoryFragmentListActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_story_fragment_list);
 	lv = (ListView) findViewById(android.R.id.list);
+
+	/* Retrieve from the intent the Story and Story Fragments */
 	Intent passedIntent = getIntent();
-	sfList = (ArrayList<StoryFragment>) passedIntent
-		.getSerializableExtra("storyFragments");
 	currentStory = (Story) passedIntent.getSerializableExtra("story");
+	sfList = currentStory.getStoryFragments();
 
 	lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list, sfList));
 
@@ -87,7 +88,7 @@ public class StoryFragmentListActivity extends Activity {
     }
 
     public void toEditFragment(View view) {
-	Intent intent = new Intent(StoryFragmentListActivity.this,
+	Intent intent = new Intent(getApplicationContext(),
 		EditFragmentActivity.class);
 	int newStoryFragmentId = currentStory.getStoryFragments().size() + 1;
 	intent.putExtra("storyFragmentId", newStoryFragmentId);
