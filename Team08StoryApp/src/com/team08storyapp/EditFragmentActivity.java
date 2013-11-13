@@ -53,7 +53,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class EditFragmentActivity extends Activity {
-   
 
     private int currentStoryFragmentId;
     private int currentStoryFragmentIndex;
@@ -80,13 +79,16 @@ public class EditFragmentActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_edit_fragment);
+
 	fHelper = new FileHelper(this, 1);
 
-	/* set up the choice listView */
 	lv = (ListView) findViewById(android.R.id.list);
-
-	/* set up the EditText Dialogue */
 	textSection = (EditText) findViewById(R.id.headerDialogue);
+
+	/*
+	 * Create a touch listener to handle scrolling of the text description
+	 * section of the Edit Fragment Screen.
+	 */
 	textSection.setOnTouchListener(new View.OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -94,19 +96,16 @@ public class EditFragmentActivity extends Activity {
 	    }
 	});
 
-	/* set up gallery header */
 	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
 		null);
-
-	/* set up the picView */
 	picView = (ImageView) headerGallery.findViewById(R.id.picture);
-
-	/* get the gallery view */
 	picGallery = (Gallery) headerGallery.findViewById(R.id.gallery);
 
-	/* set the click listener for each item in the thumbnail gallery */
+	/*
+	 * Create a click listener to handle when the user clicks on the gallery
+	 * to add a photo.
+	 */
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
-	    /* handle clicks */
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
 		/*
@@ -117,51 +116,57 @@ public class EditFragmentActivity extends Activity {
 	    }
 	});
 
+	/*
+	 * Retrieve the Story Fragment Id passed from the Story Fragment List
+	 * that the user is wishing to edit, along with the Story it is from in
+	 * order to save any changes made back to the Story.
+	 */
 	Intent storyFragment = getIntent();
-
-	/* Get the story object from the intent */
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
-
-	/* Get the story fragment id from the intent - the fragment to display */
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
-	currentStoryId = currentStory.getOfflineStoryId();
 
-	currentStoryFragmentIndex = 0; 
-	for (int i = 0; i < currentStory.getStoryFragments().size(); i++) {
-	    if (currentStory.getStoryFragments().get(i).getStoryFragmentId() == currentStoryFragmentId) {
-		currentStoryFragmentIndex = i;
-	    }
-	}
 	/*
-	 * The current story fragment object - from the story fragment list, by
-	 * id
+	 * Set the index position of the Story Fragment in the Story's Array List
+	 * of Story Fragments to be able to update the information at that
+	 * location when finished editing the Story Fragment.
 	 */
-	currentStoryFragment = StoryController.readStoryFragment(
-		currentStory.getStoryFragments(), currentStoryFragmentId);
+	currentStoryFragmentIndex = currentStoryFragmentId - 1;
 
-	/* Display the current fragment text */
-	textSection.setText(currentStoryFragment.getStoryText());
+	/*
+	 * If the Story Fragment Id is less than or equal to the size of the
+	 * array list of Story Fragments, then we are dealing with an editing an
+	 * existing Story Fragment. Thus retrieve the Story Fragment to display
+	 * the current data for editing.
+	 */
+	if (currentStoryFragmentId <= currentStory.getStoryFragments().size()) {
+	    currentStoryFragment = StoryController.readStoryFragment(
+		    currentStory.getStoryFragments(), currentStoryFragmentId);
 
-	ArrayList<Choice> storyFragmentChoices = currentStoryFragment
-		.getChoices();
-	ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
+	    /*
+	     * Display the existing Story Fragment text, choices, and
+	     * illustrations.
+	     */
+	    textSection.setText(currentStoryFragment.getStoryText());
+	    ArrayList<Choice> storyFragmentChoices = currentStoryFragment
+		    .getChoices();
+	    ArrayList<Photo> illustrationList = currentStoryFragment
+		    .getPhotos();
 
-	pc = new PhotoController(this, getApplicationContext(), currentStory,
-		currentStoryFragment, currentStoryFragmentIndex, fHelper);
+	    pc = new PhotoController(this, getApplicationContext(),
+		    currentStory, currentStoryFragment,
+		    currentStoryFragmentIndex, fHelper);
 
-	/* create a new adapter */
-	imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
-		currentStoryFragmentId);
+	    imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
+		    currentStoryFragmentId);
 
-	/* set the gallery adapter */
-	picGallery.setAdapter(imgAdapt);
-	fillChoice(storyFragmentChoices);
+	    picGallery.setAdapter(imgAdapt);
+	    fillChoice(storyFragmentChoices);
+	}
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater().inflate(R.menu.edit_fragment, menu);
 	return true;
     }
@@ -183,6 +188,7 @@ public class EditFragmentActivity extends Activity {
 	    intent.putExtra("story", currentStory);
 
 	    /* retrieve the selected choice object */
+
 	    //not needed
 	    //int newChoiceId = currentStoryFragment.getChoices().size()+1;
 

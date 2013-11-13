@@ -72,7 +72,7 @@ public class MyStoriesActivity extends ListActivity {
 
     private static final int PUBLISH_ID = Menu.FIRST;
     private static final int READ_ID = Menu.FIRST + 1;
-    private static final int EDIT_ID = Menu.FIRST +2;
+    private static final int EDIT_ID = Menu.FIRST + 2;
     private static final boolean onUpdate = true;
     private static final boolean onCreate = false;
 
@@ -219,7 +219,7 @@ public class MyStoriesActivity extends ListActivity {
 	super.onCreateContextMenu(menu, v, menuInfo);
 	menu.add(0, PUBLISH_ID, 0, R.string.publish_menu);
 	menu.add(0, READ_ID, 0, R.string.read_menu);
-	menu.add(0,EDIT_ID, 0, R.string.edit_menu);
+	menu.add(0, EDIT_ID, 0, R.string.edit_menu);
     }
 
     public boolean onContextItemSelected(MenuItem item) {
@@ -258,24 +258,21 @@ public class MyStoriesActivity extends ListActivity {
 		return true;
 	    }
 	case EDIT_ID:
-	    
+
 	    Intent intent = new Intent(MyStoriesActivity.this,
-			StoryFragmentListActivity.class);
-		intent.putExtra("story", currentStory);
-		ArrayList<StoryFragment> storyFragments = currentStory.getStoryFragments();
-		intent.putExtra("storyFragments", storyFragments);
-		startActivity(intent);
-	    
-	   
+		    StoryFragmentListActivity.class);
+	    intent.putExtra("story", currentStory);
+	    startActivity(intent);
+
 	    return true;
-	    
+
 	case READ_ID:
 
 	    /*
 	     * This case creates an intent to pass the selected story object and
 	     * the first story fragment id to the StoryFragmentActivity
 	     */
-	     
+
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
 	    firstStoryFragment.putExtra("story", (Serializable) currentStory);
@@ -284,7 +281,7 @@ public class MyStoriesActivity extends ListActivity {
 	    firstStoryFragment.putExtra("mode", 2);
 	    startActivity(firstStoryFragment);
 	    return true;
-	    
+
 	default:
 	    return super.onContextItemSelected(item);
 	}
@@ -294,13 +291,13 @@ public class MyStoriesActivity extends ListActivity {
      * This method populates the list view with a list of My Stories.
      * 
      * @param sList
-     * 		An ArrayList of stories used to populate the list.
+     *            An ArrayList of stories used to populate the list.
      * @param update
-     * 		A flag that indicates if a footer/header already exists.
+     *            A flag that indicates if a footer/header already exists.
      */
     private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
-	    //lv.addHeaderView(footerCreate);
+	    // lv.addHeaderView(footerCreate);
 	    lv.addHeaderView(header);
 	}
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
@@ -320,11 +317,11 @@ public class MyStoriesActivity extends ListActivity {
     }
 
     public void toNewStoryActivity(View view) {
-    	Intent intent = new Intent(MyStoriesActivity.this, NewStoryActivity.class);
-    	startActivity(intent);
-        }
-    
-    
+	Intent intent = new Intent(MyStoriesActivity.this,
+		NewStoryActivity.class);
+	startActivity(intent);
+    }
+
     protected void onResume() {
 	super.onResume();
 	try {
