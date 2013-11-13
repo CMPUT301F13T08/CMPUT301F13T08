@@ -260,10 +260,10 @@ public class MyStoriesActivity extends ListActivity {
 	case EDIT_ID:
 	    
 	    Intent intent = new Intent(MyStoriesActivity.this,
-			EditFragmentActivity.class);
+			StoryFragmentListActivity.class);
 		intent.putExtra("story", currentStory);
-		int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
-		intent.putExtra("storyFragmentId", nextStoryFragmentId);
+		ArrayList<StoryFragment> storyFragments = currentStory.getStoryFragments();
+		intent.putExtra("storyFragments", storyFragments);
 		startActivity(intent);
 	    
 	   

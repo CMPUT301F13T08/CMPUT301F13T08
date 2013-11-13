@@ -54,10 +54,10 @@ public class SelectFragmentActivity extends Activity {
 	return true;
     }
 
-    /*
+/*    
      * Extras will have to be passed here so that the new fragment created is
      * linked as a choice the last choice from EditChoiceActivity.
-     */
+     
     public void newEditFragmentActivity(View view) {
 	StoryFragment newStoryFragment = new StoryFragment(currentStory.getStoryFragments().size()+1);
 	currentStory.getStoryFragments().add(newStoryFragment);
@@ -68,6 +68,6 @@ public class SelectFragmentActivity extends Activity {
 	intent.putExtra("story", currentStory);
 	intent.putExtra("mode", 1);
 	startActivity(intent);
-    }
+    }*/
 
 }

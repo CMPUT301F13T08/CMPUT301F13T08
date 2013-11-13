@@ -44,8 +44,13 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 	    holder.fragmentImage = (ImageView) v.findViewById(R.id.thumbnail);
 	    holder.fragmentText = (TextView) v.findViewById(R.id.fragmentText);
 	    v.setTag(holder);
-	} else
+	} else {
 	    holder = (ViewHolder) v.getTag();
+	}
+
+	if (storyFragmentList == null) {
+	    return v;
+	}
 
 	final StoryFragment currentStoryFragment = storyFragmentList
 		.get(position);
@@ -56,28 +61,33 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 	 * view. Else set the default launch icon to the image view.
 	 */
 	if (currentStoryFragment != null) {
-	    if (currentStoryFragment.getPhotos().get(0) != null
-		    && !currentStoryFragment.getPhotos().isEmpty()) {
-		File file = activity.getFilesDir();
-		File[] fileList = file.listFiles();
-		File sfFile;
-		for (int i = 0; i < fileList.length; i++) {
-		    if (fileList[i].getName().equals(
-			    currentStoryFragment.getPhotos().get(0)
-				    .getPictureName())) {
-			sfFile = fileList[i];
-			String path = sfFile.getAbsolutePath();
+	    if (!currentStoryFragment.getPhotos().isEmpty()) {
+		if (currentStoryFragment.getPhotos().get(0) != null) {
+		    File file = activity.getFilesDir();
+		    File[] fileList = file.listFiles();
+		    File sfFile;
+		    for (int i = 0; i < fileList.length; i++) {
+			if (fileList[i].getName().equals(
+				currentStoryFragment.getPhotos().get(0)
+					.getPictureName())) {
+			    sfFile = fileList[i];
+			    String path = sfFile.getAbsolutePath();
 
-			Bitmap placeholder = BitmapFactory.decodeFile(path);
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			placeholder.compress(Bitmap.CompressFormat.PNG, 80,
-				stream);
-			byte[] bytePicture = stream.toByteArray();
-			holder.fragmentImage.setImageBitmap((BitmapFactory
-				.decodeByteArray(bytePicture, 0,
-					bytePicture.length)));
-			break;
+			    Bitmap placeholder = BitmapFactory.decodeFile(path);
+			    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			    placeholder.compress(Bitmap.CompressFormat.PNG, 80,
+				    stream);
+			    byte[] bytePicture = stream.toByteArray();
+			    holder.fragmentImage.setImageBitmap((BitmapFactory
+				    .decodeByteArray(bytePicture, 0,
+					    bytePicture.length)));
+			    break;
+			}
 		    }
+		} else {
+		    holder.fragmentImage.setImageBitmap(BitmapFactory
+			    .decodeResource(activity.getResources(),
+				    R.drawable.ic_launcher));
 		}
 	    } else {
 		holder.fragmentImage.setImageBitmap(BitmapFactory

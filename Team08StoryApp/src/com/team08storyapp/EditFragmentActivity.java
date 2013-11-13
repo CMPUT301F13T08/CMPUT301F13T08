@@ -96,6 +96,7 @@ public class EditFragmentActivity extends Activity {
 		.getIntExtra("storyFragmentId", 0);
 	currentStoryId = currentStory.getOfflineStoryId();
 
+	currentStoryFragmentIndex = 0; 
 	for (int i = 0; i < currentStory.getStoryFragments().size(); i++) {
 	    if (currentStory.getStoryFragments().get(i).getStoryFragmentId() == currentStoryFragmentId) {
 		currentStoryFragmentIndex = i;
