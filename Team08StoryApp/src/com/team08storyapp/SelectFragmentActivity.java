@@ -70,9 +70,10 @@ public class SelectFragmentActivity extends Activity {
 		
 		Intent intent = new Intent(SelectFragmentActivity.this,
 			EditChoiceActivity.class);
-		intent.putExtra("storyFragmentId", storyFragmentId);
+		intent.putExtra("nextStoryFragmentId", storyFragmentId);
 		intent.putExtra("story", currentStory);
 		intent.putExtra("mode", 1);
+		setResult(RESULT_OK, intent);
 		finish();
 	    }
 	});

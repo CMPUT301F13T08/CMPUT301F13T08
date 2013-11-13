@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -45,14 +46,18 @@ import android.widget.Toast;
 
 public class EditChoiceActivity extends Activity {
     private Story currentStory;
+    private StoryFragment currentStoryFragment;
     private int currentStoryFragmentIndex;
-    private int choiceId;
+    //private int choiceId;
+    private int nextFragmentId = 0;
     private Choice currentChoice;
     private FileHelper fHelper;
     private ArrayList<StoryFragment> availableStoryFragmentList;
 
     private EditText tv;
     private static final int LINKED_FRAGMENT = 1;
+    private static final String TAG = "EditChocieActivity";
+  
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +74,11 @@ public class EditChoiceActivity extends Activity {
 	currentStory = (Story) choiceIntent.getSerializableExtra("story");
 	currentStoryFragmentIndex = choiceIntent.getIntExtra(
 		"storyFragmentIndex", 0);
-	choiceId = choiceIntent.getIntExtra("choiceId", 1);
+	currentStoryFragment = currentStory.getStoryFragments().get(currentStoryFragmentIndex);
+	//choiceId = choiceIntent.getIntExtra("choiceId", 1);
 	currentChoice = new Choice();
-	currentChoice.setChoiceId(choiceId);
+	//not needed
+	//currentChoice.setChoiceId(choiceId);
 	availableStoryFragmentList = currentStory.getStoryFragments();
 	if (currentStory.getStoryFragments().size() == availableStoryFragmentList
 		.size()) {
@@ -82,21 +89,36 @@ public class EditChoiceActivity extends Activity {
 
     public void returnEditFragmentActivity(View view) {
 	tv = (EditText) findViewById(R.id.editChoiceText);
-	String text = tv.getText().toString();
-	if (isBlank(text)) {
+	String choiceText = tv.getText().toString();
+	if (isBlank(choiceText)) {
 	    Toast.makeText(getApplicationContext(),
 		    "Please enter choice text.", Toast.LENGTH_LONG).show();
 	    return;
 	}
-	currentChoice.setText(text);
-	if (currentChoice.getStoryFragmentID() < 1) {
+	
+	//not needed
+	//currentChoice.setText(text);
+	//if (currentChoice.getStoryFragmentID() < 1) {
+	if (nextFragmentId < 1) {
 	    Toast.makeText(getApplicationContext(),
 		    "Please link a story fragment to current choice.",
 		    Toast.LENGTH_LONG).show();
 	    return;
 	}
-	currentStory.getStoryFragments().get(currentStoryFragmentIndex)
-		.getChoices().add(currentChoice);
+	
+	//not needed
+	/*currentStory.getStoryFragments().get(currentStoryFragmentIndex)
+		.getChoices().add(currentChoice);*/
+	currentStoryFragment = StoryController.addChoice(choiceText, currentStoryFragment, nextFragmentId);
+	ArrayList<StoryFragment> currentStoryFragments = currentStory.getStoryFragments();
+	for (StoryFragment storyFragment : currentStoryFragments){
+	    if(storyFragment.getStoryFragmentId() == currentStoryFragment.getStoryFragmentId()){
+		storyFragment = currentStoryFragment;
+	    }
+	}
+	currentStory.setStoryFragments(currentStoryFragments);
+	//currentStory.getStoryFragments().set(currentStoryFragment.getStoryFragmentId()-1, currentStoryFragment);	
+	
 	try {
 	    fHelper.updateOfflineStory(currentStory);
 	} catch (FileNotFoundException e) {
@@ -116,14 +138,16 @@ public class EditChoiceActivity extends Activity {
 	startActivityForResult(intent, LINKED_FRAGMENT);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-	if (resultCode == RESULT_OK && requestCode == LINKED_FRAGMENT) {
-	    int nextFragmentId = data.getIntExtra("nextStoryFragmentId", 1);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { 
+	super.onActivityResult(requestCode, resultCode, data);
+	    //if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+	    nextFragmentId = data.getIntExtra("nextStoryFragmentId", resultCode);
+	    //Log.d(TAG, "NEXT FRAGMENT ID OF CHOICE:");
+	    //Log.d(TAG, String.valueOf(nextFragmentId));
 	    currentChoice.setStoryFragmentID(nextFragmentId);
-	} else {
-	    super.onActivityResult(requestCode, resultCode, data);
-	}
+	//} //else {
+	  //  super.onActivityResult(requestCode, resultCode, data);
+	//}
     }
 
     private boolean isBlank(String str) {

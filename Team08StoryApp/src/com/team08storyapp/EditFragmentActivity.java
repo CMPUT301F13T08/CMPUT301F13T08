@@ -183,10 +183,12 @@ public class EditFragmentActivity extends Activity {
 	    intent.putExtra("story", currentStory);
 
 	    /* retrieve the selected choice object */
-	    int newChoiceId = currentStoryFragment.getChoices().size()+1;
+	    //not needed
+	    //int newChoiceId = currentStoryFragment.getChoices().size()+1;
 
 	    /* put the id in the intent */
-	    intent.putExtra("choiceId", newChoiceId);
+	    //not needed
+	    //intent.putExtra("choiceId", newChoiceId);
 	    intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
 	    startActivity(intent);
 	    return true;
