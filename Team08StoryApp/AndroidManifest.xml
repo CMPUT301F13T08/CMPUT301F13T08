@@ -83,6 +83,10 @@
             android:name="com.team08storyapp.SelectFragmentActivity"
             android:label="@string/title_activity_select_fragment" >
         </activity>
+        <activity
+            android:name="com.team08storyapp.StoryFragmentListActivity"
+            android:label="@string/title_activity_story_fragment_list" >
+        </activity>
     </application>
 
 </manifest>
