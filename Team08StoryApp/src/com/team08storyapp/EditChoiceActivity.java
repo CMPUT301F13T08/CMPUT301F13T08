@@ -123,8 +123,10 @@ public class EditChoiceActivity extends Activity {
 	currentStory.getStoryFragments().set(
 		currentStoryFragment.getStoryFragmentId() - 1,
 		currentStoryFragment);
-	ArrayList<StoryFragment> currentStoryFragments = currentStory
-		.getStoryFragments();
+	/*
+	 * ArrayList<StoryFragment> currentStoryFragments = currentStory
+	 * .getStoryFragments();
+	 */
 	try {
 	    fHelper.updateOfflineStory(currentStory);
 	} catch (FileNotFoundException e) {
