@@ -4,24 +4,24 @@
         android:id="@+id/camIllus"
         android:orderInCategory="1"
         android:showAsAction="never"
-        android:title="Add illustration (Camera)"/>
+        android:title="@string/add_illustration_camera_"/>
 
     <item
         android:id="@+id/camGallery"
         android:orderInCategory="2"
         android:showAsAction="never"
-        android:title="Add illustration (Gallery)"/>
+        android:title="@string/add_illustration_gallery_"/>
     
     <item
         android:id="@+id/addChoice"
         android:orderInCategory="3"
         android:showAsAction="never"
-        android:title="Add Choice"/>
+        android:title="@string/add_choice"/>
     
      <item
         android:id="@+id/save"
         android:orderInCategory="4"
         android:showAsAction="never"
-        android:title="Save"/>
+        android:title="@string/save"/>
     
 </menu>

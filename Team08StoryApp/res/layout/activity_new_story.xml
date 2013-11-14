@@ -15,7 +15,7 @@
         android:layout_above="@+id/enterAuthor"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="22dp"
-        android:text="Title:" />
+        android:text="@string/title_" />
 
     <EditText
         android:id="@+id/enterTitle"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/titleText"
         android:layout_toRightOf="@id/titleText"
-        android:hint="Enter new story title here" />
+        android:hint="@string/enter_new_story_title_here" />
 
     <TextView
         android:id="@+id/authorText"
@@ -32,7 +32,7 @@
         android:layout_alignLeft="@+id/titleText"
         android:layout_alignParentTop="true"
         android:layout_marginTop="58dp"
-        android:text="Author:" />
+        android:text="@string/author_" />
 
     <EditText
         android:id="@+id/enterAuthor"
@@ -40,24 +40,16 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/authorText"
         android:layout_toRightOf="@id/authorText"
-        android:hint="Enter author&apos;s name here" />
+        android:hint="@string/enter_author_apos_s_name_here" />
 
-    <TextView
-        android:id="@+id/authorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/titleText"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="58dp"
-        android:text="Author:" />
-
+ 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/enterAuthor"
-        android:text="Save" 
+        android:text="@string/save" 
         android:onClick="toEditFragmentActivity"/>
 
 </RelativeLayout>

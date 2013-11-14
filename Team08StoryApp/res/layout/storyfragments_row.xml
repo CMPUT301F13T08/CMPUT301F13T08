@@ -4,6 +4,7 @@
     android:layout_height="match_parent" >
 
     <ImageView
+        android:contentDescription="@string/gallery_image"
         android:id="@+id/thumbnail"
         android:layout_width="35dp"
         android:layout_height="35dp"
