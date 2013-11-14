@@ -29,5 +29,6 @@
     <string name="title_activity_edit_choice">EditChoiceActivity</string>
     <string name="title_activity_select_fragment">SelectFragmentActivity</string>
     <string name="title_activity_story_fragment_list">StoryFragmentListActivity</string>
+    <string name ="gallery_image">Default gallery image</string>
 
 </resources>

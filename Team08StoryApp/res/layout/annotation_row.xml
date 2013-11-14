@@ -5,6 +5,7 @@
     android:orientation="vertical" >
 
     <ImageView
+        android:contentDescription="@string/gallery_image"
         android:id="@+id/annotationImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
