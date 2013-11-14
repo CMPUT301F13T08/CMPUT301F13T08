@@ -48,7 +48,7 @@ public class EditChoiceActivity extends Activity {
     private Story currentStory;
     private StoryFragment currentStoryFragment;
     private int currentStoryFragmentIndex;
-    //private int choiceId;
+    // private int choiceId;
     private int nextFragmentId = 0;
     private Choice currentChoice;
     private FileHelper fHelper;
@@ -57,33 +57,31 @@ public class EditChoiceActivity extends Activity {
     private EditText tv;
     private static final int LINKED_FRAGMENT = 1;
     private static final String TAG = "EditChocieActivity";
-  
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_edit_choice);
 	fHelper = new FileHelper(this, 1);
+
+	Intent choiceIntent = getIntent();
+	currentStory = (Story) choiceIntent.getSerializableExtra("story");
+	currentStoryFragmentIndex = choiceIntent.getIntExtra(
+		"storyFragmentIndex", 0);
+	currentStoryFragment = currentStory.getStoryFragments().get(
+		currentStoryFragmentIndex);
+	availableStoryFragmentList = currentStory.getStoryFragments();
+	if (currentStory.getStoryFragments().size() == availableStoryFragmentList
+		.size()) {
+	    availableStoryFragmentList.remove(currentStoryFragmentIndex);
+	}
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater().inflate(R.menu.edit_choice, menu);
-	Intent choiceIntent = getIntent();
-	currentStory = (Story) choiceIntent.getSerializableExtra("story");
-	currentStoryFragmentIndex = choiceIntent.getIntExtra(
-		"storyFragmentIndex", 0);
-	currentStoryFragment = currentStory.getStoryFragments().get(currentStoryFragmentIndex);
-	//choiceId = choiceIntent.getIntExtra("choiceId", 1);
-	currentChoice = new Choice();
-	//not needed
-	//currentChoice.setChoiceId(choiceId);
-	availableStoryFragmentList = currentStory.getStoryFragments();
-	if (currentStory.getStoryFragments().size() == availableStoryFragmentList
-		.size()) {
-	    availableStoryFragmentList.remove(currentStoryFragmentIndex);
-	}
+
 	return true;
     }
 
@@ -95,30 +93,38 @@ public class EditChoiceActivity extends Activity {
 		    "Please enter choice text.", Toast.LENGTH_LONG).show();
 	    return;
 	}
-	
-	//not needed
-	//currentChoice.setText(text);
-	//if (currentChoice.getStoryFragmentID() < 1) {
-	if (nextFragmentId < 1) {
+
+	// not needed
+	// currentChoice.setText(text);
+	// if (currentChoice.getStoryFragmentID() < 1) {
+	if (nextFragmentId < 0) {
 	    Toast.makeText(getApplicationContext(),
 		    "Please link a story fragment to current choice.",
 		    Toast.LENGTH_LONG).show();
 	    return;
 	}
-	
-	//not needed
-	/*currentStory.getStoryFragments().get(currentStoryFragmentIndex)
-		.getChoices().add(currentChoice);*/
-	currentStoryFragment = StoryController.addChoice(choiceText, currentStoryFragment, nextFragmentId);
-	ArrayList<StoryFragment> currentStoryFragments = currentStory.getStoryFragments();
-	for (StoryFragment storyFragment : currentStoryFragments){
-	    if(storyFragment.getStoryFragmentId() == currentStoryFragment.getStoryFragmentId()){
-		storyFragment = currentStoryFragment;
-	    }
-	}
-	currentStory.setStoryFragments(currentStoryFragments);
-	//currentStory.getStoryFragments().set(currentStoryFragment.getStoryFragmentId()-1, currentStoryFragment);	
-	
+
+	// not needed
+	/*
+	 * currentStory.getStoryFragments().get(currentStoryFragmentIndex)
+	 * .getChoices().add(currentChoice);
+	 */
+	currentStoryFragment = StoryController.addChoice(choiceText,
+		currentStoryFragment, nextFragmentId);
+	/*
+	 * ArrayList<StoryFragment> currentStoryFragments =
+	 * currentStory.getStoryFragments(); for (StoryFragment storyFragment :
+	 * currentStoryFragments){ if(storyFragment.getStoryFragmentId() ==
+	 * currentStoryFragment.getStoryFragmentId()){ storyFragment =
+	 * currentStoryFragment; } }
+	 * currentStory.setStoryFragments(currentStoryFragments);
+	 */
+
+	currentStory.getStoryFragments().set(
+		currentStoryFragment.getStoryFragmentId() - 1,
+		currentStoryFragment);
+	ArrayList<StoryFragment> currentStoryFragments = currentStory
+		.getStoryFragments();
 	try {
 	    fHelper.updateOfflineStory(currentStory);
 	} catch (FileNotFoundException e) {
@@ -138,16 +144,16 @@ public class EditChoiceActivity extends Activity {
 	startActivityForResult(intent, LINKED_FRAGMENT);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) { 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	super.onActivityResult(requestCode, resultCode, data);
-	    //if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-	    nextFragmentId = data.getIntExtra("nextStoryFragmentId", resultCode);
-	    //Log.d(TAG, "NEXT FRAGMENT ID OF CHOICE:");
-	    //Log.d(TAG, String.valueOf(nextFragmentId));
-	    currentChoice.setStoryFragmentID(nextFragmentId);
-	//} //else {
-	  //  super.onActivityResult(requestCode, resultCode, data);
-	//}
+	// if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+	nextFragmentId = data.getIntExtra("nextStoryFragmentId", resultCode);
+	// Log.d(TAG, "NEXT FRAGMENT ID OF CHOICE:");
+	// Log.d(TAG, String.valueOf(nextFragmentId));
+	currentChoice.setStoryFragmentID(nextFragmentId);
+	// } //else {
+	// super.onActivityResult(requestCode, resultCode, data);
+	// }
     }
 
     private boolean isBlank(String str) {

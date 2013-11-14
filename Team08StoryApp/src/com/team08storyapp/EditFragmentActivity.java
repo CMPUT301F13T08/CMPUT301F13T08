@@ -127,8 +127,8 @@ public class EditFragmentActivity extends Activity {
 		.getIntExtra("storyFragmentId", 0);
 
 	/*
-	 * Set the index position of the Story Fragment in the Story's Array List
-	 * of Story Fragments to be able to update the information at that
+	 * Set the index position of the Story Fragment in the Story's Array
+	 * List of Story Fragments to be able to update the information at that
 	 * location when finished editing the Story Fragment.
 	 */
 	currentStoryFragmentIndex = currentStoryFragmentId - 1;
@@ -184,17 +184,7 @@ public class EditFragmentActivity extends Activity {
 	case R.id.addChoice:
 	    Intent intent = new Intent(EditFragmentActivity.this,
 		    EditChoiceActivity.class);
-	    /* pass the currentStory to intent */
 	    intent.putExtra("story", currentStory);
-
-	    /* retrieve the selected choice object */
-
-	    //not needed
-	    //int newChoiceId = currentStoryFragment.getChoices().size()+1;
-
-	    /* put the id in the intent */
-	    //not needed
-	    //intent.putExtra("choiceId", newChoiceId);
 	    intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
 	    startActivity(intent);
 	    return true;
