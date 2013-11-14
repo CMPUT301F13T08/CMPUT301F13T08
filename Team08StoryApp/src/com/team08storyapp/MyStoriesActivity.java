@@ -104,7 +104,7 @@ public class MyStoriesActivity extends ListActivity {
 	 * to auto-generate a story in My Stories for part 3 demo.
 	 */
 	try {
-	    if (fHelper.getOfflineStory(11) != null) {
+	    if (fHelper.getOfflineStory(11) == null) {
 		Story s1 = new Story(11, "Los Santos", "Alice Wu");
 		ArrayList<StoryFragment> sfList = new ArrayList<StoryFragment>();
 		StoryFragment sf1 = new StoryFragment(
