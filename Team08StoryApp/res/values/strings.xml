@@ -45,5 +45,15 @@
     <string name="view_annotations">View Annotations</string>
     <string name="add_annotations">Add Annotations</string>
     <string name="return_to_main_menu">Return to Main Menu</string>
+    <string name="textview">TextView</string>
+    <string name="from_camera">From Camera</string>
+    <string name="from_gallery">From Gallery</string>
+    <string name="add_illustration_camera_">Add illustration (Camera)</string>
+    <string name="add_illustration_gallery_">Add illustration (Gallery)</string>
+    <string name="add_choice">Add Choice</string>
+    <string name="create_a_story">Create a Story</string>
+    <string name="search_">Search&#8230;</string>
+    <string name="illustration_from_camera">Illustration from Camera</string>
+    <string name="illustration_from_gallery">Illustration from Gallery</string>
 
 </resources>
