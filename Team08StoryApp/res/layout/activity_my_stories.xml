@@ -17,6 +17,6 @@
         android:layout_marginTop="3dip"
         android:layout_weight="0.79"
         android:onClick="toNewStoryActivity"
-        android:text="Create New Story" />
+        android:text="@string/create_new_story" />
 
 </LinearLayout>

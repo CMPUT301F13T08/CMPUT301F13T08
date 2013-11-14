@@ -14,7 +14,7 @@
         android:id="@+id/choiceText"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Choice Text:"
+        android:text="@string/choice_text"
        />
     
     <EditText
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:layout_below="@id/choiceText"
-        android:hint="Enter the text for your choice."
+        android:hint="@string/enter_the_text_for_your_choice_"
         />
 
     <Button
@@ -32,7 +32,7 @@
         android:layout_below="@+id/editChoiceText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="116dp"
-        android:text="Link choice to fragment"
+        android:text="@string/link_choice_to_fragment"
         android:onClick="toSelectFragmentActivity" />
 
     <Button
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/editChoiceText"
-        android:text="Save"
+        android:text="@string/save"
         android:onClick="returnEditFragmentActivity"
          />
   

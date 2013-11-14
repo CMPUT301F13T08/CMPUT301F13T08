@@ -30,5 +30,20 @@
     <string name="title_activity_select_fragment">SelectFragmentActivity</string>
     <string name="title_activity_story_fragment_list">StoryFragmentListActivity</string>
     <string name ="gallery_image">Default gallery image</string>
+    <string name="enter_the_text_for_your_choice_">Enter the text for your choice.</string>
+    <string name="choice_text">Choice Text:</string>
+    <string name="link_choice_to_fragment">Link choice to fragment</string>
+    <string name="save">Save</string>
+    <string name="create_new_story">Create New Story</string>
+    <string name="title_">Title:</string>
+    <string name="enter_new_story_title_here">Enter new story title here</string>
+    <string name="author_">Author:</string>
+    <string name="enter_author_apos_s_name_here">Enter author&amp;apos;s name here</string>
+    <string name="search">Search</string>
+    <string name="select_a_fragment_to_link_to_">Select a fragment to link to:</string>
+    <string name="create_fragment">Create Fragment</string>
+    <string name="view_annotations">View Annotations</string>
+    <string name="add_annotations">Add Annotations</string>
+    <string name="return_to_main_menu">Return to Main Menu</string>
 
 </resources>
