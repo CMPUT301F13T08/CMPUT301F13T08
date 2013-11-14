@@ -56,7 +56,7 @@ public class EditChoiceActivity extends Activity {
 
     private EditText tv;
     private static final int LINKED_FRAGMENT = 1;
-    private static final String TAG = "EditChocieActivity";
+    private static final String TAG = "EditChoiceeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,8 @@ public class EditChoiceActivity extends Activity {
 	setContentView(R.layout.activity_edit_choice);
 	fHelper = new FileHelper(this, 1);
 
+	//currentChoice = new Choice();
+	
 	Intent choiceIntent = getIntent();
 	currentStory = (Story) choiceIntent.getSerializableExtra("story");
 	currentStoryFragmentIndex = choiceIntent.getIntExtra(
@@ -111,18 +113,19 @@ public class EditChoiceActivity extends Activity {
 	 */
 	currentStoryFragment = StoryController.addChoice(choiceText,
 		currentStoryFragment, nextFragmentId);
-	/*
-	 * ArrayList<StoryFragment> currentStoryFragments =
-	 * currentStory.getStoryFragments(); for (StoryFragment storyFragment :
-	 * currentStoryFragments){ if(storyFragment.getStoryFragmentId() ==
-	 * currentStoryFragment.getStoryFragmentId()){ storyFragment =
-	 * currentStoryFragment; } }
-	 * currentStory.setStoryFragments(currentStoryFragments);
-	 */
 
-	currentStory.getStoryFragments().set(
-		currentStoryFragment.getStoryFragmentId() - 1,
-		currentStoryFragment);
+	int currentFragmentId = currentStoryFragment.getStoryFragmentId();
+	for (int i = 0; i < currentStory.getStoryFragments().size(); i++){
+	    StoryFragment fragment = currentStory.getStoryFragments().get(i);
+	    if (fragment.getStoryFragmentId() == currentFragmentId){
+		fragment = currentStoryFragment;
+		currentStory.getStoryFragments().set(i, currentStoryFragment);
+	    }
+	}
+	
+	/*currentStory.getStoryFragments().set(
+		currentFragmentId - 1,
+		currentStoryFragment);*/
 	/*
 	 * ArrayList<StoryFragment> currentStoryFragments = currentStory
 	 * .getStoryFragments();
@@ -148,12 +151,16 @@ public class EditChoiceActivity extends Activity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	super.onActivityResult(requestCode, resultCode, data);
-	// if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+	//if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+	if (resultCode == RESULT_OK) {
+	currentStory = (Story) data.getSerializableExtra("story");
 	nextFragmentId = data.getIntExtra("nextStoryFragmentId", resultCode);
 	// Log.d(TAG, "NEXT FRAGMENT ID OF CHOICE:");
 	// Log.d(TAG, String.valueOf(nextFragmentId));
-	currentChoice.setStoryFragmentID(nextFragmentId);
-	// } //else {
+	
+	//currentChoice.setStoryFragmentID(nextFragmentId);
+	
+	}//else {
 	// super.onActivityResult(requestCode, resultCode, data);
 	// }
     }
