@@ -105,8 +105,9 @@ public class EditChoiceActivity extends Activity {
 		currentStoryFragment, nextFragmentId);
 	
 
-	Intent intent = new Intent(EditChoiceActivity.this,
-		EditFragmentActivity.class);
+	/*Intent intent = new Intent(EditChoiceActivity.this,
+		EditFragmentActivity.class);*/
+	Intent intent = new Intent();
 	intent.putExtra("currentStoryFragment", currentStoryFragment);
 
 	setResult(RESULT_OK, intent);

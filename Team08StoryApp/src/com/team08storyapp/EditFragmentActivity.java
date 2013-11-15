@@ -127,43 +127,7 @@ public class EditFragmentActivity extends Activity {
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 
-	/*
-	 * Set the index position of the Story Fragment in the Story's Array
-	 * List of Story Fragments to be able to update the information at that
-	 * location when finished editing the Story Fragment.
-	 */
-	currentStoryFragmentIndex = currentStoryFragmentId - 1;
-
-	/*
-	 * If the Story Fragment Id is less than or equal to the size of the
-	 * array list of Story Fragments, then we are dealing with an editing an
-	 * existing Story Fragment. Thus retrieve the Story Fragment to display
-	 * the current data for editing.
-	 */
-	if (currentStoryFragmentId <= currentStory.getStoryFragments().size()) {
-	    currentStoryFragment = StoryController.readStoryFragment(
-		    currentStory.getStoryFragments(), currentStoryFragmentId);
-
-	    /*
-	     * Display the existing Story Fragment text, choices, and
-	     * illustrations.
-	     */
-	    textSection.setText(currentStoryFragment.getStoryText());
-	    ArrayList<Choice> storyFragmentChoices = currentStoryFragment
-		    .getChoices();
-	    ArrayList<Photo> illustrationList = currentStoryFragment
-		    .getPhotos();
-
-	    pc = new PhotoController(this, getApplicationContext(),
-		    currentStory, currentStoryFragment,
-		    currentStoryFragmentIndex, fHelper);
-
-	    imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
-		    currentStoryFragmentId);
-
-	    picGallery.setAdapter(imgAdapt);
-	    fillChoice(storyFragmentChoices);
-	}
+	populateScreen();
     }
 
     @Override
@@ -228,6 +192,8 @@ public class EditFragmentActivity extends Activity {
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    currentStoryFragment = currentStory.getStoryFragments().get(
 		    currentStoryFragmentIndex);
+	    
+	    populateScreen();
 
 	} catch (Exception e) {
 	    e.printStackTrace();
@@ -253,13 +219,56 @@ public class EditFragmentActivity extends Activity {
 	    }
 	    try {
 		currentStory = fHelper.getOfflineStory(currentStoryId);
-		currentStoryFragment = currentStory.getStoryFragments().get(
-			currentStoryFragmentIndex);
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
+	    
+	    Bundle extras = data.getExtras();
+	    currentStoryFragment = (StoryFragment)extras.getSerializable("currentStoryFragment");    
+	    currentStory.getStoryFragments().set(currentStoryFragmentIndex, currentStoryFragment);
+	    populateScreen();
 	} else {
 	    super.onActivityResult(requestCode, resultCode, data);
+	}
+    }
+    
+    private void populateScreen(){
+	/*
+	 * Set the index position of the Story Fragment in the Story's Array
+	 * List of Story Fragments to be able to update the information at that
+	 * location when finished editing the Story Fragment.
+	 */
+	currentStoryFragmentIndex = currentStoryFragmentId - 1;
+
+	/*
+	 * If the Story Fragment Id is less than or equal to the size of the
+	 * array list of Story Fragments, then we are dealing with an editing an
+	 * existing Story Fragment. Thus retrieve the Story Fragment to display
+	 * the current data for editing.
+	 */
+	if (currentStoryFragmentId <= currentStory.getStoryFragments().size()) {
+	    currentStoryFragment = StoryController.readStoryFragment(
+		    currentStory.getStoryFragments(), currentStoryFragmentId);
+
+	    /*
+	     * Display the existing Story Fragment text, choices, and
+	     * illustrations.
+	     */
+	    textSection.setText(currentStoryFragment.getStoryText());
+	    ArrayList<Choice> storyFragmentChoices = currentStoryFragment
+		    .getChoices();
+	    ArrayList<Photo> illustrationList = currentStoryFragment
+		    .getPhotos();
+
+	    pc = new PhotoController(this, getApplicationContext(),
+		    currentStory, currentStoryFragment,
+		    currentStoryFragmentIndex, fHelper);
+
+	    imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
+		    currentStoryFragmentId);
+
+	    picGallery.setAdapter(imgAdapt);
+	    fillChoice(storyFragmentChoices);
 	}
     }
 

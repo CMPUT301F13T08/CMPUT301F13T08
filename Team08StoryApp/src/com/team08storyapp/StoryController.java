@@ -124,5 +124,4 @@ public class StoryController {
 	storyFragment1.getChoices().add(choice);
 	return storyFragment1;
     }
-
 }
