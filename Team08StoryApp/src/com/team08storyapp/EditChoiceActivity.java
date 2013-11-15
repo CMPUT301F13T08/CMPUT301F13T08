@@ -48,23 +48,20 @@ public class EditChoiceActivity extends Activity {
     private Story currentStory;
     private StoryFragment currentStoryFragment;
     private int currentStoryFragmentIndex;
-    // private int choiceId;
+
     private int nextFragmentId = 0;
-    private Choice currentChoice;
-    private FileHelper fHelper;
+ 
     private ArrayList<StoryFragment> availableStoryFragmentList;
 
     private EditText tv;
     private static final int LINKED_FRAGMENT = 1;
-    private static final String TAG = "EditChoiceeActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_edit_choice);
-	fHelper = new FileHelper(this, 1);
-
-	// currentChoice = new Choice();
+	
 
 	Intent choiceIntent = getIntent();
 	currentStory = (Story) choiceIntent.getSerializableExtra("story");
@@ -96,9 +93,6 @@ public class EditChoiceActivity extends Activity {
 	    return;
 	}
 
-	// not needed
-	// currentChoice.setText(text);
-	// if (currentChoice.getStoryFragmentID() < 1) {
 	if (nextFragmentId < 0) {
 	    Toast.makeText(getApplicationContext(),
 		    "Please link a story fragment to current choice.",
@@ -106,38 +100,19 @@ public class EditChoiceActivity extends Activity {
 	    return;
 	}
 
-	// not needed
-	/*
-	 * currentStory.getStoryFragments().get(currentStoryFragmentIndex)
-	 * .getChoices().add(currentChoice);
-	 */
+
 	currentStoryFragment = StoryController.addChoice(choiceText,
 		currentStoryFragment, nextFragmentId);
 
-	int currentFragmentId = currentStoryFragment.getStoryFragmentId();
-	for (int i = 0; i < currentStory.getStoryFragments().size(); i++) {
-	    StoryFragment fragment = currentStory.getStoryFragments().get(i);
-	    if (fragment.getStoryFragmentId() == currentFragmentId) {
-		fragment = currentStoryFragment;
-		currentStory.getStoryFragments().set(i, currentStoryFragment);
-	    }
-	}
 
-	/*
-	 * currentStory.getStoryFragments().set( currentFragmentId - 1,
-	 * currentStoryFragment);
-	 */
-	/*
-	 * ArrayList<StoryFragment> currentStoryFragments = currentStory
-	 * .getStoryFragments();
-	 */
-	try {
-	    fHelper.updateOfflineStory(currentStory);
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+	
+
+	Intent intent = new Intent(EditChoiceActivity.this,
+		EditFragmentActivity.class);
+	intent.putExtra("nextStoryFragment", currentStoryFragment);
+
+	setResult(RESULT_OK, intent);
+	
 	finish();
 
     }
@@ -146,25 +121,18 @@ public class EditChoiceActivity extends Activity {
 	Intent intent = new Intent(EditChoiceActivity.this,
 		SelectFragmentActivity.class);
 	intent.putExtra("storyFragments", availableStoryFragmentList);
-	intent.putExtra("story", currentStory);
+
 	startActivityForResult(intent, LINKED_FRAGMENT);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	super.onActivityResult(requestCode, resultCode, data);
-	// if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+
 	if (resultCode == RESULT_OK) {
-	    currentStory = (Story) data.getSerializableExtra("story");
 	    nextFragmentId = data
 		    .getIntExtra("nextStoryFragmentId", resultCode);
-	    // Log.d(TAG, "NEXT FRAGMENT ID OF CHOICE:");
-	    // Log.d(TAG, String.valueOf(nextFragmentId));
 
-	    // currentChoice.setStoryFragmentID(nextFragmentId);
-
-	}// else {
-	 // super.onActivityResult(requestCode, resultCode, data);
-	 // }
+	}
     }
 
     private boolean isBlank(String str) {

@@ -46,8 +46,6 @@ public class SelectFragmentActivity extends Activity {
 
     private ListView lv;
     private ArrayList<StoryFragment> sfList;
-    private StoryFragment currentStoryFragment;
-    private Story currentStory;
 
 
     @SuppressWarnings("unchecked")
@@ -59,7 +57,7 @@ public class SelectFragmentActivity extends Activity {
 	Intent passedIntent = getIntent();
 	sfList = (ArrayList<StoryFragment>) passedIntent
 		.getSerializableExtra("storyFragments");
-	currentStory = (Story) passedIntent.getSerializableExtra("story");
+
 	lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list, sfList));
 	
 	lv.setOnItemClickListener(new OnItemClickListener(){
@@ -71,7 +69,7 @@ public class SelectFragmentActivity extends Activity {
 		Intent intent = new Intent(SelectFragmentActivity.this,
 			EditChoiceActivity.class);
 		intent.putExtra("nextStoryFragmentId", storyFragmentId);
-		intent.putExtra("story", currentStory);
+	
 		intent.putExtra("mode", 1);
 		setResult(RESULT_OK, intent);
 		finish();
