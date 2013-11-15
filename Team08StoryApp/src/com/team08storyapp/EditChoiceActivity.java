@@ -103,16 +103,13 @@ public class EditChoiceActivity extends Activity {
 
 	currentStoryFragment = StoryController.addChoice(choiceText,
 		currentStoryFragment, nextFragmentId);
-
-
 	
 
 	Intent intent = new Intent(EditChoiceActivity.this,
 		EditFragmentActivity.class);
-	intent.putExtra("nextStoryFragment", currentStoryFragment);
+	intent.putExtra("currentStoryFragment", currentStoryFragment);
 
 	setResult(RESULT_OK, intent);
-	
 	finish();
 
     }
