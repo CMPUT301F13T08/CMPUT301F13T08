@@ -163,8 +163,10 @@ public class EditFragmentActivity extends Activity {
 		fHelper.updateOfflineStory(currentStory);
 		Toast.makeText(getApplicationContext(), "Save Successfully",
 			Toast.LENGTH_LONG).show();
-		
-		Intent storyFragmentListIntent = new Intent(EditFragmentActivity.this, StoryFragmentListActivity.class);
+
+		Intent storyFragmentListIntent = new Intent(
+			EditFragmentActivity.this,
+			StoryFragmentListActivity.class);
 		storyFragmentListIntent.putExtra("story", currentStory);
 		startActivity(storyFragmentListIntent);
 	    } catch (FileNotFoundException e) {
@@ -192,7 +194,7 @@ public class EditFragmentActivity extends Activity {
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    currentStoryFragment = currentStory.getStoryFragments().get(
 		    currentStoryFragmentIndex);
-	    
+
 	    populateScreen();
 
 	} catch (Exception e) {
@@ -203,7 +205,7 @@ public class EditFragmentActivity extends Activity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+	super.onActivityResult(requestCode, resultCode, data);
 	if (resultCode == RESULT_OK) {
 	    Uri pickedUri = data.getData();
 	    Bitmap pic = pc.savePhoto(pickedUri);
@@ -222,17 +224,17 @@ public class EditFragmentActivity extends Activity {
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
-	    
+
 	    Bundle extras = data.getExtras();
-	    currentStoryFragment = (StoryFragment)extras.getSerializable("currentStoryFragment");    
-	    currentStory.getStoryFragments().set(currentStoryFragmentIndex, currentStoryFragment);
+	    currentStoryFragment = (StoryFragment) extras
+		    .getSerializable("currentStoryFragment");
+	    currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+		    currentStoryFragment);
 	    populateScreen();
-	} else {
-	    super.onActivityResult(requestCode, resultCode, data);
 	}
     }
-    
-    private void populateScreen(){
+
+    private void populateScreen() {
 	/*
 	 * Set the index position of the Story Fragment in the Story's Array
 	 * List of Story Fragments to be able to update the information at that
