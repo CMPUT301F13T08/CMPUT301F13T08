@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -64,8 +64,8 @@ public class EditChoiceActivity extends Activity {
 	setContentView(R.layout.activity_edit_choice);
 	fHelper = new FileHelper(this, 1);
 
-	//currentChoice = new Choice();
-	
+	// currentChoice = new Choice();
+
 	Intent choiceIntent = getIntent();
 	currentStory = (Story) choiceIntent.getSerializableExtra("story");
 	currentStoryFragmentIndex = choiceIntent.getIntExtra(
@@ -115,17 +115,18 @@ public class EditChoiceActivity extends Activity {
 		currentStoryFragment, nextFragmentId);
 
 	int currentFragmentId = currentStoryFragment.getStoryFragmentId();
-	for (int i = 0; i < currentStory.getStoryFragments().size(); i++){
+	for (int i = 0; i < currentStory.getStoryFragments().size(); i++) {
 	    StoryFragment fragment = currentStory.getStoryFragments().get(i);
-	    if (fragment.getStoryFragmentId() == currentFragmentId){
+	    if (fragment.getStoryFragmentId() == currentFragmentId) {
 		fragment = currentStoryFragment;
 		currentStory.getStoryFragments().set(i, currentStoryFragment);
 	    }
 	}
-	
-	/*currentStory.getStoryFragments().set(
-		currentFragmentId - 1,
-		currentStoryFragment);*/
+
+	/*
+	 * currentStory.getStoryFragments().set( currentFragmentId - 1,
+	 * currentStoryFragment);
+	 */
 	/*
 	 * ArrayList<StoryFragment> currentStoryFragments = currentStory
 	 * .getStoryFragments();
@@ -151,18 +152,19 @@ public class EditChoiceActivity extends Activity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	super.onActivityResult(requestCode, resultCode, data);
-	//if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+	// if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 	if (resultCode == RESULT_OK) {
-	currentStory = (Story) data.getSerializableExtra("story");
-	nextFragmentId = data.getIntExtra("nextStoryFragmentId", resultCode);
-	// Log.d(TAG, "NEXT FRAGMENT ID OF CHOICE:");
-	// Log.d(TAG, String.valueOf(nextFragmentId));
-	
-	//currentChoice.setStoryFragmentID(nextFragmentId);
-	
-	}//else {
-	// super.onActivityResult(requestCode, resultCode, data);
-	// }
+	    currentStory = (Story) data.getSerializableExtra("story");
+	    nextFragmentId = data
+		    .getIntExtra("nextStoryFragmentId", resultCode);
+	    // Log.d(TAG, "NEXT FRAGMENT ID OF CHOICE:");
+	    // Log.d(TAG, String.valueOf(nextFragmentId));
+
+	    // currentChoice.setStoryFragmentID(nextFragmentId);
+
+	}// else {
+	 // super.onActivityResult(requestCode, resultCode, data);
+	 // }
     }
 
     private boolean isBlank(String str) {

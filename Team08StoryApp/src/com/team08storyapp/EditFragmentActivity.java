@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -124,6 +124,7 @@ public class EditFragmentActivity extends Activity {
 	 */
 	Intent storyFragment = getIntent();
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
+	currentStoryId = currentStory.getOfflineStoryId();
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 
@@ -163,11 +164,11 @@ public class EditFragmentActivity extends Activity {
 
 	    picGallery.setAdapter(imgAdapt);
 	    fillChoice(storyFragmentChoices);
-	    
-	    intent = new Intent(EditFragmentActivity.this,
-		    EditChoiceActivity.class);
-	    intent.putExtra("story", currentStory);
-	    intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
+
+	    // intent = new Intent(EditFragmentActivity.this,
+	    // EditChoiceActivity.class);
+	    // intent.putExtra("story", currentStory);
+	    // intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
 	}
     }
 
@@ -188,10 +189,10 @@ public class EditFragmentActivity extends Activity {
 	    return true;
 
 	case R.id.addChoice:
-/*	    Intent intent = new Intent(EditFragmentActivity.this,
+	    Intent intent = new Intent(EditFragmentActivity.this,
 		    EditChoiceActivity.class);
 	    intent.putExtra("story", currentStory);
-	    intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);*/
+	    intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
 	    startActivity(intent);
 	    return true;
 
