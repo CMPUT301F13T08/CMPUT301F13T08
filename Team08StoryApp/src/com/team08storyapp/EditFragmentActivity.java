@@ -74,7 +74,6 @@ public class EditFragmentActivity extends Activity {
     private ESHelper esHelper;
     private Uri imageFileUri;
     private PhotoController pc;
-    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,11 +163,6 @@ public class EditFragmentActivity extends Activity {
 
 	    picGallery.setAdapter(imgAdapt);
 	    fillChoice(storyFragmentChoices);
-
-	    // intent = new Intent(EditFragmentActivity.this,
-	    // EditChoiceActivity.class);
-	    // intent.putExtra("story", currentStory);
-	    // intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
 	}
     }
 
@@ -178,6 +172,16 @@ public class EditFragmentActivity extends Activity {
 	return true;
     }
 
+    public void onPause(){
+	try {
+	    currentStory = fHelper.getOfflineStory(currentStoryId);
+	    currentStoryFragment = currentStory.getStoryFragments().get(
+		    currentStoryFragmentIndex);
+
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	// Handle item selection
@@ -205,6 +209,10 @@ public class EditFragmentActivity extends Activity {
 		fHelper.updateOfflineStory(currentStory);
 		Toast.makeText(getApplicationContext(), "Save Successfully",
 			Toast.LENGTH_LONG).show();
+		
+		Intent storyFragmentListIntent = new Intent(EditFragmentActivity.this, StoryFragmentListActivity.class);
+		storyFragmentListIntent.putExtra("story", currentStory);
+		startActivity(storyFragmentListIntent);
 	    } catch (FileNotFoundException e) {
 		e.printStackTrace();
 	    } catch (IOException e) {
