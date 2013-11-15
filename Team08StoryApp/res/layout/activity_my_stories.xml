@@ -12,11 +12,11 @@
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="bottom|center"
         android:layout_marginTop="3dip"
         android:layout_weight="0.79"
         android:onClick="toNewStoryActivity"
-        android:text="Create New Story" />
+        android:text="@string/create_new_story" />
 
 </LinearLayout>

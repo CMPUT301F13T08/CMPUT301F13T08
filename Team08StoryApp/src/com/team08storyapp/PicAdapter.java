@@ -117,7 +117,7 @@ public class PicAdapter extends BaseAdapter {
 		    prefixFileList.add(fileList[i]);
 		}
 	    }
-	    for (int i = 0; i < Math.min(imageBitmaps.length, photoList.size()); i++) {
+	    for (int i = 0; i < Math.min(imageBitmaps.length, prefixFileList.size()); i++) {
 		String path = prefixFileList.get(i).getAbsolutePath();
 		placeholder = BitmapFactory.decodeFile(path);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();

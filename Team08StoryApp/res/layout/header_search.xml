@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:hint="@string/search_"
         android:ems="10" >
 
         <requestFocus />
@@ -28,6 +29,6 @@
         android:layout_alignBaseline="@+id/searchText"
         android:layout_alignBottom="@+id/searchText"
         android:layout_alignParentRight="true"
-        android:text="Search" />
+        android:text="@string/search" />
 
 </RelativeLayout>

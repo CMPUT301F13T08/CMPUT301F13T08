@@ -3,17 +3,17 @@
 
      <item android:id="@+id/view_annotations"
           android:icon="@android:drawable/ic_menu_gallery"
-          android:title="View Annotations"
+          android:title="@string/view_annotations"
           android:showAsAction="ifRoom" />
      
      <item android:id="@+id/action_add_annotations"
           android:icon="@android:drawable/ic_menu_camera"
-          android:title="Add Annotations"
+          android:title="@string/add_annotations"
           android:showAsAction="ifRoom"
            />
      
      <item android:id="@+id/action_mainmenu"
-          android:title="Return to Main Menu"
+          android:title="@string/return_to_main_menu"
           android:showAsAction="never" />
      
     
