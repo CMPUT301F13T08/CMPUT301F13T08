@@ -172,16 +172,6 @@ public class EditFragmentActivity extends Activity {
 	return true;
     }
 
-    public void onPause(){
-	try {
-	    currentStory = fHelper.getOfflineStory(currentStoryId);
-	    currentStoryFragment = currentStory.getStoryFragments().get(
-		    currentStoryFragmentIndex);
-
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	// Handle item selection
