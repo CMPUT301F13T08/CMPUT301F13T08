@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -60,6 +60,12 @@ import java.io.Serializable;
  * 
  */
 public class Choice implements Serializable {
+    @Override
+    public String toString() {
+	return "Choice [text=" + text + ", toGoToStoryFragmentID="
+		+ toGoToStoryFragmentID + ", choiceId=" + choiceId + "]";
+    }
+
     private static final long serialVersionUID = 1L;
     String text;
     int toGoToStoryFragmentID;

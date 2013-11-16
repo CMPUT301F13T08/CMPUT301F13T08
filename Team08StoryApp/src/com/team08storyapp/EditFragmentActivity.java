@@ -75,6 +75,7 @@ public class EditFragmentActivity extends Activity {
     private Uri imageFileUri;
     private PhotoController pc;
     private ChoiceAdapter adapter;
+    private ArrayList<Choice> storyFragmentChoices;
 
     private final static int REQUEST_CHOICE = 0;
     private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -100,10 +101,10 @@ public class EditFragmentActivity extends Activity {
 	    }
 	});
 
-	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
-		null);
-	picView = (ImageView) headerGallery.findViewById(R.id.picture);
-	picGallery = (Gallery) headerGallery.findViewById(R.id.gallery);
+	// headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
+	// null);
+	picView = (ImageView) findViewById(R.id.picture);
+	picGallery = (Gallery) findViewById(R.id.gallery);
 
 	/*
 	 * Create a click listener to handle when the user clicks on the gallery
@@ -157,8 +158,7 @@ public class EditFragmentActivity extends Activity {
 	     * illustrations.
 	     */
 	    textSection.setText(currentStoryFragment.getStoryText());
-	    ArrayList<Choice> storyFragmentChoices = currentStoryFragment
-		    .getChoices();
+	    storyFragmentChoices = currentStoryFragment.getChoices();
 	    ArrayList<Photo> illustrationList = currentStoryFragment
 		    .getPhotos();
 
@@ -236,10 +236,14 @@ public class EditFragmentActivity extends Activity {
     }
 
     protected void onResume() {
+	System.out.println("On RESUME!");
 	try {
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    currentStoryFragment = currentStory.getStoryFragments().get(
 		    currentStoryFragmentIndex);
+	    adapter.clear();
+	    adapter.addAll(currentStoryFragment.getChoices());
+	    adapter.notifyDataSetChanged();
 
 	} catch (Exception e) {
 	    e.printStackTrace();
@@ -278,12 +282,12 @@ public class EditFragmentActivity extends Activity {
 					.get(currentStoryFragmentIndex)
 					.getChoices().size() - 1).getText());
 		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
-		currentStoryFragment = currentStory.getStoryFragments().get(currentStoryFragmentIndex);
-		
+		currentStoryFragment = currentStory.getStoryFragments().get(
+			currentStoryFragmentIndex);
+		storyFragmentChoices = currentStory.getStoryFragments()
+			.get(currentStoryFragmentIndex).getChoices();
 		/* need to simplify below statement later */
-		adapter.add(currentStoryFragment.getChoices().get(
-			currentStoryFragment.getChoices().size() - 1));		
-		adapter.notifyDataSetChanged();
+
 		try {
 		    fHelper.updateOfflineStory(currentStory);
 		} catch (Exception e) {

@@ -112,7 +112,6 @@ public class StoryFragmentActivity extends Activity {
 
 	/* set up text header */
 	textSection = (TextView) findViewById(R.id.headerText);
-	System.out.println("FOUND");
 	textSection.setOnTouchListener(new View.OnTouchListener() {
 
 	    @Override
@@ -123,25 +122,21 @@ public class StoryFragmentActivity extends Activity {
 	textSection.setMovementMethod(new ScrollingMovementMethod());
 
 	/* set up gallery header */
-	headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
-		null);
+	// headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
+	// null);
 
 	/* set up the picView */
-	picView = (ImageView) headerGallery.findViewById(R.id.picture);
+	picView = (ImageView) findViewById(R.id.picture);
 
 	/* get the gallery view */
-	picGallery = (Gallery) headerGallery.findViewById(R.id.gallery);
-
+	// picGallery = (Gallery) headerGallery.findViewById(R.id.gallery);
+	picGallery = (Gallery) findViewById(R.id.gallery);
 	/* set the click listener for each item in the thumbnail gallery */
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
 
 	    /* handle clicks */
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
-		/*
-		 * set the larger image view to display the chosen bitmap
-		 * calling method of adapter class
-		 */
 		picView.setImageBitmap(imgAdapt.getPic(position));
 	    }
 	});
@@ -178,11 +173,13 @@ public class StoryFragmentActivity extends Activity {
 		currentStoryFragmentIndex = i;
 	    }
 	}
-	
+
 	System.out.println(currentStoryFragmentId);
 	System.out.println(currentStory.getStoryFragments().size());
-	System.out.println(currentStory.getStoryFragments().get(0).getStoryText());
-
+	System.out.println(currentStory.getStoryFragments().get(0)
+		.getStoryText());
+	System.out.println(currentStory.getStoryFragments()
+		.get(currentStoryFragmentIndex).getChoices().toString());
 
 	/*
 	 * Gets the current story fragment object from the story fragment list,
@@ -213,6 +210,7 @@ public class StoryFragmentActivity extends Activity {
 	picGallery.setAdapter(imgAdapt);
 
 	/* populate the listview with choices */
+	System.out.println("POPULATE TO LISTVIEW:" + storyFragmentChoices);
 	fillChoice(storyFragmentChoices);
 
 	/* set listview item's setOnItemClickListener */
@@ -234,7 +232,7 @@ public class StoryFragmentActivity extends Activity {
 
 		/* get the id of next story fragment */
 		int nextStoryFragmentId = nextChoice.getStoryFragmentID();
-		
+
 		/* pass the mode */
 		nextStoryFragment.putExtra("mode", mode);
 
@@ -290,8 +288,6 @@ public class StoryFragmentActivity extends Activity {
      */
     private void fillChoice(ArrayList<Choice> cList) {
 
-	/* add headers to background list view */
-	lv.addHeaderView(headerGallery);
 	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
 		cList);
 
