@@ -229,7 +229,6 @@ public class EditFragmentActivity extends Activity {
     }
 
     private void fillChoice(ArrayList<Choice> cList) {
-	lv.addHeaderView(headerGallery);
 	adapter = new ChoiceAdapter(this, android.R.id.list, cList);
 	lv.setAdapter(adapter);
 
