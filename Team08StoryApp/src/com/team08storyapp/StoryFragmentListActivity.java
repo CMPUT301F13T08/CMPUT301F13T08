@@ -103,6 +103,7 @@ public class StoryFragmentListActivity extends Activity {
 	try{
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    sfList = currentStory.getStoryFragments();
+	    lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list, sfList));
 	}catch (Exception e){
 	    e.printStackTrace();
 	}

@@ -267,17 +267,25 @@ public class EditFragmentActivity extends Activity {
 
 	if (resultCode == RESULT_OK) {
 	    if (requestCode == REQUEST_CHOICE) {
+		System.out.println("DETECT NEW CHOICE!");
 		currentStory = (Story) data.getSerializableExtra("story");
+		System.out.println("JUST MAKE SURE I HAVE THE NEW ONE:"
+			+ currentStory
+				.getStoryFragments()
+				.get(currentStoryFragmentIndex)
+				.getChoices()
+				.get(currentStory.getStoryFragments()
+					.get(currentStoryFragmentIndex)
+					.getChoices().size() - 1).getText());
 		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
+		currentStoryFragment = currentStory.getStoryFragments().get(currentStoryFragmentIndex);
+		
+		/* need to simplify below statement later */
+		adapter.add(currentStoryFragment.getChoices().get(
+			currentStoryFragment.getChoices().size() - 1));		
+		adapter.notifyDataSetChanged();
 		try {
 		    fHelper.updateOfflineStory(currentStory);
-		    currentStoryFragment = currentStory.getStoryFragments()
-			    .get(currentStoryFragmentIndex);
-		    /* need to simplify below statement later */
-		    adapter.add(currentStoryFragment.getChoices().get(
-			    currentStoryFragment.getChoices().size() - 1));
-		    adapter.notifyDataSetChanged();
-
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
