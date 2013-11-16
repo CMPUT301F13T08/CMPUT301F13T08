@@ -180,6 +180,7 @@ public class StoryFragmentActivity extends Activity {
 		.getStoryText());
 	System.out.println(currentStory.getStoryFragments()
 		.get(currentStoryFragmentIndex).getChoices().toString());
+	System.out.println(currentStory.toString());
 
 	/*
 	 * Gets the current story fragment object from the story fragment list,

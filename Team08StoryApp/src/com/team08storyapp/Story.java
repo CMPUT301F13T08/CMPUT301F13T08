@@ -33,6 +33,7 @@ package com.team08storyapp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Story is a model class representing a Chose Your Own Adventure Story. A story
@@ -70,7 +71,7 @@ public class Story implements Serializable {
 	return "Story [onlineStoryId=" + onlineStoryId + ", offlineStoryId="
 		+ offlineStoryId + ", title=" + title + ", author=" + author
 		+ ", storyFragments=" + storyFragments
-		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
+		+ ", firstStoryFragmentId=" + firstStoryFragmentId + ", Changed?: "+ unchanged+"]";
     }
 
     private static final long serialVersionUID = 1L;
@@ -80,6 +81,16 @@ public class Story implements Serializable {
     private String author;
     private ArrayList<StoryFragment> storyFragments;
     private int firstStoryFragmentId;
+    private Boolean unchanged;
+
+
+    public Boolean getUnchanged() {
+        return unchanged;
+    }
+
+    public void setUnchanged(Boolean unchanged) {
+        this.unchanged = unchanged;
+    }
 
     /**
      * A constructor for creating a Story object used when initializing a sample
