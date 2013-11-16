@@ -72,7 +72,6 @@ public class EditFragmentActivity extends Activity {
     private Story currentStory;
     private StoryFragment currentStoryFragment;
     private FileHelper fHelper;
-    private ESHelper esHelper;
     private Uri imageFileUri;
     private PhotoController pc;
     private ChoiceAdapter adapter;
@@ -132,6 +131,10 @@ public class EditFragmentActivity extends Activity {
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
 
+	populateScreen();
+    }
+
+    private void populateScreen() {
 	/*
 	 * Set the index position of the Story Fragment in the Story's Array
 	 * List of Story Fragments to be able to update the information at that

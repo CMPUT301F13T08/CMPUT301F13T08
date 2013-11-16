@@ -1,19 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
         
     <Gallery
     android:id="@+id/gallery"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" />
-
     
     <ImageView
     android:id="@+id/picture"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:contentDescription="@string/picture" />
-    
+    android:layout_height="wrap_content"
+    android:contentDescription="@string/picture" />    
 	
 </LinearLayout>
