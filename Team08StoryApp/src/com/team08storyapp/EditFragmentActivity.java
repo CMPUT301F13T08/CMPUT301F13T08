@@ -215,12 +215,7 @@ public class EditFragmentActivity extends Activity {
 		fHelper.updateOfflineStory(currentStory);
 		Toast.makeText(getApplicationContext(), "Save Successfully",
 			Toast.LENGTH_LONG).show();
-
-		Intent storyFragmentListIntent = new Intent(
-			EditFragmentActivity.this,
-			StoryFragmentListActivity.class);
-		storyFragmentListIntent.putExtra("story", currentStory);
-		startActivity(storyFragmentListIntent);
+		finish();
 	    } catch (FileNotFoundException e) {
 		e.printStackTrace();
 	    } catch (IOException e) {

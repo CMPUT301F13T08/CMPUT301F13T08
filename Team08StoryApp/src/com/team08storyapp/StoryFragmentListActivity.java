@@ -47,6 +47,8 @@ public class StoryFragmentListActivity extends Activity {
     private ArrayList<StoryFragment> sfList;
     private StoryFragment currentStoryFragment;
     private Story currentStory;
+    private int currentStoryId;
+    private FileHelper fHelper;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -54,13 +56,13 @@ public class StoryFragmentListActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_story_fragment_list);
 	lv = (ListView) findViewById(android.R.id.list);
-
+	fHelper = new FileHelper(this, 1);
+	
 	/* Retrieve from the intent the Story and Story Fragments */
 	Intent passedIntent = getIntent();
 	currentStory = (Story) passedIntent.getSerializableExtra("story");
+	currentStoryId = currentStory.getOfflineStoryId();
 	sfList = currentStory.getStoryFragments();
-	System.out.println("THERE SHOULD BE THIS MUCH FRAGMENTS:"  + sfList.size());
-
 	lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list, sfList));
 
 	lv.setOnItemClickListener(new OnItemClickListener() {
@@ -95,5 +97,16 @@ public class StoryFragmentListActivity extends Activity {
 	intent.putExtra("story", currentStory);
 	intent.putExtra("mode", 1);
 	startActivity(intent);
+    }
+    
+    protected void onResume(){
+	try{
+	    currentStory = fHelper.getOfflineStory(currentStoryId);
+	    sfList = currentStory.getStoryFragments();
+	}catch (Exception e){
+	    e.printStackTrace();
+	}
+	
+	super.onResume();
     }
 }
