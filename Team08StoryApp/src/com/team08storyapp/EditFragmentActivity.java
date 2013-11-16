@@ -76,6 +76,7 @@ public class EditFragmentActivity extends Activity {
     private PhotoController pc;
     private ChoiceAdapter adapter;
     private ArrayList<Choice> storyFragmentChoices;
+    private InternetDetector internetDetector;
 
     private final static int REQUEST_CHOICE = 0;
     private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -86,6 +87,7 @@ public class EditFragmentActivity extends Activity {
 	setContentView(R.layout.activity_edit_fragment);
 
 	fHelper = new FileHelper(this, 1);
+	internetDetector = new InternetDetector(this);
 
 	lv = (ListView) findViewById(android.R.id.list);
 	textSection = (EditText) findViewById(R.id.headerDialogue);
@@ -233,6 +235,7 @@ public class EditFragmentActivity extends Activity {
 	lv.setAdapter(adapter);
 
     }
+    
 
     protected void onResume() {
 	System.out.println("On RESUME!");
@@ -316,6 +319,7 @@ public class EditFragmentActivity extends Activity {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
+		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 		return;
 	    }
 	    Uri pickedUri = data.getData();
@@ -329,14 +333,8 @@ public class EditFragmentActivity extends Activity {
 		picGallery.setAdapter(imgAdapt);
 		picView.setImageBitmap(pic);
 		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 	    }
-	    /*
-	     * try { currentStory = fHelper.getOfflineStory(currentStoryId);
-	     * currentStoryFragment = currentStory.getStoryFragments().get(
-	     * currentStoryFragmentIndex); } catch (Exception e) {
-	     * e.printStackTrace(); }
-	     */
-
 	} else {
 	    super.onActivityResult(requestCode, resultCode, data);
 	}

@@ -33,14 +33,17 @@ package com.team08storyapp;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -95,8 +98,6 @@ public class FileHelper {
     private static final int My = 1;
     private static final int Save = 1;
     private String prefix;
-    @SuppressWarnings("unused")
-    private ESHelper esHelper;
 
     /**
      * The Constructor initializes the fileContext with passed context. Since we
@@ -115,8 +116,6 @@ public class FileHelper {
      */
     public FileHelper(Context context, int mode) {
 
-	/* Initialize the esHelper */
-	esHelper = new ESHelper();
 	fileContext = context;
 	switch (mode) {
 	case Download:
@@ -143,16 +142,16 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
-	    if ((getOfflineStory(story.getOfflineStoryId()) != null
-		    && getOfflineStory(story.getOfflineStoryId())
-			    .getOnlineStoryId() != story.getOnlineStoryId()) || story.getOfflineStoryId() == 0) {
+	    if ((getOfflineStory(story.getOfflineStoryId()) != null && getOfflineStory(
+		    story.getOfflineStoryId()).getOnlineStoryId() != story
+		    .getOnlineStoryId()) || story.getOfflineStoryId() == 0) {
 		int total = getOfflineStories().size();
 		story.setOfflineStoryId(Math.max(total - 1, getOfflineStories()
 			.get(total - 1).getOfflineStoryId()) + 1);
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
-
+	    story.setUnchanged(true);
 	    /* translate the story context to Json */
 	    String context = gson.toJson(story);
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,
@@ -192,7 +191,12 @@ public class FileHelper {
 	    fileContext.deleteFile(fileName);
 
 	    /* add new file */
-	    addOfflineStory(story);
+	    story.setUnchanged(false);
+	    String context = gson.toJson(story);
+	    FileOutputStream ops = fileContext.openFileOutput(fileName,
+		    Context.MODE_PRIVATE);
+	    ops.write(context.getBytes());
+	    ops.close();
 	    return true;
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -200,6 +204,42 @@ public class FileHelper {
 	    e.printStackTrace();
 	}
 	return false;
+    }
+
+    public boolean resetOfflineStory(Story story) throws FileNotFoundException {
+	try {
+	    String fileName = prefix
+		    + Integer.toString(story.getOfflineStoryId());
+
+	    /* delete original file */
+	    fileContext.deleteFile(fileName);
+
+	    /* add new file */
+	    String context = gson.toJson(story);
+	    FileOutputStream ops = fileContext.openFileOutput(fileName,
+		    Context.MODE_PRIVATE);
+	    ops.write(context.getBytes());
+	    ops.close();
+	    return true;
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+
+	return false;
+    }
+
+    public void appendUpdateQueue(int storyId) {
+	try
+	{
+	    String filename= "updateQueue";
+	    FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+	    fw.write(Integer.toString(storyId)+"\n");//appends the string to the file
+	    fw.close();
+	}
+	catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
     }
 
     /**
@@ -509,4 +549,5 @@ public class FileHelper {
 	}
 	return story;
     }
+
 }
