@@ -21,6 +21,7 @@ import com.team08storyapp.StoryFragment;
 
 import dalvik.annotation.TestTargetClass;
 
+@SuppressWarnings("deprecation")
 @TestTargetClass(MyStoriesActivity.class)
 public class testPhotoController extends ActivityTestCase {
 
