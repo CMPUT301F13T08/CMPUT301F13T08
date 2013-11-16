@@ -89,7 +89,6 @@ public class OfflineStoriesActivity extends ListActivity {
 	    public void onClick(View v) {
 		searchText = et.getText().toString();
 		if (searchText != null && searchText != "") {
-		    System.out.println(searchText);
 		    fillData(fHelper.searchOfflineStories(searchText), onUpdate);
 		} else {
 		    try {
@@ -125,6 +124,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	 * story object and the first story fragment id to the
 	 * StoryFragmentActivity
 	 */
+	currentStory = (Story) l.getItemAtPosition(position);
 	Intent firstStoryFragment = new Intent(getApplicationContext(),
 		StoryFragmentActivity.class);
 

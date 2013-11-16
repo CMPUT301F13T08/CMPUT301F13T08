@@ -70,8 +70,6 @@ public class StoryFragmentListActivity extends Activity {
 		StoryFragment sf = (StoryFragment) parent
 			.getItemAtPosition(position);
 		int storyFragmentId = sf.getStoryFragmentId();
-		System.out.println("SELECTED FRAGMENT ID : " + storyFragmentId);
-
 		Intent intent = new Intent(StoryFragmentListActivity.this,
 			EditFragmentActivity.class);
 		intent.putExtra("storyFragmentId", storyFragmentId);
