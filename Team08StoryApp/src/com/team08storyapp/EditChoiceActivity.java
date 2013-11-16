@@ -66,9 +66,15 @@ public class EditChoiceActivity extends Activity {
 		currentStoryFragmentIndex);
 
 	availableStoryFragmentList = new ArrayList<StoryFragment>();
-	ArrayList<StoryFragment> currentStoryFragments = currentStory.getStoryFragments();
-	for(StoryFragment sf: currentStoryFragments){
-	    if(sf.getStoryFragmentId() != currentStoryFragmentIndex + 1){
+	ArrayList<StoryFragment> currentStoryFragments = currentStory
+		.getStoryFragments();
+	/*
+	 * Remove the current fragment from the story fragment list that will be
+	 * passes to SelectFragmentActivity. The current fragment will not be
+	 * selected as a choice to itself
+	 */
+	for (StoryFragment sf : currentStoryFragments) {
+	    if (sf.getStoryFragmentId() != currentStoryFragmentIndex + 1) {
 		availableStoryFragmentList.add(sf);
 	    }
 	}
@@ -87,20 +93,40 @@ public class EditChoiceActivity extends Activity {
 	tv = (EditText) findViewById(R.id.editChoiceText);
 	String choiceText = tv.getText().toString();
 	if (isBlank(choiceText)) {
-	    Toast.makeText(getApplicationContext(),
+	    /*
+	     * A choice must have a text before it's added
+	     */Toast.makeText(getApplicationContext(),
 		    "Please enter choice text.", Toast.LENGTH_LONG).show();
 	    return;
 	}
 
 	if (nextFragmentId < 0) {
-	    Toast.makeText(getApplicationContext(),
+	    /*
+	     * A choice must have a fragment selected before it's added
+	     */Toast.makeText(getApplicationContext(),
 		    "Please link a story fragment to current choice.",
 		    Toast.LENGTH_LONG).show();
 	    return;
 	}
+
+	/*
+	 * Call addChoice to update the choice list of the current story
+	 * fragment with the new choice
+	 */
 	currentStoryFragment = StoryController.addChoice(choiceText,
 		currentStoryFragment, nextFragmentId);
-	currentStory.getStoryFragments().set(currentStoryFragmentIndex, currentStoryFragment);
+
+	/*
+	 * Update the current story object by replacing the fragment the user is
+	 * on with the updated fragment that contains a new choice
+	 */
+	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+		currentStoryFragment);
+
+	/*
+	 * Update the story object on the file system, later access will include
+	 * the new choice for the current fragment
+	 */
 	FileHelper fHelper = new FileHelper(this, 1);
 	try {
 	    fHelper.updateOfflineStory(currentStory);
@@ -111,7 +137,11 @@ public class EditChoiceActivity extends Activity {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
-	System.out.println("THIS IS THE NEW CHOICE??"+ currentStoryFragment.getChoices().get(currentStoryFragment.getChoices().size()-1).getText());
+
+	/*
+	 * Return to the EditFragment activity Pass the updated story object,
+	 * and the current story fragment id
+	 */
 	Intent intent = new Intent(EditChoiceActivity.this,
 		EditFragmentActivity.class);
 	intent.putExtra("story", currentStory);
@@ -125,6 +155,10 @@ public class EditChoiceActivity extends Activity {
     public void toSelectFragmentActivity(View view) {
 	Intent intent = new Intent(EditChoiceActivity.this,
 		SelectFragmentActivity.class);
+	/*
+	 * Pass the fragment list of the story, not including the current
+	 * fragment (no choice link to itself)
+	 */
 	intent.putExtra("storyFragments", availableStoryFragmentList);
 	startActivityForResult(intent, LINKED_FRAGMENT);
     }
@@ -133,14 +167,21 @@ public class EditChoiceActivity extends Activity {
 	super.onActivityResult(requestCode, resultCode, data);
 
 	if (resultCode == RESULT_OK) {
+	    /*
+	     * The selected fragment for a new choice is passed from the
+	     * SelectFragmentActivity
+	     */
 	    nextFragmentId = data
 		    .getIntExtra("nextStoryFragmentId", resultCode);
 	    tvFragment.setText("The next storyFragment id is: "
 		    + Integer.toString(nextFragmentId));
-
 	}
     }
 
+    /*
+     * if the input text for a choice is null, the user will be prompted for
+     * input before saving in returnEditFragment activity method
+     */
     private boolean isBlank(String str) {
 	int strLen;
 	if ((str == null) || ((strLen = str.length()) == 0))

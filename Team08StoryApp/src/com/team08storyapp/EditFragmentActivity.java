@@ -212,8 +212,15 @@ public class EditFragmentActivity extends Activity {
 	    try {
 		String dialogue = textSection.getText().toString();
 		currentStoryFragment.setStoryText(dialogue);
-		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-			currentStoryFragment);
+		/*
+		 * Replace the current fragment in the story object, to include
+		 * changes made to it's text or illustrations
+		 */currentStory.getStoryFragments().set(
+			currentStoryFragmentIndex, currentStoryFragment);
+		/*
+		 * Update the current story on the file system. Permanent chenge
+		 * to the current fragment
+		 */
 		fHelper.updateOfflineStory(currentStory);
 		Toast.makeText(getApplicationContext(), "Save Successfully",
 			Toast.LENGTH_LONG).show();
@@ -235,7 +242,6 @@ public class EditFragmentActivity extends Activity {
 	lv.setAdapter(adapter);
 
     }
-    
 
     protected void onResume() {
 	System.out.println("On RESUME!");
@@ -273,45 +279,14 @@ public class EditFragmentActivity extends Activity {
 
 	if (resultCode == RESULT_OK) {
 	    if (requestCode == REQUEST_CHOICE) {
-		System.out.println("DETECT NEW CHOICE!");
+
 		currentStory = (Story) data.getSerializableExtra("story");
-		System.out.println(currentStory.toString());
-		System.out.println("JUST MAKE SURE I HAVE THE NEW ONE:"
-			+ currentStory
-				.getStoryFragments()
-				.get(currentStoryFragmentIndex)
-				.getChoices()
-				.get(currentStory.getStoryFragments()
-					.get(currentStoryFragmentIndex)
-					.getChoices().size() - 1).getText());
+
 		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
 		currentStoryFragment = currentStory.getStoryFragments().get(
 			currentStoryFragmentIndex);
 		storyFragmentChoices = currentStory.getStoryFragments()
 			.get(currentStoryFragmentIndex).getChoices();
-		/* need to simplify below statement later */
-
-		/*
-		 * 
-		 * //currentStory = (Story) data.getSerializableExtra("story");
-		 * //currentStoryFragmentId =
-		 * data.getIntExtra("storyFragmentId", 0); currentStoryFragment
-		 * = (StoryFragment)
-		 * data.getSerializableExtra("currentStoryFragment");
-		 * ArrayList<StoryFragment> currentStoryFragments =
-		 * currentStory.getStoryFragments();
-		 * 
-		 * // This will have to be a separate method for (int i = 0;
-		 * i<currentStoryFragments.size(); i++){ if
-		 * (currentStoryFragments.get(i).getStoryFragmentId() ==
-		 * currentStoryFragment.getStoryFragmentId()){
-		 * currentStoryFragments.remove(i);
-		 * currentStoryFragments.add(currentStoryFragment); }
-		 * 
-		 * currentStory.setStoryFragments(currentStoryFragments);
-		 * 
-		 * }
-		 */
 
 		try {
 		    fHelper.updateOfflineStory(currentStory);
