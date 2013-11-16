@@ -80,7 +80,8 @@ public class StoryController {
 	    ArrayList<StoryFragment> storyFragments, int storyFragmentId) {
 	StoryFragment nextFragment = null;
 	for (StoryFragment storyFragment : storyFragments) {
-	    System.out.println("Looking for: "+storyFragmentId + "  Now is: "+storyFragment.getStoryFragmentId());
+	    System.out.println("Looking for: " + storyFragmentId + "  Now is: "
+		    + storyFragment.getStoryFragmentId());
 	    if (storyFragment.getStoryFragmentId() == storyFragmentId) {
 		nextFragment = storyFragment;
 		break;
@@ -124,5 +125,31 @@ public class StoryController {
 	Choice choice = new Choice(storyFragment2Id, choiceId, choiceText);
 	storyFragment1.getChoices().add(choice);
 	return storyFragment1;
+    }
+
+    /**
+     * This method takes the size of a list of Stories and returns a random
+     * number that symbolizes the Story Id of one of the Stories in the list.
+     * This Story Id is used to display a random Story for the user.
+     * 
+     * This method would be used with a "I'm Feeling Lucky!" button in a list of
+     * Stories to read. The user presses the button which calls this method and
+     * takes the size of the list of Stories displayed to the user. Then the
+     * method returns to the calling code the Story Id of the Story to retrieve
+     * and display to the user.
+     * 
+     * @param storyListSize
+     *            The size of the List of Stories that the user is getting a
+     *            random Story from.
+     * @return The Story Id for the random Story to display to the user.
+     */
+    public static int feelingLucky(int storyListSize) {
+	/*
+	 * Use Math.random() to return a double between 0 and 1. Then convert
+	 * this number to the range we need by multiplying by the size of the
+	 * Story list. As the range does not include the max size and includes
+	 * zero, so we shift the number by 1 to cover those scenarios.
+	 */
+	return 1 + (int) (Math.random() * (storyListSize));
     }
 }

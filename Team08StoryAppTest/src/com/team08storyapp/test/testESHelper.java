@@ -21,6 +21,7 @@ import com.team08storyapp.ESHelper;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
+@SuppressWarnings("deprecation")
 public class testESHelper extends AndroidTestCase {
 
     private ESHelper esHelper;
@@ -499,6 +500,7 @@ public class testESHelper extends AndroidTestCase {
     protected void tearDown() throws IOException {
 
 	/* Delete the story added to online */
+	@SuppressWarnings("resource")
 	HttpClient httpclient = new DefaultHttpClient();
 	HttpDelete httpDelete = new HttpDelete(
 		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"

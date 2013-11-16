@@ -20,6 +20,7 @@ public class testStoryController extends TestCase {
     private StoryFragment joinStoryFragment1;
     private StoryFragment joinStoryFragment2;
     private Story story;
+    private int storyListSize;
 
     protected void setUp() {
 	/* Instantiate the Array List of Story Fragments */
@@ -40,6 +41,9 @@ public class testStoryController extends TestCase {
 	joinStoryFragment2 = new StoryFragment(2, "joining to Story Fragment 1");
 
 	story = new Story("title", "author");
+
+	/* sample Story List Size for testing random Story selection */
+	storyListSize = 12;
     }
 
     /*
@@ -69,7 +73,6 @@ public class testStoryController extends TestCase {
      * and add it to the Story Fragment. Once it has been added we will get the
      * Story Fragment and check for the Choice comparing it to the original
      * object.
-     * 
      */
     public void testaddChoice() {
 	/* set the text for the Choice and add it to the Story Fragment */
@@ -95,6 +98,31 @@ public class testStoryController extends TestCase {
 		storyFragmentList, nextStoryFragmentId);
 
 	assertEquals(retrievedStoryFragment, secondStoryFragment);
+    }
+
+    /*
+     * Test for Use Case 19
+     * 
+     * The testFeelingLuck method tests getting a random Story Id for the user
+     * to read a random Story. Using a set Story List size, the call to
+     * feelingLucky will return a random Story Id. The first test to make sure
+     * that we are receiving a random Story is that the Story Id is not zero.
+     * The second test is to run the call again and check that the two calls
+     * resulted in two different Story Id's.
+     */
+    public void testFeelingLucky() {
+
+	/* Test that the random Story Id is not 0 and between 1 and storyListSize*/
+	int randomStoryId = StoryController.feelingLucky(storyListSize);
+	assertTrue(randomStoryId != 0);
+	assertTrue(randomStoryId > 1 && randomStoryId <= storyListSize);
+
+	/*
+	 * Test that the method is returning randomly by comparing two random
+	 * call results to each other
+	 */
+	int secondRandStoryId = StoryController.feelingLucky(storyListSize);
+	assertTrue(randomStoryId != secondRandStoryId);
     }
 
 }
