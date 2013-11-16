@@ -267,12 +267,26 @@ public class EditFragmentActivity extends Activity {
 
 	if (resultCode == RESULT_OK) {
 	    if (requestCode == REQUEST_CHOICE) {
-		currentStory = (Story) data.getSerializableExtra("story");
-		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
+		//currentStory = (Story) data.getSerializableExtra("story");
+		//currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
+		currentStoryFragment = (StoryFragment) data.getSerializableExtra("currentStoryFragment");
+		ArrayList<StoryFragment> currentStoryFragments = currentStory.getStoryFragments();
+
+		// This will have to be a separate method
+		for (int i = 0; i<currentStoryFragments.size(); i++){
+		    if (currentStoryFragments.get(i).getStoryFragmentId() == currentStoryFragment.getStoryFragmentId()){
+			currentStoryFragments.remove(i);
+			currentStoryFragments.add(currentStoryFragment);
+		    }
+		    
+		    currentStory.setStoryFragments(currentStoryFragments);
+		    
+		}
+		
 		try {
-		    fHelper.updateOfflineStory(currentStory);
-		    currentStoryFragment = currentStory.getStoryFragments()
-			    .get(currentStoryFragmentIndex);
+		    //fHelper.updateOfflineStory(currentStory);
+		    //currentStoryFragment = currentStory.getStoryFragments()
+			//    .get(currentStoryFragmentIndex);
 		    /* need to simplify below statement later */
 		    adapter.add(currentStoryFragment.getChoices().get(
 			    currentStoryFragment.getChoices().size() - 1));
@@ -295,13 +309,15 @@ public class EditFragmentActivity extends Activity {
 		picView.setImageBitmap(pic);
 		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 	    }
-	    try {
+	/*    try {
 		currentStory = fHelper.getOfflineStory(currentStoryId);
 		currentStoryFragment = currentStory.getStoryFragments().get(
 			currentStoryFragmentIndex);
 	    } catch (Exception e) {
 		e.printStackTrace();
-	    }
+	    }*/
+	    
+	    
 	} else {
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
