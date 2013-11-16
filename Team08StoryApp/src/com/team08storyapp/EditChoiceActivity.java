@@ -98,7 +98,6 @@ public class EditChoiceActivity extends Activity {
 		    Toast.LENGTH_LONG).show();
 	    return;
 	}
-	Choice newChoice = new Choice();
 	currentStoryFragment = StoryController.addChoice(choiceText,
 		currentStoryFragment, nextFragmentId);
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex, currentStoryFragment);
@@ -118,7 +117,6 @@ public class EditChoiceActivity extends Activity {
 	intent.putExtra("story", currentStory);
 	intent.putExtra("storyFragmentId",
 		currentStoryFragment.getStoryFragmentId());
-	intent.putExtra("mode", 1);
 	setResult(RESULT_OK, intent);
 	finish();
 
