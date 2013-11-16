@@ -80,6 +80,7 @@ import com.google.gson.reflect.TypeToken;
  * @since 1.0
  * 
  */
+@SuppressWarnings("deprecation")
 public class ESHelper {
     /* Http Connector */
     private HttpClient httpclient = new DefaultHttpClient();

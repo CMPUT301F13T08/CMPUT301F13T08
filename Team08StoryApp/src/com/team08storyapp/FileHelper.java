@@ -95,6 +95,7 @@ public class FileHelper {
     private static final int My = 1;
     private static final int Save = 1;
     private String prefix;
+    @SuppressWarnings("unused")
     private ESHelper esHelper;
 
     /**

@@ -45,12 +45,10 @@ import android.widget.AdapterView.OnItemClickListener;
 public class StoryFragmentListActivity extends Activity {
     private ListView lv;
     private ArrayList<StoryFragment> sfList;
-    private StoryFragment currentStoryFragment;
     private Story currentStory;
     private int currentStoryId;
     private FileHelper fHelper;
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

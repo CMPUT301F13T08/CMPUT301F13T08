@@ -73,6 +73,7 @@ import android.widget.TextView;
  * @since 1.0
  */
 
+@SuppressWarnings("deprecation")
 public class StoryFragmentActivity extends Activity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -86,7 +87,6 @@ public class StoryFragmentActivity extends Activity {
     private Gallery picGallery;
     private ListView lv;
     private TextView textSection;
-    private View headerGallery;
     private ImageView picView;
 
     private Story currentStory;

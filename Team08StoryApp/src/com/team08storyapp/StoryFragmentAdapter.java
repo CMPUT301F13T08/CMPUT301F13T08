@@ -4,8 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.team08storyapp.AnnotationAdapter.ViewHolder;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -57,6 +57,7 @@ public class AnnotationViewActivity extends Activity {
     private ListView lv;
     private ArrayList<Annotation> aList;
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);

@@ -58,6 +58,7 @@ import android.widget.ImageView;
  * @since 1.0
  * 
  */
+@SuppressWarnings("deprecation")
 public class PicAdapter extends BaseAdapter {
 
     /* use the default gallery background image */

@@ -38,13 +38,13 @@ import java.util.ArrayList;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -71,12 +71,10 @@ public class OnlineStoriesActivity extends ListActivity {
 
     private static final int DOWNLOAD_ID = Menu.FIRST;
     private static final int READ_ID = Menu.FIRST + 1;
-    private static final boolean onUpdate = true;
-    private static final boolean onCreate = false;
+    private static final String TAG = "OnlineStoriesActivity";
 
     private FileHelper fHelper;
     private ESHelper esHelper;
-    private View header;
     private String searchText;
     private EditText et;
     private ListView lv;
@@ -86,11 +84,9 @@ public class OnlineStoriesActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
-	setContentView(R.layout.activity_story_list);
+	setContentView(R.layout.activity_online_stories);
 	lv = (ListView) findViewById(android.R.id.list);
-	header = getLayoutInflater().inflate(R.layout.header_search, null);
-	Button searchButton = (Button) header.findViewById(R.id.searchButton);
-	et = (EditText) header.findViewById(R.id.searchText);
+	et = (EditText) findViewById(R.id.search);
 
 	esHelper = new ESHelper();
 
@@ -102,21 +98,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	while (result == null) {
 	    result = esHelper.getOnlineStories();
 	}
-	fillData(result, onCreate);
+	fillData(result);
 
-	searchButton.setOnClickListener(new View.OnClickListener() {
-
-	    @Override
-	    public void onClick(View v) {
-		searchText = et.getText().toString();
-		if (searchText != null && !searchText.isEmpty()) {
-		    fillData(esHelper.searchOnlineStories(searchText), onUpdate);
-		} else {
-		    fillData(esHelper.getOnlineStories(), onUpdate);
-		}
-
-	    }
-	});
 	registerForContextMenu(getListView());
     }
 
@@ -220,13 +203,8 @@ public class OnlineStoriesActivity extends ListActivity {
      * 
      * @param sList
      *            An ArrayList of stories used to populate the listview.
-     * @param update
-     *            Indicates whether or not a header already exists.
      */
-    private void fillData(ArrayList<Story> sList, boolean update) {
-	if (!update) {
-	    lv.addHeaderView(header);
-	}
+    private void fillData(ArrayList<Story> sList) {
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
 
@@ -235,10 +213,10 @@ public class OnlineStoriesActivity extends ListActivity {
 	    Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
 	/*
-	 * Populate the listview with the downloaded/offline stories at the
-	 * start of the activity
+	 * Populate the listview with the online stories at the start of the
+	 * activity
 	 */
-	fillData(esHelper.getOnlineStories(), onUpdate);
+	fillData(esHelper.getOnlineStories());
     }
 
     @Override
@@ -248,8 +226,80 @@ public class OnlineStoriesActivity extends ListActivity {
 	while (result == null) {
 	    result = esHelper.getOnlineStories();
 	}
-	/* Re-populate the listview with the downloaded/offline stories */
-	fillData(result, onUpdate);
+	/* Re-populate the listview with the online stories */
+	fillData(result);
+    }
+
+    /**
+     * This method is called from a button click that allows the user to search
+     * through the list of online Stories. They must have a search string
+     * entered into the search text area. If they do not it will just return the
+     * full list of online stories. If they have a search string that is
+     * contained within a title or author of any online story, that story will
+     * be displayed in the list for the user to chose from.
+     * 
+     * This method uses ElasticSearch (@link http://www.elasticsearch.org/) to search the webservice for the online
+     * Stories.
+     * 
+     * @see ESHelper
+     * 
+     * @param view
+     *            The screen used to display the Online Story list for the user.
+     */
+    public void onClickSearchButton(View view) {
+	searchText = et.getText().toString();
+	if (searchText != null && !searchText.isEmpty()) {
+	    fillData(esHelper.searchOnlineStories(searchText));
+	} else {
+	    fillData(esHelper.getOnlineStories());
+	}
+    }
+
+    /**
+     * This method is called from a button click that allows the user to ask for
+     * a random Online Story to be viewed for their reading pleasure. It will
+     * get a random story and pass this story to the next activity for
+     * displaying to the user. Once this is compelete the user should be
+     * presented with a display of the first page of the story.
+     * 
+     * @param view
+     *            The screen used to display the Online Story list for the user.
+     */
+    public void onClickFeelingLuckButton(View view) {
+	/* Generate and get a random Story for the user */
+	ArrayList<Story> storyList = esHelper.getOnlineStories();
+	int randomStoryId = StoryController.feelingLucky(storyList.size());
+	Story randomStory = esHelper.getOnlineStory(randomStoryId);
+
+	Intent firstStoryFragment = new Intent(getApplicationContext(),
+		StoryFragmentActivity.class);
+
+	fHelper = new FileHelper(this, 0);
+
+	/*
+	 * decode the Story so that the photos are returned to their normal
+	 * format
+	 */
+	try {
+	    currentStory = fHelper.decodeStory(randomStory, 0);
+	} catch (IOException e) {
+	    Log.d(TAG, e.getLocalizedMessage());
+	} catch (Exception e) {
+	    Log.d(TAG, e.getLocalizedMessage());
+	}
+	firstStoryFragment.putExtra("story", currentStory);
+
+	int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
+
+	/* send the first story fragment id through the intent */
+	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+	firstStoryFragment.putExtra("mode", 0);
+
+	/*
+	 * start the StoryFragmentActivity to display the first fragment of the
+	 * selected story
+	 */
+	startActivity(firstStoryFragment);
     }
 
 }
