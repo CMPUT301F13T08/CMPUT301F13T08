@@ -64,8 +64,7 @@ public class SelectFragmentActivity extends Activity {
 	    @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		StoryFragment sf = (StoryFragment)parent.getItemAtPosition(position);
-		int storyFragmentId = sf.getStoryFragmentId();
-		
+		int storyFragmentId = sf.getStoryFragmentId();		
 		Intent intent = new Intent(SelectFragmentActivity.this,
 			EditChoiceActivity.class);
 		intent.putExtra("nextStoryFragmentId", storyFragmentId);	

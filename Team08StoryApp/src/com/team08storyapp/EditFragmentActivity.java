@@ -267,6 +267,7 @@ public class EditFragmentActivity extends Activity {
 
 	if (resultCode == RESULT_OK) {
 	    if (requestCode == REQUEST_CHOICE) {
+
 		//currentStory = (Story) data.getSerializableExtra("story");
 		//currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
 		currentStoryFragment = (StoryFragment) data.getSerializableExtra("currentStoryFragment");

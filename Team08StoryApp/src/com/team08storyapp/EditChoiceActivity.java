@@ -31,6 +31,8 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -63,17 +65,13 @@ public class EditChoiceActivity extends Activity {
 	currentStoryFragment = currentStory.getStoryFragments().get(
 		currentStoryFragmentIndex);
 
-	availableStoryFragmentList = currentStory.getStoryFragments();
-	for (StoryFragment sf : availableStoryFragmentList) {
-	    System.out.println(sf.getStoryFragmentId() + "\n"
-		    + sf.getStoryText());
+	availableStoryFragmentList = new ArrayList<StoryFragment>();
+	ArrayList<StoryFragment> currentStoryFragments = currentStory.getStoryFragments();
+	for(StoryFragment sf: currentStoryFragments){
+	    if(sf.getStoryFragmentId() != currentStoryFragmentIndex + 1){
+		availableStoryFragmentList.add(sf);
+	    }
 	}
-	// if (currentStory.getStoryFragments().size() ==
-	// availableStoryFragmentList
-	// .size()) {
-	// availableStoryFragmentList.remove(currentStoryFragmentIndex);
-	// }
-
 	tvFragment = (TextView) findViewById(R.id.choiceFragmentId);
     }
 
@@ -100,10 +98,21 @@ public class EditChoiceActivity extends Activity {
 		    Toast.LENGTH_LONG).show();
 	    return;
 	}
-
+	Choice newChoice = new Choice();
 	currentStoryFragment = StoryController.addChoice(choiceText,
 		currentStoryFragment, nextFragmentId);
-
+	currentStory.getStoryFragments().set(currentStoryFragmentIndex, currentStoryFragment);
+	FileHelper fHelper = new FileHelper(this, 1);
+	try {
+	    fHelper.updateOfflineStory(currentStory);
+	} catch (FileNotFoundException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	System.out.println("THIS IS THE NEW CHOICE??"+ currentStoryFragment.getChoices().get(currentStoryFragment.getChoices().size()-1).getText());
 	Intent intent = new Intent(EditChoiceActivity.this,
 		EditFragmentActivity.class);
 	/*intent.putExtra("story", currentStory);
