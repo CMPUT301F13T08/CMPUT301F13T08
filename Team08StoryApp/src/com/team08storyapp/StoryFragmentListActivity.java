@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -59,6 +59,7 @@ public class StoryFragmentListActivity extends Activity {
 	Intent passedIntent = getIntent();
 	currentStory = (Story) passedIntent.getSerializableExtra("story");
 	sfList = currentStory.getStoryFragments();
+	System.out.println("THERE SHOULD BE THIS MUCH FRAGMENTS:"  + sfList.size());
 
 	lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list, sfList));
 
@@ -69,12 +70,13 @@ public class StoryFragmentListActivity extends Activity {
 		StoryFragment sf = (StoryFragment) parent
 			.getItemAtPosition(position);
 		int storyFragmentId = sf.getStoryFragmentId();
+		System.out.println("SELECTED FRAGMENT ID : " + storyFragmentId);
 
 		Intent intent = new Intent(StoryFragmentListActivity.this,
 			EditFragmentActivity.class);
 		intent.putExtra("storyFragmentId", storyFragmentId);
 		intent.putExtra("story", currentStory);
-		intent.putExtra("mode", 0);
+		intent.putExtra("mode", 1);
 		startActivity(intent);
 	    }
 	});
@@ -93,7 +95,7 @@ public class StoryFragmentListActivity extends Activity {
 	int newStoryFragmentId = currentStory.getStoryFragments().size() + 1;
 	intent.putExtra("storyFragmentId", newStoryFragmentId);
 	intent.putExtra("story", currentStory);
-	intent.putExtra("mode", 0);
+	intent.putExtra("mode", 1);
 	startActivity(intent);
     }
 }

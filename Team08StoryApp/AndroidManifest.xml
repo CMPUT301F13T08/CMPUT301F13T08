@@ -79,6 +79,10 @@
             android:name="com.team08storyapp.StoryFragmentListActivity"
             android:label="@string/title_activity_story_fragment_list" >
         </activity>
+        <activity
+            android:name="com.team08storyapp.ViewFragmentsActivity"
+            android:label="@string/title_activity_view_fragments" >
+        </activity>
     </application>
 
 </manifest>

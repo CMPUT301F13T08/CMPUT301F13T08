@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -68,8 +68,7 @@ public class SelectFragmentActivity extends Activity {
 		
 		Intent intent = new Intent(SelectFragmentActivity.this,
 			EditChoiceActivity.class);
-		intent.putExtra("nextStoryFragmentId", storyFragmentId);
-	
+		intent.putExtra("nextStoryFragmentId", storyFragmentId);	
 		intent.putExtra("mode", 1);
 		setResult(RESULT_OK, intent);
 		finish();
@@ -77,12 +76,6 @@ public class SelectFragmentActivity extends Activity {
 	});
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.select, menu);
-	return true;
-    }
 
 
 

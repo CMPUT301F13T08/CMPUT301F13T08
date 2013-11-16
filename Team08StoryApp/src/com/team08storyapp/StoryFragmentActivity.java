@@ -85,7 +85,7 @@ public class StoryFragmentActivity extends Activity {
     private PicAdapter imgAdapt;
     private Gallery picGallery;
     private ListView lv;
-    private View headerText;
+    private TextView textSection;
     private View headerGallery;
     private ImageView picView;
 
@@ -111,7 +111,7 @@ public class StoryFragmentActivity extends Activity {
 	lv = (ListView) findViewById(android.R.id.list);
 
 	/* set up text header */
-	TextView textSection = (TextView) findViewById(R.id.headerText);
+	textSection = (TextView) findViewById(R.id.headerText);
 	System.out.println("FOUND");
 	textSection.setOnTouchListener(new View.OnTouchListener() {
 
@@ -178,6 +178,11 @@ public class StoryFragmentActivity extends Activity {
 		currentStoryFragmentIndex = i;
 	    }
 	}
+	
+	System.out.println(currentStoryFragmentId);
+	System.out.println(currentStory.getStoryFragments().size());
+	System.out.println(currentStory.getStoryFragments().get(0).getStoryText());
+
 
 	/*
 	 * Gets the current story fragment object from the story fragment list,
@@ -185,6 +190,7 @@ public class StoryFragmentActivity extends Activity {
 	 */
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
+	System.out.println(currentStoryFragment == null);
 
 	/* Display the current fragment text */
 	textSection.setText(currentStoryFragment.getStoryText());

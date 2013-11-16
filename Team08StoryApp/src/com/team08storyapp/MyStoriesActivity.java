@@ -104,7 +104,7 @@ public class MyStoriesActivity extends ListActivity {
 	 * to auto-generate a story in My Stories for part 3 demo.
 	 */
 	try {
-	    if (fHelper.getOfflineStory(11) == null) {
+	    //if (fHelper.getOfflineStory(11) == null) {
 		Story s1 = new Story(11, "Los Santos", "Alice Wu");
 		ArrayList<StoryFragment> sfList = new ArrayList<StoryFragment>();
 		StoryFragment sf1 = new StoryFragment(
@@ -164,7 +164,7 @@ public class MyStoriesActivity extends ListActivity {
 		s1.setStoryFragments(sfList);
 
 		fHelper.addOfflineStory(s1);
-	    }
+	    //}
 
 	} catch (FileNotFoundException e1) {
 	    e1.printStackTrace();
@@ -228,6 +228,8 @@ public class MyStoriesActivity extends ListActivity {
 	Story currentStory = (Story) lv.getAdapter().getItem(position);
 	System.out.println(currentStory.getTitle());
 	System.out.println(currentStory.getAuthor());
+	System.out.println(currentStory.getStoryFragments().size());
+	System.out.println(currentStory.getStoryFragments().get(0).toString());
 
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
@@ -262,6 +264,7 @@ public class MyStoriesActivity extends ListActivity {
 	    Intent intent = new Intent(MyStoriesActivity.this,
 		    StoryFragmentListActivity.class);
 	    intent.putExtra("story", currentStory);
+	    System.out.println(currentStory.getStoryFragments().size());
 	    startActivity(intent);
 
 	    return true;

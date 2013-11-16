@@ -40,6 +40,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -74,6 +75,10 @@ public class EditFragmentActivity extends Activity {
     private ESHelper esHelper;
     private Uri imageFileUri;
     private PhotoController pc;
+    private ChoiceAdapter adapter;
+
+    private final static int REQUEST_CHOICE = 0;
+    private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,24 +177,22 @@ public class EditFragmentActivity extends Activity {
 	return true;
     }
 
-    public void onPause(){
-	try {
-	    currentStory = fHelper.getOfflineStory(currentStoryId);
-	    currentStoryFragment = currentStory.getStoryFragments().get(
-		    currentStoryFragmentIndex);
-
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	// Handle item selection
 	switch (item.getItemId()) {
 	case R.id.camIllus:
+	    Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    intent1.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+	    startActivityForResult(intent1, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	    return true;
 
 	case R.id.camGallery:
+	    Intent pickIntent = new Intent();
+	    pickIntent.setType("image/*");
+	    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
+	    startActivityForResult(
+		    Intent.createChooser(pickIntent, "Select Picture"), 200);
 	    return true;
 
 	case R.id.addChoice:
@@ -197,7 +200,7 @@ public class EditFragmentActivity extends Activity {
 		    EditChoiceActivity.class);
 	    intent.putExtra("story", currentStory);
 	    intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
-	    startActivity(intent);
+	    startActivityForResult(intent, REQUEST_CHOICE);
 	    return true;
 
 	case R.id.save:
@@ -209,8 +212,10 @@ public class EditFragmentActivity extends Activity {
 		fHelper.updateOfflineStory(currentStory);
 		Toast.makeText(getApplicationContext(), "Save Successfully",
 			Toast.LENGTH_LONG).show();
-		
-		Intent storyFragmentListIntent = new Intent(EditFragmentActivity.this, StoryFragmentListActivity.class);
+
+		Intent storyFragmentListIntent = new Intent(
+			EditFragmentActivity.this,
+			StoryFragmentListActivity.class);
 		storyFragmentListIntent.putExtra("story", currentStory);
 		startActivity(storyFragmentListIntent);
 	    } catch (FileNotFoundException e) {
@@ -227,8 +232,7 @@ public class EditFragmentActivity extends Activity {
 
     private void fillChoice(ArrayList<Choice> cList) {
 	lv.addHeaderView(headerGallery);
-	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
-		cList);
+	adapter = new ChoiceAdapter(this, android.R.id.list, cList);
 	lv.setAdapter(adapter);
 
     }
@@ -246,9 +250,41 @@ public class EditFragmentActivity extends Activity {
 
     }
 
+    protected void onPause() {
+	try {
+	    String dialogue = textSection.getText().toString();
+	    currentStoryFragment.setStoryText(dialogue);
+	    currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+		    currentStoryFragment);
+	    fHelper.updateOfflineStory(currentStory);
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	super.onPause();
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 	if (resultCode == RESULT_OK) {
+	    if (requestCode == REQUEST_CHOICE) {
+		currentStory = (Story) data.getSerializableExtra("story");
+		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
+		try {
+		    fHelper.updateOfflineStory(currentStory);
+		    currentStoryFragment = currentStory.getStoryFragments()
+			    .get(currentStoryFragmentIndex);
+		    /* need to simplify below statement later */
+		    adapter.add(currentStoryFragment.getChoices().get(
+			    currentStoryFragment.getChoices().size() - 1));
+		    adapter.notifyDataSetChanged();
+
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		return;
+	    }
 	    Uri pickedUri = data.getData();
 	    Bitmap pic = pc.savePhoto(pickedUri);
 	    if (pic != null) {

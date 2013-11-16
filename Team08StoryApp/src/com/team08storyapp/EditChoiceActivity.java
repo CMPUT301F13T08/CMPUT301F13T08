@@ -31,49 +31,50 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditChoiceActivity extends Activity {
     private Story currentStory;
     private StoryFragment currentStoryFragment;
     private int currentStoryFragmentIndex;
-
     private int nextFragmentId = 0;
- 
     private ArrayList<StoryFragment> availableStoryFragmentList;
-
     private EditText tv;
+    private TextView tvFragment;
     private static final int LINKED_FRAGMENT = 1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_edit_choice);
-	
-
 	Intent choiceIntent = getIntent();
 	currentStory = (Story) choiceIntent.getSerializableExtra("story");
 	currentStoryFragmentIndex = choiceIntent.getIntExtra(
 		"storyFragmentIndex", 0);
 	currentStoryFragment = currentStory.getStoryFragments().get(
 		currentStoryFragmentIndex);
+
 	availableStoryFragmentList = currentStory.getStoryFragments();
-	if (currentStory.getStoryFragments().size() == availableStoryFragmentList
-		.size()) {
-	    availableStoryFragmentList.remove(currentStoryFragmentIndex);
+	for (StoryFragment sf : availableStoryFragmentList) {
+	    System.out.println(sf.getStoryFragmentId() + "\n"
+		    + sf.getStoryText());
 	}
+	// if (currentStory.getStoryFragments().size() ==
+	// availableStoryFragmentList
+	// .size()) {
+	// availableStoryFragmentList.remove(currentStoryFragmentIndex);
+	// }
+
+	tvFragment = (TextView) findViewById(R.id.choiceFragmentId);
     }
 
     @Override
@@ -100,15 +101,14 @@ public class EditChoiceActivity extends Activity {
 	    return;
 	}
 
-
 	currentStoryFragment = StoryController.addChoice(choiceText,
 		currentStoryFragment, nextFragmentId);
-	
-
 	Intent intent = new Intent(EditChoiceActivity.this,
 		EditFragmentActivity.class);
-	intent.putExtra("currentStoryFragment", currentStoryFragment);
-
+	intent.putExtra("story", currentStory);
+	intent.putExtra("storyFragmentId",
+		currentStoryFragment.getStoryFragmentId());
+	intent.putExtra("mode", 1);
 	setResult(RESULT_OK, intent);
 	finish();
 
@@ -118,7 +118,6 @@ public class EditChoiceActivity extends Activity {
 	Intent intent = new Intent(EditChoiceActivity.this,
 		SelectFragmentActivity.class);
 	intent.putExtra("storyFragments", availableStoryFragmentList);
-
 	startActivityForResult(intent, LINKED_FRAGMENT);
     }
 
@@ -128,6 +127,8 @@ public class EditChoiceActivity extends Activity {
 	if (resultCode == RESULT_OK) {
 	    nextFragmentId = data
 		    .getIntExtra("nextStoryFragmentId", resultCode);
+	    tvFragment.setText("The next storyFragment id is: "
+		    + Integer.toString(nextFragmentId));
 
 	}
     }

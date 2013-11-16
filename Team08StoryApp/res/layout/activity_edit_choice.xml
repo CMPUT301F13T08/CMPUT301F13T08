@@ -44,6 +44,13 @@
         android:text="@string/save"
         android:onClick="returnEditFragmentActivity"
          />
-  
+
+    <TextView
+        android:id="@+id/choiceFragmentId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonFragment"
+        android:layout_below="@+id/buttonFragment"
+        android:text="The linked fragment id is: " />
 
 </RelativeLayout>

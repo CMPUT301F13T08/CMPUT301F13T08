@@ -29,7 +29,7 @@
     <string name="title_activity_edit_choice">EditChoiceActivity</string>
     <string name="title_activity_select_fragment">SelectFragmentActivity</string>
     <string name="title_activity_story_fragment_list">StoryFragmentListActivity</string>
-    <string name ="gallery_image">Default gallery image</string>
+    <string name="gallery_image">Default gallery image</string>
     <string name="enter_the_text_for_your_choice_">Enter the text for your choice.</string>
     <string name="choice_text">Choice Text:</string>
     <string name="link_choice_to_fragment">Link choice to fragment</string>
@@ -55,5 +55,7 @@
     <string name="search_">Search&#8230;</string>
     <string name="illustration_from_camera">Illustration from Camera</string>
     <string name="illustration_from_gallery">Illustration from Gallery</string>
+    <string name="title_activity_view_fragments">ViewFragmentsActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

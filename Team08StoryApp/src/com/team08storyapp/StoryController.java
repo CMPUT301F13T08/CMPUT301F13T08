@@ -80,6 +80,7 @@ public class StoryController {
 	    ArrayList<StoryFragment> storyFragments, int storyFragmentId) {
 	StoryFragment nextFragment = null;
 	for (StoryFragment storyFragment : storyFragments) {
+	    System.out.println("Looking for: "+storyFragmentId + "  Now is: "+storyFragment.getStoryFragmentId());
 	    if (storyFragment.getStoryFragmentId() == storyFragmentId) {
 		nextFragment = storyFragment;
 		break;
