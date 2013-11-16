@@ -272,6 +272,7 @@ public class EditFragmentActivity extends Activity {
 	    if (requestCode == REQUEST_CHOICE) {
 		System.out.println("DETECT NEW CHOICE!");
 		currentStory = (Story) data.getSerializableExtra("story");
+		System.out.println(currentStory.toString());
 		System.out.println("JUST MAKE SURE I HAVE THE NEW ONE:"
 			+ currentStory
 				.getStoryFragments()
