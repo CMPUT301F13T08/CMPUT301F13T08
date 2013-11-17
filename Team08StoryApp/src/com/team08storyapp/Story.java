@@ -66,14 +66,6 @@ import java.util.Date;
 
 public class Story implements Serializable {
 
-    @Override
-    public String toString() {
-	return "Story [onlineStoryId=" + onlineStoryId + ", offlineStoryId="
-		+ offlineStoryId + ", title=" + title + ", author=" + author
-		+ ", storyFragments=" + storyFragments
-		+ ", firstStoryFragmentId=" + firstStoryFragmentId + ", Changed?: "+ unchanged+"]";
-    }
-
     private static final long serialVersionUID = 1L;
     private int onlineStoryId;
     private int offlineStoryId;
@@ -81,16 +73,6 @@ public class Story implements Serializable {
     private String author;
     private ArrayList<StoryFragment> storyFragments;
     private int firstStoryFragmentId;
-    private Boolean unchanged;
-
-
-    public Boolean getUnchanged() {
-        return unchanged;
-    }
-
-    public void setUnchanged(Boolean unchanged) {
-        this.unchanged = unchanged;
-    }
 
     /**
      * A constructor for creating a Story object used when initializing a sample
@@ -228,5 +210,13 @@ public class Story implements Serializable {
      */
     public void setFirstStoryFragmentId(int firstStoryFragmentId) {
 	this.firstStoryFragmentId = firstStoryFragmentId;
+    }
+
+    @Override
+    public String toString() {
+	return "Story [onlineStoryId=" + onlineStoryId + ", offlineStoryId="
+		+ offlineStoryId + ", title=" + title + ", author=" + author
+		+ ", storyFragments=" + storyFragments
+		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
     }
 }

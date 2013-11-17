@@ -169,9 +169,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    fHelper = new FileHelper(this, 0);
 	    /* send the story object through the intent */
 	    try {
-		System.out.println("Decode Story starts");
 		currentStory = fHelper.decodeStory(currentStory, 0);
-		System.out.println(currentStory.toString());
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    } catch (Exception e) {

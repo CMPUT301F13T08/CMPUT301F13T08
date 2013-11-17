@@ -149,7 +149,6 @@ public class FileHelper {
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
-	    story.setUnchanged(true);
 	    /* translate the story context to Json */
 	    String context = gson.toJson(story);
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,
@@ -189,7 +188,6 @@ public class FileHelper {
 	    fileContext.deleteFile(fileName);
 
 	    /* add new file */
-	    story.setUnchanged(false);
 	    String context = gson.toJson(story);
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,
 		    Context.MODE_PRIVATE);
@@ -204,40 +202,47 @@ public class FileHelper {
 	return false;
     }
 
-    public boolean resetOfflineStory(Story story) throws FileNotFoundException {
+    public void appendUpdateQueue(int storyId) {
 	try {
-	    String fileName = prefix
-		    + Integer.toString(story.getOfflineStoryId());
-
-	    /* delete original file */
-	    fileContext.deleteFile(fileName);
-
-	    /* add new file */
-	    String context = gson.toJson(story);
-	    FileOutputStream ops = fileContext.openFileOutput(fileName,
-		    Context.MODE_PRIVATE);
-	    ops.write(context.getBytes());
-	    ops.close();
-	    return true;
+	    String filename = "updateQueue";
+	    FileOutputStream fos = fileContext.openFileOutput(filename, Context.MODE_APPEND);
+	    fos.write((Integer.toString(storyId) + "\n").getBytes());
+	    System.out.println("WROTE IT!");
+	    fos.close();
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-
-	return false;
     }
 
-    public void appendUpdateQueue(int storyId) {
-	try
-	{
-	    String filename= "updateQueue";
-	    FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-	    fw.write(Integer.toString(storyId)+"\n");//appends the string to the file
-	    fw.close();
-	}
-	catch(Exception e)
-	{
+    public ArrayList<String> getUpdateFilesIds() {
+	ArrayList<String> updateId = new ArrayList<String>();
+	try {
+
+	    File dir = fileContext.getFilesDir();
+	    File updateQueue = new File(dir, "updateQueue");
+	    InputStream is = new BufferedInputStream(new FileInputStream(
+		    updateQueue));
+	    if (is != null) {
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+		String temp = "";
+		while ((temp = br.readLine()) != null) {
+		    System.out.println("Read THIS FILE:" + updateId);
+		    if (!updateId.contains(temp)) {
+			System.out.println("ADD THIS FILE:" + updateId);
+			updateId.add(temp);
+		    }
+		}
+	    }
+	    is.close();
+	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+	return updateId;
+    }
+    
+    public void clearUpdateQueue(){
+	fileContext.deleteFile("updateQueue");
     }
 
     /**

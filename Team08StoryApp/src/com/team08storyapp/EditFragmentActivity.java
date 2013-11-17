@@ -222,8 +222,9 @@ public class EditFragmentActivity extends Activity {
 		 * to the current fragment
 		 */
 		fHelper.updateOfflineStory(currentStory);
+		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 		Toast.makeText(getApplicationContext(), "Save Successfully",
-			Toast.LENGTH_LONG).show();
+			Toast.LENGTH_SHORT).show();
 		finish();
 	    } catch (FileNotFoundException e) {
 		e.printStackTrace();
@@ -267,6 +268,7 @@ public class EditFragmentActivity extends Activity {
 	    currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		    currentStoryFragment);
 	    fHelper.updateOfflineStory(currentStory);
+	    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
@@ -281,7 +283,6 @@ public class EditFragmentActivity extends Activity {
 	    if (requestCode == REQUEST_CHOICE) {
 
 		currentStory = (Story) data.getSerializableExtra("story");
-
 		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
 		currentStoryFragment = currentStory.getStoryFragments().get(
 			currentStoryFragmentIndex);

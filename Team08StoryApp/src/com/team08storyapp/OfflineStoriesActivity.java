@@ -73,7 +73,7 @@ public class OfflineStoriesActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
-	setContentView(R.layout.activity_story_list);
+	setContentView(R.layout.activity_offline_stories);
 	lv = (ListView) findViewById(android.R.id.list);
 	fHelper = new FileHelper(this, 0);
 	et = (EditText) findViewById(R.id.search);

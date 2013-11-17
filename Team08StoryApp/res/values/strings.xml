@@ -8,7 +8,7 @@
     <string name="read_online">Read Online Stories</string>
     <string name="read_download">Read Downloaded Stories</string>
     <string name="my_stories">My Stories</string>
-    <string name="search_hint">Search Title&#8230;</string>
+    <string name="search_hint">Search Title Or Author…</string>
     <string name="title_activity_online_stories">OnlineStoriesActivity</string>
     <string name="title_activity_offline_stories">OfflineStoriesActivity</string>
     <string name="title_activity_story_view">StoryFragmentActivity</string>

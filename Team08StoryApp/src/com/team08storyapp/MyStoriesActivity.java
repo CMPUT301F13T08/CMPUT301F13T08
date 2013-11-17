@@ -84,6 +84,7 @@ public class MyStoriesActivity extends ListActivity {
     private String searchText;
     private ListView lv;
     private Story currentStory;
+    private InternetDetector IntDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +212,15 @@ public class MyStoriesActivity extends ListActivity {
 	 * story activity });
 	 */
 
+	IntDetector = new InternetDetector(this);
+	System.out.println("INTERNET CONNECTION? : "
+		+ IntDetector.connectedToInternet());
+	if (IntDetector.connectedToInternet()
+		&& fHelper.getUpdateFilesIds() != null) {
+	    SyncManager.getInstance();
+	    SyncManager.sync(fHelper, esHelper);
+	    Toast.makeText(this, "Your changes to stories have been uploaded.", Toast.LENGTH_SHORT).show();
+	}
 	registerForContextMenu(getListView());
     }
 
@@ -324,6 +334,14 @@ public class MyStoriesActivity extends ListActivity {
 	super.onResume();
 	try {
 	    fillData(fHelper.getOfflineStories(), onUpdate);
+	    IntDetector = new InternetDetector(this);
+	    System.out.println("INTERNET CONNECTION? : "
+		    + IntDetector.connectedToInternet());
+	    if (IntDetector.connectedToInternet()
+		    && fHelper.getUpdateFilesIds() != null) {
+		SyncManager.getInstance();
+		SyncManager.sync(fHelper, esHelper);
+	    }
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
