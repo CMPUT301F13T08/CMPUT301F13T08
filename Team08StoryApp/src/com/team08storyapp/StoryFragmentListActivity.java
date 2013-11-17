@@ -31,6 +31,8 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.os.Bundle;
@@ -87,10 +89,13 @@ public class StoryFragmentListActivity extends Activity {
 	return true;
     }
 
-    public void toEditFragment(View view) {
+    public void toEditFragment(View view) throws Exception {
 	Intent intent = new Intent(getApplicationContext(),
 		EditFragmentActivity.class);
 	int newStoryFragmentId = currentStory.getStoryFragments().size() + 1;
+	StoryFragment addStoryFragment = new StoryFragment(newStoryFragmentId);
+	currentStory.getStoryFragments().add(addStoryFragment);
+	fHelper.updateOfflineStory(currentStory);
 	intent.putExtra("storyFragmentId", newStoryFragmentId);
 	intent.putExtra("story", currentStory);
 	intent.putExtra("mode", 1);

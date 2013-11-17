@@ -264,7 +264,9 @@ public class EditFragmentActivity extends Activity {
     protected void onPause() {
 	try {
 	    String dialogue = textSection.getText().toString();
-	    currentStoryFragment.setStoryText(dialogue);
+	    if (!dialogue.isEmpty() && dialogue != null) {
+		currentStoryFragment.setStoryText(dialogue);
+	    }
 	    currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		    currentStoryFragment);
 	    fHelper.updateOfflineStory(currentStory);
