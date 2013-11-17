@@ -37,9 +37,9 @@ import java.util.ArrayList;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -61,11 +61,9 @@ public class OfflineStoriesActivity extends ListActivity {
 
     public int position;
     public AdapterContextMenuInfo info;
-    private static final boolean onUpdate = true;
-    private static final boolean onCreate = false;
+    private static final String TAG = "OfflineStoriesActivity";
 
     private FileHelper fHelper;
-    private View header;
     private ListView lv;
     private String searchText;
     private EditText et;
@@ -78,33 +76,10 @@ public class OfflineStoriesActivity extends ListActivity {
 	setContentView(R.layout.activity_story_list);
 	lv = (ListView) findViewById(android.R.id.list);
 	fHelper = new FileHelper(this, 0);
-	header = getLayoutInflater().inflate(R.layout.header_search, null);
-
-	/* assigns searchbutton to a button in our layout */
-	Button searchButton = (Button) header.findViewById(R.id.searchButton);
-	et = (EditText) header.findViewById(R.id.searchText);
-
-	searchButton.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View v) {
-		searchText = et.getText().toString();
-		if (searchText != null && searchText != "") {
-		    fillData(fHelper.searchOfflineStories(searchText), onUpdate);
-		} else {
-		    try {
-			fillData(fHelper.getOfflineStories(), onUpdate);
-		    } catch (FileNotFoundException e) {
-			e.printStackTrace();
-		    } catch (IOException e) {
-			e.printStackTrace();
-		    }
-		}
-	    }
-
-	});
+	et = (EditText) findViewById(R.id.search);
 
 	try {
-	    fillData(fHelper.getOfflineStories(), onCreate);
+	    fillData(fHelper.getOfflineStories());
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
@@ -142,7 +117,6 @@ public class OfflineStoriesActivity extends ListActivity {
 	 * selected story
 	 */
 	startActivity(firstStoryFragment);
-
     }
 
     /**
@@ -152,13 +126,8 @@ public class OfflineStoriesActivity extends ListActivity {
      * 
      * @param sList
      *            An Arraylist of stories used to populate the listview.
-     * @param update
-     *            indicates whether or not a header exists.
      */
-    private void fillData(ArrayList<Story> sList, boolean update) {
-	if (!update) {
-	    lv.addHeaderView(header);
-	}
+    private void fillData(ArrayList<Story> sList) {
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
 
@@ -171,7 +140,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	     * Populate the listview with the online stories at the start of the
 	     * activity
 	     */
-	    fillData(fHelper.getOfflineStories(), onUpdate);
+	    fillData(fHelper.getOfflineStories());
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
@@ -183,12 +152,101 @@ public class OfflineStoriesActivity extends ListActivity {
 	super.onResume();
 	try {
 	    /* Re-populate the listview with the online stories */
-	    fillData(fHelper.getOfflineStories(), onUpdate);
+	    fillData(fHelper.getOfflineStories());
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    }
+
+    /**
+     * This method is called from a button click that allows the user to search
+     * through the list of online Stories. They must have a search string
+     * entered into the search text area. If they do not it will just return the
+     * full list of online stories. If they have a search string that is
+     * contained within a title or author of any online story, that story will
+     * be displayed in the list for the user to chose from.
+     * 
+     * This method uses ElasticSearch (@link http://www.elasticsearch.org/) to
+     * search the webservice for the online Stories.
+     * 
+     * @see ESHelper
+     * 
+     * @param view
+     *            The screen used to display the Online Story list for the user.
+     */
+    public void onClickSearchButton(View view) {
+	searchText = et.getText().toString();
+	if (searchText != null && searchText != "") {
+	    fillData(fHelper.searchOfflineStories(searchText));
+	} else {
+	    try {
+		fillData(fHelper.getOfflineStories());
+	    } catch (FileNotFoundException e) {
+		e.printStackTrace();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	}
+    }
+
+    /**
+     * This method is called from a button click that allows the user to ask for
+     * a random Offline Story to be viewed for their reading pleasure. It will
+     * get a random story and pass this story to the next activity for
+     * displaying to the user. Once this is complete the user should be
+     * presented with a display of the first page of the story.
+     * 
+     * @param view
+     *            The screen used to display the Offline Story list for the
+     *            user.
+     */
+    public void onClickFeelingLuckButton(View view) {
+	Story randomStory = null;
+
+	/* Generate and get a random Story for the user */
+	try {
+	    ArrayList<Story> storyList = fHelper.getOfflineStories();
+	    if (storyList.size() > 0) {
+		int randomStoryIndex = StoryController.feelingLucky(storyList
+			.size());
+		randomStory = storyList.get(randomStoryIndex);
+	    }
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
 
+	if (randomStory != null) {
+	    Intent firstStoryFragment = new Intent(getApplicationContext(),
+		    StoryFragmentActivity.class);
+	    /*
+	     * decode the Story so that the photos are returned to their normal
+	     * format
+	     */
+	    try {
+		currentStory = fHelper.decodeStory(randomStory, 0);
+	    } catch (IOException e) {
+		Log.d(TAG, e.getLocalizedMessage());
+	    } catch (Exception e) {
+		Log.d(TAG, e.getLocalizedMessage());
+	    }
+	    firstStoryFragment.putExtra("story", currentStory);
+
+	    int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
+
+	    /* send the first story fragment id through the intent */
+	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+	    firstStoryFragment.putExtra("mode", 0);
+
+	    /*
+	     * start the StoryFragmentActivity to display the first fragment of
+	     * the selected story
+	     */
+	    startActivity(firstStoryFragment);
+	}
     }
+
 }

@@ -103,26 +103,30 @@ public class testStoryController extends TestCase {
     /*
      * Test for Use Case 19
      * 
-     * The testFeelingLuck method tests getting a random Story Id for the user
-     * to read a random Story. Using a set Story List size, the call to
-     * feelingLucky will return a random Story Id. The first test to make sure
-     * that we are receiving a random Story is that the Story Id is not zero.
-     * The second test is to run the call again and check that the two calls
-     * resulted in two different Story Id's.
+     * The testFeelingLuck method tests getting a random Story index for the
+     * user to read a random Story. Using a set Story List size, the call to
+     * feelingLucky will return a random Story index. The first test to make
+     * sure that we are receiving a random Story is that the Story index is
+     * between zero and the size minus one. The second test is to run the call
+     * again and check that the two calls resulted in two different Story
+     * indexes.
      */
     public void testFeelingLucky() {
 
-	/* Test that the random Story Id is not 0 and between 1 and storyListSize*/
-	int randomStoryId = StoryController.feelingLucky(storyListSize);
-	assertTrue(randomStoryId != 0);
-	assertTrue(randomStoryId > 1 && randomStoryId <= storyListSize);
+	/*
+	 * Test that the random Story index is between 0 and storyListSize minus
+	 * one
+	 */
+	int randomStoryIndex = StoryController.feelingLucky(storyListSize);
+	assertTrue(randomStoryIndex >= 0
+		&& randomStoryIndex <= storyListSize - 1);
 
 	/*
 	 * Test that the method is returning randomly by comparing two random
 	 * call results to each other
 	 */
-	int secondRandStoryId = StoryController.feelingLucky(storyListSize);
-	assertTrue(randomStoryId != secondRandStoryId);
+	int randomStoryIndex2 = StoryController.feelingLucky(storyListSize);
+	assertTrue(randomStoryIndex != randomStoryIndex2);
     }
 
 }

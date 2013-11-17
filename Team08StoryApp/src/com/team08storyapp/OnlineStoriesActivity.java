@@ -238,8 +238,8 @@ public class OnlineStoriesActivity extends ListActivity {
      * contained within a title or author of any online story, that story will
      * be displayed in the list for the user to chose from.
      * 
-     * This method uses ElasticSearch (@link http://www.elasticsearch.org/) to search the webservice for the online
-     * Stories.
+     * This method uses ElasticSearch (@link http://www.elasticsearch.org/) to
+     * search the webservice for the online Stories.
      * 
      * @see ESHelper
      * 
@@ -259,7 +259,7 @@ public class OnlineStoriesActivity extends ListActivity {
      * This method is called from a button click that allows the user to ask for
      * a random Online Story to be viewed for their reading pleasure. It will
      * get a random story and pass this story to the next activity for
-     * displaying to the user. Once this is compelete the user should be
+     * displaying to the user. Once this is complete the user should be
      * presented with a display of the first page of the story.
      * 
      * @param view
@@ -268,38 +268,41 @@ public class OnlineStoriesActivity extends ListActivity {
     public void onClickFeelingLuckButton(View view) {
 	/* Generate and get a random Story for the user */
 	ArrayList<Story> storyList = esHelper.getOnlineStories();
-	int randomStoryId = StoryController.feelingLucky(storyList.size());
-	Story randomStory = esHelper.getOnlineStory(randomStoryId);
+	if (storyList.size() > 0) {
+	    int randomStoryIndex = StoryController.feelingLucky(storyList
+		    .size());
+	    Story randomStory = storyList.get(randomStoryIndex);
 
-	Intent firstStoryFragment = new Intent(getApplicationContext(),
-		StoryFragmentActivity.class);
+	    Intent firstStoryFragment = new Intent(getApplicationContext(),
+		    StoryFragmentActivity.class);
 
-	fHelper = new FileHelper(this, 0);
+	    fHelper = new FileHelper(this, 0);
 
-	/*
-	 * decode the Story so that the photos are returned to their normal
-	 * format
-	 */
-	try {
-	    currentStory = fHelper.decodeStory(randomStory, 0);
-	} catch (IOException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	} catch (Exception e) {
-	    Log.d(TAG, e.getLocalizedMessage());
+	    /*
+	     * decode the Story so that the photos are returned to their normal
+	     * format
+	     */
+	    try {
+		currentStory = fHelper.decodeStory(randomStory, 0);
+	    } catch (IOException e) {
+		Log.d(TAG, e.getLocalizedMessage());
+	    } catch (Exception e) {
+		Log.d(TAG, e.getLocalizedMessage());
+	    }
+	    firstStoryFragment.putExtra("story", currentStory);
+
+	    int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
+
+	    /* send the first story fragment id through the intent */
+	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
+	    firstStoryFragment.putExtra("mode", 0);
+
+	    /*
+	     * start the StoryFragmentActivity to display the first fragment of
+	     * the selected story
+	     */
+	    startActivity(firstStoryFragment);
 	}
-	firstStoryFragment.putExtra("story", currentStory);
-
-	int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
-
-	/* send the first story fragment id through the intent */
-	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-	firstStoryFragment.putExtra("mode", 0);
-
-	/*
-	 * start the StoryFragmentActivity to display the first fragment of the
-	 * selected story
-	 */
-	startActivity(firstStoryFragment);
     }
 
 }
