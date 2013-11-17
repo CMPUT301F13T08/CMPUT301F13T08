@@ -58,14 +58,12 @@ public class EditFragmentActivity extends Activity {
     private int currentStoryFragmentId;
     private int currentStoryFragmentIndex;
     private int currentStoryId;
-    private int mode;
     private int currentPic;
 
     /* declare variables for UI setup */
     private PicAdapter imgAdapt;
     private Gallery picGallery;
     private ListView lv;
-    private View headerGallery;
     private ImageView picView;
     private EditText textSection;
 
@@ -76,7 +74,6 @@ public class EditFragmentActivity extends Activity {
     private PhotoController pc;
     private ChoiceAdapter adapter;
     private ArrayList<Choice> storyFragmentChoices;
-    private InternetDetector internetDetector;
 
     private final static int REQUEST_CHOICE = 0;
     private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -87,8 +84,7 @@ public class EditFragmentActivity extends Activity {
 	setContentView(R.layout.activity_edit_fragment);
 
 	fHelper = new FileHelper(this, 1);
-	internetDetector = new InternetDetector(this);
-
+	
 	lv = (ListView) findViewById(android.R.id.list);
 	textSection = (EditText) findViewById(R.id.headerDialogue);
 

@@ -224,17 +224,19 @@ public class FileHelper {
 		    updateQueue));
 	    if (is != null) {
 		InputStreamReader isr = new InputStreamReader(is);
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(isr);
 		String temp = "";
 		while ((temp = br.readLine()) != null) {
-		    System.out.println("Read THIS FILE:" + updateId);
+		    System.out.println("In update Queue:" + updateId);
 		    if (!updateId.contains(temp)) {
-			System.out.println("ADD THIS FILE:" + updateId);
+			System.out.println("going to update:" + updateId);
 			updateId.add(temp);
 		    }
 		}
 	    }
 	    is.close();
+	    System.out.println(updateId);
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}

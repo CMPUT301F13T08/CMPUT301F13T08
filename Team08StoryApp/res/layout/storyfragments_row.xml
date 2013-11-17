@@ -4,10 +4,10 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:contentDescription="@string/gallery_image"
         android:id="@+id/thumbnail"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:contentDescription="@string/gallery_image"
         android:src="@drawable/ic_launcher" >
     </ImageView>
 
@@ -15,7 +15,7 @@
         android:id="@+id/fragmentText"
         android:layout_width="218dp"
         android:layout_height="wrap_content"
-        android:textSize="30sp" >
+        android:textSize="24sp" >
     </TextView>
 
 </LinearLayout>

@@ -100,9 +100,9 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 
 	    if (currentStoryFragment.getStoryText() != null
 		    && !currentStoryFragment.getStoryText().isEmpty()) {
-		if (currentStoryFragment.getStoryText().length() > 20) {
+		if (currentStoryFragment.getStoryText().length() > 30) {
 		    holder.fragmentText.setText(currentStoryFragment
-			    .getStoryText().substring(0, 19) + "...");
+			    .getStoryText().substring(0, 29) + "...");
 		} else {
 		    holder.fragmentText.setText(currentStoryFragment
 			    .getStoryText());

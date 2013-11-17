@@ -1,10 +1,6 @@
 package com.team08storyapp;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import android.widget.Toast;
 
 public class SyncManager {
     private static SyncManager syncManager = new SyncManager();
@@ -20,15 +16,15 @@ public class SyncManager {
 	ArrayList<String> storyIdList = fHelper.getUpdateFilesIds();
 	for (String id : storyIdList) {
 	    System.out.println("I'm gonna update this!:" + id);
+	    int intId = 0;
 	    try {
-		int intId = Integer.parseInt(id);
+		intId = Integer.parseInt(id);
 	    } catch (NumberFormatException e) {
 		e.printStackTrace();
 		continue;
 	    }
 	    try {
-		Story updateStory = fHelper.getOfflineStory(Integer
-			.parseInt(id));
+		Story updateStory = fHelper.getOfflineStory(intId);
 		System.out.println("BEING UPDATE:" + updateStory.toString());
 		esHelper.addOrUpdateOnlineStory(updateStory);
 	    } catch (Exception e) {
