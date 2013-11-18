@@ -159,6 +159,11 @@ public class StoryController {
      * will then choose one of these possible choices at random and return that
      * fragment.
      * 
+     * @param Choices
+     * 		An array list of choice objects containing all the possible
+     * 		choices of the fragment.
+     * @return The fragment which the the method randomChoice chose at random
+     * 		out of the fragments the possible choices might lead to.
      */
     public static StoryFragment randomChoice(ArrayList<Choice> Choices) {
 	StoryFragment randomFragment = null;
