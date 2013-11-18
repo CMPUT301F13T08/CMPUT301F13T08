@@ -115,17 +115,15 @@ public class StoryFragmentActivity extends Activity {
 	lv.setOnTouchListener(new OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View v, MotionEvent event) {
-		//int action = event.getAction();
-		v.getParent().requestDisallowInterceptTouchEvent(true);
-		/*
+		int action = event.getAction();	
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 		    v.getParent().requestDisallowInterceptTouchEvent(true);
 		    break;
 		case MotionEvent.ACTION_UP:
-		    v.getParent().requestDisallowInterceptTouchEvent(false);
+		    v.getParent().requestDisallowInterceptTouchEvent(true);
 		}
-		v.onTouchEvent(event);*/
+		v.onTouchEvent(event);
 		return true;
 	    }
 	});
