@@ -152,27 +152,30 @@ public class StoryController {
     }
 
     /**
-     * This method takes in an Array list of choices and returns a random story
-     * fragment ID of a possible fragment that the current story fragment might 
-     * go to.
+     * This method takes in an Array list of choices and arrayList of story fragments.
+     * It returns a random story fragment of a possible fragment that the current story
+     * fragment might go to.
      * 
      * Example: If there is a fragment that has choices a,b,c, each of them
      * leading to different fragments through toGoToStoryFragmentID. This method
      * will then choose one of these possible choices at random and return that
-     * fragment's ID.
+     * fragment.
      * 
      * @param Choices
-     * 		An array list of choice objects containing all the possible
-     * 		choices of the fragment.
-     * @return The next story fragment ID that the randomChoice chose out of the
-     * possible choices.
+     *            An array list of choice objects containing all the possible
+     *            choices of the fragment.
+     * @return The next story fragment that the randomChoice chose out of the
+     *         possible choices.
      */
-    public static int randomChoice(ArrayList<Choice> choices) {
+    public static StoryFragment randomChoice(ArrayList<Choice> choices, ArrayList<StoryFragment> storyFragments) {
 	int ChoiceListSize = choices.size();
+	StoryFragment nextFragment = null;
 	Random rand = new Random();
 	int randomIndexNumber = rand.nextInt(ChoiceListSize);
 	Choice chosenChoice = choices.get(randomIndexNumber);
-	return chosenChoice.getStoryFragmentID();
+	int choiseNextFragmentID = chosenChoice.getStoryFragmentID();
+	nextFragment = readStoryFragment(storyFragments, choiseNextFragmentID);
+	return nextFragment;
 
     }
 }

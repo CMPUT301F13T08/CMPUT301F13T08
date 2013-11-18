@@ -59,6 +59,7 @@ public class StoryFragmentListActivity extends Activity {
 	/* Retrieve from the intent the Story and Story Fragments */
 	Intent passedIntent = getIntent();
 	currentStory = (Story) passedIntent.getSerializableExtra("story");
+	setTitle(currentStory.getTitle());
 	currentStoryId = currentStory.getOfflineStoryId();
 	sfList = currentStory.getStoryFragments();
 	lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list, sfList));

@@ -99,6 +99,8 @@ public class StoryFragmentActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
 	super.onCreate(savedInstanceState);
+	
+	
 
 	/* Initialize esHelper */
 	esHelper = new ESHelper();
@@ -158,6 +160,7 @@ public class StoryFragmentActivity extends Activity {
 	 * Get the story object from the intent See source [7]
 	 */
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
+	setTitle(currentStory.getTitle());
 
 	/* Get the story fragment id from the intent - the fragment to display */
 	currentStoryFragmentId = storyFragment
