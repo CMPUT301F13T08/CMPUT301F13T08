@@ -5,16 +5,16 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 public class InternetDetector {
-
+    private static InternetDetector internetDetector = new InternetDetector();
 
     private InternetDetector() {
     }
     
-    public InternetDetector getInstance(){
-	return new InternetDetector();
+    public static InternetDetector getInstance(){
+	return internetDetector;
     }
 
-    public boolean connectedToInternet(Context context) {
+    protected static boolean connectedToInternet(Context context) {
 	ConnectivityManager connectivityManager = (ConnectivityManager) context
 		.getSystemService(Context.CONNECTIVITY_SERVICE);
 	if (connectivityManager != null) {

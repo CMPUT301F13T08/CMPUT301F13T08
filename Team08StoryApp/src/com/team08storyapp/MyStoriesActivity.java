@@ -84,7 +84,6 @@ public class MyStoriesActivity extends ListActivity {
     private String searchText;
     private ListView lv;
     private Story currentStory;
-    private InternetDetector InternetDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +193,7 @@ public class MyStoriesActivity extends ListActivity {
 	 * @Override public void onClick(View v) { //TODO: start a create a new
 	 * story activity });
 	 */
-	InternetDetector = InternetDetector.getInstance();
+	InternetDetector.getInstance();
 	System.out.println("INTERNET CONNECTION? : "
 		+ InternetDetector.connectedToInternet(this));
 	try {
@@ -323,7 +322,7 @@ public class MyStoriesActivity extends ListActivity {
 	super.onResume();
 	try {
 	    fillData(fHelper.getOfflineStories(), onUpdate);
-	    InternetDetector = InternetDetector.getInstance();
+	    InternetDetector.getInstance();
 	    System.out.println("INTERNET CONNECTION? : "
 		    + InternetDetector.connectedToInternet(this));
 	    try {
