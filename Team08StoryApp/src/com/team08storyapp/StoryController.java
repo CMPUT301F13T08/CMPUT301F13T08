@@ -46,6 +46,7 @@ import java.util.Random;
  * <li>Adding a Story Fragment to a story.
  * <li>Adding a Choice to a Story Fragment.
  * <li>Connecting two Story Fragments together.
+ * <li>
  * </ul>
  * 
  * @see Story
@@ -152,23 +153,26 @@ public class StoryController {
 
     /**
      * This method takes in an Array list of choices and returns a random story
-     * fragment that the current story fragment might go to.
+     * fragment ID of a possible fragment that the current story fragment might 
+     * go to.
      * 
      * Example: If there is a fragment that has choices a,b,c, each of them
      * leading to different fragments through toGoToStoryFragmentID. This method
      * will then choose one of these possible choices at random and return that
-     * fragment.
+     * fragment's ID.
      * 
      * @param Choices
      * 		An array list of choice objects containing all the possible
      * 		choices of the fragment.
-     * @return The fragment which the the method randomChoice chose at random
-     * 		out of the fragments the possible choices might lead to.
+     * @return The next story fragment ID that the randomChoice chose out of the
+     * possible choices.
      */
-    public static StoryFragment randomChoice(ArrayList<Choice> Choices) {
-	StoryFragment randomFragment = null;
-
-	return randomFragment;
+    public static int randomChoice(ArrayList<Choice> choices) {
+	int ChoiceListSize = choices.size();
+	Random rand = new Random();
+	int randomIndexNumber = rand.nextInt(ChoiceListSize);
+	Choice chosenChoice = choices.get(randomIndexNumber);
+	return chosenChoice.getStoryFragmentID();
 
     }
 }
