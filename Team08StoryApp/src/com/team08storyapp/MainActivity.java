@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -36,6 +36,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 /**
  * MainActivity is a view class that displays the main menu for our application.
@@ -80,9 +81,25 @@ public class MainActivity extends Activity {
      * @param view
      */
     public void toOnlineStories(View view) {
-	Intent intent = new Intent(MainActivity.this,
-		OnlineStoriesActivity.class);
-	startActivity(intent);
+	try {
+	    Intent intent = new Intent(MainActivity.this,
+		    OnlineStoriesActivity.class);
+	    startActivity(intent);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    if (!InternetDetector.connectedToInternet(getApplicationContext())) {
+		Toast.makeText(
+			getApplicationContext(),
+			"Sorry, An Error Occured. Please Check Your Network And Try Again",
+			Toast.LENGTH_LONG).show();
+	    }else{
+		Toast.makeText(
+			getApplicationContext(),
+			"Sorry, An Error Occured. Please Try Again.",
+			Toast.LENGTH_LONG).show();
+	    }
+	}
+
     }
 
     /**

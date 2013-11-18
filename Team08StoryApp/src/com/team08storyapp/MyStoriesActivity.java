@@ -230,27 +230,33 @@ public class MyStoriesActivity extends ListActivity {
 	     * This case handles publishing a story online by passing a story
 	     * object to esHelper to be pushed online.
 	     */
-	    try {
-		Story encodedStory = fHelper.encodeStory(currentStory);
-		if (currentStory.getOnlineStoryId() > 0) {
-		    esHelper.addOrUpdateOnlineStory(encodedStory);
+	    if (InternetDetector.connectedToInternet(getApplicationContext())) {
+		try {
+		    Story encodedStory = fHelper.encodeStory(currentStory);
+		    if (currentStory.getOnlineStoryId() > 0) {
+			esHelper.addOrUpdateOnlineStory(encodedStory);
 
-		    Toast.makeText(getApplicationContext(),
-			    "Your Story is Successfully Published",
+			Toast.makeText(getApplicationContext(),
+				"Your Story is Successfully Published",
+				Toast.LENGTH_LONG).show();
+			return true;
+		    } else {
+			currentStory.setOnlineStoryId(esHelper
+				.addOrUpdateOnlineStory(encodedStory));
+
+			Toast.makeText(getApplicationContext(),
+				"Your Story is Successfully Published",
+				Toast.LENGTH_LONG).show();
+		    }
+		} catch (Exception e) {
+		    Toast.makeText(getApplicationContext(), "Publish Error",
 			    Toast.LENGTH_LONG).show();
 		    return true;
-		} else {
-		    currentStory.setOnlineStoryId(esHelper
-			    .addOrUpdateOnlineStory(encodedStory));
-
-		    Toast.makeText(getApplicationContext(),
-			    "Your Story is Successfully Published",
-			    Toast.LENGTH_LONG).show();
 		}
-	    } catch (Exception e) {
-		Toast.makeText(getApplicationContext(), "Publish Error",
+	    } else {
+		Toast.makeText(getApplicationContext(),
+			"Network Error. Please Check Your Network Connection",
 			Toast.LENGTH_LONG).show();
-		return true;
 	    }
 	case EDIT_ID:
 

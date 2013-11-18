@@ -95,8 +95,17 @@ public class OnlineStoriesActivity extends ListActivity {
 	 * currently online
 	 */
 	ArrayList<Story> result = esHelper.getOnlineStories();
-	while (result == null) {
+	boolean connected = InternetDetector
+		.connectedToInternet(getApplicationContext());
+	while (result == null && connected) {
 	    result = esHelper.getOnlineStories();
+	    connected = InternetDetector
+		    .connectedToInternet(getApplicationContext());
+	}
+	if (!connected) {
+	    Toast.makeText(getApplicationContext(), "No Internet Connection",
+		    Toast.LENGTH_LONG).show();
+	    finish();
 	}
 	fillData(result);
 
@@ -134,7 +143,6 @@ public class OnlineStoriesActivity extends ListActivity {
 		 * Save the story to file, via FileHelper if the download option
 		 * selected
 		 */
-		System.out.println(currentStory.toString());
 		if (fHelper.addOfflineStory(currentStory)) {
 		    Toast.makeText(
 			    getApplicationContext(),
@@ -221,8 +229,17 @@ public class OnlineStoriesActivity extends ListActivity {
     protected void onResume() {
 	super.onResume();
 	ArrayList<Story> result = esHelper.getOnlineStories();
-	while (result == null) {
+	boolean connected = InternetDetector
+		.connectedToInternet(getApplicationContext());
+	while (result == null && connected) {
 	    result = esHelper.getOnlineStories();
+	    connected = InternetDetector
+		    .connectedToInternet(getApplicationContext());
+	}
+	if (!connected) {
+	    Toast.makeText(getApplicationContext(), "No Internet Connection",
+		    Toast.LENGTH_LONG).show();
+	    finish();
 	}
 	/* Re-populate the listview with the online stories */
 	fillData(result);
