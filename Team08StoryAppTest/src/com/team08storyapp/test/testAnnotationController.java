@@ -4,22 +4,24 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.Before;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.test.ActivityTestCase;
+import android.test.ActivityInstrumentationTestCase2;
 
 import com.team08storyapp.AnnotationController;
 import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
+import com.team08storyapp.MainActivity;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
-public class testAnnotationController extends ActivityTestCase {
+public class testAnnotationController extends ActivityInstrumentationTestCase2<MainActivity> {
+
+    public testAnnotationController() {
+	super(MainActivity.class);
+    }
 
     private AnnotationController anController;
     private Activity testActivity;
@@ -32,7 +34,6 @@ public class testAnnotationController extends ActivityTestCase {
     private Uri testUri;
     private ArrayList<StoryFragment> testStoryFragmentList;
 
-    @Before
     public void setUp() throws FileNotFoundException, IOException {
 
 	/*
@@ -80,7 +81,6 @@ public class testAnnotationController extends ActivityTestCase {
     }
 
     /* Delete the file used to test savePhoto() after the testcase has run */
-    @After
     public void tearDown() {
 	testContext.deleteFile("Download15");
     }
