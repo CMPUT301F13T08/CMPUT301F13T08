@@ -16,11 +16,16 @@ public class testStoryController extends TestCase {
     private StoryFragment retrievedStoryFragment;
     StoryFragment secondStoryFragment;
     ArrayList<StoryFragment> storyFragmentList;
+    ArrayList<Choice> Choices;
     private StoryFragment testAddStoryFragment;
     private StoryFragment joinStoryFragment1;
     private StoryFragment joinStoryFragment2;
     private Story story;
     private int storyListSize;
+    private Choice testChoice1;
+    private Choice testChoice2;
+    private Choice testChoice3;
+    private Choice testChoice4;
 
     protected void setUp() {
 	/* Instantiate the Array List of Story Fragments */
@@ -44,6 +49,16 @@ public class testStoryController extends TestCase {
 
 	/* sample Story List Size for testing random Story selection */
 	storyListSize = 12;
+	
+	/* Sample array list of choices for testing randomChoice */
+	testChoice1 = new Choice(1, 1, "This is test 1");
+	testChoice2 = new Choice(2, 2, "This is test 2");
+	testChoice3 = new Choice(3, 3, "This is test 3");
+	testChoice4 = new Choice(4, 4, "This is test 4");
+	Choices.add(testChoice1);
+	Choices.add(testChoice2);
+	Choices.add(testChoice3);
+	Choices.add(testChoice4);
     }
 
     /*
@@ -137,13 +152,17 @@ public class testStoryController extends TestCase {
      * current fragment contains. Using a set array list of different choices of
      * a fragment, the call of testRandomChoice should return the 
      * toGoToStoryFragmentID of a choice at random. The first test makes sure
-     * that we are receiving a random choice that is within the boundaries of the
-     * array list. The second test is to run the call again and check that the two
-     * calls resulted in two different toGoToStoryFragmetnIDs.
+     * that we are receiving a random toGoToStoryFragmentID that is within the
+     * set toGoToStoryIDs (1,2,3,4). The second test is to run the call again and 
+     * check that the two calls resulted in two different toGoToStoryFragmentIDs.
      * 
      */
     public void testRandomChoice(){
 	
+	/*
+	 * Test that the random toGoToStoryFragmentIDs returned is within the set
+	 * ones.
+	 */
     }
 
 }
