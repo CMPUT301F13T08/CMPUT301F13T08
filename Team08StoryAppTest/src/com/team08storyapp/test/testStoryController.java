@@ -128,5 +128,17 @@ public class testStoryController extends TestCase {
 	int randomStoryIndex2 = StoryController.feelingLucky(storyListSize);
 	assertTrue(randomStoryIndex != randomStoryIndex2);
     }
+    
+    /*
+     * Test for Use Case 17
+     * 
+     * The testRandomChoice method tests getting a random toGoToStoryFragmentID
+     * for the user to read a random fragment out of the possible choices the 
+     * current fragment contains. 
+     * 
+     */
+    public void testRandomChoice(){
+	
+    }
 
 }
