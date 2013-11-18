@@ -155,10 +155,7 @@ public class testStoryController extends TestCase {
      */
     public void testRandomChoice(){
 	
-	/*
-	 * Test that the random toGoToStoryFragmentIDs returned is within the set
-	 * ones.
-	 */
+
     }
 
 }
