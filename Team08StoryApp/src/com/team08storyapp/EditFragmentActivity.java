@@ -84,7 +84,7 @@ public class EditFragmentActivity extends Activity {
 	setContentView(R.layout.activity_edit_fragment);
 
 	fHelper = new FileHelper(this, 1);
-	
+
 	lv = (ListView) findViewById(android.R.id.list);
 	textSection = (EditText) findViewById(R.id.headerDialogue);
 
@@ -210,11 +210,19 @@ public class EditFragmentActivity extends Activity {
 		currentStoryFragment.setStoryText(dialogue);
 		/*
 		 * Replace the current fragment in the story object, to include
-		 * changes made to it's text or illustrations
-		 */currentStory.getStoryFragments().set(
-			currentStoryFragmentIndex, currentStoryFragment);
+		 * changes made to it's text or illustrations. If the fragment
+		 * is a new story fragment, it is added to the fragment list of
+		 * the story.
+		 */
+		if (currentStoryFragmentIndex > (currentStory
+			.getStoryFragments().size() - 1)) {
+		    currentStory.getStoryFragments().add(currentStoryFragment);
+		} else {
+		    currentStory.getStoryFragments().set(
+			    currentStoryFragmentIndex, currentStoryFragment);
+		}
 		/*
-		 * Update the current story on the file system. Permanent chenge
+		 * Update the current story on the file system. Permanent change
 		 * to the current fragment
 		 */
 		fHelper.updateOfflineStory(currentStory);
@@ -263,8 +271,14 @@ public class EditFragmentActivity extends Activity {
 	    if (!dialogue.isEmpty() && dialogue != null) {
 		currentStoryFragment.setStoryText(dialogue);
 	    }
-	    currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-		    currentStoryFragment);
+
+	    if (currentStoryFragmentIndex > (currentStory.getStoryFragments()
+		    .size() - 1)) {
+		currentStory.getStoryFragments().add(currentStoryFragment);
+	    } else {
+		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+			currentStoryFragment);
+	    }
 	    fHelper.updateOfflineStory(currentStory);
 	    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 	} catch (FileNotFoundException e) {

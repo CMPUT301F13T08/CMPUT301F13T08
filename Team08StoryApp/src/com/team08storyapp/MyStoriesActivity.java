@@ -257,7 +257,6 @@ public class MyStoriesActivity extends ListActivity {
 	    Intent intent = new Intent(MyStoriesActivity.this,
 		    StoryFragmentListActivity.class);
 	    intent.putExtra("story", currentStory);
-	    System.out.println(currentStory.getStoryFragments().size());
 	    startActivity(intent);
 
 	    return true;

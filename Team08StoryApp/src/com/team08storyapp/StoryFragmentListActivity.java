@@ -91,9 +91,9 @@ public class StoryFragmentListActivity extends Activity {
 	Intent intent = new Intent(getApplicationContext(),
 		EditFragmentActivity.class);
 	int newStoryFragmentId = currentStory.getStoryFragments().size() + 1;
-	StoryFragment addStoryFragment = new StoryFragment(newStoryFragmentId);
-	currentStory.getStoryFragments().add(addStoryFragment);
-	fHelper.updateOfflineStory(currentStory);
+	//StoryFragment addStoryFragment = new StoryFragment(newStoryFragmentId);
+	//currentStory.getStoryFragments().add(addStoryFragment);
+	//fHelper.updateOfflineStory(currentStory);
 	intent.putExtra("storyFragmentId", newStoryFragmentId);
 	intent.putExtra("story", currentStory);
 	intent.putExtra("mode", 1);
