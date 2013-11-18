@@ -207,16 +207,6 @@ public class EditFragmentActivity extends Activity {
 	    if (currentStoryFragmentId > currentStory.getStoryFragments()
 			.size()) {
 		    currentStory.getStoryFragments().add(currentStoryFragment);
-		    		    
-			try {
-			    fHelper.updateOfflineStory(currentStory);
-			} catch (FileNotFoundException e) {
-			    // TODO Auto-generated catch block
-			    e.printStackTrace();
-			} catch (IOException e) {
-			    // TODO Auto-generated catch block
-			    e.printStackTrace();
-			}
 		   
 		} 
 	    
