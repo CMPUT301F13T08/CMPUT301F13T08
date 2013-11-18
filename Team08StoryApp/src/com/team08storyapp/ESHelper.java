@@ -37,6 +37,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -360,7 +361,7 @@ public class ESHelper {
      *         either their Author or Title fields.
      */
     public ArrayList<Story> searchOnlineStories(String searchString) {
-	searchString = searchString.toLowerCase();
+	searchString = searchString.toLowerCase(Locale.US);
 
 	StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 		.permitAll().build();
