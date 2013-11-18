@@ -171,6 +171,9 @@ public class EditFragmentActivity extends Activity {
 
 	    picGallery.setAdapter(imgAdapt);
 	    fillChoice(storyFragmentChoices);
+
+	} else {
+	    currentStoryFragment = new StoryFragment(currentStoryFragmentId);
 	}
     }
 
@@ -199,6 +202,25 @@ public class EditFragmentActivity extends Activity {
 	    return true;
 
 	case R.id.addChoice:
+	    
+	    
+	    if (currentStoryFragmentId > currentStory.getStoryFragments()
+			.size()) {
+		    currentStory.getStoryFragments().add(currentStoryFragment);
+		    		    
+			try {
+			    fHelper.updateOfflineStory(currentStory);
+			} catch (FileNotFoundException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			} catch (IOException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
+		   
+		} 
+	    
+	    
 	    Intent intent = new Intent(EditFragmentActivity.this,
 		    EditChoiceActivity.class);
 	    intent.putExtra("story", currentStory);
@@ -216,8 +238,8 @@ public class EditFragmentActivity extends Activity {
 		 * is a new story fragment, it is added to the fragment list of
 		 * the story.
 		 */
-		if (currentStoryFragmentIndex > (currentStory
-			.getStoryFragments().size() - 1)) {
+		if (currentStoryFragmentId > currentStory.getStoryFragments()
+			.size()) {
 		    currentStory.getStoryFragments().add(currentStoryFragment);
 		} else {
 		    currentStory.getStoryFragments().set(
@@ -275,8 +297,8 @@ public class EditFragmentActivity extends Activity {
 	     * when the story fragment text changes (since we've saved choice
 	     * and illustration as soon as they are added)
 	     */
-	    if (currentStoryFragmentIndex > (currentStory.getStoryFragments()
-		    .size() - 1)) {
+	    if (currentStoryFragmentId > currentStory.getStoryFragments()
+		    .size()) {
 		fHelper.updateOfflineStory(currentStory);
 		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 	    } else {
