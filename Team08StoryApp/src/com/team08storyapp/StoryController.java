@@ -153,7 +153,7 @@ public class StoryController {
 
     /**
      * This method takes in an Array list of choices and returns a random story
-     * fragment ID of a possible fragment that the current story fragment might 
+     * fragment ID of a possible fragment that the current story fragment might
      * go to.
      * 
      * Example: If there is a fragment that has choices a,b,c, each of them
@@ -162,10 +162,10 @@ public class StoryController {
      * fragment's ID.
      * 
      * @param Choices
-     * 		An array list of choice objects containing all the possible
-     * 		choices of the fragment.
+     *            An array list of choice objects containing all the possible
+     *            choices of the fragment.
      * @return The next story fragment ID that the randomChoice chose out of the
-     * possible choices.
+     *         possible choices.
      */
     public static int randomChoice(ArrayList<Choice> choices) {
 	int ChoiceListSize = choices.size();
