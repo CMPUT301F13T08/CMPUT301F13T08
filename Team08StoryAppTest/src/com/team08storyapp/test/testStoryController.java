@@ -134,7 +134,12 @@ public class testStoryController extends TestCase {
      * 
      * The testRandomChoice method tests getting a random toGoToStoryFragmentID
      * for the user to read a random fragment out of the possible choices the 
-     * current fragment contains. 
+     * current fragment contains. Using a set array list of different choices of
+     * a fragment, the call of testRandomChoice should return the 
+     * toGoToStoryFragmentID of a choice at random. The first test makes sure
+     * that we are receiving a random choice that is within the boundaries of the
+     * array list. The second test is to run the call again and check that the two
+     * calls resulted in two different toGoToStoryFragmetnIDs.
      * 
      */
     public void testRandomChoice(){
