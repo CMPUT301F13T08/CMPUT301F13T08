@@ -167,12 +167,15 @@ public class StoryController {
      * @return The next story fragment ID that the randomChoice chose out of the
      *         possible choices.
      */
-    public static int randomChoice(ArrayList<Choice> choices) {
+    public static StoryFragment randomChoice(ArrayList<Choice> choices, ArrayList<StoryFragment> storyFragments) {
 	int ChoiceListSize = choices.size();
+	StoryFragment nextFragment = null;
 	Random rand = new Random();
 	int randomIndexNumber = rand.nextInt(ChoiceListSize);
 	Choice chosenChoice = choices.get(randomIndexNumber);
-	return chosenChoice.getStoryFragmentID();
+	int choiseNextFragmentID = chosenChoice.getStoryFragmentID();
+	nextFragment = readStoryFragment(storyFragments, choiseNextFragmentID);
+	return nextFragment;
 
     }
 }
