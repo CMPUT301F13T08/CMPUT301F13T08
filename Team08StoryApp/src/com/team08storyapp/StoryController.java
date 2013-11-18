@@ -152,9 +152,9 @@ public class StoryController {
     }
 
     /**
-     * This method takes in an Array list of choices and returns a random story
-     * fragment of a possible fragment that the current story fragment might
-     * go to.
+     * This method takes in an Array list of choices and arrayList of story fragments.
+     * It returns a random story fragment of a possible fragment that the current story
+     * fragment might go to.
      * 
      * Example: If there is a fragment that has choices a,b,c, each of them
      * leading to different fragments through toGoToStoryFragmentID. This method
