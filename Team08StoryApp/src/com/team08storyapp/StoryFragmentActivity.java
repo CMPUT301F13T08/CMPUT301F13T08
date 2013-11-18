@@ -44,6 +44,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Gallery;
@@ -111,6 +112,21 @@ public class StoryFragmentActivity extends Activity {
 	/* set up background layout */
 	setContentView(R.layout.activity_story_fragment_view);
 	lv = (ListView) findViewById(android.R.id.list);
+	lv.setOnTouchListener(new OnTouchListener() {
+	    @Override
+	    public boolean onTouch(View v, MotionEvent event) {
+		int action = event.getAction();	
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+		    v.getParent().requestDisallowInterceptTouchEvent(true);
+		    break;
+		case MotionEvent.ACTION_UP:
+		    v.getParent().requestDisallowInterceptTouchEvent(true);
+		}
+		v.onTouchEvent(event);
+		return true;
+	    }
+	});
 
 	/* set up text header */
 	textSection = (TextView) findViewById(R.id.headerText);
@@ -176,14 +192,6 @@ public class StoryFragmentActivity extends Activity {
 		currentStoryFragmentIndex = i;
 	    }
 	}
-
-	System.out.println(currentStoryFragmentId);
-	System.out.println(currentStory.getStoryFragments().size());
-	System.out.println(currentStory.getStoryFragments().get(0)
-		.getStoryText());
-	System.out.println(currentStory.getStoryFragments()
-		.get(currentStoryFragmentIndex).getChoices().toString());
-	System.out.println(currentStory.toString());
 
 	/*
 	 * Gets the current story fragment object from the story fragment list,

@@ -1,48 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
-    <Gallery
-        android:id="@+id/gallery"
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0" />
-
-    <ImageView
-        android:id="@+id/picture"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/picture" />
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".StoryFragmentActivity" >
 
-    <EditText
-        android:id="@+id/headerDialogue"
-        style="@style/AppTheme"
-        android:layout_width="match_parent"
-        android:layout_height="193dp"
-        android:clickable="true"
-        android:drawableBottom="@android:color/black"
-        android:drawableTop="@android:color/black"
-        android:gravity="center_vertical|top"
-        android:maxLines="10"
-        android:minHeight="200dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:paddingTop="10dp"
-        android:scrollHorizontally="false"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbars="vertical"
-        android:textSize="18sp" >
+        <Gallery
+            android:id="@+id/gallery"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
 
-        <requestFocus />
-    </EditText>
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/picture" />
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </ListView>
+       <EditText
+            android:id="@+id/headerDialogue"
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="193dp"
+            android:clickable="true"
+            android:drawableBottom="@android:color/black"
+            android:drawableTop="@android:color/black"
+            android:gravity="center_vertical|top"
+            android:maxLines="10"
+            android:minHeight="200dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="10dp"
+            android:scrollHorizontally="false"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical"
+            android:textSize="18sp" >
 
-</LinearLayout>
+            <requestFocus />
+        </EditText>
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true" >
+        </ListView>
+    </LinearLayout>
+
+</ScrollView>

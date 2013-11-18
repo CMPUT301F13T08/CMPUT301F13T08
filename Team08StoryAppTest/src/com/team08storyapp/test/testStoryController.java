@@ -14,7 +14,9 @@ public class testStoryController extends TestCase {
     private int nextStoryFragmentId;
     private StoryFragment firstStoryFragment;
     private StoryFragment retrievedStoryFragment;
-    StoryFragment secondStoryFragment;
+    private StoryFragment secondStoryFragment;
+    private StoryFragment thirdStoryFragment;
+    private StoryFragment fourthStoryFragment;
     ArrayList<StoryFragment> storyFragmentList;
     ArrayList<Choice> Choices;
     private StoryFragment testAddStoryFragment;
@@ -35,10 +37,17 @@ public class testStoryController extends TestCase {
 	nextStoryFragmentId = 2;
 	firstStoryFragment = new StoryFragment(1, "fragment text");
 	secondStoryFragment = new StoryFragment(2, "another fragment text");
+	
+	/* Set two more fragments for test random Choice*/
+	thirdStoryFragment = new StoryFragment(3, "third fragment text");
+	fourthStoryFragment = new StoryFragment(4, "fourth fragment text");
 
 	/* StoryFragment list has two fragments with ids 1 and 2 */
 	storyFragmentList.add(firstStoryFragment);
 	storyFragmentList.add(secondStoryFragment);
+	storyFragmentList.add(thirdStoryFragment);
+	storyFragmentList.add(fourthStoryFragment);
+	
 
 	testAddStoryFragment = new StoryFragment(1, "adding Story Fragment");
 
@@ -147,22 +156,28 @@ public class testStoryController extends TestCase {
     /*
      * Test for Use Case 17
      * 
-     * The testRandomChoice method tests getting a random toGoToStoryFragmentID
-     * for the user to read a random fragment out of the possible choices the 
-     * current fragment contains. Using a set array list of different choices of
-     * a fragment, the call of testRandomChoice should return the 
-     * toGoToStoryFragmentID of a choice at random. The first test makes sure
-     * that we are receiving a random toGoToStoryFragmentID that is within the
-     * set toGoToStoryIDs (1,2,3,4). The second test is to run the call again and 
-     * check that the two calls resulted in two different toGoToStoryFragmentIDs.
+     * The testRandomChoice method tests getting a random next fragment from a list of
+     * choices the current fragment has. Using a set array list of different choices of
+     * a fragment and a set array list of fragments, the call of testRandomChoice should 
+     * return the next fragment of a choice at random.
      * 
      */
     public void testRandomChoice(){
 	
 	/*
-	 * Test that the random toGoToStoryFragmentIDs returned is within the set
-	 * ones.
+	 * Test that a random fragment is generated between the set fragments above 
+	 * (1, 2, 3, 4)
 	 */
+	StoryFragment randomFragment0 = StoryController.randomChoice(Choices, storyFragmentList);
+	
+	
+	/*
+	 * Tests that the method is returning different fragments randomly by comparing
+	 * two different call results.
+	 */
+	StoryFragment randomFragment1 = StoryController.randomChoice(Choices, storyFragmentList);
+	assertTrue(randomFragment0 != randomFragment1);
+
     }
 
 }

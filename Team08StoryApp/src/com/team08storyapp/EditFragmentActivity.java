@@ -45,6 +45,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -87,6 +88,21 @@ public class EditFragmentActivity extends Activity {
 	fHelper = new FileHelper(this, 1);
 
 	lv = (ListView) findViewById(android.R.id.list);
+	lv.setOnTouchListener(new OnTouchListener() {
+	    @Override
+	    public boolean onTouch(View v, MotionEvent event) {
+		int action = event.getAction();	
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+		    v.getParent().requestDisallowInterceptTouchEvent(true);
+		    break;
+		case MotionEvent.ACTION_UP:
+		    v.getParent().requestDisallowInterceptTouchEvent(true);
+		}
+		v.onTouchEvent(event);
+		return true;
+	    }
+	});
 	textSection = (EditText) findViewById(R.id.headerDialogue);
 
 	/*
@@ -104,7 +120,6 @@ public class EditFragmentActivity extends Activity {
 	// null);
 	picView = (ImageView) findViewById(R.id.picture);
 	picGallery = (Gallery) findViewById(R.id.gallery);
-
 	/*
 	 * Create a click listener to handle when the user clicks on the gallery
 	 * to add a photo.
