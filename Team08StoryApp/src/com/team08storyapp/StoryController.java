@@ -149,4 +149,18 @@ public class StoryController {
 	Random rand = new Random();
 	return rand.nextInt(storyListSize);
     }
+    
+    /**
+     * This method takes in an Array list of choices and returns a random 
+     * story fragment that the current story fragment might go to.
+     * 
+     * Example: If
+     * 
+     */
+    public static StoryFragment randomChoice(ArrayList<Choice> Choices){
+	StoryFragment randomFragment = null;
+	
+	return randomFragment;
+	
+    }
 }
