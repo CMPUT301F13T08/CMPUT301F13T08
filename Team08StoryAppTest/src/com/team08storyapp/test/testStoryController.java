@@ -14,7 +14,9 @@ public class testStoryController extends TestCase {
     private int nextStoryFragmentId;
     private StoryFragment firstStoryFragment;
     private StoryFragment retrievedStoryFragment;
-    StoryFragment secondStoryFragment;
+    private StoryFragment secondStoryFragment;
+    private StoryFragment thirdStoryFragment;
+    private StoryFragment fourthStoryFragment;
     ArrayList<StoryFragment> storyFragmentList;
     ArrayList<Choice> Choices;
     private StoryFragment testAddStoryFragment;
@@ -35,10 +37,17 @@ public class testStoryController extends TestCase {
 	nextStoryFragmentId = 2;
 	firstStoryFragment = new StoryFragment(1, "fragment text");
 	secondStoryFragment = new StoryFragment(2, "another fragment text");
+	
+	/* Set two more fragments for test random Choice*/
+	thirdStoryFragment = new StoryFragment(3, "third fragment text");
+	fourthStoryFragment = new StoryFragment(4, "fourth fragment text");
 
 	/* StoryFragment list has two fragments with ids 1 and 2 */
 	storyFragmentList.add(firstStoryFragment);
 	storyFragmentList.add(secondStoryFragment);
+	storyFragmentList.add(thirdStoryFragment);
+	storyFragmentList.add(fourthStoryFragment);
+	
 
 	testAddStoryFragment = new StoryFragment(1, "adding Story Fragment");
 
@@ -149,12 +158,21 @@ public class testStoryController extends TestCase {
      * 
      * The testRandomChoice method tests getting a random next fragment from a list of
      * choices the current fragment has. Using a set array list of different choices of
-     * a fragment and a set array list of fragments, the call of testRandomChoice should return the 
-     * next fragment of a choice at random.
+     * a fragment and a set array list of fragments, the call of testRandomChoice should 
+     * return the next fragment of a choice at random.
      * 
      */
     public void testRandomChoice(){
 	
+	/*
+	 * Test that a random fragment is generated between the set fragments above 
+	 * (1, 2, 3, 4)
+	 */
+	
+	/*
+	 * Tests that the method is returning different fragments randomly by comparing
+	 * two different call results.
+	 */
 
     }
 
