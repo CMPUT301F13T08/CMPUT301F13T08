@@ -272,6 +272,11 @@ public class testFileHelper extends AndroidTestCase {
 	assertNotNull(photo);
 
     }
+    
+    @Test
+    public void testAppendUpdateQueue(){
+	fHelper.appendUpdateQueue(s1.getOfflineStoryId());
+    }
 
     /* Delete data */
     @After
