@@ -74,6 +74,7 @@ public class EditFragmentActivity extends Activity {
     private PhotoController pc;
     private ChoiceAdapter adapter;
     private ArrayList<Choice> storyFragmentChoices;
+    private String originalText;
 
     private final static int REQUEST_CHOICE = 0;
     private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -155,7 +156,8 @@ public class EditFragmentActivity extends Activity {
 	     * Display the existing Story Fragment text, choices, and
 	     * illustrations.
 	     */
-	    textSection.setText(currentStoryFragment.getStoryText());
+	    originalText = currentStoryFragment.getStoryText();
+	    textSection.setText(originalText);
 	    storyFragmentChoices = currentStoryFragment.getChoices();
 	    ArrayList<Photo> illustrationList = currentStoryFragment
 		    .getPhotos();
@@ -249,7 +251,6 @@ public class EditFragmentActivity extends Activity {
     }
 
     protected void onResume() {
-	System.out.println("On RESUME!");
 	try {
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    currentStoryFragment = currentStory.getStoryFragments().get(
@@ -268,19 +269,37 @@ public class EditFragmentActivity extends Activity {
     protected void onPause() {
 	try {
 	    String dialogue = textSection.getText().toString();
-	    if (!dialogue.isEmpty() && dialogue != null) {
-		currentStoryFragment.setStoryText(dialogue);
-	    }
 
+	    /*
+	     * save new storyfragment no matter what. And save existing fragment
+	     * when the story fragment text changes (since we've saved choice
+	     * and illustration as soon as they are added)
+	     */
 	    if (currentStoryFragmentIndex > (currentStory.getStoryFragments()
 		    .size() - 1)) {
-		currentStory.getStoryFragments().add(currentStoryFragment);
+		fHelper.updateOfflineStory(currentStory);
+		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 	    } else {
-		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-			currentStoryFragment);
+		if (!dialogue.equals(originalText) && !dialogue.isEmpty()
+			&& dialogue != null) {
+		    currentStoryFragment.setStoryText(dialogue);
+		    fHelper.updateOfflineStory(currentStory);
+		    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
+		}
 	    }
-	    fHelper.updateOfflineStory(currentStory);
-	    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
+	    /*
+	     * if (!dialogue.isEmpty() && dialogue != null) {
+	     * currentStoryFragment.setStoryText(dialogue); }
+	     * 
+	     * if (currentStoryFragmentIndex > (currentStory.getStoryFragments()
+	     * .size() - 1)) {
+	     * currentStory.getStoryFragments().add(currentStoryFragment);
+	     * fHelper.updateOfflineStory(currentStory);
+	     * fHelper.appendUpdateQueue(currentStory.getOfflineStoryId()); }
+	     * else {
+	     * currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+	     * currentStoryFragment); }
+	     */
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {

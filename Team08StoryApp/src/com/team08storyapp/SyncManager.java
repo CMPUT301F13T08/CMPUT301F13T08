@@ -26,7 +26,11 @@ public class SyncManager {
 	    try {
 		Story updateStory = fHelper.getOfflineStory(intId);
 		System.out.println("BEING UPDATE:" + updateStory.toString());
-		esHelper.addOrUpdateOnlineStory(updateStory);
+		int onlineId = esHelper.addOrUpdateOnlineStory(updateStory);
+		if (updateStory.getOnlineStoryId() < 1) {
+		    updateStory.setOnlineStoryId(onlineId);
+		    fHelper.updateOfflineStory(updateStory);
+		}
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
