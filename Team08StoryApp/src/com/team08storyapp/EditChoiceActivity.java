@@ -120,9 +120,14 @@ public class EditChoiceActivity extends Activity {
 	 * Update the current story object by replacing the fragment the user is
 	 * on with the updated fragment that contains a new choice
 	 */
-	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-		currentStoryFragment);
-
+	if (currentStoryFragmentIndex > (currentStory
+		.getStoryFragments().size() - 1)) {
+	    currentStory.getStoryFragments().add(currentStoryFragment);
+	} else {
+	    currentStory.getStoryFragments().set(
+		    currentStoryFragmentIndex, currentStoryFragment);
+	}
+	
 	/*
 	 * Update the story object on the file system, later access will include
 	 * the new choice for the current fragment
