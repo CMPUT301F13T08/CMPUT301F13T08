@@ -168,11 +168,15 @@ public class testStoryController extends TestCase {
 	 * Test that a random fragment is generated between the set fragments above 
 	 * (1, 2, 3, 4)
 	 */
+	StoryFragment randomFragment0 = StoryController.randomChoice(Choices, storyFragmentList);
+	
 	
 	/*
 	 * Tests that the method is returning different fragments randomly by comparing
 	 * two different call results.
 	 */
+	StoryFragment randomFragment1 = StoryController.randomChoice(Choices, storyFragmentList);
+	assertTrue(randomFragment0 != randomFragment1);
 
     }
 
