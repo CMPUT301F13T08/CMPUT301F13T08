@@ -51,6 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonFragment"
         android:layout_below="@+id/buttonFragment"
-        android:text="The linked fragment id is: " />
+        android:text="@string/the_linked_fragment_id_is_" />
 
 </RelativeLayout>
