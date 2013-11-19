@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ��  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -138,6 +138,21 @@ public class StoryFragmentActivity extends Activity {
 	    }
 	});
 	textSection.setMovementMethod(new ScrollingMovementMethod());
+	textSection.setOnTouchListener(new OnTouchListener() {
+	    @Override
+	    public boolean onTouch(View v, MotionEvent event) {
+		int action = event.getAction();	
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+		    v.getParent().requestDisallowInterceptTouchEvent(true);
+		    break;
+		case MotionEvent.ACTION_UP:
+		    v.getParent().requestDisallowInterceptTouchEvent(true);
+		}
+		v.onTouchEvent(event);
+		return true;
+	    }
+	});
 
 	/* set up gallery header */
 	// headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
