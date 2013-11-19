@@ -210,6 +210,7 @@ public class PicAdapter extends BaseAdapter {
 	/* set at currently selected index */
 	imageBitmaps[currentPic] = newPic;
     }
+    
 
     /**
      * getPic returns bitmap at specified position for larger display
