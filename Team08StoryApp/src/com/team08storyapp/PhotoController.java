@@ -252,9 +252,7 @@ public class PhotoController {
 	    fHelper.updateOfflineStory(currentStory);
 	    Toast.makeText(activity, "Illustration is added successfully",
 		    Toast.LENGTH_LONG).show();
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	} catch (IOException e) {
+	} catch (Exception e) {
 	    e.printStackTrace();
 	}
 
