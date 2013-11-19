@@ -8,24 +8,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.test.AndroidTestCase;
+import android.test.ActivityInstrumentationTestCase2;
 import android.util.Base64;
 
 import com.team08storyapp.FileHelper;
+import com.team08storyapp.MainActivity;
 import com.team08storyapp.Photo;
 import com.team08storyapp.R;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
-public class testFileHelper extends AndroidTestCase {
+public class testFileHelper extends
+	ActivityInstrumentationTestCase2<MainActivity> {
 
     private FileHelper fHelper;
 
@@ -41,7 +39,10 @@ public class testFileHelper extends AndroidTestCase {
 
     private String content;
 
-    @Before
+    public testFileHelper() {
+	super(MainActivity.class);
+    }
+
     /*
      * set up testing data for testing methods.
      * 
@@ -53,7 +54,7 @@ public class testFileHelper extends AndroidTestCase {
      * function with these code.
      */
     public void setUp() throws FileNotFoundException, IOException {
-	context = getContext();
+	context = this.getInstrumentation().getTargetContext();
 	fHelper = new FileHelper(context, 0);
 
 	storyCount = fHelper.getOfflineStories().size() + 2;
@@ -103,7 +104,6 @@ public class testFileHelper extends AndroidTestCase {
      * is successfully added, the test function testAddOfflineStory() will
      * return true.
      */
-    @Test
     public void testAddOfflineStory() throws FileNotFoundException, IOException {
 	assertTrue(fHelper.addOfflineStory(s1));
     }
@@ -119,7 +119,6 @@ public class testFileHelper extends AndroidTestCase {
      * between use case 6 and use case 11 right now. Hope we can find out in
      * part 4 in order to improve our test cases.
      */
-    @Test
     public void testUpdateOfflineStory() throws FileNotFoundException,
 	    IOException {
 	sfList.add(fragment1);
@@ -135,7 +134,6 @@ public class testFileHelper extends AndroidTestCase {
      * information of that story(title, author, id) should not be null. And we
      * also check the length of fragment list to make sure no fragment is lost.
      */
-    @Test
     public void testGetOfflineStory() throws FileNotFoundException, IOException {
 	Story story = fHelper.getOfflineStory(12);
 
@@ -165,7 +163,6 @@ public class testFileHelper extends AndroidTestCase {
      * The list returned from the method call fHelper.getStories should be the
      * same size as the one stored locally.
      */
-    @Test
     public void testGetOfflineStories() throws FileNotFoundException,
 	    IOException {
 	assertEquals(fHelper.getOfflineStories().size(), storyCount);
@@ -186,7 +183,6 @@ public class testFileHelper extends AndroidTestCase {
      * "create a relevant story and irrelevant story and check that the relevant
      * story is returned and the irrelevant one is not"
      */
-    @Test
     public void testSearchOfflineStories() {
 
 	/* test the result of search should only have 1 item */
@@ -220,7 +216,6 @@ public class testFileHelper extends AndroidTestCase {
      * the encoding functionality of encodeStory, especially its ability and
      * correctness to encode an image.
      */
-    @Test
     public void testEncodeStory() throws FileNotFoundException, IOException {
 
 	/* encode a story */
@@ -258,7 +253,6 @@ public class testFileHelper extends AndroidTestCase {
      * into local file system, this test is a part for UC#3, 12, 10, 14.
      * testDecodeStory() tests the decoding functionality of decodeStory().
      */
-    @Test
     public void testDecodeStory() throws Exception {
 	Story encodedStory = fHelper.encodeStory(s1);
 
@@ -272,14 +266,12 @@ public class testFileHelper extends AndroidTestCase {
 	assertNotNull(photo);
 
     }
-    
-    @Test
-    public void testAppendUpdateQueue(){
+
+    public void testAppendUpdateQueue() {
 	fHelper.appendUpdateQueue(s1.getOfflineStoryId());
     }
 
     /* Delete data */
-    @After
     protected void tearDown() {
 	context.deleteFile("Download12");
 	context.deleteFile("Download13");
