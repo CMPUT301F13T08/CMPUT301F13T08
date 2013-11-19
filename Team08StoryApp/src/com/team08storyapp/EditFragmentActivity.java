@@ -54,6 +54,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+@SuppressWarnings("deprecation")
 public class EditFragmentActivity extends Activity {
 
     private int currentStoryFragmentId;
