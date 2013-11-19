@@ -2,14 +2,16 @@ package com.team08storyapp.test;
 
 import java.util.ArrayList;
 
+import android.test.ActivityInstrumentationTestCase2;
+
 import com.team08storyapp.Choice;
+import com.team08storyapp.MainActivity;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryController;
 import com.team08storyapp.StoryFragment;
 
-import junit.framework.TestCase;
-
-public class testStoryController extends TestCase {
+public class testStoryController extends
+	ActivityInstrumentationTestCase2<MainActivity> {
 
     private int nextStoryFragmentId;
     private StoryFragment firstStoryFragment;
@@ -29,6 +31,10 @@ public class testStoryController extends TestCase {
     private Choice testChoice3;
     private Choice testChoice4;
 
+    public testStoryController() {
+	super(MainActivity.class);
+    }
+
     protected void setUp() {
 	/* Instantiate the Array List of Story Fragments */
 	storyFragmentList = new ArrayList<StoryFragment>();
@@ -37,8 +43,8 @@ public class testStoryController extends TestCase {
 	nextStoryFragmentId = 2;
 	firstStoryFragment = new StoryFragment(1, "fragment text");
 	secondStoryFragment = new StoryFragment(2, "another fragment text");
-	
-	/* Set two more fragments for test random Choice*/
+
+	/* Set two more fragments for test random Choice */
 	thirdStoryFragment = new StoryFragment(3, "third fragment text");
 	fourthStoryFragment = new StoryFragment(4, "fourth fragment text");
 
@@ -47,7 +53,6 @@ public class testStoryController extends TestCase {
 	storyFragmentList.add(secondStoryFragment);
 	storyFragmentList.add(thirdStoryFragment);
 	storyFragmentList.add(fourthStoryFragment);
-	
 
 	testAddStoryFragment = new StoryFragment(1, "adding Story Fragment");
 
@@ -58,8 +63,9 @@ public class testStoryController extends TestCase {
 
 	/* sample Story List Size for testing random Story selection */
 	storyListSize = 12;
-	
+
 	/* Sample array list of choices for testing randomChoice */
+	Choices = new ArrayList<Choice>();
 	testChoice1 = new Choice(1, 1, "This is test 1");
 	testChoice2 = new Choice(2, 2, "This is test 2");
 	testChoice3 = new Choice(3, 3, "This is test 3");
@@ -152,30 +158,31 @@ public class testStoryController extends TestCase {
 	int randomStoryIndex2 = StoryController.feelingLucky(storyListSize);
 	assertTrue(randomStoryIndex != randomStoryIndex2);
     }
-    
+
     /*
      * Test for Use Case 17
      * 
-     * The testRandomChoice method tests getting a random next fragment from a list of
-     * choices the current fragment has. Using a set array list of different choices of
-     * a fragment and a set array list of fragments, the call of testRandomChoice should 
-     * return the next fragment of a choice at random.
-     * 
+     * The testRandomChoice method tests getting a random next fragment from a
+     * list of choices the current fragment has. Using a set array list of
+     * different choices of a fragment and a set array list of fragments, the
+     * call of testRandomChoice should return the next fragment of a choice at
+     * random.
      */
-    public void testRandomChoice(){
-	
+    public void testRandomChoice() {
+
 	/*
-	 * Test that a random fragment is generated between the set fragments above 
-	 * (1, 2, 3, 4)
+	 * Test that a random fragment is generated between the set fragments
+	 * above (1, 2, 3, 4)
 	 */
-	StoryFragment randomFragment0 = StoryController.randomChoice(Choices, storyFragmentList);
-	
-	
+	StoryFragment randomFragment0 = StoryController.randomChoice(Choices,
+		storyFragmentList);
+
 	/*
-	 * Tests that the method is returning different fragments randomly by comparing
-	 * two different call results.
+	 * Tests that the method is returning different fragments randomly by
+	 * comparing two different call results.
 	 */
-	StoryFragment randomFragment1 = StoryController.randomChoice(Choices, storyFragmentList);
+	StoryFragment randomFragment1 = StoryController.randomChoice(Choices,
+		storyFragmentList);
 	assertTrue(randomFragment0 != randomFragment1);
 
     }

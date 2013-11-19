@@ -17,7 +17,8 @@ import com.team08storyapp.MainActivity;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
-public class testAnnotationController extends ActivityInstrumentationTestCase2<MainActivity> {
+public class testAnnotationController extends
+	ActivityInstrumentationTestCase2<MainActivity> {
 
     public testAnnotationController() {
 	super(MainActivity.class);

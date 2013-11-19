@@ -166,9 +166,9 @@ public class AnnotationController {
 		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 	    picCursor.moveToFirst();
 	    imgPath = picCursor.getString(index);
+	    picCursor.close();
 	} else
 	    imgPath = pickedUri.getPath();
-	picCursor.close();
 
 	/* if we have a new URI attempt to decode the image bitmap */
 	if (pickedUri != null) {
