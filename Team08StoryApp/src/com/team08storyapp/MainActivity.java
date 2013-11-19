@@ -32,10 +32,14 @@ Retrieved Oct. 29, 2013
 package com.team08storyapp;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Toast;
 
 /**
@@ -58,6 +62,8 @@ import android.widget.Toast;
  */
 public class MainActivity extends Activity {
 
+    private static final int HELP_MENU_ID = Menu.FIRST;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -72,6 +78,22 @@ public class MainActivity extends Activity {
 	 */
 	getMenuInflater().inflate(R.menu.main, menu);
 	return true;
+    }
+    
+    public void onCreateContextMenu(ContextMenu menu, View v,
+	    ContextMenuInfo menuInfo) {
+	super.onCreateContextMenu(menu, v, menuInfo);
+	menu.add(0, HELP_MENU_ID, 0, R.string.help_menu);
+    }
+
+    public boolean onContextItemSelected(MenuItem item) {
+	
+	if(item.getItemId() == HELP_MENU_ID){
+	    Dialog helpDialog = new Dialog(MainActivity.this);
+	    return true;
+	}
+	
+	return super.onContextItemSelected(item);   
     }
 
     /**

@@ -56,7 +56,8 @@
     <string name="illustration_from_camera">Illustration from Camera</string>
     <string name="illustration_from_gallery">Illustration from Gallery</string>
     <string name="title_activity_view_fragments">ViewFragmentsActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="luckyButton">I\'m Feeling Lucky!</string>
     <string name="the_linked_fragment_id_is_">"The linked fragment id is: "</string>
+    <string name="help_menu">Help</string>
+    <string name="okayButton">Okay</string>
 </resources>
