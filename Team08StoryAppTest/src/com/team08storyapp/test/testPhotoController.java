@@ -6,23 +6,24 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.team08storyapp.FileHelper;
-import com.team08storyapp.MainActivity;
 import com.team08storyapp.MyStoriesActivity;
 import com.team08storyapp.Photo;
 import com.team08storyapp.PhotoController;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
+import com.team08storyapp.StoryFragmentActivity;
 
 import dalvik.annotation.TestTargetClass;
 
 @SuppressWarnings("deprecation")
 @TestTargetClass(MyStoriesActivity.class)
 public class testPhotoController extends
-	ActivityInstrumentationTestCase2<MainActivity> {
+	ActivityInstrumentationTestCase2<StoryFragmentActivity> {
 
     private PhotoController phController;
 
@@ -36,7 +37,7 @@ public class testPhotoController extends
     private Uri testUri;
 
     public testPhotoController() {
-	super(MainActivity.class);
+	super(StoryFragmentActivity.class);
     }
 
     public void setUp() throws FileNotFoundException, IOException {
@@ -46,8 +47,6 @@ public class testPhotoController extends
 	 * context, file helper, and test story objects
 	 */
 	testUri = Uri.parse("test");
-	testActivity = this.getActivity();
-	testContext = this.getInstrumentation().getTargetContext();
 	
 	testFHelper = new FileHelper(testContext, 0);
 	testCurrentStory = new Story(14, "Spaceman Spiff", "Calvin");
@@ -58,6 +57,14 @@ public class testPhotoController extends
 
 	testCurrentStory.setStoryFragments(testStoryFragmentList);
 
+	Intent intent = new Intent();
+	intent.putExtra("story", testCurrentStory);
+	intent.putExtra("storyFragmentId", 1);
+	super.setActivityIntent(intent);
+	testActivity = super.getActivity();
+	testContext = super.getInstrumentation().getContext();
+
+	
 	/* The PhotoController initialization */
 	phController = new PhotoController(testActivity, testContext,
 		testCurrentStory, testCurrentStoryFragment, 0, testFHelper);
