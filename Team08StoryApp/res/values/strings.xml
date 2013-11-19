@@ -38,7 +38,7 @@
     <string name="title_">Title:</string>
     <string name="enter_new_story_title_here">Enter new story title here</string>
     <string name="author_">Author:</string>
-    <string name="enter_author_apos_s_name_here">Enter author&amp;apos;s name here</string>
+    <string name="enter_author_apos_s_name_here">Enter author\'s name here</string>
     <string name="search">Search</string>
     <string name="select_a_fragment_to_link_to_">Select a fragment to link to:</string>
     <string name="create_fragment">Create Fragment</string>
