@@ -140,8 +140,8 @@ public class PhotoController {
 	/* query the data */
 	Cursor picCursor;
 	try {
-	    picCursor = activity.getContentResolver().query(pickedUri,
-		    medData, null, null, null);
+	    picCursor = activity.getContentResolver().query(pickedUri, medData,
+		    null, null, null);
 	} catch (Exception e) {
 	    return null;
 	}
@@ -152,9 +152,9 @@ public class PhotoController {
 		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 	    picCursor.moveToFirst();
 	    imgPath = picCursor.getString(index);
+	    picCursor.close();
 	} else
 	    imgPath = pickedUri.getPath();
-	picCursor.close();
 
 	/* if we have a new URI attempt to decode the image bitmap */
 	if (pickedUri != null) {
@@ -230,7 +230,6 @@ public class PhotoController {
     /*
      * AddIllustration is a method that updates a story with newly added
      * illustrations.
-     * 
      */
     private void addIllustration(String fileName) {
 
@@ -263,8 +262,8 @@ public class PhotoController {
 
     /**
      * Retrieves the StoryFragment from the current fragment.
-     * @return 
-     * 		on success desired current story fragment object.
+     * 
+     * @return on success desired current story fragment object.
      */
     public StoryFragment getCurrentStoryFragment() {
 	return currentStoryFragment;
@@ -272,8 +271,9 @@ public class PhotoController {
 
     /**
      * Sets the current story fragment to currentStoryFragment.
+     * 
      * @param currentStoryFragment
-     * 		the current story fragment.
+     *            the current story fragment.
      */
     public void setCurrentStoryFragment(StoryFragment currentStoryFragment) {
 	this.currentStoryFragment = currentStoryFragment;
