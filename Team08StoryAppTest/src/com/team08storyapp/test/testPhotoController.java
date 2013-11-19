@@ -4,15 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.Before;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-import android.test.ActivityTestCase;
+import android.test.ActivityInstrumentationTestCase2;
 
 import com.team08storyapp.FileHelper;
+import com.team08storyapp.MainActivity;
 import com.team08storyapp.MyStoriesActivity;
 import com.team08storyapp.Photo;
 import com.team08storyapp.PhotoController;
@@ -23,7 +21,8 @@ import dalvik.annotation.TestTargetClass;
 
 @SuppressWarnings("deprecation")
 @TestTargetClass(MyStoriesActivity.class)
-public class testPhotoController extends ActivityTestCase {
+public class testPhotoController extends
+	ActivityInstrumentationTestCase2<MainActivity> {
 
     private PhotoController phController;
 
@@ -36,7 +35,10 @@ public class testPhotoController extends ActivityTestCase {
     private FileHelper testFHelper;
     private Uri testUri;
 
-    @Before
+    public testPhotoController() {
+	super(MainActivity.class);
+    }
+
     public void setUp() throws FileNotFoundException, IOException {
 
 	/*
@@ -44,9 +46,9 @@ public class testPhotoController extends ActivityTestCase {
 	 * context, file helper, and test story objects
 	 */
 	testUri = Uri.parse("test");
-	testActivity = super.getActivity();
-	testContext = super.getInstrumentation().getContext();
-
+	testActivity = this.getActivity();
+	testContext = this.getInstrumentation().getTargetContext();
+	
 	testFHelper = new FileHelper(testContext, 0);
 	testCurrentStory = new Story(14, "Spaceman Spiff", "Calvin");
 
@@ -88,7 +90,6 @@ public class testPhotoController extends ActivityTestCase {
     }
 
     /* Delete the file used to test savePhoto() after the testcase has run */
-    @After
     public void tearDown() {
 	testContext.deleteFile("Download14");
     }
