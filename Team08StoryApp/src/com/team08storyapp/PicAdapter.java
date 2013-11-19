@@ -72,7 +72,7 @@ public class PicAdapter extends BaseAdapter {
 
     /* placeholder bitmap for empty spaces in gallery */
     Bitmap placeholder;
-    
+
     private ArrayList<Photo> pList;
 
     /**
@@ -91,7 +91,7 @@ public class PicAdapter extends BaseAdapter {
      */
     public PicAdapter(Context context, ArrayList<Photo> photoList,
 	    int currentStoryId, int currentStoryFragmentId) {
-	
+
 	pList = photoList;
 
 	/* instantiate context */
@@ -122,7 +122,8 @@ public class PicAdapter extends BaseAdapter {
 		    prefixFileList.add(fileList[i]);
 		}
 	    }
-	    for (int i = 0; i < Math.min(imageBitmaps.length, prefixFileList.size()); i++) {
+	    for (int i = 0; i < Math.min(imageBitmaps.length,
+		    prefixFileList.size()); i++) {
 		String path = prefixFileList.get(i).getAbsolutePath();
 		placeholder = BitmapFactory.decodeFile(path);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -152,13 +153,13 @@ public class PicAdapter extends BaseAdapter {
     }
 
     /* return item at specified position */
-    public Bitmap getItem(int position) {
-	return imageBitmaps[position];
+    public Object getItem(int position) {
+	return position;
     }
 
     /* return item ID at specified position */
     public long getItemId(int position) {
-	return pList.get(position).getPhotoID();
+	return position;
     }
 
     /**

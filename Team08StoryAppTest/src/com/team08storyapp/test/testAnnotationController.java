@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.test.ActivityInstrumentationTestCase2;
@@ -13,15 +14,16 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.team08storyapp.AnnotationController;
 import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
-import com.team08storyapp.MainActivity;
+import com.team08storyapp.Photo;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
+import com.team08storyapp.StoryFragmentActivity;
 
 public class testAnnotationController extends
-	ActivityInstrumentationTestCase2<MainActivity> {
+	ActivityInstrumentationTestCase2<StoryFragmentActivity> {
 
     public testAnnotationController() {
-	super(MainActivity.class);
+	super(StoryFragmentActivity.class);
     }
 
     private AnnotationController anController;
@@ -42,20 +44,28 @@ public class testAnnotationController extends
 	 * context as well
 	 */
 	testUri = Uri.parse("test");
-	testActivity = super.getActivity();
-	testContext = super.getInstrumentation().getContext();
 
 	/*
 	 * Initialize the setStory object, as well as the file helper and the es
 	 * helper
 	 */
+	ArrayList<Photo> pList = new ArrayList<Photo>();
 	testStory = new Story(15, "newstory", "me");
 	testFHelper = new FileHelper(testContext, 0);
 	testESHelper = new ESHelper();
 
 	testStoryFragment = new StoryFragment(1, "Test text.");
+	testStoryFragment.setPhotos(pList);
 	testStoryFragmentList = new ArrayList<StoryFragment>();
 	testStoryFragmentList.add(testStoryFragment);
+	testStory.setStoryFragments(testStoryFragmentList);
+	
+	Intent intent = new Intent();
+	intent.putExtra("story", testStory);
+	intent.putExtra("storyFragmentId", 1);
+	super.setActivityIntent(intent);
+	testActivity = super.getActivity();
+	testContext = super.getInstrumentation().getContext();
 
 	/* The AnnotationController initialization */
 	anController = new AnnotationController(testActivity, testContext,
