@@ -162,27 +162,24 @@ public class testStoryController extends
     /*
      * Test for Use Case 17
      * 
-     * The testRandomChoice method tests getting a random next fragment from a
+     * The testRandomChoice method tests getting a random next fragment ID from a
      * list of choices the current fragment has. Using a set array list of
-     * different choices of a fragment and a set array list of fragments, the
-     * call of testRandomChoice should return the next fragment of a choice at
-     * random.
+     * different choices of a fragment, the call of testRandomChoice should 
+     * return the next fragment ID of a choice at random.
      */
     public void testRandomChoice() {
 
 	/*
-	 * Test that a random fragment is generated between the set fragments
+	 * Test that a random fragment ID is generated between the set fragments
 	 * above (1, 2, 3, 4)
 	 */
-	StoryFragment randomFragment0 = StoryController.randomChoice(Choices,
-		storyFragmentList);
+	int randomFragment0 = StoryController.randomChoice(Choices);
 
 	/*
-	 * Tests that the method is returning different fragments randomly by
+	 * Tests that the method is returning different fragment IDs randomly by
 	 * comparing two different call results.
 	 */
-	StoryFragment randomFragment1 = StoryController.randomChoice(Choices,
-		storyFragmentList);
+	int randomFragment1 = StoryController.randomChoice(Choices);
 	assertTrue(randomFragment0 != randomFragment1);
 
     }
