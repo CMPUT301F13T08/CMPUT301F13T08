@@ -30,6 +30,7 @@ Retrieved Oct. 29, 2013
  */
 package com.team08storyapp;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -217,7 +218,7 @@ public class AnnotationController {
 		FileOutputStream fos = context.openFileOutput(fileName,
 			Context.MODE_PRIVATE);
 		pic.compress(CompressFormat.PNG, 90, fos);
-	    } catch (FileNotFoundException e1) {
+	    } catch (Exception e1) {
 		e1.printStackTrace();
 	    }
 	} else {
