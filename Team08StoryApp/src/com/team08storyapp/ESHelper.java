@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -445,18 +445,14 @@ public class ESHelper {
 	/* Create a buffer reader to read the contents of response. */
 	BufferedReader br = new BufferedReader(new InputStreamReader(
 		(response.getEntity().getContent())));
-	StringBuilder stringBuilder = new StringBuilder();
-	Log.d(TAG, "Output from Server -> ");
-	String output = "";
-
-	/* Retrieve the contents of the response and append it in a string. */
-	while ((output = br.readLine()) != null) {
-	    Log.d(TAG, output);
-	    stringBuilder.append(output);
-	}
-	Log.d(TAG, "JSON:" + stringBuilder.toString());
-
-	/* Return the string of the response. */
-	return stringBuilder.toString();
+	String output;
+        System.err.println("Output from Server -> ");
+        String json = "";
+        while ((output = br.readLine()) != null) {
+                System.err.println(output);
+                json += output;
+        }
+        System.err.println("JSON:"+json);
+        return json;
     }
 }
