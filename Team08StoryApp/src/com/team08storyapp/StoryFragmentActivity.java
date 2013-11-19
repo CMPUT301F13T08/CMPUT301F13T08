@@ -199,7 +199,6 @@ public class StoryFragmentActivity extends Activity {
 	 */
 	currentStoryFragment = StoryController.readStoryFragment(
 		currentStory.getStoryFragments(), currentStoryFragmentId);
-	System.out.println(currentStoryFragment == null);
 
 	/* Display the current fragment text */
 	textSection.setText(currentStoryFragment.getStoryText());
@@ -222,7 +221,6 @@ public class StoryFragmentActivity extends Activity {
 	picGallery.setAdapter(imgAdapt);
 
 	/* populate the listview with choices */
-	System.out.println("POPULATE TO LISTVIEW:" + storyFragmentChoices);
 	fillChoice(storyFragmentChoices);
 
 	/* set listview item's setOnItemClickListener */

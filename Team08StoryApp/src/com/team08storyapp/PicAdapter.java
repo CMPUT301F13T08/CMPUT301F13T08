@@ -72,6 +72,8 @@ public class PicAdapter extends BaseAdapter {
 
     /* placeholder bitmap for empty spaces in gallery */
     Bitmap placeholder;
+    
+    private ArrayList<Photo> pList;
 
     /**
      * This constructor of PicAdapter will populate all images from photoList
@@ -89,6 +91,8 @@ public class PicAdapter extends BaseAdapter {
      */
     public PicAdapter(Context context, ArrayList<Photo> photoList,
 	    int currentStoryId, int currentStoryFragmentId) {
+	
+	pList = photoList;
 
 	/* instantiate context */
 	galleryContext = context;
@@ -148,13 +152,13 @@ public class PicAdapter extends BaseAdapter {
     }
 
     /* return item at specified position */
-    public Object getItem(int position) {
-	return position;
+    public Bitmap getItem(int position) {
+	return imageBitmaps[position];
     }
 
     /* return item ID at specified position */
     public long getItemId(int position) {
-	return position;
+	return pList.get(position).getPhotoID();
     }
 
     /**
