@@ -61,8 +61,6 @@ import android.widget.Toast;
  * @since 1.0
  */
 public class MainActivity extends Activity {
-
-    private static final int HELP_MENU_ID = Menu.FIRST;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,22 +76,6 @@ public class MainActivity extends Activity {
 	 */
 	getMenuInflater().inflate(R.menu.main, menu);
 	return true;
-    }
-    
-    public void onCreateContextMenu(ContextMenu menu, View v,
-	    ContextMenuInfo menuInfo) {
-	super.onCreateContextMenu(menu, v, menuInfo);
-	menu.add(0, HELP_MENU_ID, 0, R.string.help_menu);
-    }
-
-    public boolean onContextItemSelected(MenuItem item) {
-	
-	if(item.getItemId() == HELP_MENU_ID){
-	    Dialog helpDialog = new Dialog(MainActivity.this);
-	    return true;
-	}
-	
-	return super.onContextItemSelected(item);   
     }
 
     /**
