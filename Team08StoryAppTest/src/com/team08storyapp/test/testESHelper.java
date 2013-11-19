@@ -10,19 +10,18 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
-import android.test.AndroidTestCase;
+import android.test.ActivityInstrumentationTestCase2;
 
 import com.team08storyapp.Choice;
 import com.team08storyapp.ESHelper;
+import com.team08storyapp.MainActivity;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
 @SuppressWarnings("deprecation")
-public class testESHelper extends AndroidTestCase {
+public class testESHelper extends
+	ActivityInstrumentationTestCase2<MainActivity> {
 
     private ESHelper esHelper;
     int expectedIdAddStory;
@@ -30,11 +29,14 @@ public class testESHelper extends AndroidTestCase {
     Story addStory;
     int storyIdGetStory;
     int storyFragmentListSizeGetStory;
-    int storyListSizeGetStories;
     String searchText;
     int searchListSize;
     int storyIdUpdateStory;
     StoryFragment storyFragmentToUpdate;
+
+    public testESHelper() {
+	super(MainActivity.class);
+    }
 
     /*
      * The initializeSampleStory method is used to create a sample story to use
@@ -279,15 +281,8 @@ public class testESHelper extends AndroidTestCase {
     }
 
     /* Set up testing data for testing methods. */
-    @Before
     public void setUp() {
 	esHelper = new ESHelper();
-
-	/*
-	 * ***Setup for testGetOnlineStories()*** set to the known count of the
-	 * stories on the webservice currently
-	 */
-	storyListSizeGetStories = 5;
 
 	/*
 	 * ***Setup for testAddOnlineStory*** create the story for adding to the
@@ -324,17 +319,25 @@ public class testESHelper extends AndroidTestCase {
      * The testGetOnlineStories method tests retrieving all stories on the
      * webservice via ESHelper's getOnlineStories method.
      * 
-     * The test retrieves all stories from the webservice. Before the test we
-     * should know how many stories are stored on the webservice. Once the
-     * method to retrieve the stories is called, the returned list's size is
-     * compared to the predetermined size. If the sizes are equally than it is
-     * successfully retrieving all stories online.
+     * The test retrieves all stories from the webservice twice. If the size of
+     * the first call is greater than zero and the sizes of the two calls are
+     * equally than it is successfully retrieving all stories online.
      */
-    @Test
     public void testGetOnlineStories() {
-	// retrieve the stories and compare the list size to the known size
-	int size = esHelper.getOnlineStories().size();
-	assertTrue(size == storyListSizeGetStories);
+	/*
+	 * retrieve the stories and check that the size is greater than 0 as
+	 * there should be stories available
+	 */
+	int onlineStoryListSizeCall1 = esHelper.getOnlineStories().size();
+	assertTrue(onlineStoryListSizeCall1 > 0);
+
+	/*
+	 * retrieve the stories again and check that the size of the first call
+	 * is the same as the size of the second call
+	 */
+	int onlineStoryListSizeCall2 = esHelper.getOnlineStories().size();
+	assertTrue(onlineStoryListSizeCall1 == onlineStoryListSizeCall2);
+
     }
 
     /*
@@ -352,7 +355,6 @@ public class testESHelper extends AndroidTestCase {
      * can be said that the add portion of addOrUpdateOnline story passes adding
      * a story to the webservice.
      */
-    @Test
     public void testAddOnlineStory() {
 	/* get the id that is expected to be set to the newly added story */
 	expectedIdAddStory = esHelper.getOnlineStories().size() + 1;
@@ -397,7 +399,6 @@ public class testESHelper extends AndroidTestCase {
      * successfully by checking the id, that the author and title are not null,
      * and it contains the correct number of fragments.
      */
-    @Test
     public void testGetOnlineStory() {
 	/* retrieve story from the webservice from the specified id */
 	Story story = esHelper.getOnlineStory(storyIdGetStory);
@@ -422,7 +423,6 @@ public class testESHelper extends AndroidTestCase {
      * text. When the search is performed a check is done to test that the
      * number of stories returned is the same as expected.
      */
-    @Test
     public void testSearchOnlineStories() {
 	/*
 	 * retrieve the story's from the search and compare the size of the list
@@ -446,7 +446,6 @@ public class testESHelper extends AndroidTestCase {
      * again and some comparisons are done to see if the story on the webservice
      * does contain the updated text.
      */
-    @Test
     public void testUpdateOnlineStory() {
 	/* retrieve a story from the webservice to update */
 	Story updateStory = esHelper.getOnlineStory(storyIdUpdateStory);
@@ -495,7 +494,6 @@ public class testESHelper extends AndroidTestCase {
 		onlineStoryFragments.get(0).getStoryText());
     }
 
-    @After
     /* Remove test data from the application */
     protected void tearDown() throws IOException {
 
