@@ -89,6 +89,7 @@ public class MyStoriesActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_my_stories);
+	setTitle(R.string.my_stories);
 	lv = (ListView) findViewById(android.R.id.list);
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
