@@ -85,7 +85,6 @@ public class OnlineStoriesActivity extends ListActivity {
 	super.onCreate(savedInstanceState);
 
 	setContentView(R.layout.activity_online_stories);
-	setTitle(R.string.online_stories);
 	lv = (ListView) findViewById(android.R.id.list);
 	et = (EditText) findViewById(R.id.search);
 
