@@ -38,7 +38,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -140,12 +139,17 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
-	    if ((getOfflineStory(story.getOfflineStoryId()) != null && getOfflineStory(
-		    story.getOfflineStoryId()).getOnlineStoryId() != story
+	    Story offlineStory = getOfflineStory(story.getOfflineStoryId());
+	    if ((offlineStory != null && offlineStory.getOnlineStoryId() != story
 		    .getOnlineStoryId()) || story.getOfflineStoryId() == 0) {
-		int total = getOfflineStories().size();
-		story.setOfflineStoryId(Math.max(total - 1, getOfflineStories()
-			.get(total - 1).getOfflineStoryId()) + 1);
+		ArrayList<Story> offlineStories = getOfflineStories();
+		int total = offlineStories.size();
+		if (total > 0) {
+		    story.setOfflineStoryId(Math.max(total - 1, offlineStories
+			    .get(total - 1).getOfflineStoryId()) + 1);
+		} else {
+		    story.setOfflineStoryId(1);
+		}
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
@@ -205,7 +209,8 @@ public class FileHelper {
     public void appendUpdateQueue(int storyId) {
 	try {
 	    String filename = "updateQueue";
-	    FileOutputStream fos = fileContext.openFileOutput(filename, Context.MODE_APPEND);
+	    FileOutputStream fos = fileContext.openFileOutput(filename,
+		    Context.MODE_APPEND);
 	    fos.write((Integer.toString(storyId) + "\n").getBytes());
 	    System.out.println("WROTE IT!");
 	    fos.close();
@@ -242,8 +247,8 @@ public class FileHelper {
 	}
 	return updateId;
     }
-    
-    public void clearUpdateQueue(){
+
+    public void clearUpdateQueue() {
 	fileContext.deleteFile("updateQueue");
     }
 
