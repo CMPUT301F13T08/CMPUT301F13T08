@@ -1,8 +1,16 @@
 package com.team08storyapp.test;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.content.Context;
@@ -51,6 +59,7 @@ public class testAnnotationController extends
 	 */
 	ArrayList<Photo> pList = new ArrayList<Photo>();
 	testStory = new Story(15, "newstory", "me");
+	testStory.setOnlineStoryId(100);
 	testFHelper = new FileHelper(testContext, 0);
 	testESHelper = new ESHelper();
 
@@ -59,7 +68,7 @@ public class testAnnotationController extends
 	testStoryFragmentList = new ArrayList<StoryFragment>();
 	testStoryFragmentList.add(testStoryFragment);
 	testStory.setStoryFragments(testStoryFragmentList);
-	
+
 	Intent intent = new Intent();
 	intent.putExtra("story", testStory);
 	intent.putExtra("storyFragmentId", 1);
@@ -92,7 +101,30 @@ public class testAnnotationController extends
     }
 
     /* Delete the file used to test savePhoto() after the testcase has run */
-    public void tearDown() {
+    @SuppressWarnings("deprecation")
+    public void tearDown() throws Exception{
+
+	/* Delete the story added to online */
+	@SuppressWarnings("resource")
+	HttpClient httpclient = new DefaultHttpClient();
+	HttpDelete httpDelete = new HttpDelete(
+		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
+			+ 100);
+	httpDelete.addHeader("Accept", "application/json");
+
+	HttpResponse response = httpclient.execute(httpDelete);
+
+	String status = response.getStatusLine().toString();
+	System.out.println(status);
+
+	HttpEntity entity = response.getEntity();
+	BufferedReader br = new BufferedReader(new InputStreamReader(
+		entity.getContent()));
+	String output;
+	System.err.println("Output from Server -> ");
+	while ((output = br.readLine()) != null) {
+	    System.err.println(output);
+	}
 	testContext.deleteFile("Download15");
     }
 
