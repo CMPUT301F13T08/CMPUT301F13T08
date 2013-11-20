@@ -46,7 +46,6 @@ public class SelectFragmentActivity extends Activity {
     private ListView lv;
     private ArrayList<StoryFragment> sfList;
 
-
     @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +57,17 @@ public class SelectFragmentActivity extends Activity {
 		.getSerializableExtra("storyFragments");
 
 	lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list, sfList));
-	
-	lv.setOnItemClickListener(new OnItemClickListener(){
+
+	lv.setOnItemClickListener(new OnItemClickListener() {
 	    @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		StoryFragment sf = (StoryFragment)parent.getItemAtPosition(position);
-		int storyFragmentId = sf.getStoryFragmentId();		
+	    public void onItemClick(AdapterView<?> parent, View view,
+		    int position, long id) {
+		StoryFragment sf = (StoryFragment) parent
+			.getItemAtPosition(position);
+		int storyFragmentId = sf.getStoryFragmentId();
 		Intent intent = new Intent(SelectFragmentActivity.this,
 			EditChoiceActivity.class);
-		intent.putExtra("nextStoryFragmentId", storyFragmentId);	
+		intent.putExtra("nextStoryFragmentId", storyFragmentId);
 		intent.putExtra("mode", 1);
 		setResult(RESULT_OK, intent);
 		finish();
@@ -74,7 +75,6 @@ public class SelectFragmentActivity extends Activity {
 	});
     }
 
-
-
+   
 
 }
