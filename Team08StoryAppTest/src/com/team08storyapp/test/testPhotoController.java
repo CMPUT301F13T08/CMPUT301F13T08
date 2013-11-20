@@ -47,7 +47,7 @@ public class testPhotoController extends
 	 * context, file helper, and test story objects
 	 */
 	testUri = Uri.parse("test");
-	
+
 	testFHelper = new FileHelper(testContext, 0);
 	testCurrentStory = new Story(14, "Spaceman Spiff", "Calvin");
 
@@ -64,10 +64,27 @@ public class testPhotoController extends
 	testActivity = super.getActivity();
 	testContext = super.getInstrumentation().getContext();
 
-	
 	/* The PhotoController initialization */
 	phController = new PhotoController(testActivity, testContext,
 		testCurrentStory, testCurrentStoryFragment, 0, testFHelper);
+    }
+
+    /*
+     * Constructor Test for Photo object. Set parameters photoId, pictureName,
+     * and encodedPicture.
+     */
+    public void testConstructorPhoto() {
+
+	Photo photo = new Photo();
+
+	photo.setPhotoID(1);
+	photo.setPictureName("photo");
+	photo.setEncodedPicture("encoded");
+
+	assertEquals(1, photo.getPhotoID());
+	assertEquals("photo", photo.getPictureName());
+	assertEquals("encoded", photo.getEncodedPicture());
+
     }
 
     /*

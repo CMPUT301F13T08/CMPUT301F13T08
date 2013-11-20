@@ -60,4 +60,8 @@
     <string name="the_linked_fragment_id_is_">"The linked fragment id is: "</string>
     <string name="help_menu">Help</string>
     <string name="okayButton">Okay</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="create_a_new_story">Create a New Story</string>
+    <string name="downloaded_stories">Downloaded Stories</string>
+    <string name="online_stories">Online Stories</string>
 </resources>

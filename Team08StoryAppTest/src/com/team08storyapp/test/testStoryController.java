@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.team08storyapp.Annotation;
 import com.team08storyapp.Choice;
 import com.team08storyapp.MainActivity;
+import com.team08storyapp.Photo;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryController;
 import com.team08storyapp.StoryFragment;
@@ -22,6 +24,8 @@ public class testStoryController extends
     private StoryFragment firstReplaceStoryFragment;
     ArrayList<StoryFragment> storyFragmentList;
     ArrayList<Choice> Choices;
+    ArrayList<Annotation> Annotations;
+    ArrayList<Photo> Photos;
     private StoryFragment testAddStoryFragment;
     private StoryFragment joinStoryFragment1;
     private StoryFragment joinStoryFragment2;
@@ -32,6 +36,10 @@ public class testStoryController extends
     private Choice testChoice2;
     private Choice testChoice3;
     private Choice testChoice4;
+    private Annotation testAnn1;
+    private Annotation testAnn2;
+    private Photo testPhoto1;
+    private Photo testPhoto2;
 
     public testStoryController() {
 	super(MainActivity.class);
@@ -81,6 +89,121 @@ public class testStoryController extends
 	Choices.add(testChoice2);
 	Choices.add(testChoice3);
 	Choices.add(testChoice4);
+
+	Annotations = new ArrayList<Annotation>();
+	testAnn1 = new Annotation();
+	testAnn1.setAnnotationID(1);
+	testAnn2 = new Annotation();
+	testAnn2.setAnnotationID(2);
+	Annotations.add(testAnn1);
+	Annotations.add(testAnn2);
+
+	Photos = new ArrayList<Photo>();
+	testPhoto1 = new Photo();
+	testPhoto1.setPhotoID(1);
+	testPhoto2 = new Photo();
+	testPhoto2.setPhotoID(2);
+	Photos.add(testPhoto1);
+	Photos.add(testPhoto2);
+    }
+
+    /*
+     * Constructor Test for Story object, with parameters title and author. Also
+     * set firstStoryFragmentId, offlineStoryId, onlineStoryId, and
+     * storyFragments.
+     */
+    public void testFirstConstructorStory() {
+	Story story = new Story("title", "author");
+
+	assertEquals("title", story.getTitle());
+	assertEquals("author", story.getAuthor());
+
+	story.setFirstStoryFragmentId(1);
+	story.setOfflineStoryId(2);
+	story.setOnlineStoryId(3);
+	story.setStoryFragments(storyFragmentList);
+
+	assertEquals(1, story.getFirstStoryFragmentId());
+	assertEquals(2, story.getOfflineStoryId());
+	assertEquals(3, story.getOnlineStoryId());
+	assertEquals(1, story.getStoryFragments().get(0).getStoryFragmentId());
+    }
+
+    /*
+     * Constructor Test for Story object, with parameters offlineStorId, title,
+     * and author. Also set firstStoryFragmentId, onlineStoryId, and
+     * storyFragments.
+     */
+    public void testSecondConstructorStory() {
+	Story story = new Story(1, "title", "author");
+
+	assertEquals(1, story.getOfflineStoryId());
+	assertEquals("title", story.getTitle());
+	assertEquals("author", story.getAuthor());
+
+	story.setFirstStoryFragmentId(1);
+	story.setOnlineStoryId(3);
+	story.setStoryFragments(storyFragmentList);
+
+	assertEquals(1, story.getFirstStoryFragmentId());
+	assertEquals(3, story.getOnlineStoryId());
+	assertEquals(1, story.getStoryFragments().get(0).getStoryFragmentId());
+
+    }
+
+    /*
+     * Constructor Test for StoryFragment object, with parameters
+     * storyFragmentId. Also set storyText, choices, annotations, an photos.
+     */
+    public void testFirstConstructorStoryFragment() {
+	StoryFragment storyFragment = new StoryFragment(1);
+
+	assertEquals(1, storyFragment.getStoryFragmentId());
+
+	storyFragment.setStoryText("text");
+	storyFragment.setChoices(Choices);
+	storyFragment.setAnnotations(Annotations);
+	storyFragment.setPhotos(Photos);
+
+	assertEquals("text", storyFragment.getStoryText());
+	assertEquals("This is test 1", storyFragment.getChoices().get(0)
+		.getText());
+	assertEquals(2, storyFragment.getAnnotations().get(1).getAnnotationID());
+	assertEquals(2, storyFragment.getPhotos().get(1).getPhotoID());
+    }
+
+    /*
+     * Constructor Test for StoryFragment object, with parameters
+     * storyFragmentId and storyText. Also set choices, annotations, photos
+     */
+    public void testSecondConstructorStoryFragment() {
+	StoryFragment storyFragment = new StoryFragment(1, "text");
+
+	assertEquals(1, storyFragment.getStoryFragmentId());
+	assertEquals("text", storyFragment.getStoryText());
+
+	storyFragment.setChoices(Choices);
+	storyFragment.setAnnotations(Annotations);
+	storyFragment.setPhotos(Photos);
+
+	assertEquals("This is test 1", storyFragment.getChoices().get(0)
+		.getText());
+	assertEquals(2, storyFragment.getAnnotations().get(1).getAnnotationID());
+	assertEquals(2, storyFragment.getPhotos().get(1).getPhotoID());
+
+    }
+
+    /*
+     * Constructor Test for Choice object, with parameters
+     * toGoToStoryFragmentID, choiceId, and text
+     */
+    public void testConstructorChoice() {
+	Choice choice = new Choice(2, 1, "text");
+
+	assertEquals(2, choice.getStoryFragmentID());
+	assertEquals(1, choice.getChoiceId());
+	assertEquals("text", choice.getText());
+
     }
 
     /*
