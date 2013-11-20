@@ -55,7 +55,7 @@ public class StoryFragmentListActivity extends Activity {
 	setContentView(R.layout.activity_story_fragment_list);
 	lv = (ListView) findViewById(android.R.id.list);
 	fHelper = new FileHelper(this, 1);
-	
+
 	/* Retrieve from the intent the Story and Story Fragments */
 	Intent passedIntent = getIntent();
 	currentStory = (Story) passedIntent.getSerializableExtra("story");
@@ -97,16 +97,36 @@ public class StoryFragmentListActivity extends Activity {
 	intent.putExtra("mode", 1);
 	startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+	Intent intent = new Intent(StoryFragmentListActivity.this,
+		    MyStoriesActivity.class);
+	    startActivityForResult(intent, 1);
+    }
     
-    protected void onResume(){
-	try{
+    protected void onResume() {
+	try {
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    sfList = currentStory.getStoryFragments();
-	    lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list, sfList));
-	}catch (Exception e){
+	    lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list,
+		    sfList));
+	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-	
+
 	super.onResume();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+	if (resultCode == RESULT_OK) {
+	    currentStory = (Story) data.getSerializableExtra("story");
+	    sfList = currentStory.getStoryFragments();
+	    lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list,
+		    sfList));
+	} else {
+	    super.onActivityResult(requestCode, resultCode, data);
+	}
     }
 }

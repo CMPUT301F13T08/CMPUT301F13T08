@@ -159,6 +159,41 @@ public class EditFragmentActivity extends Activity {
 	populateScreen();
     }
 
+    @Override
+    public void onBackPressed() {
+	try {
+	    String dialogue = textSection.getText().toString();
+	    currentStoryFragment.setStoryText(dialogue);
+	    /*
+	     * Replace the current fragment in the story object, to include
+	     * changes made to it's text or illustrations. If the fragment is a
+	     * new story fragment, it is added to the fragment list of the
+	     * story.
+	     */
+	    currentStory = StoryController.updateStoryFragment(currentStory,
+		    currentStoryFragment, currentStoryFragmentId,
+		    currentStoryFragmentIndex);
+	    /*
+	     * Update the current story on the file system. Permanent change to
+	     * the current fragment
+	     */
+	    fHelper.updateOfflineStory(currentStory);
+	    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
+	    Toast.makeText(getApplicationContext(), "Save Successfully",
+		    Toast.LENGTH_SHORT).show();
+
+	    Intent intent = new Intent(EditFragmentActivity.this,
+		    StoryFragmentListActivity.class);
+	    intent.putExtra("story", currentStory);
+	    startActivityForResult(intent, 1);
+
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    }
+
     private void populateScreen() {
 	/*
 	 * Set the index position of the Story Fragment in the Story's Array
@@ -232,11 +267,12 @@ public class EditFragmentActivity extends Activity {
 		    currentStoryFragment, currentStoryFragmentId,
 		    currentStoryFragmentIndex);
 
-	    Intent intent = new Intent(EditFragmentActivity.this,
+	    Intent choiceIntent = new Intent(EditFragmentActivity.this,
 		    EditChoiceActivity.class);
-	    intent.putExtra("story", currentStory);
-	    intent.putExtra("storyFragmentIndex", currentStoryFragmentIndex);
-	    startActivityForResult(intent, REQUEST_CHOICE);
+	    choiceIntent.putExtra("story", currentStory);
+	    choiceIntent.putExtra("storyFragmentIndex",
+		    currentStoryFragmentIndex);
+	    startActivityForResult(choiceIntent, REQUEST_CHOICE);
 	    return true;
 
 	case R.id.save:
@@ -260,7 +296,13 @@ public class EditFragmentActivity extends Activity {
 		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 		Toast.makeText(getApplicationContext(), "Save Successfully",
 			Toast.LENGTH_SHORT).show();
-		finish();
+
+		Intent intent = new Intent(EditFragmentActivity.this,
+			StoryFragmentListActivity.class);
+		intent.putExtra("story", currentStory);
+		startActivityForResult(intent, 1);
+		return true;
+
 	    } catch (FileNotFoundException e) {
 		e.printStackTrace();
 	    } catch (IOException e) {
@@ -299,9 +341,9 @@ public class EditFragmentActivity extends Activity {
 	try {
 	    String dialogue = textSection.getText().toString();
 
-	    currentStory = StoryController.updateStoryFragment(
-			currentStory, currentStoryFragment,
-			currentStoryFragmentId, currentStoryFragmentIndex);
+	    currentStory = StoryController.updateStoryFragment(currentStory,
+		    currentStoryFragment, currentStoryFragmentId,
+		    currentStoryFragmentIndex);
 	    /*
 	     * save new storyfragment no matter what. And save existing fragment
 	     * when the story fragment text changes (since we've saved choice
@@ -319,7 +361,7 @@ public class EditFragmentActivity extends Activity {
 		    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 		}
 	    }
-	
+
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {

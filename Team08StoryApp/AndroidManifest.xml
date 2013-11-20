@@ -61,7 +61,9 @@
         </activity>
         <activity
             android:name="com.team08storyapp.NewStoryActivity"
-            android:label="@string/title_activity_new_story" >
+            android:label="@string/title_activity_new_story"
+            android:noHistory="true" >
+"
         </activity>
         <activity
             android:name="com.team08storyapp.EditFragmentActivity"
@@ -77,9 +79,9 @@
         </activity>
         <activity
             android:name="com.team08storyapp.StoryFragmentListActivity"
-            android:label="@string/title_activity_story_fragment_list" >
+            android:label="@string/title_activity_story_fragment_list"
+            android:noHistory="true" >
         </activity>
-       
     </application>
 
 </manifest>
