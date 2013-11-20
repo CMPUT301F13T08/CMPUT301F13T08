@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -139,16 +139,16 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
-	    Story offlineStory = getOfflineStory(story.getOfflineStoryId());
-	    if ((offlineStory != null && offlineStory.getOnlineStoryId() != story
-		    .getOnlineStoryId()) || story.getOfflineStoryId() == 0) {
-		ArrayList<Story> offlineStories = getOfflineStories();
-		int total = offlineStories.size();
-		if (total > 0) {
-		    story.setOfflineStoryId(Math.max(total - 1, offlineStories
-			    .get(total - 1).getOfflineStoryId()) + 1);
-		} else {
+	    if ((getOfflineStory(story.getOfflineStoryId()) != null && getOfflineStory(
+		    story.getOfflineStoryId()).getOnlineStoryId() != story
+		    .getOnlineStoryId())) {
+		int total = getOfflineStories().size();
+		if (total == 0) {
 		    story.setOfflineStoryId(1);
+		} else {
+		    story.setOfflineStoryId(Math.max(total - 1,
+			    getOfflineStories().get(total - 1)
+				    .getOfflineStoryId()) + 1);
 		}
 	    }
 	    String fileName = prefix
