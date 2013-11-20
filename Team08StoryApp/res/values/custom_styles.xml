@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--      <style name="CustomBackground"> -->
+<!--            <item name="android:background">@drawable/title_gradient</item> -->
+<!--      </style> -->
+     
+     <style name="CustomTheme" parent="android:Theme">
+
+           <item name="android:windowTitleBackgroundStyle">@drawable/title_gradient</item>
+      </style>
+</resources>
