@@ -275,14 +275,17 @@ public class testFileHelper extends
 	File updateQueue = new File(dir, "updateQueue");
 	updateQueue.createNewFile();
 	fHelper.appendUpdateQueue(s1.getOfflineStoryId());
+	fHelper.appendUpdateQueue(s2.getOfflineStoryId());
 	InputStream in = context.openFileInput("updateQueue");
 	InputStreamReader inputStreamReader = new InputStreamReader(in);
 	BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 	StringBuilder sb = new StringBuilder();
 	String line;
-	while ((line = bufferedReader.readLine()) != null) {
-	    assertEquals(line, "12");
-	}
+	line = bufferedReader.readLine();
+	assertEquals(line, "12");
+	line = bufferedReader.readLine();
+	assertEquals(line, "13");
+
 
     }
 
@@ -293,6 +296,19 @@ public class testFileHelper extends
 	assertTrue(updateQueue.exists());
 	fHelper.clearUpdateQueue();
 	assertFalse(updateQueue.exists());
+    }
+    
+    public void testGetUpdateFilesIds() throws Exception{
+	File dir = context.getFilesDir();
+	File updateQueue = new File(dir, "updateQueue");
+	updateQueue.createNewFile();
+	fHelper.appendUpdateQueue(s1.getOfflineStoryId());
+	fHelper.appendUpdateQueue(s2.getOfflineStoryId());
+	ArrayList<String> ids = fHelper.getUpdateFilesIds();
+	assertEquals(ids.size(), 2);
+	assertEquals(ids.get(0), "12");
+	assertEquals(ids.get(1), "13");
+	
     }
 
     /* Delete data */
