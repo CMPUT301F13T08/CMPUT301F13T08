@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -85,8 +85,10 @@ public class NewStoryActivity extends Activity {
 	
 	newStory = new Story(title, author);
 	StoryFragment firstFragment = new StoryFragment(1);
+	firstFragment.setStoryText("Please Edit your story text here.");
 	newStory.getStoryFragments().add(firstFragment);
 	newStory.setFirstStoryFragmentId(1);
+
 	
 	try {
 	    fHelper.addOfflineStory(newStory);
@@ -99,10 +101,8 @@ public class NewStoryActivity extends Activity {
 	}
 	
 	Intent intent = new Intent(NewStoryActivity.this,
-		EditFragmentActivity.class);
+		StoryFragmentListActivity.class);
 	intent.putExtra("story", newStory);
-	int nextStoryFragmentId = newStory.getFirstStoryFragmentId();
-	intent.putExtra("storyFragmentId", nextStoryFragmentId);
 	startActivity(intent);
     }
 
