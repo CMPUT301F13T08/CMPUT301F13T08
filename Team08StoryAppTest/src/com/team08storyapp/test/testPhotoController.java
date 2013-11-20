@@ -69,23 +69,6 @@ public class testPhotoController extends
 		testCurrentStory, testCurrentStoryFragment, 0, testFHelper);
     }
 
-    /*
-     * Constructor Test for Photo object. Set parameters photoId, pictureName,
-     * and encodedPicture.
-     */
-    public void testConstructorPhoto() {
-
-	Photo photo = new Photo();
-
-	photo.setPhotoID(1);
-	photo.setPictureName("photo");
-	photo.setEncodedPicture("encoded");
-
-	assertEquals(1, photo.getPhotoID());
-	assertEquals("photo", photo.getPictureName());
-	assertEquals("encoded", photo.getEncodedPicture());
-
-    }
 
     /*
      * Test Case for Use Cases 6, 11
