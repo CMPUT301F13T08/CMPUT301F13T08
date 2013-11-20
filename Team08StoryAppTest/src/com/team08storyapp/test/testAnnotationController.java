@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.team08storyapp.Annotation;
 import com.team08storyapp.AnnotationController;
 import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
@@ -83,6 +84,27 @@ public class testAnnotationController extends
     }
 
     /*
+     * Constructor Test for Annotation object. Set parameters annotationId,
+     * encodedAnnotation, photo, storyFragmentId, and text.
+     */
+    public void testConstructorAnnotation() {
+
+	Annotation annotation = new Annotation();
+
+	annotation.setAnnotationID(1);
+	annotation.setEncodedAnnotation("encoded");
+	annotation.setPhoto("photo");
+	annotation.setStoryFragmentID(2);
+	annotation.setText("text");
+
+	assertEquals(1, annotation.getAnnotationID());
+	assertEquals("encoded", annotation.getEncodedAnnotation());
+	assertEquals("photo", annotation.getPhoto());
+	assertEquals(2, annotation.getStoryFragmentID());
+	assertEquals("text", annotation.getText());
+    }
+
+    /*
      * Test Case for Use Cases 6, 11
      * 
      * The testSavePhoto method tests saving the illustrations and updating the
@@ -102,14 +124,13 @@ public class testAnnotationController extends
 
     /* Delete the file used to test savePhoto() after the testcase has run */
     @SuppressWarnings("deprecation")
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
 
 	/* Delete the story added to online */
 	@SuppressWarnings("resource")
 	HttpClient httpclient = new DefaultHttpClient();
 	HttpDelete httpDelete = new HttpDelete(
-		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/"
-			+ 100);
+		"http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/" + 100);
 	httpDelete.addHeader("Accept", "application/json");
 
 	HttpResponse response = httpclient.execute(httpDelete);
