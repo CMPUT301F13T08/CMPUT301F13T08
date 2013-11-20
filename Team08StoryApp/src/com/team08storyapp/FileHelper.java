@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -142,10 +142,15 @@ public class FileHelper {
 	try {
 	    if ((getOfflineStory(story.getOfflineStoryId()) != null && getOfflineStory(
 		    story.getOfflineStoryId()).getOnlineStoryId() != story
-		    .getOnlineStoryId()) || story.getOfflineStoryId() == 0) {
+		    .getOnlineStoryId())) {
 		int total = getOfflineStories().size();
-		story.setOfflineStoryId(Math.max(total - 1, getOfflineStories()
-			.get(total - 1).getOfflineStoryId()) + 1);
+		if (total == 0) {
+		    story.setOfflineStoryId(1);
+		} else {
+		    story.setOfflineStoryId(Math.max(total - 1,
+			    getOfflineStories().get(total - 1)
+				    .getOfflineStoryId()) + 1);
+		}
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
@@ -205,7 +210,8 @@ public class FileHelper {
     public void appendUpdateQueue(int storyId) {
 	try {
 	    String filename = "updateQueue";
-	    FileOutputStream fos = fileContext.openFileOutput(filename, Context.MODE_APPEND);
+	    FileOutputStream fos = fileContext.openFileOutput(filename,
+		    Context.MODE_APPEND);
 	    fos.write((Integer.toString(storyId) + "\n").getBytes());
 	    System.out.println("WROTE IT!");
 	    fos.close();
@@ -242,8 +248,8 @@ public class FileHelper {
 	}
 	return updateId;
     }
-    
-    public void clearUpdateQueue(){
+
+    public void clearUpdateQueue() {
 	fileContext.deleteFile("updateQueue");
     }
 
