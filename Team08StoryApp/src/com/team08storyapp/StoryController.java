@@ -152,9 +152,9 @@ public class StoryController {
     }
 
     /**
-     * This method takes in an Array list of choices.
-     * It returns a random story fragment ID of a possible fragment that the current story
-     * fragment might go to.
+     * This method takes in an Array list of choices. It returns a random story
+     * fragment ID of a possible fragment that the current story fragment might
+     * go to.
      * 
      * Example: If there is a fragment that has choices a,b,c, each of them
      * leading to different fragments through toGoToStoryFragmentID. This method
@@ -174,5 +174,40 @@ public class StoryController {
 	Choice chosenChoice = choices.get(randomIndexNumber);
 	return chosenChoice.getStoryFragmentID();
 
+    }
+
+    /**
+     * This method replaces a fragment in a story at a particular index, or adds
+     * it to the story if it does not exist. It takes a story object, the
+     * fragment to be replaced, the id of that fragment, and the index of the
+     * fragment in the story fragments list. It returns the updated story
+     * object. Example: If the fragment should be at index 10 of the story
+     * fragments list, but there are only 10 items in the list (max index 9),
+     * the fragment is appended to the story fragments list of the story object.
+     * 
+     * @param story
+     *            A story object.
+     * @param storyFragment
+     *            The story fragment that should replace an existing fragment at
+     *            a particular index, or appended to the story fragments list.
+     * @param storyFragmentId
+     *            The id if the storyFragment parameter. This is used to check
+     *            if the fragment already exists in the list.
+     * @param storyFragmentIndex
+     *            This is the position of the fragment in the story fragments
+     *            list. The fragment replaces the existing fragment at this
+     *            index.
+     * @return The updated story object containing a list of fragments with
+     *         either a modified fragment, or an additional one.
+     */
+    public static Story updateStoryFragment(Story story,
+	    StoryFragment storyFragment, int storyFragmentId,
+	    int storyFragmentIndex) {
+	if (storyFragmentId > story.getStoryFragments().size()) {
+	    story.getStoryFragments().add(storyFragment);
+	} else {
+	    story.getStoryFragments().set(storyFragmentIndex, storyFragment);
+	}
+	return story;
     }
 }

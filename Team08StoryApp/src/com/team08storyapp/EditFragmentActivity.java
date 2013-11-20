@@ -92,7 +92,7 @@ public class EditFragmentActivity extends Activity {
 	lv.setOnTouchListener(new OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View v, MotionEvent event) {
-		int action = event.getAction();	
+		int action = event.getAction();
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 		    v.getParent().requestDisallowInterceptTouchEvent(true);
@@ -113,7 +113,7 @@ public class EditFragmentActivity extends Activity {
 	textSection.setOnTouchListener(new OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View v, MotionEvent event) {
-		int action = event.getAction();	
+		int action = event.getAction();
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 		    v.getParent().requestDisallowInterceptTouchEvent(true);
@@ -227,15 +227,11 @@ public class EditFragmentActivity extends Activity {
 	    return true;
 
 	case R.id.addChoice:
-	    
-	    
-	    if (currentStoryFragmentId > currentStory.getStoryFragments()
-			.size()) {
-		    currentStory.getStoryFragments().add(currentStoryFragment);
-		   
-		} 
-	    
-	    
+
+	    currentStory = StoryController.updateStoryFragment(currentStory,
+		    currentStoryFragment, currentStoryFragmentId,
+		    currentStoryFragmentIndex);
+
 	    Intent intent = new Intent(EditFragmentActivity.this,
 		    EditChoiceActivity.class);
 	    intent.putExtra("story", currentStory);
@@ -253,13 +249,9 @@ public class EditFragmentActivity extends Activity {
 		 * is a new story fragment, it is added to the fragment list of
 		 * the story.
 		 */
-		if (currentStoryFragmentId > currentStory.getStoryFragments()
-			.size()) {
-		    currentStory.getStoryFragments().add(currentStoryFragment);
-		} else {
-		    currentStory.getStoryFragments().set(
-			    currentStoryFragmentIndex, currentStoryFragment);
-		}
+		currentStory = StoryController.updateStoryFragment(
+			currentStory, currentStoryFragment,
+			currentStoryFragmentId, currentStoryFragmentIndex);
 		/*
 		 * Update the current story on the file system. Permanent change
 		 * to the current fragment
@@ -307,6 +299,9 @@ public class EditFragmentActivity extends Activity {
 	try {
 	    String dialogue = textSection.getText().toString();
 
+	    currentStory = StoryController.updateStoryFragment(
+			currentStory, currentStoryFragment,
+			currentStoryFragmentId, currentStoryFragmentIndex);
 	    /*
 	     * save new storyfragment no matter what. And save existing fragment
 	     * when the story fragment text changes (since we've saved choice
@@ -324,19 +319,7 @@ public class EditFragmentActivity extends Activity {
 		    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 		}
 	    }
-	    /*
-	     * if (!dialogue.isEmpty() && dialogue != null) {
-	     * currentStoryFragment.setStoryText(dialogue); }
-	     * 
-	     * if (currentStoryFragmentIndex > (currentStory.getStoryFragments()
-	     * .size() - 1)) {
-	     * currentStory.getStoryFragments().add(currentStoryFragment);
-	     * fHelper.updateOfflineStory(currentStory);
-	     * fHelper.appendUpdateQueue(currentStory.getOfflineStoryId()); }
-	     * else {
-	     * currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-	     * currentStoryFragment); }
-	     */
+	
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {

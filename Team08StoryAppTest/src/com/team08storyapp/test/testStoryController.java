@@ -19,12 +19,14 @@ public class testStoryController extends
     private StoryFragment secondStoryFragment;
     private StoryFragment thirdStoryFragment;
     private StoryFragment fourthStoryFragment;
+    private StoryFragment firstReplaceStoryFragment;
     ArrayList<StoryFragment> storyFragmentList;
     ArrayList<Choice> Choices;
     private StoryFragment testAddStoryFragment;
     private StoryFragment joinStoryFragment1;
     private StoryFragment joinStoryFragment2;
     private Story story;
+    private Story replacedStory;
     private int storyListSize;
     private Choice testChoice1;
     private Choice testChoice2;
@@ -47,6 +49,7 @@ public class testStoryController extends
 	/* Set two more fragments for test random Choice */
 	thirdStoryFragment = new StoryFragment(3, "third fragment text");
 	fourthStoryFragment = new StoryFragment(4, "fourth fragment text");
+	firstReplaceStoryFragment = new StoryFragment(1, "first new fragment");
 
 	/* StoryFragment list has two fragments with ids 1 and 2 */
 	storyFragmentList.add(firstStoryFragment);
@@ -60,6 +63,10 @@ public class testStoryController extends
 	joinStoryFragment2 = new StoryFragment(2, "joining to Story Fragment 1");
 
 	story = new Story("title", "author");
+
+	replacedStory = new Story("Replace", "Fragment");
+	replacedStory.getStoryFragments().add(firstStoryFragment);
+	replacedStory.getStoryFragments().add(secondStoryFragment);
 
 	/* sample Story List Size for testing random Story selection */
 	storyListSize = 12;
@@ -162,9 +169,9 @@ public class testStoryController extends
     /*
      * Test for Use Case 17
      * 
-     * The testRandomChoice method tests getting a random next fragment ID from a
-     * list of choices the current fragment has. Using a set array list of
-     * different choices of a fragment, the call of testRandomChoice should 
+     * The testRandomChoice method tests getting a random next fragment ID from
+     * a list of choices the current fragment has. Using a set array list of
+     * different choices of a fragment, the call of testRandomChoice should
      * return the next fragment ID of a choice at random.
      */
     public void testRandomChoice() {
@@ -182,6 +189,18 @@ public class testStoryController extends
 	int randomFragment1 = StoryController.randomChoice(Choices);
 	assertTrue(randomFragment0 != randomFragment1);
 
+    }
+
+    /*
+     * Test whether a fragment is replaced in the fragment list of the story.
+     * The given fragment should be inserted at the given index in the list. An
+     * updated story object is returned by the controller method.
+     */
+    public void testUpdateStoryFragment() {
+	replacedStory = StoryController.updateStoryFragment(replacedStory,
+		firstReplaceStoryFragment, 1, 0);
+	assertEquals("first new fragment", replacedStory.getStoryFragments()
+		.get(0).getStoryText());
     }
 
 }
