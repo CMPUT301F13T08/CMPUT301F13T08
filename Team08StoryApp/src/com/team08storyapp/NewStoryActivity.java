@@ -54,6 +54,7 @@ public class NewStoryActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	fHelper = new FileHelper(this, 1);
 	setContentView(R.layout.activity_new_story);
+	setTitle(R.string.create_a_new_story);
     }
 
     @Override
