@@ -86,7 +86,6 @@ public class NewStoryActivity extends Activity {
 	
 	newStory = new Story(title, author);
 	StoryFragment firstFragment = new StoryFragment(1);
-	firstFragment.setStoryText("Please Edit your story text here.");
 	newStory.getStoryFragments().add(firstFragment);
 	newStory.setFirstStoryFragmentId(1);
 

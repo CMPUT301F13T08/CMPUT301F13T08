@@ -184,8 +184,7 @@ public class EditFragmentActivity extends Activity {
 	    originalText = currentStoryFragment.getStoryText();
 	    textSection.setText(originalText);
 	    storyFragmentChoices = currentStoryFragment.getChoices();
-	    ArrayList<Photo> illustrationList = currentStoryFragment
-		    .getPhotos();
+	    ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
 
 	    pc = new PhotoController(this, getApplicationContext(),
 		    currentStory, currentStoryFragment,
@@ -299,9 +298,9 @@ public class EditFragmentActivity extends Activity {
 	try {
 	    String dialogue = textSection.getText().toString();
 
-	    currentStory = StoryController.updateStoryFragment(
-			currentStory, currentStoryFragment,
-			currentStoryFragmentId, currentStoryFragmentIndex);
+	    currentStory = StoryController.updateStoryFragment(currentStory,
+		    currentStoryFragment, currentStoryFragmentId,
+		    currentStoryFragmentIndex);
 	    /*
 	     * save new storyfragment no matter what. And save existing fragment
 	     * when the story fragment text changes (since we've saved choice
@@ -319,7 +318,7 @@ public class EditFragmentActivity extends Activity {
 		    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 		}
 	    }
-	
+
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
