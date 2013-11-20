@@ -139,9 +139,16 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
+	    /*
+	     * If the offlineStoryId of added story is taken, and the offline
+	     * story which has the same offline Id is not the same story as the
+	     * story we are going to add. Then we assign a new offline Id for
+	     * it. Else if the offlineStoryId is empty and our Offline stock is
+	     * also empty, we simply assign the new story an 1 as offline Id.
+	     */
 	    if ((getOfflineStory(story.getOfflineStoryId()) != null && getOfflineStory(
 		    story.getOfflineStoryId()).getOnlineStoryId() != story
-		    .getOnlineStoryId())) {
+		    .getOnlineStoryId()) || story.getOfflineStoryId() == 0) {
 		int total = getOfflineStories().size();
 		if (total == 0) {
 		    story.setOfflineStoryId(1);
@@ -149,6 +156,8 @@ public class FileHelper {
 		    story.setOfflineStoryId(Math.max(total - 1,
 			    getOfflineStories().get(total - 1)
 				    .getOfflineStoryId()) + 1);
+		    System.out.println("NEW OFFLINE ID:"
+			    + story.getOfflineStoryId());
 		}
 	    }
 	    String fileName = prefix
@@ -212,7 +221,7 @@ public class FileHelper {
 	    FileOutputStream fos = fileContext.openFileOutput(filename,
 		    Context.MODE_APPEND);
 	    fos.write((Integer.toString(storyId) + "\n").getBytes());
-	    System.out.println("WROTE IT!");
+	    // System.out.println("WROTE IT!");
 	    fos.close();
 	} catch (Exception e) {
 	    e.printStackTrace();
@@ -233,15 +242,15 @@ public class FileHelper {
 		BufferedReader br = new BufferedReader(isr);
 		String temp = "";
 		while ((temp = br.readLine()) != null) {
-		    System.out.println("In update Queue:" + updateId);
+		    // System.out.println("In update Queue:" + updateId);
 		    if (!updateId.contains(temp)) {
-			System.out.println("going to update:" + updateId);
+			// System.out.println("going to update:" + updateId);
 			updateId.add(temp);
 		    }
 		}
 	    }
 	    is.close();
-	    System.out.println(updateId);
+	    // System.out.println(updateId);
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
