@@ -63,7 +63,6 @@
             android:name="com.team08storyapp.NewStoryActivity"
             android:label="@string/title_activity_new_story"
             android:noHistory="true" >
-
         </activity>
         <activity
             android:name="com.team08storyapp.EditFragmentActivity"
