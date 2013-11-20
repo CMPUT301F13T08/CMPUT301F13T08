@@ -32,10 +32,16 @@ Retrieved Oct. 29, 2013
 package com.team08storyapp;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -71,7 +77,17 @@ public class MainActivity extends Activity {
 	 * present.
 	 */
 	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
+	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	if (item.getItemId() == R.id.help) {
+	    BuiltInHelp help = new BuiltInHelp(MainActivity.this);
+	    help.showDialog();
+	    return true;
+	}
+	return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -92,9 +108,8 @@ public class MainActivity extends Activity {
 			getApplicationContext(),
 			"Sorry, An Error Occured. Please Check Your Network And Try Again",
 			Toast.LENGTH_LONG).show();
-	    }else{
-		Toast.makeText(
-			getApplicationContext(),
+	    } else {
+		Toast.makeText(getApplicationContext(),
 			"Sorry, An Error Occured. Please Try Again.",
 			Toast.LENGTH_LONG).show();
 	    }
