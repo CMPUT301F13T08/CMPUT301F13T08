@@ -1,5 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/add_anno_camera" android:title="@string/from_camera"></item>
-    <item android:id="@+id/add_anno_gallery" android:title="@string/from_gallery"></item>
-   
+
+    <item
+        android:id="@+id/add_anno_camera"
+        android:title="@string/from_camera">
+    </item>
+    <item
+        android:id="@+id/add_anno_gallery"
+        android:title="@string/from_gallery">
+    </item>
+
 </menu>
