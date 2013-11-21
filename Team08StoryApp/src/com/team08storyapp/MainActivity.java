@@ -69,6 +69,7 @@ public class MainActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
 	setTitle("Main Menu");
+	SyncManager.sync(this);
 
     }
 
@@ -144,6 +145,11 @@ public class MainActivity extends Activity {
     public void toMyStories(View view) {
 	Intent intent = new Intent(MainActivity.this, MyStoriesActivity.class);
 	startActivity(intent);
+    }
+    
+    public void onResume(){
+	SyncManager.sync(this);
+	super.onResume();
     }
 
 }

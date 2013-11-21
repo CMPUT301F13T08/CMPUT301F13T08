@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ��  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -72,7 +72,7 @@ public class OfflineStoriesActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-
+	SyncManager.sync(this);
 	setContentView(R.layout.activity_offline_stories);
 	lv = (ListView) findViewById(android.R.id.list);
 	fHelper = new FileHelper(this, 0);
@@ -149,6 +149,7 @@ public class OfflineStoriesActivity extends ListActivity {
     }
 
     protected void onResume() {
+	SyncManager.sync(this);
 	super.onResume();
 	try {
 	    /* Re-populate the listview with the online stories */

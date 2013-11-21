@@ -52,6 +52,7 @@ public class StoryFragmentListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	SyncManager.sync(this);
 	setContentView(R.layout.activity_story_fragment_list);
 	lv = (ListView) findViewById(android.R.id.list);
 	fHelper = new FileHelper(this, 1);
