@@ -97,7 +97,7 @@ public class MyStoriesActivity extends ListActivity {
 	fHelper = new FileHelper(this, 1);
 	esHelper = new ESHelper();
 
-	sync();
+	SyncManager.sync(this);
 
 	try {
 	    ArrayList<Story> temp = fHelper.getOfflineStories();
@@ -248,23 +248,12 @@ public class MyStoriesActivity extends ListActivity {
 
     }
 
-    protected void sync() {
-	ArrayList<String> ids = fHelper.getUpdateFilesIds();
-	System.out.println(ids);
-	if (fHelper.getUpdateFilesIds().size() > 0
-		&& InternetDetector.connectedToInternet(this)) {
-	    UpdateToolPackage utp1 = new UpdateToolPackage(fHelper, esHelper,
-		    this);
-	    UpdateTask sync = new UpdateTask(utp1);
-	    sync.execute();
-	}
-    }
 
     protected void onResume() {
 	super.onResume();
 	try {
 	    fillData(fHelper.getOfflineStories(), onUpdate);
-	    sync();
+	    SyncManager.sync(this);
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {

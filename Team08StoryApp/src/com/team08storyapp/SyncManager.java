@@ -1,6 +1,6 @@
 package com.team08storyapp;
 
-import java.util.ArrayList;
+import android.app.Activity;
 
 public class SyncManager {
 
@@ -13,33 +13,16 @@ public class SyncManager {
 	return syncManager;
     }
 
-    protected static void sync(FileHelper fHelper) {
+    protected static void sync(Activity activity) {
+	FileHelper fHelper = new FileHelper(activity.getApplicationContext(), 1);
 	ESHelper esHelper = new ESHelper();
-	ArrayList<String> storyIdList = fHelper.getUpdateFilesIds();
-	for (String id : storyIdList) {
-	    System.out.println("I'm gonna update this!:" + id);
-	    int intId = 0;
-	    try {
-		intId = Integer.parseInt(id);
-	    } catch (NumberFormatException e) {
-		e.printStackTrace();
-		continue;
-	    }
-	    try {
-		Story updateStory = fHelper.getOfflineStory(intId);
-		System.out.println("BEING UPDATE:" + updateStory.toString());
-		int onlineId = esHelper.addOrUpdateOnlineStory(updateStory);
-		if (updateStory.getOnlineStoryId() < 1) {
-		    updateStory.setOnlineStoryId(onlineId);
-		    fHelper.updateOfflineStory(updateStory);
-		}
-	    } catch (Exception e) {
-		e.printStackTrace();
-	    }
-
+	if (fHelper.getUpdateFilesIds().size() > 0
+		&& InternetDetector.connectedToInternet(activity
+			.getApplicationContext())) {
+	    UpdateToolPackage utp1 = new UpdateToolPackage(fHelper, esHelper,
+		    activity);
+	    UpdateTask sync = new UpdateTask(utp1);
+	    sync.execute();
 	}
-	fHelper.clearUpdateQueue();
-	System.out.println("UPDATE QUEUE CLEAR");
-
     }
 }

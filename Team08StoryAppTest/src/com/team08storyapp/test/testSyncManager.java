@@ -10,9 +10,9 @@ public class testSyncManager extends TestCase{
     }
     
     public void testGetInstance(){
-	SyncManager sm1 = SyncManager.getInstance();
-	SyncManager sm2 = SyncManager.getInstance();
-	assertEquals(sm1, sm2);
+        SyncManager sm1 = SyncManager.getInstance();
+        SyncManager sm2 = SyncManager.getInstance();
+        assertEquals(sm1, sm2);
     }
 
 }

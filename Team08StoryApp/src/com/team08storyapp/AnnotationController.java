@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -98,11 +98,11 @@ public class AnnotationController {
      *            The ESHelper object that helps with uploading and saving
      *            images online.
      */
-    public AnnotationController(Activity activity, Context context,
+    public AnnotationController(Activity activity,
 	    Story currentStory, StoryFragment currentStoryFragment,
 	    int currentStoryFragmentIndex, FileHelper fHelper, ESHelper esHelper) {
 	this.activity = activity;
-	this.context = context;
+	this.context = activity.getApplicationContext();
 	this.currentStory = currentStory;
 	this.currentStoryFragment = currentStoryFragment;
 	this.currentStoryFragmentIndex = currentStoryFragmentIndex;
@@ -277,6 +277,7 @@ public class AnnotationController {
 	} else if (mode == MODE_MY) {
 	    try {
 		fHelper.updateOfflineStory(currentStory);
+		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 	    } catch (FileNotFoundException e) {
 		e.printStackTrace();
 	    } catch (IOException e) {

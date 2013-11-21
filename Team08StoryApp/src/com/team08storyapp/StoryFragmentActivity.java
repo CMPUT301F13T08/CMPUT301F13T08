@@ -100,14 +100,14 @@ public class StoryFragmentActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
 	super.onCreate(savedInstanceState);
-	
-	
 
 	/* Initialize esHelper */
 	esHelper = new ESHelper();
 
 	/* Initialize fHelper to Download mode */
 	fHelper = new FileHelper(this, 0);
+	
+	SyncManager.sync(this);
 
 	/* set up background layout */
 	setContentView(R.layout.activity_story_fragment_view);
@@ -115,7 +115,7 @@ public class StoryFragmentActivity extends Activity {
 	lv.setOnTouchListener(new OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View v, MotionEvent event) {
-		int action = event.getAction();	
+		int action = event.getAction();
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 		    v.getParent().requestDisallowInterceptTouchEvent(true);
@@ -141,7 +141,7 @@ public class StoryFragmentActivity extends Activity {
 	textSection.setOnTouchListener(new OnTouchListener() {
 	    @Override
 	    public boolean onTouch(View v, MotionEvent event) {
-		int action = event.getAction();	
+		int action = event.getAction();
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 		    v.getParent().requestDisallowInterceptTouchEvent(true);
@@ -365,15 +365,22 @@ public class StoryFragmentActivity extends Activity {
 	popupMenu.show();
 
     }
-
+    
+    protected void onResume(){
+	SyncManager.sync(this);
+	super.onResume();
+    }
+    
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (resultCode == RESULT_OK) {
+	    
+	    SyncManager.sync(this);
+	    
 	    /* the returned picture URI */
 	    Uri pickedUri = data.getData();
 	    AnnotationController ac = new AnnotationController(this,
-		    getApplicationContext(), currentStory,
-		    currentStoryFragment, currentStoryFragmentIndex, fHelper,
-		    esHelper);
+		    currentStory, currentStoryFragment,
+		    currentStoryFragmentIndex, fHelper, esHelper);
 	    ac.savePhoto(pickedUri, mode);
 	    try {
 		currentStory = fHelper.getOfflineStory(currentStoryId);

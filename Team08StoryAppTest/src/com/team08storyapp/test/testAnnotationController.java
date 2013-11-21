@@ -37,7 +37,6 @@ public class testAnnotationController extends
 
     private AnnotationController anController;
     private Activity testActivity;
-    private Context testContext;
     private Story testStory;
     private StoryFragment testStoryFragment;
     private FileHelper testFHelper;
@@ -61,8 +60,6 @@ public class testAnnotationController extends
 	ArrayList<Photo> pList = new ArrayList<Photo>();
 	testStory = new Story(15, "newstory", "me");
 	testStory.setOnlineStoryId(100);
-	testFHelper = new FileHelper(testContext, 0);
-	testESHelper = new ESHelper();
 
 	testStoryFragment = new StoryFragment(1, "Test text.");
 	testStoryFragment.setPhotos(pList);
@@ -75,10 +72,12 @@ public class testAnnotationController extends
 	intent.putExtra("storyFragmentId", 1);
 	super.setActivityIntent(intent);
 	testActivity = super.getActivity();
-	testContext = super.getInstrumentation().getContext();
+	
+	testFHelper = new FileHelper(testActivity.getApplicationContext(), 0);
+	testESHelper = new ESHelper();
 
 	/* The AnnotationController initialization */
-	anController = new AnnotationController(testActivity, testContext,
+	anController = new AnnotationController(testActivity,
 		testStory, testStoryFragment, 0, testFHelper, testESHelper);
 
     }
@@ -126,7 +125,7 @@ public class testAnnotationController extends
 	while ((output = br.readLine()) != null) {
 	    System.err.println(output);
 	}
-	testContext.deleteFile("Download15");
+	testActivity.getApplicationContext().deleteFile("Download15");
     }
 
 }
