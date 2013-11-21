@@ -220,12 +220,25 @@ public class EditFragmentActivity extends Activity {
 	    textSection.setText(originalText);
 	    storyFragmentChoices = currentStoryFragment.getChoices();
 	    ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
+	    
+	    if(illustrationList == null){
+		System.out.println("Photo List is Null");
+		illustrationList = new ArrayList<Photo>();
+		currentStoryFragment.setPhotos(illustrationList);
+		currentStory.getStoryFragments().set(currentStoryFragmentIndex, currentStoryFragment);
+		try{
+		    fHelper.updateOfflineStory(currentStory);
+		}catch(Exception e){
+		    e.printStackTrace();
+		}
+	    }
+	    
 
 	    pc = new PhotoController(this, getApplicationContext(),
 		    currentStory, currentStoryFragment,
 		    currentStoryFragmentIndex, fHelper);
 
-	    imgAdapt = new PicAdapter(this, illustrationList, currentStoryId,
+	    imgAdapt = new PicAdapter(this, currentStoryFragment.getPhotos(), currentStoryId,
 		    currentStoryFragmentId);
 
 	    picGallery.setAdapter(imgAdapt);

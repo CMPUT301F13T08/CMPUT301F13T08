@@ -44,7 +44,8 @@
             android:scrollHorizontally="false"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbars="vertical"
-            android:textSize="18sp" >
+            android:textSize="18sp"
+            android:hint="@string/enter_text_for_dialogue" >
 
             <requestFocus />
         </EditText>

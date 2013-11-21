@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -89,7 +89,6 @@ public class MyStoriesActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_my_stories);
-	setTitle(R.string.my_stories);
 	lv = (ListView) findViewById(android.R.id.list);
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
@@ -322,6 +321,14 @@ public class MyStoriesActivity extends ListActivity {
 	Intent intent = new Intent(MyStoriesActivity.this,
 		NewStoryActivity.class);
 	startActivity(intent);
+    }
+    
+    @Override
+    public void onBackPressed() {
+	Intent intent = new Intent(MyStoriesActivity.this, MainActivity.class);
+	startActivity(intent);
+	return;
+	
     }
 
     protected void onResume() {

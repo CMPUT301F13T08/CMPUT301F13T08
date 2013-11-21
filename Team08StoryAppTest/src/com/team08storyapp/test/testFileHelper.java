@@ -1,11 +1,14 @@
 package com.team08storyapp.test;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -267,8 +270,45 @@ public class testFileHelper extends
 
     }
 
-    public void testAppendUpdateQueue() {
+    public void testAppendUpdateQueue() throws Exception {
+	File dir = context.getFilesDir();
+	File updateQueue = new File(dir, "updateQueue");
+	updateQueue.createNewFile();
 	fHelper.appendUpdateQueue(s1.getOfflineStoryId());
+	fHelper.appendUpdateQueue(s2.getOfflineStoryId());
+	InputStream in = context.openFileInput("updateQueue");
+	InputStreamReader inputStreamReader = new InputStreamReader(in);
+	BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+	StringBuilder sb = new StringBuilder();
+	String line;
+	line = bufferedReader.readLine();
+	assertEquals(line, "12");
+	line = bufferedReader.readLine();
+	assertEquals(line, "13");
+
+
+    }
+
+    public void testClearUpdateQueue() throws Exception {
+	File dir = context.getFilesDir();
+	File updateQueue = new File(dir, "updateQueue");
+	updateQueue.createNewFile();
+	assertTrue(updateQueue.exists());
+	fHelper.clearUpdateQueue();
+	assertFalse(updateQueue.exists());
+    }
+    
+    public void testGetUpdateFilesIds() throws Exception{
+	File dir = context.getFilesDir();
+	File updateQueue = new File(dir, "updateQueue");
+	updateQueue.createNewFile();
+	fHelper.appendUpdateQueue(s1.getOfflineStoryId());
+	fHelper.appendUpdateQueue(s2.getOfflineStoryId());
+	ArrayList<String> ids = fHelper.getUpdateFilesIds();
+	assertEquals(ids.size(), 2);
+	assertEquals(ids.get(0), "12");
+	assertEquals(ids.get(1), "13");
+	
     }
 
     /* Delete data */

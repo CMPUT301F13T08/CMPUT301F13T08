@@ -9,8 +9,8 @@
     <string name="read_download">Read Downloaded Stories</string>
     <string name="my_stories">My Stories</string>
     <string name="search_hint">Search Title Or Author…</string>
-    <string name="title_activity_online_stories">OnlineStoriesActivity</string>
-    <string name="title_activity_offline_stories">OfflineStoriesActivity</string>
+    <string name="title_activity_online_stories">Online Stories</string>
+    <string name="title_activity_offline_stories">Offline Stories</string>
     <string name="title_activity_story_view">StoryFragmentActivity</string>
     <string name="read_menu">Read</string>
     <string name="download_menu">Download</string>
@@ -20,13 +20,13 @@
     <string name="show_intro">Press a thumbnail to display at larger size</string>
     <string name="camera_des">Image Vary</string>
     <string name="get_photo">get photo</string>
-    <string name="title_activity_my_stories">MyStoriesActivity</string>
+    <string name="title_activity_my_stories">My Stories</string>
     <string name="title_activity_online_story_fragment">OnlineStoryFragmentActivity</string>
     <string name="title_activity_my_story_fragment">MyStoryFragmentActivity</string>
     <string name="title_activity_annotation_view">AnnotationViewActivity</string>
-    <string name="title_activity_new_story">NewStoryActivity</string>
-    <string name="title_activity_edit_fragment">EditFragmentActivity</string>
-    <string name="title_activity_edit_choice">EditChoiceActivity</string>
+    <string name="title_activity_new_story">Create a New Story</string>
+    <string name="title_activity_edit_fragment">Edit Fragment</string>
+    <string name="title_activity_edit_choice">Edit Choice</string>
     <string name="title_activity_select_fragment">SelectFragmentActivity</string>
     <string name="title_activity_story_fragment_list">StoryFragmentListActivity</string>
     <string name="gallery_image">Default gallery image</string>
@@ -64,4 +64,5 @@
     <string name="create_a_new_story">Create a New Story</string>
     <string name="downloaded_stories">Downloaded Stories</string>
     <string name="online_stories">Online Stories</string>
+    <string name="enter_text_for_dialogue">Enter text for dialogue</string>
 </resources>

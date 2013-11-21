@@ -101,8 +101,9 @@ public class NewStoryActivity extends Activity {
 	}
 	
 	Intent intent = new Intent(NewStoryActivity.this,
-		StoryFragmentListActivity.class);
+		EditFragmentActivity.class);
 	intent.putExtra("story", newStory);
+	intent.putExtra("storyFragmentId", 1);
 	startActivity(intent);
     }
 
