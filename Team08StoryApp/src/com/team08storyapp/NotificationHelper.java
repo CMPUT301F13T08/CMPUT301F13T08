@@ -35,8 +35,7 @@ public class NotificationHelper {
 	notification = new Notification(icon, tickerText, when);
 
 	// create the content which is shown in the notification pulldown
-	contentTitle = "Syncing...";
-	CharSequence contentText = "0% complete";
+	contentTitle = "Sync Process";
 
 	// you have to set a PendingIntent on a notification to tell the system
 	// what you want it to do when the notification is selected
@@ -46,8 +45,8 @@ public class NotificationHelper {
 		notificationIntent, 0);
 
 	// add the additional content and intent to the notification
-	notification.setLatestEventInfo(context, contentTitle, contentText,
-		contentIntent);
+	notification.setLatestEventInfo(context, contentTitle,
+		"Syncing", contentIntent);
 
 	// make this notification appear in the 'Ongoing events' section
 	notification.flags = Notification.FLAG_ONGOING_EVENT;
@@ -55,22 +54,6 @@ public class NotificationHelper {
 	// show the notification
 	notificationManager.notify(NOTIFICATION_ID, notification);
     }
-
-    /**
-     * Receives progress updates from the background task and updates the status
-     * bar notification appropriately
-     * 
-     * @param percentageComplete
-     */
-    public void progressUpdate(int percentageComplete) {
-	// build up the new status message
-	CharSequence contentText = percentageComplete + "% complete";
-	// publish it to the status bar
-	notification.setLatestEventInfo(context, contentTitle, contentText,
-		contentIntent);
-	notificationManager.notify(NOTIFICATION_ID, notification);
-    }
-
     /**
      * called when the background task is complete, this removes the
      * notification from the status bar. We could also use this to add a new

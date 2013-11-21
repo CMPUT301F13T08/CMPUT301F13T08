@@ -27,17 +27,6 @@
         android:textColorHint="@android:color/white" />
 
     <Button
-        android:id="@+id/buttonFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editChoiceText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="116dp"
-        android:text="@string/link_choice_to_fragment"
-        android:background="@android:color/holo_orange_light"
-        android:onClick="toSelectFragmentActivity" />
-
-    <Button
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,5 +45,18 @@
         android:text="@string/the_linked_fragment_id_is_"
         android:textColor="@android:color/holo_orange_light"
         android:textColorHint="@android:color/holo_orange_light" />
+
+    <Button
+        android:id="@+id/buttonFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editChoiceText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="88dp"
+        android:background="@android:color/holo_orange_light"
+        android:onClick="toSelectFragmentActivity"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/link_choice_to_fragment" />
 
 </RelativeLayout>

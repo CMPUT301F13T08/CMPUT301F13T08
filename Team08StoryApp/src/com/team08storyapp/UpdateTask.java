@@ -32,7 +32,6 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	ArrayList<String> ids = fHelper.getUpdateFilesIds();
 	for (int i = 0; i < ids.size(); i++) {
 	    String id = ids.get(i);
-	    System.out.println("I'm gonna update this!:" + id);
 	    int intId = 0;
 	    try {
 		intId = Integer.parseInt(id);
@@ -43,8 +42,6 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	    try {
 		Story updateStory = fHelper.getOfflineStory(intId);
 		Story encodedStory = fHelper.encodeStory(updateStory);
-		System.out.println("BEING UPDATE:" + updateStory.toString());
-		System.out.println("NEED TO UPDATE:" + id);
 		if(updateStory.getOnlineStoryId() < 1){
 		    updateStory.setOnlineStoryId(esHelper.addOrUpdateOnlineStory(encodedStory));
 		    fHelper.updateOfflineStory(updateStory);
