@@ -32,8 +32,8 @@ Retrieved Oct. 29, 2013
 package com.team08storyapp;
 
 import android.app.Activity;
+
 import android.app.Dialog;
-import android.content.ContextWrapper;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -73,7 +73,17 @@ public class BuiltInHelp {
      * based on the activity set when instantiating the class.
      */
     private enum ActivityEnum {
-	MainActivity, OnlineStoriesActivity
+	AnnotationViewActivity,
+	EditChoiceActivity,
+	EditFragmentActivity,
+	MainActivity, 
+	MyStoriesActivity, 
+	NewStoryActivity,
+	OfflineStoriesActivity, 
+	OnlineStoriesActivity, 
+	SelectFragmentActivity,
+	StoryFragmentActivity,
+	StoryFragmentListActivity
     }
 
     /**
@@ -86,23 +96,63 @@ public class BuiltInHelp {
      */
     public BuiltInHelp(Activity activity) {
 	this.activity = activity;
+
+	/*
+	 * Retrieve just the activity name from the activity component name for
+	 * use in determining what help text to set up for displaying in the
+	 * dialog.
+	 */
 	String activityName = activity.getComponentName().getClassName()
 		.replace("com.team08storyapp.", "");
+
+	/*
+	 * Turn the string Activity name into an enum value in order to be used
+	 * in a switch statement for comparison.
+	 */
 	ActivityEnum activityEnum = ActivityEnum.valueOf(activityName);
 
 	switch (activityEnum) {
+	case AnnotationViewActivity:
+	    setAnnotationHelp();
+	    break;
+	case EditChoiceActivity:
+	    setEditChoiceHelp();
+	    break;
+	case EditFragmentActivity:
+	    setEditFragmentHelp();
+	    break;
 	case MainActivity:
 	    setMainMenuHelp();
 	    break;
+	case MyStoriesActivity:
+	    setMyStoriesHelp();
+	    break;
+	case NewStoryActivity:
+	    setNewStoryHelp();
+	    break;
+	case OfflineStoriesActivity:
+	    setOfflineStoryHelp();
+	    break;
 	case OnlineStoriesActivity:
 	    setOnlineStoryHelp();
+	    break;
+	case SelectFragmentActivity:
+	    setSelectFragmentHelp();
+	    break;
+	case StoryFragmentActivity:
+	    setReadStoryHelp();
+	    break;
+	case StoryFragmentListActivity:
+	    setStoryFragmentListHelp();
+	    break;
 	default:
 	    break;
 	}
     }
 
     /**
-     * 
+     * When called displays a pop up dialog to the user containing help for the
+     * screen they are currently viewing.
      */
     public void showDialog() {
 	/*
@@ -132,8 +182,26 @@ public class BuiltInHelp {
 
 	});
 
-	/* Display the help dialog popup to the user. */
+	/* Display the help dialog pop up to the user. */
 	helpDialog.show();
+    }
+
+    /* Sets up the help text to display for the Annotation screen. */
+    private void setAnnotationHelp() {
+	this.helpText = "Annotation Help";
+	this.helpText = "";
+    }
+    
+    /* Sets up the help text to display for the Edit Story Fragment screen. */
+    private void setEditFragmentHelp(){
+	this.helpText = "Edit Story Fragment Help";
+	this.helpText = "";
+    }
+    
+    /* Sets up the help text to display for the Edit Choice screen. */
+    private void setEditChoiceHelp(){
+	this.helpText = "Edit Choice Help";
+	this.helpText = "";
     }
 
     /* Sets up the help text to display for the Main Menu screen. */
@@ -145,6 +213,24 @@ public class BuiltInHelp {
 		+ "<br>Click to display the list of Stories available to read that are local stored on the device.<br>"
 		+ "<br><B>My Stories Button</B>"
 		+ "<br>Click to display the list of Stories you are creating.<br>";
+    }
+    
+    /* Sets up the help text to display for the My Stories screen.*/
+    private void setMyStoriesHelp(){
+	this.helpText = "My Stories Help";
+	this.helpText = "";
+    }
+    
+    /* Sets up the help text to display for the New Story screen.*/
+    private void setNewStoryHelp(){
+	this.helpText = "New Story Help";
+	this.helpText = "";
+    }
+    
+    /* Sets up the help text to display for the Offline Story Listing screen. */
+    private void setOfflineStoryHelp() {
+	this.helpText = "Downloaded Stories Help";
+	this.helpText = "";
     }
 
     /* Sets up the help text to display for the Online Story Listing screen. */
@@ -159,5 +245,26 @@ public class BuiltInHelp {
 		+ "<br>	• <b>Read</b> - Select this to start reading the Story.<br>"
 		+ "<br><b>\"I'm Feeling Lucky\" Button</b>"
 		+ "<br>Click to pick a story at random to start reading.<br>";
+    }
+
+    /* Sets up the help text to display for the Select Story Fragment screen. */
+    private void setSelectFragmentHelp(){
+	this.helpText = "Selecting Story Fragment Help";
+	this.helpText = "";
+    }
+    
+    /* Sets up the help text to display for the Reading of a Story. */
+    private void setReadStoryHelp() {
+	this.helpTitle = "Story Reading Help";
+	this.helpText = "<b>Action Bar Options</b>"
+		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
+		+ "<br>	• <b>Annotations</b> - This is the icon that looks like a little picture. Click it to go to the annotation screen where you can view user annotations or provide your own."
+		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.";
+    }
+    
+    /* Sets up the help text to display for the Story Fragment Listing screen. */
+    private void setStoryFragmentListHelp(){
+	this.helpText = "Story Fragment Listing Help";
+	this.helpText = "";
     }
 }
