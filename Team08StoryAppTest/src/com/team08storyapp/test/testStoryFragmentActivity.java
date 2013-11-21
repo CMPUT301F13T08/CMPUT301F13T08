@@ -71,9 +71,11 @@ public class testStoryFragmentActivity extends
 	story.setFirstStoryFragmentId(1);
 	story.getStoryFragments().add(storyFragment);
 
-	// Pass intent to StoryFragmentActivity with the current story object,
-	// the current story fragment id, and the mode to indicate the user is
-	// offline or online
+	/*
+	 * Pass intent to StoryFragmentActivity with the current story object,
+	 * the current story fragment id, and the mode to indicate the user is
+	 * offline or online
+	 */
 	Intent intent = new Intent();
 	intent.putExtra("story", story);
 	intent.putExtra("storyFragmentId", 1);
