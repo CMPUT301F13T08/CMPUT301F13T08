@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  ©  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ï¿½  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -83,6 +83,17 @@ public class ElasticSearchSearchResponse<T> {
 	Collection<T> out = new ArrayList<T>();
 	for (ElasticSearchResponse<T> essrt : getHits()) {
 	    out.add(essrt.getSource());
+	}
+	return out;
+    }
+    /**
+     * @return The collection of strongly typed object received from the
+     *         ElasticSearch search.
+     */
+    public Collection<T> getFields() {
+	Collection<T> out = new ArrayList<T>();
+	for (ElasticSearchResponse<T> essrt : getHits()) {
+	    out.add(essrt.getFields());
 	}
 	return out;
     }

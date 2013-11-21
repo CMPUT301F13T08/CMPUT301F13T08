@@ -302,7 +302,7 @@ public class ESHelper {
 	     * webservice
 	     */
 	    HttpPost postRequest = new HttpPost(
-		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/_search?pretty=1");
+		    "http://cmput301.softwareprocess.es:8080/cmput301f13t08/stories/_search?pretty=1&fields=onlineStoryId,title,author");
 
 	    /*
 	     * Set the httppost so that it knows it is retrieving a JSON
@@ -326,13 +326,13 @@ public class ESHelper {
 	    /* We have to tell GSON what type we expect */
 	    Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Story>>() {
 	    }.getType();
-	    /* Now we expect to get a story response */
+	    /* Now we expect to get a story response */	    
 	    ElasticSearchSearchResponse<Story> esResponse = gson.fromJson(json,
 		    elasticSearchSearchResponseType);
 	    /* We get the story from it! */
 	    Log.d(TAG, esResponse.toString());
 	    for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
-		Story story = s.getSource();
+		Story story = s.getFields();
 		stories.add(story);
 	    }
 
@@ -385,7 +385,7 @@ public class ESHelper {
 	     * Create the ElasticSearch query string to search the webservice
 	     * for the search text
 	     */
-	    String query = "{\"query\": {\"query_string\" :{ \"fields\":[\"title\",\"author\"], \"query\":\""
+	    String query = "{\"fields\": [\"onlineStoryId\",\"title\",\"author\"], \"query\": {\"query_string\" :{ \"fields\":[\"title\",\"author\"], \"query\":\""
 		    + searchString + "\"}}}";
 	    StringEntity stringentity = new StringEntity(query);
 
@@ -418,7 +418,7 @@ public class ESHelper {
 	    Log.d(TAG, esResponse.toString());
 	    /* We get the story from it! */
 	    for (ElasticSearchResponse<Story> s : esResponse.getHits()) {
-		Story story = s.getSource();
+		Story story = s.getFields();
 		stories.add(story);
 	    }
 	} catch (ClientProtocolException e) {

@@ -133,6 +133,7 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    fHelper = new FileHelper(this, 0);
 	    try {
+		currentStory = esHelper.getOnlineStory(currentStory.getOnlineStoryId());
 		currentStory = fHelper.decodeStory(currentStory, 1);
 	    } catch (IOException e1) {
 		e1.printStackTrace();
@@ -178,6 +179,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    fHelper = new FileHelper(this, 0);
 	    /* send the story object through the intent */
 	    try {
+		currentStory = esHelper.getOnlineStory(currentStory.getOnlineStoryId());
 		currentStory = fHelper.decodeStory(currentStory, 0);
 	    } catch (IOException e) {
 		e.printStackTrace();
