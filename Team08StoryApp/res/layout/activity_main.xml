@@ -2,43 +2,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/adventure"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-     >
+    tools:context=".MainActivity" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/story_welcome"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:text="@string/story_welcome" />
 
-    <Button 
+    <Button
         android:id="@+id/read_online_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/read_online"
         android:onClick="toOnlineStories"
-        />
-    
-     <Button
-        android:id="@+id/read_download_button" 
+        android:text="@string/read_online"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/read_download_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/read_download"
         android:onClick="toOfflineStories"
-        />
-     
-      <Button 
+        android:text="@string/read_download"
+        android:textStyle="bold" />
+
+    <Button
         android:id="@+id/my_stories_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/my_stories"
         android:onClick="toMyStories"
-        />
-    
-    
+        android:text="@string/my_stories"
+        android:textStyle="bold" />
+
 </LinearLayout>
