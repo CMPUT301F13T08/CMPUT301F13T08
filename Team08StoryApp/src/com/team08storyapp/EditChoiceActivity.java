@@ -101,7 +101,7 @@ public class EditChoiceActivity extends Activity {
 	    return;
 	}
 
-	if (nextFragmentId < 0) {
+	if (nextFragmentId < 1) {
 	    /*
 	     * A choice must have a fragment selected before it's added
 	     */Toast.makeText(getApplicationContext(),

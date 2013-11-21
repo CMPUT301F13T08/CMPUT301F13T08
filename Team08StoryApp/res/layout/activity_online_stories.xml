@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background = "@drawable/old_paper"
     tools:context=".OnlineStoriesActivity" >
 
     <RelativeLayout
@@ -23,7 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/search_button"
             android:hint="@string/search_hint"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColorHint="@android:color/black" />
+
     </RelativeLayout>
 
     <ListView
