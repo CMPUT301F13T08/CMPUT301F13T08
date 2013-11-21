@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/picture" />
 
-       <EditText
+        <EditText
             android:id="@+id/headerDialogue"
             style="@style/AppTheme"
             android:layout_width="match_parent"
@@ -35,6 +35,8 @@
             android:drawableBottom="@android:color/black"
             android:drawableTop="@android:color/black"
             android:gravity="center_vertical|top"
+            android:hint="@string/enter_text_for_dialogue"
+            android:inputType="textCapSentences"
             android:maxLines="10"
             android:minHeight="200dp"
             android:paddingBottom="10dp"
@@ -44,8 +46,7 @@
             android:scrollHorizontally="false"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbars="vertical"
-            android:textSize="18sp"
-            android:hint="@string/enter_text_for_dialogue" >
+            android:textSize="18sp" >
 
             <requestFocus />
         </EditText>

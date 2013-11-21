@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EditChoiceActivity" >
-    
+
     <TextView
         android:id="@+id/choiceText"
         android:layout_width="wrap_content"
@@ -17,13 +17,14 @@
         android:textColor="@android:color/holo_orange_light"
         android:textColorHint="@android:color/secondary_text_light"
         android:textStyle="bold" />
-    
+
     <EditText
         android:id="@+id/editChoiceText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/choiceText"
         android:hint="@string/enter_the_text_for_your_choice_"
+        android:inputType="textCapSentences"
         android:textColorHint="@android:color/white" />
 
     <Button

@@ -27,6 +27,7 @@
         android:layout_alignBaseline="@id/titleText"
         android:layout_toRightOf="@id/titleText"
         android:hint="@string/enter_new_story_title_here"
+        android:inputType="textCapSentences"
         android:textColorHint="@android:color/secondary_text_light" />
 
     <TextView
