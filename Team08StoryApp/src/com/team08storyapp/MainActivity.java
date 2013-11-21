@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
 	setTitle("Main Menu");
-	
+
     }
 
     @Override
@@ -85,6 +85,10 @@ public class MainActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	if (item.getItemId() == R.id.help) {
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
 	    BuiltInHelp help = new BuiltInHelp(MainActivity.this);
 	    help.showDialog();
 	    return true;

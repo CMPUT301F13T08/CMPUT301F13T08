@@ -112,6 +112,30 @@ public class OnlineStoriesActivity extends ListActivity {
 	registerForContextMenu(getListView());
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	/*
+	 * Inflate the menu; this adds items to the action bar if they are
+	 * present.
+	 */
+	getMenuInflater().inflate(R.menu.main, menu);
+	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	if (item.getItemId() == R.id.help) {
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(OnlineStoriesActivity.this);
+	    help.showDialog();
+	    return true;
+	}
+	return super.onOptionsItemSelected(item);
+    }
+
     public void onCreateContextMenu(ContextMenu menu, View v,
 	    ContextMenuInfo menuInfo) {
 	super.onCreateContextMenu(menu, v, menuInfo);
@@ -132,7 +156,8 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    fHelper = new FileHelper(this, 0);
 	    try {
-		currentStory = esHelper.getOnlineStory(currentStory.getOnlineStoryId());
+		currentStory = esHelper.getOnlineStory(currentStory
+			.getOnlineStoryId());
 		currentStory = fHelper.decodeStory(currentStory, 1);
 	    } catch (IOException e1) {
 		e1.printStackTrace();
@@ -178,7 +203,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	    fHelper = new FileHelper(this, 0);
 	    /* send the story object through the intent */
 	    try {
-		currentStory = esHelper.getOnlineStory(currentStory.getOnlineStoryId());
+		currentStory = esHelper.getOnlineStory(currentStory
+			.getOnlineStoryId());
 		currentStory = fHelper.decodeStory(currentStory, 0);
 	    } catch (IOException e) {
 		e.printStackTrace();
