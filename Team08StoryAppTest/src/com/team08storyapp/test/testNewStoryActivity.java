@@ -45,24 +45,16 @@ public class testNewStoryActivity extends
 
     }
 
-    /*
-     * NOT SURE HOW TO TEST TEXT VIEWS BECAUSE YOU CANNOT SET TEXT ON AN EDIT
-     * TEXT
-     */
+    public void testAuthorText() {
 
-    /*
-     * public void testAuthorItem(){
-     * 
-     * authorText.setText("Ana Marcu"); assertEquals("Ana Marcu",
-     * authorText.getText());
-     * 
-     * }
-     * 
-     * public void testTitleItem(){
-     * 
-     * titleText.setText("Jungle Music"); assertEquals("Jungle Music",
-     * titleText.getText());
-     * 
-     * }
-     */
+	assertEquals("", authorText.getText().toString());
+
+    }
+
+    public void testTitleText() {
+
+	assertEquals("", titleText.getText().toString());
+
+    }
+
 }
