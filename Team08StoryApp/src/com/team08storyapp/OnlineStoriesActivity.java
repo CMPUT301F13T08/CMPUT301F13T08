@@ -156,6 +156,7 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    fHelper = new FileHelper(this, 0);
 	    try {
+		Toast.makeText(getApplicationContext(), "Downloading...Please wait", Toast.LENGTH_LONG).show();
 		currentStory = esHelper.getOnlineStory(currentStory
 			.getOnlineStoryId());
 		currentStory = fHelper.decodeStory(currentStory, 1);
@@ -203,6 +204,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    fHelper = new FileHelper(this, 0);
 	    /* send the story object through the intent */
 	    try {
+		Toast.makeText(getApplicationContext(), "Loading...Please wait", Toast.LENGTH_LONG).show();
 		currentStory = esHelper.getOnlineStory(currentStory
 			.getOnlineStoryId());
 		currentStory = fHelper.decodeStory(currentStory, 0);
@@ -211,6 +213,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
+	    Toast.makeText(getApplicationContext(), "Ready to read..", Toast.LENGTH_SHORT).show();
 	    firstStoryFragment.putExtra("story", currentStory);
 
 	    int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
@@ -308,14 +311,17 @@ public class OnlineStoriesActivity extends ListActivity {
      * 
      * @param view
      *            The screen used to display the Online Story list for the user.
+     * @throws Exception 
      */
-    public void onClickFeelingLuckButton(View view) {
+    public void onClickFeelingLuckButton(View view){
 	/* Generate and get a random Story for the user */
 	ArrayList<Story> storyList = esHelper.getOnlineStories();
 	if (storyList.size() > 0) {
 	    int randomStoryIndex = StoryController.feelingLucky(storyList
 		    .size());
 	    Story randomStory = storyList.get(randomStoryIndex);
+	    int storyId = randomStory.getOnlineStoryId();
+	    Story rightStory = esHelper.getOnlineStory(storyId);
 
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
@@ -327,7 +333,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	     * format
 	     */
 	    try {
-		currentStory = fHelper.decodeStory(randomStory, 0);
+		currentStory = fHelper.decodeStory(rightStory, 0);
 	    } catch (IOException e) {
 		Log.d(TAG, e.getLocalizedMessage());
 	    } catch (Exception e) {

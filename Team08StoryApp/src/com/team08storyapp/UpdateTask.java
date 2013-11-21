@@ -51,7 +51,6 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 		}else{
 		    esHelper.addOrUpdateOnlineStory(encodedStory);
 		}
-		publishProgress(i / ids.size());
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
@@ -61,11 +60,6 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	return null;
     }
 
-    protected void onProgressUpdate(Integer... progress) {
-	// This method runs on the UI thread, it receives progress updates
-	// from the background thread and publishes them to the status bar
-	notificationHelper.progressUpdate(progress[0]);
-    }
 
     protected void onPostExecute(String result) {
 	notificationHelper.completed();

@@ -28,14 +28,14 @@ public class NotificationHelper {
 		.getSystemService(Context.NOTIFICATION_SERVICE);
 
 	// create the notification
-	int icon = android.R.drawable.stat_sys_download;
-	CharSequence tickerText = "Syncing now..."; // Initial text that appears
+	int icon = android.R.drawable.stat_sys_upload;
+	CharSequence tickerText = "Sync"; // Initial text that appears
 						    // in the status bar
 	long when = System.currentTimeMillis();
 	notification = new Notification(icon, tickerText, when);
 
 	// create the content which is shown in the notification pulldown
-	contentTitle = context.getString(R.string.sync_notice);
+	contentTitle = "Syncing...";
 	CharSequence contentText = "0% complete";
 
 	// you have to set a PendingIntent on a notification to tell the system
