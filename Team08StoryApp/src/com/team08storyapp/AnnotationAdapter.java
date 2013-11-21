@@ -5,7 +5,7 @@ Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen.
 
 LICENSE
 =======
-Copyright  �  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
+Copyright  ���  2013 Alice Wu, Ana Marcu, Michele Paulichuk, Jarrett Toll, Jiawei Shen,  
 Free Software Foundation, Inc., Marky Mark  License GPLv3+: GNU
 GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify it under the terms of 
@@ -52,7 +52,6 @@ import android.widget.TextView;
  * ListView. This class requires at least a list of annotation as the
  * information provider and an activity to get LAYOUT_INFLATER_SERVICE.
  * 
- * @author Sue Smith
  * @author Michele Paulichuk
  * @author Alice Wu
  * @author Ana Marcu

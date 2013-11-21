@@ -219,27 +219,28 @@ public class EditFragmentActivity extends Activity {
 	    originalText = currentStoryFragment.getStoryText();
 	    textSection.setText(originalText);
 	    storyFragmentChoices = currentStoryFragment.getChoices();
-	    ArrayList<Photo> illustrationList = currentStoryFragment.getPhotos();
-	    
-	    if(illustrationList == null){
+	    ArrayList<Photo> illustrationList = currentStoryFragment
+		    .getPhotos();
+
+	    if (illustrationList == null) {
 		System.out.println("Photo List is Null");
 		illustrationList = new ArrayList<Photo>();
 		currentStoryFragment.setPhotos(illustrationList);
-		currentStory.getStoryFragments().set(currentStoryFragmentIndex, currentStoryFragment);
-		try{
+		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+			currentStoryFragment);
+		try {
 		    fHelper.updateOfflineStory(currentStory);
-		}catch(Exception e){
+		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	    }
-	    
 
 	    pc = new PhotoController(this, getApplicationContext(),
 		    currentStory, currentStoryFragment,
 		    currentStoryFragmentIndex, fHelper);
 
-	    imgAdapt = new PicAdapter(this, currentStoryFragment.getPhotos(), currentStoryId,
-		    currentStoryFragmentId);
+	    imgAdapt = new PicAdapter(this, currentStoryFragment.getPhotos(),
+		    currentStoryId, currentStoryFragmentId);
 
 	    picGallery.setAdapter(imgAdapt);
 	    fillChoice(storyFragmentChoices);
@@ -351,8 +352,8 @@ public class EditFragmentActivity extends Activity {
 
     protected void onPause() {
 	try {
-	    String dialogue = textSection.getText().toString();
-
+	    Story original = currentStory;
+	    /* TOO MANY parameters */
 	    currentStory = StoryController.updateStoryFragment(currentStory,
 		    currentStoryFragment, currentStoryFragmentId,
 		    currentStoryFragmentIndex);
@@ -365,13 +366,9 @@ public class EditFragmentActivity extends Activity {
 		    .size()) {
 		fHelper.updateOfflineStory(currentStory);
 		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
-	    } else {
-		if (!dialogue.equals(originalText) && !dialogue.isEmpty()
-			&& dialogue != null) {
-		    currentStoryFragment.setStoryText(dialogue);
-		    fHelper.updateOfflineStory(currentStory);
-		    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
-		}
+	    } else if (!original.equals(currentStory)) {
+		fHelper.updateOfflineStory(currentStory);
+		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 	    }
 
 	} catch (FileNotFoundException e) {

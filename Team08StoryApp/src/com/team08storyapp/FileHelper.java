@@ -70,7 +70,6 @@ import com.google.gson.reflect.TypeToken;
  * perform search on "\n" and whitespace )
  * </ul>
  * 
- * @author Sue Smith
  * @author Michele Paulichuk
  * @author Alice Wu
  * @author Ana Marcu

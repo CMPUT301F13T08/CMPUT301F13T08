@@ -3,6 +3,7 @@ package com.team08storyapp;
 import java.util.ArrayList;
 
 public class SyncManager {
+
     private static SyncManager syncManager = new SyncManager();
 
     private SyncManager() {
@@ -12,7 +13,8 @@ public class SyncManager {
 	return syncManager;
     }
 
-    protected static void sync(FileHelper fHelper, ESHelper esHelper) {
+    protected static void sync(FileHelper fHelper) {
+	ESHelper esHelper = new ESHelper();
 	ArrayList<String> storyIdList = fHelper.getUpdateFilesIds();
 	for (String id : storyIdList) {
 	    System.out.println("I'm gonna update this!:" + id);

@@ -65,4 +65,5 @@
     <string name="downloaded_stories">Downloaded Stories</string>
     <string name="online_stories">Online Stories</string>
     <string name="enter_text_for_dialogue">Enter text for dialogue</string>
+    <string name="sync_notice">Sync </string>
 </resources>
