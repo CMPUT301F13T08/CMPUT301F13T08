@@ -279,7 +279,6 @@ public class testFileHelper extends
 	InputStream in = context.openFileInput("updateQueue");
 	InputStreamReader inputStreamReader = new InputStreamReader(in);
 	BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-	StringBuilder sb = new StringBuilder();
 	String line;
 	line = bufferedReader.readLine();
 	assertEquals(line, "12");
