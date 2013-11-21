@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/choiceText"
         android:hint="@string/enter_the_text_for_your_choice_"
-        android:inputType="textCapSentences"
         android:textColorHint="@android:color/white" />
 
     <Button
