@@ -65,6 +65,9 @@
     <string name="downloaded_stories">Downloaded Stories</string>
     <string name="online_stories">Online Stories</string>
     <string name="enter_text_for_dialogue">Enter text for dialogue</string>
+    <string name="random_choice_checkbox">Random Choice</string>
+    <string name="button_RandomChoice">Random Choice</string>
     <string name="sync_notice">Sync </string>
     <string name="random_choice_check">Make it a random choice?</string>
+
 </resources>
