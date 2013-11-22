@@ -107,6 +107,7 @@ public class StoryFragmentListActivity extends Activity {
     
     protected void onResume() {
 	try {
+	    SyncManager.sync(this);
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    sfList = currentStory.getStoryFragments();
 	    lv.setAdapter(new StoryFragmentAdapter(this, android.R.id.list,

@@ -2,21 +2,19 @@ package com.team08storyapp;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 public class UpdateTask extends AsyncTask<Void, Integer, String> {
 
-    private Activity activity;
+    private Context context;
     private FileHelper fHelper;
     private ESHelper esHelper;
     private NotificationHelper notificationHelper;
 
-    public UpdateTask(UpdateToolPackage updatePkg) {
-	activity = updatePkg.getActivity();
-	Context context = activity.getApplicationContext();
+    public UpdateTask(UpdateToolPackage updatePkg) { 	
+	context = updatePkg.getContext();
 	fHelper = updatePkg.getfHelper();
 	esHelper = updatePkg.getESHelper();
 	notificationHelper = new NotificationHelper(context);
@@ -60,7 +58,7 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 
     protected void onPostExecute(String result) {
 	notificationHelper.completed();
-	Toast.makeText(activity, "You changes have been uploaded.",
+	Toast.makeText(context, "You changes have been uploaded.",
 		Toast.LENGTH_SHORT).show();
     }
 

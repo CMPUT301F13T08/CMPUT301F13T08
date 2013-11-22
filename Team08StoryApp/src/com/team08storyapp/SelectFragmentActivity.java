@@ -75,6 +75,11 @@ public class SelectFragmentActivity extends Activity {
 	    }
 	});
     }
+    
+    protected void onResume(){
+	SyncManager.sync(this);
+	super.onResume();
+    }
 
    
 

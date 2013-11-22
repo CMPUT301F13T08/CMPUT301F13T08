@@ -1,16 +1,16 @@
 package com.team08storyapp;
 
-import android.app.Activity;
+import android.content.Context;
 
 public class UpdateToolPackage {
 
     private FileHelper fHelper;
-    private Activity activity;
+    private Context context;
     private ESHelper esHelper;
 
-    public UpdateToolPackage(FileHelper fHelper, ESHelper esHelper, Activity activity) {
+    public UpdateToolPackage(FileHelper fHelper, ESHelper esHelper, Context context) {
 	this.fHelper = fHelper;
-	this.activity = activity;
+	this.context = context;
 	this.esHelper = esHelper;
     }
 
@@ -22,9 +22,8 @@ public class UpdateToolPackage {
 	return esHelper;
     }
 
-    public Activity getActivity() {
-	// TODO Auto-generated method stub
-	return activity;
+    public Context getContext() {
+	return context;
     }
 
 }

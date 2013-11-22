@@ -26,7 +26,7 @@ public class testUpdateToolPackage extends ActivityInstrumentationTestCase2<Main
     public void testConstructorUpdateToolPackage(){
 	UpdateToolPackage utp = new UpdateToolPackage(fHelper,esHelper, activity);
 	
-	assertEquals(activity, utp.getActivity());
+	assertEquals(activity.getApplicationContext(), utp.getContext());
 	assertEquals(fHelper, utp.getfHelper());
 	assertEquals(esHelper, utp.getESHelper());
     }
