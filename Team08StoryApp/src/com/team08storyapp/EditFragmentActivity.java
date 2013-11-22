@@ -48,6 +48,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
@@ -441,5 +442,21 @@ public class EditFragmentActivity extends Activity {
 	} else {
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
+    }
+    public void onCheckboxClickedRandomChoice(View view) {
+	// Check is the box checked?
+	final CheckBox randomChoice = (CheckBox) findViewById(R.id.checkbox_randomChoice);
+
+	boolean checked = randomChoice.isChecked();
+	// Check which check box was clicked
+
+	if (checked) {
+	    // If checked then a story fragment's randomChoice attribute will be
+	    // set to 1 to show the random choice button
+	    currentStoryFragment.setRandomChoice(1);
+	} else {
+	    currentStoryFragment.setRandomChoice(0);
+	}
+
     }
 }
