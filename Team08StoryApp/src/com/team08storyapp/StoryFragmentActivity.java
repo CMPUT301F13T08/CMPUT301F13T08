@@ -47,6 +47,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -267,6 +268,14 @@ public class StoryFragmentActivity extends Activity {
 		startActivity(nextStoryFragment);
 	    }
 	});
+	
+	Button rCButton = (Button) findViewById(R.id.button_RandomChoice);
+	if(currentStoryFragment.getRandomChoice() == 1){
+	    rCButton.setVisibility(View.VISIBLE); 
+	}
+	if(currentStoryFragment.getRandomChoice() == 0){
+	    rCButton.setVisibility(View.INVISIBLE);
+	}
     }
 
     @Override
@@ -395,6 +404,27 @@ public class StoryFragmentActivity extends Activity {
 	    /* superclass method */
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
+    }
+    
+    //Called when the user clicks on random choice button
+    public void onClickRandomChoice(View view){
+	ArrayList<Choice> choiceList = currentStoryFragment.getChoices();
+	
+	/*chooses a random choice from the list of choices */
+	int randomFragmentID = StoryController.randomChoice(choiceList);
+	
+	Intent randomStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);
+	randomStoryFragment.putExtra("story", currentStory);
+	
+	/* send the random fragment id through the intent */
+	randomStoryFragment.putExtra("storyFragmentId", randomFragmentID);
+	randomStoryFragment.putExtra("mode", 0);
+	
+	/*
+	 * Start the StoryFragmentAvitivty to display the random fragment
+	 * that was randomly chosen
+	 */
+	startActivity(randomStoryFragment);
     }
 
 }
