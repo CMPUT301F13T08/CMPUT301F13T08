@@ -43,7 +43,7 @@
             android:scrollHorizontally="false"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbars="vertical"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <ListView
             android:id="@android:id/list"
@@ -51,6 +51,15 @@
             android:layout_height="200dip"
             android:focusableInTouchMode="true" >
         </ListView>
+
+        <Button
+            android:id="@+id/button_RandomChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickRandomChoice"
+            android:text="@string/button_RandomChoice"
+            android:visibility="gone" />
+        
     </LinearLayout>
 
 </ScrollView>
