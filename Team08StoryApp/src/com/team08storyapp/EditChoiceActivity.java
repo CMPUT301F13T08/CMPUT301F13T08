@@ -44,18 +44,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * EditChoiceActivity is a view class that provides author an EditText to edit
+ * story text for the current story fragment, a gallery to add illustrations,
+ * and a listview to add choices.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class EditChoiceActivity extends Activity {
+
     private Story currentStory;
     private StoryFragment currentStoryFragment;
     private int currentStoryFragmentIndex;
     private int nextFragmentId = 0;
     private ArrayList<StoryFragment> availableStoryFragmentList;
+
     private EditText tv;
     private TextView tvFragment;
+
     private static final int LINKED_FRAGMENT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_edit_choice);
 	SyncManager.sync(this);
@@ -69,6 +86,7 @@ public class EditChoiceActivity extends Activity {
 	availableStoryFragmentList = new ArrayList<StoryFragment>();
 	ArrayList<StoryFragment> currentStoryFragments = currentStory
 		.getStoryFragments();
+
 	/*
 	 * Remove the current fragment from the story fragment list that will be
 	 * passes to SelectFragmentActivity. The current fragment will not be
@@ -90,6 +108,23 @@ public class EditChoiceActivity extends Activity {
 	return true;
     }
 
+    /**
+     * After hitting the save button in current activity, this function is
+     * automatically called to return to StoryFragmentListActivity. Before
+     * returning, this function handles the information of the new choice.
+     * <ul>
+     * If choice text and/or linked fragment is not set when save button is
+     * clicked, this function will terminate and inform author which field is
+     * missing.
+     * </ul>
+     * <ul>
+     * Else, the new choice will be added to current fragment's choice list and
+     * update the current story.
+     * </ul>
+     * 
+     * @param view
+     *            It's the view where the save button is placed.
+     */
     public void returnEditFragmentActivity(View view) {
 	tv = (EditText) findViewById(R.id.editChoiceText);
 	String choiceText = tv.getText().toString();
@@ -121,11 +156,10 @@ public class EditChoiceActivity extends Activity {
 	 * Update the current story object by replacing the fragment the user is
 	 * on with the updated fragment that contains a new choice
 	 */
-	
-	    currentStory.getStoryFragments().set(
-		    currentStoryFragmentIndex, currentStoryFragment);
-	
-	
+
+	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+		currentStoryFragment);
+
 	/*
 	 * Update the story object on the file system, later access will include
 	 * the new choice for the current fragment
@@ -142,7 +176,7 @@ public class EditChoiceActivity extends Activity {
 	}
 
 	SyncManager.sync(this);
-	
+
 	/*
 	 * Return to the EditFragment activity Pass the updated story object,
 	 * and the current story fragment id
@@ -157,6 +191,14 @@ public class EditChoiceActivity extends Activity {
 
     }
 
+    /**
+     * This function is linked to the button "Link Fragment", which let the
+     * author select an available story fragment for the new choice to go to.
+     * 
+     * 
+     * @param view
+     *            It's the view where the Link Fragment button is placed.
+     */
     public void toSelectFragmentActivity(View view) {
 	Intent intent = new Intent(EditChoiceActivity.this,
 		SelectFragmentActivity.class);
