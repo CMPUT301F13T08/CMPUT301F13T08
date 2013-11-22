@@ -34,16 +34,41 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+/**
+ * InternetDetector is a singleton class that mainly checks the connectivity of
+ * the network. It's plain and requires nothing in constructor, and doesn't have
+ * any fields except for an instance of itself.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class InternetDetector {
+
     private static InternetDetector internetDetector = new InternetDetector();
 
     private InternetDetector() {
     }
-    
-    public static InternetDetector getInstance(){
+
+    public static InternetDetector getInstance() {
 	return internetDetector;
     }
 
+    /**
+     * This function takes in the context of current activity to get the service
+     * of CONNECTIVITY_SERVICE. And returns the condition of network connection.
+     * This function is usually called before sync to check if it's okay to sync.
+     * 
+     * @param context
+     *            a context object of the activity where the function is called
+     * @return true: if the device has network connection false: if the device
+     *         doesn't have network connection
+     */
     protected static boolean connectedToInternet(Context context) {
 	ConnectivityManager connectivityManager = (ConnectivityManager) context
 		.getSystemService(Context.CONNECTIVITY_SERVICE);

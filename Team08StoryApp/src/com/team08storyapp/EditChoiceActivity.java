@@ -45,9 +45,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * EditChoiceActivity is a view class that provides author an EditText to edit
- * story text for the current story fragment, a gallery to add illustrations,
- * and a listview to add choices.
+ * EditChoiceActivity is a view class that provides author an opportunity to
+ * edit the new choice's text and the fragment it links to.
  * 
  * @author Michele Paulichuk
  * @author Alice Wu

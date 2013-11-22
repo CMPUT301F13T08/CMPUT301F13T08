@@ -54,6 +54,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * EditFragmentActivity is a view class that provides author an EditText to edit
+ * story text for the current story fragment, a gallery to add illustrations,
+ * and a listview to add choices.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 21, 2013
+ * @since 1.0
+ */
 @SuppressWarnings("deprecation")
 public class EditFragmentActivity extends Activity {
 
@@ -327,6 +340,18 @@ public class EditFragmentActivity extends Activity {
 	    return super.onOptionsItemSelected(item);
 	}
     }
+
+    /**
+     * fillChoice() fills the listview in this activity with passed choice list.
+     * The choice list is from the current story fragment. And this function is
+     * called either when the activity is on create or on resume, because when
+     * the activity is on resume, the choice list of current fragment may be 
+     * changed.
+     * 
+     * @param cList
+     *            cList is an ArrayList of Choice objects, and it's from the
+     *            choice list of current story fragment
+     */
 
     private void fillChoice(ArrayList<Choice> cList) {
 	adapter = new ChoiceAdapter(this, android.R.id.list, cList);

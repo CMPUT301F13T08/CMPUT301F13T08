@@ -214,25 +214,52 @@ public class FileHelper {
 	return false;
     }
 
+    /**
+     * appendUpdateQueue function is called whenever a local authored story has
+     * been changed since last sync. This function will append the story's
+     * offline id into a file named "updateQueue" if it's not in the
+     * updateQueue. And the "updateQueue" file is used for keeping records of
+     * locally authored stories that have been edited since the last sync.
+     * 
+     * @param storyId
+     *            the offline id of the story that needs to be synced to
+     *            webserver
+     */
     public void appendUpdateQueue(int storyId) {
 	try {
+
+	    /* create the updateQueue file or open it if it exists */
 	    String filename = "updateQueue";
 	    FileOutputStream fos = fileContext.openFileOutput(filename,
 		    Context.MODE_APPEND);
+
+	    /* write the offline id of story that is need to be uploaded */
 	    fos.write((Integer.toString(storyId) + "\n").getBytes());
-	    // System.out.println("WROTE IT!");
 	    fos.close();
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
     }
 
+    /**
+     * This function is usually called under condition of the network is
+     * connected and check if a sync is need to be performed. getUpdateFilesIds
+     * returns a list of ids that are read from the file "updateQueue". Those
+     * ids are the offline ids of stories that need to be synced.
+     * 
+     * 
+     * @return updateId It's an ArrayList of Strings, which represent the
+     *         offline ids of the stories that need to be synced to webserver.
+     */
     public ArrayList<String> getUpdateFilesIds() {
 	ArrayList<String> updateId = new ArrayList<String>();
 	try {
 
+	    /* open the "updateQueue" file */
 	    File dir = fileContext.getFilesDir();
 	    File updateQueue = new File(dir, "updateQueue");
+
+	    /* read in the ids of stories that need to be uploaded */
 	    InputStream is = new BufferedInputStream(new FileInputStream(
 		    updateQueue));
 	    if (is != null) {
@@ -241,21 +268,23 @@ public class FileHelper {
 		BufferedReader br = new BufferedReader(isr);
 		String temp = "";
 		while ((temp = br.readLine()) != null) {
-		    // System.out.println("In update Queue:" + updateId);
 		    if (!updateId.contains(temp)) {
-			// System.out.println("going to update:" + updateId);
 			updateId.add(temp);
 		    }
 		}
 	    }
 	    is.close();
-	    // System.out.println(updateId);
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
 	return updateId;
     }
 
+    /**
+     * clearUpdateQueue deletes the file "updateQueue", which keeps record of
+     * stories that need to be uploaded, when a sync/upload is done
+     * successfully.
+     */
     public void clearUpdateQueue() {
 	fileContext.deleteFile("updateQueue");
     }
@@ -363,6 +392,8 @@ public class FileHelper {
      * if this story should be added into the result storyList.
      * 
      * @param searchText
+     *            the string that user enters as search string, usually it's an
+     *            author name or title
      * @return return an ArrayList<Story> storyList that contains the search
      *         text in author and/or title field;
      */
@@ -473,7 +504,7 @@ public class FileHelper {
      *            a story downdloaed from webserver that needs to be decoded
      * @param mode
      *            the mode:
-     * @return the decoded Story
+     * @return story the decoded Story
      * @throws Exception
      * @throws IOException
      */
