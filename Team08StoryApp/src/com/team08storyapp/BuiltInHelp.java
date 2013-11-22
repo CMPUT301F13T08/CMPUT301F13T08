@@ -223,7 +223,16 @@ public class BuiltInHelp {
     /* Sets up the help text to display for the My Stories screen.*/
     private void setMyStoriesHelp(){
 	this.helpText = "My Stories Help";
-	this.helpText = "";
+	this.helpText = "<b>Search Function</b>"
+		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
+		+ "<br><b>List of Stories </b>"
+		+ "<br>Displays all stories created by the author or the created stories resulting from the search."
+		+ "<br><br>By long pressing on a story in the list, a popup menu appears with the following options:"
+		+ "<br>	• <b>Publish</b> - Select this will publish the story online for all users to read.<br>"
+		+ "<br>	• <b>Read</b> - Select this to start reading the Story.<br>"
+		+ "<br>	• <b>Edit</b> - Select this to edit the Story. This will display the list of Story Fragments that make up the Story for editing.<br>"
+		+ "<br><b>Create New Story Button</b>"
+		+ "<br>Click this to start creating a new Story.<br>";
     }
     
     /* Sets up the help text to display for the New Story screen.*/
