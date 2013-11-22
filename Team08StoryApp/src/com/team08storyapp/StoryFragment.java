@@ -70,6 +70,7 @@ public class StoryFragment implements Serializable {
     private ArrayList<Photo> photos;
     private ArrayList<Choice> choices;
     private ArrayList<Annotation> annotations;
+    private int randomChoice;
 
     /**
      * A constructor for creating a Story Fragment object used when initializing
@@ -87,6 +88,7 @@ public class StoryFragment implements Serializable {
 	choices = new ArrayList<Choice>();
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
+	this.randomChoice = 0;
     }
 
     /**
@@ -110,6 +112,7 @@ public class StoryFragment implements Serializable {
 	choices = new ArrayList<Choice>();
 	photos = new ArrayList<Photo>();
 	annotations = new ArrayList<Annotation>();
+	this.randomChoice = 0;
     }
 
     /**
@@ -189,6 +192,14 @@ public class StoryFragment implements Serializable {
      */
     public void setAnnotations(ArrayList<Annotation> annotations) {
 	this.annotations = annotations;
+    }
+    
+    public int getRandomChoice(){
+	return randomChoice;
+    }
+    
+    public void setRandomChoice(int randomChoice){
+	this.randomChoice = randomChoice;
     }
 
 }
