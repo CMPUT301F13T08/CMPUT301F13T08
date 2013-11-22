@@ -195,7 +195,12 @@ public class BuiltInHelp {
     /* Sets up the help text to display for the Edit Story Fragment screen. */
     private void setEditFragmentHelp(){
 	this.helpText = "Edit Story Fragment Help";
-	this.helpText = "";
+	this.helpText = "<b>Action Bar Options</b>"
+		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
+		+ "<br>	• <b>Add illustration (Camera)</b> - Select this to use the camera to add a picture to the photo gallery of the story fragment."
+		+ "<br>	• <b>Add illustration (Gallery)</b> - Select this to chose a picture for the phones photo gallery for adding to the photo gallery of the story fragment."
+		+ "<br>	• <b>Add Choice</b> - Select this to add a choice to the Story Fragment."
+		+ "<br>	• <b>Save</b> - Select this to save the Story Fragment and return to the Story's Story Fragment List.";
     }
     
     /* Sets up the help text to display for the Edit Choice screen. */
@@ -230,7 +235,13 @@ public class BuiltInHelp {
     /* Sets up the help text to display for the Offline Story Listing screen. */
     private void setOfflineStoryHelp() {
 	this.helpText = "Downloaded Stories Help";
-	this.helpText = "";
+	this.helpText = "<b>Search Function</b>"
+		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
+		+ "<br><b>List of Stories </b>"
+		+ "<br>Displays all stories stored downloaded or the stories resulting from the search."
+		+ "<br><br>By selecting a story it will be displayed for reading.<br>"
+		+ "<br><b>\"I'm Feeling Lucky\" Button</b>"
+		+ "<br>Click to pick a story at random to start reading.<br>";
     }
 
     /* Sets up the help text to display for the Online Story Listing screen. */
