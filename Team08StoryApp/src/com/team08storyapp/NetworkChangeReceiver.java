@@ -35,18 +35,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+/**
+ * NetworkChangeReceiver is a BroadcastReceiver that is responsible for
+ * detecting the network state change of the device, registered in manifest.
+ * When the network is on, the receiver calls SycnManger to sync, and sync will
+ * be done if it's needed. When lose the network, receiver will simply toast a
+ * message to the user and let them know the state of network.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class NetworkChangeReceiver extends BroadcastReceiver {
-    
+
     @Override
     public void onReceive(final Context context, final Intent intent) {
- 
-        boolean status = InternetDetector.connectedToInternet(context);
- 
-        if(status){
-            SyncManager.sync(context);
-        }else{
-            Toast.makeText(context, "Lose Network Connection.", Toast.LENGTH_LONG).show();
-        }
+
+	/* detect the network condition */
+	boolean status = InternetDetector.connectedToInternet(context);
+
+	/*
+	 * if it's connected, do sync; otherwise inform user the state of
+	 * network
+	 */
+	if (status) {
+	    SyncManager.sync(context);
+	} else {
+	    Toast.makeText(context, "Lose Network Connection.",
+		    Toast.LENGTH_LONG).show();
+	}
     }
 
 }

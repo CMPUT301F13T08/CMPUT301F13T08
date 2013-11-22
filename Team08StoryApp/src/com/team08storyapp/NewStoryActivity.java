@@ -42,6 +42,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * NewStoryActivity is a view class that is activated when the author needs to
+ * create a new story. NewStoryActivity provides two editText views for author
+ * to enter the title of the story and the name of author. When the creating
+ * process is finished, save button will lead the author to create the first
+ * story fragment of his story.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class NewStoryActivity extends Activity {
 
     private EditText authorField;
@@ -59,47 +74,74 @@ public class NewStoryActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
 	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater().inflate(R.menu.new_story, menu);
 	return true;
     }
 
+    /**
+     * <ul>
+     * toEditFragmentActivity is linked to the button "save", which saves the
+     * information of new story and directs the author to edit the first
+     * fragment of the story. So this function is called when the save button is
+     * hit.
+     * </ul>
+     * <ul>
+     * Mainly, this function checks if author and title are blank first. If both
+     * of them are blank, the function will toast a message and inform the
+     * author that at least one of the fields can't be blank. If only author is
+     * blank, function will automatically assign "Anonymous" to author fields,
+     * and if only the title is blank, the function will write the title as
+     * "Untitled".
+     * </ul>
+     * <ul>
+     * After handling the information of the story, a new story and its first
+     * fragment are created. FileHelper will add the story to file system and
+     * assign it an off-line id. Then start the activity of EditFragment.
+     * </ul>
+     * 
+     * @param view
+     *            the current view of NewStoryActivity
+     */
     public void toEditFragmentActivity(View view) {
+	
+	/* find views of authorfield and titlefield */
 	authorField = (EditText) findViewById(R.id.enterAuthor);
 	titleField = (EditText) findViewById(R.id.enterTitle);
-	
+
+	/* read the string input from two views */
 	String author = authorField.getText().toString();
 	String title = titleField.getText().toString();
-	
+
+	/* check if both of them are blank */
 	if (isBlank(author) && isBlank(title)) {
 	    Toast.makeText(getApplicationContext(),
 		    "Sorry. Please make sure title and author are not empty",
 		    Toast.LENGTH_LONG).show();
 	    return;
-	}else{
-	    if(isBlank(author) && !isBlank(title)){
+	} else {
+	    if (isBlank(author) && !isBlank(title)) {
 		author = "Anonymous";
-	    }else if (isBlank(title) && !isBlank(author)){
+	    } else if (isBlank(title) && !isBlank(author)) {
 		title = "Untitled";
 	    }
 	}
-	
+
+	/* create a new story based on given information */
 	newStory = new Story(title, author);
 	StoryFragment firstFragment = new StoryFragment(1);
 	newStory.getStoryFragments().add(firstFragment);
 	newStory.setFirstStoryFragmentId(1);
 
-	
+	/* add the story to file system */
 	try {
 	    fHelper.addOfflineStory(newStory);
-	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
+	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-	
+
+	/* start the EditFragmentActivity*/
 	Intent intent = new Intent(NewStoryActivity.this,
 		EditFragmentActivity.class);
 	intent.putExtra("story", newStory);
@@ -107,6 +149,20 @@ public class NewStoryActivity extends Activity {
 	startActivity(intent);
     }
 
+    /**
+     * isBlank is called when testing if the author or title field is blank. By
+     * blank, this function defines a string is blank as it contains only
+     * whitespace or newline characters or "is empty" or null.
+     * 
+     * 
+     * @param str
+     *            the string that needs to be tested to see if it contains
+     *            alphabets or numbers or other symbols
+     * @return bool a boolean value that indicate if the string is blank or not.
+     *         if it's true, then the string is only newline characters,
+     *         whitespace. otherwise, when returning a false, it means the
+     *         string is not blank.
+     */
     private boolean isBlank(String str) {
 	int strLen;
 	if ((str == null) || ((strLen = str.length()) == 0))
