@@ -15,10 +15,36 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * StoryFragmentAdapter is a customized ArrayAdapter that is designed for
+ * populating the images and text (if applicable) into right views in a
+ * ListView. This class requires at least a list of story fragments as the
+ * information provider and an activity to get LAYOUT_INFLATER_SERVICE.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
     private ArrayList<StoryFragment> storyFragmentList;
     private Activity activity;
 
+    /**
+     * The constructor of an StoryFragmentAdapter requires at least a list of
+     * story fragments as the information provider and an activity to get
+     * LAYOUT_INFLATER_SERVICE.
+     * 
+     * @param activity
+     *            an activity object that provides LAYOUT_INFLATER_SERVICE
+     * @param textViewResourceId
+     *            the int value of the id of the view
+     * @param stroyFragmentList
+     *            a list of StoryFragment objects
+     */
     public StoryFragmentAdapter(Activity activity, int textViewResourceId,
 	    ArrayList<StoryFragment> storyFragmentList) {
 	super(activity, textViewResourceId, storyFragmentList);
@@ -26,6 +52,18 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 	this.storyFragmentList = storyFragmentList;
     }
 
+    /**
+     * The customized getView will populate images and texts into the passed
+     * ListView.
+     * 
+     * @param position
+     *            the index of the selected photo in the adapter
+     * @param convertView
+     *            the view that is going to be converted to user's desire
+     * @param parent
+     *            a ViewGroup object
+     * @return the converted view for the Annotation
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = convertView;
 	ViewHolder holder;
@@ -115,6 +153,10 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 	return v;
     }
 
+    /**
+     * ViewHolder is a like a struct in C++. Only hold two view objects for the
+     * population purpose of StoryFragmentAdapter
+     */
     public static class ViewHolder {
 	public ImageView fragmentImage;
 	public TextView fragmentText;

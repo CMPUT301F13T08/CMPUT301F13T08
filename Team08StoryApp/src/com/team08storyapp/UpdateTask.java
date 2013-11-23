@@ -36,6 +36,19 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+/**
+ * UpdateTask is an AsyncTask Object that performs sync function in the
+ * background.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class UpdateTask extends AsyncTask<Void, Integer, String> {
 
     private Context context;
@@ -43,20 +56,54 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
     private ESHelper esHelper;
     private NotificationHelper notificationHelper;
 
-    public UpdateTask(UpdateToolPackage updatePkg) { 	
+    /**
+     * Constructor of UpdateTask requires an updateToolPackage that contains all
+     * the information it needs:
+     * <ul>
+     * a FileHelper object to get the ids of stories that need to be uploaded
+     * </ul>
+     * <ul>
+     * an ESHelepr object to upload stories
+     * </ul>
+     * <ul>
+     * a Context object to instantiate a NotificationHelper object that puts up
+     * a notification in status bar
+     * </ul>
+     * 
+     * @param updatePkg
+     *            an UpdateTookPackage that contains objects (fileHelper,
+     *            esHelper, context) that are from the activity where
+     *            constructor is called
+     */
+    public UpdateTask(UpdateToolPackage updatePkg) {
 	context = updatePkg.getContext();
 	fHelper = updatePkg.getfHelper();
 	esHelper = updatePkg.getESHelper();
 	notificationHelper = new NotificationHelper(context);
     }
 
+    /**
+     * This function just uses notificationHelper to create a new notification
+     * of "sync" in the status bar. And it's called before executing the
+     * "doInBackgroun()" function.
+     */
     protected void onPreExecute() {
 	super.onPreExecute();
 	notificationHelper.createNotification();
     }
 
+    /**
+     * Doing sync in the background thread. It's executed when the execute() is
+     * called to an UpdateTask object through dot operation.
+     * 
+     * @param updatePkg
+     *            an UpdateTookPackage that contains objects (fileHelper,
+     *            esHelper, context) that are from the activity where
+     *            constructor is called
+     */
     @Override
     protected String doInBackground(Void... updatePkg) {
+	/* Get the ids of stories that need to be uploaded */
 	ArrayList<String> ids = fHelper.getUpdateFilesIds();
 	for (int i = 0; i < ids.size(); i++) {
 	    String id = ids.get(i);
@@ -67,13 +114,15 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 		e.printStackTrace();
 		continue;
 	    }
+	    /* upload a story */
 	    try {
 		Story updateStory = fHelper.getOfflineStory(intId);
 		Story encodedStory = fHelper.encodeStory(updateStory);
-		if(updateStory.getOnlineStoryId() < 1){
-		    updateStory.setOnlineStoryId(esHelper.addOrUpdateOnlineStory(encodedStory));
+		if (updateStory.getOnlineStoryId() < 1) {
+		    updateStory.setOnlineStoryId(esHelper
+			    .addOrUpdateOnlineStory(encodedStory));
 		    fHelper.updateOfflineStory(updateStory);
-		}else{
+		} else {
 		    esHelper.addOrUpdateOnlineStory(encodedStory);
 		}
 	    } catch (Exception e) {
@@ -81,11 +130,15 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	    }
 
 	}
+	/* delete all ids of stories that need to be uploaded */
 	fHelper.clearUpdateQueue();
 	return null;
     }
 
-
+    /**
+     * Delete the notification from status bar and toast a message to let the
+     * author know the changes have been uploaded
+     */
     protected void onPostExecute(String result) {
 	notificationHelper.completed();
 	Toast.makeText(context, "You changes have been uploaded.",

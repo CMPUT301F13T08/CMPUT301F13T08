@@ -32,26 +32,75 @@ package com.team08storyapp;
 
 import android.content.Context;
 
+/**
+ * UpdateToolPackage is a class that mainly works as a parameter object. Since
+ * sometimes a function requires both context, FileHelper, ESHelper and other
+ * objects, it may be too much for a function to have 4 and more parameters.
+ * Thus, a parameter object named UpdateToolPackage is created. Because this
+ * parameter object is required only by functions that related to updating a
+ * story to web server at the most of time. So the it's named as
+ * "UpdateTookPackage".
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
 public class UpdateToolPackage {
 
     private FileHelper fHelper;
     private Context context;
     private ESHelper esHelper;
 
-    public UpdateToolPackage(FileHelper fHelper, ESHelper esHelper, Context context) {
+    /**
+     * Constructor of UpdateToolPackage requires a FileHelper object, ESHelper
+     * Object, Context object. And assign them to the FileHelper, ESHelper,
+     * Context object in UpdateToolPackage respectively.
+     * 
+     * @param fHelper
+     *            Simply a FileHelper object
+     * @param esHelper
+     *            an ESHelper object
+     * @param context
+     *            an android Context object
+     */
+    public UpdateToolPackage(FileHelper fHelper, ESHelper esHelper,
+	    Context context) {
 	this.fHelper = fHelper;
 	this.context = context;
 	this.esHelper = esHelper;
     }
 
+    /**
+     * This function is called when the FileHelper of UpdateTookPackage is in
+     * need.
+     * 
+     * @return FileHelper, the FileHelper field in an UpdateToolPackage object.
+     */
     public FileHelper getfHelper() {
 	return fHelper;
     }
-    
-    public ESHelper getESHelper(){
+
+    /**
+     * This function is called when the ESHelper of UpdateTookPackage is in
+     * need.
+     * 
+     * @return FileHelper, the ESHelper field in an UpdateToolPackage object.
+     */
+    public ESHelper getESHelper() {
 	return esHelper;
     }
-
+ 
+    /**
+     * This function is called when the Context of UpdateTookPackage is in
+     * need.
+     * 
+     * @return FileHelper, the Context field in an UpdateToolPackage object.
+     */
     public Context getContext() {
 	return context;
     }
