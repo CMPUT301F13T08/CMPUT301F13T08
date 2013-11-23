@@ -277,6 +277,13 @@ public class StoryFragmentActivity extends Activity {
 	 * then set the button to be visible
 	 */
 	if (currentStoryFragment.getRandomChoice() == 1) {
+	    
+	    /* If the current Story fragment doesn't have any choices then button
+	     * is set to be invisible
+	     */
+	    if(currentStoryFragment.getChoices().size() == 0){
+		rCButton.setVisibility(View.INVISIBLE);
+	    }
 	    rCButton.setVisibility(View.VISIBLE);
 	}
 
