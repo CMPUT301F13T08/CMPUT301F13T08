@@ -193,12 +193,24 @@ public class StoryFragment implements Serializable {
     public void setAnnotations(ArrayList<Annotation> annotations) {
 	this.annotations = annotations;
     }
-    
-    public int getRandomChoice(){
+
+    /**
+     * @return the Random Choice attribute (1 = on, 0 = off) of the current
+     *         fragment that the author chose
+     * 
+     */
+    public int getRandomChoice() {
 	return randomChoice;
     }
-    
-    public void setRandomChoice(int randomChoice){
+
+    /**
+     * 
+     * @param randomChoice
+     *            The random choice attribute 1 for on and 0 for off for the
+     *            current fragment
+     */
+
+    public void setRandomChoice(int randomChoice) {
 	this.randomChoice = randomChoice;
     }
 
