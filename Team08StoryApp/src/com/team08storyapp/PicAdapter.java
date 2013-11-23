@@ -73,6 +73,7 @@ public class PicAdapter extends BaseAdapter {
     /* placeholder bitmap for empty spaces in gallery */
     Bitmap placeholder;
 
+    @SuppressWarnings("unused")
     private ArrayList<Photo> pList;
 
     /**

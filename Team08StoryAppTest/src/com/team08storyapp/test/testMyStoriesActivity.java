@@ -1,19 +1,16 @@
 package com.team08storyapp.test;
 
 import android.app.Activity;
-import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.MyStoriesActivity;
 import com.team08storyapp.R;
 import com.team08storyapp.Story;
-import com.team08storyapp.StoryFragment;
 
 public class testMyStoriesActivity extends
 	ActivityInstrumentationTestCase2<MyStoriesActivity> {
@@ -21,7 +18,9 @@ public class testMyStoriesActivity extends
     private Activity activity;
     private View header;
     private Button searchButton;
+    @SuppressWarnings("unused")
     private ESHelper esHelper;
+    @SuppressWarnings("unused")
     private FileHelper fHelper;
     private ListView listView;
     private EditText editText;

@@ -3,7 +3,6 @@ package com.team08storyapp.test;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
-
 import com.team08storyapp.NewStoryActivity;
 import com.team08storyapp.R;
 import com.team08storyapp.Story;
@@ -16,6 +15,7 @@ public class testNewStoryActivity extends
     private EditText titleText;
     private String author;
     private String title;
+    @SuppressWarnings("unused")
     private Story story;
 
     public testNewStoryActivity() {

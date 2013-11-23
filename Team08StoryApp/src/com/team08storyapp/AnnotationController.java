@@ -30,7 +30,6 @@ Retrieved Oct. 29, 2013
  */
 package com.team08storyapp;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;

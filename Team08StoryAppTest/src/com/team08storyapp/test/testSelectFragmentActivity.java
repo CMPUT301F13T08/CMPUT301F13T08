@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Adapter;
 import android.widget.ListView;
 
 import com.team08storyapp.SelectFragmentActivity;

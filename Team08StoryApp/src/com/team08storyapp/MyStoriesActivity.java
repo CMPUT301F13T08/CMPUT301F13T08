@@ -48,7 +48,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -83,6 +82,7 @@ public class MyStoriesActivity extends ListActivity {
     private EditText et;
     private String searchText;
     private ListView lv;
+    @SuppressWarnings("unused")
     private Story currentStory;
 
     @Override

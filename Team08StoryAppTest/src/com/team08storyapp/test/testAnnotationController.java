@@ -13,13 +13,11 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.team08storyapp.Annotation;
 import com.team08storyapp.AnnotationController;
 import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
@@ -28,6 +26,7 @@ import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 import com.team08storyapp.StoryFragmentActivity;
 
+@SuppressWarnings("deprecation")
 public class testAnnotationController extends
 	ActivityInstrumentationTestCase2<StoryFragmentActivity> {
 
@@ -102,7 +101,6 @@ public class testAnnotationController extends
     }
 
     /* Delete the file used to test savePhoto() after the testcase has run */
-    @SuppressWarnings("deprecation")
     public void tearDown() throws Exception {
 
 	/* Delete the story added to online */

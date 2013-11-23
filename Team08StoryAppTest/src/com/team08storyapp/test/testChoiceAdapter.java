@@ -20,6 +20,7 @@ public class testChoiceAdapter extends
 	ActivityInstrumentationTestCase2<StoryFragmentActivity> {
 
     private Activity testActivity;
+    @SuppressWarnings("unused")
     private Context testContext;
     private Story testStory;
     private StoryFragment testStoryFragment;

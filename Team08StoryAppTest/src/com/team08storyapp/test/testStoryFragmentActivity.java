@@ -3,10 +3,8 @@ package com.team08storyapp.test;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.ViewGroup;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,6 +18,7 @@ import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 import com.team08storyapp.StoryFragmentActivity;
 
+@SuppressWarnings("deprecation")
 public class testStoryFragmentActivity extends
 	ActivityInstrumentationTestCase2<StoryFragmentActivity> {
 
