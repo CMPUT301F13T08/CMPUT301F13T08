@@ -107,7 +107,7 @@ public class StoryFragmentActivity extends Activity {
 
 	/* Initialize fHelper to Download mode */
 	fHelper = new FileHelper(this, 0);
-	
+
 	SyncManager.sync(this);
 
 	/* set up background layout */
@@ -268,12 +268,30 @@ public class StoryFragmentActivity extends Activity {
 		startActivity(nextStoryFragment);
 	    }
 	});
-	
+
+	/* Random Choice button */
 	Button rCButton = (Button) findViewById(R.id.button_RandomChoice);
-	if(currentStoryFragment.getRandomChoice() == 1){
-	    rCButton.setVisibility(View.VISIBLE); 
+
+	/*
+	 * If the randomChoice attribute of the current story fragment is on
+	 * then set the button to be visible
+	 */
+	if (currentStoryFragment.getRandomChoice() == 1) {
+	    
+	    /* If the current Story fragment doesn't have any choices then button
+	     * is set to be invisible
+	     */
+	    if(currentStoryFragment.getChoices().size() == 0){
+		rCButton.setVisibility(View.INVISIBLE);
+	    }
+	    rCButton.setVisibility(View.VISIBLE);
 	}
-	if(currentStoryFragment.getRandomChoice() == 0){
+
+	/*
+	 * If the randomChoice attribute of the current story fragment is off
+	 * then set the button to be invisible
+	 */
+	if (currentStoryFragment.getRandomChoice() == 0) {
 	    rCButton.setVisibility(View.INVISIBLE);
 	}
     }
@@ -374,17 +392,17 @@ public class StoryFragmentActivity extends Activity {
 	popupMenu.show();
 
     }
-    
-    protected void onResume(){
+
+    protected void onResume() {
 	SyncManager.sync(this);
 	super.onResume();
     }
-    
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (resultCode == RESULT_OK) {
-	    
+
 	    SyncManager.sync(this);
-	    
+
 	    /* the returned picture URI */
 	    Uri pickedUri = data.getData();
 	    AnnotationController ac = new AnnotationController(this,
@@ -405,24 +423,35 @@ public class StoryFragmentActivity extends Activity {
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
     }
-    
-    //Called when the user clicks on random choice button
-    public void onClickRandomChoice(View view){
+
+    /**
+     * This method is called when the random choice button is clicked which randomly chooses
+     * a choice for the user and takes them to the fragment related to that choice. It will
+     * get a random story fragment from the list of possible choices and pass this to the next 
+     * activity for displaying to the user. Once this is completed the user should be presented
+     * with a random fragment page selected from one of the possible choices of the previous 
+     * fragment.
+     * 
+     * @param view
+     * 		The screen of a story fragment.
+     */
+    public void onClickRandomChoice(View view) {
 	ArrayList<Choice> choiceList = currentStoryFragment.getChoices();
-	
-	/*chooses a random choice from the list of choices */
+
+	/* chooses a random choice from the list of choices */
 	int randomFragmentID = StoryController.randomChoice(choiceList);
-	
-	Intent randomStoryFragment = new Intent(getApplicationContext(), StoryFragmentActivity.class);
+
+	Intent randomStoryFragment = new Intent(getApplicationContext(),
+		StoryFragmentActivity.class);
 	randomStoryFragment.putExtra("story", currentStory);
-	
+
 	/* send the random fragment id through the intent */
 	randomStoryFragment.putExtra("storyFragmentId", randomFragmentID);
 	randomStoryFragment.putExtra("mode", 0);
-	
+
 	/*
-	 * Start the StoryFragmentAvitivty to display the random fragment
-	 * that was randomly chosen
+	 * Start the StoryFragmentAvitivty to display the random fragment that
+	 * was randomly chosen
 	 */
 	startActivity(randomStoryFragment);
     }
