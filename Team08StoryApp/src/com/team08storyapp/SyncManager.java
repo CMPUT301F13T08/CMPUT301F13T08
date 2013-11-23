@@ -32,20 +32,55 @@ package com.team08storyapp;
 
 import android.content.Context;
 
+/**
+ * SyncManager is a singleton class that handles the sync of changes on locally
+ * authored stories.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class SyncManager {
 
     private static SyncManager syncManager = new SyncManager();
 
+    /**
+     * Constructor of SyncManager
+     * 
+     */
     private SyncManager() {
     }
 
+    /**
+     * This function is called to return an instance of SyncManager
+     * 
+     * @return syncManager an instance of SyncManager
+     */
     public static SyncManager getInstance() {
 	return syncManager;
     }
 
+    /**
+     * sync is usually called in an activity's onCreate(), onResume(), and when
+     * the network is connected. It simply checks if a sync should be done
+     * first. If necessary, it will call an AsyncTask object, UpdateTask, to
+     * upload changes to web server. Otherwise, the function will stop working.
+     * 
+     * @param context
+     *            a context object of the activity that depends on the activity
+     *            where SyncManager is called
+     */
     protected static void sync(Context context) {
+
+	/* Initialize two helpers */
 	FileHelper fHelper = new FileHelper(context, 1);
 	ESHelper esHelper = new ESHelper();
+
+	/* check if a sync should be performed and can be performed */
 	if (fHelper.getUpdateFilesIds().size() > 0
 		&& InternetDetector.connectedToInternet(context)) {
 	    UpdateToolPackage utp1 = new UpdateToolPackage(fHelper, esHelper,

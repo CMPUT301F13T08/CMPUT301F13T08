@@ -52,9 +52,17 @@ public class InternetDetector {
 
     private static InternetDetector internetDetector = new InternetDetector();
 
+    /**
+     * Constructor of InternetDetector
+     */
     private InternetDetector() {
     }
 
+    /**
+     * The function is called when an instance of InternetDetector is needed.
+     * 
+     * @return an instance of InterentDetector object
+     */
     public static InternetDetector getInstance() {
 	return internetDetector;
     }
