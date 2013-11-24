@@ -219,7 +219,7 @@ public class EditChoiceActivity extends Activity {
 	     */
 	    nextFragmentId = data
 		    .getIntExtra("nextStoryFragmentId", resultCode);
-	    tvFragment.setText("The next storyFragment id is: "
+	    tvFragment.setText("The linked fragment id is: "
 		    + Integer.toString(nextFragmentId));
 	}
     }
