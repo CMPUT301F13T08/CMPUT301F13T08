@@ -8,7 +8,7 @@
     <string name="read_online">Read Online Stories</string>
     <string name="read_download">Read Downloaded Stories</string>
     <string name="my_stories">My Stories</string>
-    <string name="search_hint">Search Title Or Author…</string>
+    <string name="search_hint">Search Title or Author…</string>
     <string name="title_activity_online_stories">Online Stories</string>
     <string name="title_activity_offline_stories">Offline Stories</string>
     <string name="title_activity_story_view">StoryFragmentActivity</string>
@@ -27,7 +27,7 @@
     <string name="title_activity_new_story">Create a New Story</string>
     <string name="title_activity_edit_fragment">Edit Fragment</string>
     <string name="title_activity_edit_choice">Edit Choice</string>
-    <string name="title_activity_select_fragment">SelectFragmentActivity</string>
+    <string name="title_activity_select_fragment">Fragment List</string>
     <string name="title_activity_story_fragment_list">StoryFragmentListActivity</string>
     <string name="gallery_image">Default gallery image</string>
     <string name="enter_the_text_for_your_choice_">Enter the text for your choice.</string>
