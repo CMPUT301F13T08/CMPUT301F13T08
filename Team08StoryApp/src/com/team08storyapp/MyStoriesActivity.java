@@ -93,6 +93,8 @@ public class MyStoriesActivity extends ListActivity {
 	header = getLayoutInflater().inflate(R.layout.header_search, null);
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
 	et = (EditText) header.findViewById(R.id.searchText);
+	et.setHintTextColor(0xff000000);
+	
 
 	fHelper = new FileHelper(this, 1);
 	esHelper = new ESHelper();
