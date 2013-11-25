@@ -65,9 +65,8 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
      * @return the converted view for the Annotation
      */
     public View getView(int position, View convertView, ViewGroup parent) {
+	ViewHolder holder = holder(convertView);
 	View v = convertView;
-	ViewHolder holder;
-
 	/*
 	 * If the passed view is a valid view then inflate it with desired
 	 * layout.
@@ -76,12 +75,10 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 	    LayoutInflater vi = (LayoutInflater) activity
 		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    v = vi.inflate(R.layout.storyfragments_row, null);
-	    holder = new ViewHolder();
 	    holder.fragmentImage = (ImageView) v.findViewById(R.id.thumbnail);
 	    holder.fragmentText = (TextView) v.findViewById(R.id.fragmentText);
 	    v.setTag(holder);
 	} else {
-	    holder = (ViewHolder) v.getTag();
 	}
 
 	if (storyFragmentList == null) {
@@ -101,12 +98,13 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 		if (currentStoryFragment.getPhotos().get(0) != null) {
 		    File file = activity.getFilesDir();
 		    File[] fileList = file.listFiles();
-		    File sfFile;
+		    File sfFile = null;
 		    for (int i = 0; i < fileList.length; i++) {
+			sfFile = StoryFragmentFile(currentStoryFragment,
+				fileList, sfFile, i);
 			if (fileList[i].getName().equals(
 				currentStoryFragment.getPhotos().get(0)
 					.getPictureName())) {
-			    sfFile = fileList[i];
 			    String path = sfFile.getAbsolutePath();
 
 			    Bitmap placeholder = BitmapFactory.decodeFile(path);
@@ -151,6 +149,44 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 	}
 
 	return v;
+    }
+
+    /**
+     * 
+     * @param convertView The view that needs to be converted 
+     * @return a ViewHolder object that suits the view
+     */
+    private ViewHolder holder(View convertView) {
+	View v = convertView;
+	ViewHolder holder;
+	if (v == null) {
+	    holder = new ViewHolder();
+	} else {
+	    holder = (ViewHolder) v.getTag();
+	}
+	return holder;
+    }
+
+    /**
+     * This function gets the file referred by the passed StoryFragment object
+     * 
+     * @param currentStoryFragment
+     *            StoryFragment object that is going to be mapped in the view
+     * @param fileList
+     *            a list of files in current directory
+     * @param sfFile
+     *            the file referred by current StoryFragment object
+     * @param i
+     *            the index of file in the fileList
+     * @return the sfFile that is referred by current StoryFragment object
+     */
+    private File StoryFragmentFile(StoryFragment currentStoryFragment,
+	    File[] fileList, File sfFile, int i) {
+	if (fileList[i].getName().equals(
+		currentStoryFragment.getPhotos().get(0).getPictureName())) {
+	    sfFile = fileList[i];
+	}
+	return sfFile;
     }
 
     /**
