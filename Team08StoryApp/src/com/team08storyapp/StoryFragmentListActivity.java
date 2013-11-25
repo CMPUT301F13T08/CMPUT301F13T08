@@ -95,13 +95,6 @@ public class StoryFragmentListActivity extends Activity {
 	});
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.select, menu);
-	return true;
-    }
-
     public void toEditFragment(View view) throws Exception {
 	Intent intent = new Intent(getApplicationContext(),
 		EditFragmentActivity.class);

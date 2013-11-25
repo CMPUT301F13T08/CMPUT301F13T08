@@ -322,13 +322,14 @@ public class StoryFragmentActivity extends Activity {
 	    /* when user selects "add annotations" icon in action bar */
 	case R.id.action_add_annotations:
 
-	    /* a popup menu asks to choose a picture from gallery or camera */
+	    /* a pop up menu asks to choose a picture from gallery or camera */
 	    showPopup();
 	    return true;
 
 	case R.id.action_mainmenu:
 	    Intent mainIntent = new Intent(getApplicationContext(),
 		    MainActivity.class);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	default:
 	    return super.onOptionsItemSelected(item);
