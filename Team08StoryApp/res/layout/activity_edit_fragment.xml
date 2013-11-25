@@ -25,13 +25,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/picture" />
-        
-         <CheckBox 
+
+        <CheckBox
             android:id="@+id/checkbox_randomChoice"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="@string/random_choice_checkbox"
-        	android:onClick="onCheckboxClickedRandomChoice"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClickedRandomChoice"
+            android:text="@string/random_choice_checkbox" />
 
         <EditText
             android:id="@+id/headerDialogue"
