@@ -155,8 +155,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	case DOWNLOAD_ID:
 
 	    fHelper = new FileHelper(this, 0);
+	    Toast.makeText(getApplicationContext(), "Downloading...Please wait", Toast.LENGTH_LONG).show();
 	    try {
-		Toast.makeText(getApplicationContext(), "Downloading...Please wait", Toast.LENGTH_LONG).show();
 		currentStory = esHelper.getOnlineStory(currentStory
 			.getOnlineStoryId());
 		currentStory = fHelper.decodeStory(currentStory, 1);
@@ -202,9 +202,9 @@ public class OnlineStoriesActivity extends ListActivity {
 		    StoryFragmentActivity.class);
 
 	    fHelper = new FileHelper(this, 0);
+	    Toast.makeText(getApplicationContext(), "Loading...Please wait", Toast.LENGTH_LONG).show();
 	    /* send the story object through the intent */
 	    try {
-		Toast.makeText(getApplicationContext(), "Loading...Please wait", Toast.LENGTH_LONG).show();
 		currentStory = esHelper.getOnlineStory(currentStory
 			.getOnlineStoryId());
 		currentStory = fHelper.decodeStory(currentStory, 0);
