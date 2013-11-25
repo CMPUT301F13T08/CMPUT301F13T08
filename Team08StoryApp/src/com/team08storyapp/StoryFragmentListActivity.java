@@ -42,6 +42,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+/**
+ * StoryFragmentListActivity is a view class that displays a list of fragments for a given
+ * story. Users are able to either read or edit a fragment by long-clicking a fragment in the
+ * list and selecting one of the above options through a context menu.
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 24, 2013
+ * @since 1.0
+ */
+
 public class StoryFragmentListActivity extends Activity {
     private ListView lv;
     private ArrayList<StoryFragment> sfList;

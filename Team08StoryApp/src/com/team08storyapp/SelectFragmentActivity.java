@@ -41,6 +41,18 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+/**
+ * SelectFragmentActivity is a view class that displays a list of fragments that can be selected
+ * as results for a choice. Once a fragment is selected, the fragment is linked to a choice that 
+ * was created by the author. The fragmentId is passed back to EditChoiceActivity.
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 24, 2013
+ * @since 1.0
+ */
 public class SelectFragmentActivity extends Activity {
 
     private ListView lv;
