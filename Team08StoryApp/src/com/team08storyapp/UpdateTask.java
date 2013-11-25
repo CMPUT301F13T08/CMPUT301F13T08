@@ -106,12 +106,8 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	/* Get the ids of stories that need to be uploaded */
 	ArrayList<String> ids = fHelper.getUpdateFilesIds();
 	for (int i = 0; i < ids.size(); i++) {
-	    String id = ids.get(i);
-	    int intId = 0;
-	    try {
-		intId = Integer.parseInt(id);
-	    } catch (NumberFormatException e) {
-		e.printStackTrace();
+	    int intId = parseId(ids, i);
+	    if(intId < 1){
 		continue;
 	    }
 	    /* upload a story */
@@ -133,6 +129,17 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	/* delete all ids of stories that need to be uploaded */
 	fHelper.clearUpdateQueue();
 	return null;
+    }
+
+    private int parseId(ArrayList<String> ids, int i) {
+	String id = ids.get(i);
+	int intId = 0;
+	try {
+	    intId = Integer.parseInt(id);
+	} catch (NumberFormatException e) {
+	    e.printStackTrace();
+	}
+	return intId;
     }
 
     /**
