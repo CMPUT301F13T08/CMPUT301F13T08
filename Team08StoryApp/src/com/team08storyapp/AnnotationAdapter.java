@@ -125,12 +125,11 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	    if (anno.getPhoto() != null && !anno.getPhoto().isEmpty()) {
 		File file = activity.getFilesDir();
 		File[] fileList = file.listFiles();
-		File annoFile;
+		File annoFile = null;
 		for (int i = 0; i < fileList.length; i++) {
+		    annoFile = annoFile(anno, fileList, annoFile, i);
 		    if (fileList[i].getName().equals(anno.getPhoto())) {
-			annoFile = fileList[i];
 			String path = annoFile.getAbsolutePath();
-			System.out.println(path);
 			Bitmap placeholder = BitmapFactory.decodeFile(path);
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			placeholder.compress(Bitmap.CompressFormat.PNG, 80,
@@ -160,6 +159,27 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	}
 
 	return v;
+    }
+
+    /**
+     * This function is called to search for the correct file referred by passed
+     * annotation object
+     * 
+     * @param anno
+     *            The annotation object that is going to be put in the holder
+     * @param fileList
+     *            A list of files in current directory
+     * @param annoFile
+     *            The file that is referred by annotation object.
+     * @param i
+     *            The index of file in fileList
+     * @return The file that is referred by annotation object
+     */
+    private File annoFile(Annotation anno, File[] fileList, File annoFile, int i) {
+	if (fileList[i].getName().equals(anno.getPhoto())) {
+	    annoFile = fileList[i];
+	}
+	return annoFile;
     }
 
     /**

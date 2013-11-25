@@ -18,9 +18,11 @@ public class testUpdateTask extends ActivityInstrumentationTestCase2<MainActivit
     public testUpdateTask() {
 	super(MainActivity.class);
     }
+    
     public void setUp(){
 	activity = super.getActivity();
     }
+    
     public void testConstructorUpdateTask(){
 	fHelper = new FileHelper(activity, 1);
 	FileHelper f1 = new FileHelper(activity, 1);
