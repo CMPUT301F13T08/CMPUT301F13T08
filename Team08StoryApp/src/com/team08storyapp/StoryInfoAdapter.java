@@ -91,20 +91,17 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
      * @return
      */
     public View getView(int position, View convertView, ViewGroup parent) {
+	ViewHolder holder = holder(convertView);
 	View v = convertView;
-	ViewHolder holder;
-
 	/* if the view is not empty populate with the given layout */
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
 		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    v = vi.inflate(R.layout.stories_row, null);
-	    holder = new ViewHolder();
 	    holder.item1 = (TextView) v.findViewById(R.id.big);
 	    holder.item2 = (TextView) v.findViewById(R.id.small);
 	    v.setTag(holder);
-	} else
-	    holder = (ViewHolder) v.getTag();
+	}
 
 	if (infos == null) {
 	    return v;
@@ -118,6 +115,17 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
 	    holder.item2.setText(story.getAuthor());
 	}
 	return v;
+    }
+
+    private ViewHolder holder(View convertView) {
+	View v = convertView;
+	ViewHolder holder;
+	if (v == null) {
+	    holder = new ViewHolder();
+	} else {
+	    holder = (ViewHolder) v.getTag();
+	}
+	return holder;
     }
 
     /**

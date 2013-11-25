@@ -60,6 +60,8 @@ public class NewStoryActivity extends Activity {
     private EditText titleField;
     private Story newStory;
     private FileHelper fHelper;
+    private String title;
+    private String author;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,35 +104,11 @@ public class NewStoryActivity extends Activity {
      *            the current view of NewStoryActivity
      */
     public void toEditFragmentActivity(View view) {
-	
-	/* find views of authorfield and titlefield */
-	authorField = (EditText) findViewById(R.id.enterAuthor);
-	titleField = (EditText) findViewById(R.id.enterTitle);
 
-	/* read the string input from two views */
-	String author = authorField.getText().toString();
-	String title = titleField.getText().toString();
-
-	/* check if both of them are blank */
-	if (isBlank(author) && isBlank(title)) {
-	    Toast.makeText(getApplicationContext(),
-		    "Sorry. Please make sure title and author are not empty",
-		    Toast.LENGTH_LONG).show();
-	    return;
-	} else {
-	    if (isBlank(author) && !isBlank(title)) {
-		author = "Anonymous";
-	    } else if (isBlank(title) && !isBlank(author)) {
-		title = "Untitled";
-	    }
-	}
-
-	/* create a new story based on given information */
-	newStory = new Story(title, author);
+	createNewStory();
 	StoryFragment firstFragment = new StoryFragment(1);
 	newStory.getStoryFragments().add(firstFragment);
-	newStory.setFirstStoryFragmentId(1);
-
+	
 	/* add the story to file system */
 	try {
 	    fHelper.addOfflineStory(newStory);
@@ -138,12 +116,30 @@ public class NewStoryActivity extends Activity {
 	    e.printStackTrace();
 	}
 
-	/* start the EditFragmentActivity*/
+	/* start the EditFragmentActivity */
 	Intent intent = new Intent(NewStoryActivity.this,
 		EditFragmentActivity.class);
 	intent.putExtra("story", newStory);
 	intent.putExtra("storyFragmentId", 1);
 	startActivity(intent);
+    }
+
+    private void createNewStory() {
+	setStoryInfo();
+	setNewStoryInfo(author, title);
+    }
+
+    /**
+     * return a newStory to edit
+     * 
+     * @param author
+     *            The string of author of the new story
+     * @param title
+     *            The string of title of the new story
+     */
+    private void setNewStoryInfo(String author, String title) {
+	newStory = new Story(title, author);
+	newStory.setFirstStoryFragmentId(1);
     }
 
     /**
@@ -170,5 +166,30 @@ public class NewStoryActivity extends Activity {
 	    }
 	}
 	return true;
+    }
+    
+    private void setStoryInfo(){
+	
+	/* find views of authorfield and titlefield */
+	authorField = (EditText) findViewById(R.id.enterAuthor);
+	titleField = (EditText) findViewById(R.id.enterTitle);
+
+	/* read the string input from two views */
+	author = authorField.getText().toString();
+	title = titleField.getText().toString();
+
+	/* check if both of them are blank */
+	if (isBlank(author) && isBlank(title)) {
+	    Toast.makeText(getApplicationContext(),
+		    "Sorry. Please make sure title and author are not empty",
+		    Toast.LENGTH_LONG).show();
+	    return;
+	} else {
+	    if (isBlank(author) && !isBlank(title)) {
+		author = "Anonymous";
+	    } else if (isBlank(title) && !isBlank(author)) {
+		title = "Untitled";
+	    }
+	}
     }
 }
