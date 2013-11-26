@@ -40,6 +40,29 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
+/**
+ * UpdateFileRecorder is a class that
+ * 
+ * <p>
+ * In order to manage the record of files that need to be updated,
+ * UpdateFileRecorder provides the following methods:
+ * <ul>
+ * <li>A
+ * <li>Get an offline story with a given story Id.
+ * <li>Retrieve a list of all available offline stories.
+ * <li>Update an offline story with a given story Id.
+ * <li>search for offline stories with given search string. (Note: it doesn't
+ * perform search on "\n" and whitespace )
+ * </ul>
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class UpdateFileRecorder {
 
     /**
