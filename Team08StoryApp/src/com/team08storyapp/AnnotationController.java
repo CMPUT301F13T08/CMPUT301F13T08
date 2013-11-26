@@ -171,7 +171,8 @@ public class AnnotationController {
     }
 
     private int resize(BitmapFactory.Options bmpOptions) {
-	// set the target image size
+	
+	/* set the target image size */
 	int targetWidth = 200;
 	int targetHeight = 150;
 
@@ -261,17 +262,6 @@ public class AnnotationController {
 	return pic;
     }
 
-    /**
-     * Adds the user's Annotation to the Story and saves it either to Offline or
-     * Online depending on where they were reading the Story from. If it is
-     * Online the Annotation should now be viewable by others.
-     * 
-     * @param fileName
-     *            the FileName assigned to the annotation
-     * @param mode
-     *            the value indicates either the annotation will be (saved
-     *            offline and published online) or only published online
-     */
     private void addAnnotation(String fileName, int mode) {
 
 	/*

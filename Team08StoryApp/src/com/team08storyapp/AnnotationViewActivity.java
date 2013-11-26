@@ -64,6 +64,7 @@ public class AnnotationViewActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	SyncManager.sync(this);
 	setContentView(R.layout.activity_annotation_list);
+	
 	/* Require intent to have an arraylist of annotations */
 	Intent passedIntent = getIntent();
 	aList = (ArrayList<Annotation>) passedIntent
@@ -74,6 +75,7 @@ public class AnnotationViewActivity extends Activity {
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+	
 	/*
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
@@ -85,6 +87,7 @@ public class AnnotationViewActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	if (item.getItemId() == R.id.help) {
+	    
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.

@@ -52,6 +52,9 @@ public class UpdateFileRecorder {
      * @param storyId
      *            the offline id of the story that needs to be synced to
      *            webserver
+     * @param fileContext
+     *            the context object of the an activity. It's used for reading/
+     *            writing files
      */
     public static void appendUpdateQueue(int storyId, Context fileContext) {
 	try {
@@ -70,6 +73,10 @@ public class UpdateFileRecorder {
      * connected and check if a sync is need to be performed. getUpdateFilesIds
      * returns a list of ids that are read from the file "updateQueue". Those
      * ids are the offline ids of stories that need to be synced.
+     * 
+     * @param fileContext
+     *            the context object of the an activity. It's used for reading/
+     *            writing files
      * 
      * @return updateId It's an ArrayList of Strings, which represent the
      *         offline ids of the stories that need to be synced to webserver.
@@ -100,9 +107,13 @@ public class UpdateFileRecorder {
     }
 
     /**
-     * clearUpdateQueue deletes the file "updateQueue", which keeps record of
+     * * clearUpdateQueue deletes the file "updateQueue", which keeps record of
      * stories that need to be uploaded, when a sync/upload is done
      * successfully.
+     * 
+     * @param fileContext
+     *            the context object of the an activity. It's used for reading/
+     *            writing files
      */
     public static void clearUpdateQueue(Context fileContext) {
 	fileContext.deleteFile("updateQueue");

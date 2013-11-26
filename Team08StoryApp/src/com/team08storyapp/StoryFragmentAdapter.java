@@ -100,7 +100,7 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 		    File[] fileList = file.listFiles();
 		    File sfFile = null;
 		    for (int i = 0; i < fileList.length; i++) {
-			sfFile = StoryFragmentFile(currentStoryFragment,
+			sfFile = getStoryFragmentFile(currentStoryFragment,
 				fileList, sfFile, i);
 			if (fileList[i].getName().equals(
 				currentStoryFragment.getPhotos().get(0)
@@ -180,7 +180,7 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
      *            the index of file in the fileList
      * @return the sfFile that is referred by current StoryFragment object
      */
-    private File StoryFragmentFile(StoryFragment currentStoryFragment,
+    private File getStoryFragmentFile(StoryFragment currentStoryFragment,
 	    File[] fileList, File sfFile, int i) {
 	if (fileList[i].getName().equals(
 		currentStoryFragment.getPhotos().get(0).getPictureName())) {

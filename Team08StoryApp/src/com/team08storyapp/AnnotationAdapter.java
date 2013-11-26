@@ -125,7 +125,7 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 		File[] fileList = file.listFiles();
 		File annoFile = null;
 		for (int i = 0; i < fileList.length; i++) {
-		    annoFile = annoFile(anno, fileList, annoFile, i);
+		    annoFile = getAnnotationFile(anno, fileList, annoFile, i);
 		    if (fileList[i].getName().equals(anno.getPhoto())) {
 			String path = annoFile.getAbsolutePath();
 			Bitmap placeholder = BitmapFactory.decodeFile(path);
@@ -162,7 +162,7 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
      *            The index of file in fileList
      * @return The file that is referred by annotation object
      */
-    private File annoFile(Annotation anno, File[] fileList, File annoFile, int i) {
+    private File getAnnotationFile(Annotation anno, File[] fileList, File annoFile, int i) {
 	if (fileList[i].getName().equals(anno.getPhoto())) {
 	    annoFile = fileList[i];
 	}
