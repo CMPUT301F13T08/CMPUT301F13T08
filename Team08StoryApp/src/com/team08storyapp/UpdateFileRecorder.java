@@ -82,6 +82,10 @@ public class UpdateFileRecorder {
      */
     public static void appendUpdateQueue(int storyId, Context fileContext) {
 	try {
+	    /*
+	     * create a file called updateQueue that keeps the record of files
+	     * that need to be uploaded
+	     */
 	    String filename = "updateQueue";
 	    FileOutputStream fos = fileContext.openFileOutput(filename,
 		    Context.MODE_APPEND);
