@@ -96,9 +96,8 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
      *            a ViewGroup object
      */
     public View getView(int position, View convertView, ViewGroup parent) {
+	ViewHolder holder = holder(convertView);
 	View v = convertView;
-	ViewHolder holder = new ViewHolder();
-
 	/* if the given view is null, populate it with desired layout. */
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
@@ -108,7 +107,6 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
 	    v.setTag(holder);
 
 	} else {
-	    holder = (ViewHolder) v.getTag();
 	}
 	final Choice choice = infos.get(position);
 
@@ -117,6 +115,16 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
 	}
 	return v;
 
+    }
+
+    private ViewHolder holder(View convertView) {
+	View v = convertView;
+	ViewHolder holder = new ViewHolder();
+	if (v == null) {
+	} else {
+	    holder = (ViewHolder) v.getTag();
+	}
+	return holder;
     }
 
 }

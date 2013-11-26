@@ -42,14 +42,7 @@ public class NotificationHelper {
 	notificationManager = (NotificationManager) context
 		.getSystemService(Context.NOTIFICATION_SERVICE);
 
-	/* create the notification */
-	int icon = android.R.drawable.stat_sys_upload;
-
-	/* Initial text that appears in the status bar */
-	CharSequence tickerText = "Sync";
-	long when = System.currentTimeMillis();
-	notification = new Notification(icon, tickerText, when);
-
+	configureNotification();
 	/* create the content which is shown in the notification pulldown */
 	contentTitle = "Sync Process";
 	Intent notificationIntent = new Intent();
@@ -60,11 +53,17 @@ public class NotificationHelper {
 	notification.setLatestEventInfo(context, contentTitle, "Syncing",
 		contentIntent);
 
-	/* make this notification appear in the 'Ongoing events' section */
-	notification.flags = Notification.FLAG_ONGOING_EVENT;
-
 	/* show the notification */
 	notificationManager.notify(NOTIFICATION_ID, notification);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void configureNotification() {
+	int icon = android.R.drawable.stat_sys_upload;
+	CharSequence tickerText = "Sync";
+	long when = System.currentTimeMillis();
+	notification = new Notification(icon, tickerText, when);
+	notification.flags = Notification.FLAG_ONGOING_EVENT;
     }
 
     /**

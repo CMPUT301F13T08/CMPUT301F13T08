@@ -25,7 +25,8 @@
             android:layout_toLeftOf="@id/search_button"
             android:hint="@string/search_hint"
             android:maxLines="1"
-            android:textColorHint="@android:color/black" />
+            android:textColorHint="@android:color/black"
+            android:textColorLink="@android:color/black" />
 
     </RelativeLayout>
 
