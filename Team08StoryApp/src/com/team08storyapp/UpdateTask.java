@@ -104,7 +104,7 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
     @Override
     protected String doInBackground(Void... updatePkg) {
 	/* Get the ids of stories that need to be uploaded */
-	ArrayList<String> ids = fHelper.getUpdateFilesIds();
+	ArrayList<String> ids = UpdateFileRecorder.getUpdateFilesIds(context);
 	for (int i = 0; i < ids.size(); i++) {
 	    int intId = parseId(ids, i);
 	    if(intId < 1){
@@ -112,8 +112,9 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	    }
 	    /* upload a story */
 	    try {
+		Encoder encoder = new Encoder(context);
 		Story updateStory = fHelper.getOfflineStory(intId);
-		Story encodedStory = fHelper.encodeStory(updateStory);
+		Story encodedStory = encoder.encodeStory(updateStory);
 		if (updateStory.getOnlineStoryId() < 1) {
 		    updateStory.setOnlineStoryId(esHelper
 			    .addOrUpdateOnlineStory(encodedStory));
@@ -127,7 +128,7 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 
 	}
 	/* delete all ids of stories that need to be uploaded */
-	fHelper.clearUpdateQueue();
+	UpdateFileRecorder.clearUpdateQueue(context);
 	return null;
     }
 

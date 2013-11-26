@@ -276,7 +276,7 @@ public class AnnotationController {
 	} else if (mode == MODE_MY) {
 	    try {
 		fHelper.updateOfflineStory(currentStory);
-		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
+		UpdateFileRecorder.appendUpdateQueue(currentStory.getOfflineStoryId(), context);
 	    } catch (FileNotFoundException e) {
 		e.printStackTrace();
 	    } catch (IOException e) {
@@ -296,7 +296,8 @@ public class AnnotationController {
 	try {
 
 	    /* encode the story */
-	    Story encodedStory = fHelper.encodeStory(currentStory);
+	    Encoder encoder = new Encoder(context);
+	    Story encodedStory = encoder.encodeStory(currentStory);
 
 	    /* make sure the annotation is uploaded and rewrites the right file. */
 	    if (esHelper.addOrUpdateOnlineStory(encodedStory) == encodedStory

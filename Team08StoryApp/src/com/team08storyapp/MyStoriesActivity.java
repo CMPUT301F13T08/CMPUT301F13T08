@@ -151,7 +151,8 @@ public class MyStoriesActivity extends ListActivity {
 	     */
 	    if (InternetDetector.connectedToInternet(getApplicationContext())) {
 		try {
-		    Story encodedStory = fHelper.encodeStory(currentStory);
+		    Encoder encoder = new Encoder(this);
+		    Story encodedStory = encoder.encodeStory(currentStory);
 		    if (currentStory.getOnlineStoryId() > 0) {
 			esHelper.addOrUpdateOnlineStory(encodedStory);
 

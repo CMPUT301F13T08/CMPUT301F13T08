@@ -155,11 +155,13 @@ public class OnlineStoriesActivity extends ListActivity {
 	case DOWNLOAD_ID:
 
 	    fHelper = new FileHelper(this, 0);
-	    Toast.makeText(getApplicationContext(), "Downloading...Please wait", Toast.LENGTH_LONG).show();
+	    Toast.makeText(getApplicationContext(),
+		    "Downloading...Please wait", Toast.LENGTH_LONG).show();
 	    try {
+		Decoder decoder = new Decoder(this);
 		currentStory = esHelper.getOnlineStory(currentStory
 			.getOnlineStoryId());
-		currentStory = fHelper.decodeStory(currentStory, 1);
+		currentStory = decoder.decodeStory(currentStory, 1);
 	    } catch (IOException e1) {
 		e1.printStackTrace();
 	    } catch (Exception e1) {
@@ -202,18 +204,22 @@ public class OnlineStoriesActivity extends ListActivity {
 		    StoryFragmentActivity.class);
 
 	    fHelper = new FileHelper(this, 0);
-	    Toast.makeText(getApplicationContext(), "Loading...Please wait", Toast.LENGTH_LONG).show();
+	    Toast.makeText(getApplicationContext(), "Loading...Please wait",
+		    Toast.LENGTH_LONG).show();
+
 	    /* send the story object through the intent */
 	    try {
+		Decoder decoder = new Decoder(this);
 		currentStory = esHelper.getOnlineStory(currentStory
 			.getOnlineStoryId());
-		currentStory = fHelper.decodeStory(currentStory, 0);
+		currentStory = decoder.decodeStory(currentStory, 0);
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
-	    Toast.makeText(getApplicationContext(), "Ready to read..", Toast.LENGTH_SHORT).show();
+	    Toast.makeText(getApplicationContext(), "Ready to read..",
+		    Toast.LENGTH_SHORT).show();
 	    firstStoryFragment.putExtra("story", currentStory);
 
 	    int nextStoryFragmentId = currentStory.getFirstStoryFragmentId();
@@ -311,9 +317,9 @@ public class OnlineStoriesActivity extends ListActivity {
      * 
      * @param view
      *            The screen used to display the Online Story list for the user.
-     * @throws Exception 
+     * @throws Exception
      */
-    public void onClickFeelingLuckButton(View view){
+    public void onClickFeelingLuckButton(View view) {
 	/* Generate and get a random Story for the user */
 	ArrayList<Story> storyList = esHelper.getOnlineStories();
 	if (storyList.size() > 0) {
@@ -333,7 +339,8 @@ public class OnlineStoriesActivity extends ListActivity {
 	     * format
 	     */
 	    try {
-		currentStory = fHelper.decodeStory(rightStory, 0);
+		Decoder decoder = new Decoder(this);
+		currentStory = decoder.decodeStory(rightStory, 0);
 	    } catch (IOException e) {
 		Log.d(TAG, e.getLocalizedMessage());
 	    } catch (Exception e) {

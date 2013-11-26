@@ -118,6 +118,7 @@ public class EditFragmentActivity extends Activity {
 		return true;
 	    }
 	});
+
 	textSection = (EditText) findViewById(R.id.headerDialogue);
 
 	/*
@@ -192,7 +193,8 @@ public class EditFragmentActivity extends Activity {
 	     * the current fragment
 	     */
 	    fHelper.updateOfflineStory(currentStory);
-	    fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
+	    UpdateFileRecorder.appendUpdateQueue(
+		    currentStory.getOfflineStoryId(), this);
 	    Toast.makeText(getApplicationContext(), "Save Successfully",
 		    Toast.LENGTH_SHORT).show();
 
@@ -320,7 +322,8 @@ public class EditFragmentActivity extends Activity {
 		 * to the current fragment
 		 */
 		fHelper.updateOfflineStory(currentStory);
-		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), this);
 		Toast.makeText(getApplicationContext(), "Save Successfully",
 			Toast.LENGTH_SHORT).show();
 
@@ -397,14 +400,11 @@ public class EditFragmentActivity extends Activity {
 	     * when the story fragment text changes (since we've saved choice
 	     * and illustration as soon as they are added)
 	     */
-	    if (currentStoryFragmentId > currentStory.getStoryFragments()
-		    .size()) {
+	    if (original.equals(currentStory)) {
 		fHelper.updateOfflineStory(currentStory);
-		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
-	    } else if (!original.equals(currentStory)) {
-		fHelper.updateOfflineStory(currentStory);
-		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
 	    }
+	    UpdateFileRecorder.appendUpdateQueue(currentStory
+		    .getOfflineStoryId(), this);
 
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -432,7 +432,7 @@ public class EditFragmentActivity extends Activity {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
-		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
+		UpdateFileRecorder.appendUpdateQueue(currentStory.getOfflineStoryId(), this);
 		return;
 	    }
 	    Uri pickedUri = data.getData();
@@ -446,7 +446,7 @@ public class EditFragmentActivity extends Activity {
 		picGallery.setAdapter(imgAdapt);
 		picView.setImageBitmap(pic);
 		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		fHelper.appendUpdateQueue(currentStory.getOfflineStoryId());
+		UpdateFileRecorder.appendUpdateQueue(currentStory.getOfflineStoryId(), this);
 	    }
 	} else {
 	    super.onActivityResult(requestCode, resultCode, data);
@@ -456,7 +456,6 @@ public class EditFragmentActivity extends Activity {
     public void onCheckboxClickedRandomChoice(View view) {
 	// Check is the box checked?
 	final CheckBox randomChoice = (CheckBox) findViewById(R.id.checkbox_randomChoice);
-
 	boolean checked = randomChoice.isChecked();
 	// Check which check box was clicked
 
@@ -469,4 +468,5 @@ public class EditFragmentActivity extends Activity {
 	}
 
     }
+
 }
