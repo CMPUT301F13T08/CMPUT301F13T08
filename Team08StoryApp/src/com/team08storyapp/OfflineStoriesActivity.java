@@ -139,6 +139,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	    Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
 	try {
+	    
 	    /*
 	     * Populate the listview with the online stories at the start of the
 	     * activity
@@ -153,6 +154,7 @@ public class OfflineStoriesActivity extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+	
 	/*
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
@@ -163,6 +165,7 @@ public class OfflineStoriesActivity extends ListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+	
 	/* Handle item selection */
 	switch (item.getItemId()) {
 	case R.id.action_mainmenu:
@@ -172,13 +175,14 @@ public class OfflineStoriesActivity extends ListActivity {
 		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	case R.id.help:
+	    
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
 	    BuiltInHelp.showDialog(OfflineStoriesActivity.this,
 		    getString(R.string.downloaded_stories_help_title),
-		    getString(R.string.my_stories_help_text));
+		    getString(R.string.downloaded_stories_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);

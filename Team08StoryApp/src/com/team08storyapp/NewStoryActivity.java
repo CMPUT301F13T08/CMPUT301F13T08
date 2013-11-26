@@ -97,7 +97,7 @@ public class NewStoryActivity extends Activity {
 	     */
 	    BuiltInHelp.showDialog(NewStoryActivity.this,
 		    getString(R.string.new_story_help_title),
-		    getString(R.string.my_stories_help_text));
+		    getString(R.string.new_story_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);

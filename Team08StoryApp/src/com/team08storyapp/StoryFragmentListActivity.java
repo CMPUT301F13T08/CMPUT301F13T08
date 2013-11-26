@@ -133,10 +133,19 @@ public class StoryFragmentListActivity extends Activity {
     }
 
     public void toEditFragment(View view) throws Exception {
+	StoryFragment nextStoryFragment = new StoryFragment(currentStory
+		.getStoryFragments().size() + 1);
+	currentStory.getStoryFragments().add(nextStoryFragment);
+
+	/* add the story to file system */
+	try {
+	    fHelper.updateOfflineStory(currentStory);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
 	Intent intent = new Intent(getApplicationContext(),
 		EditFragmentActivity.class);
-	intent.putExtra("storyFragmentId", currentStory.getStoryFragments()
-		.size() + 1);
+	intent.putExtra("storyFragmentId",nextStoryFragment.getStoryFragmentId());
 	intent.putExtra("story", currentStory);
 	intent.putExtra("mode", 1);
 	startActivity(intent);
