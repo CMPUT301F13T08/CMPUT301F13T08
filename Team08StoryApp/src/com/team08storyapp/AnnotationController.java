@@ -120,7 +120,7 @@ public class AnnotationController {
 		+ ".png";
     }
 
-    private Cursor getPicCursor(Uri pickedUri){
+    private Cursor getPicCursor(Uri pickedUri) {
 	/* retrieve the string using media data */
 	String[] medData = { MediaStore.Images.Media.DATA };
 	try {
@@ -130,13 +130,13 @@ public class AnnotationController {
 	    return null;
 	}
     }
-    
+
     private String getImagePath(Uri pickedUri) {
 
 	String imgPath = "";
 	/* query the data */
 	Cursor picCursor = getPicCursor(pickedUri);
-	
+
 	if (picCursor != null) {
 
 	    /* get the path string */
@@ -150,6 +150,24 @@ public class AnnotationController {
 	}
 
 	return imgPath;
+    }
+
+    private BitmapFactory.Options createBitmapOptions(String imgPath) {
+	/* create bitmap options to calculate and use sample size */
+	BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+
+	/* first decode image dimensions only */
+	bmpOptions.inJustDecodeBounds = true;
+	
+	BitmapFactory.decodeFile(imgPath, bmpOptions);
+
+	/* use the new sample size */
+	bmpOptions.inSampleSize = resize(bmpOptions);
+
+	/* now decode the bitmap using sample options */
+	bmpOptions.inJustDecodeBounds = false;
+	
+	return bmpOptions;
     }
 
     private int resize(BitmapFactory.Options bmpOptions) {
@@ -168,12 +186,10 @@ public class AnnotationController {
 	if (currHeight > targetHeight || currWidth > targetWidth) {
 	    // use either width or height
 	    if (currWidth > currHeight)
-		return Math.round((float) currHeight
-			/ (float) targetHeight);
+		return Math.round((float) currHeight / (float) targetHeight);
 	    else
-		return Math
-			.round((float) currWidth / (float) targetWidth);
-	}else{
+		return Math.round((float) currWidth / (float) targetWidth);
+	} else {
 	    return 1;
 	}
 
@@ -215,18 +231,8 @@ public class AnnotationController {
 	if (pickedUri != null) {
 
 	    /* create bitmap options to calculate and use sample size */
-	    BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-
-	    /* first decode image dimensions only */
-	    bmpOptions.inJustDecodeBounds = true;
-	    BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-	    /* use the new sample size */
-	    bmpOptions.inSampleSize = resize(bmpOptions);
-
-	    /* now decode the bitmap using sample options */
-	    bmpOptions.inJustDecodeBounds = false;
-
+	    BitmapFactory.Options bmpOptions = createBitmapOptions(imgPath);
+	    
 	    /* get the file as a bitmap */
 	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
 	    try {
