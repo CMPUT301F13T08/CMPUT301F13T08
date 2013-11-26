@@ -182,7 +182,7 @@ public class OfflineStoriesActivity extends ListActivity {
 	     */
 	    BuiltInHelp.showDialog(OfflineStoriesActivity.this,
 		    getString(R.string.downloaded_stories_help_title),
-		    getString(R.string.my_stories_help_text));
+		    getString(R.string.downloaded_stories_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);

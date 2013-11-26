@@ -36,8 +36,8 @@ public class testUpdateFileRecorder extends
 
     public testUpdateFileRecorder() {
 	super(MainActivity.class);
-	context = super.getActivity().getApplicationContext();
-	fHelper = new FileHelper(context, 0);
+	/*context = super.getActivity().getApplicationContext();
+	fHelper = new FileHelper(context, 0);*/
     }
 
     /*
@@ -52,6 +52,9 @@ public class testUpdateFileRecorder extends
      */
     public void setUp() throws FileNotFoundException, IOException {
 
+	context = getActivity().getApplicationContext();
+	fHelper = new FileHelper(context, 0);
+	
 	s1 = new Story(14, "Morroco likoko", "Alice Wu");
 	s1.setOfflineStoryId(12);
 	sfList = new ArrayList<StoryFragment>();
