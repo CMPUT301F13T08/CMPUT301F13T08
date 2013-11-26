@@ -34,6 +34,7 @@ package com.team08storyapp;
 import android.app.Activity;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -150,11 +151,13 @@ public class BuiltInHelp {
 	 * Create a dialog for displaying help and set it's title and layout to
 	 * display the help information for the current screen.
 	 */
-	final Dialog helpDialog = new Dialog(activity);
+	final Dialog helpDialog = new Dialog(activity, R.style.cust_dialog);
+	
 	helpDialog.setContentView(R.layout.help_dialog);
 	TextView helptext = (TextView) helpDialog
 		.findViewById(R.id.helptextView);
 	helpDialog.setTitle(helpTitle);
+	helptext.setTextColor(Color.BLACK);
 	helptext.setText(Html.fromHtml(helpText));
 	helptext.setMovementMethod(new ScrollingMovementMethod());
 
