@@ -64,88 +64,15 @@ import android.widget.TextView;
  */
 public class BuiltInHelp {
 
-    private String helpTitle;
-    private String helpText;
-    private Activity activity;
-
-    /*
-     * This enum contains all the activity classes that contain help. This is
-     * used in a switch statement to help determine which help text to display
-     * based on the activity set when instantiating the class.
-     */
-    private enum ActivityEnum {
-	AnnotationViewActivity, EditChoiceActivity, EditFragmentActivity, MainActivity, MyStoriesActivity, NewStoryActivity, OfflineStoriesActivity, OnlineStoriesActivity, SelectFragmentActivity, StoryFragmentActivity, StoryFragmentListActivity
-    }
-
-    /**
-     * Initializes the BuiltInHelp with the current Activity, setting up the
-     * help to display for that Activity.
-     * 
-     * @param activity
-     *            The current activity the user is viewing and needs the help
-     *            for.
-     */
-    public BuiltInHelp(Activity activity) {
-	this.activity = activity;
-
-	/*
-	 * Retrieve just the activity name from the activity component name for
-	 * use in determining what help text to set up for displaying in the
-	 * dialog.
-	 */
-	String activityName = activity.getComponentName().getClassName()
-		.replace("com.team08storyapp.", "");
-
-	/*
-	 * Turn the string Activity name into an enum value in order to be used
-	 * in a switch statement for comparison.
-	 */
-	ActivityEnum activityEnum = ActivityEnum.valueOf(activityName);
-
-	switch (activityEnum) {
-	case AnnotationViewActivity:
-	    setAnnotationHelp();
-	    break;
-	case EditChoiceActivity:
-	    setEditChoiceHelp();
-	    break;
-	case EditFragmentActivity:
-	    setEditFragmentHelp();
-	    break;
-	case MainActivity:
-	    setMainMenuHelp();
-	    break;
-	case MyStoriesActivity:
-	    setMyStoriesHelp();
-	    break;
-	case NewStoryActivity:
-	    setNewStoryHelp();
-	    break;
-	case OfflineStoriesActivity:
-	    setOfflineStoryHelp();
-	    break;
-	case OnlineStoriesActivity:
-	    setOnlineStoryHelp();
-	    break;
-	case SelectFragmentActivity:
-	    setSelectFragmentHelp();
-	    break;
-	case StoryFragmentActivity:
-	    setReadStoryHelp();
-	    break;
-	case StoryFragmentListActivity:
-	    setStoryFragmentListHelp();
-	    break;
-	default:
-	    break;
-	}
-    }
-
     /**
      * When called displays a pop up dialog to the user containing help for the
      * screen they are currently viewing.
+     * 
+     * @param activity
+     * @param helpTitle
+     * @param helpText
      */
-    public void showDialog() {
+    public static void showDialog(Activity activity, String helpTitle, String helpText) {
 	/*
 	 * Create a dialog for displaying help and set it's title and layout to
 	 * display the help information for the current screen.
@@ -176,71 +103,5 @@ public class BuiltInHelp {
 
 	/* Display the help dialog pop up to the user. */
 	helpDialog.show();
-    }
-
-    /* Sets up the help text to display for the Annotation screen. */
-    private void setAnnotationHelp() {
-	this.helpTitle = activity.getString(R.string.annotation_help_title);
-	this.helpText = activity.getString(R.string.annotation_help_text);
-    }
-
-    /* Sets up the help text to display for the Edit Story Fragment screen. */
-    private void setEditFragmentHelp() {
-	this.helpTitle = activity.getString(R.string.edit_story_fragment_help_title);
-	this.helpText = activity.getString(R.string.edit_story_fragment_help_text);
-    }
-
-    /* Sets up the help text to display for the Edit Choice screen. */
-    private void setEditChoiceHelp() {
-	this.helpTitle = activity.getString(R.string.edit_choice_help_title);
-	this.helpText = activity.getString(R.string.edit_choice_help_text);
-    }
-
-    /* Sets up the help text to display for the Main Menu screen. */
-    private void setMainMenuHelp() {
-	this.helpTitle = activity.getString(R.string.main_menu_help_title);
-	this.helpText = activity.getString(R.string.main_menu_help_text);
-    }
-
-    /* Sets up the help text to display for the My Stories screen. */
-    private void setMyStoriesHelp() {
-	this.helpTitle = activity.getString(R.string.my_stories_help_title);
-	this.helpText = activity.getString(R.string.my_stories_help_text);
-    }
-
-    /* Sets up the help text to display for the New Story screen. */
-    private void setNewStoryHelp() {
-	this.helpTitle = activity.getString(R.string.new_story_help_title);
-	this.helpText = activity.getString(R.string.my_stories_help_text);
-    }
-
-    /* Sets up the help text to display for the Offline Story Listing screen. */
-    private void setOfflineStoryHelp() {
-	this.helpTitle = activity.getString(R.string.downloaded_stories_help_title);
-	this.helpText = activity.getString(R.string.my_stories_help_text);
-    }
-
-    /* Sets up the help text to display for the Online Story Listing screen. */
-    private void setOnlineStoryHelp() {
-	this.helpTitle = activity.getString(R.string.online_stories_help_title);
-	this.helpText = activity.getString(R.string.online_stories_help_text);
-    }
-
-    /* Sets up the help text to display for the Select Story Fragment screen. */
-    private void setSelectFragmentHelp() {
-	this.helpTitle = activity.getString(R.string.selecting_story_fragment_title);
-	this.helpText = activity.getString(R.string.selecting_story_fragment_text);
-    }
-
-    /* Sets up the help text to display for the Reading of a Story. */
-    private void setReadStoryHelp() {
-	this.helpTitle = activity.getString(R.string.story_reading_help_title);
-	this.helpText = activity.getString(R.string.story_reading_help_text);
-    }
-
-    /* Sets up the help text to display for the Story Fragment Listing screen. */
-    private void setStoryFragmentListHelp() {
-	this.helpTitle = activity.getString(R.string.story_fragment_list_help_title);
-	this.helpText = activity.getString(R.string.story_fragment_list_help_text);
     }
 }

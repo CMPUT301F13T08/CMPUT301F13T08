@@ -111,8 +111,9 @@ public class SelectFragmentActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(SelectFragmentActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(SelectFragmentActivity.this,
+		    getString(R.string.selecting_story_fragment_title),
+		    getString(R.string.selecting_story_fragment_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);

@@ -95,14 +95,15 @@ public class NewStoryActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(NewStoryActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(NewStoryActivity.this,
+		    getString(R.string.new_story_help_title),
+		    getString(R.string.my_stories_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
     }
-    
+
     /**
      * <ul>
      * toEditFragmentActivity is linked to the button "save", which saves the
@@ -132,7 +133,7 @@ public class NewStoryActivity extends Activity {
 	createNewStory();
 	StoryFragment firstFragment = new StoryFragment(1);
 	newStory.getStoryFragments().add(firstFragment);
-	
+
 	/* add the story to file system */
 	try {
 	    fHelper.addOfflineStory(newStory);
@@ -191,9 +192,9 @@ public class NewStoryActivity extends Activity {
 	}
 	return true;
     }
-    
-    private void setStoryInfo(){
-	
+
+    private void setStoryInfo() {
+
 	/* find views of authorfield and titlefield */
 	authorField = (EditText) findViewById(R.id.enterAuthor);
 	titleField = (EditText) findViewById(R.id.enterTitle);

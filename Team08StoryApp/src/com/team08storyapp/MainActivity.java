@@ -85,8 +85,9 @@ public class MainActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(MainActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(MainActivity.this,
+		    getString(R.string.main_menu_help_title),
+		    getString(R.string.main_menu_help_text));
 	    return true;
 	}
 	return super.onOptionsItemSelected(item);
@@ -141,8 +142,8 @@ public class MainActivity extends Activity {
 	Intent intent = new Intent(MainActivity.this, MyStoriesActivity.class);
 	startActivity(intent);
     }
-    
-    public void onResume(){
+
+    public void onResume() {
 	SyncManager.sync(this);
 	super.onResume();
     }

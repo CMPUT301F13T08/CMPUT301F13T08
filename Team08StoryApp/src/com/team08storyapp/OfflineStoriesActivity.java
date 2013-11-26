@@ -176,8 +176,9 @@ public class OfflineStoriesActivity extends ListActivity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(OfflineStoriesActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(OfflineStoriesActivity.this,
+		    getString(R.string.downloaded_stories_help_title),
+		    getString(R.string.my_stories_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);

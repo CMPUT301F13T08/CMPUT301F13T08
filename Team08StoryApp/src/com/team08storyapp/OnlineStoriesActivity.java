@@ -137,8 +137,9 @@ public class OnlineStoriesActivity extends ListActivity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(OnlineStoriesActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(OnlineStoriesActivity.this,
+		    getString(R.string.online_stories_help_title),
+		    getString(R.string.online_stories_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);

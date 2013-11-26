@@ -345,8 +345,9 @@ public class EditFragmentActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(EditFragmentActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(EditFragmentActivity.this,
+		    getString(R.string.edit_story_fragment_help_title),
+		    getString(R.string.edit_story_fragment_help_text));
 	    return true;
 
 	default:
@@ -403,8 +404,8 @@ public class EditFragmentActivity extends Activity {
 	    if (original.equals(currentStory)) {
 		fHelper.updateOfflineStory(currentStory);
 	    }
-	    UpdateFileRecorder.appendUpdateQueue(currentStory
-		    .getOfflineStoryId(), this);
+	    UpdateFileRecorder.appendUpdateQueue(
+		    currentStory.getOfflineStoryId(), this);
 
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -432,7 +433,8 @@ public class EditFragmentActivity extends Activity {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
-		UpdateFileRecorder.appendUpdateQueue(currentStory.getOfflineStoryId(), this);
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), this);
 		return;
 	    }
 	    Uri pickedUri = data.getData();
@@ -446,7 +448,8 @@ public class EditFragmentActivity extends Activity {
 		picGallery.setAdapter(imgAdapt);
 		picView.setImageBitmap(pic);
 		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		UpdateFileRecorder.appendUpdateQueue(currentStory.getOfflineStoryId(), this);
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), this);
 	    }
 	} else {
 	    super.onActivityResult(requestCode, resultCode, data);
