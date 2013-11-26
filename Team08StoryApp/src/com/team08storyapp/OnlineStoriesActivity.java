@@ -118,14 +118,21 @@ public class OnlineStoriesActivity extends ListActivity {
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
 	 */
-	getMenuInflater().inflate(R.menu.main, menu);
+	getMenuInflater().inflate(R.menu.online_stories, menu);
 	return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	if (item.getItemId() == R.id.help) {
-	    
+	/* Handle item selection */
+	switch (item.getItemId()) {
+	case R.id.action_mainmenu:
+	    Intent mainIntent = new Intent(getApplicationContext(),
+		    MainActivity.class);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	    startActivity(mainIntent);
+	case R.id.help:
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -133,8 +140,9 @@ public class OnlineStoriesActivity extends ListActivity {
 	    BuiltInHelp help = new BuiltInHelp(OnlineStoriesActivity.this);
 	    help.showDialog();
 	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
 	}
-	return super.onOptionsItemSelected(item);
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v,

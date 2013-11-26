@@ -38,6 +38,8 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
@@ -145,6 +147,39 @@ public class OfflineStoriesActivity extends ListActivity {
 	    e.printStackTrace();
 	} catch (IOException e) {
 	    e.printStackTrace();
+	}
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	/*
+	 * Inflate the menu; this adds items to the action bar if they are
+	 * present.
+	 */
+	getMenuInflater().inflate(R.menu.offline_stories, menu);
+	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	/* Handle item selection */
+	switch (item.getItemId()) {
+	case R.id.action_mainmenu:
+	    Intent mainIntent = new Intent(getApplicationContext(),
+		    MainActivity.class);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	    startActivity(mainIntent);
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(OfflineStoriesActivity.this);
+	    help.showDialog();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
 	}
     }
 
