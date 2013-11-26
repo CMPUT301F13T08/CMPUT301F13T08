@@ -16,8 +16,6 @@ public class testMyStoriesActivity extends
 	ActivityInstrumentationTestCase2<MyStoriesActivity> {
 
     private Activity activity;
-    private View header;
-    private Button searchButton;
     @SuppressWarnings("unused")
     private ESHelper esHelper;
     @SuppressWarnings("unused")
@@ -39,29 +37,12 @@ public class testMyStoriesActivity extends
 	fHelper = new FileHelper(activity, 1);
 	esHelper = new ESHelper();
 
-	/*
-	 * Hey Ana:
-	 * 
-	 * Sorry, I moved the header search bar to activity_my_stories
-	 * xml to maintain the consistency of our layout. So you don't have to
-	 * do the header thing. Just do the search bar as you did in
-	 * OnlineStories/OfflineStoriesActivity will be fine.
-	 * 
-	 * Sorry for bringing the bugs and any inconvenience.
-	 * 
-	 * Alice
-	 */
-	header = activity.getLayoutInflater().inflate(R.layout.header_search,
-		null);
-	searchButton = (Button) header.findViewById(R.id.searchButton);
 	listView = (ListView) activity.findViewById(android.R.id.list);
-	editText = (EditText) header.findViewById(R.id.searchText);
+	editText = (EditText) activity.findViewById(R.id.search);
     }
 
     public void testPreConditions() {
 
-	assertNotNull(header);
-	assertNotNull(searchButton);
 	assertNotNull(listView);
 	assertNotNull(editText);
 
@@ -73,7 +54,6 @@ public class testMyStoriesActivity extends
 
     }
 
-    // not sure why fails
     public void testListViewItem() {
 
 	int firstVisibleRow = listView.getFirstVisiblePosition();

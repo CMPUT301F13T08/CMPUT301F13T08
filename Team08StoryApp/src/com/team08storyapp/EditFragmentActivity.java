@@ -371,6 +371,7 @@ public class EditFragmentActivity extends Activity {
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    currentStoryFragment = currentStory.getStoryFragments().get(
 		    currentStoryFragmentIndex);
+	    currentStoryFragmentId = currentStoryFragment.getStoryFragmentId();
 	    adapter.clear();
 	    adapter.addAll(currentStoryFragment.getChoices());
 	    adapter.notifyDataSetChanged();
@@ -383,8 +384,7 @@ public class EditFragmentActivity extends Activity {
 
     protected void onPause() {
 	try {
-
-	    /* TOO MANY parameters */
+	    
 	    currentStory = StoryController.updateStoryFragment(currentStory,
 		    currentStoryFragment, currentStoryFragmentId,
 		    currentStoryFragmentIndex);
