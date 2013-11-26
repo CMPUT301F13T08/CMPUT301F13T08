@@ -94,7 +94,7 @@ public class testEditFragmentActivity extends
 
 	choiceAdapter = new ChoiceAdapter(activity, android.R.id.list,
 		storyFragment.getChoices());
-	
+
 	listView = (ListView) activity.findViewById(android.R.id.list);
 
 	editText = (EditText) activity.findViewById(R.id.headerDialogue);
@@ -133,16 +133,14 @@ public class testEditFragmentActivity extends
 		((Choice) listView.getItemAtPosition(1)).getText());
     }
 
-    /*
-     * public void testChoiceAdapterItem(){
-     * 
-     * assertNotNull(choiceAdapter.getItem(0));
-     * assertEquals(choiceAdapter.getItem(0), 0);
-     * 
-     * assertNotNull(choiceAdapter.getItem(1));
-     * assertEquals(choiceAdapter.getItem(1), 1);
-     * 
-     * }
-     */
+    public void testChoiceAdapterItem() {
+
+	assertNotNull(choiceAdapter.getItem(0));
+	assertEquals(choiceAdapter.getItem(0), 0);
+
+	assertNotNull(choiceAdapter.getItem(1));
+	assertEquals(choiceAdapter.getItem(1), 1);
+
+    }
 
 }
