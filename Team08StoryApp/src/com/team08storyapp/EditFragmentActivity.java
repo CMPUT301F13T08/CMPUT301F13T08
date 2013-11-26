@@ -142,10 +142,9 @@ public class EditFragmentActivity extends Activity {
 	    }
 	});
 
-	// headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
-	// null);
 	picView = (ImageView) findViewById(R.id.picture);
 	picGallery = (Gallery) findViewById(R.id.gallery);
+
 	/*
 	 * Create a click listener to handle when the user clicks on the gallery
 	 * to add a photo.
@@ -153,6 +152,7 @@ public class EditFragmentActivity extends Activity {
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
 	    public void onItemClick(AdapterView<?> parent, View v,
 		    int position, long id) {
+
 		/*
 		 * set the larger image view to display the chosen bitmap
 		 * calling method of adapter class
@@ -171,17 +171,17 @@ public class EditFragmentActivity extends Activity {
 	currentStoryId = currentStory.getOfflineStoryId();
 	currentStoryFragmentId = storyFragment
 		.getIntExtra("storyFragmentId", 0);
-
 	populateScreen();
 	original = currentStory;
-
     }
 
     @Override
     public void onBackPressed() {
 	try {
+
 	    String dialogue = textSection.getText().toString();
 	    currentStoryFragment.setStoryText(dialogue);
+
 	    /*
 	     * Replace the current fragment in the story object, to include
 	     * changes made to it's text or illustrations. If the fragment is a
@@ -195,9 +195,8 @@ public class EditFragmentActivity extends Activity {
 	     * Update the current story on the file system. Permanent change to
 	     * the current fragment
 	     */
-	    fHelper.updateOfflineStory(currentStory);
-	    UpdateFileRecorder.appendUpdateQueue(
-		    currentStory.getOfflineStoryId(), this);
+
+	    checkDifference();
 	    Toast.makeText(getApplicationContext(), "Save Successfully",
 		    Toast.LENGTH_SHORT).show();
 
@@ -214,6 +213,7 @@ public class EditFragmentActivity extends Activity {
     }
 
     private void populateScreen() {
+
 	/*
 	 * Set the index position of the Story Fragment in the Story's Array
 	 * List of Story Fragments to be able to update the information at that
@@ -262,6 +262,7 @@ public class EditFragmentActivity extends Activity {
 		    currentStoryId, currentStoryFragmentId);
 
 	    picGallery.setAdapter(imgAdapt);
+
 	    fillChoice(storyFragmentChoices);
 
 	} else {
@@ -344,6 +345,7 @@ public class EditFragmentActivity extends Activity {
 	    return true;
 
 	case R.id.help:
+
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -351,7 +353,6 @@ public class EditFragmentActivity extends Activity {
 	    BuiltInHelp help = new BuiltInHelp(EditFragmentActivity.this);
 	    help.showDialog();
 	    return true;
-
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
@@ -372,7 +373,6 @@ public class EditFragmentActivity extends Activity {
     private void fillChoice(ArrayList<Choice> cList) {
 	adapter = new ChoiceAdapter(this, android.R.id.list, cList);
 	lv.setAdapter(adapter);
-
     }
 
     protected void onResume() {
@@ -388,7 +388,6 @@ public class EditFragmentActivity extends Activity {
 	    e.printStackTrace();
 	}
 	super.onResume();
-
     }
 
     protected void onPause() {
@@ -398,19 +397,7 @@ public class EditFragmentActivity extends Activity {
 	    currentStory = StoryController.updateStoryFragment(currentStory,
 		    currentStoryFragment, currentStoryFragmentId,
 		    currentStoryFragmentIndex);
-	    /*
-	     * save new storyfragment no matter what. And save existing fragment
-	     * when the story fragment text changes (since we've saved choice
-	     * and illustration as soon as they are added)
-	     */
-	    if (original.equals(currentStory)) {
-		System.out.println("Story fragment unchanged");
-	    } else {
-		fHelper.updateOfflineStory(currentStory);
-		UpdateFileRecorder.appendUpdateQueue(
-			currentStory.getOfflineStoryId(), this);
-	    }
-
+	    checkDifference();
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
@@ -423,14 +410,12 @@ public class EditFragmentActivity extends Activity {
 
 	if (resultCode == RESULT_OK) {
 	    if (requestCode == REQUEST_CHOICE) {
-
 		currentStory = (Story) data.getSerializableExtra("story");
 		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
 		currentStoryFragment = currentStory.getStoryFragments().get(
 			currentStoryFragmentIndex);
 		storyFragmentChoices = currentStory.getStoryFragments()
 			.get(currentStoryFragmentIndex).getChoices();
-
 		try {
 		    fHelper.updateOfflineStory(currentStory);
 
@@ -460,6 +445,19 @@ public class EditFragmentActivity extends Activity {
 	}
     }
 
+    /**
+     * onCheckboxClickedRandomChoice is linked to a checkbox. It's called when
+     * the checkbox is checked or clicked. And when it's clicked and checked,
+     * the randomChoice attribute in current StoryFragment will be set to 1, and
+     * the StoryFragment will have a random choice button that chooses a random
+     * choice for the user when user is reading the story; otherwise the
+     * randomChoice attribute will be zero, and there won't be the random choice
+     * button in the StoryFragment.
+     * 
+     * 
+     * @param view
+     *            the view of current activity
+     */
     public void onCheckboxClickedRandomChoice(View view) {
 
 	/* Check is the box checked? */
@@ -467,8 +465,8 @@ public class EditFragmentActivity extends Activity {
 	boolean checked = randomChoice.isChecked();
 
 	/* Check which check box was clicked */
-
 	if (checked) {
+
 	    /*
 	     * If checked then a story fragment's randomChoice attribute will be
 	     * set to 1 to show the random choice button
@@ -477,16 +475,22 @@ public class EditFragmentActivity extends Activity {
 	} else {
 	    currentStoryFragment.setRandomChoice(0);
 	}
-
     }
 
-    private void checkDifference() throws FileNotFoundException, IOException{
-	if(!original.equals(currentStory)){
-		fHelper.updateOfflineStory(currentStory);
-		UpdateFileRecorder.appendUpdateQueue(
-			currentStory.getOfflineStoryId(), this);
+    private void checkDifference() throws FileNotFoundException, IOException {
+
+	/*
+	 * save new storyfragment no matter what. And save existing fragment
+	 * when the story fragment text changes (since we've saved choice and
+	 * illustration as soon as they are added)
+	 */
+	if (!original.equals(currentStory)) {
+	    fHelper.updateOfflineStory(currentStory);
+	    UpdateFileRecorder.appendUpdateQueue(
+		    currentStory.getOfflineStoryId(), this);
 	}
     }
+
     protected void onStop() {
 	try {
 	    checkDifference();

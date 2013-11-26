@@ -5,12 +5,13 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:contentDescription="@string/gallery_image"
         android:id="@+id/annotationImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/gallery_image"
         android:maxHeight="300dp"
         android:maxWidth="300dp"
+        android:paddingBottom="10dp"
         android:src="@drawable/ic_launcher" />
 
 </LinearLayout>
