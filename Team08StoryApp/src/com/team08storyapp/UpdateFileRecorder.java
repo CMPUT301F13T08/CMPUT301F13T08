@@ -40,6 +40,30 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
+/**
+ * UpdateFileRecorder is a class that records, retrieves, clears the ids of
+ * files that need to be uploaded. It's always called and provides the ids of
+ * files whenever sync is in process and sync needs to know what files it needs
+ * to upload.
+ * 
+ * <p>
+ * In order to manage the record of files that need to be updated,
+ * UpdateFileRecorder provides the following methods:
+ * <ul>
+ * <li>Add an id of a file to updateQueue file where all ids of files that needs
+ * to be uploaded are stored.
+ * <li>Retrieve a list of ids of files that needs to be uploaded
+ * <li>Clear the updateQueue file when a sync is done.
+ * </ul>
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ */
 public class UpdateFileRecorder {
 
     /**

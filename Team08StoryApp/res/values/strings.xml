@@ -69,5 +69,6 @@
     <string name="button_RandomChoice">Random Choice</string>
     <string name="sync_notice">Sync </string>
     <string name="random_choice_check">Make it a random choice?</string>
+    <string name="choices_">Choices:</string>
 
 </resources>

@@ -102,7 +102,7 @@ public class NewStoryActivity extends Activity {
 	    return super.onOptionsItemSelected(item);
 	}
     }
-    
+
     /**
      * <ul>
      * toEditFragmentActivity is linked to the button "save", which saves the
@@ -129,28 +129,32 @@ public class NewStoryActivity extends Activity {
      */
     public void toEditFragmentActivity(View view) {
 
-	createNewStory();
-	StoryFragment firstFragment = new StoryFragment(1);
-	newStory.getStoryFragments().add(firstFragment);
-	
-	/* add the story to file system */
-	try {
-	    fHelper.addOfflineStory(newStory);
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+	if (createNewStory()) {
+	    StoryFragment firstFragment = new StoryFragment(1);
+	    newStory.getStoryFragments().add(firstFragment);
 
-	/* start the EditFragmentActivity */
-	Intent intent = new Intent(NewStoryActivity.this,
-		EditFragmentActivity.class);
-	intent.putExtra("story", newStory);
-	intent.putExtra("storyFragmentId", 1);
-	startActivity(intent);
+	    /* add the story to file system */
+	    try {
+		fHelper.addOfflineStory(newStory);
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+
+	    /* start the EditFragmentActivity */
+	    Intent intent = new Intent(NewStoryActivity.this,
+		    EditFragmentActivity.class);
+	    intent.putExtra("story", newStory);
+	    intent.putExtra("storyFragmentId", 1);
+	    startActivity(intent);
+	}
     }
 
-    private void createNewStory() {
-	setStoryInfo();
-	setNewStoryInfo(author, title);
+    private boolean createNewStory() {
+	if (setStoryInfo()) {
+	    setNewStoryInfo(author, title);
+	    return true;
+	}
+	return false;
     }
 
     /**
@@ -191,9 +195,9 @@ public class NewStoryActivity extends Activity {
 	}
 	return true;
     }
-    
-    private void setStoryInfo(){
-	
+
+    private boolean setStoryInfo() {
+
 	/* find views of authorfield and titlefield */
 	authorField = (EditText) findViewById(R.id.enterAuthor);
 	titleField = (EditText) findViewById(R.id.enterTitle);
@@ -207,7 +211,7 @@ public class NewStoryActivity extends Activity {
 	    Toast.makeText(getApplicationContext(),
 		    "Sorry. Please make sure title and author are not empty",
 		    Toast.LENGTH_LONG).show();
-	    return;
+	    return false;
 	} else {
 	    if (isBlank(author) && !isBlank(title)) {
 		author = "Anonymous";
@@ -215,5 +219,6 @@ public class NewStoryActivity extends Activity {
 		title = "Untitled";
 	    }
 	}
+	return true;
     }
 }
