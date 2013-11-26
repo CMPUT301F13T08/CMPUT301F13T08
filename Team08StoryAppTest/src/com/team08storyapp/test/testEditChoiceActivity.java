@@ -62,7 +62,7 @@ ActivityInstrumentationTestCase2<EditChoiceActivity>  {
     
     public void testTextViewItem(){
 	
-	assertEquals("The linked fragment id is: ", textView.getText().toString());
+	assertEquals("The linked Story Fragment id is: ", textView.getText().toString());
 	
     }
     
