@@ -118,6 +118,7 @@ public class EditFragmentActivity extends Activity {
 		return true;
 	    }
 	});
+
 	textSection = (EditText) findViewById(R.id.headerDialogue);
 
 	/*
@@ -339,6 +340,15 @@ public class EditFragmentActivity extends Activity {
 	    }
 	    return true;
 
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(EditFragmentActivity.this);
+	    help.showDialog();
+	    return true;
+
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
@@ -446,7 +456,6 @@ public class EditFragmentActivity extends Activity {
     public void onCheckboxClickedRandomChoice(View view) {
 	// Check is the box checked?
 	final CheckBox randomChoice = (CheckBox) findViewById(R.id.checkbox_randomChoice);
-
 	boolean checked = randomChoice.isChecked();
 	// Check which check box was clicked
 
@@ -459,4 +468,5 @@ public class EditFragmentActivity extends Activity {
 	}
 
     }
+
 }
