@@ -277,11 +277,12 @@ public class StoryFragmentActivity extends Activity {
 	 * then set the button to be visible
 	 */
 	if (currentStoryFragment.getRandomChoice() == 1) {
-	    
-	    /* If the current Story fragment doesn't have any choices then button
-	     * is set to be invisible
+
+	    /*
+	     * If the current Story fragment doesn't have any choices then
+	     * button is set to be invisible
 	     */
-	    if(currentStoryFragment.getChoices().size() == 0){
+	    if (currentStoryFragment.getChoices().size() == 0) {
 		rCButton.setVisibility(View.INVISIBLE);
 	    }
 	    rCButton.setVisibility(View.VISIBLE);
@@ -329,8 +330,17 @@ public class StoryFragmentActivity extends Activity {
 	case R.id.action_mainmenu:
 	    Intent mainIntent = new Intent(getApplicationContext(),
 		    MainActivity.class);
-	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(StoryFragmentActivity.this);
+	    help.showDialog();
+	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
@@ -426,15 +436,16 @@ public class StoryFragmentActivity extends Activity {
     }
 
     /**
-     * This method is called when the random choice button is clicked which randomly chooses
-     * a choice for the user and takes them to the fragment related to that choice. It will
-     * get a random story fragment from the list of possible choices and pass this to the next 
-     * activity for displaying to the user. Once this is completed the user should be presented
-     * with a random fragment page selected from one of the possible choices of the previous 
-     * fragment.
+     * This method is called when the random choice button is clicked which
+     * randomly chooses a choice for the user and takes them to the fragment
+     * related to that choice. It will get a random story fragment from the list
+     * of possible choices and pass this to the next activity for displaying to
+     * the user. Once this is completed the user should be presented with a
+     * random fragment page selected from one of the possible choices of the
+     * previous fragment.
      * 
      * @param view
-     * 		The screen of a story fragment.
+     *            The screen of a story fragment.
      */
     public void onClickRandomChoice(View view) {
 	ArrayList<Choice> choiceList = currentStoryFragment.getChoices();

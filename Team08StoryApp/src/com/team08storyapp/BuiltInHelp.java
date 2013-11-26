@@ -35,6 +35,7 @@ import android.app.Activity;
 
 import android.app.Dialog;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -155,6 +156,7 @@ public class BuiltInHelp {
 		.findViewById(R.id.helptextView);
 	helpDialog.setTitle(helpTitle);
 	helptext.setText(Html.fromHtml(helpText));
+	helptext.setMovementMethod(new ScrollingMovementMethod());
 
 	/*
 	 * Retrieve the button from the dialog layout and assign it a click
@@ -221,9 +223,9 @@ public class BuiltInHelp {
     /* Sets up the help text to display for the My Stories screen. */
     private void setMyStoriesHelp() {
 	this.helpTitle = "My Stories Help";
-	this.helpText = "<b>Action Bar Options</b>" 
+	this.helpText = "<b>Action Bar Options</b>"
 		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>" 
+		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
 		+ "<br><b>Search Function</b>"
 		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
 		+ "<br><b>List of Stories </b>"
@@ -239,9 +241,9 @@ public class BuiltInHelp {
     /* Sets up the help text to display for the New Story screen. */
     private void setNewStoryHelp() {
 	this.helpTitle = "New Story Help";
-	this.helpText = "<b>Action Bar Options</b>" 
+	this.helpText = "<b>Action Bar Options</b>"
 		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>" 
+		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
 		+ "<br><b>Title Text</b>"
 		+ "<br>Write the Title of the new Story in this box.<br>"
 		+ "<br><b>Author Text</b>"
@@ -253,7 +255,7 @@ public class BuiltInHelp {
     /* Sets up the help text to display for the Offline Story Listing screen. */
     private void setOfflineStoryHelp() {
 	this.helpTitle = "Downloaded Stories Help";
-	this.helpText = "<b>Action Bar Options</b>" 
+	this.helpText = "<b>Action Bar Options</b>"
 		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
 		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
 		+ "<br><b>Search Function</b>"
@@ -268,9 +270,9 @@ public class BuiltInHelp {
     /* Sets up the help text to display for the Online Story Listing screen. */
     private void setOnlineStoryHelp() {
 	this.helpTitle = "Online Stories Help";
-	this.helpText = "<b>Action Bar Options</b>" 
+	this.helpText = "<b>Action Bar Options</b>"
 		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>" 
+		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
 		+ "<br><b>Search Function</b>"
 		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
 		+ "<br><b>List of Stories </b>"
@@ -285,7 +287,9 @@ public class BuiltInHelp {
     /* Sets up the help text to display for the Select Story Fragment screen. */
     private void setSelectFragmentHelp() {
 	this.helpTitle = "Selecting Story Fragment Help";
-	this.helpText = "";
+	this.helpText = "<b>List of the Story's Story Fragments</b>"
+		+ "<br>Displays the list of the current Story's Story Fragments to the user for linking to a choice, except the Story Fragment the Choice is being added to.<br>"
+		+ "<br>Selecting a Story Fragment from the list will link it to the Choice and return you to the Edit/Add Choice screen.<br>";
     }
 
     /* Sets up the help text to display for the Reading of a Story. */
@@ -299,7 +303,14 @@ public class BuiltInHelp {
 
     /* Sets up the help text to display for the Story Fragment Listing screen. */
     private void setStoryFragmentListHelp() {
-	this.helpTitle = "Story Fragment Listing Help";
-	this.helpText = "";
+	this.helpTitle = "Story Fragment List Help";
+	this.helpText = "<b>Action Bar Options</b>"
+		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
+		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
+		+ "<br><b>List of the Story's Story Fragments </b>"
+		+ "<br>Displays the list of the current Story's Story Fragments.<br>"
+		+ "<br>Selecting a Story Fragment will lead to the Edit Story Fragment screen where it can be edited.<br>"
+		+ "<br><b>Create Story Fragment Button</b>"
+		+ "<br>Click this to start creating a Story Fragment for use in the Story.<br>";
     }
 }

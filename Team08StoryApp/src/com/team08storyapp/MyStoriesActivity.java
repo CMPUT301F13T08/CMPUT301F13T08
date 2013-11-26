@@ -94,7 +94,6 @@ public class MyStoriesActivity extends ListActivity {
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
 	et = (EditText) header.findViewById(R.id.searchText);
 	et.setHintTextColor(0xff000000);
-	
 
 	fHelper = new FileHelper(this, 1);
 	esHelper = new ESHelper();
@@ -129,6 +128,39 @@ public class MyStoriesActivity extends ListActivity {
 	    }
 	});
 	registerForContextMenu(getListView());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	/*
+	 * Inflate the menu; this adds items to the action bar if they are
+	 * present.
+	 */
+	getMenuInflater().inflate(R.menu.my_stories, menu);
+	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	/* Handle item selection */
+	switch (item.getItemId()) {
+	case R.id.action_mainmenu:
+	    Intent mainIntent = new Intent(getApplicationContext(),
+		    MainActivity.class);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	    startActivity(mainIntent);
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(MyStoriesActivity.this);
+	    help.showDialog();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v,
@@ -250,7 +282,6 @@ public class MyStoriesActivity extends ListActivity {
 	return;
 
     }
-
 
     protected void onResume() {
 	super.onResume();

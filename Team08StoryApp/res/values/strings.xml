@@ -27,7 +27,7 @@
     <string name="title_activity_new_story">Create a New Story</string>
     <string name="title_activity_edit_fragment">Edit Fragment</string>
     <string name="title_activity_edit_choice">Edit Choice</string>
-    <string name="title_activity_select_fragment">Fragment List</string>
+    <string name="title_activity_select_fragment">Story Fragments</string>
     <string name="title_activity_story_fragment_list">StoryFragmentListActivity</string>
     <string name="gallery_image">Default gallery image</string>
     <string name="enter_the_text_for_your_choice_">Enter the text for your choice.</string>
@@ -40,8 +40,8 @@
     <string name="author_">Author:</string>
     <string name="enter_author_apos_s_name_here">Enter author\'s name here</string>
     <string name="search">Search</string>
-    <string name="select_a_fragment_to_link_to_">Select a fragment to link to:</string>
-    <string name="create_fragment">Create Fragment</string>
+    <string name="select_a_fragment_to_link_to_">Select Story Fragment to Link:</string>
+    <string name="create_fragment">Create Story Fragment</string>
     <string name="view_annotations">View Annotations</string>
     <string name="add_annotations">Add Annotations</string>
     <string name="return_to_main_menu">Return to Main Menu</string>
@@ -57,7 +57,7 @@
     <string name="illustration_from_gallery">Illustration from Gallery</string>
     <string name="title_activity_view_fragments">ViewFragmentsActivity</string>
     <string name="luckyButton">I\'m Feeling Lucky!</string>
-    <string name="the_linked_fragment_id_is_">"The linked fragment id is: "</string>
+    <string name="the_linked_fragment_id_is_">"The linked Story Fragment id is: "</string>
     <string name="help_menu">Help</string>
     <string name="okayButton">Okay</string>
     <string name="main_menu">Main Menu</string>

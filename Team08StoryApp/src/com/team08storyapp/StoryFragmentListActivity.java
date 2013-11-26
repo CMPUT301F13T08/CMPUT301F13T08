@@ -37,15 +37,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
- * StoryFragmentListActivity is a view class that displays a list of fragments for a given
- * story. Users are able to either read or edit a fragment by long-clicking a fragment in the
- * list and selecting one of the above options through a context menu.
+ * StoryFragmentListActivity is a view class that displays a list of fragments
+ * for a given story. Users are able to either read or edit a fragment by
+ * long-clicking a fragment in the list and selecting one of the above options
+ * through a context menu.
+ * 
  * @author Michele Paulichuk
  * @author Alice Wu
  * @author Ana Marcu
@@ -95,10 +98,44 @@ public class StoryFragmentListActivity extends Activity {
 	});
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	/*
+	 * Inflate the menu; this adds items to the action bar if they are
+	 * present.
+	 */
+	getMenuInflater().inflate(R.menu.story_fragment_list, menu);
+	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	/* Handle item selection */
+	switch (item.getItemId()) {
+	case R.id.action_mainmenu:
+	    Intent mainIntent = new Intent(getApplicationContext(),
+		    MainActivity.class);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	    startActivity(mainIntent);
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(StoryFragmentListActivity.this);
+	    help.showDialog();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
+    }
+
     public void toEditFragment(View view) throws Exception {
 	Intent intent = new Intent(getApplicationContext(),
 		EditFragmentActivity.class);
-	intent.putExtra("storyFragmentId", currentStory.getStoryFragments().size()+1);
+	intent.putExtra("storyFragmentId", currentStory.getStoryFragments()
+		.size() + 1);
 	intent.putExtra("story", currentStory);
 	intent.putExtra("mode", 1);
 	startActivity(intent);
@@ -107,10 +144,10 @@ public class StoryFragmentListActivity extends Activity {
     @Override
     public void onBackPressed() {
 	Intent intent = new Intent(StoryFragmentListActivity.this,
-		    MyStoriesActivity.class);
-	    startActivityForResult(intent, 1);
+		MyStoriesActivity.class);
+	startActivityForResult(intent, 1);
     }
-    
+
     protected void onResume() {
 	try {
 	    SyncManager.sync(this);
