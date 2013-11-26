@@ -41,18 +41,19 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
 /**
- * UpdateFileRecorder is a class that
+ * UpdateFileRecorder is a class that records, retrieves, clears the ids of
+ * files that need to be uploaded. It's always called and provides the ids of
+ * files whenever sync is in process and sync needs to know what files it needs
+ * to upload.
  * 
  * <p>
  * In order to manage the record of files that need to be updated,
  * UpdateFileRecorder provides the following methods:
  * <ul>
- * <li>A
- * <li>Get an offline story with a given story Id.
- * <li>Retrieve a list of all available offline stories.
- * <li>Update an offline story with a given story Id.
- * <li>search for offline stories with given search string. (Note: it doesn't
- * perform search on "\n" and whitespace )
+ * <li>Add an id of a file to updateQueue file where all ids of files that needs
+ * to be uploaded are stored.
+ * <li>Retrieve a list of ids of files that needs to be uploaded
+ * <li>Clear the updateQueue file when a sync is done.
  * </ul>
  * 
  * @author Michele Paulichuk
