@@ -1,14 +1,8 @@
 package com.team08storyapp.test;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -16,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Base64;
 
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.MainActivity;
@@ -209,65 +202,6 @@ public class testFileHelper extends
 	// No author or title has string "DAT". The result should be 0.
 	assertEquals(fHelper
 		.searchOfflineStories("WHO DAT WHO DAT WHO DAT DAT").size(), 0);
-    }
-
-    /*
-     * Test case for Use Case #3, #12, #10, #14
-     * 
-     * Since encodeStory() function is used before uploading/updating an online
-     * story, this test is a part for UC#3, 12, 10, 14. testEncodeStory() tests
-     * the encoding functionality of encodeStory, especially its ability and
-     * correctness to encode an image.
-     */
-    public void testEncodeStory() throws FileNotFoundException, IOException {
-
-	/* encode a story */
-	Story encodedStory = fHelper.encodeStory(s1);
-
-	/* create the byte[] of lauch icon image */
-	InputStream is = context.openFileInput(s1.getStoryFragments().get(0)
-		.getPhotos().get(0).getPictureName());
-	ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	byte[] b = new byte[1024];
-	int bytesRead = 0;
-	while ((bytesRead = is.read(b)) != -1) {
-	    bos.write(b, 0, bytesRead);
-	}
-	byte[] bytes = bos.toByteArray();
-
-	/* test the encodeStory() function does some "encoding" */
-	assertNotNull(encodedStory.getStoryFragments().get(0).getPhotos()
-		.get(0).getEncodedPicture());
-
-	/* test the correctness of encoding */
-	assertEquals(Base64.encodeToString(bytes, Base64.DEFAULT), encodedStory
-		.getStoryFragments().get(0).getPhotos().get(0)
-		.getEncodedPicture());
-
-	/* test the file is not changed during the process */
-	assertEquals(encodedStory.getStoryFragments().get(0).getPhotos().get(0)
-		.getPictureName(), "Image12Fragment1Photo1.png");
-    }
-
-    /*
-     * Test case for Use Case #9, #12, #16
-     * 
-     * Since decodeStory() function is used before saving the downloaded story
-     * into local file system, this test is a part for UC#3, 12, 10, 14.
-     * testDecodeStory() tests the decoding functionality of decodeStory().
-     */
-    public void testDecodeStory() throws Exception {
-	Story encodedStory = fHelper.encodeStory(s1);
-
-	// assert the correctness of fileName
-	assertEquals(fHelper.decodeStory(encodedStory, 1).getStoryFragments()
-		.get(0).getPhotos().get(0).getPictureName(),
-		"Image12Fragment1Photo1.png");
-	FileInputStream fos = context
-		.openFileInput("Image12Fragment1Photo1.png");
-	Bitmap photo = BitmapFactory.decodeStream(fos);
-	assertNotNull(photo);
-
     }
 
     /* Delete data */
