@@ -33,7 +33,6 @@ package com.team08storyapp;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,10 +45,6 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -91,7 +86,6 @@ public class FileHelper {
     private Gson gson = new Gson();
     private static final int Download = 0;
     private static final int My = 1;
-    private static final int Save = 1;
     private String prefix;
 
     /**
@@ -351,200 +345,5 @@ public class FileHelper {
 	}
 	return null;
     }
-
-//    /**
-//     * Function takes in a story object and encodes all the image files related
-//     * to the story into a Base64 string for further use. (Convert to Json
-//     * Object and upload to webserver)
-//     * 
-//     * @param s
-//     *            a story that needs to be encoded for uploading to webserver
-//     * @return s an encoded story object
-//     * @throws IOException
-//     */
-//    public Story encodeStory(Story s) throws IOException {
-//
-//	/* get all fragments */
-//	ArrayList<StoryFragment> sfList = s.getStoryFragments();
-//
-//	/* for each fragment, get it's photolist and annotation list */
-//	for (int i = 0; i < sfList.size(); i++) {
-//	    ArrayList<Photo> photos = sfList.get(i).getPhotos();
-//	    ArrayList<Annotation> annotations = sfList.get(i).getAnnotations();
-//
-//	    /* set picture in each Photo object to empty after encoding. */
-//	    for (int m = 0; m < photos.size(); m++) {
-//		try {
-//		    InputStream is = fileContext.openFileInput(photos.get(m)
-//			    .getPictureName());
-//		    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//		    byte[] b = new byte[1024];
-//		    int bytesRead = 0;
-//		    while ((bytesRead = is.read(b)) != -1) {
-//			bos.write(b, 0, bytesRead);
-//		    }
-//		    byte[] bytes = bos.toByteArray();
-//
-//		    photos.get(m).setEncodedPicture(
-//			    Base64.encodeToString(bytes, Base64.DEFAULT));
-//		} catch (Exception e) {
-//		    continue;
-//		}
-//	    }
-//
-//	    /* Encode the photo annotation object first and clear the photo. */
-//	    for (int n = 0; n < annotations.size(); n++) {
-//		try {
-//		    InputStream is = fileContext.openFileInput(annotations.get(
-//			    n).getPhoto());
-//		    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//		    byte[] b = new byte[1024];
-//		    int bytesRead = 0;
-//		    while ((bytesRead = is.read(b)) != -1) {
-//			bos.write(b, 0, bytesRead);
-//		    }
-//		    byte[] bytes = bos.toByteArray();
-//		    annotations.get(n).setEncodedAnnotation(
-//			    Base64.encodeToString(bytes, Base64.DEFAULT));
-//		} catch (Exception e) {
-//		    continue;
-//		}
-//	    }
-//
-//	    /* update the annotations list and photos list of a story */
-//	    sfList.get(i).setAnnotations(annotations);
-//	    sfList.get(i).setPhotos(photos);
-//	}
-//	return s;
-//
-//    }
-//
-//    /**
-//     * This function decodes a story's images files from encoded strings to
-//     * byteArray and save them to local before passing the story to
-//     * addOfflineStory(Story story) for adding to local
-//     * 
-//     * @param story
-//     *            a story downdloaed from webserver that needs to be decoded
-//     * @param mode
-//     *            the mode:
-//     * @return story the decoded Story
-//     * @throws Exception
-//     * @throws IOException
-//     */
-//    public Story decodeStory(Story story, int mode) throws Exception,
-//	    IOException {
-//
-//	int storyId = setStoryId(story);
-//	ArrayList<StoryFragment> sfList = story.getStoryFragments();
-//	for (int i = 0; i < sfList.size(); i++) {
-//	    ArrayList<Photo> photos = sfList.get(i).getPhotos();
-//	    ArrayList<Annotation> annotations = sfList.get(i).getAnnotations();
-//	    for (int m = 0; m < photos.size(); m++) {
-//		try {
-//		    byte[] photoByte = Base64.decode(photos.get(m)
-//			    .getEncodedPicture(), Base64.DEFAULT);
-//		    Bitmap photoBM = BitmapFactory.decodeByteArray(photoByte,
-//			    0, photoByte.length);
-//
-//		    /*
-//		     * clear the encoded string to avoid conflicts with
-//		     * encodeStory and save spaces.
-//		     */
-//		    photos.get(m).setEncodedPicture("");
-//		    String fileName = createPictureName(mode, storyId, sfList,
-//			    i, photos, m);
-//		    try {
-//			FileOutputStream fos = fileContext.openFileOutput(
-//				fileName, Context.MODE_PRIVATE);
-//			photoBM.compress(CompressFormat.PNG, 90, fos);
-//		    } catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		    }
-//		} catch (Exception e) {
-//		    e.printStackTrace();
-//		    continue;
-//		}
-//	    }
-//	    for (int n = 0; n < annotations.size(); n++) {
-//		try {
-//		    byte[] annotationByte = Base64.decode(annotations.get(n)
-//			    .getEncodedAnnotation(), Base64.DEFAULT);
-//		    Bitmap annotationBM = BitmapFactory.decodeByteArray(
-//			    annotationByte, 0, annotationByte.length);
-//		    annotations.get(n).setEncodedAnnotation("");
-//		    String fileName = createFileName(storyId, i, annotations, n);
-//		    
-//		    /*
-//		     * write the file to local system based on the fileName
-//		     * generated by the above code
-//		     */
-//		    try {
-//			FileOutputStream fos = fileContext.openFileOutput(
-//				fileName, Context.MODE_PRIVATE);
-//			annotationBM.compress(CompressFormat.PNG, 90, fos);
-//		    } catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		    }
-//		} catch (Exception e) {
-//		    e.printStackTrace();
-//		    continue;
-//		}
-//	    }
-//	    sfList.get(i).setAnnotations(annotations);
-//	    sfList.get(i).setPhotos(photos);
-//	}
-//	return story;
-//    }
-//
-//    private int setStoryId(Story story) throws java.io.FileNotFoundException,
-//	    java.io.IOException {
-//	if (story.getOfflineStoryId() < 1) {
-//	    story.setOfflineStoryId(getOfflineStories().size() + 1);
-//	}
-//	return story.getOfflineStoryId();
-//    }
-//
-//    private String createPictureName(int mode, int storyId,
-//	    ArrayList<StoryFragment> sfList, int i, ArrayList<Photo> photos,
-//	    int m) {
-//	String fileName = "";
-//	if (photos.get(m).getPictureName().isEmpty()) {
-//	    if (mode == Save) {
-//		fileName = "Image" + Integer.toString(storyId) + "Fragment"
-//			+ Integer.toString(sfList.get(i).getStoryFragmentId())
-//			+ "Photo" + Integer.toString(m + 1) + ".png";
-//	    }
-//	} else {
-//	    fileName = photos.get(m).getPictureName();
-//	}
-//	return fileName;
-//    }
-//
-//    /**
-//     * This function creates the file name for the annotation
-//     * 
-//     * @param storyId
-//     *            the id of selected story
-//     * @param i
-//     *            the index of storyfragment in storyFragments list
-//     * @param annotations
-//     *            list of annotations
-//     * @param n
-//     *            the index of annotation in annotation list
-//     * @return the string of file name
-//     */
-//    private String createFileName(int storyId, int i,
-//	    ArrayList<Annotation> annotations, int n) {
-//	String fileName;
-//	if (annotations.get(n).getPhoto().isEmpty()) {
-//	    fileName = "Image" + Integer.toString(storyId) + "Fragment"
-//		    + Integer.toString(i + 1) + "Annotation"
-//		    + Integer.toString(n + 1) + ".png";
-//	} else {
-//	    fileName = annotations.get(n).getPhoto();
-//	}
-//	return fileName;
-//    }
 
 }
