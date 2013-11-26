@@ -97,9 +97,9 @@ public class AnnotationController {
      *            The ESHelper object that helps with uploading and saving
      *            images online.
      */
-    public AnnotationController(Activity activity,
-	    Story currentStory, StoryFragment currentStoryFragment,
-	    int currentStoryFragmentIndex, FileHelper fHelper, ESHelper esHelper) {
+    public AnnotationController(Activity activity, Story currentStory,
+	    StoryFragment currentStoryFragment, int currentStoryFragmentIndex,
+	    FileHelper fHelper, ESHelper esHelper) {
 	this.activity = activity;
 	this.context = activity.getApplicationContext();
 	this.currentStory = currentStory;
@@ -145,71 +145,23 @@ public class AnnotationController {
 	/* declare the bitmap */
 	Bitmap pic = null;
 
-	// declare the path string
-	String imgPath = "";
-
-	/* retrieve the string using media data */
-	String[] medData = { MediaStore.Images.Media.DATA };
-
 	/* query the data */
-	Cursor picCursor;
-	try {
-	    picCursor = activity.getContentResolver().query(pickedUri, medData,
-		    null, null, null);
-	} catch (Exception e) {
-	    return null;
-	}
+	Cursor picCursor = getPicCursor(pickedUri);
+	
+	String imgPath = getImageFilePath(pickedUri, picCursor);
+
+	
 	if (picCursor != null) {
 
-	    /* get the path string */
-	    int index = picCursor
-		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 	    picCursor.moveToFirst();
-	    imgPath = picCursor.getString(index);
 	    picCursor.close();
-	} else
-	    imgPath = pickedUri.getPath();
+	}
 
+	setUpBmpOptions(pickedUri);
 	/* if we have a new URI attempt to decode the image bitmap */
 	if (pickedUri != null) {
-
-	    // set the target image size
-	    int targetWidth = 200;
-	    int targetHeight = 150;
-
-	    /* create bitmap options to calculate and use sample size */
-	    BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-
-	    /* first decode image dimensions only */
-	    bmpOptions.inJustDecodeBounds = true;
+	    BitmapFactory.Options bmpOptions = setUpBmpOptions(pickedUri);
 	    BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-	    /* image width and height before sampling */
-	    int currHeight = bmpOptions.outHeight;
-	    int currWidth = bmpOptions.outWidth;
-
-	    /* variable to store new sample size */
-	    int sampleSize = 1;
-
-	    /*
-	     * calculate the sample size if the existing size is larger than
-	     * target size
-	     */
-	    if (currHeight > targetHeight || currWidth > targetWidth) {
-		// use either width or height
-		if (currWidth > currHeight)
-		    sampleSize = Math.round((float) currHeight
-			    / (float) targetHeight);
-		else
-		    sampleSize = Math.round((float) currWidth
-			    / (float) targetWidth);
-	    }
-
-	    /* use the new sample size */
-	    bmpOptions.inSampleSize = sampleSize;
-
-	    /* now decode the bitmap using sample options */
-	    bmpOptions.inJustDecodeBounds = false;
 
 	    /* get the file as a bitmap */
 	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
@@ -239,10 +191,51 @@ public class AnnotationController {
 	return pic;
     }
 
-    /*
+    private String getImageFilePath(Uri pickedUri, Cursor picCursor)
+	    throws java.lang.IllegalArgumentException {
+	String imgPath = "";
+	if (picCursor != null) {
+	    int index = picCursor
+		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+	    imgPath = picCursor.getString(index);
+	} else {
+	    imgPath = pickedUri.getPath();
+	}
+	return imgPath;
+    }
+    
+    private Cursor getPicCursor(Uri pickedUri){
+	
+	/* retrieve the string using media data */
+	String[] medData = { MediaStore.Images.Media.DATA };
+	Cursor picCursor = null;
+	try {
+	    picCursor = activity.getContentResolver().query(pickedUri, medData,
+		    null, null, null);
+	} catch (Exception e) {
+	    return null;
+	}
+	return picCursor;
+    }
+
+    private BitmapFactory.Options setUpBmpOptions(Uri pickedUri) {
+	BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+	bmpOptions.inJustDecodeBounds = true;
+	bmpOptions.inSampleSize = resizing(bmpOptions);
+	bmpOptions.inJustDecodeBounds = false;
+	return bmpOptions;
+    }
+
+    /**
      * Adds the user's Annotation to the Story and saves it either to Offline or
      * Online depending on where they were reading the Story from. If it is
      * Online the Annotation should now be viewable by others.
+     * 
+     * @param fileName
+     *            the FileName assigned to the annotation
+     * @param mode
+     *            the value indicates either the annotation will be (saved
+     *            offline and published online) or only published online
      */
     private void addAnnotation(String fileName, int mode) {
 
@@ -276,7 +269,8 @@ public class AnnotationController {
 	} else if (mode == MODE_MY) {
 	    try {
 		fHelper.updateOfflineStory(currentStory);
-		UpdateFileRecorder.appendUpdateQueue(currentStory.getOfflineStoryId(), context);
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), context);
 	    } catch (FileNotFoundException e) {
 		e.printStackTrace();
 	    } catch (IOException e) {
@@ -314,6 +308,30 @@ public class AnnotationController {
 
 	} catch (IOException e) {
 	    e.printStackTrace();
+	}
+    }
+
+    private int resizing(BitmapFactory.Options bmpOptions) {
+	/* image width and height before sampling */
+	int currHeight = bmpOptions.outHeight;
+	int currWidth = bmpOptions.outWidth;
+
+	// set the target image size
+	int targetWidth = 200;
+	int targetHeight = 150;
+
+	/*
+	 * calculate the sample size if the existing size is larger than target
+	 * size
+	 */
+	if (currHeight > targetHeight || currWidth > targetWidth) {
+	    // use either width or height
+	    if (currWidth > currHeight)
+		return (Math.round((float) currHeight / (float) targetHeight));
+	    else
+		return (Math.round((float) currWidth / (float) targetWidth));
+	} else {
+	    return 1;
 	}
     }
 }
