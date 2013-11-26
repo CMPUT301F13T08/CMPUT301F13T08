@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background = "@drawable/old_paper3" >
+    android:background="@drawable/old_paper3" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,13 +26,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/picture" />
-
-        <CheckBox
-            android:id="@+id/checkbox_randomChoice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckboxClickedRandomChoice"
-            android:text="@string/random_choice_checkbox" />
 
         <EditText
             android:id="@+id/headerDialogue"
@@ -64,13 +57,20 @@
             android:text="@string/choices_"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
-        
+
         <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="200dip"
             android:focusableInTouchMode="true" >
         </ListView>
+
+        <CheckBox
+            android:id="@+id/checkbox_randomChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClickedRandomChoice"
+            android:text="@string/random_choice_checkbox" />
     </LinearLayout>
 
 </ScrollView>
