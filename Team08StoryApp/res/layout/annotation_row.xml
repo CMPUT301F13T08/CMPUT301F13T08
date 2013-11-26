@@ -13,10 +13,4 @@
         android:maxWidth="300dp"
         android:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:id="@+id/annotationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/textview" />
-
 </LinearLayout>

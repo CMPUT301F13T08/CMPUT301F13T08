@@ -37,6 +37,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 /**
@@ -70,12 +71,29 @@ public class AnnotationViewActivity extends Activity {
 	lv = (ListView) findViewById(android.R.id.list);
 	lv.setAdapter(new AnnotationAdapter(this, android.R.id.list, aList));
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	/* Inflate the menu; this adds items to the action bar if it is present. */
-	getMenuInflater().inflate(R.menu.annotation_view, menu);
-	return true;
+	/*
+	 * Inflate the menu; this adds items to the action bar if they are
+	 * present.
+	 */
+	getMenuInflater().inflate(R.menu.annotation, menu);
+	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	if (item.getItemId() == R.id.help) {
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(AnnotationViewActivity.this);
+	    help.showDialog();
+	    return true;
+	}
+	return super.onOptionsItemSelected(item);
     }
 
 }

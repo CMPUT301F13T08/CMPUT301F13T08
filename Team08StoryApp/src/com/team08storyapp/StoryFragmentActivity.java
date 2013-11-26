@@ -300,7 +300,7 @@ public class StoryFragmentActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
 	/* Inflate the menu; this adds items to the action bar if it is present. */
-	getMenuInflater().inflate(R.menu.annotation_action_bar, menu);
+	getMenuInflater().inflate(R.menu.story_fragment, menu);
 	return super.onCreateOptionsMenu(menu);
     }
 
