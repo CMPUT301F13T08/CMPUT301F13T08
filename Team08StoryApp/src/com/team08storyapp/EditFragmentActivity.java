@@ -278,7 +278,8 @@ public class EditFragmentActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	// Handle item selection
+	
+	/* Handle item selection */
 	switch (item.getItemId()) {
 	case R.id.camIllus:
 	    Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -312,6 +313,7 @@ public class EditFragmentActivity extends Activity {
 	    try {
 		String dialogue = textSection.getText().toString();
 		currentStoryFragment.setStoryText(dialogue);
+		
 		/*
 		 * Replace the current fragment in the story object, to include
 		 * changes made to it's text or illustrations. If the fragment
@@ -357,18 +359,6 @@ public class EditFragmentActivity extends Activity {
 	    return super.onOptionsItemSelected(item);
 	}
     }
-
-    /**
-     * fillChoice() fills the listview in this activity with passed choice list.
-     * The choice list is from the current story fragment. And this function is
-     * called either when the activity is on create or on resume, because when
-     * the activity is on resume, the choice list of current fragment may be
-     * changed.
-     * 
-     * @param cList
-     *            cList is an ArrayList of Choice objects, and it's from the
-     *            choice list of current story fragment
-     */
 
     private void fillChoice(ArrayList<Choice> cList) {
 	adapter = new ChoiceAdapter(this, android.R.id.list, cList);
