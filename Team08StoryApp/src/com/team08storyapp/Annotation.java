@@ -41,12 +41,16 @@ import java.io.Serializable;
  * <li>Story Fragment Id the Id identified with the Story Fragment the
  * Annotation belongs to.
  * <li>Photo the photo the reader set in the Annotation.
- * <li>Text the text the reader set in the Annotation.
  * <li>Encoded Annotation is the Annotation encoded for storing it in a file or
  * on a webservice.
  * </ul>
  * These properties are able to be accessed through the constructor or through
  * public getters/setters.
+ * 
+ * A user while reading a Story online or offline has the option to view or add
+ * Annotations to each Story Fragment they read. The Annotation is created in
+ * the form of a illustration or photo. The user can either add this by taking a
+ * picture or uploading it from their phones gallery.
  * 
  * @see StoryFragment
  * @see Photo

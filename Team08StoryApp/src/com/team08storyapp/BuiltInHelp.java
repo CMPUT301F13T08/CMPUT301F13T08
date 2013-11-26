@@ -180,137 +180,67 @@ public class BuiltInHelp {
 
     /* Sets up the help text to display for the Annotation screen. */
     private void setAnnotationHelp() {
-	this.helpTitle = "Annotation Help";
-	this.helpText = "<b>Viewing Annotations</b>"
-		+ "<br>Swipe down/up on the screen to scroll through the annotations.<br>"
-		+ "<br><b>Back Button</b>"
-		+ "<br>Click to return to the Story.";
+	this.helpTitle = activity.getString(R.string.annotation_help_title);
+	this.helpText = activity.getString(R.string.annotation_help_text);
     }
 
     /* Sets up the help text to display for the Edit Story Fragment screen. */
     private void setEditFragmentHelp() {
-	this.helpTitle = "Edit Story Fragment Help";
-	this.helpText = "<b>Action Bar Options</b>"
-		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Add illustration (Camera)</b> - Select this to use the camera to add a picture to the photo gallery of the story fragment.<br>"
-		+ "<br>	• <b>Add illustration (Gallery)</b> - Select this to chose a picture for the phones photo gallery for adding to the photo gallery of the story fragment.<br>"
-		+ "<br>	• <b>Add Choice</b> - Select this to add a choice to the Story Fragment.<br>"
-		+ "<br>	• <b>Save</b> - Select this to save the Story Fragment and return to the Story's Story Fragment List.<br>";
+	this.helpTitle = activity.getString(R.string.edit_story_fragment_help_title);
+	this.helpText = activity.getString(R.string.edit_story_fragment_help_text);
     }
 
     /* Sets up the help text to display for the Edit Choice screen. */
     private void setEditChoiceHelp() {
-	this.helpTitle = "Edit Choice Help";
-	this.helpText = "<b>Choice Text</b>"
-		+ "<br>Write in the box the statment that should be displayed to the reader when deciding on a choice to chose.<br>"
-		+ "<br><b>\"Link Next Story Fragment\" Button</b>"
-		+ "<br>Click this button to chose a Story Fragment to link the choice to.<br>"
-		+ "<br><b>Save Button</b>"
-		+ "<br>Click this button to save the choice and return to the Editing/Creating the Story Fragment.<br>";
+	this.helpTitle = activity.getString(R.string.edit_choice_help_title);
+	this.helpText = activity.getString(R.string.edit_choice_help_text);
     }
 
     /* Sets up the help text to display for the Main Menu screen. */
     private void setMainMenuHelp() {
-	this.helpTitle = "Main Menu Help";
-	this.helpText = "<B>Read Online Stories Button</B>"
-		+ "<br>Click to display the list of Stories available to read from the online webservice.<br>"
-		+ "<br><B>Read Downloaded Stories Button</B>"
-		+ "<br>Click to display the list of Stories available to read that are local stored on the device.<br>"
-		+ "<br><B>My Stories Button</B>"
-		+ "<br>Click to display the list of Stories you are creating.<br>";
+	this.helpTitle = activity.getString(R.string.main_menu_help_title);
+	this.helpText = activity.getString(R.string.main_menu_help_text);
     }
 
     /* Sets up the help text to display for the My Stories screen. */
     private void setMyStoriesHelp() {
-	this.helpTitle = "My Stories Help";
-	this.helpText = "<b>Action Bar Options</b>"
-		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
-		+ "<br><b>Search Function</b>"
-		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
-		+ "<br><b>List of Stories </b>"
-		+ "<br>Displays all stories created by the author or the created stories resulting from the search."
-		+ "<br><br>By long pressing on a story in the list, a popup menu appears with the following options:"
-		+ "<br>	• <b>Publish</b> - Select this will publish the story online for all users to read.<br>"
-		+ "<br>	• <b>Read</b> - Select this to start reading the Story.<br>"
-		+ "<br>	• <b>Edit</b> - Select this to edit the Story. This will display the list of Story Fragments that make up the Story for editing.<br>"
-		+ "<br><b>Create New Story Button</b>"
-		+ "<br>Click this to start creating a new Story.<br>";
+	this.helpTitle = activity.getString(R.string.my_stories_help_title);
+	this.helpText = activity.getString(R.string.my_stories_help_text);
     }
 
     /* Sets up the help text to display for the New Story screen. */
     private void setNewStoryHelp() {
-	this.helpTitle = "New Story Help";
-	this.helpText = "<b>Action Bar Options</b>"
-		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
-		+ "<br><b>Title Text</b>"
-		+ "<br>Write the Title of the new Story in this box.<br>"
-		+ "<br><b>Author Text</b>"
-		+ "<br>Write the Author of the new Story in this box.<br>"
-		+ "<br><b>Save Button</b>"
-		+ "<br>Click this to save the Title and Author of the Story and move to creating the first Story Fragment.<br>";
+	this.helpTitle = activity.getString(R.string.new_story_help_title);
+	this.helpText = activity.getString(R.string.my_stories_help_text);
     }
 
     /* Sets up the help text to display for the Offline Story Listing screen. */
     private void setOfflineStoryHelp() {
-	this.helpTitle = "Downloaded Stories Help";
-	this.helpText = "<b>Action Bar Options</b>"
-		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
-		+ "<br><b>Search Function</b>"
-		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
-		+ "<br><b>List of Stories </b>"
-		+ "<br>Displays all stories stored downloaded or the stories resulting from the search."
-		+ "<br><br>By selecting a story it will be displayed for reading.<br>"
-		+ "<br><b>\"I'm Feeling Lucky\" Button</b>"
-		+ "<br>Click to pick a story at random to start reading.<br>";
+	this.helpTitle = activity.getString(R.string.downloaded_stories_help_title);
+	this.helpText = activity.getString(R.string.my_stories_help_text);
     }
 
     /* Sets up the help text to display for the Online Story Listing screen. */
     private void setOnlineStoryHelp() {
-	this.helpTitle = "Online Stories Help";
-	this.helpText = "<b>Action Bar Options</b>"
-		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
-		+ "<br><b>Search Function</b>"
-		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
-		+ "<br><b>List of Stories </b>"
-		+ "<br>Displays all stories stored online or the stories resulting from the search."
-		+ "<br><br>By long pressing on a story in the list, a popup menu appears with the following options:"
-		+ "<br>	• <b>Download</b> - Select this to download the Story to the devices local memory."
-		+ "<br>	• <b>Read</b> - Select this to start reading the Story.<br>"
-		+ "<br><b>\"I'm Feeling Lucky\" Button</b>"
-		+ "<br>Click to pick a story at random to start reading.<br>";
+	this.helpTitle = activity.getString(R.string.online_stories_help_title);
+	this.helpText = activity.getString(R.string.online_stories_help_text);
     }
 
     /* Sets up the help text to display for the Select Story Fragment screen. */
     private void setSelectFragmentHelp() {
-	this.helpTitle = "Selecting Story Fragment Help";
-	this.helpText = "<b>List of the Story's Story Fragments</b>"
-		+ "<br>Displays the list of the current Story's Story Fragments to the user for linking to a choice, except the Story Fragment the Choice is being added to.<br>"
-		+ "<br>Selecting a Story Fragment from the list will link it to the Choice and return you to the Edit/Add Choice screen.<br>";
+	this.helpTitle = activity.getString(R.string.selecting_story_fragment_title);
+	this.helpText = activity.getString(R.string.selecting_story_fragment_text);
     }
 
     /* Sets up the help text to display for the Reading of a Story. */
     private void setReadStoryHelp() {
-	this.helpTitle = "Story Reading Help";
-	this.helpText = "<b>Action Bar Options</b>"
-		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Annotations</b> - This is the icon that looks like a little picture. Click it to go to the annotation screen where you can view user annotations or provide your own."
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.";
+	this.helpTitle = activity.getString(R.string.story_reading_help_title);
+	this.helpText = activity.getString(R.string.story_reading_help_text);
     }
 
     /* Sets up the help text to display for the Story Fragment Listing screen. */
     private void setStoryFragmentListHelp() {
-	this.helpTitle = "Story Fragment List Help";
-	this.helpText = "<b>Action Bar Options</b>"
-		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Return to Main Menu</b> - This is located in the drop down menu and will return you to the main menu screen.<br>"
-		+ "<br><b>List of the Story's Story Fragments </b>"
-		+ "<br>Displays the list of the current Story's Story Fragments.<br>"
-		+ "<br>Selecting a Story Fragment will lead to the Edit Story Fragment screen where it can be edited.<br>"
-		+ "<br><b>Create Story Fragment Button</b>"
-		+ "<br>Click this to start creating a Story Fragment for use in the Story.<br>";
+	this.helpTitle = activity.getString(R.string.story_fragment_list_help_title);
+	this.helpText = activity.getString(R.string.story_fragment_list_help_text);
     }
 }
