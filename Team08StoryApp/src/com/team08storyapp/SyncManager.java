@@ -81,7 +81,7 @@ public class SyncManager {
 	ESHelper esHelper = new ESHelper();
 
 	/* check if a sync should be performed and can be performed */
-	if (fHelper.getUpdateFilesIds().size() > 0
+	if (UpdateFileRecorder.getUpdateFilesIds(context).size() > 0
 		&& InternetDetector.connectedToInternet(context)) {
 	    UpdateToolPackage utp1 = new UpdateToolPackage(fHelper, esHelper,
 		    context);

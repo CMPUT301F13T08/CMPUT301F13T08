@@ -228,7 +228,8 @@ public class OfflineStoriesActivity extends ListActivity {
 	     * format
 	     */
 	    try {
-		currentStory = fHelper.decodeStory(randomStory, 0);
+		Decoder decoder = new Decoder(this);
+		currentStory = decoder.decodeStory(randomStory, 0);
 	    } catch (IOException e) {
 		Log.d(TAG, e.getLocalizedMessage());
 	    } catch (Exception e) {
