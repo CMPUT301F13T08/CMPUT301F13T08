@@ -204,22 +204,7 @@ public class OfflineStoriesActivity extends ListActivity {
      *            user.
      */
     public void onClickFeelingLuckButton(View view) {
-	Story randomStory = null;
-
-	/* Generate and get a random Story for the user */
-	try {
-	    ArrayList<Story> storyList = fHelper.getOfflineStories();
-	    if (storyList.size() > 0) {
-		int randomStoryIndex = StoryController.feelingLucky(storyList
-			.size());
-		randomStory = storyList.get(randomStoryIndex);
-	    }
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-
+	Story randomStory = getRandomStory();
 	if (randomStory != null) {
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
@@ -249,6 +234,23 @@ public class OfflineStoriesActivity extends ListActivity {
 	     */
 	    startActivity(firstStoryFragment);
 	}
+    }
+
+    private Story getRandomStory() {
+	Story randomStory = null;
+	try {
+	    ArrayList<Story> storyList = fHelper.getOfflineStories();
+	    if (storyList.size() > 0) {
+		int randomStoryIndex = StoryController.feelingLucky(storyList
+			.size());
+		randomStory = storyList.get(randomStoryIndex);
+	    }
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	return randomStory;
     }
 
 }

@@ -145,23 +145,71 @@ public class AnnotationController {
 	/* declare the bitmap */
 	Bitmap pic = null;
 
-	/* query the data */
-	Cursor picCursor = getPicCursor(pickedUri);
-	
-	String imgPath = getImageFilePath(pickedUri, picCursor);
+	// declare the path string
+	String imgPath = "";
 
-	
+	/* retrieve the string using media data */
+	String[] medData = { MediaStore.Images.Media.DATA };
+
+	/* query the data */
+	Cursor picCursor;
+	try {
+	    picCursor = activity.getContentResolver().query(pickedUri, medData,
+		    null, null, null);
+	} catch (Exception e) {
+	    return null;
+	}
 	if (picCursor != null) {
 
+	    /* get the path string */
+	    int index = picCursor
+		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 	    picCursor.moveToFirst();
+	    imgPath = picCursor.getString(index);
 	    picCursor.close();
-	}
+	} else
+	    imgPath = pickedUri.getPath();
 
-	setUpBmpOptions(pickedUri);
 	/* if we have a new URI attempt to decode the image bitmap */
 	if (pickedUri != null) {
-	    BitmapFactory.Options bmpOptions = setUpBmpOptions(pickedUri);
+
+	    // set the target image size
+	    int targetWidth = 200;
+	    int targetHeight = 150;
+
+	    /* create bitmap options to calculate and use sample size */
+	    BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+
+	    /* first decode image dimensions only */
+	    bmpOptions.inJustDecodeBounds = true;
 	    BitmapFactory.decodeFile(imgPath, bmpOptions);
+
+	    /* image width and height before sampling */
+	    int currHeight = bmpOptions.outHeight;
+	    int currWidth = bmpOptions.outWidth;
+
+	    /* variable to store new sample size */
+	    int sampleSize = 1;
+
+	    /*
+	     * calculate the sample size if the existing size is larger than
+	     * target size
+	     */
+	    if (currHeight > targetHeight || currWidth > targetWidth) {
+		// use either width or height
+		if (currWidth > currHeight)
+		    sampleSize = Math.round((float) currHeight
+			    / (float) targetHeight);
+		else
+		    sampleSize = Math.round((float) currWidth
+			    / (float) targetWidth);
+	    }
+
+	    /* use the new sample size */
+	    bmpOptions.inSampleSize = sampleSize;
+
+	    /* now decode the bitmap using sample options */
+	    bmpOptions.inJustDecodeBounds = false;
 
 	    /* get the file as a bitmap */
 	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
@@ -189,41 +237,6 @@ public class AnnotationController {
 	 */
 	addAnnotation(fileName, mode);
 	return pic;
-    }
-
-    private String getImageFilePath(Uri pickedUri, Cursor picCursor)
-	    throws java.lang.IllegalArgumentException {
-	String imgPath = "";
-	if (picCursor != null) {
-	    int index = picCursor
-		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-	    imgPath = picCursor.getString(index);
-	} else {
-	    imgPath = pickedUri.getPath();
-	}
-	return imgPath;
-    }
-    
-    private Cursor getPicCursor(Uri pickedUri){
-	
-	/* retrieve the string using media data */
-	String[] medData = { MediaStore.Images.Media.DATA };
-	Cursor picCursor = null;
-	try {
-	    picCursor = activity.getContentResolver().query(pickedUri, medData,
-		    null, null, null);
-	} catch (Exception e) {
-	    return null;
-	}
-	return picCursor;
-    }
-
-    private BitmapFactory.Options setUpBmpOptions(Uri pickedUri) {
-	BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-	bmpOptions.inJustDecodeBounds = true;
-	bmpOptions.inSampleSize = resizing(bmpOptions);
-	bmpOptions.inJustDecodeBounds = false;
-	return bmpOptions;
     }
 
     /**
@@ -308,30 +321,6 @@ public class AnnotationController {
 
 	} catch (IOException e) {
 	    e.printStackTrace();
-	}
-    }
-
-    private int resizing(BitmapFactory.Options bmpOptions) {
-	/* image width and height before sampling */
-	int currHeight = bmpOptions.outHeight;
-	int currWidth = bmpOptions.outWidth;
-
-	// set the target image size
-	int targetWidth = 200;
-	int targetHeight = 150;
-
-	/*
-	 * calculate the sample size if the existing size is larger than target
-	 * size
-	 */
-	if (currHeight > targetHeight || currWidth > targetWidth) {
-	    // use either width or height
-	    if (currWidth > currHeight)
-		return (Math.round((float) currHeight / (float) targetHeight));
-	    else
-		return (Math.round((float) currWidth / (float) targetWidth));
-	} else {
-	    return 1;
 	}
     }
 }

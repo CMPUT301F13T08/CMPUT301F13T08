@@ -105,9 +105,6 @@ public class StoryFragmentActivity extends Activity {
 	/* Initialize esHelper */
 	esHelper = new ESHelper();
 
-	/* Initialize fHelper to Download mode */
-	fHelper = new FileHelper(this, 0);
-
 	SyncManager.sync(this);
 
 	/* set up background layout */
@@ -187,6 +184,9 @@ public class StoryFragmentActivity extends Activity {
 	 * crucial because it determines the way that app stores the annotation.
 	 */
 	mode = storyFragment.getIntExtra("mode", 0);
+	
+	/* Initialize fHelper to Download mode */
+	fHelper = new FileHelper(this, mode);
 
 	/*
 	 * Get the story object from the intent See source [7]
@@ -277,11 +277,12 @@ public class StoryFragmentActivity extends Activity {
 	 * then set the button to be visible
 	 */
 	if (currentStoryFragment.getRandomChoice() == 1) {
-	    
-	    /* If the current Story fragment doesn't have any choices then button
-	     * is set to be invisible
+
+	    /*
+	     * If the current Story fragment doesn't have any choices then
+	     * button is set to be invisible
 	     */
-	    if(currentStoryFragment.getChoices().size() == 0){
+	    if (currentStoryFragment.getChoices().size() == 0) {
 		rCButton.setVisibility(View.INVISIBLE);
 	    }
 	    rCButton.setVisibility(View.VISIBLE);
@@ -329,7 +330,8 @@ public class StoryFragmentActivity extends Activity {
 	case R.id.action_mainmenu:
 	    Intent mainIntent = new Intent(getApplicationContext(),
 		    MainActivity.class);
-	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	default:
 	    return super.onOptionsItemSelected(item);
@@ -401,14 +403,13 @@ public class StoryFragmentActivity extends Activity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (resultCode == RESULT_OK) {
-
-	    SyncManager.sync(this);
-
+	    // saveAnnotationImage(data);
 	    /* the returned picture URI */
 	    Uri pickedUri = data.getData();
 	    AnnotationController ac = new AnnotationController(this,
 		    currentStory, currentStoryFragment,
 		    currentStoryFragmentIndex, fHelper, esHelper);
+	    System.out.println("In Mode:" + mode);
 	    ac.savePhoto(pickedUri, mode);
 	    try {
 		currentStory = fHelper.getOfflineStory(currentStoryId);
@@ -417,6 +418,7 @@ public class StoryFragmentActivity extends Activity {
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
+	    SyncManager.sync(this);
 	} else {
 	    System.out.println("Not sure what's happening!");
 
@@ -426,15 +428,16 @@ public class StoryFragmentActivity extends Activity {
     }
 
     /**
-     * This method is called when the random choice button is clicked which randomly chooses
-     * a choice for the user and takes them to the fragment related to that choice. It will
-     * get a random story fragment from the list of possible choices and pass this to the next 
-     * activity for displaying to the user. Once this is completed the user should be presented
-     * with a random fragment page selected from one of the possible choices of the previous 
-     * fragment.
+     * This method is called when the random choice button is clicked which
+     * randomly chooses a choice for the user and takes them to the fragment
+     * related to that choice. It will get a random story fragment from the list
+     * of possible choices and pass this to the next activity for displaying to
+     * the user. Once this is completed the user should be presented with a
+     * random fragment page selected from one of the possible choices of the
+     * previous fragment.
      * 
      * @param view
-     * 		The screen of a story fragment.
+     *            The screen of a story fragment.
      */
     public void onClickRandomChoice(View view) {
 	ArrayList<Choice> choiceList = currentStoryFragment.getChoices();
@@ -455,6 +458,15 @@ public class StoryFragmentActivity extends Activity {
 	 * was randomly chosen
 	 */
 	startActivity(randomStoryFragment);
+    }
+
+    private void saveAnnotationImage(Intent data) {
+	/* the returned picture URI */
+	Uri pickedUri = data.getData();
+	AnnotationController ac = new AnnotationController(this, currentStory,
+		currentStoryFragment, currentStoryFragmentIndex, fHelper,
+		esHelper);
+	ac.savePhoto(pickedUri, mode);
     }
 
 }

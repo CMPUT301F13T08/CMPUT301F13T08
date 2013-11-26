@@ -162,18 +162,7 @@ public class ESHelper {
 	/* set the object to add into the httppost */
 	httpPost.setEntity(stringentity);
 
-	/* execute the httpclient to post the object to the webservice */
-	HttpResponse response = null;
-	try {
-	    response = httpclient.execute(httpPost);
-	} catch (ClientProtocolException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	    return 0;
-	} catch (IOException e) {
-	    Log.d(TAG, e.getLocalizedMessage());
-	    return 0;
-	}
-
+	HttpResponse response = getHttpResponse(httpPost);
 	/* Retrieve and print to the log cat the status result of the post */
 	String status = response.getStatusLine().toString();
 	Log.d(TAG, status);
@@ -201,6 +190,18 @@ public class ESHelper {
 	 * object added or updated
 	 */
 	return story.getOnlineStoryId();
+    }
+
+    private HttpResponse getHttpResponse(HttpPost httpPost) {
+	HttpResponse response = null;
+	try {
+	    response = httpclient.execute(httpPost);
+	} catch (ClientProtocolException e) {
+	    Log.d(TAG, e.getLocalizedMessage());
+	} catch (IOException e) {
+	    Log.d(TAG, e.getLocalizedMessage());
+	}
+	return response;
     }
 
     /**
