@@ -109,6 +109,76 @@ public class AnnotationController {
 	this.esHelper = esHelper;
     }
 
+    private String createFileName() {
+	return "Image"
+		+ Integer.toString(currentStory.getOfflineStoryId())
+		+ "Fragment"
+		+ Integer.toString(currentStoryFragment.getStoryFragmentId())
+		+ "Annotation"
+		+ Integer
+			.toString(currentStoryFragment.getAnnotations().size() + 1)
+		+ ".png";
+    }
+
+    private Cursor getPicCursor(Uri pickedUri){
+	/* retrieve the string using media data */
+	String[] medData = { MediaStore.Images.Media.DATA };
+	try {
+	    return activity.getContentResolver().query(pickedUri, medData,
+		    null, null, null);
+	} catch (Exception e) {
+	    return null;
+	}
+    }
+    
+    private String getImagePath(Uri pickedUri) {
+
+	String imgPath = "";
+	/* query the data */
+	Cursor picCursor = getPicCursor(pickedUri);
+	
+	if (picCursor != null) {
+
+	    /* get the path string */
+	    int index = picCursor
+		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+	    picCursor.moveToFirst();
+	    imgPath = picCursor.getString(index);
+	    picCursor.close();
+	} else {
+	    imgPath = pickedUri.getPath();
+	}
+
+	return imgPath;
+    }
+
+    private int resize(BitmapFactory.Options bmpOptions) {
+	// set the target image size
+	int targetWidth = 200;
+	int targetHeight = 150;
+
+	/* image width and height before sampling */
+	int currHeight = bmpOptions.outHeight;
+	int currWidth = bmpOptions.outWidth;
+
+	/*
+	 * calculate the sample size if the existing size is larger than target
+	 * size
+	 */
+	if (currHeight > targetHeight || currWidth > targetWidth) {
+	    // use either width or height
+	    if (currWidth > currHeight)
+		return Math.round((float) currHeight
+			/ (float) targetHeight);
+	    else
+		return Math
+			.round((float) currWidth / (float) targetWidth);
+	}else{
+	    return 1;
+	}
+
+    }
+
     /**
      * SavePhoto is the function where resizing, saving the illustration, and
      * updating the current fragment are performed in order.
@@ -133,49 +203,16 @@ public class AnnotationController {
     public Bitmap savePhoto(Uri pickedUri, int mode) {
 
 	// create the fileName for the image
-	String fileName = "Image"
-		+ Integer.toString(currentStory.getOfflineStoryId())
-		+ "Fragment"
-		+ Integer.toString(currentStoryFragment.getStoryFragmentId())
-		+ "Annotation"
-		+ Integer
-			.toString(currentStoryFragment.getAnnotations().size() + 1)
-		+ ".png";
+	String fileName = createFileName();
 
 	/* declare the bitmap */
 	Bitmap pic = null;
 
 	// declare the path string
-	String imgPath = "";
-
-	/* retrieve the string using media data */
-	String[] medData = { MediaStore.Images.Media.DATA };
-
-	/* query the data */
-	Cursor picCursor;
-	try {
-	    picCursor = activity.getContentResolver().query(pickedUri, medData,
-		    null, null, null);
-	} catch (Exception e) {
-	    return null;
-	}
-	if (picCursor != null) {
-
-	    /* get the path string */
-	    int index = picCursor
-		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-	    picCursor.moveToFirst();
-	    imgPath = picCursor.getString(index);
-	    picCursor.close();
-	} else
-	    imgPath = pickedUri.getPath();
+	String imgPath = getImagePath(pickedUri);
 
 	/* if we have a new URI attempt to decode the image bitmap */
 	if (pickedUri != null) {
-
-	    // set the target image size
-	    int targetWidth = 200;
-	    int targetHeight = 150;
 
 	    /* create bitmap options to calculate and use sample size */
 	    BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
@@ -184,29 +221,8 @@ public class AnnotationController {
 	    bmpOptions.inJustDecodeBounds = true;
 	    BitmapFactory.decodeFile(imgPath, bmpOptions);
 
-	    /* image width and height before sampling */
-	    int currHeight = bmpOptions.outHeight;
-	    int currWidth = bmpOptions.outWidth;
-
-	    /* variable to store new sample size */
-	    int sampleSize = 1;
-
-	    /*
-	     * calculate the sample size if the existing size is larger than
-	     * target size
-	     */
-	    if (currHeight > targetHeight || currWidth > targetWidth) {
-		// use either width or height
-		if (currWidth > currHeight)
-		    sampleSize = Math.round((float) currHeight
-			    / (float) targetHeight);
-		else
-		    sampleSize = Math.round((float) currWidth
-			    / (float) targetWidth);
-	    }
-
 	    /* use the new sample size */
-	    bmpOptions.inSampleSize = sampleSize;
+	    bmpOptions.inSampleSize = resize(bmpOptions);
 
 	    /* now decode the bitmap using sample options */
 	    bmpOptions.inJustDecodeBounds = false;
