@@ -73,12 +73,8 @@ public class MyStoriesActivity extends ListActivity {
     private static final int PUBLISH_ID = Menu.FIRST;
     private static final int READ_ID = Menu.FIRST + 1;
     private static final int EDIT_ID = Menu.FIRST + 2;
-    private static final boolean onUpdate = true;
-    private static final boolean onCreate = false;
-
     private ESHelper esHelper;
     private FileHelper fHelper;
-    private View header;
     private EditText et;
     private String searchText;
     private ListView lv;
@@ -90,10 +86,7 @@ public class MyStoriesActivity extends ListActivity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_my_stories);
 	lv = (ListView) findViewById(android.R.id.list);
-	header = getLayoutInflater().inflate(R.layout.header_search, null);
-	Button searchButton = (Button) header.findViewById(R.id.searchButton);
-	et = (EditText) header.findViewById(R.id.searchText);
-	et.setHintTextColor(0xff000000);
+	et = (EditText) findViewById(R.id.search);
 
 	fHelper = new FileHelper(this, 1);
 	esHelper = new ESHelper();
@@ -101,35 +94,46 @@ public class MyStoriesActivity extends ListActivity {
 	SyncManager.sync(this);
 
 	try {
-	    ArrayList<Story> temp = fHelper.getOfflineStories();
-	    fillData(temp, onCreate);
+	    fillData(fHelper.getOfflineStories());
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-
-	searchButton.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View v) {
-		searchText = et.getText().toString();
-		if (searchText != null && searchText != "") {
-		    fillData(fHelper.searchOfflineStories(searchText), onUpdate);
-		} else {
-		    try {
-			fillData(fHelper.getOfflineStories(), onUpdate);
-		    } catch (FileNotFoundException e) {
-			e.printStackTrace();
-		    } catch (IOException e) {
-			e.printStackTrace();
-		    }
-		}
-
-	    }
-	});
 	registerForContextMenu(getListView());
     }
 
+    /**
+     * This method is called from a button click that allows the user to search
+     * through the list of online Stories. They must have a search string
+     * entered into the search text area. If they do not it will just return the
+     * full list of online stories. If they have a search string that is
+     * contained within a title or author of any online story, that story will
+     * be displayed in the list for the user to chose from.
+     * 
+     * This method uses ElasticSearch (@link http://www.elasticsearch.org/) to
+     * search the webservice for the online Stories.
+     * 
+     * @see ESHelper
+     * 
+     * @param view
+     *            The screen used to display the Online Story list for the user.
+     */
+    public void onClickSearchButton(View view) {
+	searchText = et.getText().toString();
+	if (searchText != null && searchText != "") {
+	    fillData(fHelper.searchOfflineStories(searchText));
+	} else {
+	    try {
+		fillData(fHelper.getOfflineStories());
+	    } catch (FileNotFoundException e) {
+		e.printStackTrace();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	}
+    }
+    
     public void onCreateContextMenu(ContextMenu menu, View v,
 	    ContextMenuInfo menuInfo) {
 	super.onCreateContextMenu(menu, v, menuInfo);
@@ -216,10 +220,7 @@ public class MyStoriesActivity extends ListActivity {
      * @param update
      *            A flag that indicates if a footer/header already exists.
      */
-    private void fillData(ArrayList<Story> sList, boolean update) {
-	if (!update) {
-	    lv.addHeaderView(header);
-	}
+    private void fillData(ArrayList<Story> sList) {
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
 
@@ -228,7 +229,7 @@ public class MyStoriesActivity extends ListActivity {
 	    Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
 	try {
-	    fillData(fHelper.getOfflineStories(), onUpdate);
+	    fillData(fHelper.getOfflineStories());
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
@@ -255,7 +256,7 @@ public class MyStoriesActivity extends ListActivity {
     protected void onResume() {
 	super.onResume();
 	try {
-	    fillData(fHelper.getOfflineStories(), onUpdate);
+	    fillData(fHelper.getOfflineStories());
 	    SyncManager.sync(this);
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
