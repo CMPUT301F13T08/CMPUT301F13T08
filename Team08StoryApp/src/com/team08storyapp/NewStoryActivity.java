@@ -157,33 +157,11 @@ public class NewStoryActivity extends Activity {
 	return false;
     }
 
-    /**
-     * return a newStory to edit
-     * 
-     * @param author
-     *            The string of author of the new story
-     * @param title
-     *            The string of title of the new story
-     */
     private void setNewStoryInfo(String author, String title) {
 	newStory = new Story(title, author);
 	newStory.setFirstStoryFragmentId(1);
     }
 
-    /**
-     * isBlank is called when testing if the author or title field is blank. By
-     * blank, this function defines a string is blank as it contains only
-     * whitespace or newline characters or "is empty" or null.
-     * 
-     * 
-     * @param str
-     *            the string that needs to be tested to see if it contains
-     *            alphabets or numbers or other symbols
-     * @return bool a boolean value that indicate if the string is blank or not.
-     *         if it's true, then the string is only newline characters,
-     *         whitespace. otherwise, when returning a false, it means the
-     *         string is not blank.
-     */
     private boolean isBlank(String str) {
 	int strLen;
 	if ((str == null) || ((strLen = str.length()) == 0))
