@@ -72,9 +72,11 @@ public class testEditFragmentActivity extends
 	storyFragments.add(storyFragment);
 	storyFragments.add(secondFragment);
 
-	story = new Story(1, "title", "author");
+	story = new Story("title", "author");
 
 	story.setFirstStoryFragmentId(1);
+	story.setOfflineStoryId(1);
+	story.setOnlineStoryId(1);
 	story.setStoryFragments(storyFragments);
 
 	Intent intent = new Intent();
@@ -90,8 +92,9 @@ public class testEditFragmentActivity extends
 	picAdapter = new PicAdapter(activity.getApplicationContext(),
 		storyFragment.getPhotos(), 1, 1);
 
-	// choiceAdapter = new ChoiceAdapter(activity, android.R.id.list,
-	// storyFragment.getChoices());
+	choiceAdapter = new ChoiceAdapter(activity, android.R.id.list,
+		storyFragment.getChoices());
+
 	listView = (ListView) activity.findViewById(android.R.id.list);
 
 	editText = (EditText) activity.findViewById(R.id.headerDialogue);
@@ -130,16 +133,14 @@ public class testEditFragmentActivity extends
 		((Choice) listView.getItemAtPosition(1)).getText());
     }
 
-    /*
-     * public void testChoiceAdapterItem(){
-     * 
-     * assertNotNull(choiceAdapter.getItem(0));
-     * assertEquals(choiceAdapter.getItem(0), 0);
-     * 
-     * assertNotNull(choiceAdapter.getItem(1));
-     * assertEquals(choiceAdapter.getItem(1), 1);
-     * 
-     * }
-     */
+    public void testChoiceAdapterItem() {
+
+	assertNotNull(choiceAdapter.getItem(0));
+	assertEquals(choiceAdapter.getItem(0), 0);
+
+	assertNotNull(choiceAdapter.getItem(1));
+	assertEquals(choiceAdapter.getItem(1), 1);
+
+    }
 
 }

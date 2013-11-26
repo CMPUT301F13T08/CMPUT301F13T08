@@ -352,8 +352,9 @@ public class EditFragmentActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(EditFragmentActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(EditFragmentActivity.this,
+		    getString(R.string.edit_story_fragment_help_title),
+		    getString(R.string.edit_story_fragment_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
@@ -370,6 +371,7 @@ public class EditFragmentActivity extends Activity {
 	    currentStory = fHelper.getOfflineStory(currentStoryId);
 	    currentStoryFragment = currentStory.getStoryFragments().get(
 		    currentStoryFragmentIndex);
+	    currentStoryFragmentId = currentStoryFragment.getStoryFragmentId();
 	    adapter.clear();
 	    adapter.addAll(currentStoryFragment.getChoices());
 	    adapter.notifyDataSetChanged();
@@ -382,12 +384,13 @@ public class EditFragmentActivity extends Activity {
 
     protected void onPause() {
 	try {
-
-	    /* TOO MANY parameters */
+	    
 	    currentStory = StoryController.updateStoryFragment(currentStory,
 		    currentStoryFragment, currentStoryFragmentId,
 		    currentStoryFragmentIndex);
+	    
 	    checkDifference();
+	    
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
