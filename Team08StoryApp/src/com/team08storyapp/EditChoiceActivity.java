@@ -39,6 +39,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -101,10 +102,26 @@ public class EditChoiceActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
+	/*
+	 * Inflate the menu; this adds items to the action bar if they are
+	 * present.
+	 */
 	getMenuInflater().inflate(R.menu.edit_choice, menu);
+	return super.onCreateOptionsMenu(menu);
+    }
 
-	return true;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	if (item.getItemId() == R.id.help) {
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(EditChoiceActivity.this);
+	    help.showDialog();
+	    return true;
+	}
+	return super.onOptionsItemSelected(item);
     }
 
     /**

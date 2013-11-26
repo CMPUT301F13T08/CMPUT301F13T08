@@ -188,25 +188,33 @@ public class BuiltInHelp {
 
     /* Sets up the help text to display for the Annotation screen. */
     private void setAnnotationHelp() {
-	this.helpText = "Annotation Help";
-	this.helpText = "";
+	this.helpTitle = "Annotation Help";
+	this.helpText = "<b>Viewing Annotations</b>"
+		+ "<br>Swipe down/up on the screen to scroll through the annotations.<br>"
+		+ "<br><b>Back Button</b>"
+		+ "<br>Click to return to the Story.";
     }
     
     /* Sets up the help text to display for the Edit Story Fragment screen. */
     private void setEditFragmentHelp(){
-	this.helpText = "Edit Story Fragment Help";
+	this.helpTitle = "Edit Story Fragment Help";
 	this.helpText = "<b>Action Bar Options</b>"
 		+ "<br>These are found at the top of the screen next to the title and consist of the following:<br>"
-		+ "<br>	• <b>Add illustration (Camera)</b> - Select this to use the camera to add a picture to the photo gallery of the story fragment."
-		+ "<br>	• <b>Add illustration (Gallery)</b> - Select this to chose a picture for the phones photo gallery for adding to the photo gallery of the story fragment."
-		+ "<br>	• <b>Add Choice</b> - Select this to add a choice to the Story Fragment."
-		+ "<br>	• <b>Save</b> - Select this to save the Story Fragment and return to the Story's Story Fragment List.";
+		+ "<br>	• <b>Add illustration (Camera)</b> - Select this to use the camera to add a picture to the photo gallery of the story fragment.<br>"
+		+ "<br>	• <b>Add illustration (Gallery)</b> - Select this to chose a picture for the phones photo gallery for adding to the photo gallery of the story fragment.<br>"
+		+ "<br>	• <b>Add Choice</b> - Select this to add a choice to the Story Fragment.<br>"
+		+ "<br>	• <b>Save</b> - Select this to save the Story Fragment and return to the Story's Story Fragment List.<br>";
     }
     
     /* Sets up the help text to display for the Edit Choice screen. */
     private void setEditChoiceHelp(){
-	this.helpText = "Edit Choice Help";
-	this.helpText = "";
+	this.helpTitle = "Edit Choice Help";
+	this.helpText = "<b>Choice Text</b>"
+		+ "<br>Write in the box the statment that should be displayed to the reader when deciding on a choice to chose.<br>"
+		+ "<br><b>\"Link Next Story Fragment\" Button</b>"
+		+ "<br>Click this button to chose a Story Fragment to link the choice to.<br>"
+		+ "<br><b>Save Button</b>"
+		+ "<br>Click this button to save the choice and return to the Editing/Creating the Story Fragment.<br>";
     }
 
     /* Sets up the help text to display for the Main Menu screen. */
@@ -222,7 +230,7 @@ public class BuiltInHelp {
     
     /* Sets up the help text to display for the My Stories screen.*/
     private void setMyStoriesHelp(){
-	this.helpText = "My Stories Help";
+	this.helpTitle = "My Stories Help";
 	this.helpText = "<b>Search Function</b>"
 		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
 		+ "<br><b>List of Stories </b>"
@@ -237,13 +245,13 @@ public class BuiltInHelp {
     
     /* Sets up the help text to display for the New Story screen.*/
     private void setNewStoryHelp(){
-	this.helpText = "New Story Help";
+	this.helpTitle = "New Story Help";
 	this.helpText = "";
     }
     
     /* Sets up the help text to display for the Offline Story Listing screen. */
     private void setOfflineStoryHelp() {
-	this.helpText = "Downloaded Stories Help";
+	this.helpTitle = "Downloaded Stories Help";
 	this.helpText = "<b>Search Function</b>"
 		+ "<br>Finds stories where the title or author contain the text entered into the search area.<br>"
 		+ "<br><b>List of Stories </b>"
@@ -269,7 +277,7 @@ public class BuiltInHelp {
 
     /* Sets up the help text to display for the Select Story Fragment screen. */
     private void setSelectFragmentHelp(){
-	this.helpText = "Selecting Story Fragment Help";
+	this.helpTitle = "Selecting Story Fragment Help";
 	this.helpText = "";
     }
     
@@ -284,7 +292,7 @@ public class BuiltInHelp {
     
     /* Sets up the help text to display for the Story Fragment Listing screen. */
     private void setStoryFragmentListHelp(){
-	this.helpText = "Story Fragment Listing Help";
+	this.helpTitle = "Story Fragment Listing Help";
 	this.helpText = "";
     }
 }

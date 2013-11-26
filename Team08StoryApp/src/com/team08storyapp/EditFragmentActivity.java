@@ -337,6 +337,15 @@ public class EditFragmentActivity extends Activity {
 	    }
 	    return true;
 
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(EditFragmentActivity.this);
+	    help.showDialog();
+	    return true;
+
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
@@ -346,7 +355,7 @@ public class EditFragmentActivity extends Activity {
      * fillChoice() fills the listview in this activity with passed choice list.
      * The choice list is from the current story fragment. And this function is
      * called either when the activity is on create or on resume, because when
-     * the activity is on resume, the choice list of current fragment may be 
+     * the activity is on resume, the choice list of current fragment may be
      * changed.
      * 
      * @param cList
@@ -443,6 +452,7 @@ public class EditFragmentActivity extends Activity {
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
     }
+
     public void onCheckboxClickedRandomChoice(View view) {
 	// Check is the box checked?
 	final CheckBox randomChoice = (CheckBox) findViewById(R.id.checkbox_randomChoice);

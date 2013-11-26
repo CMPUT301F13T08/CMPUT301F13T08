@@ -32,7 +32,7 @@
     <string name="gallery_image">Default gallery image</string>
     <string name="enter_the_text_for_your_choice_">Enter the text for your choice.</string>
     <string name="choice_text">Choice Text:</string>
-    <string name="link_choice_to_fragment">Link choice to fragment</string>
+    <string name="link_choice_to_fragment">Link Next Story Fragment</string>
     <string name="save">Save</string>
     <string name="create_new_story">Create New Story</string>
     <string name="title_">Title:</string>
