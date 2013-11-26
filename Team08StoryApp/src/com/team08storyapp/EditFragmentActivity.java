@@ -118,6 +118,7 @@ public class EditFragmentActivity extends Activity {
 		return true;
 	    }
 	});
+
 	textSection = (EditText) findViewById(R.id.headerDialogue);
 
 	/*
@@ -456,7 +457,6 @@ public class EditFragmentActivity extends Activity {
     public void onCheckboxClickedRandomChoice(View view) {
 	// Check is the box checked?
 	final CheckBox randomChoice = (CheckBox) findViewById(R.id.checkbox_randomChoice);
-
 	boolean checked = randomChoice.isChecked();
 	// Check which check box was clicked
 
@@ -469,4 +469,5 @@ public class EditFragmentActivity extends Activity {
 	}
 
     }
+
 }
