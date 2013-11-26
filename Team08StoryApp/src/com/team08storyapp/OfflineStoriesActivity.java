@@ -110,7 +110,8 @@ public class OfflineStoriesActivity extends ListActivity {
 
 	/* send the first story fragment id through the intent */
 	firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-	firstStoryFragment.putExtra("mode", 1);
+	firstStoryFragment.putExtra("AnnotationMode", 1);
+	firstStoryFragment.putExtra("FileHelperMode", 0);
 
 	/*
 	 * start the StoryFragmentActivity to display the first fragment of the
@@ -226,7 +227,8 @@ public class OfflineStoriesActivity extends ListActivity {
 
 	    /* send the first story fragment id through the intent */
 	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-	    firstStoryFragment.putExtra("mode", 0);
+	    firstStoryFragment.putExtra("AnnotationMode", 1);
+	    firstStoryFragment.putExtra("FileHelperMode", 0);
 
 	    /*
 	     * start the StoryFragmentActivity to display the first fragment of

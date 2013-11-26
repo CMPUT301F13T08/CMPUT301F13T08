@@ -113,7 +113,7 @@ public class OnlineStoriesActivity extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	
+
 	/*
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
@@ -125,7 +125,7 @@ public class OnlineStoriesActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	if (item.getItemId() == R.id.help) {
-	    
+
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -204,7 +204,6 @@ public class OnlineStoriesActivity extends ListActivity {
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
 
-	    fHelper = new FileHelper(this, 0);
 	    Toast.makeText(getApplicationContext(), "Loading...Please wait",
 		    Toast.LENGTH_LONG).show();
 
@@ -219,6 +218,7 @@ public class OnlineStoriesActivity extends ListActivity {
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
+
 	    Toast.makeText(getApplicationContext(), "Ready to read..",
 		    Toast.LENGTH_SHORT).show();
 	    firstStoryFragment.putExtra("story", currentStory);
@@ -227,7 +227,8 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    /* send the first story fragment id through the intent */
 	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-	    firstStoryFragment.putExtra("mode", 0);
+	    firstStoryFragment.putExtra("AnnotationMode", 0);
+	    firstStoryFragment.putExtra("FileHelperMode", -1);
 
 	    /*
 	     * start the StoryFragmentActivity to display the first fragment of
@@ -350,7 +351,8 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    /* send the first story fragment id through the intent */
 	    firstStoryFragment.putExtra("storyFragmentId", nextStoryFragmentId);
-	    firstStoryFragment.putExtra("mode", 0);
+	    firstStoryFragment.putExtra("AnnotationMode", 0);
+	    firstStoryFragment.putExtra("FileHelperMode", -1);
 
 	    /*
 	     * start the StoryFragmentActivity to display the first fragment of

@@ -83,6 +83,7 @@ public class StoryFragmentActivity extends Activity {
     private int currentStoryFragmentIndex;
     private int currentStoryId;
     private int mode;
+    private int helperMode;
 
     /* declare variables for UI setup */
     private PicAdapter imgAdapt;
@@ -183,10 +184,10 @@ public class StoryFragmentActivity extends Activity {
 	 * mode is 1, user is reading a downloaded story. This mode variable is
 	 * crucial because it determines the way that app stores the annotation.
 	 */
-	mode = storyFragment.getIntExtra("mode", 0);
-	
+	mode = storyFragment.getIntExtra("AnnotationMode", 0);
+	helperMode = storyFragment.getIntExtra("FileHelperMode", 0);
 	/* Initialize fHelper to Download mode */
-	fHelper = new FileHelper(this, mode);
+	fHelper = new FileHelper(this, helperMode);
 
 	/*
 	 * Get the story object from the intent See source [7]
@@ -260,7 +261,8 @@ public class StoryFragmentActivity extends Activity {
 		int nextStoryFragmentId = nextChoice.getStoryFragmentID();
 
 		/* pass the mode */
-		nextStoryFragment.putExtra("mode", mode);
+		nextStoryFragment.putExtra("AnnotationMode", mode);
+		nextStoryFragment.putExtra("FileHelperMode", helperMode);
 
 		/* put the id in the intent */
 		nextStoryFragment.putExtra("storyFragmentId",
@@ -403,14 +405,14 @@ public class StoryFragmentActivity extends Activity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (resultCode == RESULT_OK) {
-	    // saveAnnotationImage(data);
+	    saveAnnotationImage(data);
 	    /* the returned picture URI */
-	    Uri pickedUri = data.getData();
-	    AnnotationController ac = new AnnotationController(this,
-		    currentStory, currentStoryFragment,
-		    currentStoryFragmentIndex, fHelper, esHelper);
+//	    Uri pickedUri = data.getData();
+//	    AnnotationController ac = new AnnotationController(this,
+//		    currentStory, currentStoryFragment,
+//		    currentStoryFragmentIndex, fHelper, esHelper);
 	    System.out.println("In Mode:" + mode);
-	    ac.savePhoto(pickedUri, mode);
+//	    ac.savePhoto(pickedUri, mode);
 	    try {
 		currentStory = fHelper.getOfflineStory(currentStoryId);
 		currentStoryFragment = currentStory.getStoryFragments().get(

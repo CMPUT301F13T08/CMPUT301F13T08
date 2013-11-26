@@ -94,7 +94,6 @@ public class MyStoriesActivity extends ListActivity {
 	Button searchButton = (Button) header.findViewById(R.id.searchButton);
 	et = (EditText) header.findViewById(R.id.searchText);
 	et.setHintTextColor(0xff000000);
-	
 
 	fHelper = new FileHelper(this, 1);
 	esHelper = new ESHelper();
@@ -199,7 +198,8 @@ public class MyStoriesActivity extends ListActivity {
 	    firstStoryFragment.putExtra("story", (Serializable) currentStory);
 	    firstStoryFragment.putExtra("storyFragmentId",
 		    currentStory.getFirstStoryFragmentId());
-	    firstStoryFragment.putExtra("mode", 2);
+	    firstStoryFragment.putExtra("AnnotationMode", 2);
+	    firstStoryFragment.putExtra("FileHelperMode", 1);
 	    startActivity(firstStoryFragment);
 	    return true;
 
@@ -218,7 +218,6 @@ public class MyStoriesActivity extends ListActivity {
      */
     private void fillData(ArrayList<Story> sList, boolean update) {
 	if (!update) {
-	    // lv.addHeaderView(footerCreate);
 	    lv.addHeaderView(header);
 	}
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
@@ -246,11 +245,12 @@ public class MyStoriesActivity extends ListActivity {
     @Override
     public void onBackPressed() {
 	Intent intent = new Intent(MyStoriesActivity.this, MainActivity.class);
+	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		| Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	startActivity(intent);
 	return;
 
     }
-
 
     protected void onResume() {
 	super.onResume();
