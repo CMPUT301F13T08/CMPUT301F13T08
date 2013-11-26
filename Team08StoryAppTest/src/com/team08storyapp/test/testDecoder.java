@@ -77,7 +77,6 @@ public class testDecoder extends ActivityInstrumentationTestCase2<MainActivity> 
     
     public testDecoder(){
 	super(MainActivity.class);
-	context = super.getActivity().getApplicationContext();
     }
 
     /*

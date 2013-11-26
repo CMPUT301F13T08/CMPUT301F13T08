@@ -108,12 +108,12 @@ public class OnlineStoriesActivity extends ListActivity {
 	    finish();
 	}
 	fillData(result);
-
 	registerForContextMenu(getListView());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+	
 	/*
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
@@ -125,6 +125,7 @@ public class OnlineStoriesActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	if (item.getItemId() == R.id.help) {
+	    
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -331,9 +332,6 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
-
-	    fHelper = new FileHelper(this, 0);
-
 	    /*
 	     * decode the Story so that the photos are returned to their normal
 	     * format
