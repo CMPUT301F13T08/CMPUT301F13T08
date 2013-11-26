@@ -44,7 +44,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
  * AnnotationAdapter is a customized ArrayAdapter that is designed for
@@ -109,7 +108,6 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	    v = vi.inflate(R.layout.annotation_row, null);
 	    holder = new ViewHolder();
 	    holder.annoImage = (ImageView) v.findViewById(R.id.annotationImage);
-	    holder.annoText = (TextView) v.findViewById(R.id.annotationText);
 	    v.setTag(holder);
 	} else
 	    holder = (ViewHolder) v.getTag();
@@ -145,17 +143,6 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 		holder.annoImage.setImageBitmap(BitmapFactory.decodeResource(
 			activity.getResources(), R.drawable.ic_launcher));
 	    }
-
-	    /*
-	     * If the annotation has its own text then set the text to the
-	     * textView else set the message to "No Text Annotation".
-	     */
-
-	    if (anno.getText() != null && !anno.getText().isEmpty()) {
-		holder.annoText.setText(anno.getText());
-	    } else {
-		holder.annoText.setText("No Text Annotations.");
-	    }
 	}
 
 	return v;
@@ -188,7 +175,7 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
      */
     public static class ViewHolder {
 	public ImageView annoImage;
-	public TextView annoText;
+	// public TextView annoText;
     }
 
 }
