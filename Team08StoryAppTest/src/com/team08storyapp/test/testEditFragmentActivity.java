@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.team08storyapp.Choice;
+import com.team08storyapp.ChoiceAdapter;
 import com.team08storyapp.EditFragmentActivity;
 import com.team08storyapp.Photo;
 import com.team08storyapp.PicAdapter;
@@ -23,14 +24,17 @@ public class testEditFragmentActivity extends
 ActivityInstrumentationTestCase2<EditFragmentActivity>{
 
     private Activity activity;
-    private PicAdapter adapter;
+    private PicAdapter picAdapter;
+    private ChoiceAdapter choiceAdapter;
     private EditText editText;
     private ImageView picView;
     private ListView listView;
     private Gallery picGallery;
     private ArrayList<Choice> Choices;
     private ArrayList<Photo> Photos;
+    private ArrayList<StoryFragment> storyFragments;
     private StoryFragment storyFragment;
+    private StoryFragment secondFragment;
     private Story story;
     private Choice choice1;
     private Choice choice2;
@@ -45,9 +49,9 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
     
     public void setUp() {
 
-	storyFragment = new StoryFragment(1);
-	storyFragment.setStoryText("Text");
-
+	storyFragment = new StoryFragment(1, "Text");
+	secondFragment = new StoryFragment(2, "OtheText");
+	
 	Choices = new ArrayList<Choice>();
 	choice1 = new Choice(2, 1, "Go to 2!");
 	choice2 = new Choice(3, 2, "Go to 3!");
@@ -66,17 +70,19 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
 
 	storyFragment.setPhotos(Photos);
 
-	story = new Story("title", "author");
-	story.setOfflineStoryId(1);
-	story.setOnlineStoryId(1);
+	storyFragments = new ArrayList<StoryFragment>();
+	storyFragments.add(storyFragment);
+	storyFragments.add(secondFragment);
+	
+	story = new Story(1, "title", "author");
+	
 	story.setFirstStoryFragmentId(1);
-	story.getStoryFragments().add(storyFragment);
+	story.setStoryFragments(storyFragments);
 
 
 	Intent intent = new Intent();
 	intent.putExtra("story", story);
 	intent.putExtra("storyFragmentId", 1);
-	intent.putExtra("mode", 0);
 	setActivityIntent(intent);
 
 	activity = getActivity();
@@ -86,9 +92,11 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
 	picGallery = (Gallery) activity.findViewById(R.id.gallery);
 	listView = (ListView) activity.findViewById(android.R.id.list);
 
-	adapter = new PicAdapter(activity.getApplicationContext(),
+	picAdapter = new PicAdapter(activity.getApplicationContext(),
 		storyFragment.getPhotos(), 1, 1);
-
+	
+	choiceAdapter = new ChoiceAdapter(activity, android.R.id.list, storyFragment.getChoices());
+	
     }
     
     public void testPreConditions() {
@@ -98,7 +106,8 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
    	assertNotNull(editText);
    	assertNotNull(picView);
    	assertNotNull(picGallery);
-   	assertNotNull(adapter);
+   	assertNotNull(picAdapter);
+   	assertNotNull(choiceAdapter);
 
        }
     
@@ -109,22 +118,33 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
 
        }
     
-    public void testListViewItem() {
-
+ 
+    public void testListViewItem(){
+	
    	assertEquals("Go to 3!",
    		((Choice) listView.getItemAtPosition(1)).getText());
+       }
+
+    
+    public void testPicAdapterItem(){
+
+	assertNotNull(picAdapter.getItem(0));
+	assertEquals(picAdapter.getItem(0), 0);
+
+	assertNotNull(picAdapter.getItem(1));
+	assertEquals(picAdapter.getItem(1), 1);
+    }
+    
+    public void testChoiceAdapterItem(){
+
+   	assertNotNull(choiceAdapter.getItem(0));
+   	assertEquals(choiceAdapter.getItem(0), 0);
+
+   	assertNotNull(choiceAdapter.getItem(1));
+   	assertEquals(choiceAdapter.getItem(1), 1);
 
        }
     
-    public void testAdapterItem() {
-
-   	assertNotNull(adapter.getItem(0));
-   	assertEquals(adapter.getItem(0), 0);
-
-   	assertNotNull(adapter.getItem(1));
-   	assertEquals(adapter.getItem(1), 1);
-
-       }
-
+   
     
 }
