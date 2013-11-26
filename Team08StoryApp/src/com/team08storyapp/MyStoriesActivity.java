@@ -102,6 +102,39 @@ public class MyStoriesActivity extends ListActivity {
 	registerForContextMenu(getListView());
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	/*
+	 * Inflate the menu; this adds items to the action bar if they are
+	 * present.
+	 */
+	getMenuInflater().inflate(R.menu.my_stories, menu);
+	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	/* Handle item selection */
+	switch (item.getItemId()) {
+	case R.id.action_mainmenu:
+	    Intent mainIntent = new Intent(getApplicationContext(),
+		    MainActivity.class);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	    startActivity(mainIntent);
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(MyStoriesActivity.this);
+	    help.showDialog();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
+    }
+
     /**
      * This method is called from a button click that allows the user to search
      * through the list of online Stories. They must have a search string

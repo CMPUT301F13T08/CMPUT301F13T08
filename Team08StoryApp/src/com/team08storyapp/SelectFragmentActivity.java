@@ -36,15 +36,19 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
- * SelectFragmentActivity is a view class that displays a list of fragments that can be selected
- * as results for a choice. Once a fragment is selected, the fragment is linked to a choice that 
- * was created by the author. The fragmentId is passed back to EditChoiceActivity.
+ * SelectFragmentActivity is a view class that displays a list of fragments that
+ * can be selected as results for a choice. Once a fragment is selected, the
+ * fragment is linked to a choice that was created by the author. The fragmentId
+ * is passed back to EditChoiceActivity.
+ * 
  * @author Michele Paulichuk
  * @author Alice Wu
  * @author Ana Marcu
@@ -87,12 +91,37 @@ public class SelectFragmentActivity extends Activity {
 	    }
 	});
     }
-    
-    protected void onResume(){
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	/*
+	 * Inflate the menu; this adds items to the action bar if they are
+	 * present.
+	 */
+	getMenuInflater().inflate(R.menu.select_story_fragment, menu);
+	return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	/* Handle item selection */
+	switch (item.getItemId()) {
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(SelectFragmentActivity.this);
+	    help.showDialog();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
+    }
+
+    protected void onResume() {
 	SyncManager.sync(this);
 	super.onResume();
     }
-
-   
 
 }

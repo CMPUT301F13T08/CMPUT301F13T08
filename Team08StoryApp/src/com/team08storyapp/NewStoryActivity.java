@@ -35,6 +35,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -79,6 +80,29 @@ public class NewStoryActivity extends Activity {
 	return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	/* Handle item selection */
+	switch (item.getItemId()) {
+	case R.id.action_mainmenu:
+	    Intent mainIntent = new Intent(getApplicationContext(),
+		    MainActivity.class);
+	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+	    startActivity(mainIntent);
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(NewStoryActivity.this);
+	    help.showDialog();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
+    }
+    
     /**
      * <ul>
      * toEditFragmentActivity is linked to the button "save", which saves the

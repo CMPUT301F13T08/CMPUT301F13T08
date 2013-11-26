@@ -335,6 +335,14 @@ public class StoryFragmentActivity extends Activity {
 	    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
+	case R.id.help:
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp help = new BuiltInHelp(StoryFragmentActivity.this);
+	    help.showDialog();
+	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
