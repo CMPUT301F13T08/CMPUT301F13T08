@@ -68,7 +68,6 @@ public class Annotation implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int annotationID;
-    private String text;
     private int storyFragmentID;
     private String photo;
     private String encodedAnnotation;
@@ -82,21 +81,9 @@ public class Annotation implements Serializable {
     }
 
     /**
-     * @return The text of an Annotation
-     */
-    public String getText() {
-	return text;
-    }
-
-    /**
-     * @param text
-     *            The text to set the in the Annotation.
-     */
-    public void setText(String text) {
-	this.text = text;
-    }
-
-    /**
+     * This getter method gets the unique identifier Story Fragment that the
+     * Annotation belongs to.
+     * 
      * @return The storyFragmentID of the Story Fragment the Annotation belongs
      *         to.
      */
@@ -105,6 +92,9 @@ public class Annotation implements Serializable {
     }
 
     /**
+     * This setter method sets the unique identifier Story Fragment that the
+     * Annotation belongs to.
+     * 
      * @param storyFragmentID
      *            The storyFragmentID to set for the Annotation.
      */
@@ -113,6 +103,8 @@ public class Annotation implements Serializable {
     }
 
     /**
+     * This getter method gets the photo that the user chose for the Annotation.
+     * 
      * @return The photo set in the Annotation but represented in as an encoded
      *         string.
      */
@@ -121,6 +113,8 @@ public class Annotation implements Serializable {
     }
 
     /**
+     * This setter method sets the photo that the user chose for the Annotation.
+     * 
      * @param photo
      *            The photo to set for the Annotation.
      */
@@ -129,9 +123,9 @@ public class Annotation implements Serializable {
     }
 
     /**
-     * Retrieving the encoded Annotation is used for storing the Annotation
-     * either on the webservice or local file system as photos need to be stored
-     * as encoded byte arrays.
+     * This getter method retrieves the encoded Annotation used for storing the
+     * Annotation either on the webservice or local file system as photos need
+     * to be stored as encoded byte arrays.
      * 
      * @return The encoded Annotation.
      */
@@ -140,9 +134,9 @@ public class Annotation implements Serializable {
     }
 
     /**
-     * The Annotation will be encoded from without the class and then set in the
-     * Annotation object to for future use for the Annotation to be stored
-     * outside the application.
+     * Annotation will be encoded from without the class and then this setter
+     * method sets it in the Annotation object to for future use for the
+     * Annotation to be stored outside the application.
      * 
      * @param encodedAnnotation
      *            The encodedAnnotation to set representing the Annotation.
@@ -152,6 +146,8 @@ public class Annotation implements Serializable {
     }
 
     /**
+     * This getter method gets the unique identifier for the Annotation.
+     * 
      * @return The annotationID used to uniquely identify the Annotation.
      */
     public int getAnnotationID() {
@@ -159,6 +155,8 @@ public class Annotation implements Serializable {
     }
 
     /**
+     * This setter method sets the unique identifier for the Annotation.
+     * 
      * @param annotationID
      *            The annotationID to set for the Annotation.
      */

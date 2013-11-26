@@ -60,8 +60,8 @@ import android.widget.Toast;
  * @author Ana Marcu
  * @author Jarrett Toll
  * @author Jiawei Shen
- * @version 1.0 November 8, 2013
- * @since 1.0
+ * @version 2.0 December 3, 2013
+ * @since 2.0
  * 
  */
 public class AnnotationController {
@@ -109,93 +109,6 @@ public class AnnotationController {
 	this.esHelper = esHelper;
     }
 
-    private String createFileName() {
-	return "Image"
-		+ Integer.toString(currentStory.getOfflineStoryId())
-		+ "Fragment"
-		+ Integer.toString(currentStoryFragment.getStoryFragmentId())
-		+ "Annotation"
-		+ Integer
-			.toString(currentStoryFragment.getAnnotations().size() + 1)
-		+ ".png";
-    }
-
-    private Cursor getPicCursor(Uri pickedUri) {
-	/* retrieve the string using media data */
-	String[] medData = { MediaStore.Images.Media.DATA };
-	try {
-	    return activity.getContentResolver().query(pickedUri, medData,
-		    null, null, null);
-	} catch (Exception e) {
-	    return null;
-	}
-    }
-
-    private String getImagePath(Uri pickedUri) {
-
-	String imgPath = "";
-	/* query the data */
-	Cursor picCursor = getPicCursor(pickedUri);
-
-	if (picCursor != null) {
-
-	    /* get the path string */
-	    int index = picCursor
-		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-	    picCursor.moveToFirst();
-	    imgPath = picCursor.getString(index);
-	    picCursor.close();
-	} else {
-	    imgPath = pickedUri.getPath();
-	}
-
-	return imgPath;
-    }
-
-    private BitmapFactory.Options createBitmapOptions(String imgPath) {
-	/* create bitmap options to calculate and use sample size */
-	BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-
-	/* first decode image dimensions only */
-	bmpOptions.inJustDecodeBounds = true;
-	
-	BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-	/* use the new sample size */
-	bmpOptions.inSampleSize = resize(bmpOptions);
-
-	/* now decode the bitmap using sample options */
-	bmpOptions.inJustDecodeBounds = false;
-	
-	return bmpOptions;
-    }
-
-    private int resize(BitmapFactory.Options bmpOptions) {
-	
-	/* set the target image size */
-	int targetWidth = 200;
-	int targetHeight = 150;
-
-	/* image width and height before sampling */
-	int currHeight = bmpOptions.outHeight;
-	int currWidth = bmpOptions.outWidth;
-
-	/*
-	 * calculate the sample size if the existing size is larger than target
-	 * size
-	 */
-	if (currHeight > targetHeight || currWidth > targetWidth) {
-	    // use either width or height
-	    if (currWidth > currHeight)
-		return Math.round((float) currHeight / (float) targetHeight);
-	    else
-		return Math.round((float) currWidth / (float) targetWidth);
-	} else {
-	    return 1;
-	}
-
-    }
-
     /**
      * SavePhoto is the function where resizing, saving the illustration, and
      * updating the current fragment are performed in order.
@@ -233,7 +146,7 @@ public class AnnotationController {
 
 	    /* create bitmap options to calculate and use sample size */
 	    BitmapFactory.Options bmpOptions = createBitmapOptions(imgPath);
-	    
+
 	    /* get the file as a bitmap */
 	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
 	    try {
@@ -262,6 +175,11 @@ public class AnnotationController {
 	return pic;
     }
 
+    /*
+     * This method adds the Annotation to the Story Fragment and saves the
+     * changes to the Story to the webservice, so that it is available online to
+     * all users.
+     */
     private void addAnnotation(String fileName, int mode) {
 
 	/*
@@ -335,4 +253,108 @@ public class AnnotationController {
 	    e.printStackTrace();
 	}
     }
+
+    /*
+     * This method resizes the Annotation to fit properly within the Annotation
+     * view.
+     */
+    private int resize(BitmapFactory.Options bmpOptions) {
+
+	/* set the target image size */
+	int targetWidth = 200;
+	int targetHeight = 150;
+
+	/* image width and height before sampling */
+	int currHeight = bmpOptions.outHeight;
+	int currWidth = bmpOptions.outWidth;
+
+	/*
+	 * calculate the sample size if the existing size is larger than target
+	 * size
+	 */
+	if (currHeight > targetHeight || currWidth > targetWidth) {
+	    // use either width or height
+	    if (currWidth > currHeight)
+		return Math.round((float) currHeight / (float) targetHeight);
+	    else
+		return Math.round((float) currWidth / (float) targetWidth);
+	} else {
+	    return 1;
+	}
+
+    }
+
+    /*
+     * This method is used to setup Bitmap options for displaying the
+     * Annotations.
+     */
+    private BitmapFactory.Options createBitmapOptions(String imgPath) {
+	/* create bitmap options to calculate and use sample size */
+	BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+
+	/* first decode image dimensions only */
+	bmpOptions.inJustDecodeBounds = true;
+
+	BitmapFactory.decodeFile(imgPath, bmpOptions);
+
+	/* use the new sample size */
+	bmpOptions.inSampleSize = resize(bmpOptions);
+
+	/* now decode the bitmap using sample options */
+	bmpOptions.inJustDecodeBounds = false;
+
+	return bmpOptions;
+    }
+
+    /*
+     * This method finds the path of the image the user selected for an
+     * Annotation.
+     * 
+     */
+    private String getImagePath(Uri pickedUri) {
+
+	String imgPath = "";
+	/* query the data */
+	Cursor picCursor = getPicCursor(pickedUri);
+
+	if (picCursor != null) {
+
+	    /* get the path string */
+	    int index = picCursor
+		    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+	    picCursor.moveToFirst();
+	    imgPath = picCursor.getString(index);
+	    picCursor.close();
+	} else {
+	    imgPath = pickedUri.getPath();
+	}
+
+	return imgPath;
+    }
+    
+    /*
+     * This method sets up the fil
+     * */
+    private String createFileName() {
+	return "Image"
+		+ Integer.toString(currentStory.getOfflineStoryId())
+		+ "Fragment"
+		+ Integer.toString(currentStoryFragment.getStoryFragmentId())
+		+ "Annotation"
+		+ Integer
+			.toString(currentStoryFragment.getAnnotations().size() + 1)
+		+ ".png";
+    }
+
+    private Cursor getPicCursor(Uri pickedUri) {
+	/* retrieve the string using media data */
+	String[] medData = { MediaStore.Images.Media.DATA };
+	try {
+	    return activity.getContentResolver().query(pickedUri, medData,
+		    null, null, null);
+	} catch (Exception e) {
+	    return null;
+	}
+    }
+
 }
