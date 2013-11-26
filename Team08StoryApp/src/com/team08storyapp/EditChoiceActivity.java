@@ -117,8 +117,9 @@ public class EditChoiceActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(EditChoiceActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(EditChoiceActivity.this,
+		    getString(R.string.edit_choice_help_title),
+		    getString(R.string.edit_choice_help_text));
 	    return true;
 	}
 	return super.onOptionsItemSelected(item);

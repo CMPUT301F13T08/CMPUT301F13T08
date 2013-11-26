@@ -95,8 +95,9 @@ public class NewStoryActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(NewStoryActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(NewStoryActivity.this,
+		    getString(R.string.new_story_help_title),
+		    getString(R.string.my_stories_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);

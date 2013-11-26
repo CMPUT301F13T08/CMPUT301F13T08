@@ -340,8 +340,9 @@ public class StoryFragmentActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(StoryFragmentActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(StoryFragmentActivity.this,
+		    getString(R.string.story_reading_help_title),
+		    getString(R.string.story_reading_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
@@ -415,12 +416,12 @@ public class StoryFragmentActivity extends Activity {
 	if (resultCode == RESULT_OK) {
 	    saveAnnotationImage(data);
 	    /* the returned picture URI */
-//	    Uri pickedUri = data.getData();
-//	    AnnotationController ac = new AnnotationController(this,
-//		    currentStory, currentStoryFragment,
-//		    currentStoryFragmentIndex, fHelper, esHelper);
+	    // Uri pickedUri = data.getData();
+	    // AnnotationController ac = new AnnotationController(this,
+	    // currentStory, currentStoryFragment,
+	    // currentStoryFragmentIndex, fHelper, esHelper);
 	    System.out.println("In Mode:" + mode);
-//	    ac.savePhoto(pickedUri, mode);
+	    // ac.savePhoto(pickedUri, mode);
 	    try {
 		currentStory = fHelper.getOfflineStory(currentStoryId);
 		currentStoryFragment = currentStory.getStoryFragments().get(

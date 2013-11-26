@@ -352,8 +352,9 @@ public class EditFragmentActivity extends Activity {
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
 	     */
-	    BuiltInHelp help = new BuiltInHelp(EditFragmentActivity.this);
-	    help.showDialog();
+	    BuiltInHelp.showDialog(EditFragmentActivity.this,
+		    getString(R.string.edit_story_fragment_help_title),
+		    getString(R.string.edit_story_fragment_help_text));
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
@@ -387,7 +388,9 @@ public class EditFragmentActivity extends Activity {
 	    currentStory = StoryController.updateStoryFragment(currentStory,
 		    currentStoryFragment, currentStoryFragmentId,
 		    currentStoryFragmentIndex);
+	    
 	    checkDifference();
+	    
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
 	} catch (IOException e) {
