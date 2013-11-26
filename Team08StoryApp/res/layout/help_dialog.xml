@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginTop="20dip"
-        android:onClick="onClickOkayButton"
         android:text="@string/okayButton" />
 
 </LinearLayout>
