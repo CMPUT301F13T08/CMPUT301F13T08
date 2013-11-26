@@ -21,7 +21,7 @@ import com.team08storyapp.StoryFragment;
 
 @SuppressWarnings("deprecation")
 public class testEditFragmentActivity extends
-ActivityInstrumentationTestCase2<EditFragmentActivity>{
+	ActivityInstrumentationTestCase2<EditFragmentActivity> {
 
     private Activity activity;
     private PicAdapter picAdapter;
@@ -40,18 +40,16 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
     private Choice choice2;
     private Photo photo1;
     private Photo photo2;
-    
-    
+
     public testEditFragmentActivity() {
 	super(EditFragmentActivity.class);
     }
-    
-    
+
     public void setUp() {
 
 	storyFragment = new StoryFragment(1, "Text");
 	secondFragment = new StoryFragment(2, "OtheText");
-	
+
 	Choices = new ArrayList<Choice>();
 	choice1 = new Choice(2, 1, "Go to 2!");
 	choice2 = new Choice(3, 2, "Go to 3!");
@@ -73,12 +71,11 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
 	storyFragments = new ArrayList<StoryFragment>();
 	storyFragments.add(storyFragment);
 	storyFragments.add(secondFragment);
-	
+
 	story = new Story(1, "title", "author");
-	
+
 	story.setFirstStoryFragmentId(1);
 	story.setStoryFragments(storyFragments);
-
 
 	Intent intent = new Intent();
 	intent.putExtra("story", story);
@@ -87,46 +84,38 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
 
 	activity = getActivity();
 
-	editText = (EditText) activity.findViewById(R.id.headerDialogue);
 	picView = (ImageView) activity.findViewById(R.id.picture);
 	picGallery = (Gallery) activity.findViewById(R.id.gallery);
-	listView = (ListView) activity.findViewById(android.R.id.list);
 
 	picAdapter = new PicAdapter(activity.getApplicationContext(),
 		storyFragment.getPhotos(), 1, 1);
-	
-	choiceAdapter = new ChoiceAdapter(activity, android.R.id.list, storyFragment.getChoices());
-	
+
+	// choiceAdapter = new ChoiceAdapter(activity, android.R.id.list,
+	// storyFragment.getChoices());
+	listView = (ListView) activity.findViewById(android.R.id.list);
+
+	editText = (EditText) activity.findViewById(R.id.headerDialogue);
     }
-    
+
     public void testPreConditions() {
 
-   	assertNotNull(activity);
-   	assertNotNull(listView);
-   	assertNotNull(editText);
-   	assertNotNull(picView);
-   	assertNotNull(picGallery);
-   	assertNotNull(picAdapter);
-   	assertNotNull(choiceAdapter);
+	assertNotNull(activity);
+	assertNotNull(listView);
+	assertNotNull(editText);
+	assertNotNull(picView);
+	assertNotNull(picGallery);
+	assertNotNull(picAdapter);
+	assertNotNull(choiceAdapter);
 
-       }
-    
-    
+    }
+
     public void testEditTextItem() {
 
-   	assertEquals("Text", editText.getText().toString());
+	assertEquals("Text", editText.getText().toString());
 
-       }
-    
- 
-    public void testListViewItem(){
-	
-   	assertEquals("Go to 3!",
-   		((Choice) listView.getItemAtPosition(1)).getText());
-       }
+    }
 
-    
-    public void testPicAdapterItem(){
+    public void testPicAdapterItem() {
 
 	assertNotNull(picAdapter.getItem(0));
 	assertEquals(picAdapter.getItem(0), 0);
@@ -134,17 +123,23 @@ ActivityInstrumentationTestCase2<EditFragmentActivity>{
 	assertNotNull(picAdapter.getItem(1));
 	assertEquals(picAdapter.getItem(1), 1);
     }
-    
-    public void testChoiceAdapterItem(){
 
-   	assertNotNull(choiceAdapter.getItem(0));
-   	assertEquals(choiceAdapter.getItem(0), 0);
+    public void testListViewItem() {
 
-   	assertNotNull(choiceAdapter.getItem(1));
-   	assertEquals(choiceAdapter.getItem(1), 1);
+	assertEquals("Go to 3!",
+		((Choice) listView.getItemAtPosition(1)).getText());
+    }
 
-       }
-    
-   
-    
+    /*
+     * public void testChoiceAdapterItem(){
+     * 
+     * assertNotNull(choiceAdapter.getItem(0));
+     * assertEquals(choiceAdapter.getItem(0), 0);
+     * 
+     * assertNotNull(choiceAdapter.getItem(1));
+     * assertEquals(choiceAdapter.getItem(1), 1);
+     * 
+     * }
+     */
+
 }
