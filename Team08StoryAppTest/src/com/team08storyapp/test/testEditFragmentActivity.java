@@ -3,6 +3,7 @@ package com.team08storyapp.test;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import com.team08storyapp.Choice;
 import com.team08storyapp.ChoiceAdapter;
 import com.team08storyapp.EditFragmentActivity;
+import com.team08storyapp.FileHelper;
 import com.team08storyapp.Photo;
 import com.team08storyapp.PicAdapter;
 import com.team08storyapp.R;
@@ -46,6 +48,8 @@ public class testEditFragmentActivity extends
     }
 
     public void setUp() {
+	
+	
 
 	storyFragment = new StoryFragment(1, "Text");
 	secondFragment = new StoryFragment(2, "OtheText");
@@ -85,7 +89,10 @@ public class testEditFragmentActivity extends
 	setActivityIntent(intent);
 
 	activity = getActivity();
+	Context context = activity.getApplicationContext();
 
+	FileHelper fHelper = new FileHelper(context, 0);
+	
 	picView = (ImageView) activity.findViewById(R.id.picture);
 	picGallery = (Gallery) activity.findViewById(R.id.gallery);
 
@@ -94,7 +101,7 @@ public class testEditFragmentActivity extends
 
 	choiceAdapter = new ChoiceAdapter(activity, android.R.id.list,
 		storyFragment.getChoices());
-	
+
 	listView = (ListView) activity.findViewById(android.R.id.list);
 
 	editText = (EditText) activity.findViewById(R.id.headerDialogue);
@@ -133,16 +140,14 @@ public class testEditFragmentActivity extends
 		((Choice) listView.getItemAtPosition(1)).getText());
     }
 
-    /*
-     * public void testChoiceAdapterItem(){
-     * 
-     * assertNotNull(choiceAdapter.getItem(0));
-     * assertEquals(choiceAdapter.getItem(0), 0);
-     * 
-     * assertNotNull(choiceAdapter.getItem(1));
-     * assertEquals(choiceAdapter.getItem(1), 1);
-     * 
-     * }
-     */
+    public void testChoiceAdapterItem() {
+
+	assertNotNull(choiceAdapter.getItem(0));
+	assertEquals(choiceAdapter.getItem(0), 0);
+
+	assertNotNull(choiceAdapter.getItem(1));
+	assertEquals(choiceAdapter.getItem(1), 1);
+
+    }
 
 }

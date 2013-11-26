@@ -124,6 +124,7 @@ public class OnlineStoriesActivity extends ListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+	
 	/* Handle item selection */
 	switch (item.getItemId()) {
 	case R.id.action_mainmenu:
@@ -133,6 +134,7 @@ public class OnlineStoriesActivity extends ListActivity {
 		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	case R.id.help:
+	    
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -156,6 +158,7 @@ public class OnlineStoriesActivity extends ListActivity {
     public boolean onContextItemSelected(MenuItem item) {
 	info = (AdapterContextMenuInfo) item.getMenuInfo();
 	position = info.position;
+	
 	/*
 	 * Get the story object of the selected story item
 	 */
@@ -178,6 +181,7 @@ public class OnlineStoriesActivity extends ListActivity {
 		e1.printStackTrace();
 	    }
 	    try {
+		
 		/*
 		 * Save the story to file, via FileHelper if the download option
 		 * selected
@@ -266,6 +270,7 @@ public class OnlineStoriesActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode,
 	    Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
+	
 	/*
 	 * Populate the listview with the online stories at the start of the
 	 * activity
@@ -290,6 +295,7 @@ public class OnlineStoriesActivity extends ListActivity {
 		    Toast.LENGTH_LONG).show();
 	    finish();
 	}
+	
 	/* Re-populate the listview with the online stories */
 	fillData(result);
     }
@@ -331,6 +337,7 @@ public class OnlineStoriesActivity extends ListActivity {
      * @throws Exception
      */
     public void onClickFeelingLuckButton(View view) {
+	
 	/* Generate and get a random Story for the user */
 	ArrayList<Story> storyList = esHelper.getOnlineStories();
 	if (storyList.size() > 0) {
@@ -342,6 +349,7 @@ public class OnlineStoriesActivity extends ListActivity {
 
 	    Intent firstStoryFragment = new Intent(getApplicationContext(),
 		    StoryFragmentActivity.class);
+	    
 	    /*
 	     * decode the Story so that the photos are returned to their normal
 	     * format

@@ -245,14 +245,6 @@ public class MyStoriesActivity extends ListActivity {
 	}
     }
 
-    /**
-     * This method populates the list view with a list of My Stories.
-     * 
-     * @param sList
-     *            An ArrayList of stories used to populate the list.
-     * @param update
-     *            A flag that indicates if a footer/header already exists.
-     */
     private void fillData(ArrayList<Story> sList) {
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
@@ -270,6 +262,13 @@ public class MyStoriesActivity extends ListActivity {
 	}
     }
 
+    /**
+     * This method is linked to the "Create New Story" button. It's called when
+     * the button is clicked. It simply starts an activity that allows the
+     * author to set the basic information of the new story.
+     * 
+     * @param view the view of current activity
+     */
     public void toNewStoryActivity(View view) {
 	Intent intent = new Intent(MyStoriesActivity.this,
 		NewStoryActivity.class);

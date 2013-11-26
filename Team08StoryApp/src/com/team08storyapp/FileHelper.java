@@ -104,7 +104,6 @@ public class FileHelper {
      *            authored stories mode == 1
      */
     public FileHelper(Context context, int mode) {
-
 	fileContext = context;
 	switch (mode) {
 	case Download:
@@ -131,6 +130,7 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
+	    
 	    /*
 	     * If the offlineStoryId of added story is taken, and the offline
 	     * story which has the same offline Id is not the same story as the
@@ -154,6 +154,7 @@ public class FileHelper {
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
+	    
 	    /* translate the story context to Json */
 	    String context = gson.toJson(story);
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,

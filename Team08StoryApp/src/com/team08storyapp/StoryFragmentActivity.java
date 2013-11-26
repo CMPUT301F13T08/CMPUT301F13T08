@@ -153,16 +153,12 @@ public class StoryFragmentActivity extends Activity {
 	    }
 	});
 
-	/* set up gallery header */
-	// headerGallery = getLayoutInflater().inflate(R.layout.header_gallery,
-	// null);
-
 	/* set up the picView */
 	picView = (ImageView) findViewById(R.id.picture);
 
 	/* get the gallery view */
-	// picGallery = (Gallery) headerGallery.findViewById(R.id.gallery);
 	picGallery = (Gallery) findViewById(R.id.gallery);
+	
 	/* set the click listener for each item in the thumbnail gallery */
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
 
@@ -186,6 +182,7 @@ public class StoryFragmentActivity extends Activity {
 	 */
 	mode = storyFragment.getIntExtra("AnnotationMode", 0);
 	helperMode = storyFragment.getIntExtra("FileHelperMode", 0);
+	
 	/* Initialize fHelper to Download mode */
 	fHelper = new FileHelper(this, helperMode);
 
@@ -389,6 +386,7 @@ public class StoryFragmentActivity extends Activity {
 				    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 			    return true;
 			case R.id.add_anno_gallery:
+			    
 			    /* take the user to their chosen image selection app */
 			    Intent pickIntent = new Intent();
 			    pickIntent.setType("image/*");
@@ -415,13 +413,6 @@ public class StoryFragmentActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (resultCode == RESULT_OK) {
 	    saveAnnotationImage(data);
-	    /* the returned picture URI */
-	    // Uri pickedUri = data.getData();
-	    // AnnotationController ac = new AnnotationController(this,
-	    // currentStory, currentStoryFragment,
-	    // currentStoryFragmentIndex, fHelper, esHelper);
-	    System.out.println("In Mode:" + mode);
-	    // ac.savePhoto(pickedUri, mode);
 	    try {
 		currentStory = fHelper.getOfflineStory(currentStoryId);
 		currentStoryFragment = currentStory.getStoryFragments().get(
@@ -472,6 +463,7 @@ public class StoryFragmentActivity extends Activity {
     }
 
     private void saveAnnotationImage(Intent data) {
+	
 	/* the returned picture URI */
 	Uri pickedUri = data.getData();
 	AnnotationController ac = new AnnotationController(this, currentStory,
