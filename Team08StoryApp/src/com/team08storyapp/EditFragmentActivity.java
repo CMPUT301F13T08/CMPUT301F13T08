@@ -84,6 +84,7 @@ public class EditFragmentActivity extends Activity {
     private EditText textSection;
 
     private Story currentStory;
+    private Story original;
     private StoryFragment currentStoryFragment;
     private FileHelper fHelper;
     private Uri imageFileUri;
@@ -172,6 +173,8 @@ public class EditFragmentActivity extends Activity {
 		.getIntExtra("storyFragmentId", 0);
 
 	populateScreen();
+	original = currentStory;
+
     }
 
     @Override
@@ -391,7 +394,7 @@ public class EditFragmentActivity extends Activity {
 
     protected void onPause() {
 	try {
-	    Story original = currentStory;
+
 	    /* TOO MANY parameters */
 	    currentStory = StoryController.updateStoryFragment(currentStory,
 		    currentStoryFragment, currentStoryFragmentId,
@@ -402,10 +405,12 @@ public class EditFragmentActivity extends Activity {
 	     * and illustration as soon as they are added)
 	     */
 	    if (original.equals(currentStory)) {
+		System.out.println("Story fragment unchanged");
+	    } else {
 		fHelper.updateOfflineStory(currentStory);
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), this);
 	    }
-	    UpdateFileRecorder.appendUpdateQueue(
-		    currentStory.getOfflineStoryId(), this);
 
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -457,14 +462,18 @@ public class EditFragmentActivity extends Activity {
     }
 
     public void onCheckboxClickedRandomChoice(View view) {
-	// Check is the box checked?
+
+	/* Check is the box checked? */
 	final CheckBox randomChoice = (CheckBox) findViewById(R.id.checkbox_randomChoice);
 	boolean checked = randomChoice.isChecked();
-	// Check which check box was clicked
+
+	/* Check which check box was clicked */
 
 	if (checked) {
-	    // If checked then a story fragment's randomChoice attribute will be
-	    // set to 1 to show the random choice button
+	    /*
+	     * If checked then a story fragment's randomChoice attribute will be
+	     * set to 1 to show the random choice button
+	     */
 	    currentStoryFragment.setRandomChoice(1);
 	} else {
 	    currentStoryFragment.setRandomChoice(0);
@@ -472,4 +481,19 @@ public class EditFragmentActivity extends Activity {
 
     }
 
+    private void checkDifference() throws FileNotFoundException, IOException{
+	if(!original.equals(currentStory)){
+		fHelper.updateOfflineStory(currentStory);
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), this);
+	}
+    }
+    protected void onStop() {
+	try {
+	    checkDifference();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	super.onStop();
+    }
 }

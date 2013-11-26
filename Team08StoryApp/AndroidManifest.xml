@@ -59,10 +59,6 @@
             android:label="@string/title_activity_my_stories" >
         </activity>
         <activity
-            android:name="com.team08storyapp.MyStoryFragmentActivity"
-            android:label="@string/title_activity_my_story_fragment" >
-        </activity>
-        <activity
             android:name="com.team08storyapp.AnnotationViewActivity"
             android:label="@string/title_activity_annotation_view" >
         </activity>

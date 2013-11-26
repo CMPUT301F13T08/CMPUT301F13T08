@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-     <style name="CustomBackground">
-           <item name="android:background">@drawable/title_gradient</item>
-     </style>
-     
-     <style name="CustomTheme" parent="android:Theme">
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-           <item name="android:windowTitleBackgroundStyle">@drawable/title_gradient</item>
-      </style>
+    <style xmlns:android="http://schemas.android.com/apk/res/android" name="cust_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowTitleStyle">@style/dialog_title_style</item>
+    </style>
+
+    <style name="dialog_title_style" parent="android:Widget.TextView">
+        <item name="android:background">@android:color/black</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
 </resources>
