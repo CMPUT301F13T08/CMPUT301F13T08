@@ -27,7 +27,6 @@ public class testMyStoriesActivity extends
     private int containLosSantos = 0;
     private Story story;
     private String title;
-    
 
     public testMyStoriesActivity() {
 	super(MyStoriesActivity.class);
@@ -36,10 +35,22 @@ public class testMyStoriesActivity extends
     public void setUp() {
 
 	activity = getActivity();
-	
+
 	fHelper = new FileHelper(activity, 1);
 	esHelper = new ESHelper();
 
+	/*
+	 * Hey Ana:
+	 * 
+	 * Sorry, I moved the header search bar to activity_my_stories
+	 * xml to maintain the consistency of our layout. So you don't have to
+	 * do the header thing. Just do the search bar as you did in
+	 * OnlineStories/OfflineStoriesActivity will be fine.
+	 * 
+	 * Sorry for bringing the bugs and any inconvenience.
+	 * 
+	 * Alice
+	 */
 	header = activity.getLayoutInflater().inflate(R.layout.header_search,
 		null);
 	searchButton = (Button) header.findViewById(R.id.searchButton);
@@ -64,21 +75,20 @@ public class testMyStoriesActivity extends
 
     // not sure why fails
     public void testListViewItem() {
-	
-	 int firstVisibleRow = listView.getFirstVisiblePosition();
-	 int lastVisibleRow = listView.getLastVisiblePosition();
-	
-	 for(int i=firstVisibleRow;i<=lastVisibleRow;i++)
-	    {
-	     story = (Story) listView.getItemAtPosition(i);
-	     title = story.getTitle().toString();
-	     
-	     if (title.equals("Los Santos")){
-			containLosSantos = 1;
-		    } 
-	     
+
+	int firstVisibleRow = listView.getFirstVisiblePosition();
+	int lastVisibleRow = listView.getLastVisiblePosition();
+
+	for (int i = firstVisibleRow; i <= lastVisibleRow; i++) {
+	    story = (Story) listView.getItemAtPosition(i);
+	    title = story.getTitle().toString();
+
+	    if (title.equals("Los Santos")) {
+		containLosSantos = 1;
 	    }
-			 	  
+
+	}
+
 	assertEquals(1, containLosSantos);
 
     }
