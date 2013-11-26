@@ -49,7 +49,7 @@ public class testUpdateToolPackage extends ActivityInstrumentationTestCase2<Main
     }
     
     public void setUp(){
-	activity = super.getActivity();
+	activity = getActivity();
 	fHelper = new FileHelper(activity.getApplicationContext(), 1);
 	esHelper = new ESHelper();
     }
@@ -57,7 +57,7 @@ public class testUpdateToolPackage extends ActivityInstrumentationTestCase2<Main
     public void testConstructorUpdateToolPackage(){
 	UpdateToolPackage utp = new UpdateToolPackage(fHelper,esHelper, activity);
 	
-	assertEquals(activity.getApplicationContext(), utp.getContext());
+	assertEquals(activity.getApplicationContext(), utp.getContext()); //THIS LINE FAILS
 	assertEquals(fHelper, utp.getfHelper());
 	assertEquals(esHelper, utp.getESHelper());
     }
