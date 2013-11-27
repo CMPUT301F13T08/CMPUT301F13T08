@@ -30,13 +30,11 @@ ActivityInstrumentationTestCase2<MainActivity>{
 	annotation.setEncodedAnnotation("encoded");
 	annotation.setPhoto("photo");
 	annotation.setStoryFragmentID(2);
-	annotation.setText("text");
 
 	assertEquals(1, annotation.getAnnotationID());
 	assertEquals("encoded", annotation.getEncodedAnnotation());
 	assertEquals("photo", annotation.getPhoto());
 	assertEquals(2, annotation.getStoryFragmentID());
-	assertEquals("text", annotation.getText());
     }
     
 }
