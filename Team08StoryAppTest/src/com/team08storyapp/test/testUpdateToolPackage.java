@@ -57,8 +57,8 @@ public class testUpdateToolPackage extends ActivityInstrumentationTestCase2<Main
     public void testConstructorUpdateToolPackage(){
 	UpdateToolPackage utp = new UpdateToolPackage(fHelper,esHelper, activity);
 	
-	assertNotSame(activity.getApplicationContext(), utp.getContext()); //THIS LINE FAILS
-	assertNotSame(fHelper, utp.getfHelper());
+	assertNotSame(activity.getApplicationContext(), utp.getContext()); 
+	assertNotSame(fHelper, utp.getfHelper()); //THIS LINE FAILS
 	assertNotSame(esHelper, utp.getESHelper());
     }
 

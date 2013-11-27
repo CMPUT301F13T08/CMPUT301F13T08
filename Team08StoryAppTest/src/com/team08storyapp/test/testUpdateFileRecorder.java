@@ -92,6 +92,7 @@ public class testUpdateFileRecorder extends
 	fHelper.addOfflineStory(s2);
     }
 
+    // JUNIT TEST BLOCKS AT THIS METHOD
     public void testAppendUpdateQueue() throws Exception {
 	File dir = context.getFilesDir();
 	File updateQueue = new File(dir, "updateQueue");
