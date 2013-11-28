@@ -130,7 +130,6 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
-	    
 	    /*
 	     * If the offlineStoryId of added story is taken, and the offline
 	     * story which has the same offline Id is not the same story as the
@@ -145,7 +144,7 @@ public class FileHelper {
 		if (total == 0) {
 		    story.setOfflineStoryId(1);
 		} else {
-		    story.setOfflineStoryId(Math.max(total - 1,
+		    story.setOfflineStoryId(Math.max(total + 1,
 			    getOfflineStories().get(total - 1)
 				    .getOfflineStoryId()) + 1);
 		    ESHelper esHelper = new ESHelper();
