@@ -158,7 +158,7 @@ public class StoryFragmentActivity extends Activity {
 
 	/* get the gallery view */
 	picGallery = (Gallery) findViewById(R.id.gallery);
-	
+
 	/* set the click listener for each item in the thumbnail gallery */
 	picGallery.setOnItemClickListener(new OnItemClickListener() {
 
@@ -182,7 +182,7 @@ public class StoryFragmentActivity extends Activity {
 	 */
 	mode = storyFragment.getIntExtra("AnnotationMode", 0);
 	helperMode = storyFragment.getIntExtra("FileHelperMode", 0);
-	
+
 	/* Initialize fHelper to Download mode */
 	fHelper = new FileHelper(this, helperMode);
 
@@ -346,65 +346,6 @@ public class StoryFragmentActivity extends Activity {
 	}
     }
 
-    /**
-     * @param cList
-     */
-    private void fillChoice(ArrayList<Choice> cList) {
-
-	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
-		cList);
-
-	/* populate the listview with choices */
-	lv.setAdapter(adapter);
-
-    }
-
-    /**
-     * 
-     */
-    private void showPopup() {
-
-	/* root view of popup menu */
-	View popUpItemView = findViewById(R.id.action_add_annotations);
-
-	/* instantiate the popup menu */
-	PopupMenu popupMenu = new PopupMenu(this, popUpItemView);
-	MenuInflater inflater = popupMenu.getMenuInflater();
-	inflater.inflate(R.menu.annotation_view, popupMenu.getMenu());
-
-	/* setup popmenu's click listener */
-	popupMenu
-		.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-		    public boolean onMenuItemClick(MenuItem item) {
-			switch (item.getItemId()) {
-			case R.id.add_anno_camera:
-			    Intent intent = new Intent(
-				    MediaStore.ACTION_IMAGE_CAPTURE);
-			    intent.putExtra(MediaStore.EXTRA_OUTPUT,
-				    imageFileUri);
-			    startActivityForResult(intent,
-				    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-			    return true;
-			case R.id.add_anno_gallery:
-			    
-			    /* take the user to their chosen image selection app */
-			    Intent pickIntent = new Intent();
-			    pickIntent.setType("image/*");
-			    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
-			    startActivityForResult(Intent.createChooser(
-				    pickIntent, "Select Picture"), 1);
-			    return true;
-			default:
-			    return false;
-			}
-		    }
-		});
-
-	/* show the popup menu */
-	popupMenu.show();
-
-    }
-
     protected void onResume() {
 	SyncManager.sync(this);
 	super.onResume();
@@ -462,8 +403,59 @@ public class StoryFragmentActivity extends Activity {
 	startActivity(randomStoryFragment);
     }
 
+    private void fillChoice(ArrayList<Choice> cList) {
+	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
+		cList);
+
+	/* populate the listview with choices */
+	lv.setAdapter(adapter);
+    }
+
+    private void showPopup() {
+
+	/* root view of popup menu */
+	View popUpItemView = findViewById(R.id.action_add_annotations);
+
+	/* instantiate the popup menu */
+	PopupMenu popupMenu = new PopupMenu(this, popUpItemView);
+	MenuInflater inflater = popupMenu.getMenuInflater();
+	inflater.inflate(R.menu.annotation_view, popupMenu.getMenu());
+
+	/* setup popmenu's click listener */
+	popupMenu
+		.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+		    public boolean onMenuItemClick(MenuItem item) {
+			switch (item.getItemId()) {
+			case R.id.add_anno_camera:
+			    Intent intent = new Intent(
+				    MediaStore.ACTION_IMAGE_CAPTURE);
+			    intent.putExtra(MediaStore.EXTRA_OUTPUT,
+				    imageFileUri);
+			    startActivityForResult(intent,
+				    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+			    return true;
+			case R.id.add_anno_gallery:
+
+			    /* take the user to their chosen image selection app */
+			    Intent pickIntent = new Intent();
+			    pickIntent.setType("image/*");
+			    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
+			    startActivityForResult(Intent.createChooser(
+				    pickIntent, "Select Picture"), 1);
+			    return true;
+			default:
+			    return false;
+			}
+		    }
+		});
+
+	/* show the popup menu */
+	popupMenu.show();
+
+    }
+
     private void saveAnnotationImage(Intent data) {
-	
+
 	/* the returned picture URI */
 	Uri pickedUri = data.getData();
 	AnnotationController ac = new AnnotationController(this, currentStory,

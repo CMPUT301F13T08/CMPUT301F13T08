@@ -119,6 +119,12 @@ public class Story implements Serializable {
     }
 
     /**
+     * This getter method gets the unique identifier used to identify the Story
+     * online.
+     * <p>
+     * If the Story is an Author's creation it may not yet have this as the
+     * Author may not have published the Story to online.
+     * 
      * @return The onlineStoryId used to uniquely identify of the Story from
      *         online.
      */
@@ -127,6 +133,9 @@ public class Story implements Serializable {
     }
 
     /**
+     * This setter method sets the unique identifier when the Story is published
+     * online.
+     * 
      * @param onlineStoryId
      *            The onlineStoryId to set the Story to.
      */
@@ -135,6 +144,10 @@ public class Story implements Serializable {
     }
 
     /**
+     * This getter method gets the unique identifier that the Story uses when
+     * stored locally on the phone, whether it is a downloaded Story or a Author
+     * creation.
+     * 
      * @return The offlineStoryId used to uniquely identify of the Story when
      *         stored offline.
      */
@@ -143,6 +156,9 @@ public class Story implements Serializable {
     }
 
     /**
+     * This setter method sets the unique identifier when the Story is
+     * downloaded or created by an Author to Store locally on the phone.
+     * 
      * @param offlineStoryId
      *            The offlineStoryId to set the stored Story to.
      */
@@ -151,6 +167,8 @@ public class Story implements Serializable {
     }
 
     /**
+     * This getter method gets the Title of the Story.
+     * 
      * @return The title of the Story.
      */
     public String getTitle() {
@@ -158,6 +176,8 @@ public class Story implements Serializable {
     }
 
     /**
+     * This setter method sets the Title of the Story.
+     * 
      * @param title
      *            The title to set the Story with.
      */
@@ -166,6 +186,8 @@ public class Story implements Serializable {
     }
 
     /**
+     * This getter method gets the Author of the Story.
+     * 
      * @return The author of the Story.
      */
     public String getAuthor() {
@@ -173,6 +195,8 @@ public class Story implements Serializable {
     }
 
     /**
+     * This setter method sets the Author of the Story.
+     * 
      * @param author
      *            The author to set for the Story.
      */
@@ -181,6 +205,9 @@ public class Story implements Serializable {
     }
 
     /**
+     * This getter method gets the Story Fragments that make up the Story's
+     * pages.
+     * 
      * @return The storyFragments, which are the pages of the Story.
      */
     public ArrayList<StoryFragment> getStoryFragments() {
@@ -188,6 +215,8 @@ public class Story implements Serializable {
     }
 
     /**
+     * This setter method sets the Story Fragments that make up the Story's
+     * 
      * @param storyFragments
      *            The storyFragments to set for the pages of the Story.
      */
@@ -196,6 +225,9 @@ public class Story implements Serializable {
     }
 
     /**
+     * This getter method gets the unique identifier used to identify the
+     * starting Story Fragment of the Story.
+     * 
      * @return The firstStoryFragmentId, that is to uniquely identify the first
      *         page of the Story to being the Story with.
      */
@@ -204,18 +236,14 @@ public class Story implements Serializable {
     }
 
     /**
+     * This setter method sets the unique identifier used to identify the
+     * starting Story Fragment of the Story.
+     * 
      * @param firstStoryFragmentId
      *            The firstStoryFragmentId to set for the Story`s first page.
      */
     public void setFirstStoryFragmentId(int firstStoryFragmentId) {
 	this.firstStoryFragmentId = firstStoryFragmentId;
     }
-
-    @Override
-    public String toString() {
-	return "Story [onlineStoryId=" + onlineStoryId + ", offlineStoryId="
-		+ offlineStoryId + ", title=" + title + ", author=" + author
-		+ ", storyFragments=" + storyFragments
-		+ ", firstStoryFragmentId=" + firstStoryFragmentId + "]";
-    }
+    
 }

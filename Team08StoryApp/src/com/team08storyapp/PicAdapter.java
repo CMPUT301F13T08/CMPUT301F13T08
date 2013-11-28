@@ -119,7 +119,8 @@ public class PicAdapter extends BaseAdapter {
 	    for (int i = 0; i < fileList.length; i++) {
 		if (fileList[i].getName().startsWith(
 			"Image" + Integer.toString(currentStoryId) + "Fragment"
-				+ Integer.toString(currentStoryFragmentId)+ "Photo")) {
+				+ Integer.toString(currentStoryFragmentId)
+				+ "Photo")) {
 		    prefixFileList.add(fileList[i]);
 		}
 	    }
@@ -211,7 +212,6 @@ public class PicAdapter extends BaseAdapter {
 	/* set at currently selected index */
 	imageBitmaps[currentPic] = newPic;
     }
-    
 
     /**
      * getPic returns bitmap at specified position for larger display

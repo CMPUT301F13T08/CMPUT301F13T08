@@ -212,6 +212,215 @@ public class EditFragmentActivity extends Activity {
 	}
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	getMenuInflater().inflate(R.menu.edit_fragment, menu);
+	return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+	/* Handle item selection */
+	switch (item.getItemId()) {
+	case R.id.camIllus:
+	    Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    intent1.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+	    startActivityForResult(intent1, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	    return true;
+
+	case R.id.camGallery:
+	    Intent pickIntent = new Intent();
+	    pickIntent.setType("image/*");
+	    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
+	    startActivityForResult(
+		    Intent.createChooser(pickIntent, "Select Picture"), 200);
+	    return true;
+
+	case R.id.addChoice:
+
+	    currentStory = StoryController.updateStoryFragment(currentStory,
+		    currentStoryFragment, currentStoryFragmentId,
+		    currentStoryFragmentIndex);
+
+	    Intent choiceIntent = new Intent(EditFragmentActivity.this,
+		    EditChoiceActivity.class);
+	    choiceIntent.putExtra("story", currentStory);
+	    choiceIntent.putExtra("storyFragmentIndex",
+		    currentStoryFragmentIndex);
+	    startActivityForResult(choiceIntent, REQUEST_CHOICE);
+	    return true;
+
+	case R.id.save:
+	    try {
+		String dialogue = textSection.getText().toString();
+		currentStoryFragment.setStoryText(dialogue);
+
+		/*
+		 * Replace the current fragment in the story object, to include
+		 * changes made to it's text or illustrations. If the fragment
+		 * is a new story fragment, it is added to the fragment list of
+		 * the story.
+		 */
+		currentStory = StoryController.updateStoryFragment(
+			currentStory, currentStoryFragment,
+			currentStoryFragmentId, currentStoryFragmentIndex);
+		/*
+		 * Update the current story on the file system. Permanent change
+		 * to the current fragment
+		 */
+		fHelper.updateOfflineStory(currentStory);
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), this);
+		Toast.makeText(getApplicationContext(), "Save Successfully",
+			Toast.LENGTH_SHORT).show();
+
+		Intent intent = new Intent(EditFragmentActivity.this,
+			StoryFragmentListActivity.class);
+		intent.putExtra("story", currentStory);
+		startActivityForResult(intent, 1);
+		return true;
+
+	    } catch (FileNotFoundException e) {
+		e.printStackTrace();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	    return true;
+
+	case R.id.help:
+
+	    /*
+	     * Help option was selected by the user, display the popup dialog
+	     * for the current activity.
+	     */
+	    BuiltInHelp.showDialog(EditFragmentActivity.this,
+		    getString(R.string.edit_story_fragment_help_title),
+		    getString(R.string.edit_story_fragment_help_text));
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
+    }
+
+    protected void onResume() {
+	try {
+	    currentStory = fHelper.getOfflineStory(currentStoryId);
+	    currentStoryFragment = currentStory.getStoryFragments().get(
+		    currentStoryFragmentIndex);
+	    currentStoryFragmentId = currentStoryFragment.getStoryFragmentId();
+	    adapter.clear();
+	    adapter.addAll(currentStoryFragment.getChoices());
+	    adapter.notifyDataSetChanged();
+
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	super.onResume();
+    }
+
+    protected void onPause() {
+	try {
+
+	    currentStory = StoryController.updateStoryFragment(currentStory,
+		    currentStoryFragment, currentStoryFragmentId,
+		    currentStoryFragmentIndex);
+
+	    checkDifference();
+
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	super.onPause();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+	if (resultCode == RESULT_OK) {
+	    if (requestCode == REQUEST_CHOICE) {
+		currentStory = (Story) data.getSerializableExtra("story");
+		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
+		currentStoryFragment = currentStory.getStoryFragments().get(
+			currentStoryFragmentIndex);
+		storyFragmentChoices = currentStory.getStoryFragments()
+			.get(currentStoryFragmentIndex).getChoices();
+		try {
+		    fHelper.updateOfflineStory(currentStory);
+
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), this);
+		return;
+	    }
+	    Uri pickedUri = data.getData();
+	    Bitmap pic = pc.savePhoto(pickedUri);
+	    if (pic != null) {
+		currentPic = pc.currentPosition();
+		if (currentPic > 4) {
+		    currentPic = (currentPic % 5);
+		}
+		imgAdapt.addPic(currentPic, pic);
+		picGallery.setAdapter(imgAdapt);
+		picView.setImageBitmap(pic);
+		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		UpdateFileRecorder.appendUpdateQueue(
+			currentStory.getOfflineStoryId(), this);
+	    }
+	} else {
+	    super.onActivityResult(requestCode, resultCode, data);
+	}
+    }
+
+    protected void onStop() {
+	try {
+	    checkDifference();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	super.onStop();
+    }
+
+    /**
+     * onCheckboxClickedRandomChoice is linked to a checkbox. It's called when
+     * the checkbox is checked or clicked. And when it's clicked and checked,
+     * the randomChoice attribute in current StoryFragment will be set to 1, and
+     * the StoryFragment will have a random choice button that chooses a random
+     * choice for the user when user is reading the story; otherwise the
+     * randomChoice attribute will be zero, and there won't be the random choice
+     * button in the StoryFragment.
+     * 
+     * 
+     * @param view
+     *            the view of current activity
+     */
+    public void onCheckboxClickedRandomChoice(View view) {
+
+	/* Check is the box checked? */
+	final CheckBox randomChoice = (CheckBox) findViewById(R.id.checkbox_randomChoice);
+	boolean checked = randomChoice.isChecked();
+
+	/* Check which check box was clicked */
+	if (checked) {
+
+	    /*
+	     * If checked then a story fragment's randomChoice attribute will be
+	     * set to 1 to show the random choice button
+	     */
+	    currentStoryFragment.setRandomChoice(1);
+	} else {
+	    currentStoryFragment.setRandomChoice(0);
+	}
+    }
+
+    private void fillChoice(ArrayList<Choice> cList) {
+	adapter = new ChoiceAdapter(this, android.R.id.list, cList);
+	lv.setAdapter(adapter);
+    }
+
     private void populateScreen() {
 
 	/*
@@ -270,206 +479,6 @@ public class EditFragmentActivity extends Activity {
 	}
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.edit_fragment, menu);
-	return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-	
-	/* Handle item selection */
-	switch (item.getItemId()) {
-	case R.id.camIllus:
-	    Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	    intent1.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-	    startActivityForResult(intent1, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-	    return true;
-
-	case R.id.camGallery:
-	    Intent pickIntent = new Intent();
-	    pickIntent.setType("image/*");
-	    pickIntent.setAction(Intent.ACTION_GET_CONTENT);
-	    startActivityForResult(
-		    Intent.createChooser(pickIntent, "Select Picture"), 200);
-	    return true;
-
-	case R.id.addChoice:
-
-	    currentStory = StoryController.updateStoryFragment(currentStory,
-		    currentStoryFragment, currentStoryFragmentId,
-		    currentStoryFragmentIndex);
-
-	    Intent choiceIntent = new Intent(EditFragmentActivity.this,
-		    EditChoiceActivity.class);
-	    choiceIntent.putExtra("story", currentStory);
-	    choiceIntent.putExtra("storyFragmentIndex",
-		    currentStoryFragmentIndex);
-	    startActivityForResult(choiceIntent, REQUEST_CHOICE);
-	    return true;
-
-	case R.id.save:
-	    try {
-		String dialogue = textSection.getText().toString();
-		currentStoryFragment.setStoryText(dialogue);
-		
-		/*
-		 * Replace the current fragment in the story object, to include
-		 * changes made to it's text or illustrations. If the fragment
-		 * is a new story fragment, it is added to the fragment list of
-		 * the story.
-		 */
-		currentStory = StoryController.updateStoryFragment(
-			currentStory, currentStoryFragment,
-			currentStoryFragmentId, currentStoryFragmentIndex);
-		/*
-		 * Update the current story on the file system. Permanent change
-		 * to the current fragment
-		 */
-		fHelper.updateOfflineStory(currentStory);
-		UpdateFileRecorder.appendUpdateQueue(
-			currentStory.getOfflineStoryId(), this);
-		Toast.makeText(getApplicationContext(), "Save Successfully",
-			Toast.LENGTH_SHORT).show();
-
-		Intent intent = new Intent(EditFragmentActivity.this,
-			StoryFragmentListActivity.class);
-		intent.putExtra("story", currentStory);
-		startActivityForResult(intent, 1);
-		return true;
-
-	    } catch (FileNotFoundException e) {
-		e.printStackTrace();
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
-	    return true;
-
-	case R.id.help:
-
-	    /*
-	     * Help option was selected by the user, display the popup dialog
-	     * for the current activity.
-	     */
-	    BuiltInHelp.showDialog(EditFragmentActivity.this,
-		    getString(R.string.edit_story_fragment_help_title),
-		    getString(R.string.edit_story_fragment_help_text));
-	    return true;
-	default:
-	    return super.onOptionsItemSelected(item);
-	}
-    }
-
-    private void fillChoice(ArrayList<Choice> cList) {
-	adapter = new ChoiceAdapter(this, android.R.id.list, cList);
-	lv.setAdapter(adapter);
-    }
-
-    protected void onResume() {
-	try {
-	    currentStory = fHelper.getOfflineStory(currentStoryId);
-	    currentStoryFragment = currentStory.getStoryFragments().get(
-		    currentStoryFragmentIndex);
-	    currentStoryFragmentId = currentStoryFragment.getStoryFragmentId();
-	    adapter.clear();
-	    adapter.addAll(currentStoryFragment.getChoices());
-	    adapter.notifyDataSetChanged();
-
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	super.onResume();
-    }
-
-    protected void onPause() {
-	try {
-	    
-	    currentStory = StoryController.updateStoryFragment(currentStory,
-		    currentStoryFragment, currentStoryFragmentId,
-		    currentStoryFragmentIndex);
-	    
-	    checkDifference();
-	    
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-	super.onPause();
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-	if (resultCode == RESULT_OK) {
-	    if (requestCode == REQUEST_CHOICE) {
-		currentStory = (Story) data.getSerializableExtra("story");
-		currentStoryFragmentId = data.getIntExtra("storyFragmentId", 0);
-		currentStoryFragment = currentStory.getStoryFragments().get(
-			currentStoryFragmentIndex);
-		storyFragmentChoices = currentStory.getStoryFragments()
-			.get(currentStoryFragmentIndex).getChoices();
-		try {
-		    fHelper.updateOfflineStory(currentStory);
-
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-		UpdateFileRecorder.appendUpdateQueue(
-			currentStory.getOfflineStoryId(), this);
-		return;
-	    }
-	    Uri pickedUri = data.getData();
-	    Bitmap pic = pc.savePhoto(pickedUri);
-	    if (pic != null) {
-		currentPic = pc.currentPosition();
-		if (currentPic > 4) {
-		    currentPic = (currentPic % 5);
-		}
-		imgAdapt.addPic(currentPic, pic);
-		picGallery.setAdapter(imgAdapt);
-		picView.setImageBitmap(pic);
-		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		UpdateFileRecorder.appendUpdateQueue(
-			currentStory.getOfflineStoryId(), this);
-	    }
-	} else {
-	    super.onActivityResult(requestCode, resultCode, data);
-	}
-    }
-
-    /**
-     * onCheckboxClickedRandomChoice is linked to a checkbox. It's called when
-     * the checkbox is checked or clicked. And when it's clicked and checked,
-     * the randomChoice attribute in current StoryFragment will be set to 1, and
-     * the StoryFragment will have a random choice button that chooses a random
-     * choice for the user when user is reading the story; otherwise the
-     * randomChoice attribute will be zero, and there won't be the random choice
-     * button in the StoryFragment.
-     * 
-     * 
-     * @param view
-     *            the view of current activity
-     */
-    public void onCheckboxClickedRandomChoice(View view) {
-
-	/* Check is the box checked? */
-	final CheckBox randomChoice = (CheckBox) findViewById(R.id.checkbox_randomChoice);
-	boolean checked = randomChoice.isChecked();
-
-	/* Check which check box was clicked */
-	if (checked) {
-
-	    /*
-	     * If checked then a story fragment's randomChoice attribute will be
-	     * set to 1 to show the random choice button
-	     */
-	    currentStoryFragment.setRandomChoice(1);
-	} else {
-	    currentStoryFragment.setRandomChoice(0);
-	}
-    }
-
     private void checkDifference() throws FileNotFoundException, IOException {
 
 	/*
@@ -482,14 +491,5 @@ public class EditFragmentActivity extends Activity {
 	    UpdateFileRecorder.appendUpdateQueue(
 		    currentStory.getOfflineStoryId(), this);
 	}
-    }
-
-    protected void onStop() {
-	try {
-	    checkDifference();
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	super.onStop();
     }
 }

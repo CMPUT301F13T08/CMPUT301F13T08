@@ -98,8 +98,113 @@ public class PhotoController {
 	this.currentStoryFragmentIndex = currentStoryFragmentIndex;
 	this.fHelper = fHelper;
     }
-    
-    private String createFileName(){
+
+    /**
+     * savePhoto is the function where resizing, saving the illustration, and
+     * updating the current fragment are performed in order.
+     * <ul>
+     * <li>resizing the illustration to 200 * 150 if it's larger than this
+     * dimension.
+     * <li>saving the image based on the information of its fragmentId storyId
+     * and current photo Id.
+     * <li>updating the story in local file system.
+     * </ul>
+     * 
+     * @param pickedUri
+     *            Uri reference to the image
+     * @return Bitmap object that is decoded from the Uri
+     */
+    public Bitmap savePhoto(Uri pickedUri) {
+	String fileName = createFileName();
+
+	/* declare the bitmap */
+	Bitmap pic = null;
+
+	/* declare the path string */
+	String imgPath = getImagePath(pickedUri);
+
+	/* if we have a new URI attempt to decode the image bitmap */
+	if (pickedUri != null) {
+
+	    /* create bitmap options to calculate and use sample size */
+	    BitmapFactory.Options bmpOptions = createBitmapOptions(imgPath);
+
+	    /* get the file as a bitmap */
+	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
+	    try {
+		FileOutputStream fos = context.openFileOutput(fileName,
+			Context.MODE_PRIVATE);
+		pic.compress(CompressFormat.PNG, 90, fos);
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+	} else {
+	    Toast.makeText(activity, "Save File Error", Toast.LENGTH_LONG)
+		    .show();
+	}
+
+	addIllustration(fileName);
+
+	return pic;
+    }
+
+    /**
+     * currentPosition function will return the index of the last photo in the
+     * gallery
+     * 
+     * @return an integer value that represents the index of the last photo in
+     *         the gallery
+     */
+    public int currentPosition() {
+	return getCurrentStoryFragment().getPhotos().size() - 1;
+
+    }
+
+    /**
+     * Retrieves the StoryFragment from the current fragment.
+     * 
+     * @return on success desired current story fragment object.
+     */
+    public StoryFragment getCurrentStoryFragment() {
+	return currentStoryFragment;
+    }
+
+    /**
+     * Sets the current story fragment to currentStoryFragment.
+     * 
+     * @param currentStoryFragment
+     *            the current story fragment.
+     */
+    public void setCurrentStoryFragment(StoryFragment currentStoryFragment) {
+	this.currentStoryFragment = currentStoryFragment;
+    }
+
+    private void addIllustration(String fileName) {
+
+	// create a new photo object based on id and fileName
+	Photo add = configureNewPhoto(fileName);
+
+	// add new Photo to photoList
+	ArrayList<Photo> temp = getCurrentStoryFragment().getPhotos();
+	temp.add(add);
+	getCurrentStoryFragment().setPhotos(temp);
+
+	// update the story
+	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
+		getCurrentStoryFragment());
+
+	// update the story in local file system
+	try {
+	    fHelper.updateOfflineStory(currentStory);
+	    Toast.makeText(activity, "Illustration is added successfully",
+		    Toast.LENGTH_LONG).show();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+
+    }
+
+    private String createFileName() {
 	return "Image"
 		+ Integer.toString(currentStory.getOfflineStoryId())
 		+ "Fragment"
@@ -146,6 +251,7 @@ public class PhotoController {
 	}
 
     }
+
     private String getImagePath(Uri pickedUri) {
 
 	String imgPath = "";
@@ -166,13 +272,14 @@ public class PhotoController {
 
 	return imgPath;
     }
+
     private BitmapFactory.Options createBitmapOptions(String imgPath) {
 	/* create bitmap options to calculate and use sample size */
 	BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
 
 	/* first decode image dimensions only */
 	bmpOptions.inJustDecodeBounds = true;
-	
+
 	BitmapFactory.decodeFile(imgPath, bmpOptions);
 
 	/* use the new sample size */
@@ -180,120 +287,11 @@ public class PhotoController {
 
 	/* now decode the bitmap using sample options */
 	bmpOptions.inJustDecodeBounds = false;
-	
+
 	return bmpOptions;
     }
 
-    /**
-     * savePhoto is the function where resizing, saving the illustration, and
-     * updating the current fragment are performed in order.
-     * <ul>
-     * <li>resizing the illustration to 200 * 150 if it's larger than this
-     * dimension.
-     * <li>saving the image based on the information of its fragmentId storyId
-     * and current photo Id.
-     * <li>updating the story in local file system.
-     * </ul>
-     * 
-     * @param pickedUri
-     *            Uri reference to the image
-     * @return Bitmap object that is decoded from the Uri
-     */
-    public Bitmap savePhoto(Uri pickedUri) {
-	String fileName = createFileName();
-
-	/* declare the bitmap */
-	Bitmap pic = null;
-
-	/* declare the path string */
-	String imgPath = getImagePath(pickedUri);
-
-	/* if we have a new URI attempt to decode the image bitmap */
-	if (pickedUri != null) {
-	    
-	    /* create bitmap options to calculate and use sample size */
-	    BitmapFactory.Options bmpOptions = createBitmapOptions(imgPath);
-	    
-	    /* get the file as a bitmap */
-	    pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-	    try {
-		FileOutputStream fos = context.openFileOutput(fileName,
-			Context.MODE_PRIVATE);
-		pic.compress(CompressFormat.PNG, 90, fos);
-	    } catch (Exception e) {
-		e.printStackTrace();
-	    }
-	} else {
-	    Toast.makeText(activity, "Save File Error", Toast.LENGTH_LONG)
-		    .show();
-	}
-
-	addIllustration(fileName);
-
-	return pic;
-    }
-
-    /**
-     * currentPosition function will return the index of the last photo in the
-     * gallery
-     * 
-     * @return an integer value that represents the index of the last photo in
-     *         the gallery
-     */
-    public int currentPosition() {
-	return getCurrentStoryFragment().getPhotos().size() - 1;
-
-    }
-
-    /*
-     * AddIllustration is a method that updates a story with newly added
-     * illustrations.
-     */
-    private void addIllustration(String fileName) {
-
-	// create a new photo object based on id and fileName
-	Photo add = configureNewPhoto(fileName);
-
-	// add new Photo to photoList
-	ArrayList<Photo> temp = getCurrentStoryFragment().getPhotos();
-	temp.add(add);
-	getCurrentStoryFragment().setPhotos(temp);
-
-	// update the story
-	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-		getCurrentStoryFragment());
-
-	// update the story in local file system
-	try {
-	    fHelper.updateOfflineStory(currentStory);
-	    Toast.makeText(activity, "Illustration is added successfully",
-		    Toast.LENGTH_LONG).show();
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-
-    }
-
-    /**
-     * Retrieves the StoryFragment from the current fragment.
-     * 
-     * @return on success desired current story fragment object.
-     */
-    public StoryFragment getCurrentStoryFragment() {
-	return currentStoryFragment;
-    }
-
-    /**
-     * Sets the current story fragment to currentStoryFragment.
-     * 
-     * @param currentStoryFragment
-     *            the current story fragment.
-     */
-    public void setCurrentStoryFragment(StoryFragment currentStoryFragment) {
-	this.currentStoryFragment = currentStoryFragment;
-    }
-    
-    private Photo configureNewPhoto(String fileName){
+    private Photo configureNewPhoto(String fileName) {
 	Photo add = new Photo();
 	add.setPhotoID(getCurrentStoryFragment().getPhotos().size() + 1);
 	add.setPictureName(fileName);

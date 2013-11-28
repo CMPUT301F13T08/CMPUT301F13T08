@@ -94,10 +94,9 @@ public class UpdateToolPackage {
     public ESHelper getESHelper() {
 	return esHelper;
     }
- 
+
     /**
-     * This function is called when the Context of UpdateTookPackage is in
-     * need.
+     * This function is called when the Context of UpdateTookPackage is in need.
      * 
      * @return FileHelper, the Context field in an UpdateToolPackage object.
      */

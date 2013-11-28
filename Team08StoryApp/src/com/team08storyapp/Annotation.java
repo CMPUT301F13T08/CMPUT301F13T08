@@ -46,7 +46,7 @@ import java.io.Serializable;
  * </ul>
  * These properties are able to be accessed through the constructor or through
  * public getters/setters.
- * 
+ * <p>
  * A user while reading a Story online or offline has the option to view or add
  * Annotations to each Story Fragment they read. The Annotation is created in
  * the form of a illustration or photo. The user can either add this by taking a

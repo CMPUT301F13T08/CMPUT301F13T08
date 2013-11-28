@@ -309,7 +309,6 @@ public class AnnotationController {
     /*
      * This method finds the path of the image the user selected for an
      * Annotation.
-     * 
      */
     private String getImagePath(Uri pickedUri) {
 
@@ -331,10 +330,10 @@ public class AnnotationController {
 
 	return imgPath;
     }
-    
+
     /*
      * This method sets up the fil
-     * */
+     */
     private String createFileName() {
 	return "Image"
 		+ Integer.toString(currentStory.getOfflineStoryId())

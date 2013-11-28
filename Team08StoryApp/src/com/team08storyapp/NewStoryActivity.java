@@ -163,6 +163,10 @@ public class NewStoryActivity extends Activity {
 	newStory.setFirstStoryFragmentId(1);
     }
 
+    /*
+     * This method is used to check that the author and title fields are not
+     * blank before being able to save.
+     */
     private boolean isBlank(String str) {
 	int strLen;
 	if ((str == null) || ((strLen = str.length()) == 0))

@@ -45,15 +45,9 @@ import android.widget.TextView;
  * BuiltInHelp provides a pop up dialog to display help on the user interface
  * for the screen the user is currently on.
  * <p>
- * It contains help for the following Android Activity's screens:
- * <ul>
- * <li>MainActivity
- * <li>OnlineStoriesActivity
- * </ul>
- * <p>
- * To display the help, instantiate an object of BuiltInHelp and pass it the
- * Android Activity for the help you wish to display. Then call the
- * BuiltInHelp's showDialog() method to display the pop up dialog.
+ * To display the help, call the BuiltInHelp's showDialog() method to display
+ * the pop up dialog passing it the calling activity and it's title and text to
+ * display in the pop up.
  * 
  * @author Michele Paulichuk
  * @author Alice Wu
@@ -70,16 +64,21 @@ public class BuiltInHelp {
      * screen they are currently viewing.
      * 
      * @param activity
+     *            The calling activity in order to set up the help text that is
+     *            a appropriate for the UI screen.
      * @param helpTitle
+     *            The title to display on the top of the Help pop up.
      * @param helpText
+     *            The text describing the help for the UI screen.
      */
-    public static void showDialog(Activity activity, String helpTitle, String helpText) {
+    public static void showDialog(Activity activity, String helpTitle,
+	    String helpText) {
 	/*
 	 * Create a dialog for displaying help and set it's title and layout to
 	 * display the help information for the current screen.
 	 */
 	final Dialog helpDialog = new Dialog(activity, R.style.cust_dialog);
-	
+
 	helpDialog.setContentView(R.layout.help_dialog);
 	TextView helptext = (TextView) helpDialog
 		.findViewById(R.id.helptextView);

@@ -153,7 +153,8 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
 
     /**
      * 
-     * @param convertView The view that needs to be converted 
+     * @param convertView
+     *            The view that needs to be converted
      * @return a ViewHolder object that suits the view
      */
     private ViewHolder holder(View convertView) {

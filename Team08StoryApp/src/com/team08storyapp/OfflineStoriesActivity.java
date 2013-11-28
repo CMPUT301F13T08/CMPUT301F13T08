@@ -122,24 +122,12 @@ public class OfflineStoriesActivity extends ListActivity {
 	startActivity(firstStoryFragment);
     }
 
-    /**
-     * fillData poplates our list with a collection of stories that have been
-     * downloaded. Stories found in this list can be viewed without an Internet
-     * connection.
-     * 
-     * @param sList
-     *            An Arraylist of stories used to populate the listview.
-     */
-    private void fillData(ArrayList<Story> sList) {
-	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
 	    Intent intent) {
 	super.onActivityResult(requestCode, resultCode, intent);
 	try {
-	    
+
 	    /*
 	     * Populate the listview with the online stories at the start of the
 	     * activity
@@ -154,7 +142,7 @@ public class OfflineStoriesActivity extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	
+
 	/*
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
@@ -165,7 +153,7 @@ public class OfflineStoriesActivity extends ListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	
+
 	/* Handle item selection */
 	switch (item.getItemId()) {
 	case R.id.action_mainmenu:
@@ -175,7 +163,7 @@ public class OfflineStoriesActivity extends ListActivity {
 		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	case R.id.help:
-	    
+
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -200,6 +188,18 @@ public class OfflineStoriesActivity extends ListActivity {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
+    }
+
+    /**
+     * fillData poplates our list with a collection of stories that have been
+     * downloaded. Stories found in this list can be viewed without an Internet
+     * connection.
+     * 
+     * @param sList
+     *            An Arraylist of stories used to populate the listview.
+     */
+    private void fillData(ArrayList<Story> sList) {
+	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
 
     /**

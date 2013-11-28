@@ -46,6 +46,11 @@ import java.io.Serializable;
  * </ul>
  * These properties are able to be accessed through the constructor or through
  * public getters/setters.
+ * <p>
+ * When a user is reading a Story, the user may come across a Story Fragment
+ * that contains these Choices. The user must select one of the Choices in order
+ * to lead to the next part of the Story. This is a way for the user to decide
+ * where the Story may lead.
  * 
  * @see StoryFragment
  * @see Story
@@ -60,17 +65,11 @@ import java.io.Serializable;
  * 
  */
 public class Choice implements Serializable {
-    @Override
-    public String toString() {
-	return "Choice [text=" + text + ", toGoToStoryFragmentID="
-		+ toGoToStoryFragmentID + ", choiceId=" + choiceId + "]";
-    }
 
     private static final long serialVersionUID = 1L;
-    String text;
-    int toGoToStoryFragmentID;
-    int choiceId;
-    
+    private String text;
+    private int toGoToStoryFragmentID;
+    private int choiceId;
 
     /**
      * The default constructor for creating an Choice object. It will have none
@@ -107,13 +106,17 @@ public class Choice implements Serializable {
     }
 
     /**
-     * @return the text
+     * This getter method gets the text to display for the Choice.
+     * 
+     * @return The text to display for the Choice.
      */
     public String getText() {
 	return text;
     }
 
     /**
+     * This setter method sets the text to display for the Choice.
+     * 
      * @param text
      *            The text to set for the Choice
      */
@@ -122,30 +125,43 @@ public class Choice implements Serializable {
     }
 
     /**
-     * @return the getStoryFragmentID
+     * This getter method gets the unique identifier for Story Fragment that the
+     * Choice leads to.
+     * 
+     * @return The unique identifier of the Story Fragment the Choice leads to.
      */
     public int getStoryFragmentID() {
 	return toGoToStoryFragmentID;
     }
 
     /**
+     * This setter method sets the unique identifier for Story Fragment that the
+     * Choice leads to.
+     * 
      * @param setStoryFragmentID
-     *            The setStoryFragmentID to set for the Choice
+     *            The unique identifier of the Story Fragment to set for the
+     *            Choice to lead to.
      */
     public void setStoryFragmentID(int toGoToStoryFragmentID) {
 	this.toGoToStoryFragmentID = toGoToStoryFragmentID;
     }
 
     /**
-     * @return the choiceId
+     * This getter method gets the unique identifier used to identify the
+     * Choice.
+     * 
+     * @return The unique identifier for the choice.
      */
     public int getChoiceId() {
 	return choiceId;
     }
 
     /**
+     * This setter method sets the unique identifier used to identify the
+     * Choice.
+     * 
      * @param choiceId
-     *            The choiceId to set for the Choice
+     *            The unique identifier to set for the choice.
      */
     public void setChoiceId(int choiceId) {
 	this.choiceId = choiceId;

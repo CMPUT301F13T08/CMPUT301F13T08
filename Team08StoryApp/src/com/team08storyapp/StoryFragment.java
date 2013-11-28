@@ -116,6 +116,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This getter method gets the unique identifier used to identify the Story
+     * Fragment.
+     * 
      * @return The storyFragmentId used to uniquely identify the Story Fragment.
      */
     public int getStoryFragmentId() {
@@ -123,6 +126,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This setter method sets the unique identifier used to identify the Story
+     * Fragment.
+     * 
      * @param storyFragmentId
      *            The storyFragmentId to set for the Story Fragment.
      */
@@ -131,6 +137,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This getter method gets the text that tells the story in the Story
+     * Fragment.
+     * 
      * @return The storyText that makes up the body of the Story Fragment.
      */
     public String getStoryText() {
@@ -138,6 +147,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This setter method sets the text that tells the story in the Story
+     * Fragment.
+     * 
      * @param storyText
      *            The storyText to set for the Story Fragment's body.
      */
@@ -146,6 +158,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This getter method gets the illustrations set to illustrate the Story
+     * being told in the Story Fragment.
+     * 
      * @return The photos that illustrate the Story being told in the Story
      *         Fragment.
      */
@@ -154,6 +169,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This setter method sets the illustrations set to illustrate the Story
+     * being told in the Story Fragment.
+     * 
      * @param photos
      *            The photos to set in the Story Fragment for the Story.
      */
@@ -162,6 +180,11 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This getter method gets the possible choices set to the Story Fragment.
+     * <p>
+     * If this Story Fragment is the end of the Story the list will be empty,
+     * otherwise it should always have at least one choice.
+     * 
      * @return The choices a reader has in moving the Story along from the
      *         current Story Fragment.
      */
@@ -170,6 +193,11 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This setter method sets the possible choices set to the Story Fragment.
+     * <p>
+     * If this Story Fragment is the end of the Story do not use setter, this
+     * will be set up as an empty list in the constructor.
+     * 
      * @param choices
      *            The choices to set for that will be available for this Story
      *            Fragment.
@@ -179,6 +207,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This getter method gets the possible annotations set to the Story
+     * Fragment by users who have read the Story.
+     * 
      * @return The annotations readers have provided for this Story Fragment.
      */
     public ArrayList<Annotation> getAnnotations() {
@@ -186,6 +217,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This setter method sets the possible annotations set to the Story
+     * Fragment by users who have read the Story.
+     * 
      * @param annotations
      *            the annotations to set that readers have given for this Story
      *            Fragment.
@@ -195,6 +229,9 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This getter method gets whether this Story Fragment has the option to
+     * have it's choices chosen at random by the user.
+     * 
      * @return the Random Choice attribute (1 = on, 0 = off) of the current
      *         fragment that the author chose
      * 
@@ -204,6 +241,8 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * This setter method sets whether this Story Fragment has the option to
+     * have it's choices chosen at random by the user.
      * 
      * @param randomChoice
      *            The random choice attribute 1 for on and 0 for off for the

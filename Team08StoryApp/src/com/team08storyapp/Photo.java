@@ -62,12 +62,6 @@ import java.io.Serializable;
  */
 public class Photo implements Serializable {
 
-    @Override
-    public String toString() {
-	return "Photo [photoID=" + photoID + ", pictureName=" + pictureName
-		+ ", encodedPicture=" + encodedPicture + "]";
-    }
-
     private static final long serialVersionUID = 1L;
     private int photoID;
     private String pictureName;
@@ -82,6 +76,9 @@ public class Photo implements Serializable {
     }
 
     /**
+     * This getter method gets the unique identifier used for to identify the
+     * Photo.
+     * 
      * @return The photoID used to uniquely identify the Photo.
      */
     public int getPhotoID() {
@@ -89,6 +86,8 @@ public class Photo implements Serializable {
     }
 
     /**
+     * This setter method sets the unique identifier used to identify the Photo.
+     * 
      * @param photoID
      *            the photoID to set to the Photo for identification.
      */
@@ -97,13 +96,17 @@ public class Photo implements Serializable {
     }
 
     /**
-     * @return The pictureName that the user used to describe the Photo.
+     * This getter method gets the file Name for the Photo.
+     * 
+     * @return The pictureName the file Name for the Photo.
      */
     public String getPictureName() {
 	return pictureName;
     }
 
     /**
+     * This setter method sets the file Name for the Photo.
+     * 
      * @param pictureName
      *            The pictureName to set the Photo to.
      */

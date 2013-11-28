@@ -93,11 +93,17 @@ public class MainActivity extends Activity {
 	return super.onOptionsItemSelected(item);
     }
 
+    public void onResume() {
+	SyncManager.sync(this);
+	super.onResume();
+    }
+
     /**
      * toOnlineStories creates an intent to move to OnlineStoriesActivity when
      * "Read Online Stories" is clicked.
      * 
      * @param view
+     *            The Main Activities view.
      */
     public void toOnlineStories(View view) {
 	try {
@@ -125,6 +131,7 @@ public class MainActivity extends Activity {
      * "Read Downloaded Stories" is clicked.
      * 
      * @param view
+     *            The Main Activities view.
      */
     public void toOfflineStories(View view) {
 	Intent intent = new Intent(MainActivity.this,
@@ -137,15 +144,10 @@ public class MainActivity extends Activity {
      * "My Stories" is clicked.
      * 
      * @param view
+     *            The Main Activities view.
      */
     public void toMyStories(View view) {
 	Intent intent = new Intent(MainActivity.this, MyStoriesActivity.class);
 	startActivity(intent);
     }
-
-    public void onResume() {
-	SyncManager.sync(this);
-	super.onResume();
-    }
-
 }

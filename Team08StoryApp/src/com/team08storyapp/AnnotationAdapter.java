@@ -162,7 +162,8 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
      *            The index of file in fileList
      * @return The file that is referred by annotation object
      */
-    private File getAnnotationFile(Annotation anno, File[] fileList, File annoFile, int i) {
+    private File getAnnotationFile(Annotation anno, File[] fileList,
+	    File annoFile, int i) {
 	if (fileList[i].getName().equals(anno.getPhoto())) {
 	    annoFile = fileList[i];
 	}

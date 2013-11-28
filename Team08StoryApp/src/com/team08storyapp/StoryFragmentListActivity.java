@@ -132,25 +132,6 @@ public class StoryFragmentListActivity extends Activity {
 	}
     }
 
-    public void toEditFragment(View view) throws Exception {
-	StoryFragment nextStoryFragment = new StoryFragment(currentStory
-		.getStoryFragments().size() + 1);
-	currentStory.getStoryFragments().add(nextStoryFragment);
-
-	/* add the story to file system */
-	try {
-	    fHelper.updateOfflineStory(currentStory);
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	Intent intent = new Intent(getApplicationContext(),
-		EditFragmentActivity.class);
-	intent.putExtra("storyFragmentId",nextStoryFragment.getStoryFragmentId());
-	intent.putExtra("story", currentStory);
-	intent.putExtra("mode", 1);
-	startActivity(intent);
-    }
-
     @Override
     public void onBackPressed() {
 	Intent intent = new Intent(StoryFragmentListActivity.this,
@@ -182,5 +163,34 @@ public class StoryFragmentListActivity extends Activity {
 	} else {
 	    super.onActivityResult(requestCode, resultCode, data);
 	}
+    }
+
+    /**
+     * This is the clickLisenter used when the Create Story Fragment button is
+     * clicked. It creates the Intent that starts the activity to move to the
+     * Create/Edit Story Fragment screen.
+     * 
+     * @param view
+     *            The Story Fragment List screen.
+     * @throws Exception
+     */
+    public void toEditFragment(View view) throws Exception {
+	StoryFragment nextStoryFragment = new StoryFragment(currentStory
+		.getStoryFragments().size() + 1);
+	currentStory.getStoryFragments().add(nextStoryFragment);
+
+	/* add the story to file system */
+	try {
+	    fHelper.updateOfflineStory(currentStory);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	Intent intent = new Intent(getApplicationContext(),
+		EditFragmentActivity.class);
+	intent.putExtra("storyFragmentId",
+		nextStoryFragment.getStoryFragmentId());
+	intent.putExtra("story", currentStory);
+	intent.putExtra("mode", 1);
+	startActivity(intent);
     }
 }

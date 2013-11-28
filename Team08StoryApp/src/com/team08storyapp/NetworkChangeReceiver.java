@@ -42,6 +42,8 @@ import android.widget.Toast;
  * be done if it's needed. When lose the network, receiver will simply toast a
  * message to the user and let them know the state of network.
  * 
+ * @see BroadcastReceiver
+ * 
  * @author Michele Paulichuk
  * @author Alice Wu
  * @author Ana Marcu

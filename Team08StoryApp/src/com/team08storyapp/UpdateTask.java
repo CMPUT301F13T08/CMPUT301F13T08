@@ -103,7 +103,7 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
      */
     @Override
     protected String doInBackground(Void... updatePkg) {
-	
+
 	/* Get the ids of stories that need to be uploaded */
 	ArrayList<String> ids = UpdateFileRecorder.getUpdateFilesIds(context);
 	for (int i = 0; i < ids.size(); i++) {
@@ -111,7 +111,7 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	    if (intId < 1) {
 		continue;
 	    }
-	    
+
 	    /* upload a story */
 	    try {
 		Encoder encoder = new Encoder(context);

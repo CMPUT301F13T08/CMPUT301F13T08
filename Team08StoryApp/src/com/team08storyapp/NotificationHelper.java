@@ -31,7 +31,8 @@ public class NotificationHelper {
      * Notification constructor requires a context object to initialize the
      * context field in NotificationHelper class.
      * 
-     * @param context a context object of an activity.
+     * @param context
+     *            a context object of an activity.
      */
     public NotificationHelper(Context context) {
 	this.context = context;
@@ -81,7 +82,7 @@ public class NotificationHelper {
      */
     public void completed() {
 
-	/* remove the notification from the status bar*/
+	/* remove the notification from the status bar */
 	notificationManager.notify(NOTIFICATION_ID, notification);
 	notificationManager.cancel(NOTIFICATION_ID);
     }

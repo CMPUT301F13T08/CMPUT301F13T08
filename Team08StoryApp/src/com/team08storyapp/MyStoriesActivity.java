@@ -66,8 +66,8 @@ import android.widget.Toast;
 public class MyStoriesActivity extends ListActivity {
 
     /* position is used to discover which list item is being selected */
-    public int position;
-    public AdapterContextMenuInfo info;
+    private int position;
+    private AdapterContextMenuInfo info;
 
     private static final int PUBLISH_ID = Menu.FIRST;
     private static final int READ_ID = Menu.FIRST + 1;
@@ -245,10 +245,6 @@ public class MyStoriesActivity extends ListActivity {
 	}
     }
 
-    private void fillData(ArrayList<Story> sList) {
-	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
 	    Intent intent) {
@@ -260,19 +256,6 @@ public class MyStoriesActivity extends ListActivity {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-    }
-
-    /**
-     * This method is linked to the "Create New Story" button. It's called when
-     * the button is clicked. It simply starts an activity that allows the
-     * author to set the basic information of the new story.
-     * 
-     * @param view the view of current activity
-     */
-    public void toNewStoryActivity(View view) {
-	Intent intent = new Intent(MyStoriesActivity.this,
-		NewStoryActivity.class);
-	startActivity(intent);
     }
 
     @Override
@@ -295,6 +278,24 @@ public class MyStoriesActivity extends ListActivity {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
+    }
+
+    /**
+     * This method is linked to the "Create New Story" button. It's called when
+     * the button is clicked. It simply starts an activity that allows the
+     * author to set the basic information of the new story.
+     * 
+     * @param view
+     *            the view of current activity
+     */
+    public void toNewStoryActivity(View view) {
+	Intent intent = new Intent(MyStoriesActivity.this,
+		NewStoryActivity.class);
+	startActivity(intent);
+    }
+
+    private void fillData(ArrayList<Story> sList) {
+	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
 
 }
