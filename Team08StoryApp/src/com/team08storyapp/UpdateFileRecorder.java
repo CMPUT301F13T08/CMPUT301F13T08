@@ -30,15 +30,16 @@ Retrieved Oct. 29, 2013
  */
 package com.team08storyapp;
 
-import java.io.FileOutputStream;
-import android.content.Context;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.InputStream;
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import android.content.Context;
 
 /**
  * UpdateFileRecorder is a class that records, retrieves, clears the ids of
@@ -82,6 +83,7 @@ public class UpdateFileRecorder {
      */
     public static void appendUpdateQueue(int storyId, Context fileContext) {
 	try {
+	    
 	    /*
 	     * create a file called updateQueue that keeps the record of files
 	     * that need to be uploaded

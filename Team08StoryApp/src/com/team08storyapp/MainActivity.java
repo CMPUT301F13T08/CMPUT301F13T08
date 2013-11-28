@@ -150,4 +150,5 @@ public class MainActivity extends Activity {
 	Intent intent = new Intent(MainActivity.this, MyStoriesActivity.class);
 	startActivity(intent);
     }
+    
 }
