@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.junit.After;
+import org.junit.Before;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -34,10 +37,9 @@ public class testUpdateFileRecorder extends
     private Context context;
     private FileHelper fHelper;
 
+
     public testUpdateFileRecorder() {
 	super(MainActivity.class);
-	/*context = super.getActivity().getApplicationContext();
-	fHelper = new FileHelper(context, 0);*/
     }
 
     /*
@@ -50,13 +52,13 @@ public class testUpdateFileRecorder extends
      * context to make the FileHelper. So that's why I still keep the setUp
      * function with these code.
      */
+    @Before
     public void setUp() throws FileNotFoundException, IOException {
 
-	context = getActivity().getApplicationContext();
+	context = super.getActivity().getApplicationContext();
 	fHelper = new FileHelper(context, 0);
 	
-	s1 = new Story(14, "Morroco likoko", "Alice Wu");
-	s1.setOfflineStoryId(12);
+	s1 = new Story(12, "Morroco likoko", "Alice Wu");
 	sfList = new ArrayList<StoryFragment>();
 	content = "	This is the city, where sins grow, profits expand, people gets colder,"
 		+ " and Michael"
@@ -66,21 +68,7 @@ public class testUpdateFileRecorder extends
 		+ "fraud by a local dealership. \n    The rage occupies "
 		+ "him, leading him" + "to teach that manager a 'lesson'";
 	StoryFragment sf1 = new StoryFragment(1, content);
-
-	/* make a photo with launch icon, assign it to story fragment 1 */
-	Photo p1 = new Photo();
-	p1.setPhotoID(1);
-	String fileName = "Image12Fragment1Photo1.png";
-	p1.setPictureName(fileName);
-	Bitmap photo = BitmapFactory.decodeResource(context.getResources(),
-		R.drawable.ic_launcher);
-	FileOutputStream fos = context.openFileOutput(fileName,
-		Context.MODE_PRIVATE);
-	photo.compress(CompressFormat.PNG, 90, fos);
-	ArrayList<Photo> pList = new ArrayList<Photo>();
-	pList.add(p1);
-	sf1.setPhotos(pList);
-
+	
 	sfList.add(sf1);
 	s1.setFirstStoryFragmentId(1);
 	s1.setStoryFragments(sfList);
@@ -92,7 +80,6 @@ public class testUpdateFileRecorder extends
 	fHelper.addOfflineStory(s2);
     }
 
-    // JUNIT TEST BLOCKS AT THIS METHOD
     public void testAppendUpdateQueue() throws Exception {
 	File dir = context.getFilesDir();
 	File updateQueue = new File(dir, "updateQueue");
@@ -132,9 +119,15 @@ public class testUpdateFileRecorder extends
     }
 
     /* Delete data */
-    protected void tearDown() {
-	context.deleteFile("Download12");
-	context.deleteFile("Download13");
+    public void tearDown() throws Exception {
+	try {
+	    context.deleteFile("Download12");
+	    context.deleteFile("Download13");
+	    context.deleteFile("updateQueue");
+	} catch (Exception e) {
+
+	}
+	super.tearDown();
     }
 
 }
