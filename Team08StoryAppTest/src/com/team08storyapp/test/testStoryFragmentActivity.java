@@ -120,6 +120,9 @@ public class testStoryFragmentActivity extends
      */
     public void testListViewItem() {
 
+	assertEquals("Go to 2!",
+		((Choice) listView.getItemAtPosition(0)).getText());
+	
 	assertEquals("Go to 3!",
 		((Choice) listView.getItemAtPosition(1)).getText());
 
