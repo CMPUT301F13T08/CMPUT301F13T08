@@ -137,6 +137,10 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 				.decodeByteArray(bytePicture, 0,
 					bytePicture.length)));
 			break;
+		    } else {
+			holder.annoImage.setImageBitmap(BitmapFactory
+				.decodeResource(activity.getResources(),
+					R.drawable.ic_launcher));
 		    }
 		}
 	    } else {

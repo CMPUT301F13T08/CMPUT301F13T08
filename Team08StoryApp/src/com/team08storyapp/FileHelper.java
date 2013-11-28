@@ -148,8 +148,8 @@ public class FileHelper {
 		    story.setOfflineStoryId(Math.max(total - 1,
 			    getOfflineStories().get(total - 1)
 				    .getOfflineStoryId()) + 1);
-		    System.out.println("NEW OFFLINE ID:"
-			    + story.getOfflineStoryId());
+		    ESHelper esHelper = new ESHelper();
+		    esHelper.addOrUpdateOnlineStory(story);
 		}
 	    }
 	    String fileName = prefix

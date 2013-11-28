@@ -346,6 +346,7 @@ public class AnnotationController {
     }
 
     private Cursor getPicCursor(Uri pickedUri) {
+
 	/* retrieve the string using media data */
 	String[] medData = { MediaStore.Images.Media.DATA };
 	try {
