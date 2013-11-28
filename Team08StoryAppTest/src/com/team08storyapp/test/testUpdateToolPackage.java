@@ -48,18 +48,15 @@ public class testUpdateToolPackage extends ActivityInstrumentationTestCase2<Main
 	super(MainActivity.class);
     }
     
-    public void setUp(){
-	activity = getActivity();
-	fHelper = new FileHelper(activity.getApplicationContext(), 1);
-	esHelper = new ESHelper();
-    }
-    
     public void testConstructorUpdateToolPackage(){
-	UpdateToolPackage utp = new UpdateToolPackage(fHelper,esHelper, activity);
+	fHelper = new FileHelper(super.getActivity().getApplicationContext(), 1);
+	esHelper = new ESHelper();
+	activity = super.getActivity();
+	UpdateToolPackage utp = new UpdateToolPackage(fHelper,esHelper, activity.getApplicationContext());
 	
-	assertNotSame(activity.getApplicationContext(), utp.getContext()); 
-	assertNotSame(fHelper, utp.getfHelper()); //THIS LINE FAILS
-	assertNotSame(esHelper, utp.getESHelper());
+	assertEquals(super.getActivity().getApplicationContext(), utp.getContext()); 
+	assertEquals(fHelper, utp.getfHelper()); 
+	assertEquals(esHelper, utp.getESHelper());
     }
 
 }
