@@ -2,6 +2,14 @@ package com.team08storyapp.test;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
+import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.ListView;
+
 import com.team08storyapp.Choice;
 import com.team08storyapp.ChoiceAdapter;
 import com.team08storyapp.EditFragmentActivity;
@@ -10,15 +18,6 @@ import com.team08storyapp.PicAdapter;
 import com.team08storyapp.R;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
-import android.widget.Gallery;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
 public class testEditFragmentActivity extends

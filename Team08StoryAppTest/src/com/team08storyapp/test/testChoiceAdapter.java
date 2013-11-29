@@ -33,16 +33,15 @@ public class testChoiceAdapter extends
     public testChoiceAdapter(){
 	super(StoryFragmentActivity.class);
     }
-    
-    public void setUp(){
+        
+    public void testGetView(){
 	pList = new ArrayList<Photo>();
 	cList = new ArrayList<Choice>();
 	
+	testStory = new Story(25, "Title", "Author");
 	Choice c1 = new Choice(1,1, "No place for you.");
 	cList.add(c1);
 	
-	testStory = new Story(15, "newstory", "me");
-
 	testStoryFragment = new StoryFragment(1, "Test text.");
 	testStoryFragment.setPhotos(pList);
 	testStoryFragment.setChoices(cList);
@@ -55,12 +54,9 @@ public class testChoiceAdapter extends
 	intent.putExtra("storyFragmentId", 1);
 	super.setActivityIntent(intent);
 	testActivity = super.getActivity();
-	testContext = super.getInstrumentation().getContext();
 	
 	adapter = new ChoiceAdapter(testActivity, android.R.id.list, cList );
-    }
-    
-    public void testGetView(){
+	
 	/* Test getView() function */
 	ViewGroup parent = new LinearLayout(testActivity.getApplicationContext());
 	adapter.getView(0, null, parent);
@@ -75,9 +71,11 @@ public class testChoiceAdapter extends
 	assertEquals(adapter.getItem(0).getChoiceId(), 1);
 	assertEquals(adapter.getItem(0).getStoryFragmentID(),
 		1);
-	assertEquals(adapter.getItem(0).getText(),"No place for you.");
-
+	assertEquals(adapter.getItem(0).getText(),"No place for you.");  
+    }
     
+    public void tearDown() throws Exception{
+	super.tearDown();
     }
     
     

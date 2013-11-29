@@ -21,10 +21,14 @@ public class testBuiltInHelp extends
     }
 
     public void setUp() {
-	activity = getActivity();
+	activity = super.getActivity();
     }
 
     public void testPreConditions(){
 	assertNotNull(activity);
+    }
+    
+    public void tearDown() throws Exception{
+	super.tearDown();
     }
 }

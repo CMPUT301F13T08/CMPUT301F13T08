@@ -3,25 +3,18 @@ package com.team08storyapp.test;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import org.junit.After;
 import org.junit.Before;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.MainActivity;
-import com.team08storyapp.Photo;
-import com.team08storyapp.R;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 import com.team08storyapp.UpdateFileRecorder;

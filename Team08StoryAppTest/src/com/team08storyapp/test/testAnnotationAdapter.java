@@ -23,7 +23,7 @@ public class testAnnotationAdapter extends
 	super(AnnotationViewActivity.class);
     }
     
-    public void setUp(){
+    public void setUp() throws Exception{
 	annoList = new ArrayList<Annotation>();
 	Annotation a1 = new Annotation();
 	a1.setAnnotationID(1);
@@ -42,6 +42,7 @@ public class testAnnotationAdapter extends
 	super.setActivityIntent(intent);
 	activity = super.getActivity();
 	adapter = new AnnotationAdapter(activity, android.R.id.list, annoList);
+	super.setUp();
     }
 
     public void testGetView() {
@@ -63,5 +64,9 @@ public class testAnnotationAdapter extends
 	assertEquals(adapter.getItem(1).getAnnotationID(), 2);
 
 	assertEquals(adapter.getItem(2).getAnnotationID(), 3);
+    }
+    
+    public void tearDown() throws Exception{
+	super.tearDown();
     }
 }

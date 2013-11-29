@@ -14,10 +14,6 @@ ActivityInstrumentationTestCase2<MainActivity>{
     public testChoice() {
 	super(MainActivity.class);
     }
-
-    public void setUp(){
-	
-    }
     
     /*
      * Constructor Test for Choice object, with parameters
@@ -31,5 +27,6 @@ ActivityInstrumentationTestCase2<MainActivity>{
 	assertEquals("text", choice.getText());
 
     }
+   
     
 }

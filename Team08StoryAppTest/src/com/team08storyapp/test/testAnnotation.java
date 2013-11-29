@@ -13,10 +13,6 @@ ActivityInstrumentationTestCase2<MainActivity>{
     public testAnnotation() {
 	super(MainActivity.class);
     }
-
-    public void setUp(){
-	
-    }
     
     /*
      * Constructor Test for Annotation object. Set parameters annotationId,

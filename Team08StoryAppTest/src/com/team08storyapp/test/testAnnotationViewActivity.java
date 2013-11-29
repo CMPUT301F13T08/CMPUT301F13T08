@@ -57,5 +57,9 @@ public class testAnnotationViewActivity extends
 	assertEquals(1, ((Annotation) listView.getItemAtPosition(0)).getStoryFragmentID());
 	assertEquals(2, ((Annotation) listView.getItemAtPosition(1)).getStoryFragmentID());
     }
+    
+    public void tearDown() throws Exception{
+	super.tearDown();
+    }
 
 }

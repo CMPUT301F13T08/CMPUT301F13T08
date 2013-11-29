@@ -116,6 +116,9 @@ public class UpdateFileRecorder {
 	try {
 	    File dir = fileContext.getFilesDir();
 	    File updateQueue = new File(dir, "updateQueue");
+	    if(!updateQueue.exists()){
+		return new ArrayList<String>();
+	    }
 	    InputStream is = new BufferedInputStream(new FileInputStream(
 		    updateQueue));
 	    if (is != null) {

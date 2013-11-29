@@ -2,10 +2,9 @@ package com.team08storyapp.test;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
 import com.team08storyapp.ESHelper;
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.MyStoriesActivity;
