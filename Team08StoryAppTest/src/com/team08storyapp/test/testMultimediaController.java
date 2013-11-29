@@ -58,8 +58,8 @@ import com.team08storyapp.StoryFragmentActivity;
 
 import dalvik.annotation.TestTargetClass;
 
-public class testMultimediaController extends ActivityInstrumentationTestCase2<StoryFragmentActivity>
-{
+public class testMultimediaController extends
+	ActivityInstrumentationTestCase2<StoryFragmentActivity> {
     private MultimediaController mMController;
 
     private Activity testActivity;
@@ -72,9 +72,8 @@ public class testMultimediaController extends ActivityInstrumentationTestCase2<S
     private Uri testAudioUri;
     private Uri testVideoUri;
 
-
-    public testMultimediaController(){
-        super(StoryFragmentActivity.class);
+    public testMultimediaController() {
+	super(StoryFragmentActivity.class);
     }
 
     public void setUp() throws FileNotFoundException, IOException {
@@ -84,7 +83,7 @@ public class testMultimediaController extends ActivityInstrumentationTestCase2<S
 	 */
 	testAudioUri = Uri.parse("Audiotest");
 	testVideoUri = Uri.parse("Videotest");
-	
+
 	testFHelper = new FileHelper(testContext, 0);
 	testCurrentStory = new Story(14, "Spaceman Spiff", "Calvin");
 
@@ -105,26 +104,55 @@ public class testMultimediaController extends ActivityInstrumentationTestCase2<S
 	mMController = new MultimediaController(testActivity, testContext,
 		testCurrentStory, testCurrentStoryFragment, 0, testFHelper);
     }
-    
-  
-    public void testSaveAudio() {
- 	assertNull(mMController.saveAudio(testAudioUri));
-     }
-    
-    public void testSaveVideo() {
- 	assertNull(mMController.saveVideo(testVideoUri));
-     }
-    
+
     /*
-     * testCurrentStoryFragment has no Photos, so currentPosition() should
-     * return -1
+     * Test Case for Use Cases
+     * 
+     * the testSaveAudio method tests saving the audio and updating the current
+     * fragment.
+     * 
+     * The test uses a multimedia controller to save an audio. Then it tests if
+     * the returned object is null. If it is not null than an Assertion error is
+     * thrown.
+     * 
+     * Input parameters: a mock testAudioUri The future saveAudio() should
+     * return a null object.
+     */
+    public void testSaveAudio() {
+	assertNull(mMController.saveAudio(testAudioUri));
+    }
+
+    /*
+     * Test Case for Use Cases
+     * 
+     * the testSaveVideo method tests saving the video and updating the current
+     * fragment.
+     * 
+     * The test uses a multimedia controller to save an video. Then it tests if
+     * the returned object is null. If it is not null than an Assertion error is
+     * thrown.
+     * 
+     * Input parameters: a mock testVideoUri The future saveVideo() should
+     * return a null object.
+     */
+
+    public void testSaveVideo() {
+	assertNull(mMController.saveVideo(testVideoUri));
+    }
+
+    /*
+     * testCurrentStoryFragment has no audio or video, so currentPosition()
+     * should return -1
      */
     public void testCurrentPosition() {
 	mMController.setCurrentStoryFragment(testCurrentStoryFragment);
 	assertEquals(mMController.currentPosition(), -1);
     }
 
-    /* Delete the file used to test savePhoto() after the testcase has run */
+    /*
+     * Delete the file used to test saveAudio() and saveVideo() after the
+     * testcase has run
+     */
     public void tearDown() {
 	testContext.deleteFile("Download14");
     }
