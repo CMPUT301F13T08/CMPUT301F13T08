@@ -12,7 +12,7 @@ import com.team08storyapp.R;
 import com.team08storyapp.Story;
 
 public class testOfflineStoriesActivity extends
-ActivityInstrumentationTestCase2<OfflineStoriesActivity>{
+	ActivityInstrumentationTestCase2<OfflineStoriesActivity> {
 
     private Activity activity;
     @SuppressWarnings("unused")
@@ -25,23 +25,21 @@ ActivityInstrumentationTestCase2<OfflineStoriesActivity>{
     private String title;
     private int containTheWalk = 0;
 
-    
     public testOfflineStoriesActivity() {
 	super(OfflineStoriesActivity.class);
     }
-    
-    public void setUp(){
-	
+
+    public void setUp() {
+
 	activity = getActivity();
-	
+
 	fHelper = new FileHelper(activity, 1);
 	esHelper = new ESHelper();
 
 	listView = (ListView) activity.findViewById(android.R.id.list);
 	editText = (EditText) activity.findViewById(R.id.search);
-	
+
     }
-    
 
     public void testPreConditions() {
 
@@ -55,28 +53,25 @@ ActivityInstrumentationTestCase2<OfflineStoriesActivity>{
 	assertEquals("", editText.getText().toString());
 
     }
-    
+
+    /* Check that the story "The Walk" is one of the offline stories */
     public void testListViewItem() {
-	
-	 int firstVisibleRow = listView.getFirstVisiblePosition();
-	 int lastVisibleRow = listView.getLastVisiblePosition();
-	
-	 for(int i=firstVisibleRow;i<=lastVisibleRow;i++)
-	    {
-	     story = (Story) listView.getItemAtPosition(i);
-	     title = story.getTitle().toString();
-	     
-	    if(title.equals("The Walk")){
+
+	int firstVisibleRow = listView.getFirstVisiblePosition();
+	int lastVisibleRow = listView.getLastVisiblePosition();
+
+	for (int i = firstVisibleRow; i <= lastVisibleRow; i++) {
+	    story = (Story) listView.getItemAtPosition(i);
+	    title = story.getTitle().toString();
+
+	    if (title.equals("The Walk")) {
 		containTheWalk = 1;
 	    }
-	    
+
 	    assertEquals(1, containTheWalk);
-	     
-	    }
-			 	  
-	
+
+	}
 
     }
-    
-    
+
 }

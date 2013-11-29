@@ -12,7 +12,7 @@ import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 
 public class testEditChoiceActivity extends
-ActivityInstrumentationTestCase2<EditChoiceActivity>  {
+	ActivityInstrumentationTestCase2<EditChoiceActivity> {
 
     private Activity activity;
     private TextView textView;
@@ -21,54 +21,56 @@ ActivityInstrumentationTestCase2<EditChoiceActivity>  {
     private StoryFragment firstStoryFragment;
     private StoryFragment secondStoryFragment;
     private int storyFragmentIndex;
-    
+
     public testEditChoiceActivity() {
 	super(EditChoiceActivity.class);
     }
-    
-    
-    public void setUp(){
-	
+
+    public void setUp() {
+
 	story = new Story("title", "author");
 	firstStoryFragment = new StoryFragment(1, "FirstText");
 	secondStoryFragment = new StoryFragment(2, "SecondText");
-	
+
 	story.getStoryFragments().add(firstStoryFragment);
 	story.getStoryFragments().add(secondStoryFragment);
-	
+
 	storyFragmentIndex = 1;
-	
+
+	/*
+	 * Set the intent for EditChoiceActivity with the local story object and
+	 * the storyFragmentIndex
+	 */
 	Intent intent = new Intent();
 	intent.putExtra("story", story);
 	intent.putExtra("storyFragmentIndex", storyFragmentIndex);
 	setActivityIntent(intent);
-	
+
 	activity = getActivity();
-	
+
 	textView = (TextView) activity.findViewById(R.id.choiceFragmentId);
 	editText = (EditText) activity.findViewById(R.id.editChoiceText);
 
     }
-    
-    
-    public void testPreConditions(){
-	
+
+    public void testPreConditions() {
+
 	assertNotNull(activity);
 	assertNotNull(textView);
 	assertNotNull(editText);
-	
+
     }
-    
-    
-    public void testTextViewItem(){
-	
-	assertEquals("The linked Story Fragment id is: ", textView.getText().toString());
-	
+
+    public void testTextViewItem() {
+
+	assertEquals("The linked Story Fragment id is: ", textView.getText()
+		.toString());
+
     }
-    
-    public void testEditTextItem(){
-	
+
+    public void testEditTextItem() {
+
 	assertEquals("", editText.getText().toString());
     }
-    
+
 }

@@ -48,6 +48,7 @@ public class testSelectFragmentActivity extends
 	assertNotNull(listView);
     }
 
+    /* Check that the second fragment is in the listview */
     public void testListViewItem() {
 	assertEquals("another fragment text",
 		((StoryFragment) listView.getItemAtPosition(1)).getStoryText());

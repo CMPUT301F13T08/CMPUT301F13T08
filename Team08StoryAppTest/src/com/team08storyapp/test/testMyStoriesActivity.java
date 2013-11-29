@@ -47,12 +47,14 @@ public class testMyStoriesActivity extends
 
     }
 
+    /* Check that the search text bar has been created */
     public void testEditViewItem() {
 
 	assertEquals("", editText.getText().toString());
 
     }
 
+    /* Check that the story "Los Santos" is one of the MyStories stories */
     public void testListViewItem() {
 
 	int firstVisibleRow = listView.getFirstVisiblePosition();

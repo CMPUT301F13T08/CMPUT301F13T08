@@ -54,6 +54,7 @@ public class testOnlineStoriesActivity extends
 
     }
 
+    /* Check that "Osbourne's Adventures" is one of the online stories */
     public void testListViewItem() {
 
 	int firstVisibleRow = listView.getFirstVisiblePosition();
@@ -66,9 +67,9 @@ public class testOnlineStoriesActivity extends
 	    if (title.equals("Osbourne's Adventures")) {
 		containOsbourne = 1;
 	    }
-	
+
 	}
-	
+
 	assertEquals(1, containOsbourne);
 
     }

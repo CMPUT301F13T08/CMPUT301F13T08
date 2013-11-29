@@ -332,7 +332,7 @@ public class AnnotationController {
     }
 
     /*
-     * This method sets up the fil
+     * This method sets up the file
      */
     private String createFileName() {
 	return "Image"
