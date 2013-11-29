@@ -371,5 +371,6 @@ public class OnlineStoriesActivity extends ListActivity {
     private void fillData(ArrayList<Story> sList) {
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
+    
 
 }

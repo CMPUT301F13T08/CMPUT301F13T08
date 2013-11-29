@@ -102,7 +102,9 @@ public class EditChoiceActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
 	/*
+	 * 
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
 	 */
@@ -113,6 +115,7 @@ public class EditChoiceActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	if (item.getItemId() == R.id.help) {
+
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -146,6 +149,7 @@ public class EditChoiceActivity extends Activity {
 	tv = (EditText) findViewById(R.id.editChoiceText);
 	String choiceText = tv.getText().toString();
 	if (isBlank(choiceText)) {
+
 	    /*
 	     * A choice must have a text before it's added
 	     */Toast.makeText(getApplicationContext(),
@@ -154,6 +158,7 @@ public class EditChoiceActivity extends Activity {
 	}
 
 	if (nextFragmentId < 1) {
+
 	    /*
 	     * A choice must have a fragment selected before it's added
 	     */Toast.makeText(getApplicationContext(),
@@ -185,10 +190,8 @@ public class EditChoiceActivity extends Activity {
 	try {
 	    fHelper.updateOfflineStory(currentStory);
 	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 

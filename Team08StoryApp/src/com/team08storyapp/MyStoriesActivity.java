@@ -189,21 +189,12 @@ public class MyStoriesActivity extends ListActivity {
 		try {
 		    Encoder encoder = new Encoder(this);
 		    Story encodedStory = encoder.encodeStory(currentStory);
-		    if (currentStory.getOnlineStoryId() > 0) {
-			esHelper.addOrUpdateOnlineStory(encodedStory);
+		    currentStory.setOnlineStoryId(esHelper
+			    .addOrUpdateOnlineStory(encodedStory));
+		    Toast.makeText(getApplicationContext(),
+			    "Your Story is Successfully Published",
+			    Toast.LENGTH_LONG).show();
 
-			Toast.makeText(getApplicationContext(),
-				"Your Story is Successfully Published",
-				Toast.LENGTH_LONG).show();
-			return true;
-		    } else {
-			currentStory.setOnlineStoryId(esHelper
-				.addOrUpdateOnlineStory(encodedStory));
-
-			Toast.makeText(getApplicationContext(),
-				"Your Story is Successfully Published",
-				Toast.LENGTH_LONG).show();
-		    }
 		} catch (Exception e) {
 		    Toast.makeText(getApplicationContext(), "Publish Error",
 			    Toast.LENGTH_LONG).show();

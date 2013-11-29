@@ -31,6 +31,7 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -65,7 +66,6 @@ public class MainActivity extends Activity {
 	setContentView(R.layout.activity_main);
 	setTitle("Main Menu");
 	SyncManager.sync(this);
-
     }
 
     @Override
@@ -150,5 +150,6 @@ public class MainActivity extends Activity {
 	Intent intent = new Intent(MainActivity.this, MyStoriesActivity.class);
 	startActivity(intent);
     }
+    
     
 }

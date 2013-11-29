@@ -245,5 +245,12 @@ public class Story implements Serializable {
     public void setFirstStoryFragmentId(int firstStoryFragmentId) {
 	this.firstStoryFragmentId = firstStoryFragmentId;
     }
-    
+
+    public boolean equals(Story story){
+	return (this.author.equals(story.getAuthor()) && 
+		this.title.equals(story.getTitle()) && 
+		this.storyFragments.equals(story.storyFragments) && 
+		this.onlineStoryId == story.getOnlineStoryId() &&
+		this.offlineStoryId == story.getOfflineStoryId());
+    }
 }

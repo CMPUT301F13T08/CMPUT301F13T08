@@ -270,8 +270,10 @@ public class EditFragmentActivity extends Activity {
 		 * to the current fragment
 		 */
 		fHelper.updateOfflineStory(currentStory);
-		UpdateFileRecorder.appendUpdateQueue(
-			currentStory.getOfflineStoryId(), this);
+		if (currentStory.getOnlineStoryId() > 0) {
+		    UpdateFileRecorder.appendUpdateQueue(
+			    currentStory.getOfflineStoryId(), this);
+		}
 		Toast.makeText(getApplicationContext(), "Save Successfully",
 			Toast.LENGTH_SHORT).show();
 
@@ -352,8 +354,6 @@ public class EditFragmentActivity extends Activity {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
-		UpdateFileRecorder.appendUpdateQueue(
-			currentStory.getOfflineStoryId(), this);
 		return;
 	    }
 	    Uri pickedUri = data.getData();
@@ -367,8 +367,6 @@ public class EditFragmentActivity extends Activity {
 		picGallery.setAdapter(imgAdapt);
 		picView.setImageBitmap(pic);
 		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		UpdateFileRecorder.appendUpdateQueue(
-			currentStory.getOfflineStoryId(), this);
 	    }
 	} else {
 	    super.onActivityResult(requestCode, resultCode, data);
@@ -486,10 +484,12 @@ public class EditFragmentActivity extends Activity {
 	 * when the story fragment text changes (since we've saved choice and
 	 * illustration as soon as they are added)
 	 */
-	if (!original.equals(currentStory)) {
+	if (!original.equals(currentStory)
+		&& currentStory.getOnlineStoryId() > 0) {
 	    fHelper.updateOfflineStory(currentStory);
 	    UpdateFileRecorder.appendUpdateQueue(
 		    currentStory.getOfflineStoryId(), this);
+	    System.out.println("MY ONLINE ID:" + currentStory.getOnlineStoryId());
 	}
     }
 }
