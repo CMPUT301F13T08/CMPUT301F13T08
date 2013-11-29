@@ -60,11 +60,11 @@ public class testAudio extends ActivityInstrumentationTestCase2<MainActivity>{
         
         //Fails
         asserEquals(1, audio.getAudioID());
-        fails("Test fails cause audio class doesn't actually exist.");
+        fail("Test fails cause audio class doesn't actually exist.");
         assertEquals("audio", audio.getAudioName());
-        fails("Test fails cause audio class doesn't actually exist.");
+        fail("Test fails cause audio class doesn't actually exist.");
         assertEquals("encoded", audio.getEncodedAudio());
-        fails("Test fails cause audio class doesn't actually exist.");
+        fail("Test fails cause audio class doesn't actually exist.");
     }
 
 
