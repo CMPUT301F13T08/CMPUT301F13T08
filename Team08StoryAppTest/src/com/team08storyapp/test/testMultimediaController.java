@@ -35,6 +35,7 @@ import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -44,6 +45,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.team08storyapp.Photo;
+import com.team08storyapp.MultimediaController;
 import com.team08storyapp.Video;
 import com.team08storyapp.Audio;
 import com.team08storyapp.MultimediaController;
@@ -55,16 +58,75 @@ import com.team08storyapp.StoryFragmentActivity;
 
 import dalvik.annotation.TestTargetClass;
 
-public class testMultimediaController
+public class testMultimediaController extends ActivityInstrumentationTestCase2<StoryFragmentActivity>
 {
+    private MultimediaController mMController;
+
+    private Activity testActivity;
+    private Context testContext;
+    private Story testCurrentStory;
+    private StoryFragment testCurrentStoryFragment;
+    ArrayList<StoryFragment> testStoryFragmentList;
+    ArrayList<Photo> testPhotoList;
+    private FileHelper testFHelper;
+    private Uri testAudioUri;
+    private Uri testVideoUri;
 
 
     public testMultimediaController(){
-        
+        super(StoryFragmentActivity.class);
     }
 
     public void setUp() throws FileNotFoundException, IOException {
-        
+	/*
+	 * Initialize testUri with a mock string Initialize the activity and
+	 * context, file helper, and test story objects
+	 */
+	testAudioUri = Uri.parse("Audiotest");
+	testVideoUri = Uri.parse("Videotest");
+	
+	testFHelper = new FileHelper(testContext, 0);
+	testCurrentStory = new Story(14, "Spaceman Spiff", "Calvin");
+
+	testCurrentStoryFragment = new StoryFragment(1, "Test text.");
+	testStoryFragmentList = new ArrayList<StoryFragment>();
+	testStoryFragmentList.add(testCurrentStoryFragment);
+
+	testCurrentStory.setStoryFragments(testStoryFragmentList);
+
+	Intent intent = new Intent();
+	intent.putExtra("story", testCurrentStory);
+	intent.putExtra("storyFragmentId", 1);
+	super.setActivityIntent(intent);
+	testActivity = super.getActivity();
+	testContext = super.getInstrumentation().getContext();
+
+	/* The MultimediaController initialization */
+	mMController = new MultimediaController(testActivity, testContext,
+		testCurrentStory, testCurrentStoryFragment, 0, testFHelper);
+    }
+    
+  
+    public void testSaveAudio() {
+ 	assertNull(mMController.saveAudio(testAudioUri));
+     }
+    
+    public void testSaveVideo() {
+ 	assertNull(mMController.saveVideo(testVideoUri));
+     }
+    
+    /*
+     * testCurrentStoryFragment has no Photos, so currentPosition() should
+     * return -1
+     */
+    public void testCurrentPosition() {
+	mMController.setCurrentStoryFragment(testCurrentStoryFragment);
+	assertEquals(mMController.currentPosition(), -1);
+    }
+
+    /* Delete the file used to test savePhoto() after the testcase has run */
+    public void tearDown() {
+	testContext.deleteFile("Download14");
     }
 
 }
