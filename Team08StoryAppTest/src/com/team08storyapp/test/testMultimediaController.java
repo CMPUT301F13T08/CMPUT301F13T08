@@ -33,6 +33,9 @@ package com.team08storyapp.test;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.junit.Test;
 
 import android.app.Activity;
@@ -52,10 +55,10 @@ import com.team08storyapp.StoryFragmentActivity;
 
 import dalvik.annotation.TestTargetClass;
 
-public class testMultimediaControleller
+public class testMultimediaController
 {
 
-    @Test
+
     public testMultimediaController(){
         
     }

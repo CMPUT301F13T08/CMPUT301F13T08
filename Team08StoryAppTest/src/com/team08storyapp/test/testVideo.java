@@ -39,8 +39,7 @@ import com.team08storyapp.MainActivity;
 import com.team08storyapp.Video;
 
 
-public class testVideo extends ActivityInstrumentationtestCase2<MainActivity>{
-{
+public class testVideo extends ActivityInstrumentationTestCase2<MainActivity>{
 
     public testVideo()
     {
@@ -61,11 +60,11 @@ public class testVideo extends ActivityInstrumentationtestCase2<MainActivity>{
         
         //Fails
         asserEquals(1, video.getVideoID());
-        fails("Test fails cause audio class doesn't actually exist.");
+        fail("Test fails cause audio class doesn't actually exist.");
         assertEquals("audio", video.getVideoName());
-        fails("Test fails cause audio class doesn't actually exist.");
+        fail("Test fails cause audio class doesn't actually exist.");
         assertEquals("encoded", video.getEncodedVideo());
-        fails("Test fails cause audio class doesn't actually exist.");
+        fail("Test fails cause audio class doesn't actually exist.");
         
     }
 
