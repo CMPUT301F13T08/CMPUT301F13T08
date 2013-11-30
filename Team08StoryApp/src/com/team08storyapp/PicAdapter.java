@@ -149,17 +149,36 @@ public class PicAdapter extends BaseAdapter {
 
     }
 
-    /* return number of data items i.e. bitmap images */
+    /**
+     * This function gives the number of bitmap images to be displayed in the
+     * adapter
+     * 
+     * @return The length of the current Bitmaps array
+     */
     public int getCount() {
 	return imageBitmaps.length;
     }
 
-    /* return item at specified position */
+    /**
+     * This function returns the photo in the adapter at the given index
+     * 
+     * @param position
+     *            the index of the selected photo in the adapter
+     * 
+     * @return The photo at the given adapter index
+     */
     public Object getItem(int position) {
 	return position;
     }
 
-    /* return item ID at specified position */
+    /**
+     * This function retrieves the id of the photo at the given adapter index
+     * 
+     * @param position
+     *            the index of the selected photo in the adapter
+     * 
+     * @return The id of the photo at the given adapter index
+     */
     public long getItemId(int position) {
 	return position;
     }
