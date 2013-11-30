@@ -178,28 +178,7 @@ public class EditFragmentActivity extends Activity {
     @Override
     public void onBackPressed() {
 	try {
-
-	    String dialogue = textSection.getText().toString();
-	    currentStoryFragment.setStoryText(dialogue);
-
-	    /*
-	     * Replace the current fragment in the story object, to include
-	     * changes made to it's text or illustrations. If the fragment is a
-	     * new story fragment, it is added to the fragment list of the
-	     * story.
-	     */
-	    currentStory = StoryController.updateStoryFragment(currentStory,
-		    currentStoryFragment, currentStoryFragmentId,
-		    currentStoryFragmentIndex);
-	    /*
-	     * Update the current story on the file system. Permanent change to
-	     * the current fragment
-	     */
-
-	    checkDifference();
-	    Toast.makeText(getApplicationContext(), "Save Successfully",
-		    Toast.LENGTH_SHORT).show();
-
+	    saveStory();
 	    Intent intent = new Intent(EditFragmentActivity.this,
 		    StoryFragmentListActivity.class);
 	    intent.putExtra("story", currentStory);
@@ -253,30 +232,7 @@ public class EditFragmentActivity extends Activity {
 
 	case R.id.save:
 	    try {
-		String dialogue = textSection.getText().toString();
-		currentStoryFragment.setStoryText(dialogue);
-
-		/*
-		 * Replace the current fragment in the story object, to include
-		 * changes made to it's text or illustrations. If the fragment
-		 * is a new story fragment, it is added to the fragment list of
-		 * the story.
-		 */
-		currentStory = StoryController.updateStoryFragment(
-			currentStory, currentStoryFragment,
-			currentStoryFragmentId, currentStoryFragmentIndex);
-		/*
-		 * Update the current story on the file system. Permanent change
-		 * to the current fragment
-		 */
-		fHelper.updateOfflineStory(currentStory);
-		if (currentStory.getOnlineStoryId() > 0) {
-		    UpdateFileRecorder.appendUpdateQueue(
-			    currentStory.getOfflineStoryId(), this);
-		}
-		Toast.makeText(getApplicationContext(), "Save Successfully",
-			Toast.LENGTH_SHORT).show();
-
+		saveStory();
 		Intent intent = new Intent(EditFragmentActivity.this,
 			StoryFragmentListActivity.class);
 		intent.putExtra("story", currentStory);
@@ -323,12 +279,10 @@ public class EditFragmentActivity extends Activity {
 
     protected void onPause() {
 	try {
-
 	    currentStory = StoryController.updateStoryFragment(currentStory,
 		    currentStoryFragment, currentStoryFragmentId,
 		    currentStoryFragmentIndex);
-
-	    checkDifference();
+	    saveStory();
 
 	} catch (FileNotFoundException e) {
 	    e.printStackTrace();
@@ -375,7 +329,7 @@ public class EditFragmentActivity extends Activity {
 
     protected void onStop() {
 	try {
-	    checkDifference();
+	    saveStory();
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
@@ -434,63 +388,51 @@ public class EditFragmentActivity extends Activity {
 	 * existing Story Fragment. Thus retrieve the Story Fragment to display
 	 * the current data for editing.
 	 */
-	if (currentStoryFragmentId <= currentStory.getStoryFragments().size()) {
-	    currentStoryFragment = StoryController.readStoryFragment(
-		    currentStory.getStoryFragments(), currentStoryFragmentId);
-
-	    /*
-	     * Display the existing Story Fragment text, choices, and
-	     * illustrations.
-	     */
-	    originalText = currentStoryFragment.getStoryText();
-	    textSection.setText(originalText);
-	    storyFragmentChoices = currentStoryFragment.getChoices();
-	    ArrayList<Photo> illustrationList = currentStoryFragment
-		    .getPhotos();
-
-	    if (illustrationList == null) {
-		System.out.println("Photo List is Null");
-		illustrationList = new ArrayList<Photo>();
-		currentStoryFragment.setPhotos(illustrationList);
-		currentStory.getStoryFragments().set(currentStoryFragmentIndex,
-			currentStoryFragment);
-		try {
-		    fHelper.updateOfflineStory(currentStory);
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-	    }
-
-	    pc = new PhotoController(this, getApplicationContext(),
-		    currentStory, currentStoryFragment,
-		    currentStoryFragmentIndex, fHelper);
-
-	    imgAdapt = new PicAdapter(this, currentStoryFragment.getPhotos(),
-		    currentStoryId, currentStoryFragmentId);
-
-	    picGallery.setAdapter(imgAdapt);
-
-	    fillChoice(storyFragmentChoices);
-
-	} else {
-	    currentStoryFragment = new StoryFragment(currentStoryFragmentId);
-	}
-    }
-
-    private void checkDifference() throws FileNotFoundException, IOException {
+	currentStoryFragment = StoryController.readStoryFragment(
+		currentStory.getStoryFragments(), currentStoryFragmentId);
 
 	/*
-	 * save new storyfragment no matter what. And save existing fragment
-	 * when the story fragment text changes (since we've saved choice and
-	 * illustration as soon as they are added)
+	 * Display the existing Story Fragment text, choices, and illustrations.
 	 */
-	System.out.println("UPDATE????" + (!original.equals(currentStory)
-		&& currentStory.getOnlineStoryId() > 0));
+	originalText = currentStoryFragment.getStoryText();
+	textSection.setText(originalText);
+	storyFragmentChoices = currentStoryFragment.getChoices();
+	pc = new PhotoController(this, getApplicationContext(), currentStory,
+		currentStoryFragment, currentStoryFragmentIndex, fHelper);
+
+	imgAdapt = new PicAdapter(this, currentStoryFragment.getPhotos(),
+		currentStoryId, currentStoryFragmentId);
+
+	picGallery.setAdapter(imgAdapt);
+
+	fillChoice(storyFragmentChoices);
+
+	currentStoryFragment = new StoryFragment(currentStoryFragmentId);
+    }
+
+    private void saveStory() throws FileNotFoundException, IOException {
+	String dialogue = textSection.getText().toString();
+	currentStoryFragment.setStoryText(dialogue);
+
+	/*
+	 * Replace the current fragment in the story object, to include changes
+	 * made to it's text or illustrations. If the fragment is a new story
+	 * fragment, it is added to the fragment list of the story.
+	 */
+	currentStory = StoryController.updateStoryFragment(currentStory,
+		currentStoryFragment, currentStoryFragmentId,
+		currentStoryFragmentIndex);
+	/*
+	 * Update the current story on the file system. Permanent change to the
+	 * current fragment
+	 */
+	fHelper.updateOfflineStory(currentStory);
 	if (!original.equals(currentStory)
 		&& currentStory.getOnlineStoryId() > 0) {
-	    fHelper.updateOfflineStory(currentStory);
 	    UpdateFileRecorder.appendUpdateQueue(
 		    currentStory.getOfflineStoryId(), this);
 	}
+	Toast.makeText(getApplicationContext(), "Save Successfully",
+		Toast.LENGTH_SHORT).show();
     }
 }

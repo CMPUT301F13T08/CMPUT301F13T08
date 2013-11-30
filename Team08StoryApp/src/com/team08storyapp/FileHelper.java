@@ -147,13 +147,15 @@ public class FileHelper {
 		    story.setOfflineStoryId(Math.max(total + 1,
 			    getOfflineStories().get(total - 1)
 				    .getOfflineStoryId()) + 1);
-		    ESHelper esHelper = new ESHelper();
-		    esHelper.addOrUpdateOnlineStory(story);
+		    if (story.getOnlineStoryId() > 0) {
+			ESHelper esHelper = new ESHelper();
+			esHelper.addOrUpdateOnlineStory(story);
+		    }
 		}
 	    }
 	    String fileName = prefix
 		    + Integer.toString(story.getOfflineStoryId());
-	    
+
 	    /* translate the story context to Json */
 	    String context = gson.toJson(story);
 	    FileOutputStream ops = fileContext.openFileOutput(fileName,

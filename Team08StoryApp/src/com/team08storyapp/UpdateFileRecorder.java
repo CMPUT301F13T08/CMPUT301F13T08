@@ -123,6 +123,7 @@ public class UpdateFileRecorder {
 		    updateQueue));
 	    if (is != null) {
 		InputStreamReader isr = new InputStreamReader(is);
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(isr);
 		String temp = "";
 		while ((temp = br.readLine()) != null) {
