@@ -49,7 +49,10 @@ public class testAudio extends ActivityInstrumentationTestCase2<MainActivity>{
         
     }
     
-    
+    /*
+     * Constructor Test for Audio object. Set parameters audioId, audioName,
+     * encodedAudio, and permissions.
+     */
     public void testConstructorAudio(){
         
         Audio audio = new Audio();
@@ -57,7 +60,7 @@ public class testAudio extends ActivityInstrumentationTestCase2<MainActivity>{
         audio.setAudioID(1);
         audio.setAudioName("audio");
         audio.setEncodedAudio("encoded");
-        audio.setPermission(1);
+        audio.setAudioPermission(1);
         
         //Fails
         asserEquals(1, audio.getAudioID());

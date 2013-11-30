@@ -50,7 +50,10 @@ public class testVideo extends ActivityInstrumentationTestCase2<MainActivity>{
         
     }
     
-    
+    /*
+     * Constructor Test for Video object. Set parameters videoId, videoName,
+     * encodedVideo, and permissions.
+     */
     public void testConstructorVideo(){
         
         Video video = new Video();
