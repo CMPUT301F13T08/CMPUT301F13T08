@@ -176,9 +176,9 @@ public class Decoder {
     }
 
     /*
-     * Create a file name for a photo of an annotation, formated as eg:
+     * Create a file name for an annotation, formated as eg:
      * "Image2Fragment4Annotation5.png", 2 is the story id, 4 is the story
-     * fragment id, and 5 is the number of this next photo
+     * fragment id, and 5 is the number of the next annotation
      */
     private String createFileName(int storyId, int i,
 	    ArrayList<Annotation> annotations, int n) {
