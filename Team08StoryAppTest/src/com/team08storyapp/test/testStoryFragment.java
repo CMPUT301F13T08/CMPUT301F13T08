@@ -10,11 +10,9 @@ import com.team08storyapp.MainActivity;
 import com.team08storyapp.Photo;
 import com.team08storyapp.StoryFragment;
 
-
 public class testStoryFragment extends
-ActivityInstrumentationTestCase2<MainActivity>{
+	ActivityInstrumentationTestCase2<MainActivity> {
 
-  
     ArrayList<Choice> Choices;
     ArrayList<Annotation> Annotations;
     ArrayList<Photo> Photos;
@@ -26,15 +24,13 @@ ActivityInstrumentationTestCase2<MainActivity>{
     private Annotation testAnn2;
     private Photo testPhoto1;
     private Photo testPhoto2;
-    
-    
+
     public testStoryFragment() {
 	super(MainActivity.class);
     }
-    
-    
-    public void setUp(){
-	
+
+    public void setUp() {
+
 	Choices = new ArrayList<Choice>();
 	testChoice1 = new Choice(1, 1, "This is test 1");
 	testChoice2 = new Choice(2, 2, "This is test 2");
@@ -61,7 +57,7 @@ ActivityInstrumentationTestCase2<MainActivity>{
 	Photos.add(testPhoto1);
 	Photos.add(testPhoto2);
     }
-    
+
     /*
      * Constructor Test for StoryFragment object, with parameters
      * storyFragmentId. Also set storyText, choices, annotations, an photos.
@@ -104,5 +100,18 @@ ActivityInstrumentationTestCase2<MainActivity>{
 
     }
 
-    
+    /*
+     * Tests the setting of read only permissions of a story fragment object
+     * 
+     * public void testFragmentPermission(){ StoryFragment storyFragment = new
+     * StoryFragment(1, "text"); storyFragment.setChoices(Choices);
+     * storyFragment.setAnnotations(Annotations);
+     * storyFragment.setPhotos(Photos); storyFragment.setFragmentPermission(1);
+     * assertEquals(1, storyFragmentgetFragmentPermission());
+     * storyFragment.setFragmentPermission(0); assertEquals(0,
+     * storyFragmentgetFragmentPermission());
+     * 
+     * }
+     */
+
 }

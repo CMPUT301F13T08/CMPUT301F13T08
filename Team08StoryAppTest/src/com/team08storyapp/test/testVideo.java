@@ -57,14 +57,15 @@ public class testVideo extends ActivityInstrumentationTestCase2<MainActivity>{
         video.setVideoID(1);
         video.setVideoName("video");
         video.setEncodedVideo("encoded");
+        video.setVideoPermission(1);
         
         //Fails
         asserEquals(1, video.getVideoID());
-        fail("Test fails cause audio class doesn't actually exist.");
         assertEquals("audio", video.getVideoName());
-        fail("Test fails cause audio class doesn't actually exist.");
         assertEquals("encoded", video.getEncodedVideo());
-        fail("Test fails cause audio class doesn't actually exist.");
+        assertEquals(1, video.getVideoPermission());
+        video.setVideoPermission(0);
+        assertEquals(0, video.getVideoPermission());
         
     }
 
