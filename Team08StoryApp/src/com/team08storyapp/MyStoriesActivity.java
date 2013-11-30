@@ -191,6 +191,7 @@ public class MyStoriesActivity extends ListActivity {
 		    Story encodedStory = encoder.encodeStory(currentStory);
 		    currentStory.setOnlineStoryId(esHelper
 			    .addOrUpdateOnlineStory(encodedStory));
+		    fHelper.updateOfflineStory(currentStory);
 		    Toast.makeText(getApplicationContext(),
 			    "Your Story is Successfully Published",
 			    Toast.LENGTH_LONG).show();
@@ -205,6 +206,7 @@ public class MyStoriesActivity extends ListActivity {
 			"Network Error. Please Check Your Network Connection",
 			Toast.LENGTH_LONG).show();
 	    }
+	    return true;
 	case EDIT_ID:
 
 	    Intent intent = new Intent(MyStoriesActivity.this,
@@ -232,7 +234,7 @@ public class MyStoriesActivity extends ListActivity {
 	    return true;
 
 	default:
-	    return super.onContextItemSelected(item);
+	    return true;
 	}
     }
 

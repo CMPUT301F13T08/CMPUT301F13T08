@@ -484,12 +484,13 @@ public class EditFragmentActivity extends Activity {
 	 * when the story fragment text changes (since we've saved choice and
 	 * illustration as soon as they are added)
 	 */
+	System.out.println("UPDATE????" + (!original.equals(currentStory)
+		&& currentStory.getOnlineStoryId() > 0));
 	if (!original.equals(currentStory)
 		&& currentStory.getOnlineStoryId() > 0) {
 	    fHelper.updateOfflineStory(currentStory);
 	    UpdateFileRecorder.appendUpdateQueue(
 		    currentStory.getOfflineStoryId(), this);
-	    System.out.println("MY ONLINE ID:" + currentStory.getOnlineStoryId());
 	}
     }
 }

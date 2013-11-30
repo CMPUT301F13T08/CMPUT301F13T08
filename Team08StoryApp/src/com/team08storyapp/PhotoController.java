@@ -211,9 +211,8 @@ public class PhotoController {
 		+ Integer.toString(getCurrentStoryFragment()
 			.getStoryFragmentId())
 		+ "Photo"
-		+ Integer
-			.toString(getCurrentStoryFragment().getPhotos().size() + 1)
-		+ ".png";
+		+ Integer.toString((getCurrentStoryFragment().getPhotos()
+			.size() + 1) % 5) + ".png";
     }
 
     private Cursor getPicCursor(Uri pickedUri) {
