@@ -37,6 +37,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import android.app.Activity;
@@ -58,6 +59,7 @@ import com.team08storyapp.StoryFragmentActivity;
 
 import dalvik.annotation.TestTargetClass;
 
+@Ignore
 public class testMultimediaController extends
 	ActivityInstrumentationTestCase2<StoryFragmentActivity> {
     private MultimediaController mMController;
@@ -76,6 +78,7 @@ public class testMultimediaController extends
 	super(StoryFragmentActivity.class);
     }
 
+    @Test
     public void setUp() throws FileNotFoundException, IOException {
 	/*
 	 * Initialize testUri with a mock string Initialize the activity and
@@ -118,6 +121,7 @@ public class testMultimediaController extends
      * Input parameters: a mock testAudioUri The future saveAudio() should
      * return a null object.
      */
+    @Test
     public void testSaveAudio() {
 	assertNull(mMController.saveAudio(testAudioUri));
     }
@@ -135,7 +139,7 @@ public class testMultimediaController extends
      * Input parameters: a mock testVideoUri The future saveVideo() should
      * return a null object.
      */
-
+    @Test
     public void testSaveVideo() {
 	assertNull(mMController.saveVideo(testVideoUri));
     }
@@ -144,6 +148,7 @@ public class testMultimediaController extends
      * testCurrentStoryFragment has no audio or video, so currentPosition()
      * should return -1
      */
+    @Test
     public void testCurrentPosition() {
 	mMController.setCurrentStoryFragment(testCurrentStoryFragment);
 	assertEquals(mMController.currentPosition(), -1);
@@ -153,6 +158,7 @@ public class testMultimediaController extends
      * Delete the file used to test saveAudio() and saveVideo() after the
      * testcase has run
      */
+    @Test
     public void tearDown() {
 	testContext.deleteFile("Download14");
     }

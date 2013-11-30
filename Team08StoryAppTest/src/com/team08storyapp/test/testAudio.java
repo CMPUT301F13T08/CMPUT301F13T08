@@ -32,19 +32,20 @@ package com.team08storyapp.test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import com.team08storyapp.MainActivity;
-import com.team08storyapp.Audio;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-
+@Ignore("Future Implementation")
 public class testAudio extends ActivityInstrumentationTestCase2<MainActivity>{
 
     public testAudio(){
         super(MainActivity.class);
     }
     
+    @Test
     public void setup(){
         
     }
@@ -53,6 +54,7 @@ public class testAudio extends ActivityInstrumentationTestCase2<MainActivity>{
      * Constructor Test for Audio object. Set parameters audioId, audioName,
      * encodedAudio, and permissions.
      */
+    @Test
     public void testConstructorAudio(){
         
         Audio audio = new Audio();

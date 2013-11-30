@@ -2,6 +2,9 @@ package com.team08storyapp.test;
 
 import java.util.ArrayList;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.team08storyapp.Annotation;
@@ -102,16 +105,19 @@ public class testStoryFragment extends
 
     /*
      * Tests the setting of read only permissions of a story fragment object
-     * 
-     * public void testFragmentPermission(){ StoryFragment storyFragment = new
-     * StoryFragment(1, "text"); storyFragment.setChoices(Choices);
-     * storyFragment.setAnnotations(Annotations);
-     * storyFragment.setPhotos(Photos); storyFragment.setFragmentPermission(1);
-     * assertEquals(1, storyFragmentgetFragmentPermission());
-     * storyFragment.setFragmentPermission(0); assertEquals(0,
-     * storyFragmentgetFragmentPermission());
-     * 
-     * }
      */
+    @Ignore("Not ready yet")
+    @Test
+    public void testFragmentPermission() {
+	StoryFragment storyFragment = new StoryFragment(1, "text");
+	storyFragment.setChoices(Choices);
+	storyFragment.setAnnotations(Annotations);
+	storyFragment.setPhotos(Photos);
+	storyFragment.setFragmentPermission(1);
+	assertEquals(1, storyFragmentgetFragmentPermission());
+	storyFragment.setFragmentPermission(0);
+	assertEquals(0, storyFragmentgetFragmentPermission());
+
+    }
 
 }
