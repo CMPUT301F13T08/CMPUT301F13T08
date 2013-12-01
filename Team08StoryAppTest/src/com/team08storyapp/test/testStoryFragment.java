@@ -115,9 +115,9 @@ public class testStoryFragment extends
 	storyFragment.setPhotos(Photos);
 	storyFragment.setFragmentPermission(1);
 
-	assertEquals(1, testFragmentPermission());
+	assertEquals(1, storyFragment.getFragmentPermission());
 	storyFragment.setFragmentPermission(0);
-	assertEquals(0, testFragmentPermission());
+	assertEquals(0, storyFragment.getFragmentPermission());
 
 
 
