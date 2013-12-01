@@ -46,6 +46,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.team08storyapp.MultimediaController;
 import com.team08storyapp.Photo;
 import com.team08storyapp.FileHelper;
 import com.team08storyapp.MyStoriesActivity;
