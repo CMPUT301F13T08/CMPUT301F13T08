@@ -33,25 +33,71 @@ package com.team08storyapp;
 
 import android.net.Uri;
 
+/**
+ * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ * ++++++ This class is used for future implementations (Fake Class)++++++
+ * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ * 
+ * MultimediaController is a controller class that is responsible for resizing
+ * (if needed), saving multimedia and update the current story and current story
+ * fragment.
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
+
 public class MultimediaController {
 
-    
-    public MultimediaController(){
-	
+    /**
+     * Constructor of the MultimediaController is a stub constructor. Will be
+     * implemented in the future
+     */
+    public MultimediaController() {
     }
-    public void setCurrentStoryFragment(){
-	
-    }
     
-    public int currentPosition(){
+    /**
+     * Used for future implementation
+     */
+    public void setCurrentStoryFragment() {
+    }
+
+    /**
+     * Used for future implementation
+     * @return 0
+     */
+    public int currentPosition() {
 	return 0;
     }
-    
-    public Object saveVideo(Uri pickedUri){
+
+    /**
+     * saveVideo is the function where saving the video and updating
+     * the current fragment are performed in order. Will be used for future
+     * implementation.
+     * 
+     * @param pickedUri
+     *            Uri reference to the image
+     * @return Null
+     */
+    public Object saveVideo(Uri pickedUri) {
 	return null;
     }
-    
-    public Object saveAudio(Uri pickedUri){
+
+    /**
+     * saveAudio is the function where saving the audio and updating
+     * the current fragment are performed in order. Will be used for future
+     * implementation.
+     * 
+     * @param pickedUri
+     *            Uri reference to the image
+     * @return Null
+     */
+    public Object saveAudio(Uri pickedUri) {
 	return null;
     }
 }
