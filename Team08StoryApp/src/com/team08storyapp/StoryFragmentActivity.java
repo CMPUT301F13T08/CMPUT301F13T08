@@ -333,6 +333,7 @@ public class StoryFragmentActivity extends Activity {
 		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	case R.id.help:
+
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -403,6 +404,10 @@ public class StoryFragmentActivity extends Activity {
 	startActivity(randomStoryFragment);
     }
 
+    /*
+     * function uses the choice list passed in to populate a list view with each
+     * choice's text
+     */
     private void fillChoice(ArrayList<Choice> cList) {
 	ChoiceAdapter adapter = new ChoiceAdapter(this, android.R.id.list,
 		cList);
@@ -411,6 +416,9 @@ public class StoryFragmentActivity extends Activity {
 	lv.setAdapter(adapter);
     }
 
+    /*
+     * This function shows up the pop up menu when adding annotations
+     */
     private void showPopup() {
 
 	/* root view of popup menu */
@@ -453,7 +461,10 @@ public class StoryFragmentActivity extends Activity {
 	popupMenu.show();
 
     }
-
+    
+    /*
+     * function calls for a new annotation controller and saves the annotation in passed in data.
+     */
     private void saveAnnotationImage(Intent data) {
 
 	/* the returned picture URI */

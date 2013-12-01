@@ -71,6 +71,7 @@ public class StoryFragment implements Serializable {
     private ArrayList<Choice> choices;
     private ArrayList<Annotation> annotations;
     private int randomChoice;
+    private int fragmentPermission;
 
 
     /**
@@ -252,6 +253,14 @@ public class StoryFragment implements Serializable {
 
     public void setRandomChoice(int randomChoice) {
 	this.randomChoice = randomChoice;
+    }
+    
+    public int getFragmentPermission(){
+	return fragmentPermission;
+    }
+    
+    public void setFragmentPermission(int fragmentPermission){
+	this.fragmentPermission = fragmentPermission;
     }
 
 

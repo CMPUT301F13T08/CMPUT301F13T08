@@ -76,6 +76,7 @@ import com.google.gson.reflect.TypeToken;
 
 @SuppressLint("DefaultLocale")
 public class FileHelper {
+    
     /*
      * a context variable provides access to application-specific resources and
      * classes, as well as up-calls for application-level operations such as

@@ -100,6 +100,7 @@ public class StoryFragmentListActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+	
 	/*
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
@@ -119,6 +120,7 @@ public class StoryFragmentListActivity extends Activity {
 		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	case R.id.help:
+	    
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.

@@ -152,19 +152,9 @@ public class AnnotationAdapter extends ArrayAdapter<Annotation> {
 	return v;
     }
 
-    /**
+    /*
      * This function is called to search for the correct file referred by passed
-     * annotation object
-     * 
-     * @param anno
-     *            The annotation object that is going to be put in the holder
-     * @param fileList
-     *            A list of files in current directory
-     * @param annoFile
-     *            The file that is referred by annotation object.
-     * @param i
-     *            The index of file in fileList
-     * @return The file that is referred by annotation object
+     * annotation objects
      */
     private File getAnnotationFile(Annotation anno, File[] fileList,
 	    File annoFile, int i) {
