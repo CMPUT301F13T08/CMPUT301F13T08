@@ -39,6 +39,7 @@ public class Video implements Serializable{
     private int videoID;
     private String videoName;
     private String encodedVideo;
+    private int videoPermission;
     
     public Video(){
     }
@@ -65,5 +66,13 @@ public class Video implements Serializable{
     
     public void setEncodedVideo(String encodedVideo){
 	this.encodedVideo = encodedVideo;
+    }
+    
+    public int getVideoPermission(){
+	return videoPermission;
+    }
+    
+    public void setVideoPermission(int videoPermission){
+	this.videoPermission = videoPermission;
     }
 }

@@ -5,9 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import android.test.ActivityInstrumentationTestCase2;
-
-import com.team08storyapp.Video;
 import com.team08storyapp.MainActivity;
+import com.team08storyapp.Video;
 
 @Ignore
 public class testVideo extends ActivityInstrumentationTestCase2<MainActivity>{
