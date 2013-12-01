@@ -36,6 +36,7 @@ public class Audio {
     private int audioID;
     private String audioName;
     private String encodedAudio;
+    private int audioPermission;
     
     public Audio(){
     }
@@ -60,8 +61,16 @@ public class Audio {
 	return encodedAudio;
     }
     
-    public void setEncodedVideo(String encodedAudio){
+    public void setEncodedAudio(String encodedAudio){
 	this.encodedAudio = encodedAudio;
+    }
+    
+    public void setAudioPermission(int audioPermission){
+	this.audioPermission = audioPermission;
+    }
+    
+    public int getAudioPermission(){
+	return audioPermission;
     }
 
 }
