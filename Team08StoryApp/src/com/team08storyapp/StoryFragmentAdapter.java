@@ -67,6 +67,7 @@ public class StoryFragmentAdapter extends ArrayAdapter<StoryFragment> {
     public View getView(int position, View convertView, ViewGroup parent) {
 	ViewHolder holder = holder(convertView);
 	View v = convertView;
+	
 	/*
 	 * If the passed view is a valid view then inflate it with desired
 	 * layout.

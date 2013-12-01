@@ -93,6 +93,7 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
     public View getView(int position, View convertView, ViewGroup parent) {
 	ViewHolder holder = holder(convertView);
 	View v = convertView;
+	
 	/* if the view is not empty populate with the given layout */
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity

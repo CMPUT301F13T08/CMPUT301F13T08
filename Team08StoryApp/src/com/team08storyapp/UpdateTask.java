@@ -128,11 +128,15 @@ public class UpdateTask extends AsyncTask<Void, Integer, String> {
 	    }
 
 	}
+	
 	/* delete all ids of stories that need to be uploaded */
 	UpdateFileRecorder.clearUpdateQueue(context);
 	return null;
     }
 
+    /*
+     *  this function tries to get the int Id from a passed string.
+     */
     private int parseId(ArrayList<String> ids, int i) {
 	String id = ids.get(i);
 	int intId = 0;
