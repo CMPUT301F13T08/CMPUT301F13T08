@@ -104,6 +104,7 @@ public class MyStoriesActivity extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+	
 	/*
 	 * Inflate the menu; this adds items to the action bar if they are
 	 * present.
@@ -114,6 +115,7 @@ public class MyStoriesActivity extends ListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+	
 	/* Handle item selection */
 	switch (item.getItemId()) {
 	case R.id.action_mainmenu:
@@ -123,6 +125,7 @@ public class MyStoriesActivity extends ListActivity {
 		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	case R.id.help:
+	    
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -181,6 +184,7 @@ public class MyStoriesActivity extends ListActivity {
 	Story currentStory = (Story) lv.getAdapter().getItem(position);
 	switch (item.getItemId()) {
 	case PUBLISH_ID:
+	    
 	    /*
 	     * This case handles publishing a story online by passing a story
 	     * object to esHelper to be pushed online.
@@ -287,6 +291,10 @@ public class MyStoriesActivity extends ListActivity {
 	startActivity(intent);
     }
 
+    /*
+     * This function takes in a list of story objects and populate the author
+     * and title of each story into each row of a list view in this activity.
+     */
     private void fillData(ArrayList<Story> sList) {
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }

@@ -179,21 +179,24 @@ public class PhotoController {
 	this.currentStoryFragment = currentStoryFragment;
     }
 
+    /*
+     * 
+     */
     private void addIllustration(String fileName) {
 
-	// create a new photo object based on id and fileName
+	/* create a new photo object based on id and fileName */
 	Photo add = configureNewPhoto(fileName);
 
-	// add new Photo to photoList
+	/* add new Photo to photoList */
 	ArrayList<Photo> temp = getCurrentStoryFragment().getPhotos();
 	temp.add(add);
 	getCurrentStoryFragment().setPhotos(temp);
 
-	// update the story
+	/* update the story */
 	currentStory.getStoryFragments().set(currentStoryFragmentIndex,
 		getCurrentStoryFragment());
 
-	// update the story in local file system
+	/* update the story in local file system */
 	try {
 	    fHelper.updateOfflineStory(currentStory);
 	    Toast.makeText(activity, "Illustration is added successfully",
@@ -204,6 +207,10 @@ public class PhotoController {
 
     }
 
+    /*
+     * This function is responsible for creating a new file name for a new
+     * illustration.
+     */
     private String createFileName() {
 	return "Image"
 		+ Integer.toString(currentStory.getOfflineStoryId())
@@ -215,7 +222,12 @@ public class PhotoController {
 			.size() + 1) % 5) + ".png";
     }
 
+    /*
+     * This function takes in a Uri object which is used for query the cursor. 
+     * And returns the cursor.
+     */
     private Cursor getPicCursor(Uri pickedUri) {
+	
 	/* retrieve the string using media data */
 	String[] medData = { MediaStore.Images.Media.DATA };
 	try {
@@ -226,8 +238,13 @@ public class PhotoController {
 	}
     }
 
+    /*
+     * This function returns the ratio of size of the image if the image's size
+     * is larger than (200*150).
+     */
     private int resize(BitmapFactory.Options bmpOptions) {
-	// set the target image size
+
+	/* set the target image size */
 	int targetWidth = 200;
 	int targetHeight = 150;
 
@@ -240,7 +257,7 @@ public class PhotoController {
 	 * size
 	 */
 	if (currHeight > targetHeight || currWidth > targetWidth) {
-	    // use either width or height
+	    /* use either width or height */
 	    if (currWidth > currHeight)
 		return Math.round((float) currHeight / (float) targetHeight);
 	    else
@@ -251,9 +268,13 @@ public class PhotoController {
 
     }
 
+    /*
+     * This function simply returns the file path in current activity context.
+     */
     private String getImagePath(Uri pickedUri) {
 
 	String imgPath = "";
+
 	/* query the data */
 	Cursor picCursor = getPicCursor(pickedUri);
 
@@ -272,7 +293,12 @@ public class PhotoController {
 	return imgPath;
     }
 
+    /*
+     * This function returns a new BitmapFactory.Options object. And the
+     * returned Options object's flags are set for future use.
+     */
     private BitmapFactory.Options createBitmapOptions(String imgPath) {
+
 	/* create bitmap options to calculate and use sample size */
 	BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
 
@@ -290,6 +316,10 @@ public class PhotoController {
 	return bmpOptions;
     }
 
+    /*
+     * Set up a new Photo object by initializing a new photo object and set up
+     * the id and filename
+     */
     private Photo configureNewPhoto(String fileName) {
 	Photo add = new Photo();
 	add.setPhotoID(getCurrentStoryFragment().getPhotos().size() + 1);

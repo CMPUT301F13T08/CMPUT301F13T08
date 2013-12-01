@@ -368,11 +368,19 @@ public class EditFragmentActivity extends Activity {
 	}
     }
 
+    /*
+     * this functions takes in a list of choice objects and populate the text of
+     * choice into the rows of list view
+     */
     private void fillChoice(ArrayList<Choice> cList) {
 	adapter = new ChoiceAdapter(this, android.R.id.list, cList);
 	lv.setAdapter(adapter);
     }
 
+    /*
+     * this functions mainly gets the story text, choice list, illustration list
+     * into the current layout of current activity
+     */
     private void populateScreen() {
 
 	/*
@@ -410,6 +418,10 @@ public class EditFragmentActivity extends Activity {
 	currentStoryFragment = new StoryFragment(currentStoryFragmentId);
     }
 
+    /*
+     * This function saves the story and checks if it's necessary to sync the
+     * story to server
+     */
     private void saveStory() throws FileNotFoundException, IOException {
 	String dialogue = textSection.getText().toString();
 	currentStoryFragment.setStoryText(dialogue);
