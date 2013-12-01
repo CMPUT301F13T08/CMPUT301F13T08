@@ -71,6 +71,7 @@ public class StoryFragment implements Serializable {
     private ArrayList<Choice> choices;
     private ArrayList<Annotation> annotations;
     private int randomChoice;
+    private int fragmentPermission;
 
     /**
      * A constructor for creating a Story Fragment object used when initializing
@@ -251,6 +252,14 @@ public class StoryFragment implements Serializable {
 
     public void setRandomChoice(int randomChoice) {
 	this.randomChoice = randomChoice;
+    }
+    
+    public int getFragmentPermission(){
+	return fragmentPermission;
+    }
+    
+    public void setFragmentPermission(int fragmentPermission){
+	this.fragmentPermission = fragmentPermission;
     }
 
 }
