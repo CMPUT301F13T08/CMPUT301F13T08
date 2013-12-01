@@ -31,6 +31,39 @@ Retrieved Oct. 29, 2013
 
 package com.team08storyapp;
 
+/**
+ * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ * ++++++ This class is used for future implementations (Fake Class)++++++
+ * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ * 
+ * Audio is a model class representing an soundtrack or recording that can be
+ * used in an Annotation on a StoryFragment in a Story or as an illustration on
+ * a StoryFragment in a Story. An photo has the following properties:
+ * <ul>
+ * <li>Audio Id is to uniquely identify the Photo.
+ * <li>Audio Name is the name the user gave to the audio track.
+ * <li>Audio the audio the reader set in Annotation.
+ * <li>Encoded audio is the photo encoded for storing it in a file or on a
+ * webservice.
+ * <li>Audio Permissions is the track's permission for read only
+ * </ul>
+ * These properties are able to be accessed through the constructor or through
+ * public getters/setters.
+ * 
+ * @see Story
+ * @see StoryFragment
+ * @see Annotation
+ * 
+ * @author Michele Paulichuk
+ * @author Alice Wu
+ * @author Ana Marcu
+ * @author Jarrett Toll
+ * @author Jiawei Shen
+ * @version 1.0 November 8, 2013
+ * @since 1.0
+ * 
+ */
+
 public class Audio {
     @SuppressWarnings("unused")
     private static final long serialVersionUID = 1L;
@@ -39,38 +72,91 @@ public class Audio {
     private String encodedAudio;
     private int audioPermission;
     
-    public Audio(){
+    /**
+     * Fake constructor for creating an Audio object. 
+     * Will be implemented in the future.
+     */
+    public Audio() {
     }
-    
-    public int getAudioID(){
+
+    /**
+     * This getter method gets the unique identifier used for to identify the 
+     * Audio.
+     * 
+     * @return The audioID used to uniquely identify the Audio.
+     */
+    public int getAudioID() {
 	return audioID;
     }
     
-    public void setAudioID(int audioID){
+    /**
+     * This setter method sets the unique identifier used to identify the Audio.
+     * 
+     * @param audiID
+     *            the audioID to set to the audio for identification.
+     */
+    public void setAudioID(int audioID) {
 	this.audioID = audioID;
     }
-    
-    public String getAudioName(){
+
+    /**
+     * This getter method gets the file Name for the Audio.
+     * 
+     * @return The audioName the file Name for the Audio.
+     */
+    public String getAudioName() {
 	return audioName;
     }
     
-    public void setAudioName(String audioName){
+    /**
+     * This setter method sets the file Name for the Audio.
+     * 
+     * @param AudioName
+     *            The AudioName to set the Audio to.
+     */
+    public void setAudioName(String audioName) {
 	this.audioName = audioName;
     }
     
-    public String getEncodedAudio(){
+    /**
+     * Retrieving the encoded Audio is used for storing the Audii either on the
+     * webservice or local file system as Audios need to be stored as encoded
+     * byte arrays.
+     * 
+     * @return The encodedAudio Audio
+     */
+    public String getEncodedAudio() {
 	return encodedAudio;
     }
     
-    public void setEncodedAudio(String encodedAudio){
+    /**
+     * The Audio will be encoded from without the class and then set in the
+     * Audio object to for future use for the Audio to be stored outside the
+     * application.
+     * 
+     * @param encodedAudio
+     *            The encodedAudio to set representing the Audio.
+     */
+    public void setEncodedAudio(String encodedAudio) {
 	this.encodedAudio = encodedAudio;
     }
     
-    public void setAudioPermission(int audioPermission){
+    /**
+     * This setter method sets the Audio's permission to be read only or not.
+     * 
+     * @param AudioPermission
+     *            The AudioPermission to set the Audio permission to.
+     */
+    public void setAudioPermission(int audioPermission) {
 	this.audioPermission = audioPermission;
     }
     
-    public int getAudioPermission(){
+    /**
+     * This getter method gets the audio file's permission.
+     * 
+     * @return The audioPermission of the audio track.
+     */
+    public int getAudioPermission() {
 	return audioPermission;
     }
 
