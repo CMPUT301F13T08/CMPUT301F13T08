@@ -21,6 +21,7 @@ import com.team08storyapp.MyStoriesActivity;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 import com.team08storyapp.StoryFragmentActivity;
+import com.team08storyapp.MultimediaController;
 
 import dalvik.annotation.TestTargetClass;
 
@@ -69,8 +70,7 @@ public class testMultimediaController extends
 	testContext = super.getInstrumentation().getContext();
 
 	/* The MultimediaController initialization */
-	mMController = new MultimediaController(testActivity, testContext,
-		testCurrentStory, testCurrentStoryFragment, 0, testFHelper);
+	mMController = new MultimediaController();
     }
 
     /*
@@ -115,7 +115,7 @@ public class testMultimediaController extends
      */
     @Test
     public void testCurrentPosition() {
-	mMController.setCurrentStoryFragment(testCurrentStoryFragment);
+	mMController.setCurrentStoryFragment();
 	assertEquals(mMController.currentPosition(), -1);
     }
 
