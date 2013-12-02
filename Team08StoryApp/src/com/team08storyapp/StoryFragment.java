@@ -71,6 +71,7 @@ public class StoryFragment implements Serializable {
     private ArrayList<Choice> choices;
     private ArrayList<Annotation> annotations;
     private int randomChoice;
+    /* Applicable for future implementation of the requirement Permissions */
     private int fragmentPermission;
 
     /**
@@ -255,11 +256,10 @@ public class StoryFragment implements Serializable {
     }
 
     /**
-     * This getter method gets whether this Story Fragment and its illustrations
-     * is read only.
+     * This getter method gets whether this Story Fragment is read only.
      * 
-     * @return the fragmentPermission attribute (1 = read and edit, 0 = read
-     *         only) of the current fragment
+     * @return the fragmentPermission attribute of the current fragment, 0 for
+     *         read only, 1 for readable and editable
      * 
      */
     public int getFragmentPermission() {
@@ -267,12 +267,10 @@ public class StoryFragment implements Serializable {
     }
 
     /**
-     * This setter method sets the read only option of the current StoryFragment
+     * This setter method sets whether this Story Fragment is read only.
      * 
-     * @param the
-     *            fragmentPermission attribute (1 = read and edit, 0 = read
-     *            only) of the current fragment
-     * 
+     * @param fragmentPermission
+     *            1 for readable and editable, 0 for read only
      */
     public void setFragmentPermission(int fragmentPermission) {
 	this.fragmentPermission = fragmentPermission;

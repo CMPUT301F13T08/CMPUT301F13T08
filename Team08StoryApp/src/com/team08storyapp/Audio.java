@@ -71,16 +71,16 @@ public class Audio {
     private String audioName;
     private String encodedAudio;
     private int audioPermission;
-    
+
     /**
-     * Fake constructor for creating an Audio object. 
-     * Will be implemented in the future.
+     * Fake constructor for creating an Audio object. Will be implemented in the
+     * future.
      */
     public Audio() {
     }
 
     /**
-     * This getter method gets the unique identifier used for to identify the 
+     * This getter method gets the unique identifier used for to identify the
      * Audio.
      * 
      * @return The audioID used to uniquely identify the Audio.
@@ -88,7 +88,7 @@ public class Audio {
     public int getAudioID() {
 	return audioID;
     }
-    
+
     /**
      * This setter method sets the unique identifier used to identify the Audio.
      * 
@@ -107,7 +107,7 @@ public class Audio {
     public String getAudioName() {
 	return audioName;
     }
-    
+
     /**
      * This setter method sets the file Name for the Audio.
      * 
@@ -117,7 +117,7 @@ public class Audio {
     public void setAudioName(String audioName) {
 	this.audioName = audioName;
     }
-    
+
     /**
      * Retrieving the encoded Audio is used for storing the Audii either on the
      * webservice or local file system as Audios need to be stored as encoded
@@ -128,7 +128,7 @@ public class Audio {
     public String getEncodedAudio() {
 	return encodedAudio;
     }
-    
+
     /**
      * The Audio will be encoded from without the class and then set in the
      * Audio object to for future use for the Audio to be stored outside the
@@ -140,7 +140,7 @@ public class Audio {
     public void setEncodedAudio(String encodedAudio) {
 	this.encodedAudio = encodedAudio;
     }
-    
+
     /**
      * This setter method sets the Audio's permission to be read only or not.
      * 
@@ -150,7 +150,7 @@ public class Audio {
     public void setAudioPermission(int audioPermission) {
 	this.audioPermission = audioPermission;
     }
-    
+
     /**
      * This getter method gets the audio file's permission.
      * 
