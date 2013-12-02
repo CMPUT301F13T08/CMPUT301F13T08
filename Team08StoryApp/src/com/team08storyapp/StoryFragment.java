@@ -256,6 +256,8 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * ++++++ Used for future implementation of the app ++++++
+     * 
      * This getter method gets whether this Story Fragment is read only.
      * 
      * @return the fragmentPermission attribute of the current fragment, 0 for
@@ -267,6 +269,8 @@ public class StoryFragment implements Serializable {
     }
 
     /**
+     * ++++++ Used for future implementation of the app ++++++
+     * 
      * This setter method sets whether this Story Fragment is read only.
      * 
      * @param fragmentPermission

@@ -73,6 +73,8 @@ public class Audio {
     private int audioPermission;
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * Fake constructor for creating an Audio object. 
      * Will be implemented in the future.
      */
@@ -80,6 +82,8 @@ public class Audio {
     }
 
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This getter method gets the unique identifier used for to identify the 
      * Audio.
      * 
@@ -90,6 +94,8 @@ public class Audio {
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This setter method sets the unique identifier used to identify the Audio.
      * 
      * @param audioID
@@ -100,6 +106,8 @@ public class Audio {
     }
 
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This getter method gets the file Name for the Audio.
      * 
      * @return The audioName the file Name for the Audio.
@@ -109,6 +117,8 @@ public class Audio {
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This setter method sets the file Name for the Audio.
      * 
      * @param AudioName
@@ -119,6 +129,8 @@ public class Audio {
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * Retrieving the encoded Audio is used for storing the Audii either on the
      * webservice or local file system as Audios need to be stored as encoded
      * byte arrays.
@@ -130,6 +142,8 @@ public class Audio {
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * The Audio will be encoded from without the class and then set in the
      * Audio object to for future use for the Audio to be stored outside the
      * application.
@@ -142,6 +156,8 @@ public class Audio {
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This setter method sets the Audio's permission to be read only or not.
      * 
      * @param AudioPermission
@@ -152,6 +168,8 @@ public class Audio {
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This getter method gets the audio file's permission.
      * 
      * @return The audioPermission of the audio track.
