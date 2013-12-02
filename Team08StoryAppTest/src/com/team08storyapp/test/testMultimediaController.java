@@ -1,7 +1,5 @@
 package com.team08storyapp.test;
 
-import static org.junit.Assert.*;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +7,6 @@ import java.util.ArrayList;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,27 +14,20 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.team08storyapp.MultimediaController;
 import com.team08storyapp.Photo;
-import com.team08storyapp.FileHelper;
-import com.team08storyapp.MyStoriesActivity;
 import com.team08storyapp.Story;
 import com.team08storyapp.StoryFragment;
 import com.team08storyapp.StoryFragmentActivity;
-import com.team08storyapp.MultimediaController;
-
-import dalvik.annotation.TestTargetClass;
 
 @Ignore
 public class testMultimediaController extends
 	ActivityInstrumentationTestCase2<StoryFragmentActivity> {
     private MultimediaController mMController;
 
-    private Activity testActivity;
     private Context testContext;
     private Story testCurrentStory;
     private StoryFragment testCurrentStoryFragment;
     ArrayList<StoryFragment> testStoryFragmentList;
     ArrayList<Photo> testPhotoList;
-    private FileHelper testFHelper;
     private Uri testAudioUri;
     private Uri testVideoUri;
 
@@ -54,7 +44,6 @@ public class testMultimediaController extends
 	testAudioUri = Uri.parse("Audiotest");
 	testVideoUri = Uri.parse("Videotest");
 
-	testFHelper = new FileHelper(testContext, 0);
 	testCurrentStory = new Story(14, "Spaceman Spiff", "Calvin");
 
 	testCurrentStoryFragment = new StoryFragment(1, "Test text.");
@@ -67,7 +56,6 @@ public class testMultimediaController extends
 	intent.putExtra("story", testCurrentStory);
 	intent.putExtra("storyFragmentId", 1);
 	super.setActivityIntent(intent);
-	testActivity = super.getActivity();
 	testContext = super.getInstrumentation().getContext();
 
 	/* The MultimediaController initialization */

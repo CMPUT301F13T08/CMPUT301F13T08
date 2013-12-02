@@ -1,14 +1,12 @@
 package com.team08storyapp.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
+import android.test.ActivityInstrumentationTestCase2;
+
 import com.team08storyapp.Audio;
 import com.team08storyapp.MainActivity;
-
-import android.test.ActivityInstrumentationTestCase2;
 
 @Ignore("Future Implementation")
 public class testAudio extends ActivityInstrumentationTestCase2<MainActivity>{
