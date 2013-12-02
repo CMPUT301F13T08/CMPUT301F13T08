@@ -55,6 +55,8 @@ import android.net.Uri;
 public class MultimediaController {
 
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * Constructor of the MultimediaController is a stub constructor. Will be
      * implemented in the future
      */
@@ -62,13 +64,14 @@ public class MultimediaController {
     }
     
     /**
-     * Used for future implementation
+     * ++++++ Used for future implementation ++++++
      */
     public void setCurrentStoryFragment() {
     }
 
     /**
-     * Used for future implementation
+     * ++++++ Used for future implementation ++++++
+     * 
      * @return 0
      */
     public int currentPosition() {
@@ -76,6 +79,8 @@ public class MultimediaController {
     }
 
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * saveVideo is the function where saving the video and updating
      * the current fragment are performed in order. Will be used for future
      * implementation.
@@ -89,6 +94,8 @@ public class MultimediaController {
     }
 
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * saveAudio is the function where saving the audio and updating
      * the current fragment are performed in order. Will be used for future
      * implementation.

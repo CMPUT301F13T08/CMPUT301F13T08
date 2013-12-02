@@ -75,6 +75,8 @@ public class Video implements Serializable{
     private int videoPermission;
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * Fake constructor for creating a Video object.
      * Will be implemented in the future.
      */
@@ -82,6 +84,8 @@ public class Video implements Serializable{
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This getter method gets the unique identifier used for to identify the video.
      * 
      * @return The videoID used to uniquely identify the Video
@@ -91,6 +95,8 @@ public class Video implements Serializable{
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This setter method sets the unique identifier used to identify the Video.
      * 
      * @param videoID
@@ -102,6 +108,8 @@ public class Video implements Serializable{
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This getter method gets the file Name for the Video
      * 
      * @return The videoName the file Name for the Video
@@ -112,6 +120,8 @@ public class Video implements Serializable{
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This setter method sets the file Name for the Video
      * 
      * @param videoName
@@ -124,6 +134,8 @@ public class Video implements Serializable{
     
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * Retrieving the encoded Video is used for storing the Video either on the
      * webservice or local file system as Videos need to be stored as encoded
      * byte arrays.
@@ -133,7 +145,10 @@ public class Video implements Serializable{
     public String getEncodedVideo(){
 	return encodedVideo;
     }
+    
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * The Video will be encoded from without the class and then set in the
      * Video object to for future use for the Video to be stored outside the
      * application.
@@ -147,6 +162,8 @@ public class Video implements Serializable{
     }
     
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This getter method gets the video file's permission.
      * 
      * @return The videoPermission of the video track.
@@ -154,7 +171,10 @@ public class Video implements Serializable{
     public int getVideoPermission(){
 	return videoPermission;
     }
+    
     /**
+     * ++++++ Used for future implementation ++++++
+     * 
      * This setter method sets the Video's permission to be read only or not.
      * 
      * @param VideoPermission
