@@ -38,14 +38,16 @@ import java.io.Serializable;
  * ++++++ This class is used for future implementations (Fake Class)++++++
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  * 
- * Video is a model class that would be used for StoryFragments video
- * illustrations, or video annotations.
+ * Video is a model class representing an soundtrack or recording that can be
+ * used in an Annotation on a StoryFragment in a Story or as an illustration on
+ * a StoryFragment in a Story. An photo has the following properties:
  * <ul>
- * <li>Video Id uniquely identifies the vidoe object.
- * <li>Video Name is the name the user gives the video.
+ * <li>Video Id is to uniquely identify the Video.
+ * <li>Video Name is the name the user gave to the Video track.
+ * <li>Video the Video the reader set in Annotation.
  * <li>Encoded Video is the video encoded for storing it in a file or on a
  * webservice.
- * <li>Vudio Permission indicates whether the video illustration is read only.
+ * <li>Video Permissions is the track's permission for read only
  * </ul>
  * These properties are able to be accessed through the constructor or through
  * public getters/setters.
@@ -64,96 +66,101 @@ import java.io.Serializable;
  * 
  */
 
-public class Video implements Serializable {
+public class Video implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private int videoID;
     private String videoName;
     private String encodedVideo;
     private int videoPermission;
-
+    
     /**
-     * Fake constructor for creating a Video object. Will be implemented in the
-     * future.
+     * Fake constructor for creating a Video object.
+     * Will be implemented in the future.
      */
-    public Video() {
+    public Video(){
     }
-
+    
     /**
-     * This getter method gets the unique identifier of the Video.
+     * This getter method gets the unique identifier used for to identify the video.
      * 
-     * @return The videoID used to uniquely identify the Video.
+     * @return The videoID used to uniquely identify the Video
      */
     public int getVideoID() {
 	return videoID;
     }
-
+    
     /**
-     * This setter method sets the unique identifier id of the Video.
+     * This setter method sets the unique identifier used to identify the Video.
      * 
-     * @param vudiID
-     *            the vudioID uniquely identifies the Video.
+     * @param videoID
+     * 		the videoID to set the video for identification.
      */
+    
     public void setVideoID(int videoID) {
 	this.videoID = videoID;
     }
-
+    
     /**
-     * This getter method gets the name of the Video.
+     * This getter method gets the file Name for the Video
      * 
-     * @return The videoName that is the file name of the Video.
+     * @return The videoName the file Name for the Video
      */
-    public String getVideoName() {
+    
+    public String getVideoName(){
 	return videoName;
     }
-
+    
     /**
-     * This setter method sets the file name for the Video.
+     * This setter method sets the file Name for the Video
      * 
      * @param videoName
-     *            The vudioName as the file of the Video.
+     * 		The VideoName to set the Video to.
      */
-    public void setVideoName(String videoName) {
+    
+    public void setVideoName(String videoName){
 	this.videoName = videoName;
     }
-
+    
+    
     /**
-     * Retrieving the encoded Video. It is used to store the Video either on the
-     * webservice or local file system, as encoded byte arrays.
+     * Retrieving the encoded Video is used for storing the Video either on the
+     * webservice or local file system as Videos need to be stored as encoded
+     * byte arrays.
      * 
-     * @return The encodedVideo
+     * @return The encodedvideo video
      */
-    public String getEncodedVideo() {
+    public String getEncodedVideo(){
 	return encodedVideo;
     }
-
     /**
-     * The Video will be encoded and stored on the local file system or on a
-     * webservice.
+     * The Video will be encoded from without the class and then set in the
+     * Video object to for future use for the Video to be stored outside the
+     * application.
      * 
      * @param encodedVideo
-     *            The encodedVideo representing the Video
+     *            The encodedVideo to set representing the Video.
      */
-    public void setEncodedVideo(String encodedVideo) {
+    
+    public void setEncodedVideo(String encodedVideo){
 	this.encodedVideo = encodedVideo;
     }
-
+    
     /**
      * This getter method gets the video file's permission.
      * 
-     * @return The vudioPermission of the Video.
+     * @return The videoPermission of the video track.
      */
-    public int getVideoPermission() {
+    public int getVideoPermission(){
 	return videoPermission;
     }
-
     /**
      * This setter method sets the Video's permission to be read only or not.
      * 
-     * @param videoPermission
-     *            The videoPermission, 0 - read only, 1 - otherwise
+     * @param VideoPermission
+     *            The VideoPermission to set the Video permission to.
      */
-    public void setVideoPermission(int videoPermission) {
+    public void setVideoPermission(int videoPermission){
 	this.videoPermission = videoPermission;
     }
 }
