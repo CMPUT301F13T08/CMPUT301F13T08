@@ -368,9 +368,12 @@ public class OnlineStoriesActivity extends ListActivity {
 	}
     }
 
+    /*
+     * This function takes in a list of story and populate the author title
+     * information of each story to each row of the listview in this activity
+     */
     private void fillData(ArrayList<Story> sList) {
 	lv.setAdapter(new StoryInfoAdapter(this, android.R.id.list, sList));
     }
-    
 
 }

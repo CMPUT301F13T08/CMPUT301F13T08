@@ -246,11 +246,20 @@ public class Story implements Serializable {
 	this.firstStoryFragmentId = firstStoryFragmentId;
     }
 
-    public boolean equals(Story story){
-	return (this.author.equals(story.getAuthor()) && 
-		this.title.equals(story.getTitle()) && 
-		this.storyFragments.equals(story.storyFragments) && 
-		this.onlineStoryId == story.getOnlineStoryId() &&
-		this.offlineStoryId == story.getOfflineStoryId());
+    /**
+     * This function overwrites the equal function that is provided by java. And
+     * it evaluates the equality of author title story fragments of two stories.
+     * 
+     * @param story
+     *            the story object that is compared to current story object
+     * @return a boolean value. If two objects are equal, true will be returned
+     *         otherwise false will be returned
+     */
+    public boolean equals(Story story) {
+	return (this.author.equals(story.getAuthor())
+		&& this.title.equals(story.getTitle())
+		&& this.storyFragments.equals(story.storyFragments)
+		&& this.onlineStoryId == story.getOnlineStoryId() && this.offlineStoryId == story
+		    .getOfflineStoryId());
     }
 }

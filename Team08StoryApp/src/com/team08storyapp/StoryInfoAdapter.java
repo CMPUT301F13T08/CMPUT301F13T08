@@ -93,7 +93,7 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
     public View getView(int position, View convertView, ViewGroup parent) {
 	ViewHolder holder = holder(convertView);
 	View v = convertView;
-	
+
 	/* if the view is not empty populate with the given layout */
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) activity
@@ -118,6 +118,11 @@ public class StoryInfoAdapter extends ArrayAdapter<Story> {
 	return v;
     }
 
+    /*
+     * holder is a function that returns an initialized holder depends on the
+     * view in parameter. If the passed view is not null, then return the tagged
+     * view, otherwise initialize a new ViewHolder object
+     */
     private ViewHolder holder(View convertView) {
 	View v = convertView;
 	ViewHolder holder;

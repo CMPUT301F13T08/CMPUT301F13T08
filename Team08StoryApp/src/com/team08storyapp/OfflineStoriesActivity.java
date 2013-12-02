@@ -278,6 +278,10 @@ public class OfflineStoriesActivity extends ListActivity {
 	}
     }
 
+    /*
+     * This functions uses a FileHelper objects to get all downloaded stories
+     * and randomly picks one and returns it
+     */
     private Story getRandomStory() {
 	Story randomStory = null;
 	try {

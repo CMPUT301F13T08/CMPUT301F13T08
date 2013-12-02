@@ -117,6 +117,11 @@ public class ChoiceAdapter extends ArrayAdapter<Choice> {
 
     }
 
+    /*
+     * holder is a function that returns an initialized holder depends on the
+     * view in parameter. If the passed view is not null, then return the tagged
+     * view, otherwise initialize a new ViewHolder object
+     */
     private ViewHolder holder(View convertView) {
 	View v = convertView;
 	ViewHolder holder = new ViewHolder();

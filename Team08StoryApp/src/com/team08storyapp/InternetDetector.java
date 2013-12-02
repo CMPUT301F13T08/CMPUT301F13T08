@@ -78,8 +78,12 @@ public class InternetDetector {
      *         doesn't have network connection
      */
     protected static boolean connectedToInternet(Context context) {
+	
+	/* Initialize a ConnectivityManager object*/
 	ConnectivityManager connectivityManager = (ConnectivityManager) context
 		.getSystemService(Context.CONNECTIVITY_SERVICE);
+	
+	/* Get the status of network connection*/
 	if (connectivityManager != null) {
 	    NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
 	    if (info != null) {

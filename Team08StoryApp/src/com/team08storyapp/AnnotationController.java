@@ -132,13 +132,13 @@ public class AnnotationController {
 
     public Bitmap savePhoto(Uri pickedUri, int mode) {
 
-	// create the fileName for the image
+	/* create the fileName for the image */
 	String fileName = createFileName();
 
 	/* declare the bitmap */
 	Bitmap pic = null;
 
-	// declare the path string
+	/* declare the path string */
 	String imgPath = getImagePath(pickedUri);
 
 	/* if we have a new URI attempt to decode the image bitmap */
@@ -289,6 +289,7 @@ public class AnnotationController {
      * Annotations.
      */
     private BitmapFactory.Options createBitmapOptions(String imgPath) {
+
 	/* create bitmap options to calculate and use sample size */
 	BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
 
@@ -313,6 +314,7 @@ public class AnnotationController {
     private String getImagePath(Uri pickedUri) {
 
 	String imgPath = "";
+
 	/* query the data */
 	Cursor picCursor = getPicCursor(pickedUri);
 
@@ -345,6 +347,10 @@ public class AnnotationController {
 		+ ".png";
     }
 
+    /*
+     * This function returns a cursor that is queried by using the Uri objected
+     * in the parameter.
+     */
     private Cursor getPicCursor(Uri pickedUri) {
 
 	/* retrieve the string using media data */

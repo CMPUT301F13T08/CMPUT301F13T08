@@ -82,6 +82,7 @@ public class NewStoryActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
 	/* Handle item selection */
 	switch (item.getItemId()) {
 	case R.id.action_mainmenu:
@@ -91,6 +92,7 @@ public class NewStoryActivity extends Activity {
 		    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 	    startActivity(mainIntent);
 	case R.id.help:
+
 	    /*
 	     * Help option was selected by the user, display the popup dialog
 	     * for the current activity.
@@ -150,17 +152,16 @@ public class NewStoryActivity extends Activity {
 	}
     }
 
+    /*
+     * This function creates a new story and returns it based on the information
+     * given by function setNewStoryInfo()
+     */
     private boolean createNewStory() {
 	if (setStoryInfo()) {
 	    setNewStoryInfo(author, title);
 	    return true;
 	}
 	return false;
-    }
-
-    private void setNewStoryInfo(String author, String title) {
-	newStory = new Story(title, author);
-	newStory.setFirstStoryFragmentId(1);
     }
 
     /*
@@ -179,6 +180,19 @@ public class NewStoryActivity extends Activity {
 	return true;
     }
 
+    /*
+     * This function sets up a new story with given information about the
+     * author, title.
+     */
+    private void setNewStoryInfo(String author, String title) {
+	newStory = new Story(title, author);
+	newStory.setFirstStoryFragmentId(1);
+    }
+
+    /*
+     * This function checks if it's possible to create a new story by checking
+     * if the author and title are both null or empty
+     */
     private boolean setStoryInfo() {
 
 	/* find views of authorfield and titlefield */

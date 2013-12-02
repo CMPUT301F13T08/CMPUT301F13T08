@@ -92,11 +92,7 @@ public class FileHelper {
     /**
      * The Constructor initializes the fileContext with passed context. Since we
      * design to store author's own stories and downloaded stories in different
-     * directories in internal storage, we need to differentiate them. (Actually
-     * I haven't come up with a better idea than using a third party library
-     * called DirectoryPicker when saving files in different directory in
-     * internal storage. But I think the "prefix" can do the job as well. So I
-     * may stick to it.)
+     * directories in internal storage, we need to differentiate them. 
      * 
      * @param context
      *            an Context object
@@ -131,6 +127,7 @@ public class FileHelper {
     public boolean addOfflineStory(Story story) throws FileNotFoundException,
 	    IOException {
 	try {
+	    
 	    /*
 	     * If the offlineStoryId of added story is taken, and the offline
 	     * story which has the same offline Id is not the same story as the
@@ -318,7 +315,6 @@ public class FileHelper {
      * @return return an ArrayList<Story> storyList that contains the search
      *         text in author and/or title field;
      */
-
     public ArrayList<Story> searchOfflineStories(String searchText) {
 	searchText = searchText.toLowerCase();
 	try {
