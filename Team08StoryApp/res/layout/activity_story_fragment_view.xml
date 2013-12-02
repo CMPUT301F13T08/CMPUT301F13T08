@@ -57,7 +57,9 @@
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="200dip"
-            android:focusableInTouchMode="true" >
+            android:focusableInTouchMode="true"
+            tools:ignore="NestedScrolling" >
+
         </ListView>
 
         <Button
