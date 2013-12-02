@@ -73,7 +73,6 @@ public class StoryFragment implements Serializable {
     private int randomChoice;
     private int fragmentPermission;
 
-
     /**
      * A constructor for creating a Story Fragment object used when initializing
      * a sample story for testing. The following properties must be know:
@@ -254,15 +253,29 @@ public class StoryFragment implements Serializable {
     public void setRandomChoice(int randomChoice) {
 	this.randomChoice = randomChoice;
     }
-    
-    public int getFragmentPermission(){
+
+    /**
+     * This getter method gets whether this Story Fragment and its illustrations
+     * is read only.
+     * 
+     * @return the fragmentPermission attribute (1 = read and edit, 0 = read
+     *         only) of the current fragment
+     * 
+     */
+    public int getFragmentPermission() {
 	return fragmentPermission;
     }
-    
-    public void setFragmentPermission(int fragmentPermission){
+
+    /**
+     * This setter method sets the read only option of the current StoryFragment
+     * 
+     * @param the
+     *            fragmentPermission attribute (1 = read and edit, 0 = read
+     *            only) of the current fragment
+     * 
+     */
+    public void setFragmentPermission(int fragmentPermission) {
 	this.fragmentPermission = fragmentPermission;
     }
-
-
 
 }

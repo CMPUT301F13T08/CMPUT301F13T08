@@ -404,7 +404,7 @@ public class testESHelper extends
 	Story story = esHelper.getOnlineStory(storyIdGetStory);
 
 	/* test that the retrieved story is indeed retrieved and correct */
-	assertTrue(!story.equals(null));
+	assertNotNull(story);
 	assertTrue(story.getOnlineStoryId() == storyIdGetStory);
 	assertTrue(!story.getAuthor().equals(null)
 		&& !story.getTitle().equals(null)
