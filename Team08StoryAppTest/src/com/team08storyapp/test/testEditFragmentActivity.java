@@ -44,6 +44,7 @@ public class testEditFragmentActivity extends
 	super(EditFragmentActivity.class);
     }
 
+/*
     public void setUp() {
 
 	story = new Story("title", "author");
@@ -71,10 +72,6 @@ public class testEditFragmentActivity extends
 	story.setOfflineStoryId(1);
 	story.setStoryFragments(storyFragments);
 
-	/*
-	 * Set the intent for EditFragmentActivity with the local story object
-	 * and the id of the fragment in the story
-	 */
 	Intent intent = new Intent();
 	intent.putExtra("story", story);
 	intent.putExtra("storyFragmentId", 1);
@@ -108,7 +105,7 @@ public class testEditFragmentActivity extends
 	assertEquals("Text", editText.getText().toString());
     }
 
-    /* The two choices of storyFragment should be populated in the listView */
+ 
     public void testListViewItem() {
 
 	assertEquals("Go to 2!",
@@ -127,8 +124,6 @@ public class testEditFragmentActivity extends
 	assertEquals(picAdapter.getItem(1), 1);
 
     }
-
-    /*
      * public void testChoiceAdapterItem() {
      * 
      * assertNotNull(choiceAdapter.getItem(0));
@@ -139,5 +134,6 @@ public class testEditFragmentActivity extends
      * 
      * }
      */
+     
 
 }
