@@ -273,6 +273,7 @@ public class AnnotationController {
 	 * size
 	 */
 	if (currHeight > targetHeight || currWidth > targetWidth) {
+	    
 	    // use either width or height
 	    if (currWidth > currHeight)
 		return Math.round((float) currHeight / (float) targetHeight);

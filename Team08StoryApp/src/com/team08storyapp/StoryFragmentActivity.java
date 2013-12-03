@@ -190,6 +190,7 @@ public class StoryFragmentActivity extends Activity {
 	 * Get the story object from the intent See source [7]
 	 */
 	currentStory = (Story) storyFragment.getSerializableExtra("story");
+	System.out.println(currentStory);
 	setTitle(currentStory.getTitle());
 
 	/* Get the story fragment id from the intent - the fragment to display */
@@ -356,9 +357,12 @@ public class StoryFragmentActivity extends Activity {
 	if (resultCode == RESULT_OK) {
 	    saveAnnotationImage(data);
 	    try {
-		currentStory = fHelper.getOfflineStory(currentStoryId);
-		currentStoryFragment = currentStory.getStoryFragments().get(
-			currentStoryFragmentIndex);
+		
+		if (fHelper.getOfflineStory(currentStory.getOfflineStoryId()) != null) {
+		    currentStory = fHelper.getOfflineStory(currentStory.getOfflineStoryId());
+		    currentStoryFragment = currentStory.getStoryFragments()
+			    .get(currentStoryFragmentIndex);
+		}
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
@@ -461,9 +465,10 @@ public class StoryFragmentActivity extends Activity {
 	popupMenu.show();
 
     }
-    
+
     /*
-     * function calls for a new annotation controller and saves the annotation in passed in data.
+     * function calls for a new annotation controller and saves the annotation
+     * in passed in data.
      */
     private void saveAnnotationImage(Intent data) {
 

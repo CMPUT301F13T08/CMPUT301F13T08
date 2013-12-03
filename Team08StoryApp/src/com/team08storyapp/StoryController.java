@@ -203,6 +203,8 @@ public class StoryController {
     public static Story updateStoryFragment(Story story,
 	    StoryFragment storyFragment, int storyFragmentId,
 	    int storyFragmentIndex) {
+	System.out.println(storyFragmentId);
+	System.out.println(story.getStoryFragments().size());
 	if (storyFragmentId > story.getStoryFragments().size()) {
 	    story.getStoryFragments().add(storyFragment);
 	} else {
