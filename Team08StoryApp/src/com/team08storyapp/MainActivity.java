@@ -32,8 +32,6 @@ Retrieved Oct. 29, 2013
 package com.team08storyapp;
 
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
